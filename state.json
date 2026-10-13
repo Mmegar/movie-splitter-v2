@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:37:40+13:00",
+ "updated": "2026-10-13T23:39:34+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 8.4,
+    "count": 361,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "moon-knight-s01e02-summon-the-suit/thumbs.bin"
    }
   }
  ],
