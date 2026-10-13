@@ -1,21 +1,11 @@
 {
- "updated": "2026-10-13T17:29:31+07:00",
+ "updated": "2026-10-13T17:29:50+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": {
-  "file": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
-  "percent": 100
- },
- "transfers": [
-  {
-   "direction": "send",
-   "movie": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
-   "file": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
-   "percent": 100
-  }
- ],
+ "uploading": null,
+ "transfers": [],
  "uploaded": [],
  "wishlist": [],
  "paused": null,
@@ -25,7 +15,7 @@
    "name": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
    "size_mb": 2586,
    "modified": "2026-10-13T16:58:24+07:00",
-   "sending": true
+   "sending": false
   }
  ],
  "library": [],
