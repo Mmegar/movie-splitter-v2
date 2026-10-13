@@ -177,12 +177,16 @@ function buildForm(d) {
     ]),
 
     group('Posting to TikTok', [
-      swRow(d, 'posting.enabled', 'Post automatically', 'Posts the next part at each time below'),
+      swRow(d, 'posting.enabled', 'Send parts to TikTok automatically', 'The next part goes to TikTok at each time below'),
       ...(p.enabled ? [
-        segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
+        segRow(d, 'posting.method', 'How to post', [['draft', 'To my TikTok drafts'], ['direct', 'Post straight away']],
+          (p.method || 'draft') === 'draft'
+            ? 'At each time, the part lands in your TikTok inbox as a draft. Tap the TikTok notification, paste the caption and post (public is fine).'
+            : '<span class="note--warn">Straight away only works with a private TikTok account until TikTok approves the app.</span>'),
+        ...((p.method || 'draft') === 'direct' ? [segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
           p.privacy === 'public'
             ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
-            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.'),
+            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.')] : []),
         `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
           <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
             const onm = (p.modes || []).includes(m);

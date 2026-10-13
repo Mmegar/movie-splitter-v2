@@ -58,7 +58,7 @@ def posted_times(state, tz):
     for _, _, p in all_parts(state):
         post = p.get("post") or {}
         when = _when(post.get("at"), tz)
-        if post.get("status") == "posted" and when:
+        if post.get("status") in ("posted", "inbox") and when:
             out.append(when)
     return out
 
@@ -82,7 +82,7 @@ def next_part(state, modes, available=None):
         for mode in modes:
             for p in sorted((m.get("modes") or {}).get(mode, {}).get("parts", []), key=lambda p: p.get("n", 0)):
                 post = p.get("post") or {}
-                if post.get("status") == "posted":
+                if post.get("status") in ("posted", "inbox"):
                     continue
                 if post.get("status") == "failed" and post.get("attempts", 0) >= MAX_ATTEMPTS:
                     continue
@@ -166,7 +166,7 @@ def _execute(client, slug, arguments, creds):
     return ok, _get(res, "data"), _get(res, "error")
 
 
-def post_video(path, caption, privacy, creds=None):
+def post_video(path, caption, privacy, creds=None, publish=True):
     """
     Posts one video file to TikTok through Composio's TikTok toolkit.
     privacy: SELF_ONLY / PUBLIC_TO_EVERYONE / MUTUAL_FOLLOW_FRIENDS / FOLLOWER_OF_CREATOR.
@@ -175,6 +175,9 @@ def post_video(path, caption, privacy, creds=None):
     Uses TIKTOK_UPLOAD_VIDEO with publish=true (the SDK uploads the local file for us), then
     polls TIKTOK_FETCH_PUBLISH_STATUS until TikTok says it's done. See plan/COMPOSIO-NOTES.md.
     creds: {api_key, user_id, connected_account_id, version, username} (the laptop's config.json).
+    publish=False: "draft" mode. The video goes to the owner's TikTok inbox as a draft and they
+    tap Post in the TikTok app. Unaudited TikTok apps may only direct-post to PRIVATE accounts;
+    drafts work with public accounts too.
     """
     creds = creds or {}
     if not creds.get("api_key"):
@@ -193,9 +196,12 @@ def post_video(path, caption, privacy, creds=None):
                               file_upload_dirs=[str(path.parent)])
         except TypeError:      # older SDKs upload local files automatically
             client = Composio(api_key=creds["api_key"])
-        ok, data, error = _execute(client, "TIKTOK_UPLOAD_VIDEO", {
-            "file_to_upload": str(path), "caption": caption, "publish": True, "privacy_level": privacy,
-        }, creds)
+        args = {"file_to_upload": str(path), "publish": bool(publish)}
+        if publish:
+            args.update(caption=caption, privacy_level=privacy)
+        ok, data, error = _execute(client, "TIKTOK_UPLOAD_VIDEO", args, creds)
+        if ok and not publish:
+            return True, _find_key(data, "publish_id"), None
         if not ok:
             return False, None, str(error or data or "TikTok upload failed")[:500]
         publish_id = _find_key(data, "publish_id")

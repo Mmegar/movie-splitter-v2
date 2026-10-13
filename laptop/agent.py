@@ -910,15 +910,21 @@ class Agent:
         creds = {"api_key": self.cfg["composio_api_key"], "user_id": self.cfg["composio_user_id"],
                  "connected_account_id": self.cfg["composio_connected_account_id"],
                  "version": self.cfg["composio_tiktok_version"], "username": self.cfg["tiktok_username"]}
+        direct = str(cfg.get("method") or "draft").lower() == "direct"
         try:
-            ok, ref, error = posting.post_video(self.output / part["drive_path"], caption, privacy, creds)
+            ok, ref, error = posting.post_video(self.output / part["drive_path"], caption, privacy, creds,
+                                                publish=direct)
         except Exception as e:
             ok, ref, error = False, None, str(e)
         url = ref if ref and str(ref).startswith("http") else None
-        status.set_post(movie["id"], mode, part["n"], "posted" if ok else "failed", url=url,
+        status.set_post(movie["id"], mode, part["n"], ("posted" if direct else "inbox") if ok else "failed", url=url,
                         error=None if ok else error)
         title = f"{movie['name']}: Part {part['n']}"
-        if ok:
+        if ok and not direct:
+            self.notify(f"📲 In your TikTok drafts: {title}",
+                        f"[{label}] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n{caption}",
+                        kind="posted", tags=["iphone"])
+        elif ok:
             where = "privately (only you can see it)" if privacy == "SELF_ONLY" else "publicly"
             self.notify(f"📤 Posted to TikTok: {title}",
                         f"[{label}] Posted {where}.{(' ' + url) if url else ''}\n\n📝 Caption:\n{caption}",
@@ -1194,10 +1200,10 @@ def main(argv=None):
         creds = {"api_key": cfg["composio_api_key"], "user_id": cfg["composio_user_id"],
                  "connected_account_id": cfg["composio_connected_account_id"],
                  "version": cfg["composio_tiktok_version"], "username": cfg["tiktok_username"]}
-        print(f"Posting {args.test_post} to TikTok privately (only you can see it). This can take a few minutes...")
+        print(f"Sending {args.test_post} to your TikTok drafts. This can take a minute...")
         ok, ref, error = posting.post_video(Path(args.test_post), "Test post from Movie Splitter 🎬 #test",
-                                           "SELF_ONLY", creds)
-        print(f"Posted! {ref or ''}" if ok else f"Didn't work: {error}")
+                                           "SELF_ONLY", creds, publish=False)
+        print("Worked! It's in your TikTok drafts/inbox: open TikTok to see it." if ok else f"Didn't work: {error}")
         return 0 if ok else 1
     setup_logging(cfg_path.parent)
     agent = Agent(ensure_secrets(cfg_path), cfg_path.parent)

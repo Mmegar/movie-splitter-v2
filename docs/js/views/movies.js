@@ -85,7 +85,7 @@ export function createMoviesView(ctx) {
         <span class="part-time">${timecode(p.start)}–${timecode(p.end)} <span class="muted">· ${shortDuration(p.seconds)}</span></span>
         ${chip(post.status)}
       </div>
-      ${post.status !== 'none' && (postWhen || post.error) ? `<p class="part-post ${post.status === 'failed' ? 'tone-bad-text' : ''}">${post.error ? esc(post.error) : `${post.status === 'posted' ? 'Posted' : 'Posting'}${esc(postWhen)}`}${post.url ? ` · <a href="${esc(post.url)}" target="_blank" rel="noopener">Open on TikTok</a>` : ''}</p>` : ''}
+      ${post.status !== 'none' && (postWhen || post.error) ? `<p class="part-post ${post.status === 'failed' ? 'tone-bad-text' : ''}">${post.error ? esc(post.error) : `${post.status === 'posted' ? 'Posted' : post.status === 'inbox' ? 'Sent to your TikTok drafts' : 'Posting'}${esc(postWhen)}`}${post.url ? ` · <a href="${esc(post.url)}" target="_blank" rel="noopener">Open on TikTok</a>` : ''}</p>` : ''}
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
         <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>

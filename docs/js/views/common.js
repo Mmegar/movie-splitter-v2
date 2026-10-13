@@ -69,7 +69,7 @@ export function notesHtml(st) {
 
 export const STATUS_CHIP = {
   queued: ['Queued', 'muted'], processing: ['Processing', 'accent'], done: ['Done', 'ok'], failed: ['Failed', 'bad'],
-  none: ['Not posted', 'muted'], scheduled: ['Scheduled', 'info'], posted: ['Posted', 'ok'],
+  none: ['Not posted', 'muted'], scheduled: ['Scheduled', 'info'], posted: ['Posted', 'ok'], inbox: ['In TikTok drafts', 'info'],
   waiting: ['Waiting for laptop', 'muted'], searching: ['Searching', 'info'], found: ['Found', 'info'],
   downloading: ['Downloading', 'accent'], uploaded: ['In To edit', 'ok'], not_available: ['Not available', 'bad'],
 };

@@ -338,11 +338,32 @@ class PostingTest(AgentTestBase):
         self.assertEqual(pick[2]["n"], 1)
         self.assertEqual(self.fake.file("state.json"), before)
 
+    def test_draft_mode_sends_to_tiktok_inbox(self):
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        calls = []
+
+        def fake_post(path, caption, privacy, creds, publish=True):
+            calls.append((path.read_bytes(), publish))
+            return True, "v_inbox_file~1", None
+        with mock.patch.object(posting, "post_video", fake_post):
+            a.post_if_due(force=True, dry_run=False)
+        self.assertEqual(calls, [(b"part one", False)])
+        st = self.fake.json_file("state.json")
+        self.assertEqual(st["movies"][0]["modes"]["stretch"]["parts"][0]["post"]["status"], "inbox")
+        self.assertEqual(st["posting"]["posted_today"], 1)
+        self.assertIn("📲 In your TikTok drafts: M: Part 1", [n["title"] for n in self.web.ntfy])
+        (self.out / "Ready to post/M/Best stretch/M - Part 02.mp4").write_bytes(b"part two")
+        with mock.patch.object(posting, "post_video", fake_post):     # next time: Part 2, not Part 1 again
+            a.post_if_due(force=True, dry_run=False)
+        self.assertEqual(calls[-1], (b"part two", False))
+
     def test_posts_local_file_and_records_result(self):
+        self.fake.put_file("config/settings.json", json.dumps({"posting": {"enabled": True, "hashtags": "#movie",
+                                                                           "method": "direct"}}))
         a = self.make_agent(composio_api_key="k", composio_user_id="u", tiktok_username="me")
         calls = []
 
-        def fake_post(path, caption, privacy, creds):
+        def fake_post(path, caption, privacy, creds, publish=True):
             calls.append((path.read_bytes(), caption, privacy, creds["api_key"], creds["user_id"]))
             return True, "https://www.tiktok.com/@me/video/9", None
         # the cutter saves state.json at the same moment: our post result must be redone on top

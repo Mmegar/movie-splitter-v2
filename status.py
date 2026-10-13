@@ -484,7 +484,7 @@ def add_event(kind, title, message="", urgent=False):
 
 @safe
 def set_post(movie, mode, n, status, url=None, error=None):
-    """Records a TikTok post result for one part. status: none | scheduled | posted | failed."""
+    """Records a TikTok post result for one part. status: none | scheduled | posted | inbox (sent to TikTok drafts) | failed."""
     at = now_iso()
     def f(st):
         m = _find(st, movie)
@@ -492,7 +492,7 @@ def set_post(movie, mode, n, status, url=None, error=None):
         if not part:
             return
         post = part.setdefault("post", {})
-        attempts = post.get("attempts", 0) + (1 if status in ("posted", "failed") else 0)
+        attempts = post.get("attempts", 0) + (1 if status in ("posted", "inbox", "failed") else 0)
         post.update(status=status, at=at, url=url, error=error, attempts=attempts)
     store().change(f, urgent=True, message=f"post {status}")
 

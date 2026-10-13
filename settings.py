@@ -50,6 +50,7 @@ DEFAULTS = {
     "posting": {
         "enabled": False,
         "privacy": "self_only",
+        "method": "draft",               # draft = sent to your TikTok inbox, you tap Post; direct = posted straight away (needs a private account until TikTok approves the app)
         "modes": ["stretch"],
         "per_day": 3,
         "times": ["12:00", "18:00", "21:00"],
