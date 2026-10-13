@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:49:55+13:00",
+ "updated": "2026-10-13T23:50:13+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 6
  },
  "queue": [],
@@ -72,6 +72,21 @@
         "url": null,
         "error": null
        }
+      },
+      {
+       "n": 4,
+       "start": 1774.9,
+       "end": 1849.2,
+       "seconds": 74.3,
+       "drive_path": "Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch/Moon Knight S01E02 Summon the Suit - Part 04.mp4",
+       "caption": "manifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "moon-knight-s01e02-summon-the-suit/stretch-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
       }
      ]
     },
@@ -97,6 +112,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-13T23:50:12+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 4 of 6 ready",
+   "message": "Part 4: 29:35 to 30:49 (74s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-13T23:48:46+13:00",
    "type": "part_ready",
