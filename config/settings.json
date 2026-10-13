@@ -32,7 +32,7 @@
   "wishlist_archive": false,
   "video_quality": 23,
   "delete_originals": "permanent",
-  "cleanup_parts_after_days": 0,
+  "cleanup_parts_after_days": 3,
   "posting": {
     "enabled": true,
     "method": "draft",
