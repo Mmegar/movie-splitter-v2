@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:45:45+13:00",
+ "updated": "2026-10-13T23:46:59+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
   "mode": "stretch",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 2,
   "parts_total": 6
  },
