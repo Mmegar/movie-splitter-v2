@@ -1,11 +1,18 @@
 {
- "updated": "2026-10-13T17:46:07+07:00",
+ "updated": "2026-10-13T17:48:15+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [],
+ "transfers": [
+  {
+   "direction": "receive",
+   "movie": "Moon Knight S01E02 Summon the Suit",
+   "file": "Moon Knight S01E02 Summon the Suit - Part 02.mp4",
+   "percent": 6
+  }
+ ],
  "uploaded": [
   {
    "file": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
