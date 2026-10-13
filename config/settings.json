@@ -28,7 +28,7 @@
   "upload_limit_mbps": 0,
   "auto_update_laptop": true,
   "previews": true,
-  "preview_keep_movies": 3,
+  "preview_keep_movies": 2,
   "wishlist_archive": true,
   "video_quality": 23,
   "delete_originals": "permanent",
