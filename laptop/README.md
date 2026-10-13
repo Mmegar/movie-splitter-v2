@@ -95,6 +95,22 @@ it contains your GitHub token.
 - To test by hand: open a Command Prompt in the `laptop` folder and run `py agent.py --once`
   (one round, then stop). `py agent.py --post-now --dry-run` shows which part would be posted next.
 
+## Updates
+
+From version 2.2 on, the helper **updates itself**: about once an hour it checks GitHub for newer
+versions of its own files, checks they're valid, saves the old ones in `laptop/.backup` and restarts.
+Turn it off in the app: Settings → Laptop & internet → "Laptop helper updates itself".
+Your `config.json` and `agent_memory.json` are never touched.
+
+## What the app can tell the laptop to do
+
+The app writes requests to `config/commands.json` on GitHub; the helper checks every 30 seconds:
+move a movie from your Movies folder (`download_folder`) into To edit, change the order of To edit,
+take a movie back out, cut a finished original again (from `Done`/`Failed`), move one to the
+Recycle Bin (never deleted for good), and make **custom clips** (it sends the original once more
+with the start/end times you picked; the clips arrive in `Ready to post/<movie>/Custom clips`).
+**Pause everything** (and "pause when on battery", "upload speed limit") stop it using the internet.
+
 ## Questions
 
 - **Does the laptop need to stay on?** While sending a movie, yes. Cutting happens on GitHub even if

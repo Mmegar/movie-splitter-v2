@@ -1,6 +1,7 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
 import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
+import { openPreview, openClipEditor, pendingClipsHtml } from './media.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
 
@@ -74,26 +75,29 @@ export function createMoviesView(ctx) {
           : { icon: 'frames', title: 'No movies yet', text: 'Movies show up here as soon as a run picks them up from To edit.', action: '<a class="btn btn--quiet" href="#/queue">Open the queue</a>' }));
   }
 
+  let demoMode = false;
   function partRow(p, movie, mode) {
     const post = p.post || { status: 'none' };
     const postWhen = post.at ? ` ${post.status === 'scheduled' ? relTime(Date.parse(post.at)) : `${dayLabel(Date.parse(post.at))} ${clock(Date.parse(post.at))}`}` : '';
     return `<li class="part" id="part-${mode}-${p.n}">
       <div class="part-head">
-        <span class="part-n">Part ${p.n}</span>
+        <span class="part-n">${mode === 'clips' ? `Clip ${p.n}` : `Part ${p.n}`}${p.title ? ` <span class="part-title">${esc(p.title)}</span>` : ''}</span>
         <span class="part-time">${timecode(p.start)}–${timecode(p.end)} <span class="muted">· ${shortDuration(p.seconds)}</span></span>
         ${chip(post.status)}
       </div>
       ${post.status !== 'none' && (postWhen || post.error) ? `<p class="part-post ${post.status === 'failed' ? 'tone-bad-text' : ''}">${post.error ? esc(post.error) : `${post.status === 'posted' ? 'Posted' : 'Posting'}${esc(postWhen)}`}${post.url ? ` · <a href="${esc(post.url)}" target="_blank" rel="noopener">Open on TikTok</a>` : ''}</p>` : ''}
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
-        ${p.caption ? `<button class="btn btn--small btn--accent" data-copy="${esc(p.caption)}">${icon('copy')}Copy caption</button>` : ''}
+        <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>
+        <button class="btn btn--small btn--quiet" data-clip="${p.n}">${icon('scissors')}Clip</button>
+        ${p.caption ? `<button class="btn btn--small btn--quiet" data-copy="${esc(p.caption)}">${icon('copy')}Copy caption</button>` : ''}
         <button class="btn btn--small btn--quiet" data-copy="${esc(p.drive_path || '')}">${icon('copy')}Copy file path</button>
       </div>
     </li>`;
   }
 
   function renderDetail(st) {
-    if (!detail || !st.data) return;
+    if (!detail || !st || !st.data) return;
     const movies = (st.data.state && st.data.state.movies) || [];
     const m = movies.find((x) => x.id === detail.id);
     const { page } = detail;
@@ -107,6 +111,7 @@ export function createMoviesView(ctx) {
     const live = run.active && run.movie === m.name && run.mode === detail.mode;
     const c = postCounts(m);
     page.setSub(`${chip(m.status)} <span class="muted">${m.source === 'wishlist' ? 'From the wish list' : 'From the laptop'}</span>`);
+    demoMode = ctx.store.isDemo();
     page.content.innerHTML = `
       ${m.error ? `<div class="banner banner--err">${icon('alert')}<div><p>${esc(m.error)}</p></div></div>` : ''}
       <dl class="facts">
@@ -115,6 +120,8 @@ export function createMoviesView(ctx) {
         <div><dt>Subtitles</dt><dd>${esc(m.subtitles || 'None')}</dd></div>
         <div><dt>Posted</dt><dd>${c.posted} of ${c.parts}</dd></div>
       </dl>
+      <button class="btn btn--accent btn--block" data-makeclip>${icon('scissors')}Make a clip of any scene</button>
+      ${pendingClipsHtml(st, m)}
       ${modes.length > 1 ? `<div class="segmented" role="tablist" aria-label="Mode">${modes.map((k) => `<button role="tab" aria-selected="${k === detail.mode}" data-mode="${k}">${esc(m.modes[k].label || MODE_LABELS[k])} <span class="count">${(m.modes[k].parts || []).length}</span></button>`).join('')}</div>` : ''}
       ${cutMap(m, detail.mode, settings)}
       <div class="section-head"><h3>${(md.parts || []).length} part${(md.parts || []).length === 1 ? '' : 's'}${md.planned ? ` of ${md.planned}` : ''}</h3>
@@ -140,6 +147,29 @@ export function createMoviesView(ctx) {
         haptic();
         if (ok) { cp.classList.add('is-copied'); cp.innerHTML = `${icon('check')}Copied`; setTimeout(() => { cp.classList.remove('is-copied'); cp.innerHTML = `${icon('copy')}Copy caption`; }, 1600); toast('Caption copied'); }
         else toast("Couldn't copy. Press and hold the caption to copy it.", { kind: 'err' });
+        return;
+      }
+      const movieNow = () => ((lastSt.data.state && lastSt.data.state.movies) || []).find((x) => x.id === detail.id);
+      const pv = e.target.closest('[data-preview]');
+      if (pv) {
+        haptic();
+        const m = movieNow();
+        const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === pv.dataset.preview);
+        if (part) openPreview(ctx, m, detail.mode, part);
+        return;
+      }
+      const cl = e.target.closest('[data-clip]');
+      if (cl) {
+        haptic();
+        const m = movieNow();
+        const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === cl.dataset.clip);
+        if (part) openClipEditor(ctx, m, { start: part.start, end: Math.min(part.end, part.start + 600) });
+        return;
+      }
+      if (e.target.closest('[data-makeclip]')) {
+        haptic();
+        const m = movieNow();
+        if (m) openClipEditor(ctx, m);
         return;
       }
       const j = e.target.closest('[data-jump]');

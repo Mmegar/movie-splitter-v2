@@ -40,6 +40,7 @@ DEFAULTS = {
     "paused": False,                     # True = laptop stops sending/receiving and GitHub doesn't start cutting
     "pause_on_battery": False,           # laptop waits while it's running on battery
     "upload_limit_mbps": 0,              # cap the laptop's upload speed (megabits/s); 0 = no limit
+    "auto_update_laptop": True,          # the laptop helper fetches its newest code from GitHub by itself
     "previews": True,                    # small encrypted copies of each part, so the app can play them
     "preview_keep_movies": 3,            # previews are kept for this many most recent movies
     "wishlist_archive": True,            # look up wish-list titles on archive.org (public domain only); False = off

@@ -13,6 +13,7 @@ function setPath(o, p, v) {
 
 const pct = (v) => `${Math.round(Number(v) * 100)}%`;
 const CLEANUP_STEPS = [0, 3, 7, 14, 30, 60, 90];
+const UPLOAD_STEPS = [0, 2, 5, 10, 20, 50, 100];
 
 function timeZones() {
   try { if (Intl.supportedValuesOf) return Intl.supportedValuesOf('timeZone'); } catch { /* old Safari */ }
@@ -151,7 +152,22 @@ function buildForm(d) {
     ]),
 
     group('Wish list', [swRow(d, 'wishlist_archive', 'Find wish-list films on archive.org', 'Public-domain films only. Turn off to stop the laptop searching and downloading')]),
-    group('Captions', [swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and your hashtags, ready to copy')]),
+    group('Captions', [
+      swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and hashtags, ready to copy'),
+      d.captions ? segRow(d, 'caption_style', 'Style', [['goofy', 'Goofy 🤪'], ['plain', 'Plain']],
+        d.caption_style === 'plain' ? 'Calm hooks like "Wait for it 😳".' : 'Jokes, chaos and sometimes a line quoted from the part: "\'Run!\' and then THIS happened 😳".') : '',
+    ]),
+
+    group('Laptop & internet', [
+      swRow(d, 'pause_on_battery', 'Pause when on battery', 'The laptop waits until it\'s plugged in before sending or downloading'),
+      stepRow(d, 'upload_limit_mbps', 'Upload speed limit', { values: UPLOAD_STEPS, sub: 'Keeps some internet free for you while a movie is sent' }),
+      swRow(d, 'auto_update_laptop', 'Laptop helper updates itself', 'Gets new versions from GitHub by itself, so you never copy files again'),
+    ], 'The big Pause switch is on Now and Queue: it stops everything straight away.'),
+
+    group('Previews', [
+      swRow(d, 'previews', 'Make previews', 'A small locked copy of every part, so you can watch it here and pick scenes for clips'),
+      d.previews ? stepRow(d, 'preview_keep_movies', 'Keep previews for', { min: 1, max: 10, step: 1, sub: 'The newest movies keep theirs; older ones are removed' }) : '',
+    ], d.previews ? 'Locked with your ntfy topic, so only this app can play them. Needs the NTFY_TOPIC secret on GitHub.' : ''),
 
     group('Storage', [
       sliderRow(d, 'video_quality', 'Video quality', { min: 18, max: 28, step: 1, ends: ['Best, big files', 'Small files'], fmt: (v) => (v <= 20 ? `High (CRF ${v})` : v <= 24 ? `Balanced (CRF ${v})` : `Small (CRF ${v})`) }),
@@ -168,7 +184,7 @@ function buildForm(d) {
             ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
             : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.'),
         `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
-          <div class="chips-pick" role="group" aria-label="Modes to post">${ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)).map((m) => {
+          <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
             const onm = (p.modes || []).includes(m);
             return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
           }).join('')}</div></div>`,
@@ -319,7 +335,7 @@ export function createSettingsView(ctx) {
       haptic();
       const m = pm.dataset.pmode;
       const cur = draft.posting.modes || [];
-      set('posting.modes', cur.includes(m) ? cur.filter((x) => x !== m) : ALL_MODES.filter((x) => x === m || cur.includes(x)));
+      set('posting.modes', cur.includes(m) ? cur.filter((x) => x !== m) : [...ALL_MODES, 'clips'].filter((x) => x === m || cur.includes(x)));
       return;
     }
     const td = e.target.closest('[data-time-del]');
@@ -474,6 +490,8 @@ export function createSettingsView(ctx) {
     btn.disabled = true; btn.textContent = 'Saving…';
     try {
       const toSave = clone(draft);
+      const live = (ctx.store.state.data.settings || {}).json || {};
+      toSave.paused = !!live.paused;             // the Pause switch is saved on its own; never undo it here
       await ctx.store.saveSettings(toSave, msg);
       base = clone(toSave); draft = clone(toSave);
       baseSha = ctx.store.state.data.settings.sha;

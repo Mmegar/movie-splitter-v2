@@ -1,5 +1,6 @@
 // App state: picks the data source (demo or GitHub), polls while visible, caches for offline.
-import { createGitHub, fetchNtfy, ApiError, STATUS_BRANCH, activeMakeRun } from './api.js';
+import { createGitHub, fetchNtfy, ApiError, STATUS_BRANCH, PREVIEWS_BRANCH, activeMakeRun } from './api.js';
+import { decryptPreview } from './crypto.js';
 import { createDemoSource } from './demo.js';
 
 const LS_CONN = 'ms.conn';
@@ -23,10 +24,12 @@ function createLiveSource(conn) {
   let polls = 0;
 
   async function loadConfigs() {
-    const [settings, wish] = await Promise.all([gh.getJson('config/settings.json'), gh.getFile('config/wishlist.txt')]);
+    const [settings, wish, cmds] = await Promise.all([gh.getJson('config/settings.json'), gh.getFile('config/wishlist.txt'),
+      gh.getJson('config/commands.json').catch(() => null)]);
     configs = {
       settings: settings ? { json: settings.json, sha: settings.sha } : { json: null, sha: null },
       wishlist: wish ? { text: wish.text, sha: wish.sha } : { text: '', sha: null },
+      commands: cmds ? { json: cmds.json && Array.isArray(cmds.json.commands) ? cmds.json : { commands: [] }, sha: cmds.sha } : { json: { commands: [] }, sha: null },
     };
   }
 
@@ -55,6 +58,7 @@ function createLiveSource(conn) {
         ntfy: ntfy.status === 'fulfilled' ? ntfy.value : undefined,
         settings: configs.settings,
         wishlist: configs.wishlist,
+        commands: configs.commands,
         fetchedAt: Date.now(),
         notes,
       };
@@ -79,6 +83,22 @@ function createLiveSource(conn) {
         if (e.kind === 'conflict') await loadConfigs();
         throw e;
       }
+    },
+    async saveCommands(json, sha, message) {
+      const text = JSON.stringify(json, null, 1) + '\n';
+      try {
+        const newSha = await gh.putFile('config/commands.json', text, sha, message);
+        configs.commands = { json, sha: newSha };
+        return newSha;
+      } catch (e) {
+        if (e.kind === 'conflict') await loadConfigs();
+        throw e;
+      }
+    },
+    async getPreview(path) {
+      const buf = await gh.getBinary(path, PREVIEWS_BRANCH);
+      if (!buf) return null;
+      return decryptPreview(buf, conn.topic);
     },
     startRun: () => gh.startRun(),
     async stopRun(state, runs) {
@@ -208,6 +228,46 @@ export function createStore() {
     async saveWishlist(text, message) {
       await source.saveWishlist(text, st.data.wishlist.sha, message);
       await refresh({ full: true, force: true });
+    },
+    /** Asks the laptop to do something (it checks every 30 s). Returns the command with its id. */
+    async sendCommand(cmd) {
+      const full = { id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, at: new Date().toISOString(), ...cmd };
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const cur = (st.data.commands && st.data.commands.json && st.data.commands.json.commands) || [];
+        const done = new Set(((st.data.laptop || {}).commands_done) || []);
+        const dayAgo = Date.now() - 24 * 3600 * 1000;
+        // finished commands are dropped after a day, so the file stays small
+        const keep = cur.filter((c) => !(done.has(c.id) && Date.parse(c.at || 0) < dayAgo)).slice(-120);
+        try {
+          await source.saveCommands({ commands: [...keep, full] }, st.data.commands && st.data.commands.sha, `App: ${cmd.type}${cmd.file ? ` ${cmd.file}` : ''}`);
+          break;
+        } catch (e) {
+          if (e.kind === 'conflict' && attempt < 2) { await refresh({ full: true, force: true }); continue; }
+          throw e;
+        }
+      }
+      await refresh({ full: true, force: true });
+      return full;
+    },
+    /** The big Pause switch: saved straight away (no review), the laptop and GitHub both obey it. */
+    async setPaused(on) {
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const s = st.data.settings || {};
+        const json = { ...(s.json || {}), paused: !!on };
+        try {
+          await source.saveSettings(json, s.sha, on ? 'App: pause everything' : 'App: resume');
+          break;
+        } catch (e) {
+          if (e.kind === 'conflict' && attempt < 2) { await refresh({ full: true, force: true }); continue; }
+          throw e;
+        }
+      }
+      await refresh({ full: true, force: true });
+    },
+    previewsAvailable() { return !!(source && source.getPreview); },
+    async getPreview(path) {
+      if (!source.getPreview) return null;
+      return source.getPreview(path);
     },
     async startRun() {
       await source.startRun();

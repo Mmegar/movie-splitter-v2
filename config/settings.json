@@ -1,7 +1,10 @@
 {
-  "modes": ["stretch", "highlights"],
+  "modes": [
+    "stretch",
+    "highlights"
+  ],
   "stretch_minutes": 12,
-  "stretch_from": 0.20,
+  "stretch_from": 0.2,
   "stretch_to": 0.75,
   "stretch_part_seconds": 75,
   "part_max_extra": 225,
@@ -23,6 +26,7 @@
   "paused": false,
   "pause_on_battery": false,
   "upload_limit_mbps": 0,
+  "auto_update_laptop": true,
   "previews": true,
   "preview_keep_movies": 3,
   "wishlist_archive": true,
@@ -32,9 +36,15 @@
   "posting": {
     "enabled": false,
     "privacy": "self_only",
-    "modes": ["stretch"],
+    "modes": [
+      "stretch"
+    ],
     "per_day": 3,
-    "times": ["12:00", "18:00", "21:00"],
+    "times": [
+      "12:00",
+      "18:00",
+      "21:00"
+    ],
     "timezone": "Pacific/Auckland",
     "hashtags": "#movie #movieclips #fyp"
   }

@@ -39,6 +39,7 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       runs: shiftTimes(JSON.parse(rn), delta).workflow_runs,
       settings: { json: savedSettings ? JSON.parse(savedSettings) : JSON.parse(se), sha: fakeSha() },
       wishlist: { text: lsGet(LS_WISH) ?? wl, sha: fakeSha() },
+      commands: { json: { commands: [] }, sha: fakeSha() },
     };
     lastStep = Date.now();
   }
@@ -123,7 +124,7 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
     // laptop: heartbeat + upload progress
     const lp = d.laptop;
     lp.updated = iso(Date.now());
-    if (lp.uploading) {
+    if (lp.uploading && !lp.paused) {
       lp.uploading.percent = Math.min(100, lp.uploading.percent + 6);
       if (lp.uploading.percent >= 100) {
         const file = lp.uploading.file;
@@ -141,13 +142,56 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       w.status = pd ? 'found' : 'not_available';
       w.note = pd ? 'Public domain copy on archive.org' : 'Not public domain - add the file to your laptop folder instead';
     }
+    runCommands();
     s.updated = iso(Date.now());
+  }
+
+  /** The pretend laptop carries out what was tapped in the app. */
+  function runCommands() {
+    const lp = d.laptop;
+    const doneIds = new Set(lp.commands_done);
+    const finish = (c, ok, note) => { lp.commands[c.id] = { status: ok ? 'done' : 'failed', note }; lp.commands_done.push(c.id); };
+    const take = (list, name) => { const i = list.findIndex((f) => f.name === name); return i < 0 ? null : list.splice(i, 1)[0]; };
+    for (const c of d.commands.json.commands) {
+      if (doneIds.has(c.id)) continue;
+      const cur = lp.commands[c.id];
+      if (c.type === 'to_queue') {
+        const f = take(c.from === 'library' ? lp.library : lp.bin, c.file);
+        if (f) { const item = { name: f.name, size_mb: f.size_mb, modified: f.modified, sending: false }; if (c.first) lp.queue.unshift(item); else lp.queue.push(item); }
+        finish(c, !!f, f ? 'Moved to To edit' : 'Not there any more');
+      } else if (c.type === 'to_library') {
+        const f = take(lp.queue, c.file);
+        if (f) lp.library.unshift({ name: f.name, size_mb: f.size_mb, modified: f.modified });
+        finish(c, !!f, 'Moved to your Movies folder');
+      } else if (c.type === 'queue_order') {
+        lp.queue.sort((a, b) => c.order.indexOf(a.name) - c.order.indexOf(b.name));
+        finish(c, true, 'New order saved');
+      } else if (c.type === 'to_bin') {
+        const f = take(lp.bin, c.file);
+        finish(c, !!f, 'Put in the Recycle Bin');
+      } else if (c.type === 'clip') {
+        if (!cur) { lp.commands[c.id] = { status: 'working', note: 'Sending the movie to GitHub' }; continue; }
+        if (cur.note === 'Sending the movie to GitHub') { cur.note = 'Being cut on GitHub'; continue; }
+        const movie = d.state.movies.find((m) => m.id === c.movie_id);
+        if (movie) {
+          const md = movie.modes.clips || (movie.modes.clips = { label: 'Custom clips', planned: 0, parts: [] });
+          const n = md.parts.length + 1;
+          const title = c.title ? ` - ${c.title}` : '';
+          md.parts.push({ n, start: c.start, end: c.end, seconds: Math.round((c.end - c.start) * 10) / 10, title: c.title || null, preview: null,
+            drive_path: `Ready to post/${movie.name}/Custom clips/${movie.name} - Clip ${String(n).padStart(2, '0')}${title}.mp4`,
+            caption: `the way my jaw hit the floor 🫠\n#fyp #movieclips #foryou #filmtok #unhinged`, post: { status: 'none', at: null, url: null, error: null } });
+          md.planned = md.parts.length;
+          note('part_ready', `✂️ ${movie.name}: clip ${n} ready`, `Clip ${n}: ${timecode(c.start)} to ${timecode(c.end)}`, ['film_frames']);
+        }
+        finish(c, !!movie, movie ? 'Clip made' : 'Movie not found');
+      }
+    }
   }
 
   function snapshot() {
     return JSON.parse(JSON.stringify({
       state: d.state, laptop: d.laptop, ntfy: d.ntfy, runs: d.runs,
-      settings: d.settings, wishlist: d.wishlist, fetchedAt: Date.now(), notes: [],
+      settings: d.settings, wishlist: d.wishlist, commands: d.commands, fetchedAt: Date.now(), notes: [],
     }));
   }
 
@@ -161,8 +205,14 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
     },
     async saveSettings(json) {
       d.settings = { json: JSON.parse(JSON.stringify(json)), sha: fakeSha() };
+      d.laptop.paused = json.paused ? 'Paused in the app' : null;
       lsSet(LS_SETTINGS, JSON.stringify(json));
       return d.settings.sha;
+    },
+    async saveCommands(json) {
+      d.commands = { json: JSON.parse(JSON.stringify(json)), sha: fakeSha() };
+      setTimeout(() => { lastStep = 0; }, 0);
+      return d.commands.sha;
     },
     async saveWishlist(text) {
       d.wishlist = { text, sha: fakeSha() };

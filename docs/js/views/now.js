@@ -2,6 +2,7 @@ import { esc, icon, toast, confirmSheet, haptic } from '../ui.js';
 import { laptopStatus, activeMakeRun } from '../api.js';
 import { STEPS, stepIndex, STAGE_TEXT, MODE_LABELS, elapsed, relTime, clock, mergeFeed } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, skeleton, chip } from './common.js';
+import { pauseRow, togglePause } from './queue.js';
 
 export function frameStrip(done, total, current) {
   if (!total) return '';
@@ -134,7 +135,17 @@ function glanceRows(st) {
   } else if (Number(settings.cleanup_parts_after_days) === 0 && done >= 5) {
     rows.push(`<a class="row" href="#/settings"><span class="row-ic tone-warn">${icon('cloud')}</span><span class="row-main"><span class="row-title">${done} finished movies on the laptop</span><span class="row-sub">Old parts are kept forever. Set "Clean up old parts" to save space.</span></span>${icon('chevR', 'row-chev')}</a>`);
   }
+  rows.push(pauseRow(st, 'now'));
   return `<div class="group">${rows.join('')}</div>`;
+}
+
+function pausedBanner(st) {
+  const s = (st.data.settings && st.data.settings.json) || {};
+  const lp = st.data.laptop || {};
+  if (!s.paused && !lp.paused) return '';
+  return `<div class="banner banner--warn" role="status">${icon('pause')}<div><p><strong>${s.paused ? 'Everything is paused' : esc(lp.paused)}</strong></p>
+    <p class="muted">${s.paused ? 'The laptop isn\'t sending or downloading, and GitHub won\'t start cutting.' : 'The laptop carries on by itself when it\'s plugged in.'}</p></div>
+    ${s.paused ? '<button class="banner-act" data-resume>Resume</button>' : ''}</div>`;
 }
 
 const TYPE_IC = { part_ready: 'frames', planned: 'scissors', started: 'play', finished: 'flag', failed: 'alert', posted: 'send', post_failed: 'alert', paused: 'pause', new_file: 'inbox', info: 'info' };
@@ -155,8 +166,14 @@ export function createNowView(ctx) {
   const page = makePage({ title: 'Now' });
   const { content } = page;
 
+  content.addEventListener('change', (e) => { if (e.target.matches('[data-pause]')) togglePause(ctx, e.target); });
   content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
+    if (e.target.closest('[data-resume]')) {
+      haptic();
+      try { await ctx.store.setPaused(false); toast('Resumed'); } catch (err) { toast(err.message, { kind: 'err', ms: 4000 }); }
+      return;
+    }
     if (e.target.closest('[data-start]')) {
       haptic();
       const btn = e.target.closest('[data-start]');
@@ -191,7 +208,7 @@ export function createNowView(ctx) {
     render(st) {
       page.setSub(freshness(st));
       if (!st.data) { content.innerHTML = banner(st) + skeleton(4); return; }
-      content.innerHTML = banner(st) + notesHtml(st) + runCard(st) + glanceRows(st) + latest(st);
+      content.innerHTML = banner(st) + notesHtml(st) + pausedBanner(st) + runCard(st) + glanceRows(st) + latest(st);
     },
   };
 }

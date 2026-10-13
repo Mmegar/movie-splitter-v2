@@ -4,6 +4,7 @@ export const GITHUB_API = 'https://api.github.com';
 export const NTFY_SERVER = 'https://ntfy.sh';
 export const WORKFLOW_FILE = 'make-parts.yml';
 export const STATUS_BRANCH = 'status';
+export const PREVIEWS_BRANCH = 'previews';
 
 // ---------- base64 <-> UTF-8 (emoji-safe) ----------
 export function b64ToUtf8(b64) {
@@ -167,8 +168,28 @@ export function createGitHub({ owner, repo, token, fetchImpl = (...a) => fetch(.
     catch { throw new ApiError('bad', `${path} isn't valid JSON.`); }
   }
 
-  async function putFile(path, text, sha, message) {
-    const branch = await defaultBranch();
+  /** Raw bytes of a file (e.g. an encrypted preview on the "previews" branch), or null if missing. */
+  async function getBinary(path, ref) {
+    const q = ref ? `?ref=${encodeURIComponent(ref)}` : '';
+    const headers = { Accept: 'application/vnd.github.raw', 'X-GitHub-Api-Version': '2022-11-28' };
+    if (token) headers.Authorization = `Bearer ${token}`;
+    let res;
+    try {
+      res = await fetchImpl(`${base}/contents/${path.split('/').map(encodeURIComponent).join('/')}${q}`, { headers, cache: 'no-store' });
+    } catch (e) {
+      throw new ApiError('offline', "Couldn't reach GitHub. You may be offline.", 0);
+    }
+    if (res.status === 404) return null;
+    if (!res.ok) {
+      let body = null;
+      try { body = await res.json(); } catch { /* not JSON */ }
+      throw errorFromResponse(res, body, path);
+    }
+    return res.arrayBuffer();
+  }
+
+  async function putFile(path, text, sha, message, branchName) {
+    const branch = branchName || await defaultBranch();
     const body = { message, content: utf8ToB64(text), branch };
     if (sha) body.sha = sha;
     const data = await request(`/contents/${path}`, { method: 'PUT', body, what: path });
@@ -189,7 +210,7 @@ export function createGitHub({ owner, repo, token, fetchImpl = (...a) => fetch(.
     await request(`/actions/runs/${id}/cancel`, { method: 'POST', what: 'That run' });
   }
 
-  return { request, getRepo, defaultBranch, getFile, getJson, putFile, listRuns, startRun, cancelRun };
+  return { request, getRepo, defaultBranch, getFile, getJson, getBinary, putFile, listRuns, startRun, cancelRun };
 }
 
 /** The make-parts run that is queued or in progress, if any. */

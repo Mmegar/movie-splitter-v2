@@ -1,6 +1,6 @@
 // Pure helpers (no DOM, no network) so they can be unit-tested under node.
 
-export const MODE_LABELS = { stretch: 'Best stretch', highlights: 'Highlights', all: 'Whole movie' };
+export const MODE_LABELS = { stretch: 'Best stretch', highlights: 'Highlights', all: 'Whole movie', clips: 'Custom clips' };
 export const MODE_HINTS = {
   stretch: 'The best few minutes, back to back',
   highlights: 'Best moments from the whole movie',
@@ -174,6 +174,13 @@ export const SETTING_LABELS = {
   cockroach_chance: 'Cockroach chance',
   cockroach_size: 'Cockroach size',
   captions: 'Captions',
+  caption_style: 'Caption style',
+  paused: 'Pause everything',
+  pause_on_battery: 'Pause on battery',
+  upload_limit_mbps: 'Upload speed limit',
+  auto_update_laptop: 'Laptop updates itself',
+  previews: 'Previews',
+  preview_keep_movies: 'Previews kept for',
   wishlist_archive: 'archive.org search',
   video_quality: 'Video quality',
   delete_originals: 'Delete originals',
@@ -212,6 +219,9 @@ export function formatSetting(path, v) {
   if (path === 'delete_originals') return v === 'permanent' ? 'Delete permanently' : 'Move to Recycle Bin';
   if (path === 'line_thickness' || path === 'cockroach_size') return `${v} px`;
   if (path === 'video_quality') return `CRF ${v}`;
+  if (path === 'upload_limit_mbps') return Number(v) ? `${v} Mbit/s` : 'No limit';
+  if (path === 'preview_keep_movies') return `${v} movie${Number(v) === 1 ? '' : 's'}`;
+  if (path === 'caption_style') return v === 'plain' ? 'Plain' : 'Goofy';
   if (path === 'flip') return { none: 'None', mirror: 'Mirror', upsidedown: 'Upside down', both: 'Both' }[v] || String(v);
   return String(v);
 }
@@ -231,6 +241,7 @@ export function diffSettings(before, after) {
   const keys = [...new Set([...Object.keys(a), ...Object.keys(b)])];
   const changes = [];
   for (const k of keys) {
+    if (k === 'paused') continue;     // the Pause switch saves on its own
     if (JSON.stringify(a[k]) === JSON.stringify(b[k])) continue;
     changes.push({ path: k, label: SETTING_LABELS[k] || k, from: formatSetting(k, a[k]), to: formatSetting(k, b[k]) });
   }
@@ -356,4 +367,31 @@ export function movieLength(movie, stretchTo = 0.75) {
   let maxEnd = 0;
   for (const md of Object.values(movie.modes || {})) for (const p of md.parts || []) maxEnd = Math.max(maxEnd, p.end);
   return maxEnd ? maxEnd / Math.min(0.95, Math.max(stretchTo, 0.5)) : 0;
+}
+
+// ---------- commands to the laptop (config/commands.json) ----------
+/** waiting (laptop hasn't seen it yet) | working | done | failed, plus the laptop's note. */
+export function commandState(cmd, laptop) {
+  const lp = laptop || {};
+  const st = (lp.commands || {})[cmd.id];
+  if (st) return { status: st.status, note: st.note || '' };
+  if ((lp.commands_done || []).includes(cmd.id)) return { status: 'done', note: '' };
+  return { status: 'waiting', note: 'Waiting for the laptop (it checks every 30 seconds)' };
+}
+
+/** Commands not finished yet, newest last. */
+export function pendingCommands(commands, laptop, type = null) {
+  const list = (commands && commands.json && commands.json.commands) || [];
+  return list.filter((c) => (!type || c.type === type) && !['done', 'failed'].includes(commandState(c, laptop).status));
+}
+
+/** Movie id like status.movie_id() in Python. */
+export function movieId(name) {
+  return String(name || '').toLowerCase().replace(/['.’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'movie';
+}
+
+/** Sizes like 1.4 GB / 655 MB. */
+export function sizeText(mb) {
+  if (!mb && mb !== 0) return '';
+  return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
 }
