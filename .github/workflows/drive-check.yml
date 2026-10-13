@@ -1,0 +1,20 @@
+name: Check Drive login (temporary)
+on: workflow_dispatch
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      RCLONE_CONFIG_GDRIVE_TYPE: drive
+      RCLONE_CONFIG_GDRIVE_SCOPE: drive
+      RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: '1IQK7I_n3ug3tC263Q-D_5MNHQPvfnzaT'
+      RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+      RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+      RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
+      RT: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+    steps:
+      - run: curl -fsSL https://rclone.org/install.sh | sudo bash >/dev/null
+      - name: Diagnose (never prints the token)
+        run: |
+          echo "::notice::token length=${#RT} starts_with_1//=$([[ $RT == 1//* ]] && echo yes || echo no) has_space=$([[ $RT == *' '* ]] && echo yes || echo no) has_quote=$([[ $RT == *'"'* ]] && echo yes || echo no) client_id_set=$([ -n "$RCLONE_CONFIG_GDRIVE_CLIENT_ID" ] && echo yes || echo no)"
+          rclone lsd gdrive: -vv 2>&1 | grep -iE "error|invalid|unauthor|failed|denied|couldn" | sed -E 's/[A-Za-z0-9_\-]{30,}/[hidden]/g' | head -5 | while IFS= read -r l; do echo "::notice::$l"; done || true
+          rclone lsd gdrive: >/dev/null 2>&1 && echo "::notice::LOGIN OK" || echo "::notice::LOGIN FAILED"
