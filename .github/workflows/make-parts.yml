@@ -44,8 +44,8 @@ jobs:
           path: ~/.cache/huggingface
           key: whisper-${{ env.WHISPER_MODEL }}
 
-      - name: Install the subtitle maker (Whisper)
-        run: pip install faster-whisper
+      - name: Install the subtitle maker (Whisper) and preview encryption
+        run: pip install faster-whisper cryptography
 
       - name: Make parts
         run: python3 process.py

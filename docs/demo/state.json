@@ -53,7 +53,8 @@
                 "at": "2026-10-13T12:00:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -67,7 +68,8 @@
                 "at": "2026-10-14T00:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -81,7 +83,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         },
@@ -119,7 +122,8 @@
                 "at": "2026-10-12T13:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -133,7 +137,8 @@
                 "at": "2026-10-12T19:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -147,7 +152,8 @@
                 "at": "2026-10-13T01:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -161,7 +167,8 @@
                 "at": "2026-10-13T07:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -175,7 +182,8 @@
                 "at": "2026-10-13T13:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -189,7 +197,8 @@
                 "at": "2026-10-13T19:05:00+13:00",
                 "url": null,
                 "error": "TikTok said: daily post limit reached. It will try again at the next time slot."
-              }
+              },
+              "preview": null
             },
             {
               "n": 7,
@@ -203,7 +212,8 @@
                 "at": "2026-10-14T15:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 8,
@@ -217,7 +227,8 @@
                 "at": "2026-10-14T18:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 9,
@@ -231,7 +242,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         },
@@ -251,7 +263,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -265,7 +278,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -279,7 +293,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -293,7 +308,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -307,7 +323,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -321,7 +338,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 7,
@@ -335,7 +353,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         }
@@ -368,7 +387,8 @@
                 "at": "2026-10-11T12:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -382,7 +402,8 @@
                 "at": "2026-10-11T18:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -396,7 +417,8 @@
                 "at": "2026-10-12T00:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -410,7 +432,8 @@
                 "at": "2026-10-12T06:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -424,7 +447,8 @@
                 "at": "2026-10-12T12:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -438,7 +462,8 @@
                 "at": "2026-10-12T18:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 7,
@@ -452,7 +477,8 @@
                 "at": "2026-10-13T00:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 8,
@@ -466,7 +492,8 @@
                 "at": "2026-10-13T06:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 9,
@@ -480,7 +507,8 @@
                 "at": "2026-10-13T12:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 10,
@@ -494,7 +522,8 @@
                 "at": "2026-10-13T18:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         },
@@ -514,7 +543,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -528,7 +558,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -542,7 +573,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -556,7 +588,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -570,7 +603,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -584,7 +618,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         }
@@ -640,7 +675,8 @@
                 "at": "2026-10-09T14:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -654,7 +690,8 @@
                 "at": "2026-10-09T20:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -668,7 +705,8 @@
                 "at": "2026-10-10T02:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -682,7 +720,8 @@
                 "at": "2026-10-10T08:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -696,7 +735,8 @@
                 "at": "2026-10-10T14:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -710,7 +750,8 @@
                 "at": "2026-10-10T20:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 7,
@@ -724,7 +765,8 @@
                 "at": "2026-10-11T02:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 8,
@@ -738,7 +780,8 @@
                 "at": "2026-10-11T08:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         },
@@ -758,7 +801,8 @@
                 "at": "2026-10-10T14:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -772,7 +816,8 @@
                 "at": "2026-10-10T20:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -786,7 +831,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -800,7 +846,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -814,7 +861,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         }
@@ -847,7 +895,8 @@
                 "at": "2026-10-07T14:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -861,7 +910,8 @@
                 "at": "2026-10-07T20:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -875,7 +925,8 @@
                 "at": "2026-10-08T02:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -889,7 +940,8 @@
                 "at": "2026-10-08T08:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -903,7 +955,8 @@
                 "at": "2026-10-08T14:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 6,
@@ -917,7 +970,8 @@
                 "at": "2026-10-08T20:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 7,
@@ -931,7 +985,8 @@
                 "at": "2026-10-09T02:05:00+13:00",
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         },
@@ -951,7 +1006,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 2,
@@ -965,7 +1021,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 3,
@@ -979,7 +1036,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 4,
@@ -993,7 +1051,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             },
             {
               "n": 5,
@@ -1007,7 +1066,8 @@
                 "at": null,
                 "url": null,
                 "error": null
-              }
+              },
+              "preview": null
             }
           ]
         }

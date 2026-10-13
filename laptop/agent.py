@@ -23,6 +23,7 @@ Run:  python agent.py            (keeps running; Ctrl+C to stop)
       python agent.py --post-now [--dry-run]   (post the next part now / just show which)
 """
 import argparse
+import hashlib
 import json
 import logging
 import logging.handlers
@@ -32,6 +33,7 @@ import secrets
 import shutil
 import signal
 import socket
+import subprocess
 import sys
 import threading
 import time
@@ -45,6 +47,7 @@ sys.path.insert(0, str(HERE))
 try:
     import archive          # noqa: E402
     import ghapi            # noqa: E402
+    import names            # noqa: E402
     import posting          # noqa: E402
     import settings         # noqa: E402
     import status           # noqa: E402
@@ -134,6 +137,62 @@ def unique(p):
     return p
 
 
+class Restart(Exception):
+    """The helper updated itself and starts again."""
+
+
+class Paused(Exception):
+    """Raised inside a transfer when the app's Pause switch (or 'pause on battery') kicks in."""
+
+
+def on_battery():
+    """True when the laptop is running on battery (Windows / Mac). False if it can't tell."""
+    try:
+        if os.name == "nt":
+            import ctypes
+
+            class SPS(ctypes.Structure):
+                _fields_ = [("ACLineStatus", ctypes.c_ubyte), ("BatteryFlag", ctypes.c_ubyte),
+                            ("BatteryLifePercent", ctypes.c_ubyte), ("SystemStatusFlag", ctypes.c_ubyte),
+                            ("BatteryLifeTime", ctypes.c_ulong), ("BatteryFullLifeTime", ctypes.c_ulong)]
+            st = SPS()
+            if ctypes.windll.kernel32.GetSystemPowerStatus(ctypes.byref(st)):
+                return st.ACLineStatus == 0
+        elif sys.platform == "darwin":
+            out = subprocess.run(["pmset", "-g", "batt"], capture_output=True, text=True, timeout=5).stdout
+            return "Battery Power" in out
+    except Exception:
+        pass
+    return False
+
+
+def git_blob_sha(data):
+    """The same id GitHub gives a file's content (used to see if a code file changed)."""
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+def plain_name(name):
+    """A bare file name from the app (no folders, no '..'), or None."""
+    name = str(name or "").strip()
+    if not name or name != Path(name).name or name in (".", "..") or "/" in name or "\\" in name:
+        return None
+    return name
+
+
+def file_info(p):
+    try:
+        st = p.stat()
+    except OSError:
+        return None
+    return {"name": p.name, "size_mb": round(st.st_size / 1e6), "modified":
+            datetime.fromtimestamp(st.st_mtime).astimezone().isoformat(timespec="seconds")}
+
+
+# files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
+CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "settings.py",
+              "status.py", "transport.py"]
+
+
 # ---------------------------------------------------------------- watch folder
 class Watcher:
     """Finds movie files in the folder that have stopped changing size for `stable` seconds."""
@@ -207,7 +266,11 @@ class Agent:
         self.to_send = []              # wish-list downloads waiting to be sent: (path, wish line)
         self.online = True
         self.last_push, self.last_sent, self.progress_changed = 0.0, None, False
-        self.last = {"receive": 0.0, "posting": 0.0, "cleanup": 0.0, "settings": 0.0}
+        self.last = {"receive": 0.0, "posting": 0.0, "cleanup": 0.0, "settings": 0.0, "commands": 0.0,
+                     "update": time.time() - 3000, "battery": 0.0}
+        self.battery = False
+        self.rate = [0.0, 0]                 # upload speed limit: (window start, bytes sent in it)
+        self.cmd_status = {}                 # command id -> {status, note}: shown in the app
         self.remote_settings = settings.load(text="{}")
         self.status_ready = False
 
@@ -218,7 +281,7 @@ class Agent:
         except Exception:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
-                     ("finished", [])):
+                     ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {})):
             m.setdefault(k, v)
         return m
 
@@ -264,8 +327,36 @@ class Agent:
             self.progress_changed = True
         self.heartbeat(force=percent is None)
 
+    # ---- pause switch, battery, upload speed limit
+    def paused_reason(self):
+        """Why the laptop is holding off right now (shown in the app), or None."""
+        if self.remote_settings.get("paused"):
+            return "Paused in the app"
+        if self.remote_settings.get("pause_on_battery"):
+            if time.time() - self.last["battery"] > 30:
+                self.last["battery"] = time.time()
+                self.battery = on_battery()
+            if self.battery:
+                return "Waiting: the laptop is on battery"
+        return None
+
+    def gate(self, n, upload=False):
+        """Called for every block sent or received: stops on pause, and keeps to the upload limit."""
+        reason = self.paused_reason()        # settings are refreshed every minute by a background thread
+        if reason:
+            raise Paused(reason)
+        limit = float(self.remote_settings.get("upload_limit_mbps") or 0)
+        if upload and limit > 0:
+            now = time.time()
+            if now - self.rate[0] > 5 + self.rate[1] / (limit * 125000):
+                self.rate = [now, 0]               # a fresh start after a break
+            self.rate[1] += n
+            wait = self.rate[1] / (limit * 125000) - (now - self.rate[0])
+            if wait > 0:
+                time.sleep(min(wait, 30))
+
     # ---- 1. send
-    def send_movie(self, path, source="laptop", wish=None):
+    def send_movie(self, path, source="laptop", wish=None, clips=None, movie=None):
         """Sends one movie (and its .srt) to GitHub, then starts the cutter."""
         path = Path(path)
         size = path.stat().st_size
@@ -277,13 +368,16 @@ class Agent:
                 rid = datetime.now().strftime("%Y%m%d-%H%M%S-") + secrets.token_hex(2)
                 self.memory["sends"][rid] = {"path": str(path), "file": path.name, "size": size,
                                              "srt": str(srt) if srt else None, "source": source, "wish": wish,
-                                             "status": "sending", "started": now_iso()}
+                                             "status": "sending", "started": now_iso(),
+                                             "clips": clips, "movie": movie}
                 self._save_memory()
             entry = self.memory["sends"][rid]
         tag = transport.INCOMING + rid
         meta = {"kind": "incoming", "id": rid, "file": path.name, "size": size,
                 "srt": Path(entry["srt"]).name if entry.get("srt") else None, "source": source,
                 "sent": entry["started"], "laptop": socket.gethostname(), "complete": False}
+        if entry.get("clips"):
+            meta.update(clips=entry["clips"], movie=entry.get("movie"))
         release = next((r for r in self.gh.releases() if r.get("tag_name") == tag), None)
         if not release:
             release = self.gh.create_release(tag, f"Incoming: {path.name}", json.dumps(meta))
@@ -300,9 +394,10 @@ class Agent:
                 self.notify(f"Sending {path.name} to GitHub: {pc}%", "Halfway there.", event=False)
         chunk = int(float(self.cfg["chunk_mb"]) * 1e6)
         try:
-            transport.send(self.gh, release, path, "movie", existing, chunk, progress)
+            up = lambda n: self.gate(n, upload=True)   # noqa: E731
+            transport.send(self.gh, release, path, "movie", existing, chunk, progress, gate=up)
             if entry.get("srt") and Path(entry["srt"]).exists():
-                transport.send(self.gh, release, Path(entry["srt"]), "subs", existing, chunk)
+                transport.send(self.gh, release, Path(entry["srt"]), "subs", existing, chunk, gate=up)
             self.gh.update_release(release["id"], body=json.dumps(dict(meta, complete=True)))
         finally:
             self.set_transfer("send", path.name, path.name, None)
@@ -315,12 +410,18 @@ class Agent:
                 self.memory["wishlist"][wish].update(status="uploaded", percent=None, note=None)
             self._save_memory()
         log.info("Sent %s", path.name)
-        self.notify("📥 Sent to GitHub", f"{path.name}: cutting starts soon. The parts come back to "
-                    f"{self.ready_dir}.", kind="new_file", tags=["inbox_tray"])
+        if entry.get("clips"):
+            self.notify("📥 Sent to GitHub for clips", f"{path.name}: {len(entry['clips'])} custom clip(s) start soon.",
+                        kind="new_file", tags=["scissors"])
+        else:
+            self.notify("📥 Sent to GitHub", f"{path.name}: cutting starts soon. The parts come back to "
+                        f"{self.ready_dir}.", kind="new_file", tags=["inbox_tray"])
         self.heartbeat(force=True)
         self.start_cutter()
 
     def start_cutter(self):
+        if self.remote_settings.get("paused"):
+            return
         try:
             if not self.gh.run_active(WORKFLOW):
                 self.gh.dispatch(WORKFLOW)
@@ -332,20 +433,33 @@ class Agent:
         """Originals already sent (or kept after their parts came back): don't send them again."""
         return {s["path"] for s in self.memory["sends"].values() if s["status"] in ("sent", "done")}
 
+    def queue_sorted(self, paths):
+        """Files in the order chosen in the app (anything not ordered goes last, by name)."""
+        order = {n: i for i, n in enumerate(self.memory.get("queue_order") or [])}
+        return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), p.name.lower()))
+
     def check_folder(self):
         busy = self.waiting_paths()
-        for p in self.watcher.ready():
+        for p in self.queue_sorted(self.watcher.ready()):
             if str(p) in busy:
                 continue
+            if self.paused_reason():
+                return
             try:
                 self.send_movie(p, "laptop")
+            except Paused as e:
+                log.info("Sending %s stopped: %s (it carries on later)", p.name, e)
+                return
             except Exception as e:
                 log.error("Sending %s failed, will try again: %s", p.name, e)
             self.watcher.forget(p)
-        while self.to_send:
+        while self.to_send and not self.paused_reason():
             p, wish = self.to_send.pop(0)
             try:
                 self.send_movie(p, "wishlist", wish)
+            except Paused:
+                self.to_send.insert(0, (p, wish))
+                return
             except Exception as e:
                 log.error("Sending %s failed, will try again: %s", Path(p).name, e)
                 self._wish(wish, status="failed", percent=None, note=str(e)[:200], checked=time.time())
@@ -366,6 +480,8 @@ class Agent:
             self.remote_settings = settings.load(text=s_text or "{}", env={})
         except Exception as e:
             log.warning("Couldn't read settings from GitHub: %s", e)
+        if self.paused_reason():
+            return
         if not self.remote_settings.get("wishlist_archive", True):
             for line, _, _ in items:
                 st = (self.memory["wishlist"].get(line) or {}).get("status")
@@ -427,10 +543,15 @@ class Agent:
                 if time.time() - last[0] > 5:
                     last[0] = time.time()
                     self._wish(line, percent=pc)
+                    if self.paused_reason():
+                        raise Paused(self.paused_reason())
             local = archive.download(url, self.downloads / name, size, progress)
             self._wish(line, percent=100)
             with self.lock:
                 self.to_send.append((local, line))      # sent by the main loop, one movie at a time
+        except Paused as e:
+            log.info("Wish list: %s download paused (%s)", line, e)
+            self._wish(line, status="found", percent=None, note=f"{e}: carries on later")
         except Exception as e:
             log.error("Wish list: %s failed: %s", line, e)
             self._wish(line, status="failed", percent=None, note=str(e)[:200])
@@ -446,7 +567,10 @@ class Agent:
             s = self.memory["sends"].get(rid)
             if meta.get("failed") and s and s["status"] == "sent":
                 self.gh.delete_release(r["id"], r["tag_name"])
-                self.finish_original(rid, failed=True, error=meta.get("error"))
+                if s.get("clips"):
+                    self.clip_job_over(rid, ok=False, note=meta.get("error") or "the cutter couldn't make it")
+                else:
+                    self.finish_original(rid, failed=True, error=meta.get("error"))
 
     def receive_parts(self):
         releases = self.gh.releases()
@@ -474,7 +598,10 @@ class Agent:
                                                                    for a in chunks):
                 log.info("Receiving %s", rel)
                 transport.receive(self.gh, chunks, dest,
-                                  lambda pc, f=p["file"]: self.set_transfer("receive", f, movie, pc))
+                                  lambda pc, f=p["file"]: self.set_transfer("receive", f, movie, pc),
+                                  gate=self.gate)
+                if p.get("mode") == "clips" and p.get("caption"):
+                    dest.with_name(dest.stem + " - caption.txt").write_text(p["caption"] + "\n", encoding="utf-8")
                 self.set_transfer("receive", p["file"], movie, None)
                 for a in chunks:
                     self.gh.delete_asset(a["id"])
@@ -493,7 +620,11 @@ class Agent:
             with open(self.output / "Finished.txt", "a", encoding="utf-8") as f:
                 f.write(f"{datetime.now():%d %b %Y, %I:%M %p}  -  {movie}  -  {body.get('summary') or n}  -  "
                         f"subtitles: {body.get('subtitles') or '-'}  (original file: {body.get('file')})\n")
-            self.finish_original(rid, failed=bool(body.get("failed")))
+            s = self.memory["sends"].get(rid) or {}
+            if body.get("clips") or s.get("clips"):
+                self.clip_job_over(rid, ok=not body.get("failed"))
+            else:
+                self.finish_original(rid, failed=bool(body.get("failed")), movie=movie)
 
     def write_lists(self, base, body):
         """_parts list.txt and captions.txt in each mode folder, ready for posting by hand."""
@@ -507,13 +638,14 @@ class Agent:
             if caps:
                 (folder / "captions.txt").write_text("\n".join(caps), encoding="utf-8")
 
-    def finish_original(self, rid, failed=False, error=None):
+    def finish_original(self, rid, failed=False, error=None, movie=None):
         """What happens to the original movie once its parts are back (or it failed)."""
         s = self.memory["sends"].get(rid)
         if not s or s["status"] not in ("sent", "sending"):
             return
         how = "move" if failed else str(self.cfg["original_after"]).lower()
         targets = [Path(s["path"])] + ([Path(s["srt"])] if s.get("srt") else [])
+        kept = {}
         for f in targets:
             if not f.exists():
                 continue
@@ -524,7 +656,16 @@ class Agent:
             elif how == "move":
                 folder = self.output / ("Failed" if failed else "Done")
                 folder.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(f), str(unique(folder / f.name)))
+                to = unique(folder / f.name)
+                shutil.move(str(f), str(to))
+                kept["srt" if f.suffix.lower() == ".srt" else "path"] = str(to)
+            else:
+                kept["srt" if f.suffix.lower() == ".srt" else "path"] = str(f)
+        if kept.get("path") and not failed:          # remembered so custom clips can be made later
+            with self.lock:
+                mid = status.movie_id(movie or names.clean_name(s["file"]))
+                self.memory["originals"][mid] = {"path": kept["path"], "srt": kept.get("srt"), "file": s["file"]}
+                self._save_memory()
         with self.lock:
             if failed:
                 del self.memory["sends"][rid]          # moving it back to the watch folder tries again
@@ -541,6 +682,175 @@ class Agent:
                         kind="failed", tags=["x"], event=False)
         self.heartbeat(force=True)
 
+    # ---- commands from the app (config/commands.json)
+    def folder_for(self, where):
+        return {"library": self.downloads, "queue": self.watch, "done": self.output / "Done",
+                "failed": self.output / "Failed"}.get(str(where or "").lower())
+
+    def check_commands(self):
+        """Does what was tapped in the app: move movies into To edit, reorder, restore/bin, custom clips."""
+        try:
+            text, _ = self.gh.read_file("config/commands.json")
+        except Exception as e:
+            log.warning("Couldn't read commands from GitHub: %s", e)
+            return
+        try:
+            cmds = (json.loads(text) if text else {}).get("commands") or []
+        except ValueError:
+            log.warning("config/commands.json isn't valid JSON")
+            return
+        done = self.memory["commands_done"]
+        clips = {}
+        for c in cmds:
+            cid = str(c.get("id") or "")
+            if (not cid or cid in done or cid in self.working_clip_ids()
+                    or self.cmd_status.get(cid, {}).get("status") == "working"):
+                continue
+            kind = c.get("type")
+            try:
+                if kind == "clip":
+                    clips.setdefault(str(c.get("movie_id") or ""), []).append(c)
+                    continue
+                note = self.run_command(kind, c)
+                self.command_over(cid, True, note)
+            except Exception as e:
+                log.warning("Command %s (%s) failed: %s", cid, kind, e)
+                self.command_over(cid, False, str(e)[:200])
+        for mid, group in clips.items():
+            self.start_clips(mid, group)
+
+    def command_over(self, cid, ok, note=None):
+        with self.lock:
+            self.cmd_status[cid] = {"status": "done" if ok else "failed", "note": note}
+            self.memory["commands_done"][cid] = {"ok": ok, "note": note, "at": now_iso()}
+            if len(self.memory["commands_done"]) > 300:
+                for k in sorted(self.memory["commands_done"], key=lambda k: self.memory["commands_done"][k]["at"])[:100]:
+                    del self.memory["commands_done"][k]
+            self._save_memory()
+        self.heartbeat(force=True)
+
+    def run_command(self, kind, c):
+        name = plain_name(c.get("file"))
+        if kind == "queue_order":
+            order = [n for n in (plain_name(x) for x in c.get("order") or []) if n]
+            with self.lock:
+                self.memory["queue_order"] = order
+                self._save_memory()
+            return "New order saved"
+        if not name:
+            raise ValueError("no file name given")
+        if kind in ("to_queue", "to_library"):
+            src_dir = self.folder_for(c.get("from") or "library")
+            dest_dir = self.watch if kind == "to_queue" else self.downloads
+            if src_dir is None or not (src_dir / name).is_file():
+                raise FileNotFoundError(f"{name} isn't in that folder any more")
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            to = unique(dest_dir / name)
+            shutil.move(str(src_dir / name), str(to))
+            srt = matching_srt(src_dir / name) if (src_dir / name).parent.is_dir() else None
+            if srt:
+                shutil.move(str(srt), str(unique(dest_dir / srt.name)))
+            if kind == "to_queue" and c.get("first"):
+                with self.lock:
+                    self.memory["queue_order"] = [to.name] + [n for n in self.memory["queue_order"] if n != to.name]
+                    self._save_memory()
+            return f"Moved to {'To edit' if kind == 'to_queue' else 'your Movies folder'}"
+        if kind == "to_bin":
+            src_dir = self.folder_for(c.get("from") or "done")
+            if src_dir is None or not (src_dir / name).is_file():
+                raise FileNotFoundError(f"{name} isn't there any more")
+            if not send_to_trash(src_dir / name):
+                raise OSError("Windows wouldn't put it in the Recycle Bin, so it was left where it is")
+            return "Put in the Recycle Bin"
+        raise ValueError(f"unknown command {kind!r}")
+
+    def find_original(self, movie_id, movie_name=None):
+        """The original file of a movie (for custom clips), wherever it is now."""
+        o = self.memory["originals"].get(movie_id)
+        if o and Path(o["path"]).is_file():
+            return Path(o["path"]), (Path(o["srt"]) if o.get("srt") and Path(o["srt"]).is_file() else None)
+        for folder in (self.output / "Done", self.watch, self.downloads, self.output / "Failed"):
+            if not folder.is_dir():
+                continue
+            for p in folder.iterdir():
+                if p.is_file() and p.suffix.lower() in VIDEO_EXT and status.movie_id(names.clean_name(p.name)) == movie_id:
+                    return p, matching_srt(p)
+        return None, None
+
+    def start_clips(self, movie_id, cmds):
+        """Sends the original once more, with the clips to make; the cutter makes only those."""
+        movie = next((c.get("movie") for c in cmds if c.get("movie")), None)
+        path, _ = self.find_original(movie_id, movie)
+        ids = [str(c["id"]) for c in cmds]
+        if not path:
+            for cid in ids:
+                self.command_over(cid, False, "The original movie isn't on the laptop any more (it may have been "
+                                              "deleted). Put it back in the Done folder to make clips.")
+            return
+        if self.paused_reason():
+            return
+        clips = [{"id": str(c["id"]), "start": float(c.get("start") or 0), "end": float(c.get("end") or 0),
+                  "title": str(c.get("title") or "")[:60]} for c in cmds]
+        for cid in ids:
+            self.cmd_status[cid] = {"status": "working", "note": "Sending the movie to GitHub"}
+        self.heartbeat(force=True)
+        try:
+            self.send_movie(path, "clip", clips=clips, movie=movie or names.clean_name(path.name))
+            for cid in ids:
+                self.cmd_status[cid] = {"status": "working", "note": "Being cut on GitHub"}
+            self.heartbeat(force=True)
+        except Paused:
+            for cid in ids:
+                self.cmd_status.pop(cid, None)
+        except Exception as e:
+            log.error("Sending %s for clips failed, will try again: %s", path.name, e)
+            for cid in ids:
+                self.cmd_status.pop(cid, None)
+
+    def clip_job_over(self, rid, ok=True, note=None):
+        s = self.memory["sends"].get(rid) or {}
+        for c in s.get("clips") or []:
+            self.command_over(c["id"], ok, note or ("Clip made" if ok else "Clip failed"))
+        with self.lock:
+            self.memory["sends"].pop(rid, None)
+            self._save_memory()
+
+    def working_clip_ids(self):
+        return {str(c["id"]) for s in self.memory["sends"].values() if s.get("clips") for c in s["clips"]}
+
+    # ---- keeping its own code up to date
+    def self_update(self, force=False):
+        """Fetches newer versions of the helper's own files from GitHub, checks they're valid Python, swaps
+        them in (old ones saved in laptop/.backup) and restarts. Setting: auto_update_laptop."""
+        if not force and not self.remote_settings.get("auto_update_laptop", True):
+            return False
+        root = HERE.parent
+        changed = []
+        for rel in CODE_FILES:
+            text, sha = self.gh.read_file(rel)
+            if text is None:
+                continue
+            local = root / rel
+            data = text.encode("utf-8")
+            old = local.read_bytes() if local.exists() else b""
+            if git_blob_sha(old) == sha or old.replace(b"\r\n", b"\n") == data:
+                continue
+            compile(text, rel, "exec")                      # never install something broken
+            changed.append((local, data, old))
+        if not changed:
+            return False
+        backup = HERE / ".backup"
+        backup.mkdir(exist_ok=True)
+        for local, data, old in changed:
+            if old:
+                (backup / local.name).write_bytes(old)
+            tmp = local.with_suffix(local.suffix + ".new")
+            tmp.write_bytes(data)
+            os.replace(tmp, local)
+        log.info("Updated %s; restarting", ", ".join(l.name for l, _, _ in changed))
+        self.notify("🔄 Laptop helper updated", "Restarting with the newest version.", event=False, tags=["arrows_counterclockwise"])
+        return True
+
     def cleanup_old_parts(self):
         """Setting "cleanup_parts_after_days": deletes parts older than that from Ready to post."""
         days = float(self.remote_settings.get("cleanup_parts_after_days") or 0)
@@ -556,7 +866,7 @@ class Agent:
 
     # ---- 4. post to TikTok
     def refresh_settings(self, force=False):
-        if not force and time.time() - self.last["settings"] < 600:
+        if not force and time.time() - self.last["settings"] < 60:
             return
         try:
             text, _ = self.gh.read_file("config/settings.json")
@@ -637,12 +947,41 @@ class Agent:
                 wl.append(e)
             transfers = list(self.transfers.values())
             send = next((t for t in transfers if t["direction"] == "send"), None)
-            return {"version": 1, "updated": now_iso(), "online": self.online, "host": socket.gethostname(),
+            return {"updated": now_iso(), "online": self.online, "host": socket.gethostname(),
                     "watch_folder": str(self.watch).replace("\\", "/"),
                     "ready_folder": str(self.ready_dir).replace("\\", "/"),
                     "uploading": {"file": send["file"], "percent": send["percent"]} if send else None,
                     "transfers": transfers,
-                    "uploaded": self.memory["uploaded"][:20], "wishlist": wl}
+                    "uploaded": self.memory["uploaded"][:20], "wishlist": wl,
+                    "paused": self.paused_reason(), "battery": self.battery,
+                    "queue": self.queue_files(), "library": self.folder_files(self.downloads),
+                    "library_folder": str(self.downloads).replace("\\", "/"),
+                    "bin": ([dict(f, folder="done") for f in self.folder_files(self.output / "Done")]
+                            + [dict(f, folder="failed") for f in self.folder_files(self.output / "Failed")]),
+                    "commands": dict({cid: {"status": "working", "note": "Being cut on GitHub"}
+                                      for cid in self.working_clip_ids()}, **self.cmd_status), "commands_done": sorted(self.memory["commands_done"])[-150:],
+                    "originals": sorted(self.memory["originals"]), "version": 2}
+
+    def folder_files(self, folder, limit=150):
+        """Movie files (top level only) in a folder, newest first."""
+        if not folder.is_dir():
+            return []
+        out = [file_info(p) for p in folder.iterdir()
+               if p.is_file() and p.suffix.lower() in VIDEO_EXT and not p.name.startswith((".", "~"))]
+        return sorted([f for f in out if f], key=lambda f: f["modified"], reverse=True)[:limit]
+
+    def queue_files(self):
+        """Movies in To edit that haven't been sent yet, in the order they'll go."""
+        busy = self.waiting_paths()
+        sending = {t["file"] for t in self.transfers.values() if t["direction"] == "send"}
+        files = [p for p in self.watcher.candidates() if str(p) not in busy]
+        out = []
+        for p in self.queue_sorted(files):
+            info = file_info(p)
+            if info:
+                info["sending"] = p.name in sending
+                out.append(info)
+        return out
 
     def heartbeat(self, force=False):
         """Saves laptop.json to GitHub when something changed (progress at most every 30 s) or every 5 minutes."""
@@ -666,6 +1005,16 @@ class Agent:
     def tick(self, now=None):
         """One round: send ready files, fetch finished parts, post if due, tidy up."""
         now = time.time() if now is None else now
+        self.refresh_settings()
+        if now - self.last["commands"] >= 30:
+            self.last["commands"] = now
+            try:
+                self.check_commands()
+            except Exception as e:
+                log.error("Checking the app's commands failed: %s", e)
+        if self.paused_reason():
+            self.heartbeat()
+            return
         self.check_folder()
         if now - self.last["receive"] >= float(self.cfg["receive_seconds"]):
             self.last["receive"] = now
@@ -685,6 +1034,15 @@ class Agent:
                 self.cleanup_old_parts()
             except Exception as e:
                 log.error("Cleaning up old parts failed: %s", e)
+        if now - self.last["update"] >= 3600 and not self.transfers:
+            self.last["update"] = now
+            try:
+                if self.self_update():
+                    raise Restart()
+            except Restart:
+                raise
+            except Exception as e:
+                log.warning("Couldn't check for a newer helper: %s", e)
         self.heartbeat()
 
     def stop(self):
@@ -785,6 +1143,37 @@ def setup_logging(folder):
         log.addHandler(sh)
 
 
+_LOCK = None
+
+
+def single_instance(wait=40):
+    """Only one helper may run at a time (two would send the same movie twice). Waits a little in case
+    the old one is just restarting."""
+    global _LOCK
+    for _ in range(int(wait)):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            sock.bind(("127.0.0.1", 47231))
+            sock.listen(1)
+            _LOCK = sock
+            return True
+        except OSError:
+            sock.close()
+            time.sleep(1)
+    return False
+
+
+def restart():
+    """Starts the helper again (new code). Mac: launchd starts it by itself when this one ends."""
+    if _LOCK:
+        _LOCK.close()
+    if os.name == "nt":
+        flags = getattr(subprocess, "DETACHED_PROCESS", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+        subprocess.Popen([sys.executable, str(HERE / "agent.py")] + sys.argv[1:], cwd=str(HERE),
+                         creationflags=flags, close_fds=True)
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Movie Splitter laptop helper")
     ap.add_argument("--config", default=str(HERE / "config.json"))
@@ -826,6 +1215,10 @@ def main(argv=None):
             agent.stop()
             return 0
 
+        if not single_instance():
+            log.info("Another copy of the helper is already running; this one stops.")
+            return 0
+
         def every(minutes, fn):
             while True:
                 time.sleep(float(minutes) * 60)
@@ -837,10 +1230,15 @@ def main(argv=None):
                          daemon=True).start()
         threading.Thread(target=every, args=(agent.cfg["heartbeat_minutes"], lambda: agent.heartbeat(force=True)),
                          daemon=True).start()
+        threading.Thread(target=every, args=(1, lambda: agent.refresh_settings(force=True)), daemon=True).start()
         threading.Thread(target=agent.check_wishlist, daemon=True).start()   # first look straight away
         while True:
             try:
                 agent.tick()
+            except Restart:
+                agent.heartbeat(force=True)
+                status.flush()
+                return restart()
             except Exception as e:
                 log.error("Something went wrong (trying again shortly): %s", e)
             time.sleep(float(agent.cfg["poll_seconds"]))

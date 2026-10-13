@@ -55,8 +55,18 @@ def read_range(path, start, end):
             yield block
 
 
-def send(gh, release, path, prefix, existing=(), chunk_size=CHUNK_SIZE, progress=None):
-    """Uploads `path` as release files prefix.000, prefix.001... progress(percent). Returns the names."""
+def gated(blocks, gate):
+    """Passes each block through gate(len) first (it may sleep to limit speed, or raise to stop)."""
+    for block in blocks:
+        if gate:
+            gate(len(block))
+        yield block
+
+
+def send(gh, release, path, prefix, existing=(), chunk_size=CHUNK_SIZE, progress=None, gate=None):
+    """Uploads `path` as release files prefix.000, prefix.001... progress(percent). Returns the names.
+    gate(bytes): called before each block; it can slow the upload down or raise to stop it (a later
+    send carries on from the last finished piece)."""
     size = os.path.getsize(path)
     have = {a["name"]: a for a in existing}
     names, done = [], 0
@@ -73,14 +83,14 @@ def send(gh, release, path, prefix, existing=(), chunk_size=CHUNK_SIZE, progress
         def tick(sent, base=done):
             if progress and size:
                 progress(int((base + sent) * 100 / size))
-        gh.upload_asset(release, name, b - a, read_range(path, a, b), tick)
+        gh.upload_asset(release, name, b - a, gated(read_range(path, a, b), gate), tick)
         done += b - a
     if progress:
         progress(100)
     return names
 
 
-def receive(gh, chunks, dest, progress=None):
+def receive(gh, chunks, dest, progress=None, gate=None):
     """Downloads the pieces (in order) and joins them into dest (written as dest.part first)."""
     dest = Path(dest)
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -95,7 +105,11 @@ def receive(gh, chunks, dest, progress=None):
                 def tick(n, base=got[0]):
                     if progress:
                         progress(min(100, int((base + n) * 100 / total)))
-                gh.download_asset(a["id"], out.write, tick)
+                def sink(block):
+                    if gate:
+                        gate(len(block))
+                    out.write(block)
+                gh.download_asset(a["id"], sink, tick)
                 if out.tell() - start != int(a.get("size", out.tell() - start)):
                     raise IOError(f"{a['name']} arrived incomplete; it will be tried again")
                 got[0] += int(a.get("size", 0))

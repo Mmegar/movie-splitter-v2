@@ -31,6 +31,7 @@ class FakeGitHub:
         self.requests = []
         self.auth_seen_on_download = []
         self.trees, self.commits = {}, {}
+        self.blobs, self.bin_branches = {}, {}      # binary files (previews): blob sha -> bytes; branch -> {path: sha}
         handler = self._handler()
         self.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
         self.port = self.server.server_port
@@ -193,6 +194,9 @@ class FakeGitHub:
                     fpath = urllib.parse.unquote("/".join(parts[1:]))
                     if method == "GET":
                         branch = q.get("ref", ["main"])[0]
+                        if fpath in fake.bin_branches.get(branch, {}):
+                            data = fake.blobs[fake.bin_branches[branch][fpath]]
+                            fake.files[(branch, fpath)] = (data.decode("utf-8", "replace"), fake.bin_branches[branch][fpath])
                         f = fake.files.get((branch, fpath))
                         if not f:
                             return self.reply(404, {"message": "Not Found"})
@@ -218,6 +222,24 @@ class FakeGitHub:
                         text = base64.b64decode(b["content"]).decode()
                         fake.put_file(fpath, text, branch)
                         return self.reply(200 if cur else 201, {"content": {"sha": fake.files[(branch, fpath)][1]}})
+                if parts[:2] == ["git", "blobs"] and method == "POST":
+                    b = json.loads(self.body())
+                    sha = f"blob{fake._id()}"
+                    fake.blobs[sha] = base64.b64decode(b["content"])
+                    return self.reply(201, {"sha": sha})
+                if parts[:2] == ["git", "trees"] and method == "GET":
+                    branch = urllib.parse.unquote(parts[2])
+                    if branch not in fake.bin_branches:
+                        return self.reply(404, {"message": "Not Found"})
+                    return self.reply(200, {"tree": [{"path": k, "type": "blob", "sha": v}
+                                                     for k, v in fake.bin_branches[branch].items()]})
+                if parts[:3] == ["git", "refs", "heads"] and method == "PATCH":
+                    branch = urllib.parse.unquote("/".join(parts[3:]))
+                    if branch not in fake.bin_branches:
+                        return self.reply(422, {"message": "Reference does not exist"})
+                    b = json.loads(self.body())
+                    fake.bin_branches[branch] = {i["path"]: i["sha"] for i in fake.trees[fake.commits[b["sha"]]["tree"]]}
+                    return self.reply(200, {})
                 if parts[0] == "branches":
                     return self.reply(200 if parts[1] in fake.branches else 404, {})
                 if parts[:2] == ["git", "trees"]:
@@ -236,8 +258,12 @@ class FakeGitHub:
                     if branch in fake.branches:
                         return self.reply(422, {"message": "Reference already exists"})
                     fake.branches.add(branch)
-                    for item in fake.trees[fake.commits[b["sha"]]["tree"]]:
-                        fake.put_file(item["path"], item["content"], branch)
+                    items = fake.trees[fake.commits[b["sha"]]["tree"]]
+                    if items and "sha" in items[0]:
+                        fake.bin_branches[branch] = {i["path"]: i["sha"] for i in items}
+                    for item in items:
+                        if "content" in item:
+                            fake.put_file(item["path"], item["content"], branch)
                     return self.reply(201, {})
                 if parts[:2] == ["git", "refs"] and method == "DELETE":
                     return self.reply(422, {"message": "Reference does not exist"})

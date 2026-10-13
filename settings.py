@@ -36,6 +36,12 @@ DEFAULTS = {
     "cockroach_chance": 1,
     "cockroach_size": 60,
     "captions": True,
+    "caption_style": "goofy",            # goofy = jokes + a quote from the clip; plain = the older, calmer captions
+    "paused": False,                     # True = laptop stops sending/receiving and GitHub doesn't start cutting
+    "pause_on_battery": False,           # laptop waits while it's running on battery
+    "upload_limit_mbps": 0,              # cap the laptop's upload speed (megabits/s); 0 = no limit
+    "previews": True,                    # small encrypted copies of each part, so the app can play them
+    "preview_keep_movies": 3,            # previews are kept for this many most recent movies
     "wishlist_archive": True,            # look up wish-list titles on archive.org (public domain only); False = off
     "video_quality": 23,                 # x264 CRF: 18 = best/biggest ... 28 = smallest
     "delete_originals": "permanent",     # "permanent" = gone for good, "bin" = Google Drive's bin (30 days)

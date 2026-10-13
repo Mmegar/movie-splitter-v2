@@ -171,6 +171,36 @@ class GitHub:
             return info["sha"]
         return None                     # someone else made the branch a moment ago
 
+    # ---------------------------------------------------------------- binary files on a branch (previews)
+    def create_blob(self, data):
+        """Stores bytes in the repo (not on any branch yet). Returns the blob's sha."""
+        return self.call("POST", "/git/blobs", {"content": base64.b64encode(data).decode(),
+                                                "encoding": "base64"}, ok=(201,))["sha"]
+
+    def branch_files(self, branch):
+        """{path: blob sha} of every file on a branch; {} if the branch doesn't exist."""
+        status, _, data = self.request("GET", f"/git/trees/{urllib.parse.quote(branch)}?recursive=1")
+        if status in (404, 409, 422):
+            return {}
+        if status != 200:
+            raise GitHubError(status, data[:300].decode("utf-8", "replace"))
+        return {t["path"]: t["sha"] for t in json.loads(data).get("tree", []) if t.get("type") == "blob"}
+
+    def replace_branch(self, branch, files, message):
+        """Makes `branch` hold exactly these files ({path: blob sha}) in one commit with no history,
+        so old files really go away and the branch never grows."""
+        tree = self.call("POST", "/git/trees", {"tree": [{"path": p, "mode": "100644", "type": "blob", "sha": sha}
+                                                          for p, sha in sorted(files.items())]}, ok=(201,))
+        commit = self.call("POST", "/git/commits", {"message": message, "tree": tree["sha"], "parents": []},
+                           ok=(201,))
+        status, _, data = self.request("PATCH", f"/git/refs/heads/{urllib.parse.quote(branch)}",
+                                       {"sha": commit["sha"], "force": True})
+        if status in (404, 422):
+            self.call("POST", "/git/refs", {"ref": f"refs/heads/{branch}", "sha": commit["sha"]}, ok=(201,))
+        elif status != 200:
+            raise GitHubError(status, data[:300].decode("utf-8", "replace"))
+        return commit["sha"]
+
     # ---------------------------------------------------------------- releases
     def releases(self):
         return self._pages("/releases")

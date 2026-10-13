@@ -35,7 +35,7 @@ STAGES = {"idle", "downloading", "analysing", "subtitles", "planning", "renderin
           "posting", "done", "failed"}
 EVENT_TYPES = {"new_file", "started", "planned", "part_ready", "finished", "failed", "posted",
                "post_failed", "paused", "info"}
-LABELS = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie"}
+LABELS = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips"}
 KEEP = object()   # "leave this as it is"
 
 
@@ -401,7 +401,7 @@ def movie_planned(name, mode, count):
 
 
 @safe
-def part_ready(name, mode, n, start, end, drive_path, caption=None):
+def part_ready(name, mode, n, start, end, drive_path, caption=None, preview=None, title=None):
     def f(st):
         m = _find(st, name)
         if not m:
@@ -409,10 +409,47 @@ def part_ready(name, mode, n, start, end, drive_path, caption=None):
         md = m["modes"].setdefault(mode, {"label": LABELS.get(mode, mode), "planned": 0, "parts": []})
         old = next((p for p in md["parts"] if p.get("n") == n), None)
         part = {"n": n, "start": round(start, 1), "end": round(end, 1), "seconds": round(end - start, 1),
-                "drive_path": drive_path, "caption": caption,
+                "drive_path": drive_path, "caption": caption, "preview": preview,
                 "post": (old or {}).get("post") or {"status": "none", "at": None, "url": None, "error": None}}
+        if title:
+            part["title"] = title
         md["parts"] = sorted([p for p in md["parts"] if p.get("n") != n] + [part], key=lambda p: p["n"])
     store().change(f, message=f"{name} part {n}")
+
+
+@safe
+def movie_previews(name, thumbs=None, subs=None):
+    """Where the encrypted thumbnail strip / subtitles of the whole movie are (previews branch)."""
+    def f(st):
+        m = _find(st, name)
+        if m:
+            if thumbs:
+                m["thumbs"] = thumbs
+            if subs:
+                m["subs_preview"] = subs
+    store().change(f, message=f"previews {name}")
+
+
+@safe
+def clips_started(name, count, source="laptop"):
+    """Custom clips of a movie that's already in the list: keeps its other parts as they are."""
+    def f(st):
+        m = _find(st, name)
+        if not m:
+            m = {"id": movie_id(name), "name": name, "status": "processing", "source": source,
+                 "started": now_iso(), "finished": None, "duration": None, "subtitles": None, "error": None,
+                 "modes": {}}
+            st["movies"].insert(0, m)
+        md = m["modes"].setdefault("clips", {"label": LABELS["clips"], "planned": 0, "parts": []})
+        md["planned"] = len(md["parts"]) + count
+        m["status"], m["error"] = "processing", None
+    store().change(f, urgent=True, message=f"clips {name}")
+
+
+def next_clip_number(name):
+    m = _find(load_state() or {"movies": []}, name) or {}
+    parts = ((m.get("modes") or {}).get("clips") or {}).get("parts") or []
+    return max([p.get("n", 0) for p in parts] + [0]) + 1
 
 
 @safe
@@ -420,7 +457,9 @@ def movie_finished(name, subtitles=None):
     def f(st):
         m = _find(st, name)
         if m:
-            m.update(status="done", finished=now_iso(), subtitles=subtitles, error=None)
+            m.update(status="done", finished=now_iso(), error=None)
+            if subtitles is not None:
+                m["subtitles"] = subtitles
     store().change(f, urgent=True, message=f"finished {name}")
 
 

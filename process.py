@@ -37,6 +37,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import previews
 import settings
 import status
 import transport
@@ -47,9 +48,9 @@ SETTINGS = settings.apply_to_env()
 
 READY = "Ready to post"
 
-MODE_NAMES = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie"}
+MODE_NAMES = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips"}
 MODES = [m.strip().lower() for m in os.environ.get("MODES", "highlights,stretch,all").split(",")
-         if m.strip().lower() in MODE_NAMES] or ["highlights"]
+         if m.strip().lower() in MODE_NAMES and m.strip().lower() != "clips"] or ["highlights"]
 MODE = ""   # the mode being made right now (labels the notifications)
 STRETCH_MINUTES = float(os.environ.get("STRETCH_MINUTES", "12"))           # "stretch" mode: how much of the movie
 STRETCH_FROM = float(os.environ.get("STRETCH_FROM", "0.20"))   # "stretch" mode: only look from 20%...
@@ -89,13 +90,6 @@ TZ = ZoneInfo(SETTINGS["posting"]["timezone"])
 WORK = Path("work")
 
 VIDEO_EXT = {".mkv", ".mp4", ".avi", ".mov", ".m4v", ".wmv", ".webm", ".mpg", ".mpeg", ".ts", ".ogv"}
-JUNK = re.compile(
-    r"\b(2160p|1080p|720p|480p|4k|uhd|hdr|10bit|bluray|blu ray|brrip|bdrip|webrip|web dl|web|"
-    r"hdtv|dvdrip|hdrip|x264|x265|h264|h265|hevc|aac|ac3|dts|proper|repack|extended|remastered|"
-    r"512kb|archive|ia)\b.*$",
-    re.I,
-)
-
 
 # ---------------------------------------------------------------- helpers
 def run(cmd, **kw):
@@ -127,24 +121,7 @@ def notify(title, message, tags=None, kind="info"):
         print(f"(notification not sent: {e})", flush=True)
 
 
-def clean_name(filename):
-    """'Nosferatu.1922.1080p.mkv' -> 'Nosferatu (1922)'"""
-    stem = Path(filename).stem
-    base = re.sub(r"[._]+", " ", stem)
-    base = re.sub(r"[\[\]\(\)\{\}]", " ", base)
-    base = re.sub(r"\s+", " ", base).strip()
-    name = None
-    for m in re.finditer(r"\b(1[89]\d{2}|20\d{2})\b", base):
-        if m.start() > 0:
-            name = f"{base[:m.start()].strip(' -')} ({m.group(1)})"
-            break
-    if not name:
-        name = JUNK.sub("", base).strip(" -") or stem
-    return safe(name)
-
-
-def safe(name):
-    return re.sub(r'[\\/:*?"<>|%]', "", name).strip()
+from names import clean_name, safe  # noqa: E402  (shared with the laptop helper)
 
 
 def fmt_time(s):
@@ -281,16 +258,124 @@ HASHTAG_SETS = [
 ]
 
 
-def make_captions(count):
-    """One caption per part: a random hook, a 'next part' line, and hashtags. No repeats within a movie."""
-    hooks = random.sample(CAPTION_HOOKS, k=min(count, len(CAPTION_HOOKS)))
+CAPTION_STYLE = os.environ.get("CAPTION_STYLE", "goofy").strip().lower()
+GOOFY_HOOKS = [
+    "POV: you said 'one more part' 4 hours ago 🤡",
+    "bro woke up and chose violence 💀",
+    "the way my jaw hit the floor 🫠",
+    "nobody: \nthis movie: 🤯",
+    "me acting like I saw that coming (I did not) 🙈",
+    "this scene owes me rent, it lives in my head 🏠",
+    "my last brain cell watching this: 🧠💨",
+    "plot armor? never heard of her 🛡️",
+    "who wrote this and are they okay 😭",
+    "sound ON. trust me. 🔊",
+    "I screamed. my neighbours screamed. 📢",
+    "the side eye at the end 👀",
+    "Rate the chaos 1 to 🔥🔥🔥",
+    "this is why I have trust issues 😶‍🌫️",
+    "watching this instead of sleeping again 🌚",
+    "bestie made it worse 😭",
+    "the audacity. the AUDACITY. 😤",
+    "okay who let them cook 🧑‍🍳",
+    "that's not a plan, that's a cry for help 🆘",
+    "if this happened to me I'd move countries ✈️",
+    "the confidence of this man 😎",
+    "the plot thickens like gravy 🍲",
+    "main character energy, side character luck 🍀",
+    "this movie said 'hold my popcorn' 🍿",
+    "explain this to me like I'm 5 🧸",
+    "brb rewatching this 47 times 🔁",
+    "a masterclass in bad decisions 🎓",
+    "I'm not crying, my eyes are sweating 🥲",
+    "the jump I just did 🦘",
+    "you're not ready for the last 10 seconds ⏳",
+    "this is cinema and I'm tired of pretending it's not 🎬",
+    "red flag? that's the whole parade 🚩",
+    "tell me you're in trouble without telling me 🫣",
+    "therapist: it can't hurt you. this scene: 😈",
+    "why is nobody talking about this 🤨",
+    "the vibes went from 0 to 100 real quick 📈",
+    "manifesting this level of chaos 🌀",
+    "I paused 3 times to process this 🧐",
+]
+GOOFY_QUOTE = [
+    "'{q}' 💀 I can't",
+    "when they said '{q}' I felt that 😭",
+    "'{q}' is my new personality 😤",
+    "the way they said '{q}' 🫠",
+    "'{q}' and then THIS happened 😳",
+    "me to my group chat: '{q}' 📱",
+]
+GOOFY_NEXT = [
+    "Part {next} is even more unhinged 👀",
+    "follow or you'll miss Part {next} (I warned you) 🔔",
+    "Part {next} drops soon, stay hydrated 💧",
+    "comment 'MORE' if you need Part {next} 👇",
+    "Part {next}? only if this gets 100 comments 😏",
+    "Part {next} is where it gets wild 🌪️",
+]
+GOOFY_LAST = [
+    "that's the end. I need a nap 😮‍💨 follow for the next movie 🍿",
+    "FINAL part. how are we feeling? 👇",
+    "and that's a wrap 🎬 drop the next movie I should do 👇",
+    "the ending. no words. just 🫠",
+]
+GOOFY_TAGS = [
+    "#fyp #movieclips #foryou #filmtok #unhinged",
+    "#fyp #moviescenes #viral #cinema #plottwist",
+    "#foryoupage #movietok #fyp #chaos #mustwatch",
+    "#fyp #movies #funny #viral #moviemoments",
+    "#fyp #filmclips #foryou #whatdidijustwatch #movie",
+]
+
+
+def pick_quote(part_cues):
+    """A short, punchy subtitle line from the part (questions and shouts first), or None."""
+    lines = []
+    for _, _, t in part_cues or []:
+        t = re.sub(r"\s+", " ", str(t)).strip().strip("-").strip()
+        if 8 <= len(t) <= 60 and not re.search(r"[\[\]♪]", t):
+            lines.append(t)
+    if not lines:
+        return None
+    loud = [t for t in lines if t.endswith(("?", "!"))]
+    return random.choice(loud or lines).replace("'", "’")
+
+
+def make_captions(count, quotes=None, style=None):
+    """One caption per part: a hook (sometimes a quote from the part), a 'next part' line, and hashtags.
+    No repeated hooks within a movie. style: goofy (default) or plain."""
+    style = (style or CAPTION_STYLE or "goofy").lower()
+    goofy = style != "plain"
+    pool = GOOFY_HOOKS if goofy else CAPTION_HOOKS
+    hooks = random.sample(pool, k=min(count, len(pool)))
     while len(hooks) < count:
-        hooks.append(random.choice(CAPTION_HOOKS))
+        hooks.append(random.choice(pool))
+    quotes = list(quotes or []) + [None] * count
     out = []
     for i in range(1, count + 1):
-        end = (random.choice(CAPTION_ENDINGS).format(next=i + 1) if i < count else random.choice(CAPTION_LAST))
-        out.append(f"{hooks[i - 1]}\nPart {i} 🎬 · {end}\n{random.choice(HASHTAG_SETS)}")
+        hook = hooks[i - 1]
+        q = quotes[i - 1]
+        if goofy and q and random.random() < 0.5:
+            hook = random.choice(GOOFY_QUOTE).format(q=q)
+        if goofy:
+            end = random.choice(GOOFY_NEXT).format(next=i + 1) if i < count else random.choice(GOOFY_LAST)
+            tags = random.choice(GOOFY_TAGS)
+        else:
+            end = (random.choice(CAPTION_ENDINGS).format(next=i + 1) if i < count else random.choice(CAPTION_LAST))
+            tags = random.choice(HASHTAG_SETS)
+        out.append(f"{hook}\nPart {i} 🎬 · {end}\n{tags}")
     return out
+
+
+def make_clip_caption(quote=None, style=None):
+    """Caption for a single custom clip (no 'Part' line)."""
+    goofy = (style or CAPTION_STYLE or "goofy").lower() != "plain"
+    if goofy:
+        hook = random.choice(GOOFY_QUOTE).format(q=quote) if quote and random.random() < 0.6 else random.choice(GOOFY_HOOKS)
+        return f"{hook}\n{random.choice(GOOFY_TAGS)}"
+    return f"{random.choice(CAPTION_HOOKS)}\n{random.choice(HASHTAG_SETS)}"
 
 
 # ---------------------------------------------------------------- automatic subtitles (Whisper)
@@ -844,7 +929,12 @@ def subtitle_filters(part_cues, length, bottom, workdir):
     return "".join(out)
 
 
-def render_part(src, start, end, number, cues, out_path, workdir):
+PART_CUES = {}    # (mode, part number) -> that part's subtitle lines (times from the part's start)
+ALL_CUES = []     # every subtitle line used, in movie time: for the app's clip timeline
+
+
+def render_part(src, start, end, number, cues, out_path, workdir, top_text=None):
+    """top_text: the big label at the top ("Part 3" by default; "" = no label, for custom clips)."""
     # the flip happens first, so "Part X" and subtitles still read the right way round
     first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}", 1)
     filters = (
@@ -861,12 +951,19 @@ def render_part(src, start, end, number, cues, out_path, workdir):
             part_cues = auto_subs(src, start, end, workdir)
         except Exception as e:
             print(f"  (no automatic subtitles for this part: {e})", flush=True)
+    PART_CUES[(MODE, number)] = part_cues
+    seen = {(round(a, 1), t) for a, _, t in ALL_CUES}
+    ALL_CUES.extend((round(a + start, 2), round(b + start, 2), t) for a, b, t in part_cues
+                    if (round(a + start, 1), t) not in seen)
     filters += subtitle_filters(part_cues, end - start, movie_bottom(src), workdir)
-    filters += (
-        f",drawtext=fontfile={FONT}:text='Part {number}':fontsize=96:fontcolor=white:"
-        "borderw=7:bordercolor=black:x=(w-text_w)/2:y=230"
-        "[txt0]"
-    )
+    label = f"Part {number}" if top_text is None else top_text
+    if label:
+        (workdir / "toptext.txt").write_text(label, encoding="utf-8")
+        filters += (
+            f",drawtext=fontfile={FONT}:textfile={(workdir / 'toptext.txt').resolve()}:expansion=none:"
+            "fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y=230"
+        )
+    filters += "[txt0]"
     filters += line_filter(src, end - start)
     roach = cockroach_filter(end - start, src)
     extra_inputs = roach[0] if roach else []
@@ -1023,8 +1120,15 @@ def process_release(gh, release):
     rid = release["tag_name"][len(transport.INCOMING):]
     video = Path(meta["file"]).name
     srt_name = Path(meta["srt"]).name if meta.get("srt") else None
-    name = clean_name(video)
+    name = meta.get("movie") or clean_name(video)
+    if meta.get("clips"):
+        return process_clips(gh, release, meta, rid, video, name)
     labels = ", ".join(MODE_NAMES[m] for m in MODES)
+    mid = status.movie_id(name)
+    prev = new_previews(gh)
+    prev.start_movie(mid)
+    ALL_CUES.clear()
+    PART_CUES.clear()
     print(f"\n=== {video} -> {name} ===", flush=True)
     status.movie_started(name, meta.get("source") or "laptop", MODES)
     notify(f"Started: {name}",
@@ -1050,17 +1154,21 @@ def process_release(gh, release):
         label = MODE_NAMES[mode]
         status.set_stage("uploading", mode=mode, part=i, parts_total=count)
         prefix = f"{mode}-{i:02}"
+        pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
         assets = transport.send(gh, out_rel, out, prefix)
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
             captions[mode] = make_captions(count)
         text = captions[mode][i - 1] if mode in captions else None
+        q = pick_quote(PART_CUES.get((mode, i)))
+        if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
+            text = random.choice(GOOFY_QUOTE).format(q=q) + "\n" + text.split("\n", 1)[1]
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
         out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": out.name,
                                   "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),
                                   "seconds": round(b - a, 1), "line": line})
         save_body()
-        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text)
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv)
         caption = f"\n\n📝 Caption:\n{text}" if text else ""
         notify(f"{name}: Part {i} of {count} ready",
                f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",
@@ -1076,7 +1184,16 @@ def process_release(gh, release):
         if srt_name and transport.assets_for(assets, "subs"):
             srt = transport.receive(gh, transport.assets_for(assets, "subs"), WORK / "in" / srt_name)
         out_rel, out_body = parts_release(gh, rid, name, video)
+        if prev.enabled:
+            try:
+                data, info = previews.make_thumbs(src, duration(src), WORK)
+                path = prev.add(f"{mid}/thumbs.bin", data, f"thumbnails {name}")
+                if path:
+                    status.movie_previews(name, thumbs=dict(info, path=path))
+            except Exception as e:
+                print(f"(no thumbnail strip: {e})", flush=True)
         results = process_local(src, name, srt, WORK / "out", WORK, on_plan, on_part)
+        save_subs(prev, mid, name)
         summary = ", ".join(f"{MODE_NAMES[m]}: {len(f)} part{'s' if len(f) != 1 else ''}" for m, f in results.items())
         out_body.update(done=True, finished=status.now_iso(), summary=summary,
                         subtitles=SUB_INFO["note"] or "none (no speech found)")
@@ -1107,6 +1224,129 @@ def process_release(gh, release):
         shutil.rmtree(WORK, ignore_errors=True)
 
 
+def new_previews(gh):
+    return previews.Previews(gh, NTFY_TOPIC, SETTINGS.get("preview_keep_movies", 3), SETTINGS.get("previews", True),
+                             log=lambda m: print(m, flush=True))
+
+
+def save_preview(prev, video, path, message):
+    """Small encrypted copy of a finished part for the app. Returns its path (or None)."""
+    if not prev.enabled:
+        return None
+    small = WORK / "preview.mp4"
+    try:
+        previews.make_part_preview(video, small)
+        return prev.add(path, small.read_bytes(), message)
+    except Exception as e:
+        print(f"(no preview for {Path(video).name}: {e})", flush=True)
+        return None
+    finally:
+        small.unlink(missing_ok=True)
+
+
+def save_subs(prev, mid, name):
+    """The movie's subtitle lines (encrypted), so the clip timeline can show what's being said."""
+    if prev.enabled and ALL_CUES:
+        path = prev.add(f"{mid}/subs.bin", json.dumps(sorted(ALL_CUES), ensure_ascii=False).encode("utf-8"),
+                        f"subtitles {name}")
+        if path:
+            status.movie_previews(name, subs=path)
+
+
+MAX_CLIP_SECONDS = 600     # TikTok's longest upload is 10 minutes
+
+
+def process_clips(gh, release, meta, rid, video, name):
+    """Custom clips the owner picked in the app (start/end in the movie): each one rendered with the
+    same look as the parts (flips, subtitles, line, cockroach), into the 'Custom clips' folder."""
+    global MODE
+    srt_name = Path(meta["srt"]).name if meta.get("srt") else None
+    clips = [c for c in meta.get("clips") or [] if float(c.get("end", 0)) > float(c.get("start", 0))]
+    mid = status.movie_id(name)
+    prev = new_previews(gh)
+    prev.start_movie(mid)
+    status.clips_started(name, len(clips), meta.get("source") or "laptop")
+    notify(f"✂️ Making {len(clips)} custom clip{'s' if len(clips) != 1 else ''}: {name}",
+           f"They'll arrive on the laptop in {READY}/{name}/Custom clips.", ["scissors"], kind="started")
+    shutil.rmtree(WORK, ignore_errors=True)
+    (WORK / "in").mkdir(parents=True)
+    (WORK / "out").mkdir(parents=True)
+    out_rel, out_body = None, None
+    SUB_INFO.update(lang=None, note="from your .srt file" if srt_name else None, full=False)
+    try:
+        status.set_stage("downloading", movie=name, mode="clips")
+        assets = gh.assets(release["id"])
+        src = WORK / "in" / video
+        transport.receive(gh, transport.assets_for(assets, "movie"), src)
+        srt = None
+        if srt_name and transport.assets_for(assets, "subs"):
+            srt = transport.receive(gh, transport.assets_for(assets, "subs"), WORK / "in" / srt_name)
+        out_rel, out_body = parts_release(gh, rid, name, video)
+        out_body["clips"] = True
+        total = duration(src)
+        detect_black_bars(src, total)
+        cues = parse_srt(srt)
+        MODE = "clips"
+        first = status.next_clip_number(name)
+        label = MODE_NAMES["clips"]
+        for k, c in enumerate(clips):
+            n = first + k
+            a = max(0.0, float(c["start"]))
+            b = min(total, float(c["end"]), a + MAX_CLIP_SECONDS)
+            title = safe(str(c.get("title") or "")).strip()[:60]
+            fname = f"{name} - Clip {n:02}{(' - ' + title) if title else ''}.mp4"
+            out = WORK / "out" / fname
+            reset_flip()
+            print(f"Making clip {k + 1} of {len(clips)}: {fmt_time(a)} to {fmt_time(b)}", flush=True)
+            status.set_stage("rendering", movie=name, mode="clips", part=k + 1, parts_total=len(clips))
+            render_part(src, a, b, n, cues, out, WORK, top_text="")
+            status.set_stage("uploading", mode="clips", part=k + 1, parts_total=len(clips))
+            pv = save_preview(prev, out, previews.part_path(mid, "clips", n), f"preview {name} clip {n}")
+            sent = transport.send(gh, out_rel, out, f"clips-{n:02}")
+            out.unlink(missing_ok=True)
+            text = make_clip_caption(pick_quote(PART_CUES.get(("clips", n)))) if CAPTIONS_ON else None
+            line = f"Clip {n}: {fmt_time(a)} to {fmt_time(b)} ({b - a:.0f}s)" + (f"  {title}" if title else "")
+            out_body["parts"].append({"mode": "clips", "label": label, "n": n, "of": len(clips), "file": fname,
+                                      "assets": sent, "caption": text, "start": round(a, 1), "end": round(b, 1),
+                                      "seconds": round(b - a, 1), "line": line, "clip_id": c.get("id")})
+            gh.update_release(out_rel["id"], body=json.dumps(out_body, ensure_ascii=False))
+            status.part_ready(name, "clips", n, a, b, f"{READY}/{name}/{label}/{fname}", text, preview=pv,
+                              title=title or None)
+            notify(f"✂️ {name}: clip {k + 1} of {len(clips)} ready", f"{line}\nOn its way to the laptop "
+                   f"({READY}/{name}/{label}).", ["film_frames"], kind="part_ready")
+        out_body.update(done=True, finished=status.now_iso(), summary=f"Custom clips: {len(clips)}")
+        gh.update_release(out_rel["id"], body=json.dumps(out_body, ensure_ascii=False))
+        gh.delete_release(release["id"], release["tag_name"])
+        status.movie_finished(name)
+        notify(f"✅ Clips done: {name}", f"{len(clips)} custom clip{'s' if len(clips) != 1 else ''} made.",
+               ["tada"], kind="finished")
+    except Exception as e:
+        print(f"FAILED clips of {video}: {e}", flush=True)
+        try:
+            meta.update(failed=True, error=str(e)[:500])
+            gh.update_release(release["id"], body=json.dumps(meta, ensure_ascii=False))
+            if out_rel:
+                out_body.update(done=True, failed=True)
+                gh.update_release(out_rel["id"], body=json.dumps(out_body, ensure_ascii=False))
+        except Exception as e2:
+            print(f"(couldn't mark the release as failed: {e2})", flush=True)
+        status.movie_failed(name, e)
+        notify(f"❌ Clips failed: {name}", str(e), ["x"], kind="failed")
+    finally:
+        MODE = ""
+        shutil.rmtree(WORK, ignore_errors=True)
+
+
+def paused_in_app(gh):
+    """The app's Pause switch (settings.json on GitHub, read fresh so it works mid-run)."""
+    try:
+        text, _ = gh.read_file("config/settings.json")
+        return bool(settings.load(text=text or "{}", env={}).get("paused"))
+    except Exception as e:
+        print(f"(couldn't check the pause switch: {e})", flush=True)
+        return False
+
+
 def main():
     """
     Keeps going until no movies are waiting on GitHub, always taking the oldest next,
@@ -1127,6 +1367,11 @@ def main():
             print("Time limit reached; the rest will be done in the next run.")
             notify("Paused for now", f"{len(entries)} movie(s) still waiting. They'll be done in the next run.",
                    kind="paused")
+            status.run_finished()
+            return
+        if paused_in_app(gh):
+            print("Paused in the app (Settings > Pause). Nothing will be cut until it's switched back on.")
+            status.set_stage("idle", movie=None, mode=None)
             status.run_finished()
             return
         if not tools_ready:
