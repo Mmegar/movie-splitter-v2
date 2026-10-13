@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T05:58:09+07:00",
+ "updated": "2026-10-14T06:00:24+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -19,6 +19,11 @@
  "battery": false,
  "queue": [],
  "library": [
+  {
+   "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
+   "size_mb": 2773,
+   "modified": "2026-10-14T05:54:27+07:00"
+  },
   {
    "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
    "size_mb": 1795,
