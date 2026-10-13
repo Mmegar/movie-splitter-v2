@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:36:13+13:00",
+ "updated": "2026-10-13T23:37:38+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
@@ -12,7 +12,31 @@
   "parts_total": null
  },
  "queue": [],
- "movies": [],
+ "movies": [
+  {
+   "id": "moon-knight-s01e02-summon-the-suit",
+   "name": "Moon Knight S01E02 Summon the Suit",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-13T23:37:38+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  }
+ ],
  "posting": {
   "enabled": false,
   "next_at": null,
