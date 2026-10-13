@@ -150,7 +150,7 @@ class SendTest(AgentTestBase):
         (self.watch / "My.Film.2015.srt").write_text("1\n00:00:01,000 --> 00:00:02,000\nHi\n")
         a = self.make_agent()
         self.send_ready(a)
-        rels = [r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-")]
+        rels = [r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming"]
         self.assertEqual(len(rels), 1)
         rel = rels[0]
         self.assertTrue(rel["draft"])
@@ -178,7 +178,7 @@ class SendTest(AgentTestBase):
         self.assertEqual(self.fake.json_file("state.json")["events"][0]["type"], "new_file")
         # not sent twice, and no new run while one is busy
         a.check_folder()
-        self.assertEqual(len([r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-")]), 1)
+        self.assertEqual(len([r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming"]), 1)
 
     def test_interrupted_send_resumes(self):
         movie = self.watch / "Big.mkv"
@@ -186,13 +186,13 @@ class SendTest(AgentTestBase):
         a = self.make_agent()
         self.fake.fail_upload_names = {"movie.002"}
         self.send_ready(a)                                           # fails part-way (logged, not raised)
-        rel = next(r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-"))
+        rel = next(r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming")
         self.assertFalse(json.loads(rel["body"])["complete"])
         b = self.make_agent()                                        # e.g. after a restart
         b.watcher.ready(now=0)
         b.watcher.stable = 0
         b.check_folder()
-        rels = [r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-")]
+        rels = [r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming"]
         self.assertEqual(len(rels), 1)
         self.assertTrue(json.loads(rels[0]["body"])["complete"])
         out = self.tmp / "o.mkv"
@@ -216,7 +216,7 @@ class SendTest(AgentTestBase):
             a = self.make_agent()
             a.check_wishlist()
             a.check_folder()
-        rel = next(r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-"))
+        rel = next(r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming")
         meta = json.loads(rel["body"])
         self.assertEqual((meta["file"], meta["source"]), ("Nosferatu (1922).mp4", "wishlist"))
         wl = {w["title"]: w for w in self.fake.json_file("laptop.json")["wishlist"]}
@@ -249,12 +249,12 @@ class ReceiveTest(AgentTestBase):
         movie = self.watch / name
         movie.write_bytes(b"movie")
         self.send_ready(a)
-        return movie, next(r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-"))
+        return movie, next(r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming")
 
     def test_receives_parts_then_moves_original(self):
         a = self.make_agent()
         movie, inc = self.sent_movie(a)
-        rid = inc["tag_name"][len("incoming-"):]
+        rid = transport.id_of(inc)
         self.fake.releases.pop(inc["id"])                             # the cutter deletes it when done
         p1, p2 = os.urandom(7000), os.urandom(5000)
         self.fake_cutter(rid, "Film", [(1, p1), (2, p2)])
@@ -274,7 +274,7 @@ class ReceiveTest(AgentTestBase):
     def test_parts_arrive_while_still_cutting(self):
         a = self.make_agent(original_after="keep")
         movie, inc = self.sent_movie(a)
-        rid = inc["tag_name"][len("incoming-"):]
+        rid = transport.id_of(inc)
         rel = self.fake_cutter(rid, "Film", [(1, b"one")], done=False)
         a.receive_parts()
         self.assertTrue((self.out / "Ready to post/Film/Best stretch/Film - Part 01.mp4").exists())
@@ -288,7 +288,7 @@ class ReceiveTest(AgentTestBase):
         self.assertNotIn(rel["id"], self.fake.releases)
         self.assertTrue(movie.exists())                               # original_after = keep
         a.check_folder()                                              # ...and it isn't sent again
-        self.assertFalse([r for r in self.fake.releases.values() if r["tag_name"].startswith("incoming-")])
+        self.assertFalse([r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming"])
 
     def test_failed_movie_goes_to_failed_folder(self):
         a = self.make_agent()

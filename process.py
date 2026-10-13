@@ -1070,7 +1070,7 @@ def incoming_movies(gh):
     out = []
     for r in gh.releases():
         meta = transport.body_of(r)
-        if (r.get("draft") and r.get("tag_name", "").startswith(transport.INCOMING)
+        if (r.get("draft") and transport.kind_of(r) == "incoming"
                 and meta.get("complete") and not meta.get("failed") and meta.get("file")):
             out.append(r)
     return sorted(out, key=lambda r: r.get("created_at") or "")
@@ -1093,7 +1093,7 @@ def parts_release(gh, rid, name, video):
     body = {"kind": "parts", "id": rid, "movie": name, "file": video, "done": False, "failed": False,
             "parts": [], "lists": {}}
     for r in gh.releases():
-        if r.get("tag_name") == tag:
+        if transport.kind_of(r) == "parts" and transport.id_of(r) == rid:
             for a in gh.assets(r["id"]):
                 gh.delete_asset(a["id"])
             r = gh.update_release(r["id"], body=json.dumps(body))
@@ -1117,7 +1117,7 @@ OFF = ("off", "no", "0", "false")
 def process_release(gh, release):
     """Gets one movie from its release, cuts it, and sends every part back as soon as it's made."""
     meta = transport.body_of(release)
-    rid = release["tag_name"][len(transport.INCOMING):]
+    rid = transport.id_of(release)
     video = Path(meta["file"]).name
     srt_name = Path(meta["srt"]).name if meta.get("srt") else None
     name = meta.get("movie") or clean_name(video)

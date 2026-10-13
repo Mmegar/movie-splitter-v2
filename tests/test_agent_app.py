@@ -16,7 +16,7 @@ def commands(fake, *cmds):
 
 
 def incoming(fake):
-    return [r for r in fake.releases.values() if r["tag_name"].startswith("incoming-")]
+    return [r for r in fake.releases.values() if transport.kind_of(r) == "incoming"]
 
 
 class PauseTest(base.AgentTestBase):
@@ -116,7 +116,7 @@ class CommandTest(base.AgentTestBase):
 class ClipTest(base.ReceiveTest):
     def finished_movie(self, a):
         movie, inc = self.sent_movie(a, "Film.2015.mkv")
-        rid = inc["tag_name"][len("incoming-"):]
+        rid = transport.id_of(inc)
         self.fake.releases.pop(inc["id"])
         self.fake_cutter(rid, "Film (2015)", [(1, b"one")])
         a.receive_parts()
@@ -139,14 +139,14 @@ class ClipTest(base.ReceiveTest):
         a.check_commands()                                     # not sent twice while it's being cut
         self.assertEqual(len(incoming(self.fake)), 1)
         # the cutter makes the clip
-        rid = rel["tag_name"][len("incoming-"):]
+        rid = transport.id_of(rel)
         self.fake.releases.pop(rel["id"])
         gh = ghapi.GitHub("o/r", "t", self.fake.api)
         out = gh.create_release("parts-" + rid, "p", "{}")
         f = self.tmp / "Film (2015) - Clip 01 - The chase.mp4"
         f.write_bytes(b"clip!")
         names = transport.send(gh, out, f, "clips-01")
-        gh.update_release(out["id"], body=json.dumps({"movie": "Film (2015)", "done": True, "clips": True, "parts": [
+        gh.update_release(out["id"], body=json.dumps({"kind": "parts", "id": rid, "movie": "Film (2015)", "done": True, "clips": True, "parts": [
             {"mode": "clips", "label": "Custom clips", "n": 1, "file": f.name, "assets": names,
              "caption": "lol #fyp"}]}))
         a.receive_parts()

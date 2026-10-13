@@ -378,7 +378,7 @@ class Agent:
                 "sent": entry["started"], "laptop": socket.gethostname(), "complete": False}
         if entry.get("clips"):
             meta.update(clips=entry["clips"], movie=entry.get("movie"))
-        release = next((r for r in self.gh.releases() if r.get("tag_name") == tag), None)
+        release = transport.find(self.gh.releases(), "incoming", rid)
         if not release:
             release = self.gh.create_release(tag, f"Incoming: {path.name}", json.dumps(meta))
         existing = self.gh.assets(release["id"])
@@ -560,10 +560,10 @@ class Agent:
     def check_incoming_failures(self, releases):
         """A movie the cutter couldn't do: original goes to <output>/Failed, the GitHub copy is deleted."""
         for r in releases:
-            if not r.get("tag_name", "").startswith(transport.INCOMING):
+            if transport.kind_of(r) != "incoming":
                 continue
             meta = transport.body_of(r)
-            rid = r["tag_name"][len(transport.INCOMING):]
+            rid = transport.id_of(r)
             s = self.memory["sends"].get(rid)
             if meta.get("failed") and s and s["status"] == "sent":
                 self.gh.delete_release(r["id"], r["tag_name"])
@@ -576,7 +576,7 @@ class Agent:
         releases = self.gh.releases()
         self.check_incoming_failures(releases)
         for r in releases:
-            if r.get("draft") and r.get("tag_name", "").startswith(transport.PARTS):
+            if r.get("draft") and transport.kind_of(r) == "parts":
                 try:
                     self.receive_release(r)
                 except Exception as e:
@@ -584,7 +584,7 @@ class Agent:
 
     def receive_release(self, r):
         body = transport.body_of(r)
-        rid = r["tag_name"][len(transport.PARTS):]
+        rid = transport.id_of(r)
         movie = body.get("movie") or rid
         base = self.ready_dir / safe_name(movie)
         assets = {a["name"]: a for a in self.gh.assets(r["id"])}

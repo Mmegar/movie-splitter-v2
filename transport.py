@@ -27,6 +27,32 @@ def body_of(release):
         return {}
 
 
+def kind_of(release):
+    """"incoming" / "parts" / None. GitHub renames a draft's tag to "untagged-..." when it's edited,
+    so the JSON body (which we write) is trusted first and the tag only as a fallback."""
+    k = body_of(release).get("kind")
+    if k in ("incoming", "parts"):
+        return k
+    tag = release.get("tag_name") or ""
+    return "incoming" if tag.startswith(INCOMING) else "parts" if tag.startswith(PARTS) else None
+
+
+def id_of(release):
+    """The send id ("20261013-170237-de0c") shared by a movie's incoming and parts releases."""
+    rid = body_of(release).get("id")
+    if rid:
+        return str(rid)
+    tag = release.get("tag_name") or ""
+    for prefix in (INCOMING, PARTS):
+        if tag.startswith(prefix):
+            return tag[len(prefix):]
+    return None
+
+
+def find(releases, kind, rid):
+    return next((r for r in releases if kind_of(r) == kind and id_of(r) == rid), None)
+
+
 def chunk_name(prefix, i):
     return f"{prefix}.{i:03}"
 

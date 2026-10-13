@@ -180,7 +180,10 @@ class FakeGitHub:
                         items = [fake._asset_json(fake.assets[a]) for a in r["asset_ids"]]
                         return self.reply(200, items[(page - 1) * per:page * per])
                     if method == "PATCH":
-                        r.update({k: v for k, v in json.loads(self.body()).items() if k in ("body", "name", "draft")})
+                        b = json.loads(self.body())
+                        r.update({k: v for k, v in b.items() if k in ("body", "name", "draft", "tag_name")})
+                        if r.get("draft") and "tag_name" not in b:      # what real GitHub does to drafts
+                            r["tag_name"] = f"untagged-{r['id']:020x}"
                         return self.reply(200, fake._release_json(r))
                     if method == "DELETE":
                         for a in list(r["asset_ids"]):
