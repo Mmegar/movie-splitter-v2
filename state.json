@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:43:57+13:00",
+ "updated": "2026-10-13T23:44:01+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 6
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 6,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    },
@@ -51,6 +51,18 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-13T23:44:01+13:00",
+   "type": "planned",
+   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Moon Knight S01E02 Summon the Suit/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-13T23:44:00+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: 6 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch as they're made."
+  },
   {
    "at": "2026-10-13T23:37:39+13:00",
    "type": "started",
