@@ -1181,6 +1181,7 @@ def main(argv=None):
     ap.add_argument("--once", action="store_true", help="one round of everything, then stop")
     ap.add_argument("--post-now", action="store_true", help="post the next part now (ignores the schedule)")
     ap.add_argument("--dry-run", action="store_true", help="with --post-now: only show what would be posted")
+    ap.add_argument("--test-post", metavar="VIDEO", help="post this one video to TikTok privately (checks the Composio setup)")
     args = ap.parse_args(argv)
     cfg_path = Path(args.config)
     if not cfg_path.exists():
@@ -1188,6 +1189,16 @@ def main(argv=None):
     if args.setup:
         setup(cfg_path)
         return 0
+    if args.test_post:
+        cfg = dict(DEFAULTS, **load_config(cfg_path))
+        creds = {"api_key": cfg["composio_api_key"], "user_id": cfg["composio_user_id"],
+                 "connected_account_id": cfg["composio_connected_account_id"],
+                 "version": cfg["composio_tiktok_version"], "username": cfg["tiktok_username"]}
+        print(f"Posting {args.test_post} to TikTok privately (only you can see it). This can take a few minutes...")
+        ok, ref, error = posting.post_video(Path(args.test_post), "Test post from Movie Splitter 🎬 #test",
+                                           "SELF_ONLY", creds)
+        print(f"Posted! {ref or ''}" if ok else f"Didn't work: {error}")
+        return 0 if ok else 1
     setup_logging(cfg_path.parent)
     agent = Agent(ensure_secrets(cfg_path), cfg_path.parent)
     for folder in (agent.watch, agent.ready_dir):
