@@ -9,8 +9,8 @@ jobs:
       RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: '1IQK7I_n3ug3tC263Q-D_5MNHQPvfnzaT'
       RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
       RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
-      RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
-      RT: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+      RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN || secrets.REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
+      RT: ${{ secrets.GDRIVE_REFRESH_TOKEN || secrets.REFRESH_TOKEN }}
     steps:
       - run: curl -fsSL https://rclone.org/install.sh | sudo bash >/dev/null
       - name: Diagnose (never prints the token)
