@@ -1,0 +1,72 @@
+name: Make TikTok parts
+
+# All the cutting settings (modes, flips, cockroach, quality...) now live in config/settings.json,
+# which the iPhone app edits. To override one just for this workflow, add it under "env:" below
+# with its old name, e.g.  MODES: "stretch"
+#
+# Secrets / variables to set once (GitHub > repo > Settings > Secrets and variables > Actions):
+#   GDRIVE_CLIENT_ID, GDRIVE_CLIENT_SECRET, GDRIVE_REFRESH_TOKEN   your Google Drive (rclone) login
+#   GDRIVE_ROOT_FOLDER_ID   the ID of the "TikTok automation v2" Drive folder (the part of its link after
+#                           /folders/). Can be a secret or a variable.
+
+on:
+  schedule:
+    - cron: "17 14 * * *"   # once a day, about 3am New Zealand time (GitHub may start it a little late)
+  workflow_dispatch:         # "Run workflow" button; the Google Drive watcher and the app also start it this way
+
+concurrency:
+  group: make-parts
+  cancel-in-progress: false
+
+permissions:
+  contents: write            # lets the run save live progress to the "status" branch (for the iPhone app)
+
+jobs:
+  make-parts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    env:
+      # ---- Google Drive: the "TikTok automation v2" folder ----
+      RCLONE_CONFIG_GDRIVE_TYPE: drive
+      RCLONE_CONFIG_GDRIVE_SCOPE: drive
+      RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID || vars.GDRIVE_ROOT_FOLDER_ID }}
+      RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+      RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+      RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
+      # ---- live status for the app (saved to the "status" branch) ----
+      GITHUB_TOKEN: ${{ github.token }}
+      # ---- phone notifications: the ntfy name is in the private file "notification name.txt" in the Drive folder ----
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read settings
+        run: python3 -c "import settings; s = settings.load(); print('WHISPER_MODEL=' + str(s['whisper_model']))" >> "$GITHUB_ENV"
+
+      - name: Keep the speech model between runs
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: whisper-${{ env.WHISPER_MODEL }}
+
+      - name: Install the subtitle maker (Whisper)
+        run: pip install faster-whisper
+
+      - name: Install rclone
+        run: curl -fsSL https://rclone.org/install.sh | sudo bash
+
+      - name: Check Google Drive connection
+        run: "rclone lsd gdrive:"
+
+      - name: Make parts
+        run: python3 process.py
+
+      - name: Tell my phone if something broke
+        if: failure() || cancelled()
+        run: |
+          curl -s -H "Title: Movie run stopped" -H "Tags: warning" \
+            -d "The GitHub run failed or was cancelled. Open the GitHub app > movie-splitter-v2 > Actions to see why." \
+            "https://ntfy.sh/$(rclone cat 'gdrive:notification name.txt' | tr -d '[:space:]')" || true

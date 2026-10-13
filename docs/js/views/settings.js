@@ -1,0 +1,561 @@
+import { esc, icon, toast, haptic, openSheet, confirmSheet } from '../ui.js';
+import { MODE_LABELS, MODE_HINTS, ALL_MODES, diffSettings, validateSettings, formatSetting, describeFlipEvery } from '../logic.js';
+import { makePage, freshness, banner, skeleton, empty } from './common.js';
+
+const clone = (o) => JSON.parse(JSON.stringify(o));
+function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
+function setPath(o, p, v) {
+  const ks = p.split('.');
+  let a = o;
+  for (const k of ks.slice(0, -1)) { if (a[k] == null || typeof a[k] !== 'object') a[k] = {}; a = a[k]; }
+  a[ks[ks.length - 1]] = v;
+}
+
+const pct = (v) => `${Math.round(Number(v) * 100)}%`;
+const CLEANUP_STEPS = [0, 3, 7, 14, 30, 60, 90];
+
+function timeZones() {
+  try { if (Intl.supportedValuesOf) return Intl.supportedValuesOf('timeZone'); } catch { /* old Safari */ }
+  return ['Pacific/Auckland', 'Australia/Sydney', 'Asia/Phnom_Penh', 'Asia/Bangkok', 'Asia/Singapore', 'Europe/London', 'America/New_York', 'America/Los_Angeles', 'UTC'];
+}
+
+// ---------- control builders (HTML) ----------
+function swRow(d, path, title, sub = '') {
+  const id = `s-${path.replace(/\W/g, '-')}`;
+  return `<label class="row row--ctl" for="${id}">
+    <span class="row-main"><span class="row-title">${esc(title)}</span>${sub ? `<span class="row-sub">${esc(sub)}</span>` : ''}</span>
+    <input type="checkbox" class="switch" role="switch" id="${id}" data-k="${path}" data-t="bool" ${getPath(d, path) ? 'checked' : ''}>
+  </label>`;
+}
+
+function stepRow(d, path, title, { min = 0, max = 100, step = 1, values = null, sub = '' } = {}) {
+  const v = Number(getPath(d, path));
+  let dec, inc;
+  if (values) { const i = values.indexOf(v); dec = i > 0 || i === -1; inc = i < values.length - 1; }
+  else { dec = v > min; inc = v < max; }
+  return `<div class="row row--ctl">
+    <span class="row-main"><span class="row-title">${esc(title)}</span>${sub ? `<span class="row-sub">${esc(sub)}</span>` : ''}</span>
+    <span class="stepper-ctl" data-step="${path}" data-min="${min}" data-max="${max}" data-inc="${step}" ${values ? `data-values="${values.join(',')}"` : ''}>
+      <button type="button" data-d="-1" aria-label="Less ${esc(title)}" ${dec ? '' : 'disabled'}>${icon('minus')}</button>
+      <span class="stepper-val" aria-live="polite">${esc(formatSetting(path, v))}</span>
+      <button type="button" data-d="1" aria-label="More ${esc(title)}" ${inc ? '' : 'disabled'}>${icon('plus')}</button>
+    </span>
+  </div>`;
+}
+
+function sliderRow(d, path, title, { min, max, step, ends = null, sub = '', fmt = null } = {}) {
+  const v = Number(getPath(d, path));
+  const p = ((v - min) / (max - min)) * 100;
+  return `<div class="row row--stack">
+    <div class="row-head"><span class="row-title">${esc(title)}</span><span class="row-val" data-out="${path}">${esc(fmt ? fmt(v) : formatSetting(path, v))}</span></div>
+    <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-k="${path}" data-t="num" style="--p:${p}%" aria-label="${esc(title)}">
+    ${ends ? `<div class="range-ends"><span>${esc(ends[0])}</span><span>${esc(ends[1])}</span></div>` : ''}
+    ${sub ? `<p class="note">${esc(sub)}</p>` : ''}
+  </div>`;
+}
+
+function segRow(d, path, title, options, sub = '') {
+  const v = getPath(d, path);
+  return `<div class="row row--stack">
+    <div class="row-head"><span class="row-title">${esc(title)}</span></div>
+    <div class="seg-sm" role="group" aria-label="${esc(title)}">${options.map(([val, label]) => `<button type="button" data-seg="${path}" data-v="${esc(val)}" aria-pressed="${String(v) === String(val)}">${esc(label)}</button>`).join('')}</div>
+    ${sub ? `<p class="note">${sub}</p>` : ''}
+  </div>`;
+}
+
+function group(title, rows, foot = '') {
+  return `${title ? `<h3 class="group-title">${esc(title)}</h3>` : ''}<div class="group">${rows.join('')}</div>${foot ? `<p class="group-foot">${foot}</p>` : ''}`;
+}
+
+// ---------- the form ----------
+function modesGroup(d) {
+  const on = (d.modes || []).filter((m) => ALL_MODES.includes(m));
+  const order = [...on, ...ALL_MODES.filter((m) => !on.includes(m))];
+  const rows = order.map((m) => {
+    const i = on.indexOf(m);
+    return `<div class="mode-row ${i < 0 ? 'is-off' : ''}" data-mode-row="${m}">
+      <span class="mode-order" aria-hidden="true">${i < 0 ? '–' : i + 1}</span>
+      <span class="row-main"><span class="mode-name">${esc(MODE_LABELS[m])}</span><span class="row-sub">${esc(MODE_HINTS[m])}</span></span>
+      <input type="checkbox" class="switch" role="switch" data-mode-toggle="${m}" ${i >= 0 ? 'checked' : ''} aria-label="Make ${esc(MODE_LABELS[m])}">
+      <button type="button" class="grip" data-grip="${m}" aria-label="Move ${esc(MODE_LABELS[m])} up" ${i < 0 ? 'style="visibility:hidden" tabindex="-1"' : ''}>${icon('grip')}</button>
+    </div>`;
+  });
+  return group('Modes & order', rows, 'Each movie is cut in these modes, top to bottom. Drag the handle to change the order.');
+}
+
+function flipEveryKind(v) {
+  const s = String(v ?? '').trim();
+  if (s === '-1') return 'cut';
+  if (s === '0' || s === '') return 'always';
+  return 'timed';
+}
+
+function buildForm(d) {
+  const p = d.posting || {};
+  const fk = flipEveryKind(d.flip_every);
+  const from = Math.round(Number(d.stretch_from) * 100), to = Math.round(Number(d.stretch_to) * 100);
+  const tz = timeZones();
+  if (p.timezone && !tz.includes(p.timezone)) tz.unshift(p.timezone);
+  return [
+    modesGroup(d),
+
+    group('Part lengths', [
+      stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
+      stepRow(d, 'stretch_part_seconds', 'Best stretch parts', { min: 30, max: 180, step: 5 }),
+      stepRow(d, 'highlight_seconds', 'Highlight clips', { min: 30, max: 180, step: 5 }),
+      stepRow(d, 'highlight_count', 'Number of highlights', { min: 0, max: 30, step: 1, sub: 'Automatic is about one per 10 minutes' }),
+      stepRow(d, 'part_seconds', 'Whole movie parts', { min: 60, max: 300, step: 10 }),
+      stepRow(d, 'part_max_extra', 'Extra time to end well', { min: 0, max: 300, step: 15, sub: 'A part may run this much longer to finish on a pause' }),
+    ]),
+
+    group('Best stretch window', [`<div class="row row--stack">
+      <div class="range2-labels"><span>Starts at <strong data-out="stretch_from">${from}%</strong></span><span>Ends by <strong data-out="stretch_to">${to}%</strong></span></div>
+      <div class="range2">
+        <div class="range2-track"><div class="range2-fill" data-fill style="left:${from}%;width:${to - from}%"></div></div>
+        <input type="range" min="0" max="100" step="5" value="${from}" data-range2="stretch_from" aria-label="Best stretch starts at">
+        <input type="range" min="0" max="100" step="5" value="${to}" data-range2="stretch_to" aria-label="Best stretch ends by">
+      </div>
+      <div class="range-ends"><span>Start of movie</span><span>Ending</span></div>
+    </div>`], 'Best stretch only picks scenes from inside this window, so the ending is never spoiled.'),
+
+    group('Flip', [
+      segRow(d, 'flip', 'Flip the picture', [['none', 'None'], ['mirror', 'Mirror'], ['upsidedown', 'Upside down'], ['both', 'Both']]),
+      d.flip === 'none' ? '' : `<div class="row row--stack">
+        <div class="row-head"><span class="row-title">When</span><span class="row-val">${esc(describeFlipEvery(d.flip_every))}</span></div>
+        <div class="seg-sm" role="group" aria-label="Flip timing">
+          <button type="button" data-flipkind="timed" aria-pressed="${fk === 'timed'}">Every few seconds</button>
+          <button type="button" data-flipkind="cut" aria-pressed="${fk === 'cut'}">Every cut</button>
+          <button type="button" data-flipkind="always" aria-pressed="${fk === 'always'}">Always</button>
+        </div>
+        ${fk === 'timed' ? `<label class="field"><span>Seconds between flips: one number, or a range like 25-30 for a random gap</span>
+          <input class="input" data-k="flip_every" data-t="flipev" value="${esc(d.flip_every)}" inputmode="text" autocomplete="off" pattern="\\d+(-\\d+)?"></label>` : ''}
+        <p class="note">${fk === 'always' ? 'Every part is flipped the whole time.' : 'The picture switches between normal and flipped only on a scene cut, so it never jumps mid-shot.'}</p>
+      </div>`,
+    ]),
+
+    group('Subtitles', [
+      swRow(d, 'auto_subtitles', 'Make subtitles automatically', 'Used when the movie has no subtitle file'),
+      d.auto_subtitles ? segRow(d, 'whisper_model', 'Speech model', [['tiny', 'Tiny'], ['base', 'Base'], ['small', 'Small'], ['medium', 'Medium']], 'Bigger models hear more accurately but make each run slower.') : '',
+    ]),
+
+    group('Line', [
+      swRow(d, 'line', 'Thin line across the picture'),
+      d.line ? sliderRow(d, 'line_opacity', 'Darkness', { min: 0.1, max: 1, step: 0.05, ends: ['Faint', 'Solid black'] }) : '',
+      d.line ? stepRow(d, 'line_thickness', 'Thickness', { min: 1, max: 12, step: 1 }) : '',
+    ]),
+
+    group('Cockroach', [
+      swRow(d, 'cockroach', 'Cockroach runs across', 'Peeks in from the side, then runs off the top'),
+      d.cockroach ? sliderRow(d, 'cockroach_chance', 'Chance per part', { min: 0, max: 1, step: 0.05, ends: ['Never', 'Every part'] }) : '',
+      d.cockroach ? stepRow(d, 'cockroach_size', 'Size', { min: 30, max: 160, step: 10, sub: 'The screen is 1080 px wide' }) : '',
+    ]),
+
+    group('Captions', [swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and your hashtags, ready to copy')]),
+
+    group('Storage', [
+      sliderRow(d, 'video_quality', 'Video quality', { min: 18, max: 28, step: 1, ends: ['Best, big files', 'Small files'], fmt: (v) => (v <= 20 ? `High (CRF ${v})` : v <= 24 ? `Balanced (CRF ${v})` : `Small (CRF ${v})`) }),
+      segRow(d, 'delete_originals', 'After a movie is done, the original', [['permanent', 'Is deleted'], ['bin', 'Goes to the bin']],
+        d.delete_originals === 'bin' ? 'Files in the Drive bin still count toward your 15 GB for 30 days.' : 'Deleting permanently frees Drive space right away.'),
+      stepRow(d, 'cleanup_parts_after_days', 'Delete old parts', { values: CLEANUP_STEPS, sub: 'Finished parts older than this are removed from Drive' }),
+    ]),
+
+    group('Posting to TikTok', [
+      swRow(d, 'posting.enabled', 'Post automatically', 'Posts the next part at each time below'),
+      ...(p.enabled ? [
+        segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
+          p.privacy === 'public'
+            ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
+            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.'),
+        `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
+          <div class="chips-pick" role="group" aria-label="Modes to post">${ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)).map((m) => {
+            const onm = (p.modes || []).includes(m);
+            return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
+          }).join('')}</div></div>`,
+        stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
+        `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
+          <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
+            <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
+          ${(p.times || []).length !== Number(p.per_day) ? `<p class="note note--warn">${(p.times || []).length} time${(p.times || []).length === 1 ? '' : 's'} for ${p.per_day} post${Number(p.per_day) === 1 ? '' : 's'} a day. Usually these match.</p>` : ''}
+        </div>`,
+        `<label class="row row--stack"><span class="row-title">Time zone</span>
+          <select class="input" data-k="posting.timezone" data-t="str">${tz.map((z) => `<option ${z === p.timezone ? 'selected' : ''}>${esc(z)}</option>`).join('')}</select></label>`,
+        `<label class="row row--stack"><span class="row-title">Hashtags</span>
+          <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
+      ] : []),
+    ], p.enabled ? '' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
+  ].join('');
+}
+
+// ---------- connection page ----------
+function connForm(c) {
+  return `
+    ${group('', [swRow({ demo: c.demo }, 'demo', 'Demo mode', 'Sample movies and a pretend run. Nothing is sent anywhere.')])}
+    <h3 class="group-title">GitHub</h3>
+    <div class="group"><div class="row row--stack">
+      <label class="field"><span>Owner (your GitHub user name)</span><input class="input" name="owner" value="${esc(c.owner)}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="kimmeng"></label>
+      <label class="field"><span>Repository</span><input class="input" name="repo" value="${esc(c.repo)}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="movie-splitter-v2"></label>
+      <label class="field"><span>Token</span>
+        <span class="input-row" style="gap:8px"><input class="input" name="token" type="password" value="${esc(c.token)}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="github_pat_…"><button type="button" class="btn btn--small btn--quiet" data-reveal>Show</button></span></label>
+    </div></div>
+    <p class="group-foot">Make a fine-grained token at github.com → Settings → Developer settings → Fine-grained tokens. Repository access: only this repo. Permissions: Contents read and write, Actions read and write. The token stays on this phone only.</p>
+    <h3 class="group-title">Notifications</h3>
+    <div class="group"><div class="row row--stack">
+      <label class="field"><span>ntfy topic (the same name as in the ntfy app)</span><input class="input" name="topic" value="${esc(c.topic)}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="my-secret-topic"></label>
+    </div></div>
+    <p class="group-foot">Used to show your phone notifications in Alerts. Find it in the Drive file "notification name.txt".</p>
+    <div class="sheet-actions">
+      <button class="btn btn--primary btn--block" data-conn-save>Save and connect</button>
+      <button class="btn btn--quiet btn--block" data-conn-test>Test connection</button>
+    </div>
+    <div data-conn-out></div>`;
+}
+
+export function createSettingsView(ctx) {
+  const page = makePage({ title: 'Settings' });
+  const { content } = page;
+  const bar = document.createElement('div');
+  bar.className = 'save-bar';
+  bar.innerHTML = '<p data-count></p><button class="btn btn--quiet" data-discard>Discard</button><button class="btn btn--primary" data-review>Review</button>';
+  page.el.appendChild(bar);
+
+  let base = null;     // settings as on GitHub
+  let baseSha = null;
+  let draft = null;    // what the form shows
+  let lastSt = null;
+  let conn = null;     // connection sub-page
+
+  const changes = () => (base && draft ? diffSettings(base, draft) : []);
+
+  function updateBar() {
+    const n = changes().length;
+    bar.classList.toggle('show', n > 0 && !conn);
+    page.el.classList.toggle('has-bar', n > 0);
+    bar.querySelector('[data-count]').textContent = `${n} unsaved change${n === 1 ? '' : 's'}`;
+  }
+
+  function connCard(st) {
+    const c = st.conn;
+    const demo = ctx.store.isDemo();
+    return `<a class="group row conn-card" href="#/settings/connection">
+      <span class="row-ic ${demo ? 'tone-accent' : st.error ? 'tone-bad' : 'tone-ok'}">${icon(demo ? 'frames' : 'key')}</span>
+      <span class="row-main"><span class="row-title">${demo ? 'Demo mode' : esc(`${c.owner}/${c.repo}`)}</span>
+        <span class="row-sub">${demo ? 'Connect your GitHub repo to see your real movies' : st.error ? esc(st.error.message) : `Connected${c.topic ? ', notifications on' : ', no ntfy topic'}`}</span></span>
+      ${icon('chevR', 'row-chev')}
+    </a>`;
+  }
+
+  function renderForm() {
+    if (!draft) return;
+    const focusKey = document.activeElement && content.contains(document.activeElement) ? document.activeElement.dataset.k : null;
+    content.querySelector('[data-form]').innerHTML = buildForm(draft);
+    if (focusKey) { const el = content.querySelector(`[data-k="${focusKey}"]`); if (el) el.focus({ preventScroll: true }); }
+    updateBar();
+  }
+
+  function render(st) {
+    lastSt = st;
+    page.setSub(freshness(st));
+    if (conn) conn.render(st);
+    if (!st.data) { content.innerHTML = banner(st) + skeleton(3); return; }
+    const s = st.data.settings || {};
+    if (!s.json) {
+      content.innerHTML = banner(st) + connCard(st) + empty({ icon: 'settings', title: 'No settings file yet', text: 'config/settings.json is missing from the repo. Push the v2 pipeline first.' });
+      base = null; draft = null; updateBar();
+      return;
+    }
+    const fresh = s.sha !== baseSha;
+    const dirty = changes().length > 0;
+    if (fresh) { base = clone(s.json); baseSha = s.sha; if (!dirty) draft = clone(s.json); }
+    if (!content.querySelector('[data-form]') || (fresh && !dirty)) {
+      content.innerHTML = `<div data-top>${banner(st) + connCard(st)}</div><div class="content" data-form></div>`;
+      renderForm();
+    } else {
+      content.querySelector('[data-top]').innerHTML = banner(st) + connCard(st);
+      updateBar();
+    }
+  }
+
+  function set(path, value, rerender = true) {
+    setPath(draft, path, value);
+    if (rerender) renderForm(); else updateBar();
+  }
+
+  // ---------- events ----------
+  content.addEventListener('click', (e) => {
+    if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
+    const st = e.target.closest('[data-step] button');
+    if (st) {
+      const box = st.closest('[data-step]');
+      const path = box.dataset.step;
+      const dir = Number(st.dataset.d);
+      const v = Number(getPath(draft, path));
+      let nv;
+      if (box.dataset.values) {
+        const vals = box.dataset.values.split(',').map(Number);
+        let i = vals.indexOf(v);
+        if (i < 0) i = vals.findIndex((x) => x > v) - (dir > 0 ? 1 : 0);
+        nv = vals[Math.max(0, Math.min(vals.length - 1, i + dir))];
+      } else {
+        const inc = Number(box.dataset.inc);
+        nv = Math.max(Number(box.dataset.min), Math.min(Number(box.dataset.max), Math.round((v + dir * inc) / inc) * inc));
+      }
+      haptic();
+      set(path, nv);
+      return;
+    }
+    const sg = e.target.closest('[data-seg]');
+    if (sg) { haptic(); set(sg.dataset.seg, sg.dataset.v); return; }
+    const fk = e.target.closest('[data-flipkind]');
+    if (fk) {
+      haptic();
+      const k = fk.dataset.flipkind;
+      const cur = String(draft.flip_every);
+      set('flip_every', k === 'cut' ? '-1' : k === 'always' ? '0' : (flipEveryKind(cur) === 'timed' ? cur : (flipEveryKind(base.flip_every) === 'timed' ? String(base.flip_every) : '25-30')));
+      return;
+    }
+    const pm = e.target.closest('[data-pmode]');
+    if (pm) {
+      haptic();
+      const m = pm.dataset.pmode;
+      const cur = draft.posting.modes || [];
+      set('posting.modes', cur.includes(m) ? cur.filter((x) => x !== m) : ALL_MODES.filter((x) => x === m || cur.includes(x)));
+      return;
+    }
+    const td = e.target.closest('[data-time-del]');
+    if (td) { haptic(); const t = [...draft.posting.times]; t.splice(Number(td.dataset.timeDel), 1); set('posting.times', t); return; }
+    if (e.target.closest('[data-time-add]')) {
+      haptic();
+      const t = [...(draft.posting.times || [])];
+      const last = t.length ? t[t.length - 1] : '09:00';
+      const h = (Number(last.slice(0, 2)) + 3) % 24;
+      let nt = `${String(h).padStart(2, '0')}:${last.slice(3, 5) || '00'}`;
+      while (t.includes(nt)) nt = `${String((Number(nt.slice(0, 2)) + 1) % 24).padStart(2, '0')}:00`;
+      t.push(nt);
+      t.sort();
+      set('posting.times', t);
+    }
+  });
+
+  content.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.dataset.range2) {
+      const k = el.dataset.range2;
+      let v = Number(el.value);
+      const other = k === 'stretch_from' ? Math.round(draft.stretch_to * 100) : Math.round(draft.stretch_from * 100);
+      if (k === 'stretch_from' && v > other - 10) v = other - 10;
+      if (k === 'stretch_to' && v < other + 10) v = other + 10;
+      el.value = v;
+      set(k, Math.round(v) / 100, false);
+      const f = Math.round(draft.stretch_from * 100), t = Math.round(draft.stretch_to * 100);
+      const fill = content.querySelector('[data-fill]');
+      fill.style.left = `${f}%`; fill.style.width = `${t - f}%`;
+      content.querySelector('[data-out="stretch_from"]').textContent = `${f}%`;
+      content.querySelector('[data-out="stretch_to"]').textContent = `${t}%`;
+      return;
+    }
+    const k = el.dataset.k;
+    if (!k || el.dataset.t === 'bool') return;
+    if (el.type === 'range') {
+      const v = Number(el.value);
+      el.style.setProperty('--p', `${((v - Number(el.min)) / (Number(el.max) - Number(el.min))) * 100}%`);
+      set(k, Math.round(v * 100) / 100, false);
+      const out = content.querySelector(`[data-out="${k}"]`);
+      if (out) out.textContent = k === 'video_quality' ? (v <= 20 ? `High (CRF ${v})` : v <= 24 ? `Balanced (CRF ${v})` : `Small (CRF ${v})`) : formatSetting(k, v);
+      return;
+    }
+    if (el.dataset.t === 'flipev') { const s = el.value.replace(/\s+/g, ''); if (/^\d+(-\d+)?$/.test(s)) set(k, s, false); return; }
+    if (el.dataset.t === 'str') set(k, el.value, false);
+  });
+
+  content.addEventListener('change', (e) => {
+    const el = e.target;
+    if (el.dataset.modeToggle) {
+      haptic();
+      const m = el.dataset.modeToggle;
+      const cur = draft.modes || [];
+      set('modes', el.checked ? [...cur, m] : cur.filter((x) => x !== m));
+      return;
+    }
+    if (el.dataset.time !== undefined) {
+      const t = [...draft.posting.times];
+      if (el.value) t[Number(el.dataset.time)] = el.value;
+      t.sort();
+      set('posting.times', t);
+      return;
+    }
+    if (el.dataset.t === 'bool') { haptic(); set(el.dataset.k, el.checked); return; }
+    if (el.dataset.t === 'flipev') { el.value = draft.flip_every; renderForm(); return; }
+    if (el.tagName === 'SELECT') set(el.dataset.k, el.value);
+  });
+
+  // ---------- drag to reorder modes ----------
+  content.addEventListener('pointerdown', (e) => {
+    const grip = e.target.closest('[data-grip]');
+    if (!grip) return;
+    const row = grip.closest('.mode-row');
+    if (row.classList.contains('is-off')) return;
+    e.preventDefault();
+    const list = row.parentElement;
+    let anchor = e.clientY; // moves each time the row swaps places
+    let moved = false;
+    row.classList.add('is-dragging');
+    try { grip.setPointerCapture(e.pointerId); } catch { /* synthetic pointer */ }
+    const move2 = (ev) => {
+      const dy = ev.clientY - anchor;
+      if (Math.abs(dy) > 4) moved = true;
+      row.style.transform = `translateY(${dy}px) scale(1.02)`;
+      const rows = [...list.querySelectorAll('.mode-row:not(.is-off)')];
+      const i = rows.indexOf(row);
+      const h = row.offsetHeight;
+      if (dy > h * 0.6 && rows[i + 1]) { rows[i + 1].after(row); anchor += h; haptic(); }
+      else if (dy < -h * 0.6 && rows[i - 1]) { rows[i - 1].before(row); anchor -= h; haptic(); }
+      else return;
+      row.style.transform = `translateY(${ev.clientY - anchor}px) scale(1.02)`;
+    };
+    const up = () => {
+      grip.removeEventListener('pointermove', move2);
+      grip.removeEventListener('pointerup', up);
+      grip.removeEventListener('pointercancel', up);
+      row.classList.remove('is-dragging');
+      row.style.transform = '';
+      const order = [...list.querySelectorAll('.mode-row:not(.is-off)')].map((r) => r.dataset.modeRow);
+      if (moved) set('modes', order);
+      else {
+        // A tap (no drag) moves the mode up one place: keyboard / VoiceOver friendly.
+        const cur = [...draft.modes];
+        const i = cur.indexOf(row.dataset.modeRow);
+        if (i > 0) { [cur[i - 1], cur[i]] = [cur[i], cur[i - 1]]; haptic(); set('modes', cur); }
+      }
+    };
+    grip.addEventListener('pointermove', move2);
+    grip.addEventListener('pointerup', up);
+    grip.addEventListener('pointercancel', up);
+  });
+  content.addEventListener('keydown', (e) => {
+    const grip = e.target.closest('[data-grip]');
+    if (grip && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      const cur = [...draft.modes];
+      const i = cur.indexOf(grip.dataset.grip);
+      if (i > 0) { [cur[i - 1], cur[i]] = [cur[i], cur[i - 1]]; set('modes', cur); }
+    }
+  });
+
+  // ---------- save bar / review sheet ----------
+  bar.addEventListener('click', async (e) => {
+    if (e.target.closest('[data-discard]')) {
+      const ok = await confirmSheet({ title: 'Discard your changes?', message: 'Settings go back to what is saved on GitHub.', confirm: 'Discard changes', destructive: true });
+      if (ok) { draft = clone(base); renderForm(); toast('Changes discarded', { kind: 'info' }); }
+      return;
+    }
+    if (e.target.closest('[data-review]')) review();
+  });
+
+  async function review() {
+    const list = changes();
+    const errs = validateSettings(draft);
+    const demo = ctx.store.isDemo();
+    const msg = `App: change ${list.map((c) => c.label).slice(0, 4).join(', ')}${list.length > 4 ? ` and ${list.length - 4} more` : ''}`;
+    const ok = await openSheet({
+      title: `Review ${list.length} change${list.length === 1 ? '' : 's'}`,
+      body: `
+        <ul class="diff">${list.map((c) => `<li><span class="d-label">${esc(c.label)}</span><span class="d-vals"><del>${esc(c.from)}</del>${icon('chevR')}<ins>${esc(c.to)}</ins></span></li>`).join('')}</ul>
+        ${errs.length ? `<div class="banner">${icon('alert')}<div>${errs.map((x) => `<p>${esc(x)}</p>`).join('')}</div></div>` : ''}
+        <p>${demo ? 'Demo mode: changes are kept on this phone only.' : `Saves config/settings.json in ${esc(lastSt.conn.owner)}/${esc(lastSt.conn.repo)}. The next run uses the new settings.`}</p>
+        <div class="sheet-actions">
+          <button class="btn btn--primary btn--block" data-ok ${errs.length ? 'disabled' : ''}>${demo ? 'Save' : 'Save to GitHub'}</button>
+          <button class="btn btn--quiet btn--block" data-close>Keep editing</button>
+        </div>`,
+      onMount: (el, close) => el.querySelector('[data-ok]').addEventListener('click', () => close(true)),
+    });
+    if (!ok) return;
+    const btn = bar.querySelector('[data-review]');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const toSave = clone(draft);
+      await ctx.store.saveSettings(toSave, msg);
+      base = clone(toSave); draft = clone(toSave);
+      baseSha = ctx.store.state.data.settings.sha;
+      renderForm();
+      haptic();
+      toast(demo ? 'Settings saved (demo)' : 'Settings saved');
+    } catch (err) {
+      if (err.kind === 'conflict') {
+        toast('Settings changed on GitHub meanwhile. Your edits are kept: review and save again.', { kind: 'err', ms: 5000 });
+        await ctx.store.refresh({ full: true });
+      } else toast(err.message || 'Could not save settings.', { kind: 'err', ms: 4500 });
+    } finally {
+      btn.disabled = false; btn.textContent = 'Review';
+      updateBar();
+    }
+  }
+
+  // ---------- connection sub-page ----------
+  function openConn() {
+    if (conn) return;
+    const cp = makePage({ title: 'Connection', back: 'Settings' });
+    cp.el.classList.add('page--pushed');
+    const c = { ...ctx.store.state.conn };
+    cp.content.innerHTML = connForm(c);
+    const read = () => {
+      const f = (n) => cp.content.querySelector(`[name="${n}"]`).value.trim();
+      return { owner: f('owner'), repo: f('repo').replace(/^.*github\.com\//, '').replace(/\.git$/, ''), token: f('token'), topic: f('topic'), demo: cp.content.querySelector('[data-k="demo"]').checked };
+    };
+    const out = cp.content.querySelector('[data-conn-out]');
+    cp.el.addEventListener('click', async (e) => {
+      if (e.target.closest('[data-back]')) { history.length > 1 ? history.back() : (location.hash = '#/settings'); return; }
+      const rv = e.target.closest('[data-reveal]');
+      if (rv) { const inp = cp.content.querySelector('[name="token"]'); const show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; rv.textContent = show ? 'Hide' : 'Show'; return; }
+      if (e.target.closest('[data-conn-test]')) {
+        const v = read();
+        if (!v.owner || !v.repo) { out.innerHTML = `<div class="banner">${icon('alert')}<div><p>Add the owner and repository first.</p></div></div>`; return; }
+        out.innerHTML = '<p class="note" style="display:flex;gap:8px;align-items:center"><span class="spinner"></span>Checking GitHub…</p>';
+        try {
+          const r = await ctx.store.testConnection(v);
+          out.innerHTML = `<div class="banner banner--info">${icon('check')}<div><dl class="kv">
+            <dt>Repo</dt><dd>${esc(r.repo)}</dd>
+            <dt>Can save</dt><dd>${r.canPush ? 'Yes' : 'No: give the token Contents read and write'}</dd>
+            <dt>Runs</dt><dd>${r.actions === true ? 'Yes' : esc(r.actions)}</dd>
+            ${r.ntfy ? `<dt>ntfy</dt><dd>${esc(r.ntfy)}</dd>` : ''}</dl></div></div>`;
+        } catch (err) {
+          out.innerHTML = `<div class="banner">${icon('alert')}<div><p>${esc(err.message)}</p></div></div>`;
+        }
+        return;
+      }
+      if (e.target.closest('[data-conn-save]')) {
+        const v = read();
+        if (!v.demo && (!v.owner || !v.repo || !v.token)) {
+          out.innerHTML = `<div class="banner">${icon('alert')}<div><p>To leave demo mode, fill in the owner, repository and token.</p></div></div>`;
+          return;
+        }
+        haptic();
+        baseSha = null; base = null; draft = null;
+        content.innerHTML = '';
+        ctx.store.connect(v);
+        toast(v.demo ? 'Demo mode on' : `Connecting to ${v.owner}/${v.repo}`, { kind: v.demo ? 'info' : 'ok' });
+        location.hash = '#/settings';
+      }
+    });
+    ctx.edgeSwipeBack(cp.el, () => history.back());
+    page.el.after(cp.el);
+    conn = { page: cp, render() {} };
+    updateBar();
+    requestAnimationFrame(() => requestAnimationFrame(() => { cp.el.classList.add('is-in'); page.el.classList.add('is-under'); }));
+  }
+
+  function closeConn() {
+    if (!conn) return;
+    const el = conn.page.el;
+    conn = null;
+    page.el.classList.remove('is-under');
+    el.classList.remove('is-in');
+    setTimeout(() => el.remove(), 360);
+    updateBar();
+  }
+
+  return {
+    page,
+    render,
+    route(parts) { if (parts[0] === 'connection') openConn(); else closeConn(); },
+  };
+}

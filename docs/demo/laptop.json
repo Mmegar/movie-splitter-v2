@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "updated": "2026-10-13T14:04:00+13:00",
+  "online": true,
+  "host": "Kimmeng-Laptop",
+  "watch_folder": "C:/Users/kimmeng/Movies/To upload",
+  "uploading": {
+    "file": "Carnival.of.Souls.1962.mp4",
+    "percent": 42
+  },
+  "uploaded": [
+    {
+      "file": "The.Kid.1921.mkv",
+      "at": "2026-10-13T13:56:00+13:00",
+      "size_mb": 410
+    },
+    {
+      "file": "Nosferatu.1922.mp4",
+      "at": "2026-10-13T13:40:00+13:00",
+      "size_mb": 812
+    },
+    {
+      "file": "TheManFromUncle.mkv",
+      "at": "2026-10-13T13:45:00+13:00",
+      "size_mb": 1381
+    }
+  ],
+  "wishlist": [
+    {
+      "title": "Nosferatu (1922)",
+      "status": "uploaded",
+      "source_url": "https://archive.org/details/nosferatu",
+      "note": null
+    },
+    {
+      "title": "Carnival of Souls (1962)",
+      "status": "downloading",
+      "source_url": "https://archive.org/details/CarnivalOfSouls",
+      "note": "Uploading to Drive"
+    },
+    {
+      "title": "The Phantom of the Opera (1925)",
+      "status": "found",
+      "source_url": "https://archive.org/details/ThePhantomOfTheOpera1925",
+      "note": "Starts after the current download"
+    },
+    {
+      "title": "Metropolis (1927)",
+      "status": "searching",
+      "source_url": null,
+      "note": null
+    },
+    {
+      "title": "Plan 9 from Outer Space (1957)",
+      "status": "failed",
+      "source_url": "https://archive.org/details/Plan_9_from_Outer_Space_1959",
+      "note": "Download kept stopping - will try again tomorrow"
+    },
+    {
+      "title": "Dune: Part Two (2024)",
+      "status": "not_available",
+      "source_url": null,
+      "note": "Not public domain - add the file to your laptop folder instead"
+    }
+  ]
+}

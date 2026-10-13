@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "updated": "2026-10-13T14:04:00+13:00",
+  "online": true,
+  "host": "Kimmeng-Laptop",
+  "watch_folder": "C:/Users/kimmeng/Movies/To upload",
+  "uploading": {"file": "Nosferatu.1922.mp4", "percent": 42},
+  "uploaded": [{"file": "TheManFromUncle.mkv", "at": "2026-10-13T13:45:00+13:00", "size_mb": 1381}],
+  "wishlist": [
+    {"title": "Nosferatu (1922)", "status": "downloading", "source_url": "https://archive.org/details/nosferatu", "note": null},
+    {"title": "Some New Movie (2024)", "status": "not_available", "source_url": null, "note": "Not public domain - add the file to your laptop folder instead"}
+  ]
+}

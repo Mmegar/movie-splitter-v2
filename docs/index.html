@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Splitter</title>
+  <meta name="description" content="Track and control Movie Splitter runs, parts, posts and the wish list.">
+  <meta name="theme-color" content="#14111b" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f3f1f6" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme" content="dark light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Splitter">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div id="app" class="app">
+    <main id="stage" class="stage" aria-live="off"></main>
+    <nav class="tabbar" aria-label="Sections">
+      <a class="tab" href="#/now" data-tab="now"><span class="tab-ic" data-icon="now"></span><span class="tab-label">Now</span></a>
+      <a class="tab" href="#/movies" data-tab="movies"><span class="tab-ic" data-icon="movies"></span><span class="tab-label">Movies</span></a>
+      <a class="tab" href="#/alerts" data-tab="alerts"><span class="tab-ic" data-icon="alerts"></span><span class="tab-label">Alerts</span><span class="tab-badge" hidden></span></a>
+      <a class="tab" href="#/queue" data-tab="queue"><span class="tab-ic" data-icon="queue"></span><span class="tab-label">Queue</span></a>
+      <a class="tab" href="#/settings" data-tab="settings"><span class="tab-ic" data-icon="settings"></span><span class="tab-label">Settings</span></a>
+    </nav>
+  </div>
+  <div id="sheets"></div>
+  <div id="toast" class="toast-host" aria-live="polite"></div>
+  <noscript><p style="padding:2rem;font-family:system-ui">This app needs JavaScript.</p></noscript>
+</body>
+</html>

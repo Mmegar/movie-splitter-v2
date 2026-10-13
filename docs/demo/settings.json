@@ -1,0 +1,43 @@
+{
+  "modes": [
+    "stretch",
+    "highlights"
+  ],
+  "stretch_minutes": 12,
+  "stretch_from": 0.2,
+  "stretch_to": 0.75,
+  "stretch_part_seconds": 75,
+  "part_max_extra": 225,
+  "highlight_seconds": 75,
+  "highlight_count": 0,
+  "part_seconds": 120,
+  "flip": "mirror",
+  "flip_every": "25-30",
+  "auto_subtitles": true,
+  "whisper_model": "small",
+  "line": true,
+  "line_opacity": 0.45,
+  "line_thickness": 1,
+  "cockroach": true,
+  "cockroach_chance": 1,
+  "cockroach_size": 60,
+  "captions": true,
+  "video_quality": 23,
+  "delete_originals": "permanent",
+  "cleanup_parts_after_days": 0,
+  "posting": {
+    "enabled": true,
+    "privacy": "self_only",
+    "modes": [
+      "stretch"
+    ],
+    "per_day": 3,
+    "times": [
+      "12:00",
+      "18:00",
+      "21:00"
+    ],
+    "timezone": "Pacific/Auckland",
+    "hashtags": "#movie #movieclips #fyp"
+  }
+}

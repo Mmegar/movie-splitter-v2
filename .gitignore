@@ -1,0 +1,10 @@
+__pycache__/
+# local test / runtime files
+status-local/
+work/
+work-post/
+out/
+laptop/config.json
+laptop/agent.log*
+laptop/agent_memory.json
+laptop/launchd-errors.log

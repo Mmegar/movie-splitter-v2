@@ -1,0 +1,30 @@
+{
+  "_help": "Copy this file to config.json (same folder) and change the values. Lines starting with _ are just notes. Use forward slashes / in folder paths, even on Windows.",
+
+  "_watch_folder": "Put movie files here (and an optional .srt with the same name). They're moved to Google Drive automatically.",
+  "watch_folder": "C:/Users/YOUR-NAME/Movies/To upload",
+
+  "_download_folder": "Public-domain films from your wish list are downloaded here first, then uploaded and removed.",
+  "download_folder": "C:/Users/YOUR-NAME/Movies/From archive.org",
+
+  "_rclone": "rclone_path: 'rclone' if it's installed normally, or the full path to rclone.exe. rclone_remote: the name you gave Google Drive in 'rclone config'.",
+  "rclone_path": "rclone",
+  "rclone_remote": "gdrive",
+
+  "_drive_folder": "The Drive folder that holds 'To edit' and 'Ready to post'.",
+  "drive_folder": "TikTok automation v2",
+
+  "_github": "Your GitHub name, the repo name, and a fine-grained token with 'Contents: Read and write' on that repo only.",
+  "github_owner": "YOUR-GITHUB-NAME",
+  "github_repo": "movie-splitter-v2",
+  "github_token": "github_pat_PASTE_YOUR_TOKEN_HERE",
+
+  "_timing": "How often to look in the folder (seconds), how long a file must stop growing before upload (seconds), how often to read the wish list and to say 'I'm online' (minutes).",
+  "poll_seconds": 15,
+  "stable_seconds": 60,
+  "wishlist_minutes": 10,
+  "heartbeat_minutes": 5,
+
+  "_max_download_mb": "Skip archive.org files bigger than this (MB).",
+  "max_download_mb": 4000
+}

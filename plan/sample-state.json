@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "updated": "2026-10-13T14:05:00+13:00",
+  "run": {
+    "active": true,
+    "run_id": 38265759509,
+    "started": "2026-10-13T13:50:00+13:00",
+    "movie": "The Man from U.N.C.L.E. (2015)",
+    "mode": "stretch",
+    "stage": "rendering",
+    "part": 4,
+    "parts_total": 10
+  },
+  "queue": [
+    {"name": "Nosferatu (1922)", "source": "wishlist", "added": "2026-10-13T13:40:00+13:00", "size_mb": 812}
+  ],
+  "movies": [
+    {
+      "id": "the-man-from-uncle-2015",
+      "name": "The Man from U.N.C.L.E. (2015)",
+      "status": "processing",
+      "source": "laptop",
+      "started": "2026-10-13T13:50:00+13:00",
+      "finished": null,
+      "subtitles": "made automatically (English)",
+      "error": null,
+      "modes": {
+        "stretch": {
+          "label": "Best stretch",
+          "planned": 10,
+          "parts": [
+            {
+              "n": 1, "start": 2580.0, "end": 2671.5, "seconds": 91.5,
+              "drive_path": "Ready to post/The Man from U.N.C.L.E. (2015)/Best stretch/The Man from U.N.C.L.E. (2015) - Part 01.mp4",
+              "caption": "Wait for it… 😳\nPart 1 🎬 · Part 2 is up next 👀\n#fyp #movie",
+              "post": {"status": "posted", "at": "2026-10-13T12:00:00+13:00", "url": null, "error": null}
+            }
+          ]
+        },
+        "highlights": {"label": "Highlights", "planned": 8, "parts": []}
+      }
+    }
+  ],
+  "posting": {"enabled": false, "next_at": "2026-10-13T18:00:00+13:00", "posted_today": 1},
+  "events": [
+    {"at": "2026-10-13T13:58:00+13:00", "type": "part_ready", "title": "[Best stretch] The Man from U.N.C.L.E. (2015): Part 3 of 10 ready", "message": "Part 3: 47:10 to 48:40 (90s)"}
+  ]
+}

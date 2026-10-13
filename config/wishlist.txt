@@ -1,0 +1,5 @@
+# One movie per line. Optional year in brackets helps matching.
+# Only PUBLIC-DOMAIN films are fetched (from archive.org). Anything else is marked "not available".
+# Example:
+# Night of the Living Dead (1968)
+# Nosferatu (1922)
