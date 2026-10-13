@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-13T17:00:00+07:00",
+ "updated": "2026-10-13T17:01:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -10,18 +10,26 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
- "library": [
+ "queue": [
   {
    "name": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
    "size_mb": 2586,
-   "modified": "2026-10-13T16:58:24+07:00"
+   "modified": "2026-10-13T16:58:24+07:00",
+   "sending": false
   }
  ],
+ "library": [],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {},
- "commands_done": [],
+ "commands": {
+  "mv6igiwhxb7g": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
+ "commands_done": [
+  "mv6igiwhxb7g"
+ ],
  "originals": [],
  "version": 2
 }
