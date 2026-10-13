@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:02:52+13:00",
+ "updated": "2026-10-14T00:03:26+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
@@ -123,7 +123,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 39.9,
+       "end": 218.8,
+       "seconds": 178.9,
+       "drive_path": "Ready to post/Moon Knight S01E02 Summon the Suit/Highlights/Moon Knight S01E02 Summon the Suit - Part 01.mp4",
+       "caption": "me to my group chat: 'You ready?' 📱\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "moon-knight-s01e02-summon-the-suit/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
