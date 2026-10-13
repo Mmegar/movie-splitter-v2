@@ -150,6 +150,7 @@ function buildForm(d) {
       d.cockroach ? stepRow(d, 'cockroach_size', 'Size', { min: 30, max: 160, step: 10, sub: 'The screen is 1080 px wide' }) : '',
     ]),
 
+    group('Wish list', [swRow(d, 'wishlist_archive', 'Find wish-list films on archive.org', 'Public-domain films only. Turn off to stop the laptop searching and downloading')]),
     group('Captions', [swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and your hashtags, ready to copy')]),
 
     group('Storage', [

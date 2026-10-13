@@ -174,6 +174,7 @@ export const SETTING_LABELS = {
   cockroach_chance: 'Cockroach chance',
   cockroach_size: 'Cockroach size',
   captions: 'Captions',
+  wishlist_archive: 'archive.org search',
   video_quality: 'Video quality',
   delete_originals: 'Delete originals',
   cleanup_parts_after_days: 'Clean up old parts',

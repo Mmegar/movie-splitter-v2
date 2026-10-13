@@ -356,6 +356,19 @@ class Agent:
         with self.lock:
             self.memory["order"] = [line for line, _, _ in items]
             self._save_memory()
+        try:                       # the on/off switch lives in the app's Settings
+            s_text, _ = self.gh.read_file("config/settings.json")
+            self.remote_settings = settings.load(text=s_text or "{}", env={})
+        except Exception as e:
+            log.warning("Couldn't read settings from GitHub: %s", e)
+        if not self.remote_settings.get("wishlist_archive", True):
+            for line, _, _ in items:
+                st = (self.memory["wishlist"].get(line) or {}).get("status")
+                if st not in ("uploaded", "downloading", "found"):
+                    self._wish(line, status="not_available", source_url=None, paused=True,
+                               note="archive.org search is switched off (app: Settings > Wish list)")
+            self.heartbeat()
+            return
         self.heartbeat()
         for line, title, year in items:
             self.handle_wish(line, title, year)
@@ -376,7 +389,9 @@ class Agent:
         st, checked = entry.get("status"), entry.get("checked", 0)
         if st == "uploaded" or any(w == line for _, w in self.to_send):
             return
-        if st == "not_available" and time.time() - checked < 24 * 3600:
+        if entry.get("paused"):
+            self._wish(line, paused=False, checked=0)   # search was switched back on: look now
+        elif st == "not_available" and time.time() - checked < 24 * 3600:
             return             # look again once a day
         if st == "failed" and time.time() - checked < 3600:
             return             # try again after an hour
@@ -611,6 +626,7 @@ class Agent:
                 e = dict(self.memory["wishlist"].get(line) or {"title": line, "status": "searching",
                                                                 "source_url": None, "note": None})
                 e.pop("checked", None)
+                e.pop("paused", None)
                 if e.get("percent") is None:
                     e.pop("percent", None)
                 wl.append(e)
