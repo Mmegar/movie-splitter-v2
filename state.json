@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:11:43+13:00",
+ "updated": "2026-10-14T00:12:03+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
@@ -183,6 +183,21 @@
         "url": null,
         "error": null
        }
+      },
+      {
+       "n": 5,
+       "start": 2801.0,
+       "end": 2881.2,
+       "seconds": 80.2,
+       "drive_path": "Ready to post/Moon Knight S01E02 Summon the Suit/Highlights/Moon Knight S01E02 Summon the Suit - Part 05.mp4",
+       "caption": "the way my jaw hit the floor 🫠\nPart 5 🎬 · the ending. no words. just 🫠\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "moon-knight-s01e02-summon-the-suit/highlights-005.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
       }
      ]
     }
@@ -203,6 +218,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-14T00:12:01+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 5 of 5 ready",
+   "message": "Part 5: 46:41 to 48:01 (80s)  interest score 63/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe way my jaw hit the floor 🫠\nPart 5 🎬 · the ending. no words. just 🫠\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T00:09:55+13:00",
    "type": "part_ready",
