@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:40:35+13:00",
+ "updated": "2026-10-14T00:40:37+13:00",
  "run": {
   "active": true,
   "run_id": 38391566309,
   "started": "2026-10-14T00:38:25+13:00",
-  "movie": null,
-  "mode": null,
-  "stage": "idle",
+  "movie": "Moon Knight S01E02 Summon the Suit",
+  "mode": "clips",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -225,6 +225,12 @@
   "posted_today": 1
  },
  "events": [
+  {
+   "at": "2026-10-14T00:40:37+13:00",
+   "type": "started",
+   "title": "✂️ Making 1 custom clip: Moon Knight S01E02 Summon the Suit",
+   "message": "They'll arrive on the laptop in Ready to post/Moon Knight S01E02 Summon the Suit/Custom clips."
+  },
   {
    "at": "2026-10-13T18:39:55+07:00",
    "type": "info",
