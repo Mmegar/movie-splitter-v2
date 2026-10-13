@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:46:18+13:00",
+ "updated": "2026-10-14T00:46:21+13:00",
  "run": {
   "active": true,
   "run_id": 38391566309,
@@ -16,10 +16,10 @@
   {
    "id": "moon-knight-s01e02-summon-the-suit",
    "name": "Moon Knight S01E02 Summon the Suit",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-13T23:37:38+13:00",
-   "finished": "2026-10-14T00:12:07+13:00",
+   "finished": "2026-10-14T00:46:21+13:00",
    "duration": 3038.6,
    "subtitles": "made automatically (English)",
    "error": null,
@@ -242,6 +242,12 @@
   "posted_today": 1
  },
  "events": [
+  {
+   "at": "2026-10-14T00:46:19+13:00",
+   "type": "part_ready",
+   "title": "[Custom clips] ✂️ Moon Knight S01E02 Summon the Suit: clip 1 of 1 ready",
+   "message": "Clip 1: 30:48 to 34:40 (231s)  Test\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Custom clips)."
+  },
   {
    "at": "2026-10-14T00:40:37+13:00",
    "type": "started",
