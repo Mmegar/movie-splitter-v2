@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-13T21:03:19+07:00",
+ "updated": "2026-10-13T21:03:20+07:00",
  "run": {
   "active": false,
   "run_id": 38391566309,
@@ -53,10 +53,11 @@
        "caption": "this movie said 'hold my popcorn' 🍿\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "moon-knight-s01e02-summon-the-suit/stretch-002.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-13T21:03:20+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
