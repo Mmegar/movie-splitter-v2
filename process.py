@@ -1,18 +1,13 @@
 """
-TikTok part maker: runs on GitHub Actions (your PC can stay off).
+TikTok part maker: runs on GitHub Actions (your laptop only sends and receives files).
 
-Google Drive layout (inside your "TikTok automation" folder):
-
-    To edit/            <- drop videos here (and an optional .srt with the same name),
-                           OR a .txt file containing an archive.org link.
-                           Finished originals are DELETED (for good, or to Drive's bin:
-                           setting "delete_originals") and listed in "Finished.txt" here.
-    Ready to post/
-        <Movie name>/
-            Highlights/      <- one subfolder per mode in MODES
-            Best stretch/
-            Whole movie/
-    Failed/             <- anything that couldn't be processed
+How movies travel (no Google Drive):
+    laptop helper  -- movie (in pieces under 2 GB) -->  draft release "incoming-<id>" on this repo
+    this script    -- cuts it, sends each part as soon as it's made --> draft release "parts-<id>"
+    laptop helper  -- downloads them into <output folder>/Ready to post/<movie>/<mode>/
+Draft releases are only visible to people with write access to the repo (not public).
+The uploaded movie is deleted once all parts are made. If cutting fails, it's kept and marked
+"failed" (the laptop then moves the original into its "Failed" folder).
 
 Every movie is made in each mode listed in MODES (default: all three):
   highlights  Scores the whole video for "interesting" moments (loud audio,
@@ -37,7 +32,6 @@ import shutil
 import subprocess
 import sys
 import time
-import urllib.parse
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -45,17 +39,13 @@ from zoneinfo import ZoneInfo
 
 import settings
 import status
+import transport
 
 # Settings come from config/settings.json (the iPhone app edits it). Any environment variable
 # with the old v1 name (MODES, FLIP_EVERY, COCKROACH_SIZE, ...) still wins over the file.
 SETTINGS = settings.apply_to_env()
 
-REMOTE = "gdrive:"
-TO_EDIT = "To edit"
 READY = "Ready to post"
-DONE = "Done"
-FAILED = "Failed"
-FINISHED_LOG = "Finished.txt"
 
 MODE_NAMES = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie"}
 MODES = [m.strip().lower() for m in os.environ.get("MODES", "highlights,stretch,all").split(",")
@@ -81,8 +71,7 @@ _fe = os.environ.get("FLIP_EVERY", "0").replace(" ", "")
 _m = re.fullmatch(r"(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)", _fe)
 FLIP_MIN, FLIP_MAX = (float(_m.group(1)), float(_m.group(2))) if _m else (float(_fe), float(_fe))
 FLIP_EVERY = FLIP_MIN
-NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "").strip()   # phone notifications (ntfy app); if empty, read from Drive
-TOPIC_FILE = "notification name.txt"                     # private file in the Drive folder holding the ntfy name
+NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "").strip()   # phone notifications (ntfy app): GitHub secret NTFY_TOPIC
 MAX_RUN_MINUTES = float(os.environ.get("MAX_RUN_MINUTES", "300"))  # don't start a new movie after this
 STARTED = time.time()
 COCKROACH = os.environ.get("COCKROACH", "on").strip().lower() not in ("off", "no", "0", "false")
@@ -96,9 +85,6 @@ AUTO_SUBS = os.environ.get("AUTO_SUBTITLES", "on").strip().lower() not in ("off"
 WHISPER_MODEL = os.environ.get("WHISPER_MODEL", "small")
 FONT = os.environ.get("FONT_FILE", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 VIDEO_QUALITY = int(float(os.environ.get("VIDEO_QUALITY", "23")))   # x264 CRF: 18 = best/biggest ... 28 = smallest
-# "permanent" = finished originals are deleted for good (saves Drive space); "bin" = Drive's bin for 30 days
-DELETE_ORIGINALS = os.environ.get("DELETE_ORIGINALS", "permanent").strip().lower()
-CLEANUP_DAYS = float(os.environ.get("CLEANUP_PARTS_AFTER_DAYS", "0"))   # delete parts older than this; 0 = never
 TZ = ZoneInfo(SETTINGS["posting"]["timezone"])
 WORK = Path("work")
 
@@ -118,12 +104,8 @@ def run(cmd, **kw):
 
 
 def ntfy_topic():
-    """The ntfy name: from the workflow if set, otherwise from the private file in Google Drive."""
-    global NTFY_TOPIC
-    if not NTFY_TOPIC:
-        out = subprocess.run(["rclone", "cat", f"{REMOTE}{TOPIC_FILE}"], capture_output=True, text=True).stdout
-        NTFY_TOPIC = out.strip() or "-"
-    return "" if NTFY_TOPIC == "-" else NTFY_TOPIC
+    """The ntfy name (GitHub secret NTFY_TOPIC); no notifications if it isn't set."""
+    return "" if NTFY_TOPIC in ("", "-") else NTFY_TOPIC
 
 
 def notify(title, message, tags=None, kind="info"):
@@ -979,136 +961,47 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
     return results
 
 
-# ---------------------------------------------------------------- links (archive.org)
-def http_json(url):
-    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "movie-splitter"})) as r:
-        return json.load(r)
+# ---------------------------------------------------------------- GitHub releases (movies in, parts out)
+def github():
+    import ghapi
+    return ghapi.GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"],
+                        os.environ.get("GITHUB_API_URL") or ghapi.API)
 
 
-def resolve_link(url):
-    """Returns (download_url, nice_name_with_extension)."""
-    url = url.strip()
-    m = re.search(r"archive\.org/(?:details|download)/([^/?#]+)(?:/([^?#]+))?", url)
-    if m and not (m.group(2) and Path(m.group(2)).suffix.lower() in VIDEO_EXT):
-        ident = m.group(1)
-        meta = http_json(f"https://archive.org/metadata/{ident}")
-        vids = [f for f in meta.get("files", []) if Path(f.get("name", "")).suffix.lower() in VIDEO_EXT]
-        if not vids:
-            raise RuntimeError(f"No video file found on archive.org item '{ident}'")
-        # prefer mp4/h.264, then the biggest file
-        vids.sort(key=lambda f: (f["name"].lower().endswith(".mp4"), int(f.get("size", 0) or 0)), reverse=True)
-        best = vids[0]["name"]
-        title = meta.get("metadata", {}).get("title") or ident
-        year = str(meta.get("metadata", {}).get("year") or meta.get("metadata", {}).get("date", ""))[:4]
-        nice = safe(f"{title} ({year})" if re.fullmatch(r"\d{4}", year or "") and year not in title else title)
-        return f"https://archive.org/download/{ident}/{urllib.parse.quote(best)}", nice + Path(best).suffix.lower()
-    name = urllib.parse.unquote(Path(urllib.parse.urlparse(url).path).name) or "video.mp4"
-    return url, name
+def incoming_movies(gh):
+    """Movies the laptop has finished sending, oldest first (first come, first served)."""
+    out = []
+    for r in gh.releases():
+        meta = transport.body_of(r)
+        if (r.get("draft") and r.get("tag_name", "").startswith(transport.INCOMING)
+                and meta.get("complete") and not meta.get("failed") and meta.get("file")):
+            out.append(r)
+    return sorted(out, key=lambda r: r.get("created_at") or "")
 
 
-def fetch_link_file(f):
-    """Downloads the video(s) in one .txt link file into 'To edit'. Returns their names."""
-    text = subprocess.run(["rclone", "cat", f"{REMOTE}{TO_EDIT}/{f}"], capture_output=True, text=True).stdout
-    urls = re.findall(r"https?://\S+", text)
-    got, ok = [], bool(urls)
-    for url in urls:
-        try:
-            dl, name = resolve_link(url)
-            local = WORK / "dl" / name
-            local.parent.mkdir(parents=True, exist_ok=True)
-            print(f"Downloading {dl}", flush=True)
-            run(["curl", "-fL", "--retry", "3", "-o", str(local), dl])
-            run(["rclone", "move", str(local.parent), f"{REMOTE}{TO_EDIT}"])
-            got.append(name)
-        except Exception as e:
-            ok = False
-            print(f"FAILED link {url}: {e}", flush=True)
-            notify("Link failed", f"Couldn't download {url}\n{e}", ["x"], kind="failed")
-    if ok:
-        rc_delete(f)
-    else:
-        rc_move(f, FAILED)
-    shutil.rmtree(WORK / "dl", ignore_errors=True)
-    return got
-
-
-# ---------------------------------------------------------------- drive
-def is_video(entry):
-    return Path(entry["Name"]).suffix.lower() in VIDEO_EXT or entry.get("MimeType", "").startswith("video/")
-
-
-def is_link_file(entry):
-    return entry["Name"].lower().endswith(".txt") and entry["Name"] != FINISHED_LOG
-
-
-def list_to_edit():
-    """Files in 'To edit', oldest first (first come, first served)."""
-    out = subprocess.run(
-        ["rclone", "lsjson", REMOTE + TO_EDIT, "--files-only"],
-        capture_output=True, text=True, check=True,
-    ).stdout
-    return sorted(json.loads(out or "[]"), key=lambda e: e.get("ModTime", ""))
-
-
-def rc_move(src_name, dest_folder):
-    subprocess.run(["rclone", "moveto", f"{REMOTE}{TO_EDIT}/{src_name}", f"{REMOTE}{dest_folder}/{src_name}"])
-
-
-def trash_flag():
-    """'bin' = deleted files go to Google Drive's bin (30 days); 'permanent' = gone for good."""
-    return "--drive-use-trash=true" if DELETE_ORIGINALS == "bin" else "--drive-use-trash=false"
-
-
-def rc_delete(name):
-    """Deletes a file from 'To edit': for good, or to Google Drive's bin (setting "delete_originals")."""
-    subprocess.run(["rclone", "deletefile", trash_flag(), f"{REMOTE}{TO_EDIT}/{name}"])
-
-
-def deleted_where():
-    return ("in Google Drive's bin for 30 days" if DELETE_ORIGINALS == "bin"
-            else "deleted for good, to save Drive space")
-
-
-def log_finished(line):
-    """Adds a line to 'To edit/Finished.txt' (creates it the first time)."""
-    remote = f"{REMOTE}{TO_EDIT}/{FINISHED_LOG}"
-    old = subprocess.run(["rclone", "cat", remote], capture_output=True, text=True).stdout
-    if not old.strip():
-        old = f"Finished movies. The original files were deleted ({deleted_where()}).\n\n"
-    local = Path("finished_log.txt")
-    local.write_text(old.rstrip("\n") + "\n" + line + "\n", encoding="utf-8")
-    subprocess.run(["rclone", "copyto", str(local), remote])
-    local.unlink(missing_ok=True)
-
-
-def cleanup_old_parts():
-    """Setting "cleanup_parts_after_days": deletes finished parts older than that, then empty folders."""
-    if CLEANUP_DAYS <= 0:
-        return
-    print(f"Deleting parts in '{READY}' older than {CLEANUP_DAYS:g} days...", flush=True)
-    subprocess.run(["rclone", "delete", f"{REMOTE}{READY}", "--min-age", f"{CLEANUP_DAYS:g}d", trash_flag()])
-    subprocess.run(["rclone", "rmdirs", f"{REMOTE}{READY}", "--leave-root"])
-
-
-def movie_source(filename):
-    """Where a file came from, for the app: 'wishlist' / 'laptop' (the laptop agent uploaded it) or 'drive'."""
-    for u in (status.read_laptop() or {}).get("uploaded", []):
-        if u.get("file") == filename:
-            return u.get("source") or "laptop"
-    return "drive"
-
-
-def update_queue(entries, current=None):
-    """Tells the app what's waiting in 'To edit'. Files it hasn't seen before become 'new file' events."""
-    before = {q.get("name") for q in (status.load_state() or {}).get("queue", [])}
+def update_queue(releases, current=None):
+    """Tells the app what's waiting on GitHub to be cut."""
     queue = []
-    for e in entries:
-        if e["Name"] not in before:
-            status.add_event("new_file", "📥 New file in \"To edit\"", e["Name"])
-        if e["Name"] != current:
-            queue.append({"name": e["Name"], "source": movie_source(e["Name"]), "added": e.get("ModTime"),
-                          "size_mb": round(int(e.get("Size", 0) or 0) / 1e6)})
+    for r in releases:
+        meta = transport.body_of(r)
+        if r["id"] != current:
+            queue.append({"name": meta.get("file"), "source": meta.get("source") or "laptop",
+                          "added": r.get("created_at"), "size_mb": round(int(meta.get("size", 0) or 0) / 1e6)})
     status.set_queue(queue)
+
+
+def parts_release(gh, rid, name, video):
+    """The draft release the finished parts go into (emptied first if an earlier run stopped half-way)."""
+    tag = transport.PARTS + rid
+    body = {"kind": "parts", "id": rid, "movie": name, "file": video, "done": False, "failed": False,
+            "parts": [], "lists": {}}
+    for r in gh.releases():
+        if r.get("tag_name") == tag:
+            for a in gh.assets(r["id"]):
+                gh.delete_asset(a["id"])
+            r = gh.update_release(r["id"], body=json.dumps(body))
+            return r, body
+    return gh.create_release(tag, f"Parts: {name}", json.dumps(body)), body
 
 
 def install_tools():
@@ -1124,73 +1017,91 @@ def install_tools():
 OFF = ("off", "no", "0", "false")
 
 
-def process_video(video, all_names, source=None):
-    stem = Path(video).stem
-    srt_name = next((f for f in all_names if f.lower() == f"{stem.lower()}.srt"), None)
+def process_release(gh, release):
+    """Gets one movie from its release, cuts it, and sends every part back as soon as it's made."""
+    meta = transport.body_of(release)
+    rid = release["tag_name"][len(transport.INCOMING):]
+    video = Path(meta["file"]).name
+    srt_name = Path(meta["srt"]).name if meta.get("srt") else None
     name = clean_name(video)
-    dest = f"{REMOTE}{READY}/{name}"
     labels = ", ".join(MODE_NAMES[m] for m in MODES)
     print(f"\n=== {video} -> {name} ===", flush=True)
-    status.movie_started(name, source or movie_source(video), MODES)
+    status.movie_started(name, meta.get("source") or "laptop", MODES)
     notify(f"Started: {name}",
-           f"Making: {labels}.\nChecking the movie first, then you'll get a message as each part lands in "
-           f"'{READY}/{name}'.", ["clapper"], kind="started")
+           f"Making: {labels}.\nChecking the movie first, then you'll get a message as each part is made. "
+           f"The laptop downloads them into '{READY}/{name}'.", ["clapper"], kind="started")
     shutil.rmtree(WORK, ignore_errors=True)
     (WORK / "in").mkdir(parents=True)
     captions = {}
+    out_rel, out_body = None, None
+
+    def save_body():
+        gh.update_release(out_rel["id"], body=json.dumps(out_body, ensure_ascii=False))
 
     def on_plan(mode, count, list_file):
-        run(["rclone", "copyto", str(list_file), f"{dest}/{MODE_NAMES[mode]}/{list_file.name}"])
+        out_body["lists"][mode] = list_file.read_text(encoding="utf-8")
+        save_body()
         status.movie_planned(name, mode, count)
         notify(f"{name}: {count} part{'s' if count != 1 else ''} planned",
-               f"The parts list is in {READY}/{name}/{MODE_NAMES[mode]}. Parts will appear there as they're made.",
+               f"Parts will arrive on the laptop in {READY}/{name}/{MODE_NAMES[mode]} as they're made.",
                ["scissors"], kind="planned")
 
     def on_part(mode, i, count, out, line):
-        folder = f"{READY}/{name}/{MODE_NAMES[mode]}"
+        label = MODE_NAMES[mode]
         status.set_stage("uploading", mode=mode, part=i, parts_total=count)
-        run(["rclone", "copyto", str(out), f"{REMOTE}{folder}/{out.name}"])
+        prefix = f"{mode}-{i:02}"
+        assets = transport.send(gh, out_rel, out, prefix)
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
             captions[mode] = make_captions(count)
         text = captions[mode][i - 1] if mode in captions else None
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
-        status.part_ready(name, mode, i, a, b, f"{folder}/{out.name}", text)
+        out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": out.name,
+                                  "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),
+                                  "seconds": round(b - a, 1), "line": line})
+        save_body()
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text)
         caption = f"\n\n📝 Caption:\n{text}" if text else ""
         notify(f"{name}: Part {i} of {count} ready",
-               f"{line}\nIt's in {folder}.{caption}", ["white_check_mark"] if i == count else ["film_frames"],
-               kind="part_ready")
+               f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",
+               ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
 
     try:
         status.set_stage("downloading", movie=name, mode=None)
-        run(["rclone", "copy", f"{REMOTE}{TO_EDIT}/{video}", str(WORK / "in"), "--stats-one-line", "--stats", "30s"])
+        assets = gh.assets(release["id"])
+        src = WORK / "in" / video
+        print(f"Downloading {video} from the laptop's upload...", flush=True)
+        transport.receive(gh, transport.assets_for(assets, "movie"), src)
         srt = None
-        if srt_name:
-            run(["rclone", "copy", f"{REMOTE}{TO_EDIT}/{srt_name}", str(WORK / "in")])
-            srt = WORK / "in" / srt_name
-        results = process_local(WORK / "in" / video, name, srt, WORK / "out", WORK, on_plan, on_part)
-        rc_delete(video)
-        if srt_name:
-            rc_delete(srt_name)
+        if srt_name and transport.assets_for(assets, "subs"):
+            srt = transport.receive(gh, transport.assets_for(assets, "subs"), WORK / "in" / srt_name)
+        out_rel, out_body = parts_release(gh, rid, name, video)
+        results = process_local(src, name, srt, WORK / "out", WORK, on_plan, on_part)
         summary = ", ".join(f"{MODE_NAMES[m]}: {len(f)} part{'s' if len(f) != 1 else ''}" for m, f in results.items())
-        when = datetime.now(TZ).strftime("%d %b %Y, %I:%M %p")
-        log_finished(f"{when}  -  {name}  -  {summary}  -  in '{READY}/{name}'  -  "
-                     f"subtitles: {SUB_INFO['note'] or 'none (no speech found)'}  (original file: {video})")
+        out_body.update(done=True, finished=status.now_iso(), summary=summary,
+                        subtitles=SUB_INFO["note"] or "none (no speech found)")
+        save_body()
+        gh.delete_release(release["id"], release["tag_name"])     # the uploaded movie isn't needed any more
         print(f"Done: {name}", flush=True)
         status.movie_finished(name, SUB_INFO["note"] or "none (no speech found)")
         notify(f"✅ Finished: {name}",
-               f"{summary}.\nAll in {READY}/{name}.\n"
-               f"🗑️ The big movie file ({video}) was deleted to free up space. "
-               f"({deleted_where()}). It's listed in {TO_EDIT}/{FINISHED_LOG}.", ["tada"], kind="finished")
+               f"{summary}.\nThe laptop downloads them into {READY}/{name}. The copy sent to GitHub "
+               f"has been deleted.", ["tada"], kind="finished")
     except Exception as e:
         global MODE
         MODE = ""
         print(f"FAILED: {video}: {e}", flush=True)
-        rc_move(video, FAILED)
-        if srt_name:
-            rc_move(srt_name, FAILED)
+        try:
+            meta.update(failed=True, error=str(e)[:500])
+            gh.update_release(release["id"], body=json.dumps(meta, ensure_ascii=False))
+            if out_rel:
+                out_body.update(done=True, failed=True)
+                save_body()
+        except Exception as e2:
+            print(f"(couldn't mark the release as failed: {e2})", flush=True)
         status.movie_failed(name, e)
-        notify(f"❌ Failed: {name}", f"Moved to the '{FAILED}' folder. Any parts already made are kept.\n{e}", ["x"],
+        notify(f"❌ Failed: {name}", f"Any parts already made still go to the laptop. The laptop moves the "
+               f"original to its 'Failed' folder; put it back in the watch folder to try again.\n{e}", ["x"],
                kind="failed")
     finally:
         shutil.rmtree(WORK, ignore_errors=True)
@@ -1198,40 +1109,32 @@ def process_video(video, all_names, source=None):
 
 def main():
     """
-    Keeps going until 'To edit' is empty, always taking the oldest file next,
-    so movies added while this is running get picked up in the same run.
+    Keeps going until no movies are waiting on GitHub, always taking the oldest next,
+    so movies sent while this is running get picked up in the same run.
     """
     status.run_started(int(os.environ["GITHUB_RUN_ID"]) if os.environ.get("GITHUB_RUN_ID", "").isdigit() else None)
-    cleanup_old_parts()
+    gh = github()
     tools_ready, tried = False, set()
     while True:
-        waiting = [e for e in list_to_edit() if is_video(e) or is_link_file(e)]
-        entries = [e for e in waiting if e["Name"] not in tried]
-        update_queue(entries, entries[0]["Name"] if entries else None)
+        entries = [r for r in incoming_movies(gh) if r["id"] not in tried]
+        update_queue(entries, entries[0]["id"] if entries else None)
         if not entries:
             if not tools_ready:
-                print("Nothing in 'To edit'.")
+                print("No movies waiting.")
             status.run_finished()
             return
         if (time.time() - STARTED) / 60 > MAX_RUN_MINUTES:
             print("Time limit reached; the rest will be done in the next run.")
-            notify("Paused for now", f"{len(entries)} file(s) still waiting. They'll be done in the next run.",
+            notify("Paused for now", f"{len(entries)} movie(s) still waiting. They'll be done in the next run.",
                    kind="paused")
             status.run_finished()
             return
         if not tools_ready:
             install_tools()
             tools_ready = True
-
         nxt = entries[0]
-        tried.add(nxt["Name"])
-        all_names = [e["Name"] for e in list_to_edit()]
-        if is_link_file(nxt):
-            for video in fetch_link_file(nxt["Name"]):  # a link's movie goes next, keeping its place in line
-                tried.add(video)
-                process_video(video, all_names + [video], source="link")
-        else:
-            process_video(nxt["Name"], all_names)
+        tried.add(nxt["id"])
+        process_release(gh, nxt)
 
 
 if __name__ == "__main__":

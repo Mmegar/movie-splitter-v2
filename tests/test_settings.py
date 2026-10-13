@@ -60,21 +60,18 @@ class SettingsTest(TempDirTest):
         self.assertEqual(env["POSTING_PER_DAY"], "3")
         self.assertEqual(env["FLIP_EVERY"], "25-30")
 
+    def test_text_instead_of_file(self):
+        s = settings.load(text='{"posting": {"enabled": true, "per_day": 5}}', env={})
+        self.assertTrue(s["posting"]["enabled"])
+        self.assertEqual(s["posting"]["per_day"], 5)
+        self.assertEqual(settings.load(text="broken", env={})["video_quality"], 23)
+
     def test_process_reads_settings_and_env_wins(self):
-        p = self.write({"modes": ["all"], "cockroach_size": 99, "video_quality": 27, "flip_every": "10-12",
-                        "delete_originals": "bin", "cleanup_parts_after_days": 7})
+        p = self.write({"modes": ["all"], "cockroach_size": 99, "video_quality": 27, "flip_every": "10-12"})
         env = {k: v for k, v in os.environ.items() if k not in ("MODES", "COCKROACH_SIZE", "VIDEO_QUALITY")}
         env.update(SETTINGS_FILE=str(p), STATUS="off", LINE_THICKNESS="3")
         code = ("import process as p; print(p.MODES, p.COCKROACH_SIZE, p.VIDEO_QUALITY, p.FLIP_MIN, p.FLIP_MAX,"
-                " p.DELETE_ORIGINALS, p.CLEANUP_DAYS, p.LINE_THICKNESS, p.trash_flag())")
+                " p.LINE_THICKNESS)")
         out = subprocess.run([sys.executable, "-c", code], cwd=ROOT, env=env, capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, out.stderr)
-        self.assertEqual(out.stdout.split(), ["['all']", "99", "27", "10.0", "12.0", "bin", "7.0", "3",
-                                              "--drive-use-trash=true"])
-
-    def test_process_permanent_delete_flag(self):
-        env = dict(os.environ, SETTINGS_FILE=str(self.write({})), STATUS="off")
-        env.pop("DELETE_ORIGINALS", None)
-        out = subprocess.run([sys.executable, "-c", "import process; print(process.trash_flag())"], cwd=ROOT,
-                             env=env, capture_output=True, text=True)
-        self.assertEqual(out.stdout.strip(), "--drive-use-trash=false", out.stderr)
+        self.assertEqual(out.stdout.split(), ["['all']", "99", "27", "10.0", "12.0", "3"])

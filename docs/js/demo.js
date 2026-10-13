@@ -194,7 +194,7 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       const s = d.state;
       if (!s.run || !s.run.active) return;
       const mv = movieOf(s.run.movie);
-      if (mv) { mv.status = 'failed'; mv.finished = iso(Date.now()); mv.error = 'Stopped from the app. Parts already made are kept in Drive.'; }
+      if (mv) { mv.status = 'failed'; mv.finished = iso(Date.now()); mv.error = 'Stopped from the app. Parts already made are kept on the laptop.'; }
       const r = d.runs.find((x) => x.id === s.run.run_id);
       if (r) { r.status = 'completed'; r.conclusion = 'cancelled'; }
       note('info', `Run stopped: ${s.run.movie}`, 'Stopped from the app. Parts already made are kept.', ['stop_sign']);

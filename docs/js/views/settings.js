@@ -155,8 +155,8 @@ function buildForm(d) {
     group('Storage', [
       sliderRow(d, 'video_quality', 'Video quality', { min: 18, max: 28, step: 1, ends: ['Best, big files', 'Small files'], fmt: (v) => (v <= 20 ? `High (CRF ${v})` : v <= 24 ? `Balanced (CRF ${v})` : `Small (CRF ${v})`) }),
       segRow(d, 'delete_originals', 'After a movie is done, the original', [['permanent', 'Is deleted'], ['bin', 'Goes to the bin']],
-        d.delete_originals === 'bin' ? 'Files in the Drive bin still count toward your 15 GB for 30 days.' : 'Deleting permanently frees Drive space right away.'),
-      stepRow(d, 'cleanup_parts_after_days', 'Delete old parts', { values: CLEANUP_STEPS, sub: 'Finished parts older than this are removed from Drive' }),
+        d.delete_originals === 'bin' ? 'When the laptop deletes an original, it goes to the Recycle Bin.' : 'When the laptop deletes an original, it is gone for good (frees disk space right away).'),
+      stepRow(d, 'cleanup_parts_after_days', 'Delete old parts', { values: CLEANUP_STEPS, sub: 'Finished parts older than this are removed from the laptop\'s Ready to post folder' }),
     ]),
 
     group('Posting to TikTok', [
@@ -202,7 +202,7 @@ function connForm(c) {
     <div class="group"><div class="row row--stack">
       <label class="field"><span>ntfy topic (the same name as in the ntfy app)</span><input class="input" name="topic" value="${esc(c.topic)}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="my-secret-topic"></label>
     </div></div>
-    <p class="group-foot">Used to show your phone notifications in Alerts. Find it in the Drive file "notification name.txt".</p>
+    <p class="group-foot">Used to show your phone notifications in Alerts. It\'s the NTFY_TOPIC name the laptop installer showed you (also in github-secrets.txt next to the laptop helper).</p>
     <div class="sheet-actions">
       <button class="btn btn--primary btn--block" data-conn-save>Save and connect</button>
       <button class="btn btn--quiet btn--block" data-conn-test>Test connection</button>

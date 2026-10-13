@@ -1,58 +1,34 @@
 name: Make TikTok parts
 
-# All the cutting settings (modes, flips, cockroach, quality...) now live in config/settings.json,
-# which the iPhone app edits. To override one just for this workflow, add it under "env:" below
-# with its old name, e.g.  MODES: "stretch"
+# Movies arrive from the laptop helper as draft releases ("incoming-..."; drafts are only visible
+# to people with write access), finished parts go back the same way ("parts-..."). No Google Drive.
+# All cutting settings (modes, flips, cockroach, quality...) live in config/settings.json,
+# which the iPhone app edits. To override one just for this workflow, add it under "env:"
+# below with its old name, e.g.  MODES: "stretch"
 #
-# Secrets / variables to set once (GitHub > repo > Settings > Secrets and variables > Actions):
-#   GDRIVE_CLIENT_ID, GDRIVE_CLIENT_SECRET, GDRIVE_REFRESH_TOKEN   your Google Drive (rclone) login
-#   GDRIVE_ROOT_FOLDER_ID   the ID of the "TikTok automation v2" Drive folder (the part of its link after
-#                           /folders/). Can be a secret or a variable.
+# The only secret (GitHub > repo > Settings > Secrets and variables > Actions):
+#   NTFY_TOPIC   your ntfy notification name (phone notifications). Without it, no notifications.
 
 on:
   schedule:
-    - cron: "17 14 * * *"   # once a day, about 3am New Zealand time (GitHub may start it a little late)
-  workflow_dispatch:         # "Run workflow" button; the Google Drive watcher and the app also start it this way
+    - cron: "17 14 * * *"   # once a day, about 3am New Zealand time, in case a start was missed
+  workflow_dispatch:         # the laptop helper (after sending a movie) and the app start it this way
 
 concurrency:
   group: make-parts
   cancel-in-progress: false
 
 permissions:
-  contents: write            # lets the run save live progress to the "status" branch (for the iPhone app)
+  contents: write            # read/write the draft releases (movies in, parts out) and the "status" branch
 
 jobs:
   make-parts:
     runs-on: ubuntu-latest
     timeout-minutes: 355
     env:
-      # ---- Google Drive: the "TikTok automation v2" folder ----
-      RCLONE_CONFIG_GDRIVE_TYPE: drive
-      RCLONE_CONFIG_GDRIVE_SCOPE: drive
-      RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID || vars.GDRIVE_ROOT_FOLDER_ID || '1IQK7I_n3ug3tC263Q-D_5MNHQPvfnzaT' }}
-      RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
-      RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
-      # ---- live status for the app (saved to the "status" branch) ----
       GITHUB_TOKEN: ${{ github.token }}
-      # ---- phone notifications: the ntfy name is in the private file "notification name.txt" in the Drive folder ----
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
     steps:
-      - name: Prepare Drive login
-        env:
-          RT: ${{ secrets.GDRIVE_REFRESH_TOKEN || secrets.REFRESH_TOKEN }}
-        run: |
-          python3 - >> "$GITHUB_ENV" <<'PY'
-          import json, os
-          import re
-          raw = os.environ.get("RT", "").strip().replace("\\\"", "\"")   # undo \" escaping
-          m = re.search(r'refresh_token"?\s*[:=]\s*"?([^"\s,}]+)', raw)   # pulled out of any pasted token text
-          rt = (m.group(1) if m else raw).strip().strip('"')
-          print("::add-mask::" + rt, file=__import__("sys").stderr)
-          tok = {"access_token": "", "token_type": "Bearer", "refresh_token": rt,
-                 "expiry": "2000-01-01T00:00:00Z"}
-          print("RCLONE_CONFIG_GDRIVE_TOKEN=" + json.dumps(tok))
-          print("DRIVE_RT_INFO=len%d_%s" % (len(rt), "ok" if rt.startswith("1//") else "odd"))
-          PY
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
@@ -71,18 +47,12 @@ jobs:
       - name: Install the subtitle maker (Whisper)
         run: pip install faster-whisper
 
-      - name: Install rclone
-        run: curl -fsSL https://rclone.org/install.sh | sudo bash
-
-      - name: Check Google Drive connection
-        run: "rclone lsd gdrive:"
-
       - name: Make parts
         run: python3 process.py
 
       - name: Tell my phone if something broke
         if: failure() || cancelled()
         run: |
-          curl -s -H "Title: Movie run stopped" -H "Tags: warning" \
+          [ -n "$NTFY_TOPIC" ] && curl -s -H "Title: Movie run stopped" -H "Tags: warning" \
             -d "The GitHub run failed or was cancelled. Open the GitHub app > movie-splitter-v2 > Actions to see why." \
-            "https://ntfy.sh/$(rclone cat 'gdrive:notification name.txt' | tr -d '[:space:]')" || true
+            "https://ntfy.sh/$NTFY_TOPIC" || true

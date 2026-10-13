@@ -82,12 +82,15 @@ def _merge(base, extra):
     return out
 
 
-def load(path=None, env=None):
-    """Settings as a dict: defaults <- settings.json <- environment variables."""
+def load(path=None, env=None, text=None):
+    """
+    Settings as a dict: defaults <- settings.json <- environment variables.
+    text: the settings.json content itself (the laptop fetches it from GitHub).
+    """
     env = os.environ if env is None else env
     path = Path(path or env.get("SETTINGS_FILE") or SETTINGS_FILE)
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(text if text is not None else path.read_text(encoding="utf-8"))
         if not isinstance(data, dict):
             raise ValueError("not a JSON object")
     except FileNotFoundError:

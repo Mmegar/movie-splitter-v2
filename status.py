@@ -2,8 +2,10 @@
 Live status for the iPhone app: keeps state.json (see plan/CONTRACT.md section 3) up to date.
 
 On GitHub Actions it's saved to the "status" branch of this repo (made the first time if it
-doesn't exist yet), using the run's own GITHUB_TOKEN. Anywhere else it's just written to a
-local folder (STATUS_DIR, default "status-local") so it can be tested. STATUS=off turns it off.
+doesn't exist yet), using the run's own GITHUB_TOKEN. The laptop helper saves its parts of it
+(TikTok post results) through GitHub's contents API (use_github). Anywhere else it's just
+written to a local folder (STATUS_DIR, default "status-local") so it can be tested.
+STATUS=off turns it off.
 
 Nothing in here may ever stop a movie run: every public function catches its own errors.
 Saves to GitHub are bundled (at most about once every 20 seconds), except finish/fail/post,
@@ -84,20 +86,40 @@ def safe(fn):
 
 # ---------------------------------------------------------------- storage
 class Store:
-    def __init__(self):
-        off = os.environ.get("STATUS", "on").strip().lower() in ("off", "no", "0", "false")
-        in_actions = os.environ.get("GITHUB_ACTIONS") == "true"
-        self.git = (not off and in_actions and bool(os.environ.get("GITHUB_TOKEN"))
-                    and bool(os.environ.get("GITHUB_REPOSITORY")))
-        self.off = off
-        default_dir = (Path(os.environ.get("RUNNER_TEMP", "/tmp")) / "status-branch" if self.git
+    """
+    Where state.json lives. mode:
+      "git"   GitHub Actions: a clone of the status branch, saved with git push
+      "api"   the laptop (or STATUS_BACKEND=api): GitHub's contents API with GITHUB_TOKEN
+      "local" a plain folder (STATUS_DIR), for testing
+      "off"   nothing (STATUS=off)
+    In "git" and "api" mode, if someone else saved first, their file is read and our own
+    changes since the last save are redone on top of it.
+    """
+
+    def __init__(self, mode=None, repo=None, token=None, api_url=None):
+        env = os.environ
+        if env.get("STATUS", "on").strip().lower() in ("off", "no", "0", "false"):
+            mode = "off"
+        repo, token = repo or env.get("GITHUB_REPOSITORY"), token or env.get("GITHUB_TOKEN")
+        if not mode:
+            mode = env.get("STATUS_BACKEND") or ("git" if env.get("GITHUB_ACTIONS") == "true" and repo and token
+                                                 else "local")
+        self.mode = mode
+        self.off, self.git, self.remote = mode == "off", mode == "git", mode in ("git", "api")
+        default_dir = (Path(env.get("RUNNER_TEMP", "/tmp")) / "status-branch" if self.git
                        else HERE / "status-local")
-        self.dir = Path(os.environ.get("STATUS_DIR") or default_dir)
+        self.dir = Path(env.get("STATUS_DIR") or default_dir)
         self.lock = threading.RLock()
         self.pending = []          # changes not yet on GitHub (replayed if someone else saved first)
         self.last_push = 0.0
         self.timer = None
+        self.sha = None
         self.state = empty_state()
+        if mode == "api":
+            import ghapi
+            self.gh = ghapi.GitHub(repo, token, api_url or env.get("GITHUB_API_URL") or ghapi.API)
+            self.refresh()
+            return
         if self.off:
             return
         self.dir.mkdir(parents=True, exist_ok=True)
@@ -107,6 +129,13 @@ class Store:
 
     # ---- files
     def _read_file(self, name=STATE_FILE):
+        if self.mode == "api":
+            text, _ = self.gh.read_file(name, BRANCH)
+            try:
+                data = json.loads(text) if text else None
+            except ValueError:
+                data = None
+            return data if isinstance(data, dict) else None
         p = self.dir / name
         try:
             data = json.loads(p.read_text(encoding="utf-8"))
@@ -114,10 +143,26 @@ class Store:
         except Exception:
             return None
 
+    def _text(self):
+        return json.dumps(self.state, ensure_ascii=False, indent=1)
+
     def _write_file(self):
         tmp = self.dir / (STATE_FILE + ".tmp")
-        tmp.write_text(json.dumps(self.state, ensure_ascii=False, indent=1), encoding="utf-8")
+        tmp.write_text(self._text(), encoding="utf-8")
         os.replace(tmp, self.dir / STATE_FILE)
+
+    def refresh(self):
+        """api mode: reads the newest state.json from GitHub (keeping our unsaved changes)."""
+        if self.mode != "api":
+            return
+        with self.lock:
+            text, self.sha = self.gh.read_file(STATE_FILE, BRANCH)
+            try:
+                self.state = json.loads(text) if text else empty_state()
+            except ValueError:
+                self.state = empty_state()
+            for change in self.pending:
+                change(self.state)
 
     # ---- git (GitHub Actions only)
     def _run_git(self, *args):
@@ -139,6 +184,8 @@ class Store:
             self._run_git("checkout", "-q", "--orphan", BRANCH)
 
     def _push(self, message):
+        if self.mode == "api":
+            return self._push_api(message)
         for attempt in range(5):
             self._write_file()
             self._run_git("add", STATE_FILE)
@@ -160,6 +207,19 @@ class Store:
         print(f"(status not saved to GitHub: {res.stderr.strip()[-300:]})", flush=True)
         return False
 
+    def _push_api(self, message):
+        for attempt in range(6):
+            sha, refused = self.gh.write_file(STATE_FILE, self._text(), BRANCH, message, self.sha)
+            if sha:
+                self.sha = sha
+                self.pending.clear()
+                return True
+            self.refresh()                       # someone saved first: theirs + our changes again
+            self.state["updated"] = now_iso()
+            time.sleep(min(5, 0.5 * (attempt + 1)))
+        print("(status not saved to GitHub: kept being refused)", flush=True)
+        return False
+
     # ---- changes
     def change(self, fn, urgent=False, message="status"):
         if self.off:
@@ -167,7 +227,7 @@ class Store:
         with self.lock:
             fn(self.state)
             self.state["updated"] = now_iso()
-            if not self.git:
+            if not self.remote:
                 self._write_file()
                 return
             self.pending.append(fn)
@@ -183,7 +243,7 @@ class Store:
         if self.timer:
             self.timer.cancel()
             self.timer = None
-        if self.git and self.pending:
+        if self.remote and self.pending:
             self.last_push = time.time()
             self._push(message)
 
@@ -203,6 +263,19 @@ def store():
     if _STORE is None:
         _STORE = Store()
     return _STORE
+
+
+def use_github(repo, token, api_url=None):
+    """The laptop: keep state.json on GitHub through the contents API."""
+    global _STORE
+    reset()
+    _STORE = Store("api", repo, token, api_url)
+    return _STORE
+
+
+@safe
+def refresh():
+    store().refresh()
 
 
 def reset():

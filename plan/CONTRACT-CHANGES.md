@@ -38,3 +38,16 @@ All additive; nothing existing changes shape or meaning.
    (the Drive watcher's ntfy message has no state.json access).
 8. **Settings env names**: every settings.json key maps to its upper-case env name; the `posting` section
    maps to `POSTING_<KEY>` (e.g. `POSTING_ENABLED=on`). Not used by the app.
+
+## v2.1 laptop transport (no Google Drive), 2026-10-13
+
+- Movies travel laptop → GitHub as draft releases `incoming-<id>` (chunks < 1.9 GB; body JSON with name/file/srt);
+  parts travel back as draft releases `parts-<id>` (body JSON per part). Drafts are deleted once received.
+- `movies[].modes[m].parts[].drive_path` keeps its name but now means the path *inside the laptop's output
+  folder* (`Ready to post/<movie>/<Mode>/<file>.mp4`). The app shows it as "On laptop" with a Copy path button.
+- `laptop.json` adds `ready_folder` and `transfers` [{direction: send|receive, movie, file, percent}];
+  `uploading` is kept (first send) for back-compat.
+- `run.stage = "uploading"` now means "sending parts back" (app text updated).
+- Posting moved from GitHub (post.yml removed) to the laptop helper; it writes the same `post` fields.
+- `delete_originals` / `cleanup_parts_after_days` now act on the laptop's folders (bin = Recycle Bin).
+- Only GitHub secret: `NTFY_TOPIC`. Encryption of drafts was not added (drafts are already private).

@@ -1,29 +1,38 @@
 {
   "_help": "Copy this file to config.json (same folder) and change the values. Lines starting with _ are just notes. Use forward slashes / in folder paths, even on Windows.",
 
-  "_watch_folder": "Put movie files here (and an optional .srt with the same name). They're moved to Google Drive automatically.",
-  "watch_folder": "C:/Users/YOUR-NAME/Movies/To upload",
+  "_watch_folder": "Put movie files here (and an optional .srt with exactly the same name). They're sent to GitHub to be cut.",
+  "watch_folder": "C:/Users/YOUR-NAME/Videos/To upload",
 
-  "_download_folder": "Public-domain films from your wish list are downloaded here first, then uploaded and removed.",
-  "download_folder": "C:/Users/YOUR-NAME/Movies/From archive.org",
+  "_output_folder": "Finished parts arrive in <this>/Ready to post/<movie>/<mode>/. Originals go to <this>/Done afterwards (or <this>/Failed).",
+  "output_folder": "C:/Users/YOUR-NAME/Videos/Movie Splitter",
 
-  "_rclone": "rclone_path: 'rclone' if it's installed normally, or the full path to rclone.exe. rclone_remote: the name you gave Google Drive in 'rclone config'.",
-  "rclone_path": "rclone",
-  "rclone_remote": "gdrive",
+  "_download_folder": "Public-domain films from your wish list are downloaded here first.",
+  "download_folder": "C:/Users/YOUR-NAME/Videos/From archive.org",
 
-  "_drive_folder": "The Drive folder that holds 'To edit' and 'Ready to post'.",
-  "drive_folder": "TikTok automation v2",
-
-  "_github": "Your GitHub name, the repo name, and a fine-grained token with 'Contents: Read and write' on that repo only.",
-  "github_owner": "YOUR-GITHUB-NAME",
+  "_github": "Your GitHub name, the repo, and a fine-grained token for that repo only with 'Contents: Read and write' AND 'Actions: Read and write'.",
+  "github_owner": "Mmegar",
   "github_repo": "movie-splitter-v2",
   "github_token": "github_pat_PASTE_YOUR_TOKEN_HERE",
 
-  "_timing": "How often to look in the folder (seconds), how long a file must stop growing before upload (seconds), how often to read the wish list and to say 'I'm online' (minutes).",
+  "_ntfy_topic": "Your ntfy notification name (the one you subscribed to in the ntfy app). Left empty, the installer makes one and tells you.",
+  "ntfy_topic": "",
+
+  "_original_after": "What happens to your original movie file once its parts are back: move (to <output_folder>/Done), keep (leave it where it is) or delete.",
+  "original_after": "move",
+
+  "_composio": "Only for automatic TikTok posting (switch it on in the app; needs  py -m pip install composio  once). See plan/COMPOSIO-NOTES.md. posting_dry_run: true = only write in the log what would be posted.",
+  "composio_api_key": "",
+  "composio_user_id": "",
+  "composio_connected_account_id": "",
+  "tiktok_username": "",
+  "posting_dry_run": false,
+
+  "_timing": "Seconds between folder checks, seconds a file must stop growing, seconds between checks for finished parts, minutes between wish-list checks.",
   "poll_seconds": 15,
   "stable_seconds": 60,
+  "receive_seconds": 60,
   "wishlist_minutes": 10,
-  "heartbeat_minutes": 5,
 
   "_max_download_mb": "Skip archive.org files bigger than this (MB).",
   "max_download_mb": 4000

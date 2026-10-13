@@ -16,10 +16,10 @@ a computer at home:
 | Need | Cost | Why |
 |---|---|---|
 | GitHub (new public repo `movie-splitter-v2`) | free | runs the cutting + posting, stores status |
-| Google Drive (separate folder "TikTok automation v2") | free (15 GB) | movies in, parts out |
+| (no Google Drive: movies and parts travel as hidden draft releases on GitHub) | free | |
 | ntfy app (iPhone) | free | phone notifications |
 | Composio account + TikTok connected | free tier | automatic TikTok posting (optional) |
-| rclone + Python 3.10+ on the laptop | free | laptop agent uploads to Drive |
+| Python 3.10+ on the laptop (no extra packages) | free | laptop helper |
 
 ### Out of scope
 - Radarr / torrent / Usenet downloading of copyrighted movies (piracy).
@@ -47,8 +47,9 @@ a computer at home:
 - [x] process.py reads `config/settings.json` (env still overrides)
 - [x] status branch: `state.json` updated at every stage, part, finish, failure, post
 - [x] originals deleted permanently (setting), CRF setting, auto-clean old parts (setting)
-- [x] `post.yml`: hourly; posts next unposted part at scheduled times via Composio; records result
-- [x] laptop agent: watch folder → upload to Drive "To edit" (waits until file finished copying)
+- [x] posting runs on the laptop: next unposted part at scheduled times via Composio; records result
+- [x] laptop agent: watch folder → hidden draft release on GitHub (chunks < 2 GB) → starts the cutter
+- [x] laptop agent: downloads finished parts back into Ready to post/<movie>/<mode>/ + captions; originals → Done/
 - [x] laptop agent: wish list → archive.org public-domain search → download → upload; status in laptop.json
 - [x] laptop agent: heartbeat; runs at login (Windows Task Scheduler / macOS launchd installers)
 
@@ -68,7 +69,8 @@ a computer at home:
 - [x] Setup guide for laptop + iPhone + Composio (`plan/SETUP.md`)
 
 ### Still to do (needs you)
-- [ ] Create the `movie-splitter-v2` repo, then Claude pushes v2 into it
-- [ ] Follow `plan/SETUP.md` steps 2–7
-- [ ] First real run with one short movie; check the app shows it live
-- [ ] (Later) TikTok developer app audit for public auto-posts
+- [ ] Laptop helper: `laptop/README.md` (token, installer, config)
+- [ ] GitHub secret `NTFY_TOPIC`
+- [ ] GitHub Pages + add the app to the iPhone home screen
+- [ ] First real run with one short video
+- [ ] (Later) Composio + TikTok developer app; TikTok audit for public auto-posts

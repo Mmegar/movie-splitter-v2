@@ -20,7 +20,7 @@ const STAGE_TO_STEP = { downloading: 0, analysing: 1, subtitles: 1, planning: 2,
 export const STAGE_TEXT = {
   idle: 'Idle', downloading: 'Downloading the movie', analysing: 'Finding the best moments',
   subtitles: 'Making subtitles', planning: 'Planning the parts', rendering: 'Making parts',
-  uploading: 'Uploading to Drive', posting: 'Posting to TikTok', done: 'Finished', failed: 'Failed',
+  uploading: 'Sending parts back', posting: 'Posting to TikTok', done: 'Finished', failed: 'Failed',
 };
 export function stepIndex(stage) {
   return STAGE_TO_STEP[stage] ?? -1;
@@ -208,7 +208,7 @@ export function formatSetting(path, v) {
   if (path === 'cleanup_parts_after_days') return Number(v) === 0 ? 'Never' : `After ${v} days`;
   if (path === 'flip_every') return describeFlipEvery(v);
   if (path === 'posting.privacy') return v === 'self_only' ? 'Only me' : 'Public';
-  if (path === 'delete_originals') return v === 'permanent' ? 'Delete permanently' : 'Move to Drive bin';
+  if (path === 'delete_originals') return v === 'permanent' ? 'Delete permanently' : 'Move to Recycle Bin';
   if (path === 'line_thickness' || path === 'cockroach_size') return `${v} px`;
   if (path === 'video_quality') return `CRF ${v}`;
   if (path === 'flip') return { none: 'None', mirror: 'Mirror', upsidedown: 'Upside down', both: 'Both' }[v] || String(v);

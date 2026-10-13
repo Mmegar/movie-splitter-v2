@@ -4,7 +4,6 @@ import os
 import shutil
 import subprocess
 import sys
-import time
 import unittest
 
 from tests.helpers import ROOT, TempDirTest
@@ -55,61 +54,3 @@ class RenderTest(TempDirTest):
             self.assertEqual(probe(p), (1080, 1920))
         st = json.loads((self.tmp / "status" / "state.json").read_text())
         self.assertEqual(st["run"]["stage"], "rendering")
-
-    def test_full_run_with_fake_drive(self):
-        drive = self.tmp / "drive"
-        (drive / "To edit").mkdir(parents=True)
-        make_video(drive / "To edit" / "Test Movie (2001).mp4", 30)
-        old = drive / "Ready to post" / "Old Movie" / "Best stretch" / "Old Movie - Part 01.mp4"
-        old.parent.mkdir(parents=True)
-        old.write_bytes(b"old part")
-        os.utime(old, (time.time() - 3 * 86400,) * 2)
-        keep = drive / "Ready to post" / "Recent" / "Highlights" / "Recent - Part 1.mp4"
-        keep.parent.mkdir(parents=True)
-        keep.write_bytes(b"new part")
-        (self.tmp / "status").mkdir()
-        (self.tmp / "status" / "laptop.json").write_text(json.dumps(
-            {"uploaded": [{"file": "Test Movie (2001).mp4", "source": "wishlist"}]}))
-
-        env = self.base_env({"modes": ["stretch", "highlights"], "stretch_minutes": 0.4, "stretch_part_seconds": 8,
-                             "part_max_extra": 4, "highlight_seconds": 8, "auto_subtitles": False,
-                             "delete_originals": "permanent", "cleanup_parts_after_days": 1, "cockroach": True})
-        env.update(self.fake_rclone_env(drive))
-        env["GITHUB_RUN_ID"] = "42"
-        res = subprocess.run([sys.executable, str(ROOT / "process.py")], cwd=self.tmp, env=env,
-                             capture_output=True, text=True, timeout=900)
-        self.assertEqual(res.returncode, 0, res.stdout[-3000:] + res.stderr[-3000:])
-
-        # parts made in both modes, original gone for good, finished log written, old parts cleaned
-        ready = drive / "Ready to post" / "Test Movie (2001)"
-        stretch = sorted((ready / "Best stretch").glob("*.mp4"))
-        highlights = sorted((ready / "Highlights").glob("*.mp4"))
-        self.assertGreaterEqual(len(stretch), 2)
-        self.assertGreaterEqual(len(highlights), 1)
-        self.assertEqual(probe(stretch[0]), (1080, 1920))
-        self.assertFalse((drive / "To edit" / "Test Movie (2001).mp4").exists())
-        self.assertIn("deleted for good", (drive / "To edit" / "Finished.txt").read_text())
-        self.assertFalse(old.exists())
-        self.assertFalse(old.parent.parent.exists())          # empty folders removed
-        self.assertTrue(keep.exists())
-        calls = [json.loads(l) for l in (self.tmp / "rclone-calls.log").read_text().splitlines()]
-        self.assertIn(["deletefile", "--drive-use-trash=false", "gdrive:To edit/Test Movie (2001).mp4"], calls)
-
-        st = json.loads((self.tmp / "status" / "state.json").read_text())
-        self.assertEqual(st["run"]["stage"], "done")
-        self.assertEqual(st["run"]["run_id"], 42)
-        self.assertFalse(st["run"]["active"])
-        self.assertEqual(st["queue"], [])
-        m = st["movies"][0]
-        self.assertEqual((m["name"], m["status"], m["source"]), ("Test Movie (2001)", "done", "wishlist"))
-        self.assertAlmostEqual(m["duration"], 30, delta=1)
-        sp = m["modes"]["stretch"]["parts"]
-        self.assertEqual(len(sp), len(stretch))
-        self.assertEqual(m["modes"]["stretch"]["planned"], len(stretch))
-        self.assertEqual(sp[0]["drive_path"], f"Ready to post/Test Movie (2001)/Best stretch/{stretch[0].name}")
-        self.assertTrue(sp[0]["caption"])
-        self.assertGreater(sp[0]["end"], sp[0]["start"])
-        types = [e["type"] for e in st["events"]]
-        self.assertEqual(types[0], "finished")
-        for t in ("new_file", "started", "planned", "part_ready"):
-            self.assertIn(t, types)

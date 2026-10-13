@@ -141,7 +141,7 @@ export function createQueueView(ctx) {
       rows.push(`<div class="row">
         <span class="row-ic tone-accent">${icon('cloud')}</span>
         <span class="row-main"><span class="row-title clamp1">${esc(lp.uploading.file)}</span>
-          <span class="row-sub"><span>Uploading to To edit${ls.online ? '' : ' (paused while offline)'}</span><span class="bar" role="progressbar" aria-valuenow="${lp.uploading.percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${lp.uploading.percent}%"></span></span></span></span>
+          <span class="row-sub"><span>Sending to GitHub${ls.online ? '' : ' (paused while offline)'}</span><span class="bar" role="progressbar" aria-valuenow="${lp.uploading.percent}" aria-valuemin="0" aria-valuemax="100"><span style="width:${lp.uploading.percent}%"></span></span></span></span>
         <span class="row-val">${lp.uploading.percent}%</span>
       </div>`);
     }

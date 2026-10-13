@@ -1,5 +1,5 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
-import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength, fileNameOf, driveSearchUrl } from '../logic.js';
+import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
@@ -87,7 +87,7 @@ export function createMoviesView(ctx) {
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
         ${p.caption ? `<button class="btn btn--small btn--accent" data-copy="${esc(p.caption)}">${icon('copy')}Copy caption</button>` : ''}
-        <a class="btn btn--small btn--quiet" href="${driveSearchUrl(fileNameOf(p.drive_path))}" target="_blank" rel="noopener">${icon('drive')}Drive</a>
+        <button class="btn btn--small btn--quiet" data-copy="${esc(p.drive_path || '')}">${icon('copy')}Copy file path</button>
       </div>
     </li>`;
   }
@@ -118,9 +118,9 @@ export function createMoviesView(ctx) {
       ${modes.length > 1 ? `<div class="segmented" role="tablist" aria-label="Mode">${modes.map((k) => `<button role="tab" aria-selected="${k === detail.mode}" data-mode="${k}">${esc(m.modes[k].label || MODE_LABELS[k])} <span class="count">${(m.modes[k].parts || []).length}</span></button>`).join('')}</div>` : ''}
       ${cutMap(m, detail.mode, settings)}
       <div class="section-head"><h3>${(md.parts || []).length} part${(md.parts || []).length === 1 ? '' : 's'}${md.planned ? ` of ${md.planned}` : ''}</h3>
-        <a class="link" href="${driveSearchUrl(m.name)}" target="_blank" rel="noopener">${icon('drive')}Folder in Drive</a></div>
+        <span class="link" title="On your laptop">On laptop: Ready to post/${esc(m.name)}</span></div>
       ${(md.parts || []).length ? `<ol class="parts">${md.parts.map((p) => partRow(p, m, detail.mode)).join('')}${live ? `<li class="part part--pending"><span class="spinner"></span>Making part ${run.part} of ${run.parts_total}…</li>` : ''}</ol>`
-        : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one lands in Drive.' : m.status === 'processing' ? 'This mode starts after the current one.' : '' })}
+        : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one is made; they arrive on your laptop shortly after.' : m.status === 'processing' ? 'This mode starts after the current one.' : '' })}
     `;
   }
 

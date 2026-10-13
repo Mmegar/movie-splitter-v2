@@ -1,34 +1,20 @@
 """
-TikTok poster: runs every hour on GitHub Actions (.github/workflows/post.yml).
+TikTok posting rules and the Composio call. Used by the laptop helper (laptop/agent.py), which
+posts the parts it has downloaded, on the schedule set in the app (settings.json "posting"):
 
-If posting is switched on in the app (settings.json "posting" section), and right now is in
-the hour of one of your posting times, and fewer than "per_day" parts went out today, it
-takes the oldest part that hasn't been posted yet (oldest movie first, Part 1 before Part 2),
-downloads it from Google Drive, posts it to TikTok through Composio, and records the result
-in the app's status file and as a phone notification.
+  * only when posting is switched on, during the hour of one of the posting times
+    (in posting.timezone), at most one post per time and at most `per_day` posts a day;
+  * oldest movie first, Part 1 before Part 2, only modes listed in posting.modes;
+  * a part that failed is tried again at the next posting time, up to 3 tries.
 
-TikTok rule: until the TikTok app behind the connection passes TikTok's audit, every post is
-private ("Only me", SELF_ONLY), and the TikTok account itself must be set to private.
-
-Test without posting:  python3 poster.py --dry-run [--force]
-    --force   ignore the schedule (post the next part now)
+TikTok rule: until the TikTok app behind the Composio connection passes TikTok's audit, every
+post is private ("Only me", SELF_ONLY), and the TikTok account itself must be set to private.
 """
-import argparse
 import json
-import os
-import shutil
-import subprocess
-import sys
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
-import settings
-import status
-
-REMOTE = "gdrive:"
-WORK = Path("work-post")
 MAX_ATTEMPTS = 3   # a part that failed this many times is skipped
 PRIVACY = {"self_only": "SELF_ONLY", "public": "PUBLIC_TO_EVERYONE",
            "friends": "MUTUAL_FOLLOW_FRIENDS", "followers": "FOLLOWER_OF_CREATOR"}
@@ -85,8 +71,12 @@ def posted_this_hour(state, now):
     return any(t.date() == now.date() and t.hour == now.hour for t in posted_times(state, now.tzinfo))
 
 
-def next_part(state, modes):
-    """The next part to post: oldest movie first, modes in the order given, Part 1 before Part 2."""
+def next_part(state, modes, available=None):
+    """
+    The next part to post: oldest movie first, modes in the order given, Part 1 before Part 2.
+    available(part) -> True (file is on the laptop), None (not downloaded yet: wait, keeping the
+    order) or False (gone for good, e.g. cleaned up: skip it).
+    """
     movies = sorted(state.get("movies", []), key=lambda m: m.get("started") or "9999")
     for m in movies:
         for mode in modes:
@@ -97,6 +87,11 @@ def next_part(state, modes):
                 if post.get("status") == "failed" and post.get("attempts", 0) >= MAX_ATTEMPTS:
                     continue
                 if not p.get("drive_path"):
+                    continue
+                here = True if available is None else available(p)
+                if here is None:
+                    return None
+                if here is False:
                     continue
                 return m, mode, p
     return None
@@ -155,13 +150,13 @@ def _find_key(obj, key):
     return None
 
 
-def _execute(client, slug, arguments):
+def _execute(client, slug, arguments, creds):
     kw = {"arguments": arguments}
-    if os.environ.get("COMPOSIO_USER_ID"):
-        kw["user_id"] = os.environ["COMPOSIO_USER_ID"]
-    if os.environ.get("COMPOSIO_CONNECTED_ACCOUNT_ID"):
-        kw["connected_account_id"] = os.environ["COMPOSIO_CONNECTED_ACCOUNT_ID"]
-    version = os.environ.get("COMPOSIO_TIKTOK_VERSION", "latest")
+    if creds.get("user_id"):
+        kw["user_id"] = creds["user_id"]
+    if creds.get("connected_account_id"):
+        kw["connected_account_id"] = creds["connected_account_id"]
+    version = creds.get("version") or "latest"
     try:
         res = client.tools.execute(slug, version=version,
                                    dangerously_skip_version_check=(version == "latest"), **kw)
@@ -171,7 +166,7 @@ def _execute(client, slug, arguments):
     return ok, _get(res, "data"), _get(res, "error")
 
 
-def post_video(path, caption, privacy):
+def post_video(path, caption, privacy, creds=None):
     """
     Posts one video file to TikTok through Composio's TikTok toolkit.
     privacy: SELF_ONLY / PUBLIC_TO_EVERYONE / MUTUAL_FOLLOW_FRIENDS / FOLLOWER_OF_CREATOR.
@@ -179,11 +174,13 @@ def post_video(path, caption, privacy):
 
     Uses TIKTOK_UPLOAD_VIDEO with publish=true (the SDK uploads the local file for us), then
     polls TIKTOK_FETCH_PUBLISH_STATUS until TikTok says it's done. See plan/COMPOSIO-NOTES.md.
+    creds: {api_key, user_id, connected_account_id, version, username} (the laptop's config.json).
     """
-    if not os.environ.get("COMPOSIO_API_KEY"):
-        return False, None, "COMPOSIO_API_KEY isn't set (add it in GitHub > Settings > Secrets)"
-    if not (os.environ.get("COMPOSIO_USER_ID") or os.environ.get("COMPOSIO_CONNECTED_ACCOUNT_ID")):
-        return False, None, "COMPOSIO_USER_ID isn't set (the user id you connected TikTok with in Composio)"
+    creds = creds or {}
+    if not creds.get("api_key"):
+        return False, None, "composio_api_key isn't set in the laptop's config.json"
+    if not (creds.get("user_id") or creds.get("connected_account_id")):
+        return False, None, "composio_user_id isn't set in the laptop's config.json"
     try:
         from composio import Composio
     except ImportError:
@@ -191,14 +188,14 @@ def post_video(path, caption, privacy):
     path = Path(path).resolve()
     try:
         try:
-            client = Composio(api_key=os.environ["COMPOSIO_API_KEY"],
+            client = Composio(api_key=creds["api_key"],
                               dangerously_allow_auto_upload_download_files=True,
                               file_upload_dirs=[str(path.parent)])
         except TypeError:      # older SDKs upload local files automatically
-            client = Composio(api_key=os.environ["COMPOSIO_API_KEY"])
+            client = Composio(api_key=creds["api_key"])
         ok, data, error = _execute(client, "TIKTOK_UPLOAD_VIDEO", {
             "file_to_upload": str(path), "caption": caption, "publish": True, "privacy_level": privacy,
-        })
+        }, creds)
         if not ok:
             return False, None, str(error or data or "TikTok upload failed")[:500]
         publish_id = _find_key(data, "publish_id")
@@ -209,7 +206,7 @@ def post_video(path, caption, privacy):
         for delay in (5, 10, 20, 30, 30, 30, 30, 30, 30, 30, 30):
             time.sleep(delay)
             waited += delay
-            ok, data, error = _execute(client, "TIKTOK_FETCH_PUBLISH_STATUS", {"publish_id": publish_id})
+            ok, data, error = _execute(client, "TIKTOK_FETCH_PUBLISH_STATUS", {"publish_id": publish_id}, creds)
             if not ok:
                 continue
             state = str(_find_key(data, "status") or "")
@@ -218,7 +215,7 @@ def post_video(path, caption, privacy):
                 return False, publish_id, str(_find_key(data, "fail_reason") or "TikTok rejected the video")
             if state in ("PUBLISH_COMPLETE", "SEND_TO_USER_INBOX"):
                 ids = _find_key(data, "publicaly_available_post_id") or _find_key(data, "publicly_available_post_id")
-                user = os.environ.get("TIKTOK_USERNAME", "").lstrip("@")
+                user = str(creds.get("username") or "").lstrip("@")
                 if ids and user:
                     return True, f"https://www.tiktok.com/@{user}/video/{ids[0]}", None
                 return True, publish_id, None
@@ -227,105 +224,17 @@ def post_video(path, caption, privacy):
         return False, None, f"{type(e).__name__}: {e}"[:500]
 
 
-# ---------------------------------------------------------------- one run
-def download(drive_path):
-    shutil.rmtree(WORK, ignore_errors=True)
-    WORK.mkdir(parents=True)
-    local = WORK / Path(drive_path).name
-    res = subprocess.run(["rclone", "copyto", f"{REMOTE}{drive_path}", str(local)], capture_output=True, text=True)
-    if res.returncode != 0 or not local.exists():
-        raise RuntimeError(f"Couldn't download '{drive_path}' from Google Drive (deleted?) {res.stderr.strip()[-200:]}")
-    return local
-
-
-def notify(title, message, tags, kind):
-    try:
-        import process
-        process.notify(title, message, tags, kind=kind)
-    except Exception as e:
-        print(f"(notification not sent: {e})", flush=True)
-        status.add_event(kind, title, message, urgent=True)
-
-
-def main(argv=None):
-    ap = argparse.ArgumentParser(description="Posts the next part to TikTok if one is due.")
-    ap.add_argument("--dry-run", action="store_true", help="show what would be posted; post nothing, change nothing")
-    ap.add_argument("--force", action="store_true", help="ignore the schedule and post the next part now")
-    args = ap.parse_args(argv)
-
-    cfg = settings.load()
-    posting = cfg["posting"]
-    tz = ZoneInfo(posting.get("timezone") or "Pacific/Auckland")
-    now = datetime.now(tz)
-    state = status.load_state() or {}
+def decide(state, posting, now, force=False, available=None):
+    """(movie, mode, part) to post right now, or (None, reason)."""
     count = posted_today(state, now)
-
-    def summary(n):
-        if not args.dry_run:
-            status.set_posting(posting.get("enabled"), next_at(datetime.now(tz), posting, n), n)
-
-    if not posting.get("enabled") and not args.force:
-        print("Posting is switched off in the settings.")
-        summary(count)
-        return 0
-    if not args.force:
+    if not posting.get("enabled") and not force:
+        return None, "Posting is switched off in the settings."
+    if not force:
         if not slot_now(now, posting.get("times")):
-            print(f"Not a posting time ({now:%H:%M}; times: {', '.join(posting.get('times') or [])}).")
-            summary(count)
-            return 0
+            return None, f"Not a posting time ({now:%H:%M})."
         if count >= int(posting.get("per_day", 0)):
-            print(f"Already posted {count} today (limit {posting.get('per_day')}).")
-            summary(count)
-            return 0
+            return None, f"Already posted {count} today (limit {posting.get('per_day')})."
         if posted_this_hour(state, now):
-            print("Already posted in this hour's slot.")
-            summary(count)
-            return 0
-
-    pick = next_part(state, posting.get("modes") or ["stretch"])
-    if not pick:
-        print("Nothing left to post.")
-        summary(count)
-        return 0
-    movie, mode, part = pick
-    privacy = PRIVACY.get(str(posting.get("privacy", "self_only")).lower(), "SELF_ONLY")
-    caption = build_caption(part.get("caption"), posting.get("hashtags"))
-    label = status.LABELS.get(mode, mode)
-    print(f"Next: {movie['name']} [{label}] Part {part['n']} -> TikTok ({privacy})\n{caption}", flush=True)
-    if args.dry_run:
-        print("(dry run: nothing downloaded or posted)")
-        return 0
-
-    run_idle = not (state.get("run") or {}).get("active")
-    if run_idle:    # don't overwrite the stage while a movie is being cut
-        status.set_stage("posting", movie=movie["name"], mode=mode, part=part["n"])
-    status.set_post(movie["id"], mode, part["n"], "scheduled")
-    try:
-        local = download(part["drive_path"])
-        ok, ref, error = post_video(local, caption, privacy)
-    except Exception as e:
-        ok, ref, error = False, None, str(e)
-    finally:
-        shutil.rmtree(WORK, ignore_errors=True)
-    url = ref if ref and str(ref).startswith("http") else None
-    status.set_post(movie["id"], mode, part["n"], "posted" if ok else "failed", url=url, error=None if ok else error)
-    title = f"{movie['name']}: Part {part['n']}"
-    if ok:
-        count += 1
-        where = "privately (only you can see it)" if privacy == "SELF_ONLY" else "publicly"
-        notify(f"📤 Posted to TikTok: {title}",
-               f"[{label}] Posted {where}.{(' ' + url) if url else ''}\n\n📝 Caption:\n{caption}",
-               ["outbox_tray"], "posted")
-    else:
-        notify(f"⚠️ TikTok post failed: {title}",
-               f"[{label}] {error}\nIt will be tried again at the next posting time "
-               f"(up to {MAX_ATTEMPTS} tries).", ["warning"], "post_failed")
-    if run_idle:
-        status.set_stage("idle", movie=None, mode=None)
-    summary(count)
-    status.flush()
-    return 0   # a failed post was already reported; don't mark the whole GitHub run as broken
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+            return None, "Already posted in this hour's slot."
+    pick = next_part(state, posting.get("modes") or ["stretch"], available)
+    return (pick, None) if pick else (None, "Nothing to post yet.")

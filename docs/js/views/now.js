@@ -89,7 +89,7 @@ function glanceRows(st) {
   if (!laptop) lapDetail = '<span class="muted">Not set up yet</span>';
   else if (lst.online) {
     lapDetail = laptop.uploading
-      ? `<span>Uploading ${esc(laptop.uploading.file)}</span><span class="bar"><span style="width:${laptop.uploading.percent}%"></span></span>`
+      ? `<span>Sending ${esc(laptop.uploading.file)} to GitHub</span><span class="bar"><span style="width:${laptop.uploading.percent}%"></span></span>`
       : '<span class="muted">Watching the folder</span>';
   } else lapDetail = `<span class="muted">Last seen ${lst.ageMs != null ? relTime(Date.now() - lst.ageMs) : 'never'}</span>`;
   rows.push(`<a class="row" href="#/queue">
@@ -130,9 +130,9 @@ function glanceRows(st) {
   // Storage hint (Drive free tier is 15 GB)
   const done = (s.movies || []).filter((m) => m.status === 'done').length;
   if (settings.delete_originals === 'bin') {
-    rows.push(`<a class="row" href="#/settings"><span class="row-ic tone-warn">${icon('cloud')}</span><span class="row-main"><span class="row-title">Originals go to the Drive bin</span><span class="row-sub">They still use your 15 GB for 30 days. "Delete permanently" frees space right away.</span></span>${icon('chevR', 'row-chev')}</a>`);
+    rows.push(`<a class="row" href="#/settings"><span class="row-ic tone-warn">${icon('cloud')}</span><span class="row-main"><span class="row-title">Deleted originals go to the Recycle Bin</span><span class="row-sub">They still use laptop space until the bin is emptied. "Delete permanently" frees it right away.</span></span>${icon('chevR', 'row-chev')}</a>`);
   } else if (Number(settings.cleanup_parts_after_days) === 0 && done >= 5) {
-    rows.push(`<a class="row" href="#/settings"><span class="row-ic tone-warn">${icon('cloud')}</span><span class="row-main"><span class="row-title">${done} finished movies in Drive</span><span class="row-sub">Old parts are kept forever. Set "Clean up old parts" to save space.</span></span>${icon('chevR', 'row-chev')}</a>`);
+    rows.push(`<a class="row" href="#/settings"><span class="row-ic tone-warn">${icon('cloud')}</span><span class="row-main"><span class="row-title">${done} finished movies on the laptop</span><span class="row-sub">Old parts are kept forever. Set "Clean up old parts" to save space.</span></span>${icon('chevR', 'row-chev')}</a>`);
   }
   return `<div class="group">${rows.join('')}</div>`;
 }
@@ -174,7 +174,7 @@ export function createNowView(ctx) {
       const run = (ctx.store.state.data.state || {}).run || {};
       const ok = await confirmSheet({
         title: `Stop ${run.movie ? `“${run.movie}”` : 'this run'}?`,
-        message: 'The part being made right now is lost. Parts already in Drive stay there, and the movie can be run again later.',
+        message: 'The part being made right now is lost. Parts already sent back stay on the laptop, and the movie can be run again later.',
         confirm: 'Stop run', destructive: true,
       });
       if (!ok) return;
