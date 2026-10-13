@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:46:21+13:00",
+ "updated": "2026-10-14T00:46:22+13:00",
  "run": {
   "active": true,
   "run_id": 38391566309,
@@ -242,6 +242,12 @@
   "posted_today": 1
  },
  "events": [
+  {
+   "at": "2026-10-14T00:46:22+13:00",
+   "type": "finished",
+   "title": "[Custom clips] ✅ Clips done: Moon Knight S01E02 Summon the Suit",
+   "message": "1 custom clip made."
+  },
   {
    "at": "2026-10-14T00:46:19+13:00",
    "type": "part_ready",
