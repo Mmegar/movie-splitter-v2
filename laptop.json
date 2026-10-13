@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T05:33:00+07:00",
+ "updated": "2026-10-14T05:34:28+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -18,7 +18,13 @@
  "paused": null,
  "battery": false,
  "queue": [],
- "library": [],
+ "library": [
+  {
+   "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
+   "size_mb": 1991,
+   "modified": "2026-10-14T05:31:18+07:00"
+  }
+ ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
   {
