@@ -32,11 +32,30 @@ jobs:
       RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID || vars.GDRIVE_ROOT_FOLDER_ID || '1IQK7I_n3ug3tC263Q-D_5MNHQPvfnzaT' }}
       RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
       RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
-      RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN || secrets.REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
       # ---- live status for the app (saved to the "status" branch) ----
       GITHUB_TOKEN: ${{ github.token }}
       # ---- phone notifications: the ntfy name is in the private file "notification name.txt" in the Drive folder ----
     steps:
+      - name: Prepare Drive login
+        env:
+          RT: ${{ secrets.GDRIVE_REFRESH_TOKEN || secrets.REFRESH_TOKEN }}
+        run: |
+          python3 - >> "$GITHUB_ENV" <<'PY'
+          import json, os
+          rt = os.environ.get("RT", "").strip()
+          tok = None
+          try:
+              t = json.loads(rt)          # the whole rclone token line was pasted
+              if isinstance(t, dict) and t.get("refresh_token"):
+                  tok = dict(t, access_token="", expiry="2000-01-01T00:00:00Z")
+          except Exception:
+              pass
+          if tok is None:                 # just the refresh token (maybe with quotes)
+              tok = {"access_token": "", "token_type": "Bearer", "refresh_token": rt.strip('"'),
+                     "expiry": "2000-01-01T00:00:00Z"}
+          print("RCLONE_CONFIG_GDRIVE_TOKEN=" + json.dumps(tok))
+          PY
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
