@@ -39,12 +39,23 @@ LABELS = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole m
 KEEP = object()   # "leave this as it is"
 
 
+def safe_zone(name):
+    """ZoneInfo(name); Windows without the 'tzdata' package has no time-zone list, so fall back to
+    the computer's own time zone instead of crashing."""
+    for n in (name, "Pacific/Auckland"):
+        try:
+            return ZoneInfo(n)
+        except Exception:
+            pass
+    return datetime.now().astimezone().tzinfo
+
+
 def _timezone():
     try:
         import settings
-        return ZoneInfo(settings.load()["posting"]["timezone"])
+        return safe_zone(settings.load()["posting"]["timezone"])
     except Exception:
-        return ZoneInfo("Pacific/Auckland")
+        return safe_zone("Pacific/Auckland")
 
 
 TZ = _timezone()

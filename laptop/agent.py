@@ -37,18 +37,23 @@ import threading
 import time
 from datetime import datetime
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))     # the shared code lives in the repo folder above this one
 sys.path.insert(0, str(HERE))
 
-import archive          # noqa: E402
-import ghapi            # noqa: E402
-import posting          # noqa: E402
-import settings         # noqa: E402
-import status           # noqa: E402
-import transport        # noqa: E402
+try:
+    import archive          # noqa: E402
+    import ghapi            # noqa: E402
+    import posting          # noqa: E402
+    import settings         # noqa: E402
+    import status           # noqa: E402
+    import transport        # noqa: E402
+except Exception:           # write why it couldn't start into agent.log (no window when started hidden)
+    import traceback
+    with open(HERE / "agent.log", "a", encoding="utf-8") as _f:
+        _f.write(f"{datetime.now()} ERROR The helper couldn't start:\n{traceback.format_exc()}\n")
+    raise
 
 VIDEO_EXT = archive.VIDEO_EXT
 PARTIAL_EXT = {".part", ".partial", ".crdownload", ".download", ".tmp", ".!ut", ".opdownload"}
@@ -564,7 +569,7 @@ class Agent:
         dry_run = self.cfg["posting_dry_run"] if dry_run is None else dry_run
         self.refresh_settings(force=True)
         cfg = self.remote_settings["posting"]
-        tz = ZoneInfo(cfg.get("timezone") or "Pacific/Auckland")
+        tz = status.safe_zone(cfg.get("timezone") or "Pacific/Auckland")
         self.state_ready()
         status.refresh()
         state = status.load_state() or {}
@@ -846,4 +851,10 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception:
+        import traceback
+        with open(HERE / "agent.log", "a", encoding="utf-8") as _f:
+            _f.write(f"{datetime.now()} ERROR The helper stopped:\n{traceback.format_exc()}\n")
+        raise
