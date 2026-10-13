@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-13T17:43:48+07:00",
+ "updated": "2026-10-13T17:43:50+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -21,12 +21,7 @@
  "library": [],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {
-  "mv6igiwhxb7g": {
-   "status": "done",
-   "note": "Moved to To edit"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g"
  ],
