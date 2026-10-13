@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:45:27+13:00",
+ "updated": "2026-10-13T23:45:45+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 6
  },
  "queue": [],
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 6,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1548.9,
+       "end": 1622.6,
+       "seconds": 73.7,
+       "drive_path": "Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch/Moon Knight S01E02 Summon the Suit - Part 01.mp4",
+       "caption": "I'm not crying, my eyes are sweating 🥲\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "moon-knight-s01e02-summon-the-suit/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
@@ -51,6 +67,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-13T23:45:44+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 1 of 6 ready",
+   "message": "Part 1: 25:49 to 27:03 (74s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-13T23:44:01+13:00",
    "type": "planned",
