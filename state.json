@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-13T18:39:56+07:00",
+ "updated": "2026-10-14T00:40:35+13:00",
  "run": {
   "active": true,
   "run_id": 38391566309,
@@ -16,7 +16,7 @@
   {
    "id": "moon-knight-s01e02-summon-the-suit",
    "name": "Moon Knight S01E02 Summon the Suit",
-   "status": "done",
+   "status": "processing",
    "source": "laptop",
    "started": "2026-10-13T23:37:38+13:00",
    "finished": "2026-10-14T00:12:07+13:00",
@@ -201,6 +201,11 @@
        }
       }
      ]
+    },
+    "clips": {
+     "label": "Custom clips",
+     "planned": 1,
+     "parts": []
     }
    },
    "thumbs": {
