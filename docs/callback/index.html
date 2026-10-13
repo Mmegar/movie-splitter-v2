@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connecting…</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;background:#14111b;color:#f3efe7;display:grid;place-items:center;min-height:100vh;margin:0;padding:16px;text-align:center}</style>
+<script>
+  // TikTok sends you here after you approve; this passes the login straight on to Composio.
+  location.replace('https://backend.composio.dev/api/v3/toolkits/auth/callback' + location.search + location.hash);
+</script></head>
+<body><p>Connecting your TikTok account… If nothing happens, <a style="color:#f8c062" id="go" href="https://backend.composio.dev/api/v3/toolkits/auth/callback">tap here</a>.</p>
+<script>document.getElementById('go').href += location.search;</script></body></html>
