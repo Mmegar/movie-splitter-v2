@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-13T18:38:09+07:00",
+ "updated": "2026-10-14T00:38:25+13:00",
  "run": {
-  "active": false,
-  "run_id": 38384455930,
-  "started": "2026-10-13T23:36:12+13:00",
+  "active": true,
+  "run_id": 38391566309,
+  "started": "2026-10-14T00:38:25+13:00",
   "movie": null,
   "mode": null,
-  "stage": "done",
+  "stage": "idle",
   "part": null,
   "parts_total": null
  },
