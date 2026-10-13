@@ -50,7 +50,7 @@ Repo → **Settings → Secrets and variables → Actions → New repository sec
 |---|---|
 | `GDRIVE_CLIENT_ID` / `GDRIVE_CLIENT_SECRET` | only if you made your own Google client in `rclone config`; if you just pressed Enter (rclone's default), **skip these two** |
 | `GDRIVE_REFRESH_TOKEN` | the `refresh_token` value inside rclone's token (step 3.2) |
-| `GDRIVE_ROOT_FOLDER_ID` | the folder ID from step 2.2 |
+| ~~`GDRIVE_ROOT_FOLDER_ID`~~ | **not needed**: already built into the workflow |
 
 The same values as your current splitter work too, if you still have them.
 

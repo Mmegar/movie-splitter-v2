@@ -29,7 +29,7 @@ jobs:
       # ---- Google Drive: the "TikTok automation v2" folder ----
       RCLONE_CONFIG_GDRIVE_TYPE: drive
       RCLONE_CONFIG_GDRIVE_SCOPE: drive
-      RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID || vars.GDRIVE_ROOT_FOLDER_ID }}
+      RCLONE_CONFIG_GDRIVE_ROOT_FOLDER_ID: ${{ secrets.GDRIVE_ROOT_FOLDER_ID || vars.GDRIVE_ROOT_FOLDER_ID || '1IQK7I_n3ug3tC263Q-D_5MNHQPvfnzaT' }}
       RCLONE_CONFIG_GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
       RCLONE_CONFIG_GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
       RCLONE_CONFIG_GDRIVE_TOKEN: '{"access_token":"","token_type":"Bearer","refresh_token":"${{ secrets.GDRIVE_REFRESH_TOKEN }}","expiry":"2000-01-01T00:00:00Z"}'
