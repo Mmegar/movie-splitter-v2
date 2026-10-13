@@ -34,11 +34,12 @@
   "delete_originals": "permanent",
   "cleanup_parts_after_days": 0,
   "posting": {
-    "enabled": false,
+    "enabled": true,
     "method": "draft",
     "privacy": "self_only",
     "modes": [
-      "stretch"
+      "stretch",
+      "highlights"
     ],
     "per_day": 3,
     "times": [
