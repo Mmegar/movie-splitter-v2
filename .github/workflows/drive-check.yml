@@ -18,7 +18,7 @@ jobs:
           import json, os
           import re
           raw = os.environ.get("RT", "").strip().replace("\\\"", "\"")   # undo \" escaping
-          m = re.search(r'"?refresh_token"?\s*[:=]\s*"([^"]+)"', raw)   # pulled out of any pasted token text
+          m = re.search(r'refresh_token"?\s*[:=]\s*"?([^"\s,}]+)', raw)   # pulled out of any pasted token text
           rt = (m.group(1) if m else raw).strip().strip('"')
           print("::add-mask::" + rt, file=__import__("sys").stderr)
           tok = {"access_token": "", "token_type": "Bearer", "refresh_token": rt,
