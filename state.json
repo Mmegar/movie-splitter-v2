@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:38:46+13:00",
+ "updated": "2026-10-13T18:39:56+07:00",
  "run": {
   "active": true,
   "run_id": 38391566309,
@@ -220,6 +220,12 @@
   "posted_today": 1
  },
  "events": [
+  {
+   "at": "2026-10-13T18:39:55+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Moon Knight S01E02 Summon the Suit: 11 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Moon Knight S01E02 Summon the Suit\nBest stretch: 6 parts, Highlights: 5 parts"
+  },
   {
    "at": "2026-10-13T18:38:38+07:00",
    "type": "posted",
