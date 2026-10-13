@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:37:38+13:00",
+ "updated": "2026-10-13T23:37:40+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
-  "movie": null,
+  "movie": "Moon Knight S01E02 Summon the Suit",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -43,6 +43,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-13T23:37:39+13:00",
+   "type": "started",
+   "title": "Started: Moon Knight S01E02 Summon the Suit",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Moon Knight S01E02 Summon the Suit'."
+  },
   {
    "at": "2026-10-13T17:29:53+07:00",
    "type": "new_file",
