@@ -1,6 +1,5 @@
 {
- "version": 1,
- "updated": "2026-10-13T15:19:58+07:00",
+ "updated": "2026-10-13T15:23:10+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -8,5 +7,15 @@
  "uploading": null,
  "transfers": [],
  "uploaded": [],
- "wishlist": []
+ "wishlist": [],
+ "paused": null,
+ "battery": false,
+ "queue": [],
+ "library": [],
+ "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
+ "bin": [],
+ "commands": {},
+ "commands_done": [],
+ "originals": [],
+ "version": 2
 }
