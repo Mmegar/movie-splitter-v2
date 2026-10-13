@@ -42,18 +42,15 @@ jobs:
         run: |
           python3 - >> "$GITHUB_ENV" <<'PY'
           import json, os
-          rt = os.environ.get("RT", "").strip()
-          tok = None
-          try:
-              t = json.loads(rt)          # the whole rclone token line was pasted
-              if isinstance(t, dict) and t.get("refresh_token"):
-                  tok = dict(t, access_token="", expiry="2000-01-01T00:00:00Z")
-          except Exception:
-              pass
-          if tok is None:                 # just the refresh token (maybe with quotes)
-              tok = {"access_token": "", "token_type": "Bearer", "refresh_token": rt.strip('"'),
-                     "expiry": "2000-01-01T00:00:00Z"}
+          import re
+          raw = os.environ.get("RT", "").strip()
+          m = re.search(r'"?refresh_token"?\s*[:=]\s*"([^"]+)"', raw)   # pulled out of any pasted token text
+          rt = (m.group(1) if m else raw).strip().strip('"')
+          print("::add-mask::" + rt, file=__import__("sys").stderr)
+          tok = {"access_token": "", "token_type": "Bearer", "refresh_token": rt,
+                 "expiry": "2000-01-01T00:00:00Z"}
           print("RCLONE_CONFIG_GDRIVE_TOKEN=" + json.dumps(tok))
+          print("DRIVE_RT_INFO=len%d_%s" % (len(rt), "ok" if rt.startswith("1//") else "odd"))
           PY
 
       - uses: actions/checkout@v4
