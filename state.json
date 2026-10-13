@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T00:05:19+13:00",
+ "updated": "2026-10-14T00:05:22+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -173,6 +173,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-14T00:05:21+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 2 of 5 ready",
+   "message": "Part 2: 12:29 to 13:52 (84s)  interest score 74/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T00:03:28+13:00",
    "type": "part_ready",
