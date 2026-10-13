@@ -1,0 +1,22 @@
+{
+ "version": 1,
+ "updated": "2026-10-13T15:45:10+13:00",
+ "run": {
+  "active": true,
+  "run_id": 38338354765,
+  "started": "2026-10-13T15:45:10+13:00",
+  "movie": null,
+  "mode": null,
+  "stage": "idle",
+  "part": null,
+  "parts_total": null
+ },
+ "queue": [],
+ "movies": [],
+ "posting": {
+  "enabled": false,
+  "next_at": null,
+  "posted_today": 0
+ },
+ "events": []
+}
