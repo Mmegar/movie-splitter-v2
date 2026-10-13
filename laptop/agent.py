@@ -690,18 +690,36 @@ class Agent:
 
 
 # ---------------------------------------------------------------- config + first-time setup
+def read_config_json(path):
+    """Reads config.json. Windows paths typed with backslashes (C:\\Users\\...) break JSON, so in the
+    folder lines they're turned into / and the file is saved again. Other mistakes get a plain message."""
+    path = Path(path)
+    text = path.read_text(encoding="utf-8-sig")
+    folder_line = re.compile(r'("(?:watch|output|download)_folder"\s*:\s*")([^"\n]*)(")')
+    fixed = folder_line.sub(lambda m: m.group(1) + re.sub(r"\\+", "/", m.group(2)) + m.group(3), text)
+    try:
+        raw = json.loads(fixed)
+    except json.JSONDecodeError as e:
+        sys.exit(f"config.json has a typing mistake on line {e.lineno} (column {e.colno}): {e.msg}. "
+                 f"Open it in Notepad, fix that line (check the quotes and commas), save, and try again.")
+    if fixed != text:
+        path.write_text(fixed, encoding="utf-8")
+        print("Fixed config.json: folder paths now use / instead of \\.")
+    return raw
+
+
 def load_config(path):
     path = Path(path)
     if not path.exists():
         sys.exit(f"No settings file at {path}. Copy config.example.json to config.json and fill it in.")
-    cfg = json.loads(path.read_text(encoding="utf-8"))
+    cfg = read_config_json(path)
     return {k: v for k, v in cfg.items() if not k.startswith("_")}
 
 
 def ensure_secrets(path):
     """Makes an ntfy name the first time (if you didn't give one) and saves it in config.json."""
     path = Path(path)
-    raw = json.loads(path.read_text(encoding="utf-8"))
+    raw = read_config_json(path)
     changed = False
     if PLACEHOLDER.search(str(raw.get("ntfy_topic") or "")):
         raw["ntfy_topic"] = "movies-" + secrets.token_hex(6)
