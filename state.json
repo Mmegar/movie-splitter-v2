@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-13T23:59:48+13:00",
+ "updated": "2026-10-14T00:00:09+13:00",
  "run": {
   "active": true,
   "run_id": 38384455930,
   "started": "2026-10-13T23:36:12+13:00",
   "movie": "Moon Knight S01E02 Summon the Suit",
-  "mode": "stretch",
-  "stage": "uploading",
-  "part": 6,
-  "parts_total": 6
+  "mode": "highlights",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -142,6 +142,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-13T23:59:50+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 6 of 6 ready",
+   "message": "Part 6: 35:16 to 38:34 (198s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-13T23:55:49+13:00",
    "type": "part_ready",
