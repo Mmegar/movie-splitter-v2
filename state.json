@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:03:37+13:00",
+ "updated": "2026-10-14T16:03:41+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 6
  },
  "queue": [
   {
@@ -33,12 +33,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 6,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 10,
      "parts": []
     }
    },
@@ -603,6 +603,18 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T16:03:41+13:00",
+   "type": "planned",
+   "title": "[Highlights] Kung Fu Hustle (2004): 10 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-14T16:03:40+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Kung Fu Hustle (2004): 6 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Best stretch as they're made."
+  },
   {
    "at": "2026-10-14T09:56:29+07:00",
    "type": "info",
