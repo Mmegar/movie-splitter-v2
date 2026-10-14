@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:05:31+07:00",
+ "updated": "2026-10-15T00:05:45+07:00",
  "run": {
   "active": false,
   "run_id": 38552474182,
@@ -755,11 +755,11 @@
        "caption": "that's not a plan, that's a cry for help 🆘\nPart 7 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/stretch-007.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-15T00:05:31+07:00",
+        "status": "failed",
+        "at": "2026-10-15T00:05:45+07:00",
         "url": null,
-        "error": null,
-        "attempts": 1
+        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150105444F768DDD1B419046CB5A\"}}",
+        "attempts": 2
        }
       }
      ]
