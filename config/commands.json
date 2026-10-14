@@ -489,6 +489,14 @@
    "movie_id": "colony-2026",
    "mode": "stretch",
    "n": 1
+  },
+  {
+   "id": "mv811mdrsd16",
+   "at": "2026-10-14T11:29:07.215Z",
+   "type": "share_part",
+   "movie_id": "colony-2026",
+   "mode": "highlights",
+   "n": 10
   }
  ]
 }
