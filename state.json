@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:47:03+13:00",
+ "updated": "2026-10-14T16:47:04+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -854,6 +854,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T16:47:04+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Kung Fu Hustle (2004)",
+   "message": "Best stretch: 6 parts, Highlights: 10 parts.\nThe laptop downloads them into Ready to post/Kung Fu Hustle (2004). The copy sent to GitHub has been deleted."
+  },
   {
    "at": "2026-10-14T16:46:57+13:00",
    "type": "part_ready",
