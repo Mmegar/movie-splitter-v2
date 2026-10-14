@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:37:37+07:00",
+ "updated": "2026-10-14T15:37:50+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -356,11 +356,11 @@
        "caption": "bestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "kung-fu-hustle-2004/stretch-001.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-14T15:37:37+07:00",
+        "status": "failed",
+        "at": "2026-10-14T15:37:50+07:00",
         "url": null,
-        "error": null,
-        "attempts": 24
+        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141637508FFD1387BBCED8151833\"}}",
+        "attempts": 25
        }
       },
       {
