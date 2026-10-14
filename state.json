@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:45:11+13:00",
+ "updated": "2026-10-14T15:45:12+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 9,
+  "stage": "rendering",
+  "part": 10,
   "parts_total": 12
  },
  "queue": [],
@@ -519,6 +519,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T15:45:12+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Notebook (2004): Part 9 of 12 ready",
+   "message": "Part 9: 1:19:43 to 1:21:42 (119s)  interest score 60/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nwhen they said 'Is that fun?' I felt that 😭\nPart 9 🎬 · Part 10 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
   {
    "at": "2026-10-14T15:42:45+13:00",
    "type": "part_ready",
