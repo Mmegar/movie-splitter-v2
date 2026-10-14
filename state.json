@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:09:33+07:00",
+ "updated": "2026-10-14T16:09:45+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -372,11 +372,11 @@
        "caption": "main character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
        "preview": "kung-fu-hustle-2004/stretch-002.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-14T16:09:33+07:00",
+        "status": "inbox",
+        "at": "2026-10-14T16:09:45+07:00",
         "url": null,
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       },
       {
