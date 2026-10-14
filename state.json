@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:28:15+13:00",
+ "updated": "2026-10-14T16:28:16+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 10
  },
  "queue": [
@@ -742,6 +742,12 @@
   "posted_today": 4
  },
  "events": [
+  {
+   "at": "2026-10-14T16:28:16+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 3 of 10 ready",
+   "message": "Part 3: 23:29 to 24:47 (78s)  interest score 64/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nif this happened to me I'd move countries ✈️\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T16:26:24+13:00",
    "type": "part_ready",
