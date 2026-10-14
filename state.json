@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:54:36+13:00",
+ "updated": "2026-10-14T17:54:41+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
@@ -16,12 +16,12 @@
   {
    "id": "colony-2026",
    "name": "Colony (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-14T16:47:25+13:00",
-   "finished": null,
+   "finished": "2026-10-14T17:54:41+13:00",
    "duration": 7351.4,
-   "subtitles": null,
+   "subtitles": "translated to English from 'ko'",
    "error": null,
    "modes": {
     "stretch": {
@@ -329,7 +329,8 @@
     "w": 160,
     "h": 90,
     "path": "colony-2026/thumbs.bin"
-   }
+   },
+   "subs_preview": "colony-2026/subs.bin"
   },
   {
    "id": "kung-fu-hustle-2004",
