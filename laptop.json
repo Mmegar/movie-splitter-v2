@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T07:17:57+07:00",
+ "updated": "2026-10-14T07:17:59+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -25,6 +25,12 @@
    "sending": false
   },
   {
+   "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
+   "size_mb": 1795,
+   "modified": "2026-10-14T05:47:44+07:00",
+   "sending": false
+  },
+  {
    "name": "Kung Fu Hustle 2004 1080p x264.mkv",
    "size_mb": 1738,
    "modified": "2026-10-14T05:34:17+07:00",
@@ -36,11 +42,6 @@
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2773,
    "modified": "2026-10-14T05:54:27+07:00"
-  },
-  {
-   "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
-   "size_mb": 1795,
-   "modified": "2026-10-14T05:47:44+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -60,13 +61,18 @@
   "mv7d21lvbmlq": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mv7d23jv572w": {
+   "status": "done",
+   "note": "Moved to To edit"
   }
  },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
   "mv7d1to8kmvj",
-  "mv7d21lvbmlq"
+  "mv7d21lvbmlq",
+  "mv7d23jv572w"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit"
