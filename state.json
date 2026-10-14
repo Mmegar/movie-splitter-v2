@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:30:28+13:00",
+ "updated": "2026-10-14T15:32:01+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 4,
   "parts_total": 12
  },
