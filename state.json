@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T07:51:30+13:00",
+ "updated": "2026-10-15T07:52:10+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 4,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 3843.4,
+       "end": 3928.0,
+       "seconds": 84.6,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
+       "caption": "'Sorry. Congratulations!' 💀 I can't\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "spider-man-across-the-spider-verse-2023/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
