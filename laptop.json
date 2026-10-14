@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T11:14:15+07:00",
+ "updated": "2026-10-14T11:15:12+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -73,6 +73,10 @@
   "mv7ldq4ejipm": {
    "status": "failed",
    "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014121112D7824CFED2EEB607EF7C\"}}"
+  },
+  "mv7li6dedlb6": {
+   "status": "failed",
+   "note": "GitHub answered 502: {\n  \"message\": \"Server Error\"\n}\n"
   }
  },
  "commands_done": [
@@ -109,7 +113,8 @@
   "mv7kze9zqkep",
   "mv7l6xi8ziif",
   "mv7lavjegzbw",
-  "mv7ldq4ejipm"
+  "mv7ldq4ejipm",
+  "mv7li6dedlb6"
  ],
  "originals": [
   "kung-fu-hustle-2004",
