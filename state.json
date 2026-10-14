@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:39:49+13:00",
+ "updated": "2026-10-14T15:40:23+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -222,6 +222,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 06.mp4",
        "caption": "brb rewatching this 47 times 🔁\nPart 6 🎬 · follow or you'll miss Part 7 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "the-notebook-2004/highlights-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 7,
+       "start": 3312.4,
+       "end": 3456.9,
+       "seconds": 144.5,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 07.mp4",
+       "caption": "when they said 'You understand English, pal?' I felt that 😭\nPart 7 🎬 · Part 8 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "the-notebook-2004/highlights-007.bin",
        "post": {
         "status": "none",
         "at": null,
