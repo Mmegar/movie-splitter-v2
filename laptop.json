@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T17:51:12+07:00",
+ "updated": "2026-10-14T17:51:17+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -8,15 +8,15 @@
  "transfers": [],
  "uploaded": [
   {
+   "file": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "at": "2026-10-14T17:51:14+07:00",
+   "size_mb": 1738,
+   "source": "clip"
+  },
+  {
    "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
    "at": "2026-10-14T08:53:46+07:00",
    "size_mb": 1795,
-   "source": "laptop"
-  },
-  {
-   "file": "Kung Fu Hustle 2004 1080p x264.mkv",
-   "at": "2026-10-14T08:47:29+07:00",
-   "size_mb": 1738,
    "source": "laptop"
   },
   {
