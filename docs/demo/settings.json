@@ -34,6 +34,7 @@
   "cleanup_parts_after_days": 0,
   "posting": {
     "enabled": true,
+    "when": "times",
     "method": "draft",
     "privacy": "self_only",
     "modes": [

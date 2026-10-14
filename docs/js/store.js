@@ -265,6 +265,23 @@ export function createStore() {
       }
       await refresh({ full: true, force: true });
     },
+    /** "Post each part as soon as it's ready": saved straight away, like Pause. */
+    async setAsReady(on) {
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const s = st.data.settings || {};
+        const json = JSON.parse(JSON.stringify(s.json || {}));
+        json.posting = { ...(json.posting || {}), when: on ? 'as_ready' : 'times' };
+        if (on) json.posting.enabled = true;
+        try {
+          await source.saveSettings(json, s.sha, on ? 'App: post each part as soon as it is ready' : 'App: post at set times');
+          break;
+        } catch (e) {
+          if (e.kind === 'conflict' && attempt < 2) { await refresh({ full: true, force: true }); continue; }
+          throw e;
+        }
+      }
+      await refresh({ full: true, force: true });
+    },
     previewsAvailable() { return !!(source && source.getPreview); },
     async getPreview(path) {
       if (!source.getPreview) return null;

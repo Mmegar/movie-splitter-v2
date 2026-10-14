@@ -188,6 +188,7 @@ export const SETTING_LABELS = {
   'posting.enabled': 'Auto-posting',
   'posting.privacy': 'Post privacy',
   'posting.method': 'How to post',
+  'posting.when': 'When to post',
   'posting.modes': 'Modes to post',
   'posting.per_day': 'Posts per day',
   'posting.times': 'Post times',
@@ -217,6 +218,7 @@ export function formatSetting(path, v) {
   if (path === 'cleanup_parts_after_days') return Number(v) === 0 ? 'Never' : `After ${v} days`;
   if (path === 'flip_every') return describeFlipEvery(v);
   if (path === 'posting.privacy') return v === 'self_only' ? 'Only me' : 'Public';
+  if (path === 'posting.when') return v === 'as_ready' ? 'As soon as ready' : 'At set times';
   if (path === 'posting.method') return v === 'direct' ? 'Post straight away' : 'To my TikTok drafts';
   if (path === 'delete_originals') return v === 'permanent' ? 'Delete permanently' : 'Move to Recycle Bin';
   if (path === 'line_thickness' || path === 'cockroach_size') return `${v} px`;

@@ -100,14 +100,21 @@ function glanceRows(st) {
   </a>`);
 
   // Posting
+  const asReady = !!(settings.posting && settings.posting.enabled && settings.posting.when === 'as_ready');
+  rows.push(`<label class="row row--ctl ${asReady ? 'is-on-row' : ''}" for="asready-now">
+    <span class="row-ic ${asReady ? 'tone-accent' : 'tone-muted'}">${icon('send')}</span>
+    <span class="row-main"><span class="row-title">Post each part as soon as it's ready</span>
+      <span class="row-sub">${asReady ? 'On: every new part goes to TikTok when it reaches the laptop (one every 5 min, up to 15 a day).' : 'Off: parts go at your post times.'}</span></span>
+    <input type="checkbox" class="switch" role="switch" id="asready-now" data-asready ${asReady ? 'checked' : ''}>
+  </label>`);
   const enabled = posting.enabled ?? (settings.posting && settings.posting.enabled);
   const perDay = settings.posting ? settings.posting.per_day : null;
   if (enabled) {
     const nextAt = posting.next_at ? Date.parse(posting.next_at) : null;
     rows.push(`<a class="row" href="#/settings">
       <span class="row-ic tone-info">${icon('send')}</span>
-      <span class="row-main"><span class="row-title">Next post</span><span class="row-sub">${nextAt ? `${relTime(nextAt)}${settings.posting && settings.posting.privacy === 'self_only' ? ', posted privately' : ''}` : 'Nothing scheduled'}</span></span>
-      <span class="row-val">${nextAt ? clock(nextAt) : '—'}</span>
+      <span class="row-main"><span class="row-title">Next post</span><span class="row-sub">${asReady ? 'As soon as the next part is ready' : nextAt ? `${relTime(nextAt)}${settings.posting && settings.posting.method === 'direct' && settings.posting.privacy === 'self_only' ? ', posted privately' : ''}` : 'Nothing scheduled'}</span></span>
+      <span class="row-val">${!asReady && nextAt ? clock(nextAt) : '—'}</span>
     </a>`);
   } else {
     rows.push(`<a class="row" href="#/settings">
@@ -166,7 +173,18 @@ export function createNowView(ctx) {
   const page = makePage({ title: 'Now' });
   const { content } = page;
 
-  content.addEventListener('change', (e) => { if (e.target.matches('[data-pause]')) togglePause(ctx, e.target); });
+  content.addEventListener('change', async (e) => {
+    if (e.target.matches('[data-pause]')) { togglePause(ctx, e.target); return; }
+    if (e.target.matches('[data-asready]')) {
+      const el = e.target, on = el.checked;
+      haptic(); el.disabled = true;
+      try {
+        await ctx.store.setAsReady(on);
+        toast(on ? 'On: each new part goes to TikTok as soon as it\'s ready' : 'Back to your post times', { kind: on ? 'ok' : 'info' });
+      } catch (err) { el.checked = !on; toast(err.message || "Couldn't save that.", { kind: 'err', ms: 4500 }); }
+      finally { el.disabled = false; }
+    }
+  });
   content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
     if (e.target.closest('[data-resume]')) {

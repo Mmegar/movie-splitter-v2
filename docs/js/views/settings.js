@@ -183,6 +183,8 @@ function buildForm(d) {
           (p.method || 'draft') === 'draft'
             ? 'At each time, the part lands in your TikTok inbox as a draft. Tap the TikTok notification, paste the caption and post (public is fine).'
             : '<span class="note--warn">Straight away only works with a private TikTok account until TikTok approves the app.</span>'),
+        segRow(d, 'posting.when', 'When to post', [['times', 'At set times'], ['as_ready', 'As soon as ready']],
+          p.when === 'as_ready' ? 'Each new part goes to TikTok when it reaches the laptop: one every 5 minutes, up to 15 a day (TikTok\'s limit). The times below are ignored.' : 'The next part goes at each time below.'),
         ...((p.method || 'draft') === 'direct' ? [segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
           p.privacy === 'public'
             ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
@@ -192,8 +194,8 @@ function buildForm(d) {
             const onm = (p.modes || []).includes(m);
             return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
           }).join('')}</div></div>`,
-        stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
-        `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
+        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
+        p.when === 'as_ready' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
           <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
             <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
           ${(p.times || []).length !== Number(p.per_day) ? `<p class="note note--warn">${(p.times || []).length} time${(p.times || []).length === 1 ? '' : 's'} for ${p.per_day} post${Number(p.per_day) === 1 ? '' : 's'} a day. Usually these match.</p>` : ''}
@@ -496,6 +498,7 @@ export function createSettingsView(ctx) {
       const toSave = clone(draft);
       const live = (ctx.store.state.data.settings || {}).json || {};
       toSave.paused = !!live.paused;             // the Pause switch is saved on its own; never undo it here
+      if (live.posting && toSave.posting && !list.some((c) => c.path === 'posting.when')) toSave.posting.when = live.posting.when;
       await ctx.store.saveSettings(toSave, msg);
       base = clone(toSave); draft = clone(toSave);
       baseSha = ctx.store.state.data.settings.sha;
