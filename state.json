@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:42:21+13:00",
+ "updated": "2026-10-14T15:42:44+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -237,6 +237,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 07.mp4",
        "caption": "when they said 'You understand English, pal?' I felt that 😭\nPart 7 🎬 · Part 8 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "the-notebook-2004/highlights-007.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 8,
+       "start": 3700.0,
+       "end": 3790.4,
+       "seconds": 90.4,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 08.mp4",
+       "caption": "therapist: it can't hurt you. this scene: 😈\nPart 8 🎬 · Part 9 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "the-notebook-2004/highlights-008.bin",
        "post": {
         "status": "none",
         "at": null,
