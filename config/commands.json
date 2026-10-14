@@ -512,6 +512,14 @@
    "type": "set_style",
    "file": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "style": "zoom"
+  },
+  {
+   "id": "mv8mh17wipl5",
+   "at": "2026-10-14T21:28:58.220Z",
+   "type": "post_part",
+   "movie_id": "spider-man-across-the-spider-verse-2023",
+   "mode": "stretch",
+   "n": 1
   }
  ]
 }
