@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T01:47:12+07:00",
+ "updated": "2026-10-15T01:47:27+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -55,6 +55,10 @@
   "mv8fsbindxat": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mv8gp92oprwa": {
+   "status": "done",
+   "note": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4: Zoomed + tracking"
   }
  },
  "commands_done": [
@@ -122,7 +126,8 @@
   "mv80c5uxjyjm",
   "mv811bsqebtf",
   "mv811mdrsd16",
-  "mv8fsbindxat"
+  "mv8fsbindxat",
+  "mv8gp92oprwa"
  ],
  "originals": [
   "kung-fu-hustle-2004",
