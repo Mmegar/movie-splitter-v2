@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:02:06+13:00",
+ "updated": "2026-10-14T15:02:27+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 7
  },
  "queue": [],
@@ -337,6 +337,12 @@
   "posted_today": 2
  },
  "events": [
+  {
+   "at": "2026-10-14T15:02:07+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Notebook (2004): Part 4 of 7 ready",
+   "message": "Part 4: 47:56 to 49:32 (96s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nexplain this to me like I'm 5 🧸\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-14T14:59:38+13:00",
    "type": "part_ready",
