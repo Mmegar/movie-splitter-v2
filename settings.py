@@ -50,6 +50,7 @@ DEFAULTS = {
     "posting": {
         "enabled": False,
         "privacy": "self_only",
+        "when": "times",                 # times = at the post times below; as_ready = each part as soon as it's on the laptop
         "method": "draft",               # draft = sent to your TikTok inbox, you tap Post; direct = posted straight away (needs a private account until TikTok approves the app)
         "modes": ["stretch"],
         "per_day": 3,

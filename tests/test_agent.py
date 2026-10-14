@@ -420,3 +420,34 @@ class SetupTest(AgentTestBase):
                 "sys.argv = ['x']; import runpy; runpy.run_path('agent.py', run_name='not_main'); print('ok')")
         out = subprocess.run([sys.executable, "-c", code], cwd=agent.HERE, capture_output=True, text=True)
         self.assertEqual(out.stdout.strip(), "ok", out.stderr)
+
+
+class AsReadyTest(PostingTest):
+    def test_posts_without_waiting_for_a_time_but_paced(self):
+        self.fake.put_file("config/settings.json", json.dumps({"posting": {"enabled": True, "when": "as_ready",
+                                                                           "times": [], "per_day": 1}}))
+        (self.out / "Ready to post/M/Best stretch/M - Part 02.mp4").write_bytes(b"part two")
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        sent = []
+        with mock.patch.object(posting, "post_video",
+                               lambda path, cap, priv, creds, publish=True: sent.append(path.name) or (True, "v~1", None)):
+            a.post_if_due()                       # no post time set: goes anyway
+            a.post_if_due()                       # straight after: waits (one every 5 minutes)
+            a.memory["last_post"] -= 301
+            a.post_if_due()                       # 5 minutes later: the next part (per_day doesn't apply)
+        self.assertEqual(sent, ["M - Part 01.mp4", "M - Part 02.mp4"])
+
+    def test_pause_holds_manual_send(self):
+        self.fake.put_file("config/settings.json", json.dumps({"paused": True}))
+        self.fake.put_file("config/commands.json", json.dumps({"commands": [
+            {"id": "x1", "type": "post_part", "movie_id": "m", "mode": "stretch", "n": 1}]}))
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        a.refresh_settings(force=True)
+        with mock.patch.object(posting, "post_video", side_effect=AssertionError("must wait while paused")):
+            a.check_commands()
+        self.assertEqual(a.cmd_status["x1"]["status"], "waiting")
+        self.fake.put_file("config/settings.json", json.dumps({"paused": False}))
+        a.refresh_settings(force=True)
+        with mock.patch.object(posting, "post_video", lambda *x, **k: (True, "v~1", None)):
+            a.check_commands()
+        self.assertEqual(a.cmd_status["x1"]["status"], "done")
