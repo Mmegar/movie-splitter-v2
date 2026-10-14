@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T10:42:36+07:00",
+ "updated": "2026-10-14T10:42:38+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -822,6 +822,12 @@
   "posted_today": 6
  },
  "events": [
+  {
+   "at": "2026-10-14T10:42:38+07:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 6",
+   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141142344BD942B1D93F760520AB\"}}"
+  },
   {
    "at": "2026-10-14T16:41:53+13:00",
    "type": "part_ready",
