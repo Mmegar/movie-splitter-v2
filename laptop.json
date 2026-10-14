@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T17:34:43+07:00",
+ "updated": "2026-10-14T17:34:53+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -101,6 +101,10 @@
   "mv7z2zznkuni": {
    "status": "done",
    "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-002.bin"
+  },
+  "mv7z3isn197u": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-002.bin"
   }
  },
  "commands_done": [
@@ -147,7 +151,8 @@
   "mv7yutfn4lwz",
   "mv7yvzy0trom",
   "mv7z0mz09w6p",
-  "mv7z2zznkuni"
+  "mv7z2zznkuni",
+  "mv7z3isn197u"
  ],
  "originals": [
   "kung-fu-hustle-2004",
