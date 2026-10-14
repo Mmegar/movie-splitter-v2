@@ -47,11 +47,13 @@ export function parseNtfy(text) {
   return out;
 }
 
-export function ntfyUrl(topic, server = NTFY_SERVER, since = '7d') {
+// ntfy only understands since= durations like 10m / 12h (no days), 'all', a timestamp or a message id;
+// it keeps messages for a few hours anyway, so ask for everything it still has
+export function ntfyUrl(topic, server = NTFY_SERVER, since = 'all') {
   return `${server.replace(/\/$/, '')}/${encodeURIComponent(topic)}/json?poll=1&since=${since}`;
 }
 
-export async function fetchNtfy(topic, { server = NTFY_SERVER, since = '7d', fetchImpl = fetch } = {}) {
+export async function fetchNtfy(topic, { server = NTFY_SERVER, since = 'all', fetchImpl = fetch } = {}) {
   if (!topic) return [];
   let res;
   try {
@@ -59,7 +61,11 @@ export async function fetchNtfy(topic, { server = NTFY_SERVER, since = '7d', fet
   } catch (e) {
     throw new ApiError('offline', "Couldn't reach ntfy. Check your connection.", 0);
   }
-  if (!res.ok) throw new ApiError('ntfy', `ntfy answered ${res.status}. Check the topic name in Settings.`, res.status);
+  if (!res.ok) {
+    let why = '';
+    try { why = (await res.json()).error || ''; } catch { /* not JSON */ }
+    throw new ApiError('ntfy', `ntfy answered ${res.status}${why ? ` (${why})` : ''}.${res.status === 404 || /topic/i.test(why) ? ' Check the topic name in Settings.' : ''}`, res.status);
+  }
   return parseNtfy(await res.text());
 }
 

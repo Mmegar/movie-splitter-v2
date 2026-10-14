@@ -74,7 +74,7 @@ export function createAlertsView(ctx) {
     if (!items.length) {
       page.content.innerHTML = head + empty(all.length
         ? { icon: 'bell', title: filter === 'problems' ? 'No problems' : 'Nothing here', text: filter === 'problems' ? 'Failed runs and failed posts show up here.' : 'Try another filter.' }
-        : { icon: 'bell', title: 'No alerts yet', text: 'Run updates and phone notifications from the last 7 days show up here.' });
+        : { icon: 'bell', title: 'No alerts yet', text: 'Run updates and recent phone notifications show up here.' });
       return;
     }
     page.content.innerHTML = head + groupByDay(items).map((g) => `<section class="feed-day" aria-label="${esc(g.label)}"><h3>${esc(g.label)}</h3>${g.items.map(alertHtml).join('')}</section>`).join('');

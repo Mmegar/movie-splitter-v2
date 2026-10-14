@@ -124,7 +124,7 @@ function createLiveSource(conn) {
       const out = { repo: `${repo.full_name} (default branch ${repo.default_branch})`, canPush: !!(repo.permissions && repo.permissions.push) };
       try { await gh.listRuns(); out.actions = true; } catch (e) { out.actions = e.message; }
       if (conn.topic) {
-        try { const n = await fetchNtfy(conn.topic); out.ntfy = `${n.length} notifications in the last 7 days`; } catch (e) { out.ntfy = e.message; }
+        try { const n = await fetchNtfy(conn.topic); out.ntfy = `Working: ${n.length} recent notification${n.length === 1 ? '' : 's'}`; } catch (e) { out.ntfy = e.message; }
       }
       return out;
     },
