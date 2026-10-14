@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T05:02:28+07:00",
+ "updated": "2026-10-15T05:03:01+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -132,27 +132,6 @@
   "spider-man-across-the-spider-verse-2023",
   "the-notebook-2004"
  ],
- "shared": [
-  "share/the-notebook-2004/stretch-001.bin",
-  "share/the-notebook-2004/stretch-002.bin",
-  "share/the-notebook-2004/stretch-004.bin",
-  "share/the-notebook-2004/stretch-005.bin",
-  "share/the-notebook-2004/stretch-006.bin",
-  "share/the-notebook-2004/stretch-007.bin",
-  "share/kung-fu-hustle-2004/stretch-003.bin",
-  "share/kung-fu-hustle-2004/stretch-006.bin",
-  "share/kung-fu-hustle-2004/highlights-001.bin",
-  "share/kung-fu-hustle-2004/highlights-002.bin",
-  "share/kung-fu-hustle-2004/highlights-003.bin",
-  "share/kung-fu-hustle-2004/stretch-004.bin",
-  "share/kung-fu-hustle-2004/highlights-004.bin",
-  "share/kung-fu-hustle-2004/highlights-005.bin",
-  "share/kung-fu-hustle-2004/highlights-006.bin",
-  "share/kung-fu-hustle-2004/highlights-007.bin",
-  "share/kung-fu-hustle-2004/highlights-008.bin",
-  "share/kung-fu-hustle-2004/highlights-009.bin",
-  "share/kung-fu-hustle-2004/highlights-010.bin",
-  "share/colony-2026/stretch-001.bin"
- ],
+ "shared": [],
  "version": 2
 }
