@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:32:22+13:00",
+ "updated": "2026-10-14T15:32:43+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 12
  },
  "queue": [],
@@ -444,6 +444,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T15:32:23+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Notebook (2004): Part 4 of 12 ready",
+   "message": "Part 4: 27:20 to 28:34 (74s)  interest score 56/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T15:30:28+13:00",
    "type": "part_ready",
