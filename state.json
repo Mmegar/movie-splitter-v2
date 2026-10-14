@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:16:31+13:00",
+ "updated": "2026-10-14T17:16:32+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 7
  },
  "queue": [],
@@ -939,6 +939,12 @@
   "posted_today": 7
  },
  "events": [
+  {
+   "at": "2026-10-14T17:16:32+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Colony (2026): Part 4 of 7 ready",
+   "message": "Part 4: 1:02:48 to 1:04:54 (127s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T17:13:58+13:00",
    "type": "part_ready",
