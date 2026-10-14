@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:55:14+13:00",
+ "updated": "2026-10-14T14:55:35+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 7,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 2645.9,
+       "end": 2717.5,
+       "seconds": 71.6,
+       "drive_path": "Ready to post/The Notebook (2004)/Best stretch/The Notebook (2004) - Part 01.mp4",
+       "caption": "this is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "the-notebook-2004/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
