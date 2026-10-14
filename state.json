@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:39:48+13:00",
+ "updated": "2026-10-14T17:40:06+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 7,
+  "stage": "rendering",
+  "part": 8,
   "parts_total": 12
  },
  "queue": [],
@@ -222,6 +222,21 @@
        "drive_path": "Ready to post/Colony (2026)/Highlights/Colony (2026) - Part 06.mp4",
        "caption": "if this happened to me I'd move countries ✈️\nPart 6 🎬 · Part 7 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "colony-2026/highlights-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 7,
+       "start": 3703.0,
+       "end": 3780.5,
+       "seconds": 77.5,
+       "drive_path": "Ready to post/Colony (2026)/Highlights/Colony (2026) - Part 07.mp4",
+       "caption": "Rate the chaos 1 to 🔥🔥🔥\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "colony-2026/highlights-007.bin",
        "post": {
         "status": "none",
         "at": null,
@@ -1076,6 +1091,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T17:40:06+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Colony (2026): Part 7 of 12 ready",
+   "message": "Part 7: 1:01:43 to 1:03:00 (78s)  interest score 69/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nRate the chaos 1 to 🔥🔥🔥\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T17:38:28+13:00",
    "type": "part_ready",
