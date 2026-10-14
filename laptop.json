@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-14T08:39:04+07:00",
+ "updated": "2026-10-14T08:39:36+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-  "percent": 56
+  "percent": 66
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
    "file": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-   "percent": 56
+   "percent": 66
   }
  ],
  "uploaded": [
