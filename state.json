@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:40:50+13:00",
+ "updated": "2026-10-15T02:41:09+07:00",
  "run": {
   "active": false,
   "run_id": 38616962381,
@@ -1472,6 +1472,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T02:41:07+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Spider-Man Across The Spider-Verse (2023): 16 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Across The Spider-Verse (2023)\nBest stretch: 4 parts, Highlights: 12 parts"
+  },
   {
    "at": "2026-10-15T08:40:48+13:00",
    "type": "finished",
