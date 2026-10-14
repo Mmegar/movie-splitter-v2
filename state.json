@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:05:59+13:00",
+ "updated": "2026-10-15T00:06:00+13:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
@@ -1195,6 +1195,12 @@
   "posted_today": 13
  },
  "events": [
+  {
+   "at": "2026-10-15T00:06:00+13:00",
+   "type": "finished",
+   "title": "[Custom clips] ✅ Clips done: Kung Fu Hustle (2004)",
+   "message": "1 custom clip made."
+  },
   {
    "at": "2026-10-15T00:05:57+13:00",
    "type": "part_ready",
