@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:08:46+13:00",
+ "updated": "2026-10-14T16:09:06+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -43,6 +43,21 @@
        "drive_path": "Ready to post/Kung Fu Hustle (2004)/Best stretch/Kung Fu Hustle (2004) - Part 01.mp4",
        "caption": "bestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "kung-fu-hustle-2004/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 3906.5,
+       "end": 3984.4,
+       "seconds": 77.9,
+       "drive_path": "Ready to post/Kung Fu Hustle (2004)/Best stretch/Kung Fu Hustle (2004) - Part 02.mp4",
+       "caption": "main character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "kung-fu-hustle-2004/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
