@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:55:24+13:00",
+ "updated": "2026-10-14T10:55:29+07:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
@@ -406,11 +406,11 @@
        "caption": "me to my group chat: 'And we’ll talk about a date, okay?' 📱\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "the-notebook-2004/stretch-005.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-14T10:55:15+07:00",
+        "status": "failed",
+        "at": "2026-10-14T10:55:27+07:00",
         "url": null,
-        "error": null,
-        "attempts": 2
+        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014115527F7B53FF216A4FE054D5D\"}}",
+        "attempts": 3
        }
       },
       {
