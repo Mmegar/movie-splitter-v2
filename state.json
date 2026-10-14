@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:12:01+13:00",
+ "updated": "2026-10-15T08:12:52+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -117,6 +117,21 @@
        "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
        "caption": "me to my group chat: 'You’re just gonna have to shut up and trust me. No!' 📱\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "spider-man-across-the-spider-verse-2023/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 1387.7,
+       "end": 1544.3,
+       "seconds": 156.6,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 03.mp4",
+       "caption": "'Psych. - Whoa!' 💀 I can't\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "spider-man-across-the-spider-verse-2023/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
