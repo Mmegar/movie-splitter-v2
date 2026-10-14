@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:16:55+13:00",
+ "updated": "2026-10-15T08:17:15+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
+  "stage": "rendering",
+  "part": 6,
   "parts_total": 12
  },
  "queue": [],
@@ -1366,6 +1366,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:16:56+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 5 of 12 ready",
+   "message": "Part 5: 47:34 to 49:17 (102s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nwhen they said 'Hey, Gw-- Uh, Gwen?' I felt that 😭\nPart 5 🎬 · Part 6? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-15T08:14:38+13:00",
    "type": "part_ready",
