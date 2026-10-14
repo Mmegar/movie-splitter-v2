@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T08:18:59+07:00",
+ "updated": "2026-10-14T08:19:17+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -53,24 +53,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mv7d1to8kmvj": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mv7d21lvbmlq": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mv7d23jv572w": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mv7d7f4wvowb": {
-   "status": "done",
-   "note": "New order saved"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
