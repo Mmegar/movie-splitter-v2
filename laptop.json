@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T09:56:25+07:00",
+ "updated": "2026-10-14T09:56:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -51,6 +51,12 @@
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
   {
+   "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
+   "size_mb": 1991,
+   "modified": "2026-10-14T05:31:18+07:00",
+   "folder": "done"
+  },
+  {
    "name": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
    "size_mb": 2586,
    "modified": "2026-10-13T16:58:24+07:00",
@@ -72,7 +78,8 @@
   "mv7gywszor5l"
  ],
  "originals": [
-  "moon-knight-s01e02-summon-the-suit"
+  "moon-knight-s01e02-summon-the-suit",
+  "the-notebook-2004"
  ],
  "shared": [],
  "version": 2
