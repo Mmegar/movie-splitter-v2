@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:20:27+13:00",
+ "updated": "2026-10-14T15:21:16+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -138,7 +138,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 12,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 287.9,
+       "end": 524.5,
+       "seconds": 236.6,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 01.mp4",
+       "caption": "watching this instead of sleeping again 🌚\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "the-notebook-2004/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
