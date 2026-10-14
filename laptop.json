@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:38:39+07:00",
+ "updated": "2026-10-14T10:39:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -79,6 +79,10 @@
   "mv7jzy64kvoq": {
    "status": "done",
    "note": "Sent to TikTok"
+  },
+  "mv7k9b6hdox0": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-002.bin"
   }
  },
  "commands_done": [
@@ -96,14 +100,16 @@
   "mv7jelh24r0h",
   "mv7jrp2xult0",
   "mv7jwkk4gldi",
-  "mv7jzy64kvoq"
+  "mv7jzy64kvoq",
+  "mv7k9b6hdox0"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit",
   "the-notebook-2004"
  ],
  "shared": [
-  "share/the-notebook-2004/stretch-001.bin"
+  "share/the-notebook-2004/stretch-001.bin",
+  "share/the-notebook-2004/stretch-002.bin"
  ],
  "version": 2
 }
