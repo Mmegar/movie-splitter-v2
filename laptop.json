@@ -1,11 +1,18 @@
 {
- "updated": "2026-10-14T11:30:58+07:00",
+ "updated": "2026-10-14T11:32:01+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [],
+ "transfers": [
+  {
+   "direction": "receive",
+   "movie": "Colony (2026)",
+   "file": "Colony (2026) - Part 03.mp4",
+   "percent": 4
+  }
+ ],
  "uploaded": [
   {
    "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
