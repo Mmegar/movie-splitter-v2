@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T23:55:03+13:00",
+ "updated": "2026-10-14T23:55:41+13:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
   "started": "2026-10-14T23:51:45+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "clips",
-  "stage": "downloading",
-  "part": null,
-  "parts_total": null
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 1
  },
  "queue": [],
  "movies": [
