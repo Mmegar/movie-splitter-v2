@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:51:14+07:00",
+ "updated": "2026-10-14T17:51:26+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -436,10 +436,10 @@
        "caption": "POV: you said 'one more part' 4 hours ago 🤡\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "kung-fu-hustle-2004/stretch-006.bin",
        "post": {
-        "status": "failed",
-        "at": "2026-10-14T17:35:14+07:00",
+        "status": "scheduled",
+        "at": "2026-10-14T17:51:26+07:00",
         "url": null,
-        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014183513D1F6E5404B2E52204D65\"}}",
+        "error": null,
         "attempts": 2
        }
       }
