@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:59:36+13:00",
+ "updated": "2026-10-14T14:59:38+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 7
  },
  "queue": [],
@@ -322,6 +322,12 @@
   "posted_today": 2
  },
  "events": [
+  {
+   "at": "2026-10-14T14:59:38+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Notebook (2004): Part 3 of 7 ready",
+   "message": "Part 3: 46:39 to 47:56 (77s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nwhen they said 'one thing in common.' I felt that 😭\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
   {
    "at": "2026-10-14T14:57:37+13:00",
    "type": "part_ready",
