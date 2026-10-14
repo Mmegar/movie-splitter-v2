@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T10:42:18+07:00",
+ "updated": "2026-10-14T16:42:20+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 8,
+  "stage": "rendering",
+  "part": 9,
   "parts_total": 10
  },
  "queue": [
@@ -822,6 +822,12 @@
   "posted_today": 6
  },
  "events": [
+  {
+   "at": "2026-10-14T16:41:53+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 8 of 10 ready",
+   "message": "Part 8: 1:12:25 to 1:14:20 (116s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 8 🎬 · Part 9? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T10:42:13+07:00",
    "type": "post_failed",
