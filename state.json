@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:44:35+13:00",
+ "updated": "2026-10-14T16:44:36+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 9,
+  "stage": "rendering",
+  "part": 10,
   "parts_total": 10
  },
  "queue": [
@@ -838,6 +838,12 @@
   "posted_today": 6
  },
  "events": [
+  {
+   "at": "2026-10-14T16:44:36+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 9 of 10 ready",
+   "message": "Part 9: 1:23:16 to 1:25:08 (112s)  interest score 63/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe way my jaw hit the floor 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
   {
    "at": "2026-10-14T10:43:47+07:00",
    "type": "post_failed",
