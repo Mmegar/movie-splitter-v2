@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:29:33+13:00",
+ "updated": "2026-10-14T15:30:26+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -162,6 +162,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 02.mp4",
        "caption": "when they said 'Allie, you remember now, don’t you?' I felt that 😭\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "the-notebook-2004/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 1322.5,
+       "end": 1585.0,
+       "seconds": 262.5,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 03.mp4",
+       "caption": "red flag? that's the whole parade 🚩\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "the-notebook-2004/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
