@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T18:07:16+07:00",
+ "updated": "2026-10-14T18:09:56+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -70,10 +70,6 @@
   }
  ],
  "commands": {
-  "mv7z7bwki751": {
-   "status": "done",
-   "note": "Clip made"
-  },
   "mv7lxf0dlvip": {
    "status": "working",
    "note": "Sent 5 of 6. Waiting: TikTok is holding the rest until you post some drafts. Trying part 6 again in 10 min"
@@ -101,6 +97,14 @@
   "mv8081yjfg3k": {
    "status": "done",
    "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-009.bin"
+  },
+  "mv7z7bwki751": {
+   "status": "done",
+   "note": "Clip made"
+  },
+  "mv80c5uxjyjm": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-010.bin"
   }
  },
  "commands_done": [
@@ -163,7 +167,8 @@
   "mv801wof4sj5",
   "mv803aj5ot2p",
   "mv804nt6zwlj",
-  "mv8081yjfg3k"
+  "mv8081yjfg3k",
+  "mv80c5uxjyjm"
  ],
  "originals": [
   "kung-fu-hustle-2004",
@@ -188,7 +193,8 @@
   "share/kung-fu-hustle-2004/highlights-006.bin",
   "share/kung-fu-hustle-2004/highlights-007.bin",
   "share/kung-fu-hustle-2004/highlights-008.bin",
-  "share/kung-fu-hustle-2004/highlights-009.bin"
+  "share/kung-fu-hustle-2004/highlights-009.bin",
+  "share/kung-fu-hustle-2004/highlights-010.bin"
  ],
  "version": 2
 }
