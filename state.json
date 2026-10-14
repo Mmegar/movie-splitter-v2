@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:29:07+13:00",
+ "updated": "2026-10-14T17:29:26+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
@@ -147,6 +147,21 @@
        "drive_path": "Ready to post/Colony (2026)/Highlights/Colony (2026) - Part 01.mp4",
        "caption": "that's not a plan, that's a cry for help 🆘\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "colony-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 1074.0,
+       "end": 1145.5,
+       "seconds": 71.5,
+       "drive_path": "Ready to post/Colony (2026)/Highlights/Colony (2026) - Part 02.mp4",
+       "caption": "'Thanks for watching!' is my new personality 😤\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "colony-2026/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
@@ -1001,6 +1016,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T17:29:26+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Colony (2026): Part 2 of 12 ready",
+   "message": "Part 2: 17:54 to 19:06 (72s)  interest score 76/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\n'Thanks for watching!' is my new personality 😤\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T17:27:47+13:00",
    "type": "part_ready",
