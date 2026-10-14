@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:53:54+13:00",
+ "updated": "2026-10-14T15:54:16+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 11,
+  "stage": "rendering",
+  "part": 12,
   "parts_total": 12
  },
  "queue": [],
@@ -549,6 +549,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T15:53:56+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Notebook (2004): Part 11 of 12 ready",
+   "message": "Part 11: 1:36:44 to 1:38:54 (131s)  interest score 69/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nI screamed. my neighbours screamed. 📢\nPart 11 🎬 · Part 12 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T15:50:18+13:00",
    "type": "part_ready",
