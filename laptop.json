@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:47:29+07:00",
+ "updated": "2026-10-14T10:47:36+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -51,6 +51,12 @@
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
   {
+   "name": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "size_mb": 1738,
+   "modified": "2026-10-14T05:34:17+07:00",
+   "folder": "done"
+  },
+  {
    "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
    "size_mb": 1991,
    "modified": "2026-10-14T05:31:18+07:00",
@@ -91,6 +97,7 @@
   "mv7kivbeq70s"
  ],
  "originals": [
+  "kung-fu-hustle-2004",
   "moon-knight-s01e02-summon-the-suit",
   "the-notebook-2004"
  ],
