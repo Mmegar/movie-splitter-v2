@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:09:46+13:00",
+ "updated": "2026-10-15T08:09:47+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 12
  },
  "queue": [],
@@ -1321,6 +1321,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:09:47+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 2 of 12 ready",
+   "message": "Part 2: 14:34 to 15:55 (81s)  interest score 69/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'You’re just gonna have to shut up and trust me. No!' 📱\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-15T08:07:59+13:00",
    "type": "part_ready",
