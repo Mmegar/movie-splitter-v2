@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:55:44+13:00",
+ "updated": "2026-10-14T15:55:51+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -16,12 +16,12 @@
   {
    "id": "the-notebook-2004",
    "name": "The Notebook (2004)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-14T14:44:07+13:00",
-   "finished": null,
+   "finished": "2026-10-14T15:55:51+13:00",
    "duration": 7429.0,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -329,7 +329,8 @@
     "w": 160,
     "h": 90,
     "path": "the-notebook-2004/thumbs.bin"
-   }
+   },
+   "subs_preview": "the-notebook-2004/subs.bin"
   },
   {
    "id": "moon-knight-s01e02-summon-the-suit",
@@ -564,6 +565,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T15:55:45+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Notebook (2004): Part 12 of 12 ready",
+   "message": "Part 12: 1:45:24 to 1:46:43 (79s)  interest score 57/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nthis is cinema and I'm tired of pretending it's not 🎬\nPart 12 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T15:53:56+13:00",
    "type": "part_ready",
