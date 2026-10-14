@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:30:29+13:00",
+ "updated": "2026-10-14T10:32:06+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -243,10 +243,11 @@
        "caption": "watching this instead of sleeping again 🌚\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/stretch-002.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-14T10:32:06+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
