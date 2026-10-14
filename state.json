@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:39:30+13:00",
+ "updated": "2026-10-15T08:40:40+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -252,6 +252,21 @@
        "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 11.mp4",
        "caption": "red flag? that's the whole parade 🚩\nPart 11 🎬 · follow or you'll miss Part 12 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "spider-man-across-the-spider-verse-2023/highlights-011.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 12,
+       "start": 6941.5,
+       "end": 7122.0,
+       "seconds": 180.5,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 12.mp4",
+       "caption": "I'm not crying, my eyes are sweating 🥲\nPart 12 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "spider-man-across-the-spider-verse-2023/highlights-012.bin",
        "post": {
         "status": "none",
         "at": null,
