@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:27:46+13:00",
+ "updated": "2026-10-14T17:27:47+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 12
  },
  "queue": [],
@@ -1001,6 +1001,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T17:27:47+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Colony (2026): Part 1 of 12 ready",
+   "message": "Part 1: 11:31 to 13:04 (92s)  interest score 66/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nthat's not a plan, that's a cry for help 🆘\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T11:26:20+07:00",
    "type": "post_failed",
