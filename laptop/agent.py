@@ -221,7 +221,11 @@ class Watcher:
             old = self.seen.get(p)
             if not old or old[:2] != sig:
                 self.seen[p] = sig + (now,)
-            elif st.st_size > 0 and now - old[2] >= self.stable and self._not_locked(p):
+            elif st.st_size > 0 and now - old[2] >= self.stable and (
+                    self._not_locked(p) or (now - old[2] >= max(600, self.stable) and self._readable(p))):
+                # A file another program keeps open (a torrent app still seeding, OneDrive syncing, or a
+                # read-only file) can't be opened for writing; if it hasn't changed for 10 minutes and can be
+                # read, it's finished: send it anyway.
                 found.append(p)
         for p in list(self.seen):
             if p not in current:
@@ -230,6 +234,15 @@ class Watcher:
 
     def forget(self, p):
         self.seen.pop(p, None)
+
+    @staticmethod
+    def _readable(p):
+        try:
+            with open(p, "rb") as f:
+                f.read(1)
+            return True
+        except OSError:
+            return False
 
     @staticmethod
     def _not_locked(p):
