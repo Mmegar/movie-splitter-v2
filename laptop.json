@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T18:28:12+07:00",
+ "updated": "2026-10-14T18:29:21+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -86,6 +86,10 @@
   "mv80c5uxjyjm": {
    "status": "done",
    "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-010.bin"
+  },
+  "mv811bsqebtf": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/colony-2026/stretch-001.bin"
   }
  },
  "commands_done": [
@@ -150,7 +154,8 @@
   "mv803aj5ot2p",
   "mv804nt6zwlj",
   "mv8081yjfg3k",
-  "mv80c5uxjyjm"
+  "mv80c5uxjyjm",
+  "mv811bsqebtf"
  ],
  "originals": [
   "kung-fu-hustle-2004",
@@ -176,7 +181,8 @@
   "share/kung-fu-hustle-2004/highlights-007.bin",
   "share/kung-fu-hustle-2004/highlights-008.bin",
   "share/kung-fu-hustle-2004/highlights-009.bin",
-  "share/kung-fu-hustle-2004/highlights-010.bin"
+  "share/kung-fu-hustle-2004/highlights-010.bin",
+  "share/colony-2026/stretch-001.bin"
  ],
  "version": 2
 }
