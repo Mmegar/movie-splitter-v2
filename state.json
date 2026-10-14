@@ -1,25 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:47:04+13:00",
+ "updated": "2026-10-14T16:47:25+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
-  "movie": "Kung Fu Hustle (2004)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 10,
-  "parts_total": 10
+  "movie": "Colony (2026)",
+  "mode": null,
+  "stage": "downloading",
+  "part": null,
+  "parts_total": null
  },
- "queue": [
-  {
-   "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
-   "source": "laptop",
-   "added": "2026-10-14T01:47:37Z",
-   "size_mb": 1795
-  }
- ],
+ "queue": [],
  "movies": [
+  {
+   "id": "colony-2026",
+   "name": "Colony (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-14T16:47:25+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "kung-fu-hustle-2004",
    "name": "Kung Fu Hustle (2004)",
@@ -854,6 +870,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T16:47:07+13:00",
+   "type": "started",
+   "title": "Started: Colony (2026)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Colony (2026)'."
+  },
   {
    "at": "2026-10-14T16:47:04+13:00",
    "type": "finished",
