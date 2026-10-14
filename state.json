@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:07:13+13:00",
+ "updated": "2026-10-15T08:07:57+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -93,7 +93,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 12,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 94.4,
+       "end": 176.4,
+       "seconds": 82.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
+       "caption": "manifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "spider-man-across-the-spider-verse-2023/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
