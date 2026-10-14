@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:53:55+13:00",
+ "updated": "2026-10-14T08:54:10+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -116,10 +116,11 @@
        "caption": "manifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "moon-knight-s01e02-summon-the-suit/stretch-004.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-14T08:54:10+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
