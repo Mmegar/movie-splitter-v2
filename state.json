@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-14T11:26:22+07:00",
+ "updated": "2026-10-14T17:27:25+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 1,
   "parts_total": 12
  },
