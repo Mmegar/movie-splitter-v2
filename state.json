@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:41:39+07:00",
+ "updated": "2026-10-15T00:46:36+07:00",
  "run": {
   "active": false,
   "run_id": 38552474182,
@@ -809,10 +809,11 @@
        "caption": "red flag? that's the whole parade 🚩\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/highlights-003.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-15T00:46:36+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
