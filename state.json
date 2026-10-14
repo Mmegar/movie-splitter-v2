@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:55:35+13:00",
+ "updated": "2026-10-14T14:55:37+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 7
  },
  "queue": [],
@@ -292,6 +292,12 @@
   "posted_today": 2
  },
  "events": [
+  {
+   "at": "2026-10-14T14:55:37+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Notebook (2004): Part 1 of 7 ready",
+   "message": "Part 1: 44:06 to 45:18 (72s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-14T08:54:38+07:00",
    "type": "posted",
