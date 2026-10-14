@@ -115,6 +115,7 @@ export function createMoviesView(ctx) {
     demoMode = ctx.store.isDemo();
     page.content.innerHTML = `
       ${m.error ? `<div class="banner banner--err">${icon('alert')}<div><p>${esc(m.error)}</p></div></div>` : ''}
+      ${m.note && m.status === 'queued' ? `<div class="banner banner--warn">${icon('pause')}<div><p><strong>${esc(m.note)}</strong></p><p class="muted">Parts made so far are kept. It carries on from the next part.</p></div></div>` : ''}
       <dl class="facts">
         <div><dt>Started</dt><dd>${esc(when(m.started)) || '—'}</dd></div>
         <div><dt>${m.status === 'failed' ? 'Stopped' : 'Finished'}</dt><dd>${m.finished ? esc(when(m.finished)) : m.status === 'processing' ? 'Working on it' : '—'}</dd></div>

@@ -273,3 +273,35 @@ class DoubleTapTest(PartActionTest):
         self.assertEqual(len(calls), 1)
         lj = self.fake.json_file("laptop.json")["commands"]
         self.assertEqual((lj["d1"]["status"], lj["d2"]["status"]), ("done", "done"))
+
+
+class ResumeTest(base.AgentTestBase):
+    def test_send_started_by_older_version_keeps_its_piece_size(self):
+        movie = self.watch / "Big.mkv"
+        movie.write_bytes(os.urandom(15_000))
+        a = self.make_agent(chunk_mb=0.006)                 # old version: 6 kB pieces
+        self.fake.fail_upload_names = {"movie.001"}
+        self.send_ready(a)                                  # stops after the first piece
+        b = self.make_agent(chunk_mb=0.002)                 # new version: smaller pieces
+        b.memory["sends"] = a.memory["sends"]
+        for s in b.memory["sends"].values():
+            s.pop("chunk", None)                            # as if written by the old version
+        b.watcher.ready(now=0)
+        b.watcher.stable = 0
+        b.check_folder()
+        rel = incoming(self.fake)[0]
+        gh = ghapi.GitHub("o/r", "t", self.fake.api)
+        pieces = transport.assets_for(gh.assets(rel["id"]), "movie")
+        self.assertEqual([p["size"] for p in pieces], [6000, 6000, 3000])   # first piece reused, same size
+        out = self.tmp / "o.mkv"
+        transport.receive(gh, pieces, out)
+        self.assertEqual(out.read_bytes(), movie.read_bytes())
+
+    def test_switching_pause_off_restarts_the_cutter(self):
+        a = self.make_agent()
+        self.fake.put_file("config/settings.json", json.dumps({"paused": True}), "main")
+        a.refresh_settings(force=True)
+        self.assertEqual(self.fake.dispatches, [])
+        self.fake.put_file("config/settings.json", json.dumps({"paused": False}), "main")
+        a.refresh_settings(force=True)
+        self.assertEqual(self.fake.dispatches, [("make-parts.yml", {"ref": "main"})])

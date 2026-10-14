@@ -985,22 +985,29 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
 PART_TIMES = {}   # (mode, part number) -> (start, end) in the movie, for the status file
 
 
-def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, modes=None):
+def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, modes=None, plan=None, skip=()):
     """
     Does all the video work on files already on disk, once per mode, each mode into its own
     subfolder of outdir. Returns {mode: [files]}.
     on_plan(mode, count, list_file) runs once a mode's parts are chosen; on_part(mode, i, count,
     file, line) runs right after each part is finished, so it can be uploaded straight away.
+    plan: {mode: [[start, end, score], ...]} saved by an earlier run of this movie (used as is, so the
+    parts come out the same); skip: {(mode, n)} parts that earlier run already finished.
     """
+    plan = plan or {}
     global MODE
     modes = modes or MODES
     workdir.mkdir(parents=True, exist_ok=True)
     detect_black_bars(src, duration(src))
     SUB_INFO.update(lang=None, note="from your .srt file" if srt else None, full=False)
     cues = parse_srt(srt)
-    status.set_stage("analysing", movie=name, mode=None)
-    total, loud, motion, cuts, quiet = analyse(src, workdir)
-    status.movie_duration(name, total)
+    resumed = all(m in plan for m in modes)
+    if resumed:                       # everything is planned already: no need to analyse again
+        total, loud, motion, cuts, quiet = duration(src), [], [], [], []
+    else:
+        status.set_stage("analysing", movie=name, mode=None)
+        total, loud, motion, cuts, quiet = analyse(src, workdir)
+        status.movie_duration(name, total)
     if not cues and AUTO_SUBS and "all" in modes:
         try:
             status.set_stage("subtitles")
@@ -1008,14 +1015,17 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         except Exception as e:
             print(f"(no automatic subtitles: {e})", flush=True)
     candidates = quiet + subtitle_gaps(cues)
-    build_endings(cues, cuts)
-    score = interest_scores(loud, motion, cuts, cues)
+    if not resumed:
+        build_endings(cues, cuts)
+        score = interest_scores(loud, motion, cuts, cues)
 
     plans = []
     status.set_stage("planning")
     for mode in modes:
         MODE = mode
-        if mode == "all":
+        if mode in plan:
+            parts = [(float(a), float(b), sc) for a, b, sc in plan[mode]]
+        elif mode == "all":
             parts = choose_cuts(total, candidates)
         elif mode == "stretch":
             parts = choose_stretch(total, score, candidates)
@@ -1035,8 +1045,8 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
             lines.append(line)
         list_file = mdir / "_parts list.txt"
         list_file.write_text("\n".join([name, f"Mode: {label}", ""] + lines) + "\n", encoding="utf-8")
-        if on_plan:
-            on_plan(mode, len(parts), list_file)       # creates this mode's subfolder right away
+        if on_plan and mode not in plan:
+            on_plan(mode, len(parts), list_file, parts)   # saves the plan; the laptop makes the folder
         plans.append((mode, parts, lines, mdir, width, label))
 
     results = {}
@@ -1045,6 +1055,9 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         reset_flip()
         files = []
         for i, ((a, b, _), line) in enumerate(zip(parts, lines), 1):
+            if (mode, i) in skip:                         # made by an earlier run that stopped
+                PART_TIMES[(mode, i)] = (a, b)
+                continue
             out = mdir / f"{name} - Part {str(i).zfill(width)}.mp4"
             print(f"Making {label} part {i} of {len(parts)}...", flush=True)
             status.set_stage("rendering", mode=mode, part=i, parts_total=len(parts))
@@ -1088,17 +1101,26 @@ def update_queue(releases, current=None):
 
 
 def parts_release(gh, rid, name, video):
-    """The draft release the finished parts go into (emptied first if an earlier run stopped half-way)."""
-    tag = transport.PARTS + rid
-    body = {"kind": "parts", "id": rid, "movie": name, "file": video, "done": False, "failed": False,
-            "parts": [], "lists": {}}
+    """The draft release the finished parts go into. If an earlier run of this movie stopped half-way
+    (crash, cancel, pause, time limit), its plan and finished parts are kept, so this run carries on."""
     for r in gh.releases():
         if transport.kind_of(r) == "parts" and transport.id_of(r) == rid:
+            body = transport.body_of(r)
+            if body.get("failed"):
+                body.update(failed=False, done=False)
+            body.setdefault("parts", [])
+            body.setdefault("lists", {})
+            body.setdefault("plan", {})
+            body.update(kind="parts", id=rid, movie=name, file=video)
+            keep = {n for p in body["parts"] for n in p.get("assets", [])}
             for a in gh.assets(r["id"]):
-                gh.delete_asset(a["id"])
-            r = gh.update_release(r["id"], body=json.dumps(body))
+                if a["name"] not in keep:             # half-sent part from the run that stopped
+                    gh.delete_asset(a["id"])
+            r = gh.update_release(r["id"], body=json.dumps(body, ensure_ascii=False))
             return r, body
-    return gh.create_release(tag, f"Parts: {name}", json.dumps(body)), body
+    body = {"kind": "parts", "id": rid, "movie": name, "file": video, "done": False, "failed": False,
+            "parts": [], "lists": {}, "plan": {}}
+    return gh.create_release(transport.PARTS + rid, f"Parts: {name}", json.dumps(body)), body
 
 
 def install_tools():
@@ -1123,6 +1145,7 @@ def process_release(gh, release):
     name = meta.get("movie") or clean_name(video)
     if meta.get("clips"):
         return process_clips(gh, release, meta, rid, video, name)
+    global MODE
     labels = ", ".join(MODE_NAMES[m] for m in MODES)
     mid = status.movie_id(name)
     prev = new_previews(gh)
@@ -1130,10 +1153,17 @@ def process_release(gh, release):
     ALL_CUES.clear()
     PART_CUES.clear()
     print(f"\n=== {video} -> {name} ===", flush=True)
-    status.movie_started(name, meta.get("source") or "laptop", MODES)
-    notify(f"Started: {name}",
-           f"Making: {labels}.\nChecking the movie first, then you'll get a message as each part is made. "
-           f"The laptop downloads them into '{READY}/{name}'.", ["clapper"], kind="started")
+    earlier = next((r for r in gh.releases() if transport.kind_of(r) == "parts" and transport.id_of(r) == rid), None)
+    earlier_parts = len(transport.body_of(earlier).get("parts", [])) if earlier else 0
+    if earlier:
+        status.movie_resumed(name)
+        notify(f"▶️ Carrying on: {name}", f"{earlier_parts} part{'s' if earlier_parts != 1 else ''} were already "
+               f"made before it stopped; making the rest.", ["arrow_forward"], kind="started")
+    else:
+        status.movie_started(name, meta.get("source") or "laptop", MODES)
+        notify(f"Started: {name}",
+               f"Making: {labels}.\nChecking the movie first, then you'll get a message as each part is made. "
+               f"The laptop downloads them into '{READY}/{name}'.", ["clapper"], kind="started")
     shutil.rmtree(WORK, ignore_errors=True)
     (WORK / "in").mkdir(parents=True)
     captions = {}
@@ -1142,8 +1172,9 @@ def process_release(gh, release):
     def save_body():
         gh.update_release(out_rel["id"], body=json.dumps(out_body, ensure_ascii=False))
 
-    def on_plan(mode, count, list_file):
+    def on_plan(mode, count, list_file, parts):
         out_body["lists"][mode] = list_file.read_text(encoding="utf-8")
+        out_body.setdefault("plan", {})[mode] = [[round(a, 3), round(b, 3), sc] for a, b, sc in parts]
         save_body()
         status.movie_planned(name, mode, count)
         notify(f"{name}: {count} part{'s' if count != 1 else ''} planned",
@@ -1173,6 +1204,14 @@ def process_release(gh, release):
         notify(f"{name}: Part {i} of {count} ready",
                f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",
                ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
+        stop_if_needed()
+
+    def stop_if_needed():
+        """Between parts: the app's Pause switch, or the run getting close to GitHub's 6-hour limit."""
+        if paused_in_app(gh):
+            raise RunStopped("paused")
+        if (time.time() - STARTED) / 60 > MAX_RUN_MINUTES + 30:
+            raise RunStopped("time")
 
     try:
         status.set_stage("downloading", movie=name, mode=None)
@@ -1192,9 +1231,15 @@ def process_release(gh, release):
                     status.movie_previews(name, thumbs=dict(info, path=path))
             except Exception as e:
                 print(f"(no thumbnail strip: {e})", flush=True)
-        results = process_local(src, name, srt, WORK / "out", WORK, on_plan, on_part)
+        done_parts = {(p["mode"], int(p["n"])) for p in out_body["parts"]}
+        results = process_local(src, name, srt, WORK / "out", WORK, on_plan, on_part,
+                                plan=out_body.get("plan") or {}, skip=done_parts)
         save_subs(prev, mid, name)
-        summary = ", ".join(f"{MODE_NAMES[m]}: {len(f)} part{'s' if len(f) != 1 else ''}" for m, f in results.items())
+        made = {}
+        for p in out_body["parts"]:
+            made[p["mode"]] = made.get(p["mode"], 0) + 1
+        summary = ", ".join(f"{MODE_NAMES[m]}: {made.get(m, 0)} part{'s' if made.get(m, 0) != 1 else ''}"
+                            for m in results)
         out_body.update(done=True, finished=status.now_iso(), summary=summary,
                         subtitles=SUB_INFO["note"] or "none (no speech found)")
         save_body()
@@ -1204,8 +1249,16 @@ def process_release(gh, release):
         notify(f"✅ Finished: {name}",
                f"{summary}.\nThe laptop downloads them into {READY}/{name}. The copy sent to GitHub "
                f"has been deleted.", ["tada"], kind="finished")
+    except RunStopped as stop:
+        MODE = ""
+        n = len(out_body["parts"]) if out_body else 0
+        print(f"Stopped ({stop}) after {n} parts of {name}; the next run carries on.", flush=True)
+        status.movie_paused(name, "Paused in the app" if str(stop) == "paused" else "Continuing in a new run")
+        if str(stop) == "paused":
+            notify(f"⏸ Paused: {name}", f"{n} part{'s' if n != 1 else ''} made so far. It carries on from the "
+                   f"next part when you switch Pause off.", ["pause_button"], kind="paused")
+        raise
     except Exception as e:
-        global MODE
         MODE = ""
         print(f"FAILED: {video}: {e}", flush=True)
         try:
@@ -1337,6 +1390,10 @@ def process_clips(gh, release, meta, rid, video, name):
         shutil.rmtree(WORK, ignore_errors=True)
 
 
+class RunStopped(Exception):
+    """Stop after the current part: "paused" (app switch) or "time" (GitHub's 6-hour limit is near)."""
+
+
 def paused_in_app(gh):
     """The app's Pause switch (settings.json on GitHub, read fresh so it works mid-run)."""
     try:
@@ -1379,7 +1436,19 @@ def main():
             tools_ready = True
         nxt = entries[0]
         tried.add(nxt["id"])
-        process_release(gh, nxt)
+        try:
+            process_release(gh, nxt)
+        except RunStopped as stop:
+            if str(stop) == "time":
+                try:
+                    gh.dispatch("make-parts.yml")          # a fresh run picks up where this one stopped
+                    notify("⏱ Continuing in a new run", "GitHub runs are limited to 6 hours, so a new run "
+                           "carries on from the next part.", kind="paused")
+                except Exception as e:
+                    print(f"(couldn't start the next run: {e}; it starts by itself once a day)", flush=True)
+            status.set_stage("idle", movie=None, mode=None)
+            status.run_finished()
+            return
 
 
 if __name__ == "__main__":

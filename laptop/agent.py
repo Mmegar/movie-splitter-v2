@@ -79,7 +79,7 @@ DEFAULTS = {
     "heartbeat_minutes": 5,
     "posting_check_minutes": 5,
     "max_download_mb": 4000,
-    "chunk_mb": 1900,                  # GitHub release files must stay under 2 GB
+    "chunk_mb": 250,                   # sent in 250 MB pieces: an interrupted send only redoes one piece
     "public_domain_collections": archive.DEFAULT_PD_COLLECTIONS,
     "composio_api_key": "",
     "composio_user_id": "",
@@ -422,7 +422,13 @@ class Agent:
             if pc >= 50 and not half[0]:
                 half[0] = True
                 self.notify(f"Sending {path.name} to GitHub: {pc}%", "Halfway there.", event=False)
-        chunk = int(float(self.cfg["chunk_mb"]) * 1e6)
+        chunk = entry.get("chunk")
+        if not chunk:                       # a send started by an older version keeps its piece size
+            first = next((a for a in existing if a["name"] == transport.chunk_name("movie", 0)), None)
+            chunk = int(first["size"]) if first and int(first.get("size", 0)) < size else int(float(self.cfg["chunk_mb"]) * 1e6)
+            with self.lock:
+                entry["chunk"] = chunk
+                self._save_memory()
         try:
             up = lambda n: self.gate(n, upload=True)   # noqa: E731
             transport.send(self.gh, release, path, "movie", existing, chunk, progress, gate=up)
@@ -940,8 +946,12 @@ class Agent:
             return
         try:
             text, _ = self.gh.read_file("config/settings.json")
+            was_paused = bool(self.remote_settings.get("paused"))
             self.remote_settings = settings.load(text=text or "{}", env={})
             self.last["settings"] = time.time()
+            if was_paused and not self.remote_settings.get("paused"):
+                log.info("Pause switched off: carrying on")
+                self.start_cutter()             # a movie paused half-way carries on straight away
         except Exception as e:
             log.warning("Couldn't read settings from GitHub: %s", e)
 

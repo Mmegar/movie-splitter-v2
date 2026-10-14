@@ -20,6 +20,7 @@ concurrency:
 
 permissions:
   contents: write            # read/write the draft releases (movies in, parts out) and the "status" branch
+  actions: write             # start a follow-up run when a long movie needs more than one 6-hour run
 
 jobs:
   make-parts:

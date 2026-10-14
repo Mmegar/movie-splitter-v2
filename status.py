@@ -381,6 +381,26 @@ def movie_started(name, source="drive", modes=()):
 
 
 @safe
+def movie_resumed(name):
+    """A movie an earlier run didn't finish: keep its parts, mark it as being worked on again."""
+    def f(st):
+        m = _find(st, name)
+        if m:
+            m.update(status="processing", error=None, finished=None)
+            m.pop("note", None)
+    store().change(f, urgent=True, message=f"resumed {name}")
+
+
+@safe
+def movie_paused(name, note):
+    def f(st):
+        m = _find(st, name)
+        if m:
+            m.update(status="queued", note=note)
+    store().change(f, urgent=True, message=f"paused {name}")
+
+
+@safe
 def movie_duration(name, seconds):
     """How long the whole movie is (the app uses it to draw where each part sits)."""
     def f(st):

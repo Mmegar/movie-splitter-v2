@@ -102,6 +102,13 @@ versions of its own files, checks they're valid, saves the old ones in `laptop/.
 Turn it off in the app: Settings → Laptop & internet → "Laptop helper updates itself".
 Your `config.json` and `agent_memory.json` are never touched.
 
+## If something stops half-way
+
+Everything carries on where it stopped: a movie being sent continues from the last finished 250 MB
+piece (after a restart, crash, update, sleep or Pause); wish-list downloads continue from where they
+were; and on GitHub a movie that was being cut (stopped by Pause, a cancelled or crashed run, or the
+6-hour run limit) carries on from the next part with the same plan, so no part is made twice.
+
 ## What the app can tell the laptop to do
 
 The app writes requests to `config/commands.json` on GitHub; the helper checks every 30 seconds:

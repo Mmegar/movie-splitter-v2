@@ -256,6 +256,7 @@ export function createStore() {
         const json = { ...(s.json || {}), paused: !!on };
         try {
           await source.saveSettings(json, s.sha, on ? 'App: pause everything' : 'App: resume');
+          if (!on && source.startRun) { try { await source.startRun(); } catch { /* the laptop starts it too */ } }
           break;
         } catch (e) {
           if (e.kind === 'conflict' && attempt < 2) { await refresh({ full: true, force: true }); continue; }
