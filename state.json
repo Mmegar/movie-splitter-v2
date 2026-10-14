@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:31:26+13:00",
+ "updated": "2026-10-15T08:31:27+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 9,
+  "stage": "rendering",
+  "part": 10,
   "parts_total": 12
  },
  "queue": [],
@@ -1426,6 +1426,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:31:27+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 9 of 12 ready",
+   "message": "Part 9: 1:35:16 to 1:37:08 (112s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Can this day get any damn weirder?' 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-15T08:28:51+13:00",
    "type": "part_ready",
