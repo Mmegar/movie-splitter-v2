@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:16:30+13:00",
+ "updated": "2026-10-14T16:16:51+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 5,
+  "stage": "rendering",
+  "part": 6,
   "parts_total": 6
  },
  "queue": [
@@ -680,6 +680,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T16:16:32+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Kung Fu Hustle (2004): Part 5 of 6 ready",
+   "message": "Part 5: 1:09:13 to 1:10:52 (99s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Who eats meat?' 📱\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-14T10:15:49+07:00",
    "type": "posted",
