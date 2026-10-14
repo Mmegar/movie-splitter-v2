@@ -271,6 +271,8 @@ export function pendingClipsHtml(st, movie) {
 
 // ---------- save a full-quality part to the phone ----------
 const partKey = (movie, mode, part) => `share/${movie.id}/${mode}-${String(part.n).padStart(3, '0')}.bin`;
+// copy the cutter keeps on GitHub for the newest 2 movies: no need to ask the laptop
+const fullKey = (movie, mode, part) => `${movie.id}/full/${mode}-${String(part.n).padStart(3, '0')}.bin`;
 const fileName = (part) => String(part.drive_path || 'part.mp4').split('/').pop();
 
 export async function openSavePart(ctx, movie, mode, part) {
@@ -283,7 +285,7 @@ export async function openSavePart(ctx, movie, mode, part) {
       <p class="media-sub">${esc(movie.name)} · ${mode === 'clips' ? 'Clip' : 'Part'} ${part.n} · full quality</p>
       <div class="save-steps" data-steps></div>
       <div class="sheet-actions"><button class="btn btn--primary btn--block" data-act hidden></button></div>
-      <p class="note">The laptop sends the part to GitHub, locked with your ntfy name, and this phone unlocks it. Only the 8 newest are kept there.</p>`,
+      <p class="note">Parts of your 2 newest movies wait on GitHub (locked with your ntfy name), so they download straight away. Older ones are sent by the laptop first.</p>`,
     onMount(el, close) {
       const steps = el.querySelector('[data-steps]');
       const act = el.querySelector('[data-act]');
@@ -292,11 +294,12 @@ export async function openSavePart(ctx, movie, mode, part) {
         act.hidden = !btn;
         if (btn) act.innerHTML = btn;
       };
-      async function download() {
+      async function download(k = key) {
         clearInterval(timer);
         show('spin', 'Downloading and unlocking…');
         try {
-          const url = await blobUrl(ctx.store, key, 'video/mp4');
+          const url = await blobUrl(ctx.store, k, 'video/mp4');
+          if (!url) cache.delete(k);
           if (!url) throw new Error('Not on GitHub yet.');
           const blob = await (await fetch(url)).blob();
           file = new File([blob], fileName(part), { type: 'video/mp4' });
@@ -328,6 +331,12 @@ export async function openSavePart(ctx, movie, mode, part) {
       });
       (async () => {
         if (ctx.store.isDemo()) { show('info', 'In your real app, the full-quality part downloads here and you tap Save Video.'); return; }
+        show('spin', 'Getting it from GitHub…');
+        const fk = fullKey(movie, mode, part);
+        try {
+          if (await blobUrl(ctx.store, fk, 'video/mp4')) { await download(fk); return; }
+        } catch { /* not there: ask the laptop */ }
+        cache.delete(fk);
         if (check()) return;
         if (!asked) {
           asked = true;

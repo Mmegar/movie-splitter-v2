@@ -1198,19 +1198,21 @@ class Agent:
         if not self.cfg.get("ntfy_topic"):
             raise RuntimeError("ntfy_topic isn't set in config.json (it's the lock for files sent to the phone)")
         data = f.read_bytes()
-        if len(data) > 95_000_000:
-            raise ValueError(f"The part is {round(len(data) / 1e6)} MB; the phone can get files up to 95 MB")
+        if len(data) > 400_000_000:
+            raise ValueError(f"The part is {round(len(data) / 1e6)} MB; the phone can get files up to 400 MB")
         prev = ensure_previews()
-        blob = self.gh.create_blob(prev.encrypt(data, self.cfg["ntfy_topic"]))
         path = f"share/{movie['id']}/{mode}-{int(part['n']):03}.bin"
+        blobs = prev.blobs_for(self.gh, path, prev.encrypt(data, self.cfg["ntfy_topic"]))   # pieces if big
         with self.lock:
             shared = [x for x in self.memory.setdefault("shared", []) if x != path] + [path]
             self.memory["shared"] = shared[-SHARE_KEEP:]
             self._save_memory()
         for attempt in range(3):           # the cutter may be rewriting this branch at the same moment
             files = self.gh.branch_files(prev.BRANCH)
-            files = {p: s for p, s in files.items() if not p.startswith("share/") or p in self.memory["shared"]}
-            files[path] = blob
+            files = {p: s for p, s in files.items()
+                     if not p.startswith("share/") or re.sub(r"\.bin\.\d+$", ".bin", p) in self.memory["shared"]}
+            files = prev.without(files, path)
+            files.update(blobs)
             try:
                 self.gh.replace_branch(prev.BRANCH, files, f"share {path}")
                 break

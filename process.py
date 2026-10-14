@@ -1222,6 +1222,7 @@ def process_release(gh, release):
         status.set_stage("uploading", mode=mode, part=i, parts_total=count)
         prefix = f"{mode}-{i:02}"
         pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
+        prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
         assets = transport.send(gh, out_rel, out, prefix)
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
@@ -1396,6 +1397,7 @@ def process_clips(gh, release, meta, rid, video, name):
             render_part(src, a, b, n, cues, out, WORK, top_text="")
             status.set_stage("uploading", mode="clips", part=k + 1, parts_total=len(clips))
             pv = save_preview(prev, out, previews.part_path(mid, "clips", n), f"preview {name} clip {n}")
+            prev.add_full(previews.full_path(mid, "clips", n), out.read_bytes(), f"full {name} clip {n}")
             sent = transport.send(gh, out_rel, out, f"clips-{n:02}")
             out.unlink(missing_ok=True)
             text = make_clip_caption(pick_quote(PART_CUES.get(("clips", n)))) if CAPTIONS_ON else None

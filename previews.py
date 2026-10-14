@@ -41,6 +41,31 @@ def part_path(movie_id, mode, n):
     return f"{movie_id}/{mode}-{int(n):03}.bin"
 
 
+def full_path(movie_id, mode, n):
+    """Full-quality copy of a part, made by the cutter so 'Save to phone' is instant."""
+    return f"{movie_id}/full/{mode}-{int(n):03}.bin"
+
+
+FULL_KEEP = 2                # movies whose full-quality parts stay on GitHub (they're big)
+PIECE = 20_000_000           # GitHub won't take one big file in a single request
+
+
+def blobs_for(gh, path, locked):
+    """Stores locked bytes, in pieces if big: path holds {"pieces": n} and path.1 ... path.n the bytes,
+    which the app joins back up. Returns {path: blob sha} for every file written."""
+    if len(locked) <= PIECE:
+        return {path: gh.create_blob(locked)}
+    pieces = [locked[i:i + PIECE] for i in range(0, len(locked), PIECE)]
+    out = {f"{path}.{i}": gh.create_blob(piece) for i, piece in enumerate(pieces, 1)}
+    out[path] = gh.create_blob(json.dumps({"pieces": len(pieces)}).encode())
+    return out
+
+
+def without(files, path):
+    """files minus path and its pieces."""
+    return {p: s for p, s in files.items() if p != path and not p.startswith(path + ".")}
+
+
 class Previews:
     """Collects previews during a run and keeps the 'previews' branch up to date."""
 
@@ -83,10 +108,26 @@ class Previews:
             self._load()
             self.order = [movie_id] + [m for m in self.order if m != movie_id]
             gone = set(self.order[self.keep:])
+            no_full = set(self.order[FULL_KEEP:])
             self.order = self.order[:self.keep]
-            self.files = {p: s for p, s in self.files.items() if p.split("/", 1)[0] not in gone}
+            self.files = {p: s for p, s in self.files.items() if p.split("/", 1)[0] not in gone
+                          and not (p.split("/", 2)[1:2] == ["full"] and p.split("/", 1)[0] in no_full)}
         except Exception as e:
             self.log(f"(previews: couldn't read the previews branch: {e})")
+
+    def add_full(self, path, data, message="full part"):
+        """Encrypts and stores a full-quality part (in pieces if big). Returns its path or None."""
+        if not self.enabled:
+            return None
+        try:
+            self._load()
+            self.files = without(self.files, path)
+            self.files.update(blobs_for(self.gh, path, encrypt(data, self.topic)))
+            self._publish(message)
+            return path
+        except Exception as e:
+            self.log(f"(full-quality copy not saved: {e})")
+            return None
 
     def add(self, path, data, message="preview"):
         """Encrypts and stores one file. Returns its path, or None if previews are off / it failed."""

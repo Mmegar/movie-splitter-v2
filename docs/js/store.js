@@ -96,8 +96,21 @@ function createLiveSource(conn) {
       }
     },
     async getPreview(path) {
-      const buf = await gh.getBinary(path, PREVIEWS_BRANCH);
+      let buf = await gh.getBinary(path, PREVIEWS_BRANCH);
       if (!buf) return null;
+      if (buf.byteLength && new Uint8Array(buf, 0, 1)[0] === 0x7b) {   // '{': a big file stored in pieces
+        const { pieces } = JSON.parse(new TextDecoder().decode(buf));
+        const got = [];
+        for (let i = 1; i <= pieces; i++) {
+          const piece = await gh.getBinary(`${path}.${i}`, PREVIEWS_BRANCH);
+          if (!piece) return null;
+          got.push(new Uint8Array(piece));
+        }
+        const all = new Uint8Array(got.reduce((n, p) => n + p.length, 0));
+        let at = 0;
+        for (const p of got) { all.set(p, at); at += p.length; }
+        buf = all.buffer;
+      }
       return decryptPreview(buf, conn.topic);
     },
     startRun: () => gh.startRun(),

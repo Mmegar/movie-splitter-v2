@@ -251,6 +251,18 @@ class PartActionTest(base.AgentTestBase):
         self.assertEqual(lj["shared"], ["share/m/stretch-003.bin"])
         self.assertEqual(lj["commands"]["p3"]["status"], "done")
 
+    def test_big_part_goes_up_in_pieces(self):
+        import previews
+        a = self.make_agent()
+        commands(self.fake, {"id": "p5", "type": "share_part", "movie_id": "m", "mode": "stretch", "n": 3})
+        with mock.patch.object(previews, "PIECE", 10):
+            a.check_commands()
+        files, blobs = self.fake.bin_branches["previews"], self.fake.blobs
+        n = json.loads(blobs[files["share/m/stretch-003.bin"]])["pieces"]
+        locked = b"".join(blobs[files[f"share/m/stretch-003.bin.{i}"]] for i in range(1, n + 1))
+        self.assertEqual(previews.decrypt(locked, "test-topic"), b"full quality part")
+        self.assertEqual(self.fake.json_file("laptop.json")["commands"]["p5"]["status"], "done")
+
     def test_missing_part_file_fails_clearly(self):
         a = self.make_agent()
         (self.out / "Ready to post/M/Best stretch/M - Part 03.mp4").unlink()
