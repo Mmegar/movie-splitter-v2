@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:22:10+13:00",
+ "updated": "2026-10-14T17:22:11+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 6,
+  "stage": "rendering",
+  "part": 7,
   "parts_total": 7
  },
  "queue": [],
@@ -969,6 +969,12 @@
   "posted_today": 7
  },
  "events": [
+  {
+   "at": "2026-10-14T17:22:11+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Colony (2026): Part 6 of 7 ready",
+   "message": "Part 6: 1:06:14 to 1:09:26 (192s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nthe way they said 'Are you okay?' 🫠\nPart 6 🎬 · Part 7 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T17:18:14+13:00",
    "type": "part_ready",
