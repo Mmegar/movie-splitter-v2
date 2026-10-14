@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:55:56+13:00",
+ "updated": "2026-10-14T09:56:30+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -595,6 +595,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T09:56:29+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "The Notebook (2004): 19 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\The Notebook (2004)\nBest stretch: 7 parts, Highlights: 12 parts"
+  },
   {
    "at": "2026-10-14T15:55:56+13:00",
    "type": "started",
