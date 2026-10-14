@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T08:53:53+07:00",
+ "updated": "2026-10-14T14:53:55+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 7
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 7,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 12,
      "parts": []
     }
    },
@@ -275,6 +275,18 @@
   "posted_today": 1
  },
  "events": [
+  {
+   "at": "2026-10-14T14:53:32+13:00",
+   "type": "planned",
+   "title": "[Highlights] The Notebook (2004): 12 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-14T14:53:31+13:00",
+   "type": "planned",
+   "title": "[Best stretch] The Notebook (2004): 7 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Best stretch as they're made."
+  },
   {
    "at": "2026-10-14T08:53:46+07:00",
    "type": "new_file",
