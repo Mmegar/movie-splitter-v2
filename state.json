@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:13:38+13:00",
+ "updated": "2026-10-14T17:13:57+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Colony (2026)/Best stretch/Colony (2026) - Part 02.mp4",
        "caption": "main character energy, side character luck 🍀\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "colony-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 3682.5,
+       "end": 3767.5,
+       "seconds": 85.0,
+       "drive_path": "Ready to post/Colony (2026)/Best stretch/Colony (2026) - Part 03.mp4",
+       "caption": "when they said 'Let’s hurry and move to a safe place.' I felt that 😭\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "colony-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
