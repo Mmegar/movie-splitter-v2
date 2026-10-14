@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-14T17:37:37+07:00",
+ "updated": "2026-10-14T17:38:14+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Kung Fu Hustle 2004 1080p x264.mkv",
+  "percent": 4
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "file": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "percent": 4
+  }
+ ],
  "uploaded": [
   {
    "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
@@ -70,6 +80,10 @@
   }
  ],
  "commands": {
+  "mv7z7bwki751": {
+   "status": "working",
+   "note": "Sending the movie to GitHub"
+  },
   "mv7lxf0dlvip": {
    "status": "working",
    "note": "Sent 5 of 6. Waiting: TikTok is holding the rest until you post some drafts. Trying part 6 again in 10 min"
@@ -105,10 +119,6 @@
   "mv7z3isn197u": {
    "status": "done",
    "note": "Ready to save on your phone: share/kung-fu-hustle-2004/highlights-002.bin"
-  },
-  "mv7z7bwki751": {
-   "status": "working",
-   "note": "Sending the movie to GitHub"
   }
  },
  "commands_done": [
