@@ -259,3 +259,17 @@ class PartActionTest(base.AgentTestBase):
         c = self.fake.json_file("laptop.json")["commands"]["p4"]
         self.assertEqual(c["status"], "failed")
         self.assertIn("isn't on the laptop", c["note"])
+
+
+class DoubleTapTest(PartActionTest):
+    def test_same_part_twice_is_sent_once(self):
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        commands(self.fake, {"id": "d1", "type": "post_part", "movie_id": "m", "mode": "stretch", "n": 3},
+                 {"id": "d2", "type": "post_part", "movie_id": "m", "mode": "stretch", "n": 3})
+        calls = []
+        with mock.patch.object(agent.posting, "post_video",
+                               lambda path, cap, priv, creds, publish=True: calls.append(1) or (True, "v~1", None)):
+            a.check_commands()
+        self.assertEqual(len(calls), 1)
+        lj = self.fake.json_file("laptop.json")["commands"]
+        self.assertEqual((lj["d1"]["status"], lj["d2"]["status"]), ("done", "done"))

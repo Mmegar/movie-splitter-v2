@@ -300,6 +300,7 @@ class Agent:
         self.battery = False
         self.rate = [0.0, 0]                 # upload speed limit: (window start, bytes sent in it)
         self.cmd_status = {}                 # command id -> {status, note}: shown in the app
+        self.cmd_lock = threading.Lock()
         self.remote_settings = settings.load(text="{}")
         self.status_ready = False
 
@@ -717,7 +718,16 @@ class Agent:
                 "failed": self.output / "Failed"}.get(str(where or "").lower())
 
     def check_commands(self):
-        """Does what was tapped in the app: move movies into To edit, reorder, restore/bin, custom clips."""
+        """Does what was tapped in the app: move movies into To edit, reorder, restore/bin, custom clips.
+        Runs in its own thread too, so taps are handled even while a movie is being sent."""
+        if not self.cmd_lock.acquire(blocking=False):
+            return                                  # already being done by the other thread
+        try:
+            self._check_commands()
+        finally:
+            self.cmd_lock.release()
+
+    def _check_commands(self):
         try:
             text, _ = self.gh.read_file("config/commands.json")
         except Exception as e:
@@ -730,7 +740,14 @@ class Agent:
             return
         done = self.memory["commands_done"]
         clips = {}
+        seen = {}                                   # the same part tapped twice: do it once
         for c in cmds:
+            if c.get("type") in ("post_part", "share_part", "mark_posted") and str(c.get("id") or "") not in done:
+                key = (c.get("type"), c.get("movie_id"), c.get("mode"), str(c.get("n")))
+                if key in seen:
+                    self.command_over(str(c["id"]), True, "Same as the request just before (done once)")
+                    continue
+                seen[key] = c["id"]
             cid = str(c.get("id") or "")
             if (not cid or cid in done or cid in self.working_clip_ids()
                     or self.cmd_status.get(cid, {}).get("status") == "working"):
@@ -1361,6 +1378,7 @@ def main(argv=None):
         threading.Thread(target=every, args=(agent.cfg["heartbeat_minutes"], lambda: agent.heartbeat(force=True)),
                          daemon=True).start()
         threading.Thread(target=every, args=(1, lambda: agent.refresh_settings(force=True)), daemon=True).start()
+        threading.Thread(target=every, args=(0.5, agent.check_commands), daemon=True).start()   # app taps, every 30 s
         threading.Thread(target=agent.check_wishlist, daemon=True).start()   # first look straight away
         while True:
             try:
