@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:40:40+13:00",
+ "updated": "2026-10-15T08:40:47+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -16,12 +16,12 @@
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-15T07:40:50+13:00",
-   "finished": null,
+   "finished": "2026-10-15T08:40:47+13:00",
    "duration": 8405.8,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "stretch": {
@@ -284,7 +284,8 @@
     "w": 160,
     "h": 90,
     "path": "spider-man-across-the-spider-verse-2023/thumbs.bin"
-   }
+   },
+   "subs_preview": "spider-man-across-the-spider-verse-2023/subs.bin"
   },
   {
    "id": "colony-2026",
@@ -1471,6 +1472,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:40:41+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 12 of 12 ready",
+   "message": "Part 12: 1:55:41 to 1:58:42 (181s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 12 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-15T08:36:37+13:00",
    "type": "part_ready",
