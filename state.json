@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T10:45:41+07:00",
+ "updated": "2026-10-14T10:46:13+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -350,8 +350,8 @@
        "caption": "explain this to me like I'm 5 🧸\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/stretch-004.bin",
        "post": {
-        "status": "inbox",
-        "at": "2026-10-14T10:41:29+07:00",
+        "status": "scheduled",
+        "at": "2026-10-14T10:46:13+07:00",
         "url": null,
         "error": null,
         "attempts": 1
