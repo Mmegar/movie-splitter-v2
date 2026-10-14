@@ -1,5 +1,6 @@
 // Preview player and the custom-clip editor (both bottom sheets).
 import { esc, icon, toast, haptic, openSheet, confirmSheet, copyText } from '../ui.js';
+import { fixMp4 } from '../mp4fix.js';
 import { timecode, shortDuration, movieLength, MODE_LABELS, pendingCommands, commandState } from '../logic.js';
 
 const MAX_CLIP = 600;   // TikTok's longest upload: 10 minutes
@@ -303,7 +304,7 @@ export async function openSavePart(ctx, movie, mode, part) {
           if (!url) cache.delete(k);
           if (!url) throw new Error('Not on GitHub yet.');
           const blob = await (await fetch(url)).blob();
-          file = new File([blob], fileName(part), { type: 'video/mp4' });
+          file = new File([fixMp4(await blob.arrayBuffer())], fileName(part), { type: 'video/mp4' });
           show('check', `Ready (${Math.round(blob.size / 1e5) / 10} MB). Tap Save, then choose “Save Video”.`, `${icon('inbox')}Save video`);
         } catch (e) { show('alert', previewError(e, ctx.store.isDemo())); }
       }
@@ -546,7 +547,7 @@ export async function saveAllParts(ctx, movie, mode) {
           if (closed) break;
           if (!buf) { toast(`${what[0].toUpperCase()}${what.slice(1)} ${p.n} isn't on the laptop, skipped`, { kind: 'info' }); continue; }
           const name = String(p.drive_path || `part-${p.n}.mp4`).split('/').pop();
-          ready.push({ n: p.n, file: new File([buf], name, { type: 'video/mp4' }) });
+          ready.push({ n: p.n, file: new File([fixMp4(buf)], name, { type: 'video/mp4' }) });
           offer();
         }
         if (!closed) show('check', ready.length ? `All downloaded. Tap Save to put ${ready.length === parts.length ? 'them' : 'the last ones'} in Photos.` : `Done: ${savedCount} saved.`);

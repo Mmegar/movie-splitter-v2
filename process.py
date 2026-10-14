@@ -1057,6 +1057,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         "-filter_complex", filters, "-map", "[v]", "-map", "0:a:0?",
         "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", str(VIDEO_QUALITY), "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "160k", "-ac", "2",
+        "-map_chapters", "-1",            # the movie's chapter list made every part look movie-length
         "-movflags", "+faststart",
         str(out_path.resolve()),
     ], cwd=workdir)

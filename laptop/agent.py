@@ -179,6 +179,16 @@ def plain_name(name):
     return name
 
 
+def repair_part(path):
+    """Removes a movie-length chapter track from a part (see mp4fix.py). True if the file was changed."""
+    try:
+        import mp4fix
+        return mp4fix.fix_file(path)
+    except Exception as e:                           # never let a repair stop anything else
+        log.warning("Couldn't check %s: %s", Path(path).name, e)
+        return False
+
+
 def file_info(p):
     try:
         st = p.stat()
@@ -190,7 +200,7 @@ def file_info(p):
 
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
-              "settings.py", "status.py", "transport.py"]
+              "settings.py", "status.py", "transport.py", "mp4fix.py"]
 SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
 
@@ -638,6 +648,7 @@ class Agent:
                 transport.receive(self.gh, chunks, dest,
                                   lambda pc, f=p["file"]: self.set_transfer("receive", f, movie, pc),
                                   gate=self.gate)
+                repair_part(dest)
                 if p.get("mode") == "clips" and p.get("caption"):
                     dest.with_name(dest.stem + " - caption.txt").write_text(p["caption"] + "\n", encoding="utf-8")
                 self.set_transfer("receive", p["file"], movie, None)
@@ -926,7 +937,8 @@ class Agent:
             head = (self.gh.call("GET", "/commits/main") or {}).get("sha")
         except Exception:
             head = None
-        if head and head == self.memory.get("code_sha") and not force:
+        missing = any(not (root / rel).exists() for rel in CODE_FILES)   # a new file added in an update
+        if head and head == self.memory.get("code_sha") and not force and not missing:
             return False
         changed = []
         for rel in CODE_FILES:
@@ -957,6 +969,25 @@ class Agent:
         log.info("Updated %s; restarting", ", ".join(l.name for l, _, _ in changed))
         self.notify("🔄 Laptop helper updated", "Restarting with the newest version.", event=False, tags=["arrows_counterclockwise"])
         return True
+
+    def repair_old_parts(self):
+        """Once: fixes parts made before the chapter fix (phones showed '1 hr' and stopped after the real part)."""
+        if not self.ready_dir.is_dir():
+            return
+        try:
+            import mp4fix  # noqa: F401
+        except ImportError:
+            return                                   # not downloaded yet: next update brings it
+        fixed = sum(1 for f in self.ready_dir.rglob("*.mp4") if repair_part(f))
+        with self.lock:
+            self.memory["mp4fix_done"] = True
+            # copies already put on GitHub for the phone were made from the broken files: send fresh ones
+            self.memory["shared"] = []
+            self._save_memory()
+        if fixed:
+            log.info("Repaired %d parts (removed the movie-length chapter track)", fixed)
+            self.notify("🔧 Parts repaired", f"{fixed} parts had a wrong length (showed about an hour and stopped "
+                        "early on the phone). Fixed on the laptop.", event=False, tags=["wrench"])
 
     def cleanup_old_parts(self):
         """Setting "cleanup_parts_after_days": deletes parts older than that from Ready to post."""
@@ -1401,6 +1432,8 @@ class Agent:
                 self.post_if_due()
             except Exception as e:
                 log.error("Posting check failed: %s", e)
+        if not self.memory.get("mp4fix_done") and not self.transfers:
+            self.repair_old_parts()
         if now - self.last["cleanup"] >= 3600:
             self.last["cleanup"] = now
             try:

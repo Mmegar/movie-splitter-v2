@@ -1,9 +1,9 @@
 // Offline shell. App files: stale-while-revalidate. Live data (GitHub, ntfy) is never cached here;
 // the app keeps its own last-good copy in localStorage.
-const VERSION = 'ms-v2-13';
+const VERSION = 'ms-v2-14';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/app.js', 'js/api.js', 'js/logic.js', 'js/store.js', 'js/demo.js', 'js/ui.js', 'js/crypto.js',
+  'js/app.js', 'js/api.js', 'js/logic.js', 'js/store.js', 'js/demo.js', 'js/ui.js', 'js/crypto.js', 'js/mp4fix.js',
   'js/views/common.js', 'js/views/now.js', 'js/views/movies.js', 'js/views/alerts.js', 'js/views/queue.js', 'js/views/settings.js', 'js/views/media.js',
   'demo/state.json', 'demo/laptop.json', 'demo/ntfy.jsonl', 'demo/runs.json', 'demo/settings.json', 'demo/wishlist.txt',
   'icons/icon-192.png', 'icons/apple-touch-icon.png', 'icons/favicon-64.png',
