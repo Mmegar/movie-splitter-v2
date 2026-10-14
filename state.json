@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-14T23:54:43+13:00",
+ "updated": "2026-10-14T23:55:03+13:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
   "started": "2026-10-14T23:51:45+13:00",
-  "movie": null,
-  "mode": null,
-  "stage": "idle",
+  "movie": "Kung Fu Hustle (2004)",
+  "mode": "clips",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -1178,6 +1178,12 @@
   "posted_today": 13
  },
  "events": [
+  {
+   "at": "2026-10-14T23:54:45+13:00",
+   "type": "started",
+   "title": "✂️ Making 1 custom clip: Kung Fu Hustle (2004)",
+   "message": "They'll arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Custom clips."
+  },
   {
    "at": "2026-10-14T17:53:29+07:00",
    "type": "post_failed",
