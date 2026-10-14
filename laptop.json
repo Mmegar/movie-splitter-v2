@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T11:32:30+07:00",
+ "updated": "2026-10-14T11:32:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -72,23 +72,7 @@
  "commands": {
   "mv7lxf0dlvip": {
    "status": "working",
-   "note": "Sent 0 of 6. Waiting: TikTok is holding the rest until you post some drafts. Trying part 1 again in 10 min"
-  },
-  "mv7ldq4ejipm": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014121112D7824CFED2EEB607EF7C\"}}"
-  },
-  "mv7li6dedlb6": {
-   "status": "failed",
-   "note": "GitHub answered 502: {\n  \"message\": \"Server Error\"\n}\n"
-  },
-  "mv7lvl5y5g15": {
-   "status": "done",
-   "note": "Marked as posted"
-  },
-  "mv7lvn1ed2ql": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-006.bin"
+   "note": "Sending to TikTok: 0 of 6 done"
   }
  },
  "commands_done": [
