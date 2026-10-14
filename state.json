@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:36:36+13:00",
+ "updated": "2026-10-15T08:36:37+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 11,
+  "stage": "rendering",
+  "part": 12,
   "parts_total": 12
  },
  "queue": [],
@@ -1456,6 +1456,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:36:37+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 11 of 12 ready",
+   "message": "Part 11: 1:46:58 to 1:49:21 (143s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 11 🎬 · follow or you'll miss Part 12 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-15T08:33:24+13:00",
    "type": "part_ready",
