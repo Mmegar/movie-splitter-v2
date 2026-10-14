@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T08:30:41+07:00",
+ "updated": "2026-10-14T08:33:45+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -53,14 +53,20 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mv7fqxtaqkw3": {
+   "status": "done",
+   "note": "Sent to TikTok"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
   "mv7d1to8kmvj",
   "mv7d21lvbmlq",
   "mv7d23jv572w",
-  "mv7d7f4wvowb"
+  "mv7d7f4wvowb",
+  "mv7fqxtaqkw3"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit"
