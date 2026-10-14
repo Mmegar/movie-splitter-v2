@@ -1,21 +1,11 @@
 {
- "updated": "2026-10-15T01:38:56+07:00",
+ "updated": "2026-10-15T01:39:00+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": {
-  "file": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-  "percent": 100
- },
- "transfers": [
-  {
-   "direction": "send",
-   "movie": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "file": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "percent": 100
-  }
- ],
+ "uploading": null,
+ "transfers": [],
  "uploaded": [
   {
    "file": "Kung Fu Hustle 2004 1080p x264.mkv",
@@ -50,7 +40,7 @@
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2773,
    "modified": "2026-10-14T05:54:27+07:00",
-   "sending": true,
+   "sending": false,
    "style": "classic"
   }
  ],
