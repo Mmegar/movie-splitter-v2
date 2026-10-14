@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:34:15+13:00",
+ "updated": "2026-10-14T17:34:16+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 12
  },
  "queue": [],
@@ -1046,6 +1046,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T17:34:16+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Colony (2026): Part 4 of 12 ready",
+   "message": "Part 4: 35:55 to 38:21 (146s)  interest score 60/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T17:31:11+13:00",
    "type": "part_ready",
