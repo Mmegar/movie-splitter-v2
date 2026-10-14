@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:05:54+13:00",
+ "updated": "2026-10-15T00:05:59+13:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
@@ -335,10 +335,10 @@
   {
    "id": "kung-fu-hustle-2004",
    "name": "Kung Fu Hustle (2004)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-14T15:55:56+13:00",
-   "finished": "2026-10-14T16:47:03+13:00",
+   "finished": "2026-10-15T00:05:59+13:00",
    "duration": 5966.0,
    "subtitles": "translated to English from 'zh'",
    "error": null,
@@ -1195,6 +1195,12 @@
   "posted_today": 13
  },
  "events": [
+  {
+   "at": "2026-10-15T00:05:57+13:00",
+   "type": "part_ready",
+   "title": "[Custom clips] ✂️ Kung Fu Hustle (2004): clip 1 of 1 ready",
+   "message": "Clip 1: 9:56 to 19:56 (600s)  Funny\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Custom clips)."
+  },
   {
    "at": "2026-10-14T18:02:31+07:00",
    "type": "post_failed",
