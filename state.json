@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:16:03+07:00",
+ "updated": "2026-10-15T00:21:01+07:00",
  "run": {
   "active": false,
   "run_id": 38552474182,
@@ -777,10 +777,10 @@
        "caption": "watching this instead of sleeping again 🌚\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/highlights-001.bin",
        "post": {
-        "status": "failed",
-        "at": "2026-10-15T00:16:01+07:00",
+        "status": "scheduled",
+        "at": "2026-10-15T00:21:01+07:00",
         "url": null,
-        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101501160168350E4ECE0CFD484CBF\"}}",
+        "error": null,
         "attempts": 1
        }
       },
