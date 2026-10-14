@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-14T08:42:01+07:00",
+ "updated": "2026-10-14T08:42:37+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Kung Fu Hustle 2004 1080p x264.mkv",
+  "percent": 11
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "file": "Kung Fu Hustle 2004 1080p x264.mkv",
+   "percent": 11
+  }
+ ],
  "uploaded": [
   {
    "file": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
@@ -28,7 +38,7 @@
    "name": "Kung Fu Hustle 2004 1080p x264.mkv",
    "size_mb": 1738,
    "modified": "2026-10-14T05:34:17+07:00",
-   "sending": false
+   "sending": true
   },
   {
    "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
