@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:14:13+13:00",
+ "updated": "2026-10-14T15:14:53+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -111,6 +111,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Best stretch/The Notebook (2004) - Part 06.mp4",
        "caption": "a masterclass in bad decisions 🎓\nPart 6 🎬 · Part 7 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "the-notebook-2004/stretch-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 7,
+       "start": 3280.6,
+       "end": 3456.9,
+       "seconds": 176.3,
+       "drive_path": "Ready to post/The Notebook (2004)/Best stretch/The Notebook (2004) - Part 07.mp4",
+       "caption": "that's not a plan, that's a cry for help 🆘\nPart 7 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "the-notebook-2004/stretch-007.bin",
        "post": {
         "status": "none",
         "at": null,
