@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:11:51+13:00",
+ "updated": "2026-10-14T17:12:07+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 7
  },
  "queue": [],
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/Colony (2026)/Best stretch/Colony (2026) - Part 01.mp4",
        "caption": "'wrong with him?' is my new personality 😤\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "colony-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 3612.5,
+       "end": 3682.5,
+       "seconds": 70.0,
+       "drive_path": "Ready to post/Colony (2026)/Best stretch/Colony (2026) - Part 02.mp4",
+       "caption": "main character energy, side character luck 🍀\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "colony-2026/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
@@ -894,6 +909,12 @@
   "posted_today": 7
  },
  "events": [
+  {
+   "at": "2026-10-14T17:12:07+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Colony (2026): Part 2 of 7 ready",
+   "message": "Part 2: 1:00:12 to 1:01:22 (70s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T11:11:15+07:00",
    "type": "post_failed",
