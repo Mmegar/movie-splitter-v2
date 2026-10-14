@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:14:22+13:00",
+ "updated": "2026-10-14T16:14:23+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 6
  },
  "queue": [
@@ -664,6 +664,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T16:14:23+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Kung Fu Hustle (2004): Part 4 of 6 ready",
+   "message": "Part 4: 1:07:57 to 1:09:13 (76s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nthe confidence of this man 😎\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
   {
    "at": "2026-10-14T16:12:03+13:00",
    "type": "part_ready",
