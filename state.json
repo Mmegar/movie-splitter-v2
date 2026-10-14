@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:54:42+13:00",
+ "updated": "2026-10-14T17:54:44+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
-  "movie": "Colony (2026)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 12,
-  "parts_total": 12
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
