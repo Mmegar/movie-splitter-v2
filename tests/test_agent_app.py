@@ -202,3 +202,60 @@ class SelfUpdateTest(base.AgentTestBase):
             with self.assertRaises(SyntaxError):
                 a.self_update()
             self.assertEqual((self.tmp / "repo" / "laptop" / "agent.py").read_text(), "print('new')\n")
+
+
+class PartActionTest(base.AgentTestBase):
+    def setUp(self):
+        super().setUp()
+        st = status.empty_state()
+        part = {"n": 3, "drive_path": "Ready to post/M/Best stretch/M - Part 03.mp4", "caption": "lol",
+                "post": {"status": "none", "at": None, "url": None, "error": None}}
+        st["movies"] = [{"id": "m", "name": "M", "status": "done", "started": "2026-10-10T10:00:00+13:00",
+                         "modes": {"stretch": {"label": "Best stretch", "planned": 3, "parts": [part]}}}]
+        self.fake.put_file("state.json", json.dumps(st), "status")
+        f = self.out / part["drive_path"]
+        f.parent.mkdir(parents=True)
+        f.write_bytes(b"full quality part")
+
+    def post_status(self):
+        return self.fake.json_file("state.json")["movies"][0]["modes"]["stretch"]["parts"][0]["post"]["status"]
+
+    def test_send_to_tiktok_now(self):
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        commands(self.fake, {"id": "p1", "type": "post_part", "movie_id": "m", "mode": "stretch", "n": 3})
+        calls = []
+        with mock.patch.object(agent.posting, "post_video",
+                               lambda path, cap, priv, creds, publish=True: calls.append((path.read_bytes(), publish))
+                               or (True, "v_inbox~1", None)):
+            a.check_commands()
+        self.assertEqual(calls, [(b"full quality part", False)])
+        self.assertEqual(self.post_status(), "inbox")
+        self.assertEqual(self.fake.json_file("laptop.json")["commands"]["p1"]["status"], "done")
+
+    def test_mark_posted(self):
+        a = self.make_agent()
+        commands(self.fake, {"id": "p2", "type": "mark_posted", "movie_id": "m", "mode": "stretch", "n": 3})
+        a.check_commands()
+        self.assertEqual(self.post_status(), "posted")
+
+    def test_save_to_phone_puts_encrypted_copy_on_previews_branch(self):
+        import previews
+        a = self.make_agent()
+        commands(self.fake, {"id": "p3", "type": "share_part", "movie_id": "m", "mode": "stretch", "n": 3})
+        a.check_commands()
+        files = self.fake.bin_branches["previews"]
+        self.assertIn("share/m/stretch-003.bin", files)
+        self.assertEqual(previews.decrypt(self.fake.blobs[files["share/m/stretch-003.bin"]], "test-topic"),
+                         b"full quality part")
+        lj = self.fake.json_file("laptop.json")
+        self.assertEqual(lj["shared"], ["share/m/stretch-003.bin"])
+        self.assertEqual(lj["commands"]["p3"]["status"], "done")
+
+    def test_missing_part_file_fails_clearly(self):
+        a = self.make_agent()
+        (self.out / "Ready to post/M/Best stretch/M - Part 03.mp4").unlink()
+        commands(self.fake, {"id": "p4", "type": "share_part", "movie_id": "m", "mode": "stretch", "n": 3})
+        a.check_commands()
+        c = self.fake.json_file("laptop.json")["commands"]["p4"]
+        self.assertEqual(c["status"], "failed")
+        self.assertIn("isn't on the laptop", c["note"])

@@ -64,6 +64,12 @@ class Previews:
         return text
 
     def _publish(self, message):
+        try:                       # keep full-quality parts the laptop shared with the phone meanwhile
+            for path, sha in self.gh.branch_files(BRANCH).items():
+                if path.startswith("share/"):
+                    self.files.setdefault(path, sha)
+        except Exception:
+            pass
         index = json.dumps({"movies": self.order, "format": "MSP1 AES-256-GCM, key = sha256('movie-splitter-preview:'"
                                                            " + ntfy topic)"}, indent=1).encode()
         self.files["index.json"] = self.gh.create_blob(index)

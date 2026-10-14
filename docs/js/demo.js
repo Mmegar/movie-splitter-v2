@@ -169,6 +169,14 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       } else if (c.type === 'to_bin') {
         const f = take(lp.bin, c.file);
         finish(c, !!f, 'Put in the Recycle Bin');
+      } else if (['post_part', 'mark_posted', 'share_part'].includes(c.type)) {
+        const movie = d.state.movies.find((m) => m.id === c.movie_id);
+        const part = movie && ((movie.modes[c.mode] || {}).parts || []).find((p) => String(p.n) === String(c.n));
+        if (part && c.type !== 'share_part') {
+          part.post = { status: c.type === 'post_part' ? 'inbox' : 'posted', at: iso(Date.now()), url: null, error: null };
+          if (c.type === 'post_part') note('posted', `📲 In your TikTok drafts: ${movie.name}: Part ${part.n}`, 'Open TikTok, tap the notification, paste the caption and post.', ['iphone']);
+        }
+        finish(c, !!part, part ? 'Done' : 'Part not found');
       } else if (c.type === 'clip') {
         if (!cur) { lp.commands[c.id] = { status: 'working', note: 'Sending the movie to GitHub' }; continue; }
         if (cur.note === 'Sending the movie to GitHub') { cur.note = 'Being cut on GitHub'; continue; }

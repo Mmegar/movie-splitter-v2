@@ -1,7 +1,7 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
 import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
-import { openPreview, openClipEditor, pendingClipsHtml } from './media.js';
+import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml } from './media.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
 
@@ -86,12 +86,13 @@ export function createMoviesView(ctx) {
         ${chip(post.status)}
       </div>
       ${post.status !== 'none' && (postWhen || post.error) ? `<p class="part-post ${post.status === 'failed' ? 'tone-bad-text' : ''}">${post.error ? esc(post.error) : `${post.status === 'posted' ? 'Posted' : post.status === 'inbox' ? 'Sent to your TikTok drafts' : 'Posting'}${esc(postWhen)}`}${post.url ? ` · <a href="${esc(post.url)}" target="_blank" rel="noopener">Open on TikTok</a>` : ''}</p>` : ''}
+      ${lastSt ? partPendingHtml(lastSt, movie, mode, p) : ''}
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
         <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>
         <button class="btn btn--small btn--quiet" data-clip="${p.n}">${icon('scissors')}Clip</button>
         ${p.caption ? `<button class="btn btn--small btn--quiet" data-copy="${esc(p.caption)}">${icon('copy')}Copy caption</button>` : ''}
-        <button class="btn btn--small btn--quiet" data-copy="${esc(p.drive_path || '')}">${icon('copy')}Copy file path</button>
+        <button class="btn btn--small btn--quiet" data-partmore="${p.n}" aria-label="More for ${mode === 'clips' ? 'clip' : 'part'} ${p.n}">${icon('more')}More</button>
       </div>
     </li>`;
   }
@@ -164,6 +165,14 @@ export function createMoviesView(ctx) {
         const m = movieNow();
         const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === cl.dataset.clip);
         if (part) openClipEditor(ctx, m, { start: part.start, end: Math.min(part.end, part.start + 600) });
+        return;
+      }
+      const pm = e.target.closest('[data-partmore]');
+      if (pm) {
+        haptic();
+        const m = movieNow();
+        const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === pm.dataset.partmore);
+        if (part) openPartActions(ctx, m, detail.mode, part);
         return;
       }
       if (e.target.closest('[data-makeclip]')) {

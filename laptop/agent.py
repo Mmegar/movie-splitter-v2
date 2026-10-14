@@ -189,8 +189,24 @@ def file_info(p):
 
 
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
-CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "settings.py",
-              "status.py", "transport.py"]
+CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
+              "settings.py", "status.py", "transport.py"]
+SHARE_KEEP = 8          # full-quality parts kept on GitHub for the phone to save
+
+
+def ensure_previews():
+    """previews.py (the lock for files sent to the phone) needs the 'cryptography' package: installed the
+    first time it's needed (only for "Save to phone")."""
+    try:
+        import cryptography  # noqa: F401
+    except ImportError:
+        log.info("Installing the 'cryptography' package (needed once for Save to phone)...")
+        subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "cryptography"], timeout=900,
+                       capture_output=True)
+        import importlib
+        importlib.invalidate_caches()
+    import previews
+    return previews
 
 
 # ---------------------------------------------------------------- watch folder
@@ -744,6 +760,20 @@ class Agent:
 
     def run_command(self, kind, c):
         name = plain_name(c.get("file"))
+        if kind in ("post_part", "mark_posted", "share_part"):
+            movie, mode, part, f = self.find_part(c)
+            if kind == "mark_posted":
+                status.set_post(movie["id"], mode, part["n"], "posted")
+                status.flush()
+                return "Marked as posted"
+            if kind == "share_part":
+                return "Ready to save on your phone: " + self.share_part(movie, mode, part, f)
+            if not self.cfg.get("composio_api_key"):
+                raise RuntimeError("TikTok isn't set up on the laptop yet (composio_api_key in config.json)")
+            ok, error = self.send_part(movie, mode, part, manual=True)
+            if not ok:
+                raise RuntimeError(error or "TikTok didn't accept it")
+            return "Sent to TikTok"
         if kind == "queue_order":
             order = [n for n in (plain_name(x) for x in c.get("order") or []) if n]
             with self.lock:
@@ -922,13 +952,25 @@ class Agent:
             log.info("Posting: %s", reason)
             return None
         movie, mode, part = pick
+        label = LABELS.get(mode, mode)
+        log.info("Posting %s [%s] Part %s%s", movie["name"], label, part["n"], " - dry run, nothing posted" if dry_run else "")
+        if dry_run:
+            return pick
+        self.send_part(movie, mode, part, cfg)
+        state = status.load_state() or {}
+        count = posting.posted_today(state, datetime.now(tz))
+        status.set_posting(cfg.get("enabled"), posting.next_at(datetime.now(tz), cfg, count), count)
+        status.flush()
+        return pick
+
+    def send_part(self, movie, mode, part, cfg=None, manual=False):
+        """Sends one part to TikTok (drafts by default, or straight onto the profile with method=direct).
+        Records the result in state.json and tells the phone. Returns (ok, error)."""
+        cfg = cfg or self.remote_settings["posting"]
+        self.state_ready()
         privacy = posting.PRIVACY.get(str(cfg.get("privacy", "self_only")).lower(), "SELF_ONLY")
         caption = posting.build_caption(part.get("caption"), cfg.get("hashtags"))
         label = LABELS.get(mode, mode)
-        log.info("Posting %s [%s] Part %s (%s)%s", movie["name"], label, part["n"], privacy,
-                 " - dry run, nothing posted" if dry_run else "")
-        if dry_run:
-            return pick
         status.set_post(movie["id"], mode, part["n"], "scheduled")
         creds = {"api_key": self.cfg["composio_api_key"], "user_id": self.cfg["composio_user_id"],
                  "connected_account_id": self.cfg["composio_connected_account_id"],
@@ -942,7 +984,8 @@ class Agent:
         url = ref if ref and str(ref).startswith("http") else None
         status.set_post(movie["id"], mode, part["n"], ("posted" if direct else "inbox") if ok else "failed", url=url,
                         error=None if ok else error)
-        title = f"{movie['name']}: Part {part['n']}"
+        what = "Clip" if mode == "clips" else "Part"
+        title = f"{movie['name']}: {what} {part['n']}"
         if ok and not direct:
             self.notify(f"📲 In your TikTok drafts: {title}",
                         f"[{label}] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n{caption}",
@@ -953,14 +996,60 @@ class Agent:
                         f"[{label}] Posted {where}.{(' ' + url) if url else ''}\n\n📝 Caption:\n{caption}",
                         kind="posted", tags=["outbox_tray"])
         else:
-            self.notify(f"⚠️ TikTok post failed: {title}",
-                        f"[{label}] {error}\nIt will be tried again at the next posting time "
-                        f"(up to {posting.MAX_ATTEMPTS} tries).", kind="post_failed", tags=["warning"])
-        state = status.load_state() or {}
-        count = posting.posted_today(state, datetime.now(tz))
-        status.set_posting(cfg.get("enabled"), posting.next_at(datetime.now(tz), cfg, count), count)
+            again = "" if manual else (f"\nIt will be tried again at the next posting time "
+                                       f"(up to {posting.MAX_ATTEMPTS} tries).")
+            self.notify(f"⚠️ TikTok post failed: {title}", f"[{label}] {error}{again}",
+                        kind="post_failed", tags=["warning"])
         status.flush()
-        return pick
+        return ok, error
+
+    def find_part(self, c):
+        """(movie, mode, part) from state.json for a command's movie_id/mode/n, checking the file is here."""
+        self.state_ready()
+        status.refresh()
+        state = status.load_state() or {}
+        movie = next((m for m in state.get("movies", []) if m.get("id") == c.get("movie_id")), None)
+        if not movie:
+            raise LookupError("That movie isn't in the list any more")
+        mode = str(c.get("mode") or "")
+        part = next((p for p in (movie.get("modes", {}).get(mode) or {}).get("parts", [])
+                     if str(p.get("n")) == str(c.get("n"))), None)
+        if not part:
+            raise LookupError("That part isn't in the list any more")
+        f = (self.output / part["drive_path"]).resolve()
+        if self.output.resolve() not in f.parents:
+            raise ValueError("bad file path")
+        if not f.is_file():
+            raise FileNotFoundError("The part isn't on the laptop (not downloaded yet, or it was cleaned up)")
+        return movie, mode, part, f
+
+    def share_part(self, movie, mode, part, f):
+        """Puts a full-quality copy of one part (encrypted with the ntfy topic, like the previews) on the
+        'previews' branch so the phone can save it. Keeps only the newest SHARE_KEEP shared parts."""
+        if not self.cfg.get("ntfy_topic"):
+            raise RuntimeError("ntfy_topic isn't set in config.json (it's the lock for files sent to the phone)")
+        data = f.read_bytes()
+        if len(data) > 95_000_000:
+            raise ValueError(f"The part is {round(len(data) / 1e6)} MB; the phone can get files up to 95 MB")
+        prev = ensure_previews()
+        blob = self.gh.create_blob(prev.encrypt(data, self.cfg["ntfy_topic"]))
+        path = f"share/{movie['id']}/{mode}-{int(part['n']):03}.bin"
+        with self.lock:
+            shared = [x for x in self.memory.setdefault("shared", []) if x != path] + [path]
+            self.memory["shared"] = shared[-SHARE_KEEP:]
+            self._save_memory()
+        for attempt in range(3):           # the cutter may be rewriting this branch at the same moment
+            files = self.gh.branch_files(prev.BRANCH)
+            files = {p: s for p, s in files.items() if not p.startswith("share/") or p in self.memory["shared"]}
+            files[path] = blob
+            try:
+                self.gh.replace_branch(prev.BRANCH, files, f"share {path}")
+                break
+            except Exception:
+                if attempt == 2:
+                    raise
+                time.sleep(3)
+        return path
 
     # ---- 5. laptop.json
     def snapshot(self):
@@ -989,7 +1078,8 @@ class Agent:
                             + [dict(f, folder="failed") for f in self.folder_files(self.output / "Failed")]),
                     "commands": dict({cid: {"status": "working", "note": "Being cut on GitHub"}
                                       for cid in self.working_clip_ids()}, **self.cmd_status), "commands_done": sorted(self.memory["commands_done"])[-150:],
-                    "originals": sorted(self.memory["originals"]), "version": 2}
+                    "originals": sorted(self.memory["originals"]), "shared": list(self.memory.get("shared", [])),
+                    "version": 2}
 
     def folder_files(self, folder, limit=150):
         """Movie files (top level only) in a folder, newest first."""

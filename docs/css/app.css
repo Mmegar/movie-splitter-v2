@@ -690,3 +690,6 @@ input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; bo
 .rot90 { transform: rotate(90deg); }
 .bin-sum { width: 100%; text-align: left; display: flex; align-items: center; gap: 12px; }
 .sheet--media .sheet-body > * { flex-shrink: 0; }
+.save-steps { display: flex; flex-direction: column; gap: 10px; }
+.save-step { display: flex; align-items: center; gap: 10px; font-size: 16px; padding: 14px; border-radius: var(--r-md); background: var(--bg-elev2); line-height: 1.4; }
+.save-step .ic { width: 22px; height: 22px; flex: none; color: var(--accent-text); }

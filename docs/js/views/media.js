@@ -1,5 +1,5 @@
 // Preview player and the custom-clip editor (both bottom sheets).
-import { esc, icon, toast, haptic, openSheet } from '../ui.js';
+import { esc, icon, toast, haptic, openSheet, confirmSheet, copyText } from '../ui.js';
 import { timecode, shortDuration, movieLength, MODE_LABELS, pendingCommands, commandState } from '../logic.js';
 
 const MAX_CLIP = 600;   // TikTok's longest upload: 10 minutes
@@ -267,4 +267,123 @@ export function pendingClipsHtml(st, movie) {
       <span class="row-main"><span class="row-title">${esc(c.title || 'Custom clip')} <span class="muted">${timecode(c.start)}–${timecode(c.end)}</span></span>
       <span class="row-sub ${bad ? 'tone-bad-text' : ''}">${esc(bad ? `Couldn't make it: ${s.note}` : s.note)}</span></span></div>`;
   }).join('')}</div>`;
+}
+
+// ---------- save a full-quality part to the phone ----------
+const partKey = (movie, mode, part) => `share/${movie.id}/${mode}-${String(part.n).padStart(3, '0')}.bin`;
+const fileName = (part) => String(part.drive_path || 'part.mp4').split('/').pop();
+
+export async function openSavePart(ctx, movie, mode, part) {
+  const key = partKey(movie, mode, part);
+  let asked = false, timer = null, file = null;
+  await openSheet({
+    title: 'Save to phone',
+    className: 'sheet--media',
+    body: `
+      <p class="media-sub">${esc(movie.name)} · ${mode === 'clips' ? 'Clip' : 'Part'} ${part.n} · full quality</p>
+      <div class="save-steps" data-steps></div>
+      <div class="sheet-actions"><button class="btn btn--primary btn--block" data-act hidden></button></div>
+      <p class="note">The laptop sends the part to GitHub, locked with your ntfy name, and this phone unlocks it. Only the 8 newest are kept there.</p>`,
+    onMount(el, close) {
+      const steps = el.querySelector('[data-steps]');
+      const act = el.querySelector('[data-act]');
+      const show = (icn, text, btn = null) => {
+        steps.innerHTML = `<div class="save-step">${icn === 'spin' ? '<span class="spinner"></span>' : icon(icn)}<span>${esc(text)}</span></div>`;
+        act.hidden = !btn;
+        if (btn) act.innerHTML = btn;
+      };
+      async function download() {
+        clearInterval(timer);
+        show('spin', 'Downloading and unlocking…');
+        try {
+          const url = await blobUrl(ctx.store, key, 'video/mp4');
+          if (!url) throw new Error('Not on GitHub yet.');
+          const blob = await (await fetch(url)).blob();
+          file = new File([blob], fileName(part), { type: 'video/mp4' });
+          show('check', `Ready (${Math.round(blob.size / 1e5) / 10} MB). Tap Save, then choose “Save Video”.`, `${icon('inbox')}Save video`);
+        } catch (e) { show('alert', previewError(e, ctx.store.isDemo())); }
+      }
+      function check() {
+        const st = ctx.store.state;
+        const lp = (st.data && st.data.laptop) || {};
+        if ((lp.shared || []).includes(key)) { download(); return true; }
+        const cmd = asked && pendingCommands(st.data.commands, lp, 'share_part').concat(
+          ((st.data.commands && st.data.commands.json && st.data.commands.json.commands) || []).filter((c) => c.type === 'share_part'))
+          .reverse().find((c) => c.movie_id === movie.id && c.mode === mode && String(c.n) === String(part.n));
+        const s = cmd && commandState(cmd, lp);
+        if (s && s.status === 'failed') { clearInterval(timer); show('alert', `The laptop couldn't send it: ${s.note}`); return true; }
+        if (asked) show('spin', s && s.status === 'working' ? 'The laptop is sending it…' : 'Waiting for the laptop (it checks every 30 seconds)…');
+        return false;
+      }
+      act.addEventListener('click', async () => {
+        if (!file) return;
+        haptic();
+        try {
+          if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file] });
+          else {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(file); a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
+          }
+        } catch (e) { if (e && e.name !== 'AbortError') toast(e.message || "Couldn't open the share sheet.", { kind: 'err' }); }
+      });
+      (async () => {
+        if (ctx.store.isDemo()) { show('info', 'In your real app, the full-quality part downloads here and you tap Save Video.'); return; }
+        if (check()) return;
+        if (!asked) {
+          asked = true;
+          show('spin', 'Asking the laptop…');
+          try { await ctx.store.sendCommand({ type: 'share_part', movie_id: movie.id, mode, n: part.n }); } catch (e) { show('alert', e.message); return; }
+          check();
+        }
+        timer = setInterval(() => { ctx.store.refresh(); check(); }, 10000);
+      })();
+      el.closest('.sheet-wrap').addEventListener('click', (e) => { if (e.target.closest('[data-close]')) clearInterval(timer); });
+    },
+  });
+  clearInterval(timer);
+}
+
+// ---------- part actions ----------
+export async function openPartActions(ctx, movie, mode, part) {
+  const label = mode === 'clips' ? `Clip ${part.n}` : `Part ${part.n}`;
+  const posted = part.post && ['posted', 'inbox'].includes(part.post.status);
+  const v = await openSheet({
+    className: 'sheet--action',
+    body: `<div class="action-card">
+        <div class="action-msg"><strong>${esc(movie.name)} · ${esc(label)}</strong></div>
+        <button class="action-btn" data-v="post">Send to TikTok now</button>
+        <button class="action-btn" data-v="save">Save to phone</button>
+        ${posted ? '' : '<button class="action-btn" data-v="mark">Mark as posted</button>'}
+        <button class="action-btn" data-v="path">Copy file path</button>
+      </div>
+      <button class="action-btn action-cancel" data-close>Cancel</button>`,
+    onMount: (el, close) => el.addEventListener('click', (e) => { const b = e.target.closest('[data-v]'); if (b) close(b.dataset.v); }),
+  });
+  if (!v) return;
+  if (v === 'save') { openSavePart(ctx, movie, mode, part); return; }
+  if (v === 'path') { const ok = await copyText(part.drive_path || ''); toast(ok ? 'File path copied' : "Couldn't copy", { kind: ok ? 'ok' : 'err' }); return; }
+  const posting = ((ctx.store.state.data.settings || {}).json || {}).posting || {};
+  const direct = posting.method === 'direct';
+  if (v === 'post') {
+    const ok = await confirmSheet({
+      title: `Send ${label} to TikTok now?`,
+      message: direct ? 'It goes straight onto your profile (as set in Settings).' : 'It lands in your TikTok inbox: tap the TikTok notification, paste the caption and post. The caption is sent to your phone too.',
+      confirm: 'Send now',
+    });
+    if (!ok) return;
+  }
+  try {
+    await ctx.store.sendCommand({ type: v === 'post' ? 'post_part' : 'mark_posted', movie_id: movie.id, mode, n: part.n });
+    haptic();
+    toast(v === 'post' ? 'Sent to the laptop. It goes to TikTok within a minute.' : 'Marked as posted');
+  } catch (e) { toast(e.message || "Couldn't send that.", { kind: 'err', ms: 4500 }); }
+}
+
+/** A line under a part while a manual action for it is on its way. */
+export function partPendingHtml(st, movie, mode, part) {
+  const cmds = pendingCommands(st.data.commands, st.data.laptop).filter((c) =>
+    ['post_part', 'mark_posted'].includes(c.type) && c.movie_id === movie.id && c.mode === mode && String(c.n) === String(part.n));
+  if (!cmds.length) return '';
+  const c = cmds[cmds.length - 1];
+  return `<p class="part-post"><span class="busy"><span class="spinner"></span>${c.type === 'post_part' ? 'Sending to TikTok…' : 'Marking as posted…'}</span></p>`;
 }
