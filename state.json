@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:12:25+07:00",
+ "updated": "2026-10-14T17:22:38+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -388,10 +388,10 @@
        "caption": "when they said 'Why don’t you stay?' I felt that 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "kung-fu-hustle-2004/stretch-003.bin",
        "post": {
-        "status": "failed",
-        "at": "2026-10-14T17:12:22+07:00",
+        "status": "scheduled",
+        "at": "2026-10-14T17:22:38+07:00",
         "url": null,
-        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141812225D08B67B570A6A1F00F2\"}}",
+        "error": null,
         "attempts": 7
        }
       },
