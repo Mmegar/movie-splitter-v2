@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:33:23+13:00",
+ "updated": "2026-10-15T08:33:25+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 10,
+  "stage": "rendering",
+  "part": 11,
   "parts_total": 12
  },
  "queue": [],
@@ -1441,6 +1441,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:33:24+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 10 of 12 ready",
+   "message": "Part 10: 1:41:48 to 1:43:00 (73s)  interest score 68/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'And I’m pretty sure you know the rest, jerk!' 📱\nPart 10 🎬 · Part 11 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-15T08:31:27+13:00",
    "type": "part_ready",
