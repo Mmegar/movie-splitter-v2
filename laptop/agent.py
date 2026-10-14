@@ -191,7 +191,7 @@ def file_info(p):
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
               "settings.py", "status.py", "transport.py"]
-SHARE_KEEP = 8          # full-quality parts kept on GitHub for the phone to save
+SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
 
 def ensure_previews():
@@ -759,7 +759,7 @@ class Agent:
                     or self.cmd_status.get(cid, {}).get("status") == "working"):
                 continue
             kind = c.get("type")
-            if kind in ("clip", "post_part", "share_part", "post_all") and self.paused_reason():
+            if kind in ("clip", "post_part", "share_part", "post_all", "share_all") and self.paused_reason():
                 self.cmd_status[cid] = {"status": "waiting", "note": f"{self.paused_reason()}: it goes when you resume"}
                 continue
             try:
@@ -791,6 +791,8 @@ class Agent:
         name = plain_name(c.get("file"))
         if kind == "post_all":
             return self.post_all(c)
+        if kind == "share_all":
+            return self.share_all(c)
         if kind in ("post_part", "mark_posted", "share_part"):
             movie, mode, part, f = self.find_part(c)
             if kind == "mark_posted":
@@ -1191,6 +1193,28 @@ class Agent:
         if not f.is_file():
             raise FileNotFoundError("The part isn't on the laptop (not downloaded yet, or it was cleaned up)")
         return movie, mode, part, f
+
+    def share_all(self, c):
+        """'Save all to phone': puts the listed parts (the ones not already on GitHub) up for the phone, in
+        order, one at a time, so the phone can download each as soon as it's there."""
+        ns = [int(n) for n in (c.get("ns") or [])]
+        sent, missing = 0, []
+        for i, n in enumerate(ns, 1):
+            if self.paused_reason():
+                raise RuntimeError(f"Paused after {sent} of {len(ns)}")
+            self.cmd_status[str(c["id"])] = {"status": "working", "note": f"Sending part {n} ({i} of {len(ns)})…"}
+            self.heartbeat(force=True)
+            try:
+                movie, mode, part, f = self.find_part(dict(c, n=n))
+            except (LookupError, FileNotFoundError):
+                missing.append(n)
+                continue
+            path = f"share/{movie['id']}/{mode}-{n:03}.bin"
+            if path not in (self.memory.get("shared") or []):
+                self.share_part(movie, mode, part, f)
+            sent += 1
+            self.heartbeat(force=True)
+        return f"{sent} parts ready to save" + (f" (not on the laptop: {', '.join(map(str, missing))})" if missing else "")
 
     def share_part(self, movie, mode, part, f):
         """Puts a full-quality copy of one part (encrypted with the ntfy topic, like the previews) on the

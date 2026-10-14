@@ -429,3 +429,105 @@ export function sendAllHtml(st, movie) {
   if (!busy && Date.parse(c.at || 0) < hourAgo) return '';
   return `<div class="banner ${s.status === 'failed' ? 'banner--err' : busy ? 'banner--info' : ''}">${busy ? '<span class="spinner"></span>' : icon(s.status === 'failed' ? 'alert' : 'check')}<div><p><strong>${busy ? 'Sending to TikTok' : s.status === 'failed' ? 'Sending stopped' : 'Sent to TikTok'}</strong></p><p class="muted">${esc(s.note || '')}</p></div></div>`;
 }
+
+// ---------- save every part of a movie to the phone ----------
+const BATCH_BYTES = 250e6;   // the phone holds at most about this much before you save a batch
+
+/** Downloads every part in order and saves them to Photos a batch at a time (one tap per batch). */
+export async function saveAllParts(ctx, movie, mode) {
+  const parts = [...((movie.modes[mode] || {}).parts || [])].sort((a, b) => a.n - b.n);
+  const what = mode === 'clips' ? 'clip' : 'part';
+  if (!parts.length) return;
+  if (ctx.store.isDemo()) { toast('In your real app, every part downloads here and you save them all to Photos in one go.', { kind: 'info', ms: 4000 }); return; }
+  let closed = false, timer = null, cmd = null;
+  const ready = [];              // downloaded, not saved yet: { n, file }
+  let savedCount = 0, wake = null;
+  const wait = (ms) => new Promise((r) => { wake = r; timer = setTimeout(r, ms); });
+  await openSheet({
+    title: 'Save all to phone',
+    className: 'sheet--media',
+    body: `
+      <p class="media-sub">${esc(movie.name)} · ${parts.length} ${what}s · full quality</p>
+      <div class="save-steps" data-steps></div>
+      <div class="sheet-actions"><button class="btn btn--primary btn--block" data-act hidden></button></div>
+      <p class="note">They save in order. Tap the button, then choose “Save Videos” and they all go into Photos at once. Big movies come in a few batches so your phone doesn't run out of memory.</p>`,
+    onMount(el) {
+      const steps = el.querySelector('[data-steps]');
+      const act = el.querySelector('[data-act]');
+      const show = (icn, text) => { steps.innerHTML = `<div class="save-step">${icn === 'spin' ? '<span class="spinner"></span>' : icon(icn)}<span>${esc(text)}</span></div>`; };
+      const label = (list) => list.length === 1 ? `${what[0].toUpperCase()}${what.slice(1)} ${list[0].n}` : `${what[0].toUpperCase()}${what.slice(1)}s ${list[0].n}–${list[list.length - 1].n}`;
+      const offer = () => {
+        if (!ready.length) { act.hidden = true; return; }
+        const mb = Math.round(ready.reduce((s, r) => s + r.file.size, 0) / 1e6);
+        act.hidden = false;
+        act.innerHTML = `${icon('inbox')}Save ${label(ready)} (${ready.length} video${ready.length === 1 ? '' : 's'}, ${mb} MB)`;
+      };
+      act.addEventListener('click', async () => {
+        if (!ready.length) return;
+        haptic();
+        const batch = ready.slice();
+        const files = batch.map((r) => r.file);
+        try {
+          if (navigator.canShare && navigator.canShare({ files })) await navigator.share({ files });
+          else for (const f of files) { const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; document.body.appendChild(a); a.click(); a.remove(); }
+        } catch (e) {
+          if (e && e.name !== 'AbortError') toast(e.message || "Couldn't open the share sheet.", { kind: 'err' });
+          return;
+        }
+        ready.splice(0, batch.length);
+        savedCount += batch.length;
+        offer();
+        if (wake) wake();
+      });
+      el.closest('.sheet-wrap').addEventListener('click', (e) => { if (e.target.closest('[data-close]')) { closed = true; if (wake) wake(); } });
+
+      const pad = (n) => String(n).padStart(3, '0');
+      async function fetchPart(key) {
+        try { const buf = await ctx.store.getPreview(key); return buf; } catch { return null; }
+      }
+      (async () => {
+        for (let i = 0; i < parts.length && !closed; i++) {
+          const p = parts[i];
+          while (!closed && ready.reduce((s, r) => s + r.file.size, 0) >= BATCH_BYTES) {
+            show('check', `${savedCount + ready.length} of ${parts.length} downloaded. Save these, then the rest carry on.`);
+            await wait(60000);
+          }
+          if (closed) break;
+          show('spin', `Downloading ${what} ${p.n} (${i + 1} of ${parts.length})…`);
+          let buf = await fetchPart(`${movie.id}/full/${mode}-${pad(p.n)}.bin`);
+          const shareKey = `share/${movie.id}/${mode}-${pad(p.n)}.bin`;
+          if (!buf && ((ctx.store.state.data.laptop || {}).shared || []).includes(shareKey)) buf = await fetchPart(shareKey);
+          if (!buf && !cmd) {            // not on GitHub: ask the laptop for this one and all after it
+            try {
+              cmd = await ctx.store.sendCommand({ type: 'share_all', movie_id: movie.id, mode, ns: parts.slice(i).map((x) => x.n) });
+            } catch (e) { show('alert', e.message || "Couldn't ask the laptop."); offer(); return; }
+          }
+          while (!buf && !closed) {
+            const lp = ctx.store.state.data.laptop || {};
+            const s = commandState(cmd, lp);
+            if ((lp.shared || []).includes(shareKey)) { buf = await fetchPart(shareKey); if (buf) break; }
+            if (s.status === 'failed' || s.status === 'done') {
+              if (s.status === 'failed') { show('alert', `The laptop stopped: ${s.note}`); offer(); return; }
+              break;                      // done but this one isn't there: not on the laptop, skip it
+            }
+            show('spin', `${savedCount + ready.length} of ${parts.length} ready. ${s.status === 'working' ? s.note || 'The laptop is sending them…' : 'Waiting for the laptop (it checks every 30 seconds)…'}`);
+            offer();
+            await wait(10000);
+            if (!closed) await ctx.store.refresh();
+          }
+          if (closed) break;
+          if (!buf) { toast(`${what[0].toUpperCase()}${what.slice(1)} ${p.n} isn't on the laptop, skipped`, { kind: 'info' }); continue; }
+          const name = String(p.drive_path || `part-${p.n}.mp4`).split('/').pop();
+          ready.push({ n: p.n, file: new File([buf], name, { type: 'video/mp4' }) });
+          offer();
+        }
+        if (!closed) show('check', ready.length ? `All downloaded. Tap Save to put ${ready.length === parts.length ? 'them' : 'the last ones'} in Photos.` : `Done: ${savedCount} saved.`);
+        while (!closed && ready.length) await wait(60000);
+        if (!closed && savedCount) show('check', `All ${savedCount} saved to your phone.`);
+      })();
+    },
+  });
+  closed = true;
+  clearTimeout(timer);
+  if (wake) wake();
+}

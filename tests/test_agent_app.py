@@ -251,6 +251,15 @@ class PartActionTest(base.AgentTestBase):
         self.assertEqual(lj["shared"], ["share/m/stretch-003.bin"])
         self.assertEqual(lj["commands"]["p3"]["status"], "done")
 
+    def test_save_all_shares_every_part_in_order_and_skips_missing(self):
+        a = self.make_agent()
+        commands(self.fake, {"id": "sa", "type": "share_all", "movie_id": "m", "mode": "stretch", "ns": [3, 9]})
+        a.check_commands()
+        lj = self.fake.json_file("laptop.json")
+        self.assertEqual(lj["shared"], ["share/m/stretch-003.bin"])
+        self.assertEqual(lj["commands"]["sa"], {"status": "done",
+                                                "note": "1 parts ready to save (not on the laptop: 9)"})
+
     def test_big_part_goes_up_in_pieces(self):
         import previews
         a = self.make_agent()
