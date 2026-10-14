@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:55:23+13:00",
+ "updated": "2026-10-14T15:55:44+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -297,6 +297,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 11.mp4",
        "caption": "I screamed. my neighbours screamed. 📢\nPart 11 🎬 · Part 12 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "the-notebook-2004/highlights-011.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 12,
+       "start": 6323.8,
+       "end": 6402.7,
+       "seconds": 78.9,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 12.mp4",
+       "caption": "this is cinema and I'm tired of pretending it's not 🎬\nPart 12 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "the-notebook-2004/highlights-012.bin",
        "post": {
         "status": "none",
         "at": null,
