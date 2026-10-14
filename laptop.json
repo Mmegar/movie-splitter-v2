@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-14T08:51:59+07:00",
+ "updated": "2026-10-14T08:52:32+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
-  "percent": 86
+  "percent": 93
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
    "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
-   "percent": 86
+   "percent": 93
   }
  ],
  "uploaded": [
