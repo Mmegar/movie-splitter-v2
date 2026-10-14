@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T05:01:08+07:00",
+ "updated": "2026-10-15T05:01:14+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -56,20 +56,7 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {
-  "mv8fsbindxat": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mv8gp92oprwa": {
-   "status": "done",
-   "note": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4: Zoomed + tracking"
-  },
-  "mv8mh17wipl5": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150529301106C315AC104651C2B4\"}}"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
