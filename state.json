@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T02:41:09+07:00",
+ "updated": "2026-10-15T04:29:14+07:00",
  "run": {
   "active": false,
   "run_id": 38616962381,
@@ -37,10 +37,11 @@
        "caption": "'Sorry. Congratulations!' 💀 I can't\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "spider-man-across-the-spider-verse-2023/stretch-001.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-15T04:29:14+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
