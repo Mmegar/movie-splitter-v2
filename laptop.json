@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T07:13:36+07:00",
+ "updated": "2026-10-14T07:17:55+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -17,7 +17,14 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
+   "size_mb": 1991,
+   "modified": "2026-10-14T05:31:18+07:00",
+   "sending": false
+  }
+ ],
  "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -33,11 +40,6 @@
    "name": "Kung Fu Hustle 2004 1080p x264.mkv",
    "size_mb": 1738,
    "modified": "2026-10-14T05:34:17+07:00"
-  },
-  {
-   "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-   "size_mb": 1991,
-   "modified": "2026-10-14T05:31:18+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -49,10 +51,16 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mv7d1to8kmvj": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
-  "mv6kcq56w73o"
+  "mv6kcq56w73o",
+  "mv7d1to8kmvj"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit"
