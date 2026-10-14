@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:06:48+07:00",
+ "updated": "2026-10-14T15:06:50+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -1167,6 +1167,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T15:06:50+07:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
+   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101416064708F62A3246C5EC1662A1\"}}"
+  },
   {
    "at": "2026-10-14T14:56:28+07:00",
    "type": "post_failed",
