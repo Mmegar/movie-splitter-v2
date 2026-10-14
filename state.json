@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:46:56+13:00",
+ "updated": "2026-10-14T16:47:03+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -23,12 +23,12 @@
   {
    "id": "kung-fu-hustle-2004",
    "name": "Kung Fu Hustle (2004)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-14T15:55:56+13:00",
-   "finished": null,
+   "finished": "2026-10-14T16:47:03+13:00",
    "duration": 5966.0,
-   "subtitles": null,
+   "subtitles": "translated to English from 'zh'",
    "error": null,
    "modes": {
     "stretch": {
@@ -291,7 +291,8 @@
     "w": 160,
     "h": 90,
     "path": "kung-fu-hustle-2004/thumbs.bin"
-   }
+   },
+   "subs_preview": "kung-fu-hustle-2004/subs.bin"
   },
   {
    "id": "the-notebook-2004",
@@ -853,6 +854,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T16:46:57+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 10 of 10 ready",
+   "message": "Part 10: 1:30:00 to 1:31:35 (95s)  interest score 71/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nwhy is nobody talking about this 🤨\nPart 10 🎬 · FINAL part. how are we feeling? 👇\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-14T10:46:23+07:00",
    "type": "post_failed",
