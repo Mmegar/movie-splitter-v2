@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:40:47+13:00",
+ "updated": "2026-10-15T08:40:48+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
@@ -1472,6 +1472,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:40:48+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
+   "message": "Best stretch: 4 parts, Highlights: 12 parts.\nThe laptop downloads them into Ready to post/Spider-Man Across The Spider-Verse (2023). The copy sent to GitHub has been deleted."
+  },
   {
    "at": "2026-10-15T08:40:41+13:00",
    "type": "part_ready",
