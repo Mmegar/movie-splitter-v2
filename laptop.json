@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:43:41+07:00",
+ "updated": "2026-10-14T10:43:49+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -103,6 +103,10 @@
   "mv7kbq6xwzcc": {
    "status": "failed",
    "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114254212895D398B730056278\"}}"
+  },
+  "mv7keubfgxsh": {
+   "status": "failed",
+   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114344D78E5CC26C2E6B051D20\"}}"
   }
  },
  "commands_done": [
@@ -126,7 +130,8 @@
   "mv7kbd893p8l",
   "mv7kbjn7fbgj",
   "mv7kbndicvc0",
-  "mv7kbq6xwzcc"
+  "mv7kbq6xwzcc",
+  "mv7keubfgxsh"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit",
