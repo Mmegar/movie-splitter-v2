@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-14T08:47:33+07:00",
+ "updated": "2026-10-14T08:48:05+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
+  "percent": 10
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
+   "file": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
+   "percent": 10
+  }
+ ],
  "uploaded": [
   {
    "file": "Kung Fu Hustle 2004 1080p x264.mkv",
@@ -34,7 +44,7 @@
    "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
    "size_mb": 1795,
    "modified": "2026-10-14T05:47:44+07:00",
-   "sending": false
+   "sending": true
   }
  ],
  "library": [
