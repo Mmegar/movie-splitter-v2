@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T09:07:15+07:00",
+ "updated": "2026-10-14T09:07:40+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -208,11 +208,11 @@
        "caption": "you're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "moon-knight-s01e02-summon-the-suit/stretch-005.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-14T09:07:15+07:00",
+        "status": "inbox",
+        "at": "2026-10-14T09:07:40+07:00",
         "url": null,
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       },
       {
