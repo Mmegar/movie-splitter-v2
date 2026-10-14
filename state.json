@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:59:16+13:00",
+ "updated": "2026-10-14T14:59:36+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Best stretch/The Notebook (2004) - Part 02.mp4",
        "caption": "watching this instead of sleeping again 🌚\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2799.3,
+       "end": 2876.5,
+       "seconds": 77.2,
+       "drive_path": "Ready to post/The Notebook (2004)/Best stretch/The Notebook (2004) - Part 03.mp4",
+       "caption": "when they said 'one thing in common.' I felt that 😭\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "the-notebook-2004/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
