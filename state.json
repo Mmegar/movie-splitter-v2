@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:42:44+13:00",
+ "updated": "2026-10-14T15:42:46+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "The Notebook (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 8,
+  "stage": "rendering",
+  "part": 9,
   "parts_total": 12
  },
  "queue": [],
@@ -504,6 +504,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T15:42:45+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Notebook (2004): Part 8 of 12 ready",
+   "message": "Part 8: 1:01:40 to 1:03:10 (90s)  interest score 57/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\ntherapist: it can't hurt you. this scene: 😈\nPart 8 🎬 · Part 9 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-14T15:40:25+13:00",
    "type": "part_ready",
