@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:53:19+07:00",
+ "updated": "2026-10-14T17:53:27+07:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
@@ -488,11 +488,11 @@
        "caption": "if this happened to me I'd move countries ✈️\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "kung-fu-hustle-2004/highlights-003.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-14T17:53:19+07:00",
+        "status": "failed",
+        "at": "2026-10-14T17:53:27+07:00",
         "url": null,
-        "error": null,
-        "attempts": 0
+        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101418532718689CF03448C923AFD8\"}}",
+        "attempts": 1
        }
       },
       {
