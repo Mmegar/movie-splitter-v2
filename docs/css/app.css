@@ -693,3 +693,5 @@ input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; bo
 .save-steps { display: flex; flex-direction: column; gap: 10px; }
 .save-step { display: flex; align-items: center; gap: 10px; font-size: 16px; padding: 14px; border-radius: var(--r-md); background: var(--bg-elev2); line-height: 1.4; }
 .save-step .ic { width: 22px; height: 22px; flex: none; color: var(--accent-text); }
+.mark-offer { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mark-offer p { margin: 0; font-size: 15px; }

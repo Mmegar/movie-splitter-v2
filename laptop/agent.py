@@ -793,6 +793,19 @@ class Agent:
             return self.post_all(c)
         if kind == "share_all":
             return self.share_all(c)
+        if kind == "cancel_post":
+            return self.cancel_post(str(c.get("target") or "all"))
+        if kind == "mark_posted" and c.get("ns"):
+            marked = []
+            for n in c["ns"]:
+                try:
+                    movie, mode, part, f = self.find_part(dict(c, n=n))
+                except (LookupError, FileNotFoundError):
+                    continue
+                status.set_post(movie["id"], mode, part["n"], "posted")
+                marked.append(str(n))
+            status.flush()
+            return f"Marked as posted: {', '.join(marked) or 'none'}"
         if kind in ("post_part", "mark_posted", "share_part"):
             movie, mode, part, f = self.find_part(c)
             if kind == "mark_posted":
@@ -1076,6 +1089,29 @@ class Agent:
 
     POST_RETRY_MINUTES = 10
 
+    def cancel_post(self, target):
+        """Stops a 'send all' (or every one, target "all"). Parts already in TikTok stay there."""
+        jobs = self.memory.get("post_jobs") or {}
+        hit = [cid for cid in jobs if target in (cid, "all")]
+        for cid in hit:
+            job = jobs.pop(cid)
+            self.command_over(cid, False, f"Cancelled. {job['total'] - len(job['left'])} of {job['total']} "
+                                          f"were sent before that")
+        with self.lock:
+            self._save_memory()
+        return "Stopped sending to TikTok" if hit else "Nothing was being sent"
+
+    def cancel_requested(self, cid):
+        """A Cancel tapped in the app while parts are going out (checked before each part)."""
+        try:
+            text, _ = self.gh.read_file("config/commands.json")
+            cmds = (json.loads(text) if text else {}).get("commands") or []
+        except Exception:
+            return False
+        done = self.memory["commands_done"]
+        return any(c.get("type") == "cancel_post" and str(c.get("target") or "all") in (cid, "all")
+                   and str(c.get("id")) not in done for c in cmds)
+
     def run_post_jobs(self):
         """Sends queued 'send all' parts strictly in order. When TikTok won't take more drafts for now, it
         waits and tries the same part again every 10 minutes (room frees up as drafts get posted), so in the
@@ -1111,6 +1147,9 @@ class Agent:
         jobs = self.memory["post_jobs"]
         while job["left"]:
             if self.paused_reason() or time.time() < job.get("next_try", 0):
+                return False
+            if self.cancel_requested(cid):
+                self.cancel_post(cid)
                 return False
             done = job["total"] - len(job["left"])
             n = job["left"][0]

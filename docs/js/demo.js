@@ -175,6 +175,13 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
         for (const p of parts) p.post = { status: 'inbox', at: iso(Date.now()), url: null, error: null };
         if (parts.length) note('posted', `📲 ${parts.length} parts in your TikTok drafts: ${movie.name}`, 'Open TikTok, tap each notification, paste the caption and post.', ['iphone']);
         finish(c, !!movie, `All ${parts.length} parts are in TikTok, in order`);
+      } else if (c.type === 'cancel_post') {
+        for (const [id, v] of Object.entries(lp.commands || {})) if (v.status === 'working' && [id, 'all'].includes(c.target || 'all')) lp.commands[id] = { status: 'failed', note: 'Cancelled. 2 of 6 were sent before that' };
+        finish(c, true, 'Stopped sending to TikTok');
+      } else if (c.type === 'mark_posted' && c.ns) {
+        const movie = d.state.movies.find((m) => m.id === c.movie_id);
+        for (const p of (movie && (movie.modes[c.mode] || {}).parts) || []) if (c.ns.includes(p.n)) p.post = { status: 'posted', at: iso(Date.now()), url: null, error: null };
+        finish(c, !!movie, `Marked as posted: ${c.ns.join(', ')}`);
       } else if (['post_part', 'mark_posted', 'share_part'].includes(c.type)) {
         const movie = d.state.movies.find((m) => m.id === c.movie_id);
         const part = movie && ((movie.modes[c.mode] || {}).parts || []).find((p) => String(p.n) === String(c.n));

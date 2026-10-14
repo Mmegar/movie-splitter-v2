@@ -1,7 +1,7 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
 import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
-import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml, saveAllParts } from './media.js';
+import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml, saveAllParts, cancelSending } from './media.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
 
@@ -179,6 +179,8 @@ export function createMoviesView(ctx) {
         if (part) openPartActions(ctx, m, detail.mode, part);
         return;
       }
+      const cancelBtn = e.target.closest('[data-cancelsend]');
+      if (cancelBtn) { haptic(); cancelSending(ctx, cancelBtn.dataset.cancelsend); return; }
       if (e.target.closest('[data-saveall]')) {
         haptic();
         const m = movieNow();

@@ -392,3 +392,38 @@ class PostAllStillCuttingTest(PostAllTest):
         cmd = self.check([(True, "v", None)])
         self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4", "M - Part 04.mp4", "M - Part 05.mp4"])
         self.assertEqual(cmd, {"status": "done", "note": "All 4 parts are in TikTok, in order"})
+
+
+class CancelPostTest(PostAllTest):
+    def test_cancel_while_waiting_at_tiktoks_limit(self):
+        self.check([(True, "v", None), (False, None, "spam_risk_too_many_pending_share")])
+        commands(self.fake, {"id": "all1", "type": "post_all", "movie_id": "m", "mode": "stretch"},
+                 {"id": "x1", "type": "cancel_post", "target": "all1"})
+        self.a.memory["post_jobs"]["all1"]["next_try"] = 0
+        self.check([])
+        cmds = self.fake.json_file("laptop.json")["commands"]
+        self.assertEqual(cmds["all1"], {"status": "failed", "note": "Cancelled. 1 of 3 were sent before that"})
+        self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4"])     # nothing more went
+        self.assertEqual(self.a.memory["post_jobs"], {})
+
+    def test_cancel_stops_before_the_next_part(self):
+        commands(self.fake, {"id": "all1", "type": "post_all", "movie_id": "m", "mode": "stretch"},
+                 {"id": "x2", "type": "cancel_post", "target": "all"})
+        cmd = self.check([])
+        self.assertEqual(self.sent, [])
+        self.assertEqual(cmd["status"], "failed")
+        self.assertTrue(cmd["note"].startswith("Cancelled"))
+
+    def test_parts_marked_posted_are_skipped_and_marking_many_works(self):
+        commands(self.fake, {"id": "mk", "type": "mark_posted", "movie_id": "m", "mode": "stretch", "ns": [2, 3]})
+        self.a.check_commands()
+        parts = self.fake.json_file("state.json")["movies"][0]["modes"]["stretch"]["parts"]
+        self.assertEqual([p["post"]["status"] for p in parts], ["inbox", "posted", "posted", "none"])
+        commands(self.fake, {"id": "all2", "type": "post_all", "movie_id": "m", "mode": "stretch"})
+        def fake(path, cap, priv, creds, publish=True):
+            self.sent.append(path.name)
+            return True, "v", None
+        with mock.patch.object(agent.posting, "post_video", fake), mock.patch.object(agent.time, "sleep"):
+            self.a.check_commands()
+        self.assertEqual(self.sent, ["M - Part 04.mp4"])
+        self.assertEqual(self.fake.json_file("laptop.json")["commands"]["all2"]["status"], "done")

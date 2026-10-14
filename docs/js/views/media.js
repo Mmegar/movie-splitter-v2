@@ -289,6 +289,7 @@ export async function openSavePart(ctx, movie, mode, part) {
     onMount(el, close) {
       const steps = el.querySelector('[data-steps]');
       const act = el.querySelector('[data-act]');
+      const offerMark = markOffer(el, ctx, movie, mode);
       const show = (icn, text, btn = null) => {
         steps.innerHTML = `<div class="save-step">${icn === 'spin' ? '<span class="spinner"></span>' : icon(icn)}<span>${esc(text)}</span></div>`;
         act.hidden = !btn;
@@ -327,7 +328,8 @@ export async function openSavePart(ctx, movie, mode, part) {
             const a = document.createElement('a');
             a.href = URL.createObjectURL(file); a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
           }
-        } catch (e) { if (e && e.name !== 'AbortError') toast(e.message || "Couldn't open the share sheet.", { kind: 'err' }); }
+        } catch (e) { if (e && e.name !== 'AbortError') toast(e.message || "Couldn't open the share sheet.", { kind: 'err' }); return; }
+        offerMark([part.n]);
       });
       (async () => {
         if (ctx.store.isDemo()) { show('info', 'In your real app, the full-quality part downloads here and you tap Save Video.'); return; }
@@ -399,6 +401,26 @@ export function partPendingHtml(st, movie, mode, part) {
 
 
 // ---------- send all parts of a movie ----------
+export async function cancelSending(ctx, id) {
+  const ok = await confirmSheet({
+    title: 'Stop sending to TikTok?',
+    message: "Parts already in your TikTok drafts stay there. The rest won't be sent. You can tap Send all again later; it skips parts marked as posted.",
+    confirm: 'Stop sending', destructive: true,
+  });
+  if (!ok) return;
+  try { await ctx.store.sendCommand({ type: 'cancel_post', target: id }); haptic(); toast('Stopping. The laptop stops before the next part.'); }
+  catch (e) { toast(e.message || "Couldn't send that.", { kind: 'err' }); }
+}
+
+async function markPosted(ctx, movie, mode, ns) {
+  try {
+    await ctx.store.sendCommand({ type: 'mark_posted', movie_id: movie.id, mode, ns });
+    haptic();
+    toast(ns.length === 1 ? 'Marked as posted. The laptop won\'t send it to TikTok.' : `${ns.length} marked as posted. The laptop won't send them to TikTok.`);
+    return true;
+  } catch (e) { toast(e.message || "Couldn't send that.", { kind: 'err' }); return false; }
+}
+
 export async function sendAllParts(ctx, movie, mode) {
   const parts = ((movie.modes[mode] || {}).parts || []);
   const todo = parts.filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status)));
@@ -427,7 +449,9 @@ export function sendAllHtml(st, movie) {
   const s = commandState(c, st.data.laptop);
   const busy = !['done', 'failed'].includes(s.status);
   if (!busy && Date.parse(c.at || 0) < hourAgo) return '';
-  return `<div class="banner ${s.status === 'failed' ? 'banner--err' : busy ? 'banner--info' : ''}">${busy ? '<span class="spinner"></span>' : icon(s.status === 'failed' ? 'alert' : 'check')}<div><p><strong>${busy ? 'Sending to TikTok' : s.status === 'failed' ? 'Sending stopped' : 'Sent to TikTok'}</strong></p><p class="muted">${esc(s.note || '')}</p></div></div>`;
+  const cancelling = busy && all.some((x) => x.type === 'cancel_post' && [c.id, 'all'].includes(x.target) && !['done', 'failed'].includes(commandState(x, st.data.laptop).status));
+  const cancelled = /^Cancelled/.test(s.note || '');
+  return `<div class="banner ${s.status === 'failed' && !cancelled ? 'banner--err' : busy ? 'banner--info' : ''}">${busy ? '<span class="spinner"></span>' : icon(s.status === 'failed' && !cancelled ? 'alert' : 'check')}<div><p><strong>${cancelling ? 'Cancelling…' : busy ? 'Sending to TikTok' : cancelled ? 'Sending cancelled' : s.status === 'failed' ? 'Sending stopped' : 'Sent to TikTok'}</strong></p><p class="muted">${esc(cancelling ? 'The laptop stops before the next part (within a minute).' : s.note || '')}</p></div>${busy && !cancelling ? `<button class="banner-act" data-cancelsend="${esc(c.id)}">Cancel</button>` : ''}</div>`;
 }
 
 // ---------- save every part of a movie to the phone ----------
@@ -454,6 +478,8 @@ export async function saveAllParts(ctx, movie, mode) {
     onMount(el) {
       const steps = el.querySelector('[data-steps]');
       const act = el.querySelector('[data-act]');
+      const savedNs = [];
+      const offerMark = markOffer(el, ctx, movie, mode);
       const show = (icn, text) => { steps.innerHTML = `<div class="save-step">${icn === 'spin' ? '<span class="spinner"></span>' : icon(icn)}<span>${esc(text)}</span></div>`; };
       const label = (list) => list.length === 1 ? `${what[0].toUpperCase()}${what.slice(1)} ${list[0].n}` : `${what[0].toUpperCase()}${what.slice(1)}s ${list[0].n}–${list[list.length - 1].n}`;
       const offer = () => {
@@ -476,6 +502,8 @@ export async function saveAllParts(ctx, movie, mode) {
         }
         ready.splice(0, batch.length);
         savedCount += batch.length;
+        savedNs.push(...batch.map((r) => r.n));
+        offerMark(savedNs.slice());
         offer();
         if (wake) wake();
       });
@@ -530,4 +558,24 @@ export async function saveAllParts(ctx, movie, mode) {
   closed = true;
   clearTimeout(timer);
   if (wake) wake();
+}
+
+/** After saving to the phone: "Posting these yourself?" with a Mark as posted button. */
+function markOffer(el, ctx, movie, mode) {
+  const box = document.createElement('div');
+  box.className = 'mark-offer';
+  box.hidden = true;
+  el.querySelector('.sheet-actions').after(box);
+  return (ns) => {
+    const posted = new Set(((movie.modes[mode] || {}).parts || []).filter((p) => p.post && p.post.status === 'posted').map((p) => p.n));
+    const todo = ns.filter((n) => !posted.has(n));
+    if (!todo.length) { box.hidden = true; return; }
+    const what = mode === 'clips' ? 'clip' : 'part';
+    box.hidden = false;
+    box.innerHTML = `<p class="muted">Posting ${todo.length === 1 ? 'it' : 'these'} yourself? Mark ${todo.length === 1 ? 'it' : 'them'} so the laptop doesn't send ${todo.length === 1 ? 'it' : 'them'} to TikTok too.</p>
+      <button class="btn btn--quiet btn--block" data-mark>${icon('check')}Mark ${todo.length === 1 ? `${what} ${todo[0]}` : `${todo.length} ${what}s`} as posted</button>`;
+    box.querySelector('[data-mark]').addEventListener('click', async () => {
+      if (await markPosted(ctx, movie, mode, todo)) { box.innerHTML = `<p class="muted">${icon('check')} Marked as posted.</p>`; }
+    });
+  };
 }
