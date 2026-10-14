@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:41:26+07:00",
+ "updated": "2026-10-15T00:41:37+07:00",
  "run": {
   "active": false,
   "run_id": 38552474182,
@@ -793,11 +793,11 @@
        "caption": "when they said 'Allie, you remember now, don’t you?' I felt that 😭\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "the-notebook-2004/highlights-002.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-15T00:41:26+07:00",
+        "status": "failed",
+        "at": "2026-10-15T00:41:37+07:00",
         "url": null,
-        "error": null,
-        "attempts": 2
+        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101501413651DF75B143AFCE4690D6\"}}",
+        "attempts": 3
        }
       },
       {
