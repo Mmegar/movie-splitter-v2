@@ -387,3 +387,36 @@ export function partPendingHtml(st, movie, mode, part) {
   const c = cmds[cmds.length - 1];
   return `<p class="part-post"><span class="busy"><span class="spinner"></span>${c.type === 'post_part' ? 'Sending to TikTok…' : 'Marking as posted…'}</span></p>`;
 }
+
+
+// ---------- send all parts of a movie ----------
+export async function sendAllParts(ctx, movie, mode) {
+  const parts = ((movie.modes[mode] || {}).parts || []);
+  const todo = parts.filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status)));
+  if (!todo.length) { toast('Every part was already sent', { kind: 'info' }); return; }
+  const label = (movie.modes[mode] && movie.modes[mode].label) || mode;
+  const what = mode === 'clips' ? 'clip' : 'part';
+  const ok = await confirmSheet({
+    title: `Send all ${todo.length} to TikTok?`,
+    message: `${label}: ${what}s ${todo.map((p) => p.n).join(', ')}, one after another in order. Each lands in your TikTok drafts with its own notification. If TikTok says too many drafts are waiting, the laptop holds the next one and tries again every 10 minutes, so post a few from your drafts and the rest keep coming. Nothing is skipped.`,
+    confirm: `Send all ${todo.length}`,
+  });
+  if (!ok) return;
+  try {
+    await ctx.store.sendCommand({ type: 'post_all', movie_id: movie.id, mode });
+    haptic();
+    toast('Sent to the laptop. Parts start going to TikTok within a minute.');
+  } catch (e) { toast(e.message || "Couldn't send that.", { kind: 'err', ms: 4500 }); }
+}
+
+/** Progress of a "send all" for this movie (shown above the parts). */
+export function sendAllHtml(st, movie) {
+  const all = (st.data.commands && st.data.commands.json && st.data.commands.json.commands) || [];
+  const hourAgo = Date.now() - 3600 * 1000;
+  const c = all.filter((x) => x.type === 'post_all' && x.movie_id === movie.id).pop();
+  if (!c) return '';
+  const s = commandState(c, st.data.laptop);
+  const busy = !['done', 'failed'].includes(s.status);
+  if (!busy && Date.parse(c.at || 0) < hourAgo) return '';
+  return `<div class="banner ${s.status === 'failed' ? 'banner--err' : busy ? 'banner--info' : ''}">${busy ? '<span class="spinner"></span>' : icon(s.status === 'failed' ? 'alert' : 'check')}<div><p><strong>${busy ? 'Sending to TikTok' : s.status === 'failed' ? 'Sending stopped' : 'Sent to TikTok'}</strong></p><p class="muted">${esc(s.note || '')}</p></div></div>`;
+}

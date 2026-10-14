@@ -1,7 +1,7 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
 import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
-import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml } from './media.js';
+import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml } from './media.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
 
@@ -126,8 +126,10 @@ export function createMoviesView(ctx) {
       ${pendingClipsHtml(st, m)}
       ${modes.length > 1 ? `<div class="segmented" role="tablist" aria-label="Mode">${modes.map((k) => `<button role="tab" aria-selected="${k === detail.mode}" data-mode="${k}">${esc(m.modes[k].label || MODE_LABELS[k])} <span class="count">${(m.modes[k].parts || []).length}</span></button>`).join('')}</div>` : ''}
       ${cutMap(m, detail.mode, settings)}
+      ${sendAllHtml(st, m)}
       <div class="section-head"><h3>${(md.parts || []).length} part${(md.parts || []).length === 1 ? '' : 's'}${md.planned ? ` of ${md.planned}` : ''}</h3>
-        <span class="link" title="On your laptop">On laptop: Ready to post/${esc(m.name)}</span></div>
+        ${(() => { const left = (md.parts || []).filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status))).length;
+          return left ? `<button class="btn btn--small btn--accent" data-sendall>${icon('send')}Send all ${left} to TikTok</button>` : '<span class="muted">All sent</span>'; })()}</div>
       ${(md.parts || []).length ? `<ol class="parts">${md.parts.map((p) => partRow(p, m, detail.mode)).join('')}${live ? `<li class="part part--pending"><span class="spinner"></span>Making part ${run.part} of ${run.parts_total}…</li>` : ''}</ol>`
         : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one is made; they arrive on your laptop shortly after.' : m.status === 'processing' ? 'This mode starts after the current one.' : '' })}
     `;
@@ -174,6 +176,12 @@ export function createMoviesView(ctx) {
         const m = movieNow();
         const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === pm.dataset.partmore);
         if (part) openPartActions(ctx, m, detail.mode, part);
+        return;
+      }
+      if (e.target.closest('[data-sendall]')) {
+        haptic();
+        const m = movieNow();
+        if (m) sendAllParts(ctx, m, detail.mode);
         return;
       }
       if (e.target.closest('[data-makeclip]')) {

@@ -169,6 +169,12 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       } else if (c.type === 'to_bin') {
         const f = take(lp.bin, c.file);
         finish(c, !!f, 'Put in the Recycle Bin');
+      } else if (c.type === 'post_all') {
+        const movie = d.state.movies.find((m) => m.id === c.movie_id);
+        const parts = movie ? ((movie.modes[c.mode] || {}).parts || []).filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status))) : [];
+        for (const p of parts) p.post = { status: 'inbox', at: iso(Date.now()), url: null, error: null };
+        if (parts.length) note('posted', `📲 ${parts.length} parts in your TikTok drafts: ${movie.name}`, 'Open TikTok, tap each notification, paste the caption and post.', ['iphone']);
+        finish(c, !!movie, `All ${parts.length} parts are in TikTok, in order`);
       } else if (['post_part', 'mark_posted', 'share_part'].includes(c.type)) {
         const movie = d.state.movies.find((m) => m.id === c.movie_id);
         const part = movie && ((movie.modes[c.mode] || {}).parts || []).find((p) => String(p.n) === String(c.n));

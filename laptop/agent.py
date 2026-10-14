@@ -755,11 +755,11 @@ class Agent:
                     continue
                 seen[key] = c["id"]
             cid = str(c.get("id") or "")
-            if (not cid or cid in done or cid in self.working_clip_ids()
+            if (not cid or cid in done or cid in self.working_clip_ids() or cid in (self.memory.get("post_jobs") or {})
                     or self.cmd_status.get(cid, {}).get("status") == "working"):
                 continue
             kind = c.get("type")
-            if kind in ("clip", "post_part", "share_part") and self.paused_reason():
+            if kind in ("clip", "post_part", "share_part", "post_all") and self.paused_reason():
                 self.cmd_status[cid] = {"status": "waiting", "note": f"{self.paused_reason()}: it goes when you resume"}
                 continue
             try:
@@ -767,12 +767,15 @@ class Agent:
                     clips.setdefault(str(c.get("movie_id") or ""), []).append(c)
                     continue
                 note = self.run_command(kind, c)
-                self.command_over(cid, True, note)
+                if note is not None or kind != "post_all":
+                    self.command_over(cid, True, note)
             except Exception as e:
                 log.warning("Command %s (%s) failed: %s", cid, kind, e)
                 self.command_over(cid, False, str(e)[:200])
         for mid, group in clips.items():
             self.start_clips(mid, group)
+        if self.memory.get("post_jobs"):
+            self.run_post_jobs()
 
     def command_over(self, cid, ok, note=None):
         with self.lock:
@@ -786,6 +789,8 @@ class Agent:
 
     def run_command(self, kind, c):
         name = plain_name(c.get("file"))
+        if kind == "post_all":
+            return self.post_all(c)
         if kind in ("post_part", "mark_posted", "share_part"):
             movie, mode, part, f = self.find_part(c)
             if kind == "mark_posted":
@@ -1042,6 +1047,131 @@ class Agent:
         status.flush()
         return ok, error
 
+    def post_all(self, c):
+        """'Send all parts to TikTok': queues every part of the movie (one mode) that hasn't been sent, in
+        order. run_post_jobs() then sends them one by one until all of them are in TikTok."""
+        if not self.cfg.get("composio_api_key"):
+            raise RuntimeError("TikTok isn't set up on the laptop yet (composio_api_key in config.json)")
+        self.state_ready()
+        status.refresh()
+        state = status.load_state() or {}
+        movie = next((m for m in state.get("movies", []) if m.get("id") == c.get("movie_id")), None)
+        if not movie:
+            raise LookupError("That movie isn't in the list any more")
+        mode = str(c.get("mode") or "")
+        parts = sorted((movie.get("modes", {}).get(mode) or {}).get("parts", []), key=lambda p: p.get("n", 0))
+        todo = [p["n"] for p in parts if (p.get("post") or {}).get("status") not in ("posted", "inbox")]
+        if not todo:
+            return "Every part was already sent"
+        cid = str(c["id"])
+        with self.lock:
+            self.memory.setdefault("post_jobs", {})[cid] = {"movie_id": movie["id"], "mode": mode, "left": todo,
+                                                            "total": len(todo), "next_try": 0, "fails": 0}
+            self._save_memory()
+        self.cmd_status[cid] = {"status": "working", "note": f"Sending {len(todo)} parts to TikTok, in order…"}
+        self.run_post_jobs()
+        return None                                    # finished later by run_post_jobs
+
+    POST_RETRY_MINUTES = 10
+
+    def run_post_jobs(self):
+        """Sends queued 'send all' parts strictly in order. When TikTok won't take more drafts for now, it
+        waits and tries the same part again every 10 minutes (room frees up as drafts get posted), so in the
+        end every part is in TikTok. Parts cut after the tap go too. Survives restarts (agent_memory.json)."""
+        jobs = self.memory.get("post_jobs") or {}
+        for cid, job in list(jobs.items()):
+            for _round in range(50):
+                if not self.send_job_parts(cid, job):          # waiting (TikTok, pause) or gave up
+                    break
+                more, cutting = self.unsent_parts(job)
+                if more:
+                    with self.lock:
+                        job["left"] += more
+                        job["total"] += len(more)
+                        self._save_memory()
+                    continue                                  # send the new ones straight away
+                if cutting:
+                    with self.lock:
+                        job["next_try"] = time.time() + 120
+                        self._save_memory()
+                    self.cmd_status[cid] = {"status": "working", "note": f"Sent {job['total']} so far. Waiting "
+                                            "for the next part to be cut, then it goes too"}
+                    self.heartbeat(force=True)
+                    break
+                with self.lock:
+                    jobs.pop(cid, None)
+                    self._save_memory()
+                self.command_over(cid, True, f"All {job['total']} parts are in TikTok, in order")
+                break
+
+    def send_job_parts(self, cid, job):
+        """Sends the job's parts in order. True when all of them went; False when it has to wait or gave up."""
+        jobs = self.memory["post_jobs"]
+        while job["left"]:
+            if self.paused_reason() or time.time() < job.get("next_try", 0):
+                return False
+            done = job["total"] - len(job["left"])
+            n = job["left"][0]
+            self.cmd_status[cid] = {"status": "working", "note": f"Sending part {n} ({done + 1} of {job['total']})…"}
+            self.heartbeat(force=True)
+            try:
+                movie, mode, part, f = self.find_part({"movie_id": job["movie_id"], "mode": job["mode"], "n": n})
+                if (part.get("post") or {}).get("status") in ("posted", "inbox"):
+                    ok, error = True, None                     # sent another way meanwhile
+                else:
+                    ok, error = self.send_part(movie, mode, part, manual=True)
+            except FileNotFoundError:
+                ok, error = False, "not on the laptop yet"
+            except LookupError as e:
+                ok, error = False, str(e)
+            with self.lock:
+                if ok:
+                    job["last_n"] = job["left"].pop(0)
+                    job["fails"] = 0
+                    job["next_try"] = 0
+                elif re.search(r"pending|spam_risk|too_many|rate.?limit|limit|not on the laptop", str(error), re.I):
+                    job["next_try"] = time.time() + self.POST_RETRY_MINUTES * 60
+                    why = ("the part isn't on the laptop yet" if "laptop" in str(error) else
+                           "TikTok is holding the rest until you post some drafts")
+                    self.cmd_status[cid] = {"status": "working", "note": f"Sent {done} of {job['total']}. "
+                                            f"Waiting: {why}. Trying part {n} again in {self.POST_RETRY_MINUTES} min"}
+                else:
+                    job["fails"] += 1
+                    job["next_try"] = time.time() + self.POST_RETRY_MINUTES * 60
+                    if job["fails"] >= 3:
+                        jobs.pop(cid, None)
+                        self._save_memory()
+                        self.command_over(cid, False, f"Sent {done} of {job['total']}, then part {n} kept "
+                                                      f"failing: {error}")
+                        return False
+                    self.cmd_status[cid] = {"status": "working", "note": f"Sent {done} of {job['total']}. Part "
+                                            f"{n} failed ({error}); trying again in {self.POST_RETRY_MINUTES} min"}
+                self._save_memory()
+            self.heartbeat(force=True)
+            if not ok:
+                return False
+            if job["left"]:
+                time.sleep(15)                                 # TikTok allows a few uploads a minute
+        return True
+
+    def unsent_parts(self, job):
+        """New parts of a 'send all' movie that came out after the tap (it may still be cutting)."""
+        if time.time() < job.get("next_try", 0):
+            return [], True
+        try:
+            status.refresh()
+            state = status.load_state() or {}
+        except Exception:
+            return [], True
+        movie = next((m for m in state.get("movies", []) if m.get("id") == job["movie_id"]), None)
+        if not movie:
+            return [], False
+        last = job.get("last_n", 0)
+        parts = sorted((movie.get("modes", {}).get(job["mode"]) or {}).get("parts", []), key=lambda p: p.get("n", 0))
+        more = [p["n"] for p in parts if p.get("n", 0) > last
+                and (p.get("post") or {}).get("status") not in ("posted", "inbox")]
+        return more, movie.get("status") not in ("done", "failed")
+
     def find_part(self, c):
         """(movie, mode, part) from state.json for a command's movie_id/mode/n, checking the file is here."""
         self.state_ready()
@@ -1115,8 +1245,12 @@ class Agent:
                     "library_folder": str(self.downloads).replace("\\", "/"),
                     "bin": ([dict(f, folder="done") for f in self.folder_files(self.output / "Done")]
                             + [dict(f, folder="failed") for f in self.folder_files(self.output / "Failed")]),
-                    "commands": dict({cid: {"status": "working", "note": "Being cut on GitHub"}
-                                      for cid in self.working_clip_ids()}, **self.cmd_status), "commands_done": sorted(self.memory["commands_done"])[-150:],
+                    "commands": {**{cid: {"status": "working", "note": "Being cut on GitHub"}
+                                      for cid in self.working_clip_ids()},
+                                     **{cid: {"status": "working", "note": f"Sending to TikTok: {j['total'] - len(j['left'])} "
+                                                                           f"of {j['total']} done"}
+                                        for cid, j in (self.memory.get("post_jobs") or {}).items()},
+                                     **self.cmd_status}, "commands_done": sorted(self.memory["commands_done"])[-150:],
                     "originals": sorted(self.memory["originals"]), "shared": list(self.memory.get("shared", [])),
                     "version": 2}
 

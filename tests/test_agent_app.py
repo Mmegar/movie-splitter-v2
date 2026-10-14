@@ -305,3 +305,69 @@ class ResumeTest(base.AgentTestBase):
         self.fake.put_file("config/settings.json", json.dumps({"paused": False}), "main")
         a.refresh_settings(force=True)
         self.assertEqual(self.fake.dispatches, [("make-parts.yml", {"ref": "main"})])
+
+
+class PostAllTest(base.AgentTestBase):
+    def setUp(self):
+        super().setUp()
+        st = status.empty_state()
+        parts = []
+        for n in (1, 2, 3, 4):
+            parts.append({"n": n, "drive_path": f"Ready to post/M/Best stretch/M - Part {n:02}.mp4", "caption": f"c{n}",
+                          "post": {"status": "inbox" if n == 1 else "none", "at": None, "url": None, "error": None}})
+            f = self.out / parts[-1]["drive_path"]
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_bytes(b"p%d" % n)
+        st["movies"] = [{"id": "m", "name": "M", "status": "done", "started": "2026-10-10T10:00:00+13:00",
+                         "modes": {"stretch": {"label": "Best stretch", "planned": 4, "parts": parts}}}]
+        self.fake.put_file("state.json", json.dumps(st), "status")
+        self.a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        commands(self.fake, {"id": "all1", "type": "post_all", "movie_id": "m", "mode": "stretch"})
+        self.sent = []
+
+    def check(self, results):
+        def fake(path, cap, priv, creds, publish=True):
+            self.sent.append(path.name)
+            return results.pop(0)
+        with mock.patch.object(agent.posting, "post_video", fake), mock.patch.object(agent.time, "sleep"):
+            self.a.check_commands()
+        return self.fake.json_file("laptop.json")["commands"]["all1"]
+
+    def test_sends_every_part_not_sent_yet_in_order(self):
+        cmd = self.check([(True, "v", None)] * 3)
+        self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4", "M - Part 04.mp4"])  # 1 was sent before
+        self.assertEqual(cmd, {"status": "done", "note": "All 3 parts are in TikTok, in order"})
+
+    def test_waits_at_tiktoks_limit_then_carries_on_in_order(self):
+        cmd = self.check([(True, "v", None), (False, None, "spam_risk_too_many_pending_share")])
+        self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4"])
+        self.assertEqual(cmd["status"], "working")
+        self.assertIn("Trying part 3 again", cmd["note"])
+        self.check([])                                         # too early: nothing is sent
+        self.assertEqual(len(self.sent), 2)
+        b = self.make_agent(composio_api_key="k", composio_user_id="u")   # e.g. after a restart
+        b.memory["post_jobs"]["all1"]["next_try"] = 0           # 10 minutes later
+        self.a = b
+        cmd = self.check([(True, "v", None), (True, "v", None)])
+        self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4", "M - Part 03.mp4", "M - Part 04.mp4"])
+        self.assertEqual(cmd["status"], "done")
+
+
+class PostAllStillCuttingTest(PostAllTest):
+    def test_parts_cut_later_go_too_in_order(self):
+        st = self.fake.json_file("state.json", "status")
+        st["movies"][0]["status"] = "processing"
+        self.fake.put_file("state.json", json.dumps(st), "status")
+        cmd = self.check([(True, "v", None)] * 3)
+        self.assertEqual(cmd["status"], "working")             # movie still cutting: waits for more
+        self.assertIn("next part", cmd["note"])
+        p5 = dict(st["movies"][0]["modes"]["stretch"]["parts"][-1], n=5, drive_path="Ready to post/M/Best stretch/M - Part 05.mp4")
+        p5["post"] = {"status": "none"}
+        (self.out / p5["drive_path"]).write_bytes(b"p5")
+        st["movies"][0]["modes"]["stretch"]["parts"].append(p5)
+        st["movies"][0]["status"] = "done"
+        self.fake.put_file("state.json", json.dumps(st), "status")
+        self.a.memory["post_jobs"]["all1"]["next_try"] = 0
+        cmd = self.check([(True, "v", None)])
+        self.assertEqual(self.sent, ["M - Part 02.mp4", "M - Part 03.mp4", "M - Part 04.mp4", "M - Part 05.mp4"])
+        self.assertEqual(cmd, {"status": "done", "note": "All 4 parts are in TikTok, in order"})
