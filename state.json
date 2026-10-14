@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T15:23:14+13:00",
+ "updated": "2026-10-14T15:23:38+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -147,6 +147,21 @@
        "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 01.mp4",
        "caption": "watching this instead of sleeping again 🌚\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 595.5,
+       "end": 679.8,
+       "seconds": 84.3,
+       "drive_path": "Ready to post/The Notebook (2004)/Highlights/The Notebook (2004) - Part 02.mp4",
+       "caption": "when they said 'Allie, you remember now, don’t you?' I felt that 😭\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "the-notebook-2004/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
