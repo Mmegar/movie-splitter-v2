@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:08:46+13:00",
+ "updated": "2026-10-14T17:08:50+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 7
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 7,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 12,
      "parts": []
     }
    },
@@ -878,6 +878,18 @@
   "posted_today": 7
  },
  "events": [
+  {
+   "at": "2026-10-14T17:08:50+13:00",
+   "type": "planned",
+   "title": "[Highlights] Colony (2026): 12 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Colony (2026)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-14T17:08:49+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Colony (2026): 7 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Colony (2026)/Best stretch as they're made."
+  },
   {
    "at": "2026-10-14T16:57:52+13:00",
    "type": "started",
