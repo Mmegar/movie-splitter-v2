@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:23:27+07:00",
+ "updated": "2026-10-14T17:23:48+07:00",
  "run": {
   "active": false,
   "run_id": 38509539362,
@@ -420,10 +420,11 @@
        "caption": "me to my group chat: 'Who eats meat?' 📱\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "kung-fu-hustle-2004/stretch-005.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-14T17:23:48+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
