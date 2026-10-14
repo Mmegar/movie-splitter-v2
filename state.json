@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-14T11:26:03+07:00",
+ "updated": "2026-10-14T17:26:05+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
-  "mode": "stretch",
-  "stage": "uploading",
-  "part": 7,
-  "parts_total": 7
+  "mode": "highlights",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 12
  },
  "queue": [],
  "movies": [
@@ -985,6 +985,12 @@
   "posted_today": 7
  },
  "events": [
+  {
+   "at": "2026-10-14T17:25:45+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Colony (2026): Part 7 of 7 ready",
+   "message": "Part 7: 1:09:26 to 1:12:03 (157s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nthe way they said 'Wait a minute!' 🫠\nPart 7 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T17:22:11+13:00",
    "type": "part_ready",
