@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T07:18:38+07:00",
+ "updated": "2026-10-14T07:22:07+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -25,15 +25,15 @@
    "sending": false
   },
   {
-   "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
-   "size_mb": 1795,
-   "modified": "2026-10-14T05:47:44+07:00",
-   "sending": false
-  },
-  {
    "name": "Kung Fu Hustle 2004 1080p x264.mkv",
    "size_mb": 1738,
    "modified": "2026-10-14T05:34:17+07:00",
+   "sending": false
+  },
+  {
+   "name": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv",
+   "size_mb": 1795,
+   "modified": "2026-10-14T05:47:44+07:00",
    "sending": false
   }
  ],
@@ -65,6 +65,10 @@
   "mv7d23jv572w": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mv7d7f4wvowb": {
+   "status": "done",
+   "note": "New order saved"
   }
  },
  "commands_done": [
@@ -72,7 +76,8 @@
   "mv6kcq56w73o",
   "mv7d1to8kmvj",
   "mv7d21lvbmlq",
-  "mv7d23jv572w"
+  "mv7d23jv572w",
+  "mv7d7f4wvowb"
  ],
  "originals": [
   "moon-knight-s01e02-summon-the-suit"
