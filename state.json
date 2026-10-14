@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T17:27:25+13:00",
+ "updated": "2026-10-14T17:27:46+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
@@ -138,7 +138,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 12,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 691.0,
+       "end": 783.5,
+       "seconds": 92.5,
+       "drive_path": "Ready to post/Colony (2026)/Highlights/Colony (2026) - Part 01.mp4",
+       "caption": "that's not a plan, that's a cry for help 🆘\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "colony-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
