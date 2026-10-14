@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:23:08+13:00",
+ "updated": "2026-10-15T08:23:11+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 7,
+  "stage": "rendering",
+  "part": 8,
   "parts_total": 12
  },
  "queue": [],
@@ -1396,6 +1396,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:23:10+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 7 of 12 ready",
+   "message": "Part 7: 1:05:04 to 1:08:29 (205s)  interest score 65/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\n'Hey, who’s the new guy?' is my new personality 😤\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-15T08:18:44+13:00",
    "type": "part_ready",
