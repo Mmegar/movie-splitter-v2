@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:11:39+13:00",
+ "updated": "2026-10-14T16:12:02+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -58,6 +58,21 @@
        "drive_path": "Ready to post/Kung Fu Hustle (2004)/Best stretch/Kung Fu Hustle (2004) - Part 02.mp4",
        "caption": "main character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
        "preview": "kung-fu-hustle-2004/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 3984.4,
+       "end": 4077.0,
+       "seconds": 92.6,
+       "drive_path": "Ready to post/Kung Fu Hustle (2004)/Best stretch/Kung Fu Hustle (2004) - Part 03.mp4",
+       "caption": "when they said 'Why don’t you stay?' I felt that 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "kung-fu-hustle-2004/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
