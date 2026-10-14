@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T08:14:37+13:00",
+ "updated": "2026-10-15T08:14:58+13:00",
  "run": {
   "active": true,
   "run_id": 38616962381,
   "started": "2026-10-15T07:39:33+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 12
  },
  "queue": [],
@@ -1351,6 +1351,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:14:38+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 4 of 12 ready",
+   "message": "Part 4: 32:52 to 34:12 (80s)  interest score 67/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Spider-Man, why did you create that guy?' 🫠\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
   {
    "at": "2026-10-15T08:12:55+13:00",
    "type": "part_ready",
