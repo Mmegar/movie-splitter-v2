@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:38:47+13:00",
+ "updated": "2026-10-14T16:39:11+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -214,6 +214,21 @@
        "drive_path": "Ready to post/Kung Fu Hustle (2004)/Highlights/Kung Fu Hustle (2004) - Part 06.mp4",
        "caption": "therapist: it can't hurt you. this scene: 😈\nPart 6 🎬 · comment 'MORE' if you need Part 7 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "kung-fu-hustle-2004/highlights-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 7,
+       "start": 4034.3,
+       "end": 4122.5,
+       "seconds": 88.2,
+       "drive_path": "Ready to post/Kung Fu Hustle (2004)/Highlights/Kung Fu Hustle (2004) - Part 07.mp4",
+       "caption": "bestie made it worse 😭\nPart 7 🎬 · follow or you'll miss Part 8 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "kung-fu-hustle-2004/highlights-007.bin",
        "post": {
         "status": "none",
         "at": null,
