@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-14T14:44:07+13:00",
+ "updated": "2026-10-14T14:44:27+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
-  "movie": null,
+  "movie": "The Notebook (2004)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -267,6 +267,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-14T14:44:09+13:00",
+   "type": "started",
+   "title": "Started: The Notebook (2004)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/The Notebook (2004)'."
+  },
   {
    "at": "2026-10-14T08:41:59+07:00",
    "type": "new_file",
