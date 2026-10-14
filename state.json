@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:30:27+13:00",
+ "updated": "2026-10-14T16:30:29+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 10
  },
  "queue": [
@@ -757,6 +757,12 @@
   "posted_today": 5
  },
  "events": [
+  {
+   "at": "2026-10-14T16:30:29+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 4 of 10 ready",
+   "message": "Part 4: 35:21 to 36:48 (86s)  interest score 64/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthis scene owes me rent, it lives in my head 🏠\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
+  },
   {
    "at": "2026-10-14T16:28:16+13:00",
    "type": "part_ready",
