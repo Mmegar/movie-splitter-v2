@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-14T08:44:15+07:00",
+ "updated": "2026-10-14T08:44:50+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Kung Fu Hustle 2004 1080p x264.mkv",
-  "percent": 48
+  "percent": 59
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Kung Fu Hustle 2004 1080p x264.mkv",
    "file": "Kung Fu Hustle 2004 1080p x264.mkv",
-   "percent": 48
+   "percent": 59
   }
  ],
  "uploaded": [
