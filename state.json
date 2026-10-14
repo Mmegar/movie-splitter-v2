@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:03:52+13:00",
+ "updated": "2026-10-15T00:05:54+13:00",
  "run": {
   "active": true,
   "run_id": 38552474182,
@@ -605,7 +605,24 @@
     "clips": {
      "label": "Custom clips",
      "planned": 1,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 596.5,
+       "end": 1196.5,
+       "seconds": 600.0,
+       "drive_path": "Ready to post/Kung Fu Hustle (2004)/Custom clips/Kung Fu Hustle (2004) - Clip 01 - Funny.mp4",
+       "caption": "'Don’t you want to pay the rent?' 💀 I can't\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "kung-fu-hustle-2004/clips-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "title": "Funny"
+      }
+     ]
     }
    },
    "thumbs": {
