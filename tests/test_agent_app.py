@@ -427,3 +427,24 @@ class CancelPostTest(PostAllTest):
             self.a.check_commands()
         self.assertEqual(self.sent, ["M - Part 04.mp4"])
         self.assertEqual(self.fake.json_file("laptop.json")["commands"]["all2"]["status"], "done")
+
+
+class StyleTest(base.AgentTestBase):
+    def test_style_picked_in_the_app_goes_with_the_movie(self):
+        movie = self.watch / "Big.Film.2015.mkv"
+        movie.write_bytes(os.urandom(5_000))
+        a = self.make_agent()
+        self.assertEqual(a.queue_files()[0]["style"], "classic")
+        commands(self.fake, {"id": "s1", "type": "set_style", "file": "Big.Film.2015.mkv", "style": "zoom"})
+        a.check_commands()
+        self.assertEqual(a.queue_files()[0]["style"], "zoom")
+        self.assertEqual(self.fake.json_file("laptop.json")["queue"][0]["style"], "zoom")
+        a.send_movie(movie)
+        rel = [r for r in self.fake.releases.values() if transport.kind_of(r) == "incoming"][0]
+        self.assertEqual(json.loads(rel["body"])["style"], "zoom")
+
+    def test_default_comes_from_settings(self):
+        (self.watch / "Other.mkv").write_bytes(b"x" * 100)
+        a = self.make_agent()
+        a.remote_settings["cut_style"] = "zoom"
+        self.assertEqual(a.queue_files()[0]["style"], "zoom")

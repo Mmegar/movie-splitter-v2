@@ -40,6 +40,7 @@ from zoneinfo import ZoneInfo
 import previews
 import settings
 import status
+import tracking
 import transport
 
 # Settings come from config/settings.json (the iPhone app edits it). Any environment variable
@@ -64,6 +65,27 @@ HIGHLIGHT_COUNT = int(os.environ.get("HIGHLIGHT_COUNT", "0"))    # 0 = automatic
 MIN_LAST_PART = 30
 MAX_EXTRA = float(os.environ.get("PART_MAX_EXTRA", "225"))  # a part may run this many seconds long to end well
 GOOD_ENDING = 3.0   # an ending at least this good is taken as soon as one turns up
+# cutting style, per movie: "classic" (whole picture, blurred background) or "zoom" (zoomed band that
+# follows faces, longer parts, fewer of them). Chosen in the app per movie; default in Settings.
+STYLE = "classic"
+_CLASSIC = {}
+
+
+def apply_style(style):
+    """Sets the part lengths etc. for this movie's style."""
+    global STYLE, STRETCH_PART_SECONDS, HIGHLIGHT_SECONDS, PART_SECONDS, MAX_EXTRA
+    if not _CLASSIC:
+        _CLASSIC.update(STRETCH_PART_SECONDS=STRETCH_PART_SECONDS, HIGHLIGHT_SECONDS=HIGHLIGHT_SECONDS,
+                        PART_SECONDS=PART_SECONDS, MAX_EXTRA=MAX_EXTRA)
+    STYLE = "zoom" if str(style or "").lower() in ("zoom", "zoomed", "tracking") else "classic"
+    if STYLE == "zoom":
+        part = float(SETTINGS.get("zoom_part_seconds", 210))
+        STRETCH_PART_SECONDS = HIGHLIGHT_SECONDS = PART_SECONDS = part
+        MAX_EXTRA = float(SETTINGS.get("zoom_part_max_extra", 90))
+    else:
+        STRETCH_PART_SECONDS, HIGHLIGHT_SECONDS = _CLASSIC["STRETCH_PART_SECONDS"], _CLASSIC["HIGHLIGHT_SECONDS"]
+        PART_SECONDS, MAX_EXTRA = _CLASSIC["PART_SECONDS"], _CLASSIC["MAX_EXTRA"]
+    return STYLE
 FLIP = os.environ.get("FLIP", "none").strip().lower()             # none / mirror / upsidedown / both
 FLIP_FILTERS = {"mirror": "hflip", "upsidedown": "vflip", "both": "hflip,vflip"}
 # FLIP_EVERY: "25-30" = switch on a scene cut every 25 to 30 seconds (random each time); "30" = every 30s;
@@ -678,7 +700,8 @@ def snap(t, candidates, before, after):
 
 def choose_highlights(total, score, candidates):
     length = min(HIGHLIGHT_SECONDS, total)
-    count = HIGHLIGHT_COUNT or max(1, min(12, round(total / 600)))
+    count = HIGHLIGHT_COUNT or (max(3, min(5, round(total / 1800))) if STYLE == "zoom"
+                                else max(1, min(12, round(total / 600))))
     L = int(length)
     # ignore the first 1% (logos) and the last 4% (end credits) of long videos
     lo = int(total * 0.01) if total > 1200 else 0
@@ -710,6 +733,8 @@ def choose_highlights(total, score, candidates):
 def choose_cuts(total, candidates, part=None, begin=0.0):
     """Back-to-back parts of ~part seconds from begin to total. Returns [(start, end, None)]."""
     part = part or PART_SECONDS
+    if STYLE == "zoom":               # long parts: share the time out evenly (no short leftover part)
+        part = (total - begin) / max(1, round((total - begin) / part))
     early, late = min(EARLIEST, part * 0.15, 10.0), MAX_EXTRA
     candidates = sorted(candidates)
     cuts, pos = [], begin
@@ -718,7 +743,7 @@ def choose_cuts(total, candidates, part=None, begin=0.0):
         cut = best_end(target, early, late) if ENDINGS else snap(target, candidates, early, late)
         cuts.append((pos, cut, None))
         pos = cut
-    if cuts and total - pos < min(MIN_LAST_PART, part * 0.5):
+    if cuts and total - pos < (part * 0.6 if STYLE == "zoom" else min(MIN_LAST_PART, part * 0.5)):
         cuts[-1] = (cuts[-1][0], total, None)
     else:
         cuts.append((pos, total, None))
@@ -838,6 +863,8 @@ def detect_black_bars(src, total):
 
 def movie_bottom(src):
     """Where the bottom edge of the movie sits on the 1080x1920 screen."""
+    if STYLE == "zoom":
+        return float(tracking.BAND_TOP + tracking.BAND_H)
     out = subprocess.run(
         ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
          "stream=width,height,sample_aspect_ratio", "-of", "json", str(src)],
@@ -941,23 +968,34 @@ def wrap_line(text, width=30):
     return [l for l in lines if l]
 
 
+ZOOM_SUB_SIZE = 46
+
+
 def subtitle_filters(part_cues, length, bottom, workdir):
-    """Burns subtitles in, centred just under the picture (or near the bottom for tall videos)."""
+    """Burns subtitles in, centred just under the picture (or near the bottom for tall videos).
+    Zoom style: small bold capitals on the lower part of the picture (not over the faces)."""
     out = []
-    y0 = bottom + 30 if bottom < 1650 else 1920 - 2 * (SUB_SIZE + 14) - 120
+    zoom = STYLE == "zoom"
+    size = ZOOM_SUB_SIZE if zoom else SUB_SIZE
+    if zoom:
+        y0 = tracking.BAND_TOP + int(tracking.BAND_H * 0.80)
+    else:
+        y0 = bottom + 30 if bottom < 1650 else 1920 - 2 * (SUB_SIZE + 14) - 120
     n = 0
     for a, b, text in part_cues:
         a, b = max(0.0, a), min(length, b)
         if b <= a:
             continue
-        for k, line in enumerate(wrap_line(text)):
+        lines = wrap_line(text.upper(), 28)[:2] if zoom else wrap_line(text)
+        for k, line in enumerate(lines):
             n += 1
             f = workdir / f"sub{n}.txt"
             f.write_text(line, encoding="utf-8")
             out.append(
-                f",drawtext=fontfile={FONT}:textfile={f.name}:expansion=none:fontsize={SUB_SIZE}:"
-                f"fontcolor=white:borderw=5:bordercolor=black:x=(w-text_w)/2:"
-                f"y={y0 + k * (SUB_SIZE + 14):.0f}:enable='between(t,{a:.3f},{b:.3f})'"
+                f",drawtext=fontfile={FONT}:textfile={f.name}:expansion=none:fontsize={size}:"
+                f"fontcolor=white:borderw={3 if zoom else 5}:bordercolor=black@{0.85 if zoom else 1}:"
+                f"{'shadowx=0:shadowy=3:shadowcolor=black@0.6:' if zoom else ''}x=(w-text_w)/2:"
+                f"y={y0 + k * (size + 12):.0f}:enable='between(t,{a:.3f},{b:.3f})'"
             )
     return "".join(out)
 
@@ -969,14 +1007,25 @@ ALL_CUES = []     # every subtitle line used, in movie time: for the app's clip 
 def render_part(src, start, end, number, cues, out_path, workdir, top_text=None):
     """top_text: the big label at the top ("Part 3" by default; "" = no label, for custom clips)."""
     # the flip happens first, so "Part X" and subtitles still read the right way round
-    first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}", 1)
-    filters = (
-        f"{first}split=2[bg][fg];"
-        "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
-        "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.08[bgb];"
-        "[fg]scale=1080:1920:force_original_aspect_ratio=decrease[fgs];"
-        "[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1"
-    )
+    if STYLE == "zoom":
+        # zoomed band that follows faces, punchier colours, black above and below
+        W, H = picture_size(src)
+        track = tracking.plan(src, start, end - start, CROP["filter"], W, H, workdir)
+        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}{track}", 1)
+        filters = (
+            f"{first}scale={tracking.BAND_W}:{tracking.BAND_H},setsar=1,"
+            "eq=contrast=1.08:saturation=1.3:brightness=0.01,unsharp=5:5:0.5,"
+            f"pad=1080:1920:0:{tracking.BAND_TOP}:black"
+        )
+    else:
+        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}", 1)
+        filters = (
+            f"{first}split=2[bg][fg];"
+            "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+            "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.08[bgb];"
+            "[fg]scale=1080:1920:force_original_aspect_ratio=decrease[fgs];"
+            "[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1"
+        )
     # subtitles: your .srt if there is one, otherwise made from this part's audio
     part_cues = [(a - start, b - start, t) for a, b, t in cues if b > start and a < end]
     if not cues and AUTO_SUBS and not SUB_INFO.get("full"):
@@ -1011,8 +1060,18 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         "-movflags", "+faststart",
         str(out_path.resolve()),
     ], cwd=workdir)
-    for f in workdir.glob("sub*.txt"):
+    for f in list(workdir.glob("sub*.txt")) + [workdir / "track.txt"]:
         f.unlink(missing_ok=True)
+
+
+def picture_size(src):
+    """The movie's picture size in pixels, after cutting off any black bars."""
+    if CROP["w"]:
+        return int(CROP["w"]), int(CROP["h"])
+    st = json.loads(subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+         "-of", "json", str(src)], capture_output=True, text=True).stdout)["streams"][0]
+    return int(st["width"]), int(st["height"])
 
 
 PART_TIMES = {}   # (mode, part number) -> (start, end) in the movie, for the status file
@@ -1164,6 +1223,7 @@ def install_tools():
         return   # only needed on GitHub's computers
     run(["sudo", "apt-get", "update", "-qq"])
     run(["sudo", "apt-get", "install", "-y", "-qq", "ffmpeg", "fonts-dejavu-core"])
+    tracking.get_model()
     for d in ["/usr/share/dotnet", "/usr/local/lib/android", "/opt/ghc", "/opt/hostedtoolcache/CodeQL"]:
         subprocess.run(["sudo", "rm", "-rf", d])
     run(["df", "-h", "/"])
@@ -1179,6 +1239,8 @@ def process_release(gh, release):
     video = Path(meta["file"]).name
     srt_name = Path(meta["srt"]).name if meta.get("srt") else None
     name = meta.get("movie") or clean_name(video)
+    style = apply_style(meta.get("style") or SETTINGS.get("cut_style"))
+    print(f"Cutting style: {'zoomed + tracking' if style == 'zoom' else 'classic'}", flush=True)
     if meta.get("clips"):
         return process_clips(gh, release, meta, rid, video, name)
     global MODE

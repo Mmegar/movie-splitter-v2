@@ -56,7 +56,8 @@ function sliderRow(d, path, title, { min, max, step, ends = null, sub = '', fmt 
 }
 
 function segRow(d, path, title, options, sub = '') {
-  const v = getPath(d, path);
+  const raw = getPath(d, path);
+  const v = raw === undefined || raw === null ? options[0][0] : raw;   // never saved yet: the first option is the default
   return `<div class="row row--stack">
     <div class="row-head"><span class="row-title">${esc(title)}</span></div>
     <div class="seg-sm" role="group" aria-label="${esc(title)}">${options.map(([val, label]) => `<button type="button" data-seg="${path}" data-v="${esc(val)}" aria-pressed="${String(v) === String(val)}">${esc(label)}</button>`).join('')}</div>
@@ -99,6 +100,12 @@ function buildForm(d) {
   if (p.timezone && !tz.includes(p.timezone)) tz.unshift(p.timezone);
   return [
     modesGroup(d),
+
+    group('Cutting style', [
+      segRow(d, 'cut_style', 'New movies', [['classic', 'Classic'], ['zoom', 'Zoomed + tracking']],
+        d.cut_style === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
+      d.cut_style === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
+    ], 'You can also pick the style for each movie in Queue, under Up next.'),
 
     group('Part lengths', [
       stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
@@ -327,7 +334,12 @@ export function createSettingsView(ctx) {
       return;
     }
     const sg = e.target.closest('[data-seg]');
-    if (sg) { haptic(); set(sg.dataset.seg, sg.dataset.v); return; }
+    if (sg) {
+      haptic();
+      if (sg.dataset.seg === 'cut_style' && sg.dataset.v === 'zoom' && draft.zoom_part_seconds == null) draft.zoom_part_seconds = 210;
+      set(sg.dataset.seg, sg.dataset.v);
+      return;
+    }
     const fk = e.target.closest('[data-flipkind]');
     if (fk) {
       haptic();

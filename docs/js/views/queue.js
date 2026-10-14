@@ -134,6 +134,8 @@ export function createQueueView(ctx) {
     if (e.target.closest('[data-add]')) { haptic(); addSheet(); return; }
     const up = e.target.closest('[data-up]');
     if (up) { haptic(); const i = queueOf(lastSt).findIndex((f) => f.name === up.dataset.up); reorder(lastSt, up.dataset.up, i - 1); return; }
+    const sc = e.target.closest('[data-style]');
+    if (sc) { haptic(); styleActions(sc.dataset.style, sc.dataset.cur); return; }
     const qm = e.target.closest('[data-qmore]');
     if (qm) { queueActions(qm.dataset.qmore, Number(qm.dataset.i), Number(qm.dataset.n)); return; }
     const al = e.target.closest('[data-add-lib]');
@@ -229,11 +231,11 @@ export function createQueueView(ctx) {
     }
   }
 
-  function fileRow(f, { busy, lead = '', action = '', sub = '' }) {
+  function fileRow(f, { busy, lead = '', action = '', sub = '', extra = '' }) {
     return `<div class="row file-row ${busy ? 'is-busy' : ''}">
       ${lead}
       <span class="row-main"><span class="row-title clamp1">${esc(cleanTitle(f.name))}</span>
-        <span class="row-sub">${busy ? `<span class="busy"><span class="spinner"></span>${esc(busy)}</span>` : esc(sub)}</span></span>
+        <span class="row-sub">${busy ? `<span class="busy"><span class="spinner"></span>${esc(busy)}</span>` : esc(sub)}</span>${extra}</span>
       ${action}
     </div>`;
   }
@@ -251,12 +253,37 @@ export function createQueueView(ctx) {
       busy: busy.get(f.name) === 'to_library' ? 'Taking it out…' : f.sending ? '' : '',
       lead: `<span class="row-ic ${i === 0 ? 'tone-accent' : 'tone-muted'}"><span class="num" style="font-weight:700;font-size:15px">${i + 1}</span></span>`,
       sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to send' : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
+      extra: styleChip(st, f),
       action: `<span class="reorder">
         <button class="icon-btn" data-up="${esc(f.name)}" ${i === 0 ? 'disabled' : ''} aria-label="Move ${esc(cleanTitle(f.name))} up">${icon('chevL', 'rot90')}</button>
         <button class="icon-btn" data-qmore="${esc(f.name)}" data-i="${i}" data-n="${q.length}" aria-label="Options for ${esc(cleanTitle(f.name))}">${icon('more')}</button>
       </span>`,
     })).join('')}</div>
     <p class="group-foot">The laptop sends one movie at a time, from the top. Tap the arrow to move a movie up.</p>`;
+  }
+
+  /** The cutting style of a movie in To edit: a small button that opens the choice. */
+  function styleChip(st, f) {
+    const pending = pendingCommands(st.data.commands, st.data.laptop, 'set_style').filter((c) => c.file === f.name).pop();
+    const style = pending ? pending.style : (f.style || 'classic');
+    const label = style === 'zoom' ? 'Zoomed + tracking' : 'Classic';
+    if (f.sending) return `<span class="style-chip is-fixed">${icon(style === 'zoom' ? 'scissors' : 'frames')}${label}</span>`;
+    return `<button class="style-chip ${style === 'zoom' ? 'is-zoom' : ''}" data-style="${esc(f.name)}" data-cur="${style}" aria-label="Cutting style: ${label}. Change">${icon(style === 'zoom' ? 'scissors' : 'frames')}${label}${pending ? ' …' : ''}<span class="chev">▾</span></button>`;
+  }
+
+  async function styleActions(name, cur) {
+    const v = await openSheet({
+      className: 'sheet--action',
+      body: `<div class="action-card">
+          <div class="action-msg"><strong>How should ${esc(cleanTitle(name))} be cut?</strong></div>
+          <button class="action-btn ${cur === 'classic' ? 'is-on' : ''}" data-v="classic">${cur === 'classic' ? '✓ ' : ''}Classic<span class="action-sub">Whole picture on a blurred background · shorter parts</span></button>
+          <button class="action-btn ${cur === 'zoom' ? 'is-on' : ''}" data-v="zoom">${cur === 'zoom' ? '✓ ' : ''}Zoomed + tracking<span class="action-sub">Zoomed in, follows who's talking or moving · 3–5 min parts, fewer of them</span></button>
+        </div>
+        <button class="action-btn action-cancel" data-close>Cancel</button>`,
+      onMount: (el, close) => el.addEventListener('click', (e) => { const b = e.target.closest('[data-v]'); if (b) close(b.dataset.v); }),
+    });
+    if (!v || v === cur) return;
+    await send({ type: 'set_style', file: name, style: v }, v === 'zoom' ? 'It will be cut zoomed in, following faces' : 'It will be cut the classic way');
   }
 
   function libraryGroup(st) {

@@ -175,6 +175,8 @@ export const SETTING_LABELS = {
   cockroach_size: 'Cockroach size',
   captions: 'Captions',
   caption_style: 'Caption style',
+  cut_style: 'Cutting style for new movies',
+  zoom_part_seconds: 'Zoomed part length',
   paused: 'Pause everything',
   pause_on_battery: 'Pause on battery',
   upload_limit_mbps: 'Upload speed limit',
@@ -212,6 +214,8 @@ export function formatSetting(path, v) {
   if (path === 'modes' || path === 'posting.modes') return (v || []).map((m) => MODE_LABELS[m] || m).join(' → ') || 'None';
   if (path === 'posting.times') return (v || []).join(', ') || 'None';
   if (PCT_KEYS.has(path)) return `${Math.round(Number(v) * 100)}%`;
+  if (path === 'zoom_part_seconds') return `${Math.floor(v / 60)} min${v % 60 ? ` ${v % 60} s` : ''}`;
+  if (path === 'cut_style') return v === 'zoom' ? 'Zoomed + tracking' : 'Classic';
   if (SEC_KEYS.has(path)) return `${v} s`;
   if (path === 'stretch_minutes') return `${v} min`;
   if (path === 'highlight_count') return Number(v) === 0 ? 'Automatic' : String(v);

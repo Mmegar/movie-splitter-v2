@@ -46,7 +46,7 @@ jobs:
           key: whisper-${{ env.WHISPER_MODEL }}
 
       - name: Install the subtitle maker (Whisper) and preview encryption
-        run: pip install faster-whisper cryptography
+        run: pip install faster-whisper cryptography "opencv-python-headless>=4.8,<5"
 
       - name: Make parts
         run: python3 process.py

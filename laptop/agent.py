@@ -311,7 +311,8 @@ class Agent:
         except Exception:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
-                     ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {})):
+                     ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {}),
+                     ("styles", {})):
             m.setdefault(k, v)
         return m
 
@@ -399,13 +400,14 @@ class Agent:
                 self.memory["sends"][rid] = {"path": str(path), "file": path.name, "size": size,
                                              "srt": str(srt) if srt else None, "source": source, "wish": wish,
                                              "status": "sending", "started": now_iso(),
-                                             "clips": clips, "movie": movie}
+                                             "clips": clips, "movie": movie, "style": self.style_for(path.name)}
                 self._save_memory()
             entry = self.memory["sends"][rid]
         tag = transport.INCOMING + rid
         meta = {"kind": "incoming", "id": rid, "file": path.name, "size": size,
                 "srt": Path(entry["srt"]).name if entry.get("srt") else None, "source": source,
-                "sent": entry["started"], "laptop": socket.gethostname(), "complete": False}
+                "sent": entry["started"], "laptop": socket.gethostname(), "complete": False,
+                "style": entry.get("style") or self.style_for(path.name)}
         if entry.get("clips"):
             meta.update(clips=entry["clips"], movie=entry.get("movie"))
         release = transport.find(self.gh.releases(), "incoming", rid)
@@ -793,6 +795,12 @@ class Agent:
             return self.post_all(c)
         if kind == "share_all":
             return self.share_all(c)
+        if kind == "set_style":
+            style = "zoom" if c.get("style") == "zoom" else "classic"
+            with self.lock:
+                self.memory["styles"][name] = style
+                self._save_memory()
+            return f"{name}: {'Zoomed + tracking' if style == 'zoom' else 'Classic'}"
         if kind == "cancel_post":
             return self.cancel_post(str(c.get("target") or "all"))
         if kind == "mark_posted" and c.get("ns"):
@@ -1327,6 +1335,11 @@ class Agent:
                if p.is_file() and p.suffix.lower() in VIDEO_EXT and not p.name.startswith((".", "~"))]
         return sorted([f for f in out if f], key=lambda f: f["modified"], reverse=True)[:limit]
 
+    def style_for(self, name):
+        """Cutting style picked in the app for this movie, else the default from Settings."""
+        return (self.memory.get("styles") or {}).get(name) or \
+            ("zoom" if (self.remote_settings or {}).get("cut_style") == "zoom" else "classic")
+
     def queue_files(self):
         """Movies in To edit that haven't been sent yet, in the order they'll go."""
         busy = self.waiting_paths()
@@ -1337,6 +1350,7 @@ class Agent:
             info = file_info(p)
             if info:
                 info["sending"] = p.name in sending
+                info["style"] = self.style_for(p.name)
                 out.append(info)
         return out
 

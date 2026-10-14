@@ -175,6 +175,10 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
         for (const p of parts) p.post = { status: 'inbox', at: iso(Date.now()), url: null, error: null };
         if (parts.length) note('posted', `📲 ${parts.length} parts in your TikTok drafts: ${movie.name}`, 'Open TikTok, tap each notification, paste the caption and post.', ['iphone']);
         finish(c, !!movie, `All ${parts.length} parts are in TikTok, in order`);
+      } else if (c.type === 'set_style') {
+        const f = (lp.queue || []).find((x) => x.name === c.file);
+        if (f) f.style = c.style;
+        finish(c, !!f, 'Style saved');
       } else if (c.type === 'cancel_post') {
         for (const [id, v] of Object.entries(lp.commands || {})) if (v.status === 'working' && [id, 'all'].includes(c.target || 'all')) lp.commands[id] = { status: 'failed', note: 'Cancelled. 2 of 6 were sent before that' };
         finish(c, true, 'Stopped sending to TikTok');

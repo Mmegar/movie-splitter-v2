@@ -695,3 +695,10 @@ input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; bo
 .save-step .ic { width: 22px; height: 22px; flex: none; color: var(--accent-text); }
 .mark-offer { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
 .mark-offer p { margin: 0; font-size: 15px; }
+.style-chip { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; min-height: 32px; padding: 0 12px; border-radius: 16px; background: var(--fill-strong); color: var(--text); font-size: 14px; font-weight: 600; align-self: flex-start; }
+.style-chip svg { width: 16px; height: 16px; }
+.style-chip.is-zoom { background: var(--accent); color: var(--accent-ink); }
+.style-chip .chev { font-size: 11px; opacity: .7; }
+.style-chip.is-fixed { opacity: .7; }
+.action-btn .action-sub { display: block; font-size: 13px; font-weight: 400; color: var(--text-2, var(--muted)); margin-top: 2px; }
+.action-btn.is-on { color: var(--accent-text); }
