@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T00:06:02+13:00",
+ "updated": "2026-10-14T18:07:14+07:00",
  "run": {
   "active": false,
   "run_id": 38552474182,
@@ -1195,6 +1195,12 @@
   "posted_today": 13
  },
  "events": [
+  {
+   "at": "2026-10-14T18:07:14+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Kung Fu Hustle (2004): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Kung Fu Hustle (2004)\nCustom clips: 1"
+  },
   {
    "at": "2026-10-15T00:06:00+13:00",
    "type": "finished",
