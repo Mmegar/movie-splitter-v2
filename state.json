@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T09:56:30+07:00",
+ "updated": "2026-10-14T15:57:24+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -41,6 +41,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 16.6,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "kung-fu-hustle-2004/thumbs.bin"
    }
   },
   {
