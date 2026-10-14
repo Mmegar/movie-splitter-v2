@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:52:24+07:00",
+ "updated": "2026-10-14T10:54:43+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -33,7 +33,7 @@
   }
  ],
  "wishlist": [],
- "paused": "Paused in the app",
+ "paused": null,
  "battery": false,
  "queue": [],
  "library": [
@@ -114,7 +114,8 @@
  "shared": [
   "share/the-notebook-2004/stretch-001.bin",
   "share/the-notebook-2004/stretch-002.bin",
-  "share/the-notebook-2004/stretch-004.bin"
+  "share/the-notebook-2004/stretch-004.bin",
+  "share/the-notebook-2004/stretch-005.bin"
  ],
  "version": 2
 }
