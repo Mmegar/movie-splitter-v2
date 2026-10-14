@@ -222,9 +222,9 @@ class Watcher:
             if not old or old[:2] != sig:
                 self.seen[p] = sig + (now,)
             elif st.st_size > 0 and now - old[2] >= self.stable and (
-                    self._not_locked(p) or (now - old[2] >= max(600, self.stable) and self._readable(p))):
+                    self._not_locked(p) or (now - old[2] >= max(300, self.stable) and self._readable(p))):
                 # A file another program keeps open (a torrent app still seeding, OneDrive syncing, or a
-                # read-only file) can't be opened for writing; if it hasn't changed for 10 minutes and can be
+                # read-only file) can't be opened for writing; if it hasn't changed for 5 minutes and can be
                 # read, it's finished: send it anyway.
                 found.append(p)
         for p in list(self.seen):
@@ -280,7 +280,7 @@ class Agent:
         self.online = True
         self.last_push, self.last_sent, self.progress_changed = 0.0, None, False
         self.last = {"receive": 0.0, "posting": 0.0, "cleanup": 0.0, "settings": 0.0, "commands": 0.0,
-                     "update": time.time() - 3000, "battery": 0.0}
+                     "update": time.time() - 240, "battery": 0.0}
         self.battery = False
         self.rate = [0.0, 0]                 # upload speed limit: (window start, bytes sent in it)
         self.cmd_status = {}                 # command id -> {status, note}: shown in the app
@@ -838,6 +838,12 @@ class Agent:
         if not force and not self.remote_settings.get("auto_update_laptop", True):
             return False
         root = HERE.parent
+        try:                                    # one quick call: has anything changed on GitHub at all?
+            head = (self.gh.call("GET", "/commits/main") or {}).get("sha")
+        except Exception:
+            head = None
+        if head and head == self.memory.get("code_sha") and not force:
+            return False
         changed = []
         for rel in CODE_FILES:
             text, sha = self.gh.read_file(rel)
@@ -850,6 +856,10 @@ class Agent:
                 continue
             compile(text, rel, "exec")                      # never install something broken
             changed.append((local, data, old))
+        if head:
+            with self.lock:
+                self.memory["code_sha"] = head
+                self._save_memory()
         if not changed:
             return False
         backup = HERE / ".backup"
@@ -1053,7 +1063,7 @@ class Agent:
                 self.cleanup_old_parts()
             except Exception as e:
                 log.error("Cleaning up old parts failed: %s", e)
-        if now - self.last["update"] >= 3600 and not self.transfers:
+        if now - self.last["update"] >= 300 and not self.transfers:
             self.last["update"] = now
             try:
                 if self.self_update():

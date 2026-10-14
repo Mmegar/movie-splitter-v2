@@ -144,14 +144,14 @@ class AgentTestBase(TempDirTest):
 
 
 class WatcherLockTest(AgentTestBase):
-    def test_file_held_open_by_another_app_is_sent_after_10_minutes(self):
+    def test_file_held_open_by_another_app_is_sent_after_5_minutes(self):
         f = self.watch / "Seeding.mkv"
         f.write_bytes(b"x" * 10)
         w = agent.Watcher(self.watch, stable=60)
         with mock.patch.object(agent.Watcher, "_not_locked", staticmethod(lambda p: False)):
             self.assertEqual(w.ready(now=0), [])
             self.assertEqual(w.ready(now=120), [])          # stable, but "locked": wait
-            self.assertEqual(w.ready(now=610), [f])         # 10 minutes unchanged and readable: go
+            self.assertEqual(w.ready(now=310), [f])         # 5 minutes unchanged and readable: go
 
 
 class SendTest(AgentTestBase):

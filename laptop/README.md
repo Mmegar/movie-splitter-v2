@@ -97,7 +97,7 @@ it contains your GitHub token.
 
 ## Updates
 
-From version 2.2 on, the helper **updates itself**: about once an hour it checks GitHub for newer
+From version 2.2 on, the helper **updates itself**: every 5 minutes it checks GitHub for newer
 versions of its own files, checks they're valid, saves the old ones in `laptop/.backup` and restarts.
 Turn it off in the app: Settings → Laptop & internet → "Laptop helper updates itself".
 Your `config.json` and `agent_memory.json` are never touched.
