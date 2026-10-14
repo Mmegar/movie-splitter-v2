@@ -1,21 +1,11 @@
 {
- "updated": "2026-10-14T08:41:44+07:00",
+ "updated": "2026-10-14T08:41:58+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": {
-  "file": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-  "percent": 96
- },
- "transfers": [
-  {
-   "direction": "send",
-   "movie": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-   "file": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
-   "percent": 96
-  }
- ],
+ "uploading": null,
+ "transfers": [],
  "uploaded": [
   {
    "file": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv",
@@ -32,7 +22,7 @@
    "name": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4",
    "size_mb": 1991,
    "modified": "2026-10-14T05:31:18+07:00",
-   "sending": true
+   "sending": false
   },
   {
    "name": "Kung Fu Hustle 2004 1080p x264.mkv",
