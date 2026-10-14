@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:24:29+13:00",
+ "updated": "2026-10-14T10:25:38+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -182,10 +182,11 @@
        "caption": "this is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "the-notebook-2004/stretch-001.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-14T10:25:38+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
