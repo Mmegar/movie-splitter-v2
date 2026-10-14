@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 MAX_ATTEMPTS = 3   # a part that failed this many times is skipped
+AS_READY_DAILY_MAX = 15   # "as soon as ready" mode: TikTok refuses more than about 15 posts a day from API apps
 PRIVACY = {"self_only": "SELF_ONLY", "public": "PUBLIC_TO_EVERYONE",
            "friends": "MUTUAL_FOLLOW_FRIENDS", "followers": "FOLLOWER_OF_CREATOR"}
 
@@ -99,8 +100,8 @@ def next_part(state, modes, available=None):
 
 def next_at(now, posting, count_today):
     """When the next post is due (ISO text), or None if posting is off."""
-    if not posting.get("enabled"):
-        return None
+    if not posting.get("enabled") or str(posting.get("when") or "") == "as_ready":
+        return None                        # as soon as ready: there's no fixed next time
     times = parse_times(posting.get("times"))
     for days in range(0, 8):
         day = (now + timedelta(days=days)).date()
@@ -235,7 +236,11 @@ def decide(state, posting, now, force=False, available=None):
     count = posted_today(state, now)
     if not posting.get("enabled") and not force:
         return None, "Posting is switched off in the settings."
-    if not force:
+    as_ready = str(posting.get("when") or "times").lower() == "as_ready"
+    if as_ready and not force:
+        if count >= AS_READY_DAILY_MAX:
+            return None, f"Already sent {count} today (TikTok's daily limit is about {AS_READY_DAILY_MAX})."
+    elif not force:
         if not slot_now(now, posting.get("times")):
             return None, f"Not a posting time ({now:%H:%M})."
         if count >= int(posting.get("per_day", 0)):

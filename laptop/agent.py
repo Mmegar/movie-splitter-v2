@@ -759,6 +759,9 @@ class Agent:
                     or self.cmd_status.get(cid, {}).get("status") == "working"):
                 continue
             kind = c.get("type")
+            if kind in ("clip", "post_part", "share_part") and self.paused_reason():
+                self.cmd_status[cid] = {"status": "waiting", "note": f"{self.paused_reason()}: it goes when you resume"}
+                continue
             try:
                 if kind == "clip":
                     clips.setdefault(str(c.get("movie_id") or ""), []).append(c)
@@ -971,6 +974,8 @@ class Agent:
             return False if p["drive_path"] in received else None
 
         now = datetime.now(tz)
+        if str(cfg.get("when") or "") == "as_ready" and not force and self.posted_recently():
+            return None                                   # one part every 5 minutes at most
         pick, reason = posting.decide(state, cfg, now, force, available)
         if not dry_run:
             count = posting.posted_today(state, now)
@@ -989,6 +994,10 @@ class Agent:
         status.set_posting(cfg.get("enabled"), posting.next_at(datetime.now(tz), cfg, count), count)
         status.flush()
         return pick
+
+    def posted_recently(self, minutes=5):
+        """'As soon as ready' sends at most one part every 5 minutes, so TikTok isn't flooded."""
+        return time.time() - self.memory.get("last_post", 0) < minutes * 60
 
     def send_part(self, movie, mode, part, cfg=None, manual=False):
         """Sends one part to TikTok (drafts by default, or straight onto the profile with method=direct).
@@ -1011,6 +1020,9 @@ class Agent:
         url = ref if ref and str(ref).startswith("http") else None
         status.set_post(movie["id"], mode, part["n"], ("posted" if direct else "inbox") if ok else "failed", url=url,
                         error=None if ok else error)
+        with self.lock:
+            self.memory["last_post"] = time.time()
+            self._save_memory()
         what = "Clip" if mode == "clips" else "Part"
         title = f"{movie['name']}: {what} {part['n']}"
         if ok and not direct:
@@ -1168,7 +1180,9 @@ class Agent:
                 self.receive_parts()
             except Exception as e:
                 log.error("Checking for finished parts failed: %s", e)
-        if now - self.last["posting"] >= float(self.cfg["posting_check_minutes"]) * 60:
+        as_ready = str((self.remote_settings.get("posting") or {}).get("when") or "") == "as_ready"
+        every = 1 if as_ready else float(self.cfg["posting_check_minutes"])   # as soon as ready: check each minute
+        if now - self.last["posting"] >= every * 60:
             self.last["posting"] = now
             try:
                 self.post_if_due()
