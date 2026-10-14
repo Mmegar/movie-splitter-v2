@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-14T10:15:48+07:00",
+ "updated": "2026-10-14T10:15:49+07:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
@@ -665,6 +665,12 @@
   "posted_today": 3
  },
  "events": [
+  {
+   "at": "2026-10-14T10:15:49+07:00",
+   "type": "posted",
+   "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 6",
+   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
+  },
   {
    "at": "2026-10-14T16:14:23+13:00",
    "type": "part_ready",
