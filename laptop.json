@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T11:10:49+07:00",
+ "updated": "2026-10-14T11:10:51+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -69,44 +69,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mv7knwae5m4k": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-005.bin"
-  },
-  "mv7kps1n42r7": {
-   "status": "done",
-   "note": "Same as the request just before (done once)"
-  },
-  "mv7kszxuk20d": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014115527F7B53FF216A4FE054D5D\"}}"
-  },
-  "mv7kwweoi337": {
-   "status": "failed",
-   "note": "GitHub answered 422: {\"message\":\"Sorry, your input was too large to process. Consider creating the blob in a local clone of the repository and then pushing it to GitHub.\",\"documentation_url\":\"https://"
-  },
-  "mv7kyd7p6gjz": {
-   "status": "failed",
-   "note": "GitHub answered 502: {\n  \"message\": \"Server Error\"\n}\n"
-  },
-  "mv7kygqzranh": {
-   "status": "done",
-   "note": "Same as the request just before (done once)"
-  },
-  "mv7kze9zqkep": {
-   "status": "failed",
-   "note": "GitHub answered 422: {\"message\":\"Sorry, your input was too large to process. Consider creating the blob in a local clone of the repository and then pushing it to GitHub.\",\"documentation_url\":\"https://"
-  },
-  "mv7l6xi8ziif": {
-   "status": "failed",
-   "note": "GitHub answered 502: {\n  \"message\": \"Server Error\"\n}\n"
-  },
-  "mv7lavjegzbw": {
-   "status": "failed",
-   "note": "GitHub answered 422: {\"message\":\"Sorry, your input was too large to process. Consider creating the blob in a local clone of the repository and then pushing it to GitHub.\",\"documentation_url\":\"https://"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
