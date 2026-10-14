@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T16:37:01+13:00",
+ "updated": "2026-10-14T16:37:22+13:00",
  "run": {
   "active": true,
   "run_id": 38497129473,
   "started": "2026-10-14T14:42:28+13:00",
   "movie": "Kung Fu Hustle (2004)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 6,
+  "stage": "rendering",
+  "part": 7,
   "parts_total": 10
  },
  "queue": [
@@ -788,6 +788,12 @@
   "posted_today": 6
  },
  "events": [
+  {
+   "at": "2026-10-14T16:37:02+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Kung Fu Hustle (2004): Part 6 of 10 ready",
+   "message": "Part 6: 58:53 to 1:00:10 (77s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\ntherapist: it can't hurt you. this scene: 😈\nPart 6 🎬 · comment 'MORE' if you need Part 7 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
   {
    "at": "2026-10-14T16:35:15+13:00",
    "type": "part_ready",
