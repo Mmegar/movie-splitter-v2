@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:54:43+07:00",
+ "updated": "2026-10-14T10:54:45+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -71,8 +71,8 @@
  ],
  "commands": {
   "mv7knwae5m4k": {
-   "status": "waiting",
-   "note": "Paused in the app: it goes when you resume"
+   "status": "done",
+   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-005.bin"
   },
   "mv7kps1n42r7": {
    "status": "done",
@@ -104,6 +104,7 @@
   "mv7keubfgxsh",
   "mv7khyk6k6a6",
   "mv7kivbeq70s",
+  "mv7knwae5m4k",
   "mv7kps1n42r7"
  ],
  "originals": [
