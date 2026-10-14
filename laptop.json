@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T10:47:19+07:00",
+ "updated": "2026-10-14T10:47:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -63,60 +63,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mv7jelh24r0h": {
-   "status": "done",
-   "note": "Sent to TikTok"
-  },
-  "mv7jrp2xult0": {
-   "status": "done",
-   "note": "Sent to TikTok"
-  },
-  "mv7jwkk4gldi": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-001.bin"
-  },
-  "mv7jzy64kvoq": {
-   "status": "done",
-   "note": "Sent to TikTok"
-  },
-  "mv7k9b6hdox0": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-002.bin"
-  },
-  "mv7kbad1yf3t": {
-   "status": "done",
-   "note": "Sent to TikTok"
-  },
-  "mv7kbd893p8l": {
-   "status": "done",
-   "note": "Sent to TikTok"
-  },
-  "mv7kbjn7fbgj": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114210CAA65109A9E19804CC09\"}}"
-  },
-  "mv7kbndicvc0": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141142344BD942B1D93F760520AB\"}}"
-  },
-  "mv7kbq6xwzcc": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114254212895D398B730056278\"}}"
-  },
-  "mv7keubfgxsh": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114344D78E5CC26C2E6B051D20\"}}"
-  },
-  "mv7khyk6k6a6": {
-   "status": "failed",
-   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114621FF9C0A3476C08904B994\"}}"
-  },
-  "mv7kivbeq70s": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/the-notebook-2004/stretch-004.bin"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
