@@ -93,8 +93,38 @@ VIDEO_EXT = {".mkv", ".mp4", ".avi", ".mov", ".m4v", ".wmv", ".webm", ".mpg", ".
 
 # ---------------------------------------------------------------- helpers
 def run(cmd, **kw):
+    """Runs a tool (ffmpeg), checking the app's Pause switch every half minute while it works, so a long
+    step (like analysing a 2-hour movie) stops soon after Pause instead of running to the end."""
     print("+", " ".join(str(c) for c in cmd), flush=True)
-    return subprocess.run(cmd, check=True, **kw)
+    if CHECKPOINT is None:
+        return subprocess.run(cmd, check=True, **kw)
+    proc = subprocess.Popen(cmd, **kw)
+    try:
+        while True:
+            try:
+                code = proc.wait(timeout=5)
+                break
+            except subprocess.TimeoutExpired:
+                checkpoint()
+    except BaseException:
+        proc.kill()
+        proc.wait()
+        raise
+    if code:
+        raise subprocess.CalledProcessError(code, cmd)
+    return subprocess.CompletedProcess(cmd, code)
+
+
+CHECKPOINT = None        # set while a movie is being cut: raises RunStopped when Pause is switched on
+_LAST_CHECK = [0.0]
+
+
+def checkpoint(force=False):
+    """Checks for Pause at most every 30 seconds (or right away with force)."""
+    if CHECKPOINT is None or (not force and time.time() - _LAST_CHECK[0] < 30):
+        return
+    _LAST_CHECK[0] = time.time()
+    CHECKPOINT()
 
 
 def ntfy_topic():
@@ -446,7 +476,10 @@ def transcribe(audio, offset=0.0):
         segs, _ = model.transcribe(audio, language=lang, task="translate", **WHISPER_OPTS)
     else:
         segs, _ = model.transcribe(audio, language="en", **WHISPER_OPTS)
-    words = [w for seg in segs for w in (seg.words or [])]
+    words = []
+    for seg in segs:                       # segments come one at a time, so Pause is noticed mid-way
+        words += seg.words or []
+        checkpoint()
     cues = words_to_lines(words)
     SUB_INFO["note"] = SUB_INFO["note"] or (
         f"translated to English from '{lang}'" if lang and lang != "en" else "made automatically (English)")
@@ -1005,11 +1038,13 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
     if resumed:                       # everything is planned already: no need to analyse again
         total, loud, motion, cuts, quiet = duration(src), [], [], [], []
     else:
+        checkpoint(force=True)
         status.set_stage("analysing", movie=name, mode=None)
         total, loud, motion, cuts, quiet = analyse(src, workdir)
         status.movie_duration(name, total)
     if not cues and AUTO_SUBS and "all" in modes:
         try:
+            checkpoint(force=True)
             status.set_stage("subtitles")
             cues = auto_subs_full(src, workdir)
         except Exception as e:
@@ -1020,6 +1055,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         score = interest_scores(loud, motion, cuts, cues)
 
     plans = []
+    checkpoint(force=True)
     status.set_stage("planning")
     for mode in modes:
         MODE = mode
@@ -1213,7 +1249,10 @@ def process_release(gh, release):
         if (time.time() - STARTED) / 60 > MAX_RUN_MINUTES + 30:
             raise RunStopped("time")
 
+    global CHECKPOINT
+    CHECKPOINT = stop_if_needed
     try:
+        stop_if_needed()
         status.set_stage("downloading", movie=name, mode=None)
         assets = gh.assets(release["id"])
         src = WORK / "in" / video
@@ -1231,6 +1270,7 @@ def process_release(gh, release):
                     status.movie_previews(name, thumbs=dict(info, path=path))
             except Exception as e:
                 print(f"(no thumbnail strip: {e})", flush=True)
+        checkpoint(force=True)
         done_parts = {(p["mode"], int(p["n"])) for p in out_body["parts"]}
         results = process_local(src, name, srt, WORK / "out", WORK, on_plan, on_part,
                                 plan=out_body.get("plan") or {}, skip=done_parts)
@@ -1274,6 +1314,7 @@ def process_release(gh, release):
                f"original to its 'Failed' folder; put it back in the watch folder to try again.\n{e}", ["x"],
                kind="failed")
     finally:
+        CHECKPOINT = None
         shutil.rmtree(WORK, ignore_errors=True)
 
 

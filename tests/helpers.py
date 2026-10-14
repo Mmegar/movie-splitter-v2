@@ -12,6 +12,11 @@ for p in (ROOT / "laptop", ROOT):
         sys.path.insert(0, str(p))
 # the fake GitHub runs on this computer: never send it through a proxy
 os.environ["no_proxy"] = os.environ["NO_PROXY"] = "127.0.0.1,localhost"
+# config/settings.json is the user's live settings (the app saves them there, e.g. Pause on):
+# the tests use the built-in defaults instead, so they don't change with what's set in the app
+_SETTINGS = Path(tempfile.mkdtemp(prefix="msplit-settings-")) / "settings.json"
+_SETTINGS.write_text("{}")
+os.environ["SETTINGS_FILE"] = str(_SETTINGS)
 
 
 class TempDirTest(unittest.TestCase):

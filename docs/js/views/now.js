@@ -34,6 +34,7 @@ function runCard(st) {
     const modes = movie ? Object.keys(movie.modes) : [run.mode];
     const ghRun = runs.find((r) => r.id === run.run_id);
     const ended = ghRun && ghRun.status === 'completed';
+    const pausing = !ended && !!((st.data.settings && st.data.settings.json) || {}).paused;
     const done = run.stage === 'rendering' ? Math.max(0, (run.part || 1) - 1) : run.stage === 'uploading' ? run.parts_total : 0;
     const partLine = run.stage === 'rendering' && run.parts_total
       ? `Part ${run.part} of ${run.parts_total}` : STAGE_TEXT[run.stage] || run.stage;
@@ -43,7 +44,9 @@ function runCard(st) {
         <span class="run-clock" title="Time since the run started">${icon('clock')}<span data-elapsed="${Date.parse(run.started)}">${elapsed(Date.now() - Date.parse(run.started))}</span></span>
       </div>
       <h2 class="run-movie">${esc(run.movie)}</h2>
-      <p class="run-stage"><span class="live-dot"></span>${esc(STAGE_TEXT[run.stage] || run.stage)}${run.stage === 'rendering' ? ` · <strong>${partLine}</strong>` : ''}</p>
+      ${pausing
+        ? `<p class="run-stage"><span class="live-dot"></span>Pausing: GitHub stops within about a minute</p>`
+        : `<p class="run-stage"><span class="live-dot"></span>${esc(STAGE_TEXT[run.stage] || run.stage)}${run.stage === 'rendering' ? ` · <strong>${partLine}</strong>` : ''}</p>`}
       ${frameStrip(done, run.parts_total || 0, run.stage === 'rendering' ? run.part : 0)}
       ${stepper(run.stage)}
       ${ended ? `<p class="run-warn">${icon('alert')}GitHub shows this run as ${esc(ghRun.conclusion || 'ended')}. Status may be out of date.</p>` : ''}
@@ -125,8 +128,8 @@ function glanceRows(st) {
   }
   rows.push(`<div class="row">
     <span class="row-ic tone-ok">${icon('check')}</span>
-    <span class="row-main"><span class="row-title">Posted today</span></span>
-    <span class="row-val">${posting.posted_today ?? 0}${enabled && perDay ? ` of ${perDay}` : ''}</span>
+    <span class="row-main"><span class="row-title">Sent to TikTok today</span>${enabled && perDay ? `<span class="row-sub">${perDay} a day at your post times, plus any you send yourself</span>` : ''}</span>
+    <span class="row-val">${posting.posted_today ?? 0}</span>
   </div>`);
   const q = (s.queue || []).length;
   rows.push(`<a class="row" href="#/queue">
