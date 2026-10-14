@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T15:59:36+07:00",
+ "updated": "2026-10-14T16:02:26+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -77,6 +77,10 @@
   "mv7vnwd1kkdo": {
    "status": "done",
    "note": "Ready to save on your phone: share/the-notebook-2004/stretch-007.bin"
+  },
+  "mv7vsi39qg0e": {
+   "status": "failed",
+   "note": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141702211B79B2F530D27F1A71FA\"}}"
   }
  },
  "commands_done": [
@@ -117,7 +121,8 @@
   "mv7li6dedlb6",
   "mv7lvl5y5g15",
   "mv7lvn1ed2ql",
-  "mv7vnwd1kkdo"
+  "mv7vnwd1kkdo",
+  "mv7vsi39qg0e"
  ],
  "originals": [
   "kung-fu-hustle-2004",
