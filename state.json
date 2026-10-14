@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-14T11:36:28+07:00",
+ "updated": "2026-10-14T17:36:36+13:00",
  "run": {
   "active": true,
   "run_id": 38508621158,
   "started": "2026-10-14T16:55:24+13:00",
   "movie": "Colony (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
+  "stage": "rendering",
+  "part": 6,
   "parts_total": 12
  },
  "queue": [],
@@ -1061,6 +1061,12 @@
   "posted_today": 8
  },
  "events": [
+  {
+   "at": "2026-10-14T17:36:16+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Colony (2026): Part 5 of 12 ready",
+   "message": "Part 5: 41:20 to 42:49 (89s)  interest score 67/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
   {
    "at": "2026-10-14T17:34:16+13:00",
    "type": "part_ready",
