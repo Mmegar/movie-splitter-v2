@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:24:50+13:00",
+ "updated": "2026-10-16T02:26:02+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 3,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1828.0,
+       "end": 2064.5,
+       "seconds": 236.5,
+       "drive_path": "Ready to post/Superman (2025)/Best stretch/Superman (2025) - Part 01.mp4",
+       "caption": "you're not ready for the last 10 seconds ⏳\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "superman-2025/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
