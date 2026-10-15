@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:07:05+13:00",
+ "updated": "2026-10-15T21:07:07+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
   "started": "2026-10-15T21:04:45+13:00",
-  "movie": null,
+  "movie": "GONJIAM Haunted Asylum (2017)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -1828,6 +1828,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T21:07:07+13:00",
+   "type": "started",
+   "title": "Started: GONJIAM Haunted Asylum (2017)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/GONJIAM Haunted Asylum (2017)'."
+  },
+  {
    "at": "2026-10-15T15:04:18+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -3020,12 +3026,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Notebook (2004): Part 2 of 7 ready",
    "message": "Part 2: 45:18 to 46:39 (82s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nwatching this instead of sleeping again 🌚\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T14:55:37+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Notebook (2004): Part 1 of 7 ready",
-   "message": "Part 1: 44:06 to 45:18 (72s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
