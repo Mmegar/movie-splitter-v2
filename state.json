@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T04:29:33+07:00",
+ "updated": "2026-10-15T08:48:20+07:00",
  "run": {
   "active": false,
   "run_id": 38616962381,
@@ -1473,6 +1473,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T08:48:20+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
   {
    "at": "2026-10-15T04:29:33+07:00",
    "type": "post_failed",
