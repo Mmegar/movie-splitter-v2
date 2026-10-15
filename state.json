@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:11:33+13:00",
+ "updated": "2026-10-15T18:12:19+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Best stretch/Spider-Man Brand New Day (2026) - Part 01.mp4",
        "caption": "when they said 'What the hell?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "spider-man-brand-new-day-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 4622.5,
+       "end": 4800.2,
+       "seconds": 177.7,
+       "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Best stretch/Spider-Man Brand New Day (2026) - Part 02.mp4",
+       "caption": "the way they said 'Are you just trying to get out of fighting the Hulk?' 🫠\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "spider-man-brand-new-day-2026/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
