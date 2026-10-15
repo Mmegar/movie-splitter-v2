@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:28:31+13:00",
+ "updated": "2026-10-15T15:32:17+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
   "movie": "Obsession (2026)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 4,
   "parts_total": 4
  },
