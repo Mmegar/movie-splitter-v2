@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:45:31+13:00",
+ "updated": "2026-10-16T02:46:42+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -87,6 +87,21 @@
        "drive_path": "Ready to post/Superman (2025)/Highlights/Superman (2025) - Part 01.mp4",
        "caption": "me to my group chat: 'Get off!' 📱\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
        "preview": "superman-2025/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 5484.0,
+       "end": 5695.5,
+       "seconds": 211.5,
+       "drive_path": "Ready to post/Superman (2025)/Highlights/Superman (2025) - Part 02.mp4",
+       "caption": "'We got it, Cole, man!' is my new personality 😤\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "superman-2025/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
