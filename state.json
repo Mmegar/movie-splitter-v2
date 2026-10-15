@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:32:17+13:00",
+ "updated": "2026-10-15T15:33:07+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -117,6 +117,21 @@
        "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 03.mp4",
        "caption": "I'm not crying, my eyes are sweating 🥲\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "obsession-2026/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 6036.9,
+       "end": 6293.8,
+       "seconds": 256.9,
+       "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 04.mp4",
+       "caption": "nobody: \nthis movie: 🤯\nPart 4 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "obsession-2026/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
