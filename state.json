@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T14:49:09+13:00",
+ "updated": "2026-10-15T14:50:54+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -13,6 +13,29 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "obsession-2026",
+   "name": "Obsession (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-15T14:50:54+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
