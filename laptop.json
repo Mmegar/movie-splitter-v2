@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T13:35:29+07:00",
+ "updated": "2026-10-15T13:36:54+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -114,6 +114,10 @@
   "mv8zvw41f3rl": {
    "status": "done",
    "note": "Clip made"
+  },
+  "mv960yaz3rjh": {
+   "status": "done",
+   "note": "Sent to TikTok"
   }
  },
  "commands_done": [
@@ -190,7 +194,8 @@
   "mv8v2l1wdaqy",
   "mv8zjp0lybmg",
   "mv8zksfxy39o",
-  "mv8zvw41f3rl"
+  "mv8zvw41f3rl",
+  "mv960yaz3rjh"
  ],
  "originals": [
   "kung-fu-hustle-2004",
