@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:28:29+13:00",
+ "updated": "2026-10-15T15:28:31+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
   "movie": "Obsession (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 4
  },
  "queue": [],
@@ -1597,6 +1597,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:28:31+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Obsession (2026): Part 3 of 4 ready",
+   "message": "Part 3: 1:34:44 to 1:38:12 (207s)  interest score 68/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-15T15:24:11+13:00",
    "type": "part_ready",
    "title": "[Highlights] Obsession (2026): Part 2 of 4 ready",
@@ -2789,12 +2795,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 5 of 6 ready",
    "message": "Part 5: 30:49 to 35:16 (267s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-13T23:50:12+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 4 of 6 ready",
-   "message": "Part 4: 29:35 to 30:49 (74s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
