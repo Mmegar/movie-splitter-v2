@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T20:04:30+07:00",
+ "updated": "2026-10-15T20:04:35+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -7,6 +7,12 @@
  "uploading": null,
  "transfers": [],
  "uploaded": [
+  {
+   "file": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
+   "at": "2026-10-15T20:04:32+07:00",
+   "size_mb": 2082,
+   "source": "laptop"
+  },
   {
    "file": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
    "at": "2026-10-15T15:04:18+07:00",
@@ -59,15 +65,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
-   "size_mb": 2082,
-   "modified": "2026-10-15T10:10:44+07:00",
-   "sending": false,
-   "style": "zoom"
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
