@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:12:19+13:00",
+ "updated": "2026-10-15T18:12:20+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
   "started": "2026-10-15T17:53:25+13:00",
   "movie": "Spider-Man Brand New Day (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 4
  },
  "queue": [],
@@ -1697,6 +1697,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:12:20+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 2 of 4 ready",
+   "message": "Part 2: 1:17:02 to 1:20:00 (178s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nthe way they said 'Are you just trying to get out of fighting the Hulk?' 🫠\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-15T18:08:59+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 1 of 4 ready",
@@ -2889,12 +2895,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Moon Knight S01E02 Summon the Suit: 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Moon Knight S01E02 Summon the Suit\nCustom clips: 1"
-  },
-  {
-   "at": "2026-10-14T00:46:22+13:00",
-   "type": "finished",
-   "title": "[Custom clips] ✅ Clips done: Moon Knight S01E02 Summon the Suit",
-   "message": "1 custom clip made."
   }
  ]
 }
