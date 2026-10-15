@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:37:36+13:00",
+ "updated": "2026-10-15T18:37:57+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
   "started": "2026-10-15T17:53:25+13:00",
   "movie": "Spider-Man Brand New Day (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -1788,6 +1788,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:37:37+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Brand New Day (2026): Part 4 of 5 ready",
+   "message": "Part 4: 1:20:37 to 1:24:27 (230s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\nwhen they said 'Get out of the building!' I felt that 😭\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-15T18:33:09+13:00",
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Brand New Day (2026): Part 3 of 5 ready",
@@ -2980,12 +2986,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-14T08:47:29+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Kung Fu Hustle 2004 1080p x264.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
