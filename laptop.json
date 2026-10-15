@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T20:56:17+07:00",
+ "updated": "2026-10-15T20:57:12+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -79,6 +79,12 @@
    "name": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
    "size_mb": 826,
    "modified": "2026-10-15T10:43:11+07:00",
+   "folder": "done"
+  },
+  {
+   "name": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
+   "size_mb": 2082,
+   "modified": "2026-10-15T10:10:44+07:00",
    "folder": "done"
   },
   {
@@ -232,6 +238,7 @@
   "obsession-2026",
   "spider-man-across-the-spider-verse-2023",
   "spider-man-brand-new-day-2026",
+  "superman-2025",
   "the-notebook-2004"
  ],
  "shared": [
