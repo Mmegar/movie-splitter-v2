@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:41:48+13:00",
+ "updated": "2026-10-16T02:41:50+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
   "started": "2026-10-16T02:05:13+13:00",
   "movie": "Superman (2025)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 4
  },
  "queue": [],
@@ -2022,6 +2022,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T02:41:49+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Superman (2025): Part 1 of 4 ready",
+   "message": "Part 1: 31:28 to 35:08 (220s)  interest score 70/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Get off!' 📱\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T02:36:46+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Superman (2025): Part 3 of 3 ready",
@@ -3214,12 +3220,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Notebook (2004): Part 12 of 12 ready",
    "message": "Part 12: 1:45:24 to 1:46:43 (79s)  interest score 57/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nthis is cinema and I'm tired of pretending it's not 🎬\nPart 12 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T15:53:56+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Notebook (2004): Part 11 of 12 ready",
-   "message": "Part 11: 1:36:44 to 1:38:54 (131s)  interest score 69/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nI screamed. my neighbours screamed. 📢\nPart 11 🎬 · Part 12 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
