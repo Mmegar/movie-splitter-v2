@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:41:45+13:00",
+ "updated": "2026-10-15T17:41:49+13:00",
  "run": {
   "active": true,
   "run_id": 38682304394,
@@ -16,10 +16,10 @@
   {
    "id": "obsession-2026",
    "name": "Obsession (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-15T14:50:54+13:00",
-   "finished": "2026-10-15T15:33:17+13:00",
+   "finished": "2026-10-15T17:41:49+13:00",
    "duration": 6533.2,
    "subtitles": "made automatically (English)",
    "error": null,
@@ -1635,6 +1635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T17:41:47+13:00",
+   "type": "part_ready",
+   "title": "[Custom clips] ✂️ Obsession (2026): clip 1 of 1 ready",
+   "message": "Clip 1: 42:20 to 45:40 (200s)  Dont do thag\nOn its way to the laptop (Ready to post/Obsession (2026)/Custom clips)."
+  },
+  {
    "at": "2026-10-15T17:37:38+13:00",
    "type": "started",
    "title": "✂️ Making 1 custom clip: Obsession (2026)",
@@ -2827,12 +2833,6 @@
    "type": "part_ready",
    "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 5 of 5 ready",
    "message": "Part 5: 46:41 to 48:01 (80s)  interest score 63/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe way my jaw hit the floor 🫠\nPart 5 🎬 · the ending. no words. just 🫠\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T00:09:55+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 4 of 5 ready",
-   "message": "Part 4: 38:56 to 40:36 (100s)  interest score 67/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\n'of here!' and then THIS happened 😳\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
