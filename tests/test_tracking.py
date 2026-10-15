@@ -71,12 +71,12 @@ class CameraPathTest(unittest.TestCase):
 
     def test_crop_has_the_band_shape(self):
         import tracking
-        self.assertEqual(tracking.crop_size(1920, 800), (900, 800))
-        self.assertEqual(tracking.crop_size(640, 1000), (640, 568))
+        self.assertEqual(tracking.crop_size(1920, 800), (1000, 800))
+        self.assertEqual(tracking.crop_size(640, 1000), (640, 512))
 
 
 class StylePartsTest(unittest.TestCase):
-    def test_zoom_style_makes_fewer_3_to_5_minute_parts(self):
+    def test_zoom_style_makes_at_least_5_parts_of_3_to_5_minutes(self):
         sys.path.insert(0, str(ROOT))
         import process
         try:
@@ -91,9 +91,9 @@ class StylePartsTest(unittest.TestCase):
             zoom = process.choose_stretch(total, score, cands)
             hl_zoom = process.choose_highlights(total, score, cands)
             self.assertLess(len(zoom), len(classic))
-            self.assertTrue(3 <= len(zoom) <= 4, len(zoom))
+            self.assertTrue(5 <= len(zoom) <= 6, len(zoom))             # at least 5 parts
             self.assertTrue(all(170 <= b - a <= 305 for a, b, _ in zoom), [(b - a) for a, b, _ in zoom])
-            self.assertTrue(3 <= len(hl_zoom) <= 5 and len(hl_zoom) < len(hl_classic))
+            self.assertTrue(5 <= len(hl_zoom) <= 6 and len(hl_zoom) < len(hl_classic))
             self.assertTrue(all(170 <= b - a <= 305 for a, b, _ in hl_zoom))
         finally:
             process.apply_style("classic")
@@ -117,13 +117,13 @@ class FollowsFaceTest(TempDirTest):
         p.stdin.close()
         p.wait()
         filt = tracking.plan(src, 0, 6, "", W, H, self.tmp)
-        self.assertIn("crop@track=w=450:h=400", filt)
+        self.assertIn("crop@track=w=500:h=400", filt)
         moves = [l.split() for l in (self.tmp / "track.txt").read_text().splitlines() if l.strip()]
         xs = [(float(m[0]), int(m[-1].rstrip(";"))) for m in moves]
         early = [x for t, x in xs if t < 1]
         late = [x for t, x in xs if t > 5]
         self.assertLess(early[0], 100)                       # starts on the left, where the face is
-        self.assertGreater(late[-1], 450)                    # ends on the right, following it
+        self.assertGreater(late[-1], 380)                    # ends on the right, following it
         for t, x in xs:                                       # the face stays in the picture the whole time
             fx = 30 + (W - 270) * t / 6 + 105
-            self.assertTrue(x - 40 <= fx <= x + 450 + 40, (t, x, fx))
+            self.assertTrue(x - 40 <= fx <= x + 500 + 40, (t, x, fx))

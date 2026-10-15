@@ -215,7 +215,7 @@ export function formatSetting(path, v) {
   if (path === 'posting.times') return (v || []).join(', ') || 'None';
   if (PCT_KEYS.has(path)) return `${Math.round(Number(v) * 100)}%`;
   if (path === 'zoom_part_seconds') return `${Math.floor(v / 60)} min${v % 60 ? ` ${v % 60} s` : ''}`;
-  if (path === 'cut_style') return v === 'zoom' ? 'Zoomed + tracking' : 'Classic';
+  if (path === 'cut_style') return v === 'classic' ? 'Classic' : 'Zoomed + tracking';
   if (SEC_KEYS.has(path)) return `${v} s`;
   if (path === 'stretch_minutes') return `${v} min`;
   if (path === 'highlight_count') return Number(v) === 0 ? 'Automatic' : String(v);
@@ -402,4 +402,9 @@ export function movieId(name) {
 export function sizeText(mb) {
   if (!mb && mb !== 0) return '';
   return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
+}
+
+/** What a part is called: "Clip 2", "Highlight 3" or "Part 4". */
+export function partLabel(mode, n) {
+  return `${mode === 'clips' ? 'Clip' : mode === 'highlights' ? 'Highlight' : 'Part'} ${n}`;
 }

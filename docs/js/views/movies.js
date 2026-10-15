@@ -1,5 +1,5 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
-import { MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
+import { partLabel, MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
 import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml, saveAllParts, cancelSending } from './media.js';
 
@@ -81,7 +81,7 @@ export function createMoviesView(ctx) {
     const postWhen = post.at ? ` ${post.status === 'scheduled' ? relTime(Date.parse(post.at)) : `${dayLabel(Date.parse(post.at))} ${clock(Date.parse(post.at))}`}` : '';
     return `<li class="part" id="part-${mode}-${p.n}">
       <div class="part-head">
-        <span class="part-n">${mode === 'clips' ? `Clip ${p.n}` : `Part ${p.n}`}${p.title ? ` <span class="part-title">${esc(p.title)}</span>` : ''}</span>
+        <span class="part-n">${partLabel(mode, p.n)}${p.title ? ` <span class="part-title">${esc(p.title)}</span>` : ''}</span>
         <span class="part-time">${timecode(p.start)}–${timecode(p.end)} <span class="muted">· ${shortDuration(p.seconds)}</span></span>
         ${chip(post.status)}
       </div>

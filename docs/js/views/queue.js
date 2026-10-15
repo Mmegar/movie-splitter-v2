@@ -265,7 +265,7 @@ export function createQueueView(ctx) {
   /** The cutting style of a movie in To edit: a small button that opens the choice. */
   function styleChip(st, f) {
     const pending = pendingCommands(st.data.commands, st.data.laptop, 'set_style').filter((c) => c.file === f.name).pop();
-    const style = pending ? pending.style : (f.style || 'classic');
+    const style = pending ? pending.style : (f.style || 'zoom');
     const label = style === 'zoom' ? 'Zoomed + tracking' : 'Classic';
     if (f.sending) return `<span class="style-chip is-fixed">${icon(style === 'zoom' ? 'scissors' : 'frames')}${label}</span>`;
     return `<button class="style-chip ${style === 'zoom' ? 'is-zoom' : ''}" data-style="${esc(f.name)}" data-cur="${style}" aria-label="Cutting style: ${label}. Change">${icon(style === 'zoom' ? 'scissors' : 'frames')}${label}${pending ? ' …' : ''}<span class="chev">▾</span></button>`;

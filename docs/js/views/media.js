@@ -1,7 +1,7 @@
 // Preview player and the custom-clip editor (both bottom sheets).
 import { esc, icon, toast, haptic, openSheet, confirmSheet, copyText } from '../ui.js';
 import { fixMp4 } from '../mp4fix.js';
-import { timecode, shortDuration, movieLength, MODE_LABELS, pendingCommands, commandState } from '../logic.js';
+import { partLabel, timecode, shortDuration, movieLength, MODE_LABELS, pendingCommands, commandState } from '../logic.js';
 
 const MAX_CLIP = 600;   // TikTok's longest upload: 10 minutes
 const MIN_CLIP = 3;
@@ -357,7 +357,7 @@ export async function openSavePart(ctx, movie, mode, part) {
 
 // ---------- part actions ----------
 export async function openPartActions(ctx, movie, mode, part) {
-  const label = mode === 'clips' ? `Clip ${part.n}` : `Part ${part.n}`;
+  const label = partLabel(mode, part.n);
   const posted = part.post && ['posted', 'inbox'].includes(part.post.status);
   const v = await openSheet({
     className: 'sheet--action',

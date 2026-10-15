@@ -36,7 +36,7 @@ DEFAULTS = {
     "cockroach_chance": 1,
     "cockroach_size": 60,
     "captions": True,
-    "cut_style": "classic",              # classic = whole picture on a blurred background; zoom = zoomed band that follows faces
+    "cut_style": "zoom",                 # zoom = zoomed band that follows faces (default); classic = whole picture on a blurred background
     "zoom_part_seconds": 210,            # zoom style: parts of about 3.5 minutes...
     "zoom_part_max_extra": 90,           # ...that may run up to this much longer to end at a pause (so 3-5 min)
     "caption_style": "goofy",            # goofy = jokes + a quote from the clip; plain = the older, calmer captions

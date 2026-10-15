@@ -63,6 +63,7 @@ LATEST = float(os.environ.get("CUT_LATEST", "15"))               # ...or this la
 HIGHLIGHT_SECONDS = float(os.environ.get("HIGHLIGHT_SECONDS", "75"))  # "highlights" mode: clip length
 HIGHLIGHT_COUNT = int(os.environ.get("HIGHLIGHT_COUNT", "0"))    # 0 = automatic (about 1 per 10 min)
 MIN_LAST_PART = 30
+MIN_PARTS = 5        # every mode makes at least this many parts (when the movie is long enough)
 MAX_EXTRA = float(os.environ.get("PART_MAX_EXTRA", "225"))  # a part may run this many seconds long to end well
 GOOD_ENDING = 3.0   # an ending at least this good is taken as soon as one turns up
 # cutting style, per movie: "classic" (whole picture, blurred background) or "zoom" (zoomed band that
@@ -395,7 +396,12 @@ def pick_quote(part_cues):
     return random.choice(loud or lines).replace("'", "’")
 
 
-def make_captions(count, quotes=None, style=None):
+def part_word(mode=None):
+    """What a part is called on the video, in captions and notifications: highlights are "Highlight N"."""
+    return "Highlight" if (mode if mode is not None else MODE) == "highlights" else "Part"
+
+
+def make_captions(count, quotes=None, style=None, word="Part"):
     """One caption per part: a hook (sometimes a quote from the part), a 'next part' line, and hashtags.
     No repeated hooks within a movie. style: goofy (default) or plain."""
     style = (style or CAPTION_STYLE or "goofy").lower()
@@ -417,7 +423,9 @@ def make_captions(count, quotes=None, style=None):
         else:
             end = (random.choice(CAPTION_ENDINGS).format(next=i + 1) if i < count else random.choice(CAPTION_LAST))
             tags = random.choice(HASHTAG_SETS)
-        out.append(f"{hook}\nPart {i} 🎬 · {end}\n{tags}")
+        if word != "Part":
+            end = end.replace("Part ", f"{word} ")
+        out.append(f"{hook}\n{word} {i} 🎬 · {end}\n{tags}")
     return out
 
 
@@ -700,8 +708,9 @@ def snap(t, candidates, before, after):
 
 def choose_highlights(total, score, candidates):
     length = min(HIGHLIGHT_SECONDS, total)
-    count = HIGHLIGHT_COUNT or (max(3, min(5, round(total / 1800))) if STYLE == "zoom"
-                                else max(1, min(12, round(total / 600))))
+    count = HIGHLIGHT_COUNT or (max(MIN_PARTS, min(6, round(total / 1800))) if STYLE == "zoom"
+                                else max(MIN_PARTS, min(12, round(total / 600))))
+    count = max(count, MIN_PARTS)
     L = int(length)
     # ignore the first 1% (logos) and the last 4% (end credits) of long videos
     lo = int(total * 0.01) if total > 1200 else 0
@@ -752,7 +761,8 @@ def choose_cuts(total, candidates, part=None, begin=0.0):
 
 def choose_stretch(total, score, candidates):
     """'stretch' mode: the most interesting STRETCH_MINUTES, cut into back-to-back parts."""
-    L = int(min(STRETCH_MINUTES * 60, total))
+    # long enough for at least MIN_PARTS parts
+    L = int(min(max(STRETCH_MINUTES * 60, MIN_PARTS * STRETCH_PART_SECONDS), total))
     # only the middle of the movie: skip the start and the finale (no spoilers)
     lo, hi = int(total * STRETCH_FROM), int(total * STRETCH_TO)
     if hi - lo < L:                                   # short video: widen around the middle
@@ -1038,7 +1048,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
     ALL_CUES.extend((round(a + start, 2), round(b + start, 2), t) for a, b, t in part_cues
                     if (round(a + start, 1), t) not in seen)
     filters += subtitle_filters(part_cues, end - start, movie_bottom(src), workdir)
-    label = f"Part {number}" if top_text is None else top_text
+    label = f"{part_word()} {number}" if top_text is None else top_text
     if label:
         (workdir / "toptext.txt").write_text(label, encoding="utf-8")
         filters += (
@@ -1134,7 +1144,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         width = max(2, len(str(len(parts))))
         lines = []
         for i, (a, b, sc) in enumerate(parts, 1):
-            line = f"Part {i}: {fmt_time(a)} to {fmt_time(b)} ({b - a:.0f}s)"
+            line = f"{part_word(mode)} {i}: {fmt_time(a)} to {fmt_time(b)} ({b - a:.0f}s)"
             if sc is not None:
                 line += f"  interest score {sc * 100:.0f}/100"
             print("  " + line, flush=True)
@@ -1154,7 +1164,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
             if (mode, i) in skip:                         # made by an earlier run that stopped
                 PART_TIMES[(mode, i)] = (a, b)
                 continue
-            out = mdir / f"{name} - Part {str(i).zfill(width)}.mp4"
+            out = mdir / f"{name} - {part_word(mode)} {str(i).zfill(width)}.mp4"
             print(f"Making {label} part {i} of {len(parts)}...", flush=True)
             status.set_stage("rendering", mode=mode, part=i, parts_total=len(parts))
             render_part(src, a, b, i, cues, out, workdir)
@@ -1289,7 +1299,7 @@ def process_release(gh, release):
         assets = transport.send(gh, out_rel, out, prefix)
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
-            captions[mode] = make_captions(count)
+            captions[mode] = make_captions(count, word=part_word(mode))
         text = captions[mode][i - 1] if mode in captions else None
         q = pick_quote(PART_CUES.get((mode, i)))
         if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
@@ -1301,7 +1311,7 @@ def process_release(gh, release):
         save_body()
         status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv)
         caption = f"\n\n📝 Caption:\n{text}" if text else ""
-        notify(f"{name}: Part {i} of {count} ready",
+        notify(f"{name}: {part_word(mode)} {i} of {count} ready",
                f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",
                ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
         stop_if_needed()

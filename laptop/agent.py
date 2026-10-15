@@ -681,7 +681,7 @@ class Agent:
             folder = base / LABELS.get(mode, mode)
             folder.mkdir(parents=True, exist_ok=True)
             (folder / "_parts list.txt").write_text(text, encoding="utf-8")
-            caps = [f"Part {p['n']}  ({p['file']})\n{p['caption']}\n"
+            caps = [f"{'Highlight' if mode == 'highlights' else 'Part'} {p['n']}  ({p['file']})\n{p['caption']}\n"
                     for p in sorted(body.get("parts", []), key=lambda p: p["n"])
                     if p["mode"] == mode and p.get("caption")]
             if caps:
@@ -1082,7 +1082,7 @@ class Agent:
         with self.lock:
             self.memory["last_post"] = time.time()
             self._save_memory()
-        what = "Clip" if mode == "clips" else "Part"
+        what = "Clip" if mode == "clips" else "Highlight" if mode == "highlights" else "Part"
         title = f"{movie['name']}: {what} {part['n']}"
         if ok and not direct:
             self.notify(f"📲 In your TikTok drafts: {title}",

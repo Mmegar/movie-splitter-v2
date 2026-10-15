@@ -1,6 +1,6 @@
 // Offline shell. App files: stale-while-revalidate. Live data (GitHub, ntfy) is never cached here;
 // the app keeps its own last-good copy in localStorage.
-const VERSION = 'ms-v2-15';
+const VERSION = 'ms-v2-16';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/api.js', 'js/logic.js', 'js/store.js', 'js/demo.js', 'js/ui.js', 'js/crypto.js', 'js/mp4fix.js',

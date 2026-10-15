@@ -29,14 +29,15 @@ function swRow(d, path, title, sub = '') {
   </label>`;
 }
 
-function stepRow(d, path, title, { min = 0, max = 100, step = 1, values = null, sub = '' } = {}) {
-  const v = Number(getPath(d, path));
+function stepRow(d, path, title, { min = 0, max = 100, step = 1, values = null, sub = '', def = null } = {}) {
+  const raw = getPath(d, path);
+  const v = Number(raw == null && def != null ? def : raw);
   let dec, inc;
   if (values) { const i = values.indexOf(v); dec = i > 0 || i === -1; inc = i < values.length - 1; }
   else { dec = v > min; inc = v < max; }
   return `<div class="row row--ctl">
     <span class="row-main"><span class="row-title">${esc(title)}</span>${sub ? `<span class="row-sub">${esc(sub)}</span>` : ''}</span>
-    <span class="stepper-ctl" data-step="${path}" data-min="${min}" data-max="${max}" data-inc="${step}" ${values ? `data-values="${values.join(',')}"` : ''}>
+    <span class="stepper-ctl" data-step="${path}" data-min="${min}" data-max="${max}" data-inc="${step}" data-def="${def ?? ''}" ${values ? `data-values="${values.join(',')}"` : ''}>
       <button type="button" data-d="-1" aria-label="Less ${esc(title)}" ${dec ? '' : 'disabled'}>${icon('minus')}</button>
       <span class="stepper-val" aria-live="polite">${esc(formatSetting(path, v))}</span>
       <button type="button" data-d="1" aria-label="More ${esc(title)}" ${inc ? '' : 'disabled'}>${icon('plus')}</button>
@@ -102,9 +103,9 @@ function buildForm(d) {
     modesGroup(d),
 
     group('Cutting style', [
-      segRow(d, 'cut_style', 'New movies', [['classic', 'Classic'], ['zoom', 'Zoomed + tracking']],
-        d.cut_style === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
-      d.cut_style === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
+      segRow(d, 'cut_style', 'New movies', [['zoom', 'Zoomed + tracking'], ['classic', 'Classic']],
+        (d.cut_style || 'zoom') === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
+      (d.cut_style || 'zoom') === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
     ], 'You can also pick the style for each movie in Queue, under Up next.'),
 
     group('Part lengths', [
@@ -318,7 +319,8 @@ export function createSettingsView(ctx) {
       const box = st.closest('[data-step]');
       const path = box.dataset.step;
       const dir = Number(st.dataset.d);
-      const v = Number(getPath(draft, path));
+      const cur = getPath(draft, path);
+      const v = Number(cur == null && box.dataset.def !== '' ? box.dataset.def : cur);
       let nv;
       if (box.dataset.values) {
         const vals = box.dataset.values.split(',').map(Number);
@@ -336,7 +338,7 @@ export function createSettingsView(ctx) {
     const sg = e.target.closest('[data-seg]');
     if (sg) {
       haptic();
-      if (sg.dataset.seg === 'cut_style' && sg.dataset.v === 'zoom' && draft.zoom_part_seconds == null) draft.zoom_part_seconds = 210;
+      
       set(sg.dataset.seg, sg.dataset.v);
       return;
     }

@@ -37,7 +37,7 @@ function runCard(st) {
     const pausing = !ended && !!((st.data.settings && st.data.settings.json) || {}).paused;
     const done = run.stage === 'rendering' ? Math.max(0, (run.part || 1) - 1) : run.stage === 'uploading' ? run.parts_total : 0;
     const partLine = run.stage === 'rendering' && run.parts_total
-      ? `Part ${run.part} of ${run.parts_total}` : STAGE_TEXT[run.stage] || run.stage;
+      ? `${run.mode === 'highlights' ? 'Highlight' : 'Part'} ${run.part} of ${run.parts_total}` : STAGE_TEXT[run.stage] || run.stage;
     return `<article class="run-card is-live" aria-live="polite">
       <div class="run-top">
         <div class="mode-track">${modes.map((m) => `<span class="mode-pill ${m === run.mode ? 'is-on' : ''}">${esc(MODE_LABELS[m] || m)}</span>`).join('')}</div>
