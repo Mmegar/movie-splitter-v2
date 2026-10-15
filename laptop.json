@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T14:45:54+07:00",
+ "updated": "2026-10-15T14:46:59+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -59,7 +59,7 @@
    "size_mb": 826,
    "modified": "2026-10-15T10:43:11+07:00",
    "sending": false,
-   "style": "classic"
+   "style": "zoom"
   }
  ],
  "library": [
@@ -125,6 +125,10 @@
   "mv98h5mqfjig": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mv98j975nahr": {
+   "status": "done",
+   "note": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv: Zoomed + tracking"
   }
  },
  "commands_done": [
@@ -203,7 +207,8 @@
   "mv8zksfxy39o",
   "mv8zvw41f3rl",
   "mv960yaz3rjh",
-  "mv98h5mqfjig"
+  "mv98h5mqfjig",
+  "mv98j975nahr"
  ],
  "originals": [
   "kung-fu-hustle-2004",
