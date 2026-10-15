@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T13:41:54+07:00",
+ "updated": "2026-10-15T15:04:18+07:00",
  "run": {
   "active": false,
   "run_id": 38683803749,
@@ -1805,6 +1805,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:04:18+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-15T13:36:51+07:00",
    "type": "posted",
    "title": "📲 In your TikTok drafts: Obsession (2026): Part 2",
@@ -2997,12 +3003,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Notebook (2004): Part 1 of 7 ready",
    "message": "Part 1: 44:06 to 45:18 (72s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T08:54:38+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 4",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
   }
  ]
 }
