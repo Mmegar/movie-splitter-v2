@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:56:16+13:00",
+ "updated": "2026-10-15T20:57:09+07:00",
  "run": {
   "active": false,
   "run_id": 38739668704,
@@ -2068,6 +2068,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T20:57:09+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Superman (2025): 7 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Superman (2025)\nBest stretch: 3 parts, Highlights: 4 parts"
+  },
+  {
    "at": "2026-10-16T02:56:13+13:00",
    "type": "finished",
    "title": "✅ Finished: Superman (2025)",
@@ -3260,12 +3266,6 @@
    "type": "planned",
    "title": "[Highlights] Kung Fu Hustle (2004): 10 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-14T16:03:40+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Kung Fu Hustle (2004): 6 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Best stretch as they're made."
   }
  ]
 }
