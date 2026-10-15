@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:41:53+13:00",
+ "updated": "2026-10-15T11:52:56+07:00",
  "run": {
   "active": false,
   "run_id": 38682304394,
@@ -1635,6 +1635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T11:52:54+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-15T17:41:50+13:00",
    "type": "finished",
    "title": "[Custom clips] ✅ Clips done: Obsession (2026)",
@@ -2827,12 +2833,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub for clips",
    "message": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv: 1 custom clip(s) start soon."
-  },
-  {
-   "at": "2026-10-14T00:12:08+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Moon Knight S01E02 Summon the Suit",
-   "message": "Best stretch: 6 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Moon Knight S01E02 Summon the Suit. The copy sent to GitHub has been deleted."
   }
  ]
 }
