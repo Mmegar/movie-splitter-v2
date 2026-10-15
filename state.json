@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:50:26+13:00",
+ "updated": "2026-10-16T02:51:27+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -102,6 +102,21 @@
        "drive_path": "Ready to post/Superman (2025)/Highlights/Superman (2025) - Part 02.mp4",
        "caption": "'We got it, Cole, man!' is my new personality 😤\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "superman-2025/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 6001.0,
+       "end": 6210.5,
+       "seconds": 209.5,
+       "drive_path": "Ready to post/Superman (2025)/Highlights/Superman (2025) - Part 03.mp4",
+       "caption": "nobody: \nthis movie: 🤯\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "superman-2025/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
