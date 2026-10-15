@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:33:21+13:00",
+ "updated": "2026-10-15T09:34:28+07:00",
  "run": {
   "active": false,
   "run_id": 38667627214,
@@ -1613,6 +1613,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T09:34:26+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Obsession (2026): 7 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Obsession (2026)\nBest stretch: 3 parts, Highlights: 4 parts"
+  },
+  {
    "at": "2026-10-15T15:33:19+13:00",
    "type": "finished",
    "title": "✅ Finished: Obsession (2026)",
@@ -2805,12 +2811,6 @@
    "type": "part_ready",
    "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 2 of 5 ready",
    "message": "Part 2: 12:29 to 13:52 (84s)  interest score 74/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T00:03:28+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 1 of 5 ready",
-   "message": "Part 1: 0:40 to 3:39 (179s)  interest score 63/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nme to my group chat: 'You ready?' 📱\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
