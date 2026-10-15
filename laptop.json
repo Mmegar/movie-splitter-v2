@@ -1,19 +1,25 @@
 {
- "updated": "2026-10-15T10:44:38+07:00",
+ "updated": "2026-10-15T10:45:20+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-  "percent": 5
+  "percent": 6
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "file": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "percent": 5
+   "percent": 6
+  },
+  {
+   "direction": "send",
+   "movie": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
+   "file": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
+   "percent": 2
   }
  ],
  "uploaded": [
@@ -88,6 +94,10 @@
   }
  ],
  "commands": {
+  "mv8zvw41f3rl": {
+   "status": "working",
+   "note": "Sending the movie to GitHub"
+  },
   "mv8r6zyrp1t9": {
    "status": "done",
    "note": "Ready to save on your phone: share/spider-man-across-the-spider-verse-2023/stretch-003.bin"
@@ -111,10 +121,6 @@
   "mv8zksfxy39o": {
    "status": "done",
    "note": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: Zoomed + tracking"
-  },
-  "mv8zvw41f3rl": {
-   "status": "working",
-   "note": "Sending the movie to GitHub"
   }
  },
  "commands_done": [
