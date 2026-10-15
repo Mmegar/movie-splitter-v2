@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T14:50:54+13:00",
+ "updated": "2026-10-15T14:50:56+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
-  "movie": null,
+  "movie": "Obsession (2026)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -1496,6 +1496,12 @@
   "posted_today": 0
  },
  "events": [
+  {
+   "at": "2026-10-15T14:50:55+13:00",
+   "type": "started",
+   "title": "Started: Obsession (2026)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Obsession (2026)'."
+  },
   {
    "at": "2026-10-15T08:48:20+07:00",
    "type": "new_file",
