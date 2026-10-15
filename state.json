@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:15:13+13:00",
+ "updated": "2026-10-15T18:16:05+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Best stretch/Spider-Man Brand New Day (2026) - Part 02.mp4",
        "caption": "the way they said 'Are you just trying to get out of fighting the Hulk?' 🫠\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "spider-man-brand-new-day-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 4800.2,
+       "end": 4993.4,
+       "seconds": 193.2,
+       "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Best stretch/Spider-Man Brand New Day (2026) - Part 03.mp4",
+       "caption": "I paused 3 times to process this 🧐\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "spider-man-brand-new-day-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
