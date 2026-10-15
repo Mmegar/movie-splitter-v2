@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:08:11+13:00",
+ "updated": "2026-10-15T18:08:57+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 4,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 4426.8,
+       "end": 4622.5,
+       "seconds": 195.8,
+       "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Best stretch/Spider-Man Brand New Day (2026) - Part 01.mp4",
+       "caption": "when they said 'What the hell?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "spider-man-brand-new-day-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
