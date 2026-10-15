@@ -85,60 +85,108 @@ def is_cut(prev_hist, hist):
     return prev_hist is not None and cv2.compareHist(prev_hist, hist, cv2.HISTCMP_CORREL) < 0.55
 
 
-def targets(frames):
-    """Per sampled frame: (x of what to look at, 0..1 of the width, or None) and whether a new shot starts."""
+def detections(frames):
+    """Per sampled frame: faces [(centre x, width, mouth movement)] (0..1 of the width), where the movement
+    is (x or None), and whether a new shot starts there."""
     import cv2
     if not len(frames):
-        return [], []
+        return [], [], []
     h, w = frames[0].shape[:2]
-    faces = Faces(w, h)
-    out, cuts = [], []
+    finder = Faces(w, h)
+    faces, moves, cuts = [], [], []
     prev_gray = prev_hist = None
-    last = None                      # what we followed in the previous frame (x, face width)
     for frame in frames:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         hist = cv2.calcHist([gray], [0], None, [32], [0, 256])
         cv2.normalize(hist, hist)
         cut = prev_gray is None or is_cut(prev_hist, hist)
-        if cut:
-            last = None
-        found = [f for f in faces.find(frame, gray) if f[2] >= w * 0.04]
-        x = None
-        if found:
-            best, best_score = None, -1.0
-            for fx, fy, fw, fh, conf in found:
-                cx = fx + fw / 2
-                size = (fw * fh) / (w * h)
-                mouth = 0.0
-                if prev_gray is not None and not cut:
-                    y0, y1 = int(fy + fh * 0.6), int(min(h, fy + fh * 1.05))
-                    x0, x1 = int(max(0, fx + fw * 0.2)), int(min(w, fx + fw * 0.8))
-                    if y1 > y0 and x1 > x0:
-                        mouth = float(cv2.absdiff(gray[y0:y1, x0:x1], prev_gray[y0:y1, x0:x1]).mean()) / 255
-                stay = 1.0 if last and abs(cx - last) < fw else 0.0      # keep following the same person
-                score = size * 4 + mouth * 6 + stay * 0.15 + conf * 0.05
-                if score > best_score:
-                    best, best_score = cx, score
-            x = best
-        elif prev_gray is not None and not cut:
+        found = []
+        for fx, fy, fw, fh, conf in finder.find(frame, gray):
+            if fw < w * 0.04:
+                continue
+            mouth = 0.0
+            if prev_gray is not None and not cut:
+                y0, y1 = int(fy + fh * 0.6), int(min(h, fy + fh * 1.05))
+                x0, x1 = int(max(0, fx + fw * 0.2)), int(min(w, fx + fw * 0.8))
+                if y1 > y0 and x1 > x0:
+                    mouth = float(cv2.absdiff(gray[y0:y1, x0:x1], prev_gray[y0:y1, x0:x1]).mean()) / 255
+            found.append(((fx + fw / 2) / w, fw / w, mouth))
+        move = None
+        if not found and prev_gray is not None and not cut:
             diff = cv2.absdiff(gray, prev_gray).astype(np.float32)
             diff[diff < 25] = 0
             cols = diff.sum(axis=0)
             total = cols.sum()
             if total > w * h * 2.0:                                     # enough movement to mean something
-                x = float((cols * np.arange(w)).sum() / total)
-        if x is not None:
-            last = x
-        out.append(None if x is None else x / w)
+                move = float((cols * np.arange(w)).sum() / total) / w
+        faces.append(found)
+        moves.append(move)
         cuts.append(cut)
         prev_gray, prev_hist = gray, hist
+    return faces, moves, cuts
+
+
+def plan_shot(faces, moves, view):
+    """
+    What to look at in each frame of ONE shot. Decided once for the whole shot, so the camera never
+    swings back and forth between people talking to each other:
+      - several people who fit in the frame together: frame them all and hold still;
+      - otherwise the main person of the shot (on screen most, biggest, talks most), followed only if
+        they themselves move;
+      - nobody: follow the movement.
+    """
+    n = len(faces)
+    people = []                      # {"xs": {frame: x}, "size": sum of widths, "mouth": sum}
+    for i, found in enumerate(faces):
+        for cx, fw, mouth in found:
+            best = None
+            for p in people:
+                last = p["xs"][max(p["xs"])]
+                if abs(cx - last) < max(fw, 0.08) and i not in p["xs"] and (best is None or abs(cx - last) < best[0]):
+                    best = (abs(cx - last), p)
+            if best:
+                p = best[1]
+            else:
+                p = {"xs": {}, "size": 0.0, "mouth": 0.0}
+                people.append(p)
+            p["xs"][i] = cx
+            p["size"] += fw
+            p["mouth"] += mouth
+    need = max(2, int(n * 0.2))      # ignore faces seen only for a moment (background, mistakes)
+    people = [p for p in people if len(p["xs"]) >= min(need, n)]
+    if not people:
+        out, last = [], None
+        for m in moves:
+            last = m if m is not None else last
+            out.append(last)
+        return out
+    if len(people) >= 2:
+        spots = [float(np.median(list(p["xs"].values()))) for p in people]
+        width = max(p["size"] / len(p["xs"]) for p in people)
+        if max(spots) - min(spots) + width <= view * 0.95:        # everyone fits: hold on the group
+            return [(max(spots) + min(spots)) / 2] * n
+    main = max(people, key=lambda p: len(p["xs"]) / n + p["size"] / len(p["xs"]) * 2 + p["mouth"] / n * 4)
+    out, last = [], None
+    for i in range(n):
+        last = main["xs"].get(i, last)
+        out.append(last)
+    return out
+
+
+def targets(frames, view=0.375):
+    """Per sampled frame: (x to centre on, 0..1 of the width, or None) and whether a new shot starts."""
+    faces, moves, cuts = detections(frames)
+    out = []
+    starts = [i for i, c in enumerate(cuts) if c] + [len(cuts)]
+    for a, b in zip(starts, starts[1:]):
+        out += plan_shot(faces[a:b], moves[a:b], view)
     return out, cuts
 
 
 def camera_path(points, cuts, view):
     """
     Smooth camera centres (0..1 of the width) from the raw targets. view = how much of the width the
-    crop shows (0..1). Holds still for small moves, glides after bigger ones, jumps only at a new shot.
+    crop shows (0..1). No panning unless the subject would leave the frame; jumps only at a new shot.
     """
     n = len(points)
     if not n:
@@ -152,17 +200,21 @@ def camera_path(points, cuts, view):
     for a, b in zip(shots, shots[1:]):
         if b <= a:
             continue
-        known = [p for p in points[a:min(b, a + SAMPLE_FPS)] if p is not None] or \
-                [p for p in points[a:b] if p is not None]
+        seen = [p for p in points[a:b] if p is not None]
+        if seen and max(seen) - min(seen) <= view * 0.7:
+            # everything the shot looks at fits in the frame: one still framing, no panning at all
+            path[a:b] = [clamp((max(seen) + min(seen)) / 2)] * (b - a)
+            continue
+        known = [p for p in points[a:min(b, a + SAMPLE_FPS)] if p is not None] or seen
         cam = clamp(float(np.median(known))) if known else 0.5
         target = cam
-        dead = view * 0.08                       # small moves inside this are ignored
+        dead = view * 0.3                        # only move when the subject nears the edge of the frame
         for i in range(a, b):
             if points[i] is not None:
                 target = clamp(points[i])
             gap = target - cam
             if abs(gap) > dead:
-                cam += gap * 0.4                 # glide 40% of the way each sample (5 a second)
+                cam += (gap - dead * (1 if gap > 0 else -1)) * 0.5 + gap * 0.1   # catch up, then stop
             path[i] = cam
         for _ in range(2):                       # soften the start and stop of each glide
             seg = path[a:b]
@@ -190,7 +242,7 @@ def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30):
     sh = max(2, int(round(sw * H / W / 2)) * 2)
     try:
         frames = read_frames(src, start, length, pre_filter, sw, sh)
-        pts, cuts = targets(frames)
+        pts, cuts = targets(frames, cw / W)
         path = camera_path(pts, cuts, cw / W)
     except Exception as e:
         print(f"  (tracking failed, keeping the middle: {e})", flush=True)

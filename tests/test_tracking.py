@@ -31,9 +31,43 @@ class CameraPathTest(unittest.TestCase):
         path = tracking.camera_path(pts, cuts, view=0.375)
         self.assertTrue(all(abs(p - path[0]) < 0.02 for p in path[:3]))      # wobble ignored
         self.assertTrue(all(b >= a - 1e-9 for a, b in zip(path[3:16], path[4:16])))   # glides right
-        self.assertGreater(path[15], 0.74)                                      # gets there
+        self.assertGreater(path[15], 0.66)                                      # 0.8 is back in the frame
         self.assertLess(path[16], 0.3)                                          # new shot: jumps
         self.assertTrue(all(0.1875 - 1e-9 <= p <= 0.8125 + 1e-9 for p in path))  # crop stays in the picture
+
+    def test_two_people_talking_who_fit_in_the_frame_get_one_still_shot(self):
+        import tracking
+        faces = []
+        for i in range(30):                      # they take turns talking: mouths move alternately
+            a_talks = (i // 5) % 2 == 0
+            faces.append([(0.42, 0.07, 0.2 if a_talks else 0.0), (0.60, 0.07, 0.0 if a_talks else 0.2)])
+        pts = tracking.plan_shot(faces, [None] * 30, view=0.375)
+        self.assertEqual(len(set(round(p, 4) for p in pts)), 1)     # one framing, held
+        self.assertAlmostEqual(pts[0], 0.51, places=2)                # both in it
+
+    def test_people_too_far_apart_the_camera_stays_on_one_of_them(self):
+        import tracking
+        faces = []
+        for i in range(30):
+            a_talks = (i // 5) % 2 == 0
+            faces.append([(0.15, 0.07, 0.25 if a_talks else 0.0), (0.85, 0.07, 0.0 if a_talks else 0.1)])
+        pts = tracking.plan_shot(faces, [None] * 30, view=0.375)
+        self.assertEqual(set(pts), {0.15})                            # never swings over to the other one
+        path = tracking.camera_path(pts, [True] + [False] * 29, 0.375)
+        self.assertTrue(max(path) - min(path) < 1e-9)
+
+    def test_one_person_walking_is_followed(self):
+        import tracking
+        faces = [[(0.2 + 0.02 * i, 0.07, 0.0)] for i in range(30)]
+        pts = tracking.plan_shot(faces, [None] * 30, view=0.375)
+        self.assertAlmostEqual(pts[0], 0.2)
+        self.assertAlmostEqual(pts[-1], 0.78)
+
+    def test_no_panning_when_the_subject_stays_in_frame(self):
+        import tracking
+        pts = [0.45, 0.5, 0.55, 0.52, 0.48, 0.58, 0.44] * 4         # someone shifting about
+        path = tracking.camera_path(pts, [True] + [False] * 27, view=0.375)
+        self.assertEqual(len(set(path)), 1)
 
     def test_crop_has_the_band_shape(self):
         import tracking
