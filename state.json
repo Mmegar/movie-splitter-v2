@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:16:56+13:00",
+ "updated": "2026-10-15T21:17:50+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch/GONJIAM Haunted Asylum (2017) - Part 01.mp4",
        "caption": "I paused 3 times to process this 🧐\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "gonjiam-haunted-asylum-2017/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 3322.8,
+       "end": 3569.9,
+       "seconds": 247.1,
+       "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch/GONJIAM Haunted Asylum (2017) - Part 02.mp4",
+       "caption": "when they said 'What is the point of this?' I felt that 😭\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "gonjiam-haunted-asylum-2017/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
