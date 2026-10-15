@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-15T08:43:07+07:00",
+ "updated": "2026-10-15T08:43:40+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
-  "percent": 65
+  "percent": 68
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
    "file": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
-   "percent": 65
+   "percent": 68
   }
  ],
  "uploaded": [
