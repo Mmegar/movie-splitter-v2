@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:07:07+13:00",
+ "updated": "2026-10-15T21:07:39+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
   "started": "2026-10-15T21:04:45+13:00",
   "movie": "GONJIAM Haunted Asylum (2017)",
   "mode": null,
-  "stage": "downloading",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 15.7,
+    "count": 360,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "gonjiam-haunted-asylum-2017/thumbs.bin"
    }
   },
   {
