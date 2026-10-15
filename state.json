@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:14:07+13:00",
+ "updated": "2026-10-15T21:16:56+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
   "started": "2026-10-15T21:04:45+13:00",
   "movie": "GONJIAM Haunted Asylum (2017)",
   "mode": "stretch",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 2,
   "parts_total": 3
  },
