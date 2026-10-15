@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:04:32+13:00",
+ "updated": "2026-10-15T15:05:22+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 3,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1876.0,
+       "end": 2116.5,
+       "seconds": 240.5,
+       "drive_path": "Ready to post/Obsession (2026)/Best stretch/Obsession (2026) - Part 01.mp4",
+       "caption": "me to my group chat: 'Did she was acting super fucking weird?' 📱\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "obsession-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
