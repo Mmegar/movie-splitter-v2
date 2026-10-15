@@ -208,13 +208,18 @@ def camera_path(points, cuts, view):
         known = [p for p in points[a:min(b, a + SAMPLE_FPS)] if p is not None] or seen
         cam = clamp(float(np.median(known))) if known else 0.5
         target = cam
-        dead = view * 0.3                        # only move when the subject nears the edge of the frame
+        dead = view * 0.2                        # only start moving when the subject nears the edge of the frame
+        moving = False
         for i in range(a, b):
             if points[i] is not None:
                 target = clamp(points[i])
             gap = target - cam
-            if abs(gap) > dead:
-                cam += (gap - dead * (1 if gap > 0 else -1)) * 0.5 + gap * 0.1   # catch up, then stop
+            if not moving and abs(gap) > dead:
+                moving = True
+            if moving:                           # glide until they're centred again, then hold still
+                cam += gap * 0.35
+                if abs(target - cam) < view * 0.05:
+                    moving = False
             path[i] = cam
         for _ in range(2):                       # soften the start and stop of each glide
             seg = path[a:b]
