@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:37:36+13:00",
+ "updated": "2026-10-15T17:37:57+13:00",
  "run": {
   "active": true,
   "run_id": 38682304394,
   "started": "2026-10-15T17:36:20+13:00",
-  "movie": null,
-  "mode": null,
-  "stage": "idle",
+  "movie": "Obsession (2026)",
+  "mode": "clips",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -1618,6 +1618,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T17:37:38+13:00",
+   "type": "started",
+   "title": "✂️ Making 1 custom clip: Obsession (2026)",
+   "message": "They'll arrive on the laptop in Ready to post/Obsession (2026)/Custom clips."
+  },
+  {
    "at": "2026-10-15T11:35:48+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub for clips",
@@ -2810,12 +2816,6 @@
    "type": "part_ready",
    "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 4 of 5 ready",
    "message": "Part 4: 38:56 to 40:36 (100s)  interest score 67/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\n'of here!' and then THIS happened 😳\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-14T00:08:05+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 3 of 5 ready",
-   "message": "Part 3: 33:16 to 35:16 (120s)  interest score 65/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nme acting like I saw that coming (I did not) 🙈\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
