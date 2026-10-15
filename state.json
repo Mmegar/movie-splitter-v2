@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:08:57+13:00",
+ "updated": "2026-10-15T18:09:18+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
   "started": "2026-10-15T17:53:25+13:00",
   "movie": "Spider-Man Brand New Day (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 4
  },
  "queue": [],
@@ -1682,6 +1682,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:08:59+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 1 of 4 ready",
+   "message": "Part 1: 1:13:47 to 1:17:02 (196s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nwhen they said 'What the hell?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-15T18:05:29+13:00",
    "type": "planned",
    "title": "[Highlights] Spider-Man Brand New Day (2026): 5 parts planned",
@@ -2874,12 +2880,6 @@
    "type": "finished",
    "title": "[Custom clips] ✅ Clips done: Moon Knight S01E02 Summon the Suit",
    "message": "1 custom clip made."
-  },
-  {
-   "at": "2026-10-14T00:46:19+13:00",
-   "type": "part_ready",
-   "title": "[Custom clips] ✂️ Moon Knight S01E02 Summon the Suit: clip 1 of 1 ready",
-   "message": "Clip 1: 30:48 to 34:40 (231s)  Test\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Custom clips)."
   }
  ]
 }
