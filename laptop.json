@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T10:44:29+07:00",
+ "updated": "2026-10-15T10:44:38+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -111,6 +111,10 @@
   "mv8zksfxy39o": {
    "status": "done",
    "note": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: Zoomed + tracking"
+  },
+  "mv8zvw41f3rl": {
+   "status": "working",
+   "note": "Sending the movie to GitHub"
   }
  },
  "commands_done": [
