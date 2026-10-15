@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:28:07+13:00",
+ "updated": "2026-10-15T21:29:16+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
@@ -87,6 +87,21 @@
        "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Highlights/GONJIAM Haunted Asylum (2017) - Part 01.mp4",
        "caption": "okay who let them cook 🧑‍🍳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #movies #funny #viral #moviemoments",
        "preview": "gonjiam-haunted-asylum-2017/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 553.7,
+       "end": 776.5,
+       "seconds": 222.8,
+       "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Highlights/GONJIAM Haunted Asylum (2017) - Part 02.mp4",
+       "caption": "who wrote this and are they okay 😭\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "gonjiam-haunted-asylum-2017/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
