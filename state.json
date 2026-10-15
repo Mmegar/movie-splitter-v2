@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:14:16+13:00",
+ "updated": "2026-10-15T15:14:19+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
   "movie": "Obsession (2026)",
-  "mode": "stretch",
-  "stage": "uploading",
-  "part": 3,
-  "parts_total": 3
+  "mode": "highlights",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 4
  },
  "queue": [],
  "movies": [
@@ -1551,6 +1551,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:14:18+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Obsession (2026): Part 3 of 3 ready",
+   "message": "Part 3: 39:12 to 43:22 (250s)\nOn its way to the laptop (Ready to post/Obsession (2026)/Best stretch).\n\n📝 Caption:\n'So what do you want to do?' and then THIS happened 😳\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-15T15:09:41+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Obsession (2026): Part 2 of 3 ready",
@@ -2743,12 +2749,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 2 of 6 ready",
    "message": "Part 2: 27:03 to 28:15 (72s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nthis movie said 'hold my popcorn' 🍿\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-13T23:45:44+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 1 of 6 ready",
-   "message": "Part 1: 25:49 to 27:03 (74s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
