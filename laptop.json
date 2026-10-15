@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T08:29:50+07:00",
+ "updated": "2026-10-15T08:29:52+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -69,6 +69,10 @@
    "note": "Moved to To edit"
   },
   "mv8v2gxq1gqt": {
+   "status": "done",
+   "note": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: Zoomed + tracking"
+  },
+  "mv8v2l1wdaqy": {
    "status": "done",
    "note": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: Zoomed + tracking"
   }
@@ -143,7 +147,8 @@
   "mv8mh17wipl5",
   "mv8r6zyrp1t9",
   "mv8v1r04fsda",
-  "mv8v2gxq1gqt"
+  "mv8v2gxq1gqt",
+  "mv8v2l1wdaqy"
  ],
  "originals": [
   "kung-fu-hustle-2004",
