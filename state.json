@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:00:34+13:00",
+ "updated": "2026-10-15T15:00:37+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
   "movie": "Obsession (2026)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 3
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 3,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 4,
      "parts": []
     }
    },
@@ -1505,6 +1505,18 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:00:37+13:00",
+   "type": "planned",
+   "title": "[Highlights] Obsession (2026): 4 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-15T15:00:36+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Obsession (2026): 3 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Best stretch as they're made."
+  },
+  {
    "at": "2026-10-15T14:50:55+13:00",
    "type": "started",
    "title": "Started: Obsession (2026)",
@@ -2691,18 +2703,6 @@
    "type": "planned",
    "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: 6 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-13T23:37:39+13:00",
-   "type": "started",
-   "title": "Started: Moon Knight S01E02 Summon the Suit",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Moon Knight S01E02 Summon the Suit'."
-  },
-  {
-   "at": "2026-10-13T17:29:53+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
