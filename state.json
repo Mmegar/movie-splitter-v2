@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:31:45+13:00",
+ "updated": "2026-10-15T21:32:31+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
@@ -102,6 +102,21 @@
        "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Highlights/GONJIAM Haunted Asylum (2017) - Part 02.mp4",
        "caption": "who wrote this and are they okay 😭\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "gonjiam-haunted-asylum-2017/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 3394.0,
+       "end": 3609.5,
+       "seconds": 215.5,
+       "drive_path": "Ready to post/GONJIAM Haunted Asylum (2017)/Highlights/GONJIAM Haunted Asylum (2017) - Part 03.mp4",
+       "caption": "'What are you doing now?' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "gonjiam-haunted-asylum-2017/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
