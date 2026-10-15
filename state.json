@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:35:45+13:00",
+ "updated": "2026-10-16T02:36:45+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Superman (2025)/Best stretch/Superman (2025) - Part 02.mp4",
        "caption": "'Go for it!' and then THIS happened 😳\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "superman-2025/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2302.5,
+       "end": 2543.5,
+       "seconds": 241.0,
+       "drive_path": "Ready to post/Superman (2025)/Best stretch/Superman (2025) - Part 03.mp4",
+       "caption": "'You have the footage?' and then THIS happened 😳\nPart 3 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "superman-2025/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
