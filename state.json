@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:23:21+13:00",
+ "updated": "2026-10-15T18:24:26+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -93,7 +93,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 173.5,
+       "end": 455.0,
+       "seconds": 281.5,
+       "drive_path": "Ready to post/Spider-Man Brand New Day (2026)/Highlights/Spider-Man Brand New Day (2026) - Part 01.mp4",
+       "caption": "tell me you're in trouble without telling me 🫣\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "spider-man-brand-new-day-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
