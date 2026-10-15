@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:33:07+13:00",
+ "updated": "2026-10-15T15:33:17+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -16,12 +16,12 @@
   {
    "id": "obsession-2026",
    "name": "Obsession (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-15T14:50:54+13:00",
-   "finished": null,
+   "finished": "2026-10-15T15:33:17+13:00",
    "duration": 6533.2,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -149,7 +149,8 @@
     "w": 160,
     "h": 90,
     "path": "obsession-2026/thumbs.bin"
-   }
+   },
+   "subs_preview": "obsession-2026/subs.bin"
   },
   {
    "id": "spider-man-across-the-spider-verse-2023",
@@ -1612,6 +1613,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:33:09+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Obsession (2026): Part 4 of 4 ready",
+   "message": "Part 4: 1:40:37 to 1:44:54 (257s)  interest score 60/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nnobody: \nthis movie: 🤯\nPart 4 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-15T15:28:31+13:00",
    "type": "part_ready",
    "title": "[Highlights] Obsession (2026): Part 3 of 4 ready",
@@ -2804,12 +2811,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 6 of 6 ready",
    "message": "Part 6: 35:16 to 38:34 (198s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-13T23:55:49+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 5 of 6 ready",
-   "message": "Part 5: 30:49 to 35:16 (267s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
