@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:42:14+13:00",
+ "updated": "2026-10-15T18:42:20+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -16,12 +16,12 @@
   {
    "id": "spider-man-brand-new-day-2026",
    "name": "Spider-Man Brand New Day (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-15T17:55:23+13:00",
-   "finished": null,
+   "finished": "2026-10-15T18:42:20+13:00",
    "duration": 8700.7,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "stretch": {
@@ -179,7 +179,8 @@
     "w": 160,
     "h": 90,
     "path": "spider-man-brand-new-day-2026/thumbs.bin"
-   }
+   },
+   "subs_preview": "spider-man-brand-new-day-2026/subs.bin"
   },
   {
    "id": "obsession-2026",
@@ -1803,6 +1804,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:42:15+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Brand New Day (2026): Part 5 of 5 ready",
+   "message": "Part 5: 1:51:50 to 1:55:56 (246s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\n'What... - What do you want?' and then THIS happened 😳\nPart 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-15T18:37:37+13:00",
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Brand New Day (2026): Part 4 of 5 ready",
@@ -2995,12 +3002,6 @@
    "type": "planned",
    "title": "[Best stretch] The Notebook (2004): 7 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-14T08:53:46+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Colony.2026.1080p.WEBRip.10bit.AAC2.0.x265-FaS.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
