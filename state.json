@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:07:28+13:00",
+ "updated": "2026-10-16T02:07:31+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
   "started": "2026-10-16T02:05:13+13:00",
-  "movie": null,
+  "movie": "Superman (2025)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -1952,6 +1952,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T02:07:30+13:00",
+   "type": "started",
+   "title": "Started: Superman (2025)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Superman (2025)'."
+  },
+  {
    "at": "2026-10-15T20:04:32+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -3144,12 +3150,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Notebook (2004): Part 6 of 12 ready",
    "message": "Part 6: 47:20 to 48:40 (80s)  interest score 74/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nbrb rewatching this 47 times 🔁\nPart 6 🎬 · follow or you'll miss Part 7 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-14T15:34:38+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Notebook (2004): Part 5 of 12 ready",
-   "message": "Part 5: 42:07 to 43:33 (86s)  interest score 59/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nthe way they said 'Why wait until the summer ends, huh?' 🫠\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
