@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T15:33:22+07:00",
+ "updated": "2026-10-15T15:33:31+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -74,6 +74,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
+  {
+   "name": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
+   "size_mb": 826,
+   "modified": "2026-10-15T10:43:11+07:00",
+   "folder": "done"
+  },
   {
    "name": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 2870,
@@ -209,6 +215,7 @@
   "mv98j975nahr"
  ],
  "originals": [
+  "gonjiam-haunted-asylum-2017",
   "kung-fu-hustle-2004",
   "moon-knight-s01e02-summon-the-suit",
   "obsession-2026",
