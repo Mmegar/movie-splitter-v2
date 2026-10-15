@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:41:49+13:00",
+ "updated": "2026-10-15T17:41:50+13:00",
  "run": {
   "active": true,
   "run_id": 38682304394,
@@ -1635,6 +1635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T17:41:50+13:00",
+   "type": "finished",
+   "title": "[Custom clips] ✅ Clips done: Obsession (2026)",
+   "message": "1 custom clip made."
+  },
+  {
    "at": "2026-10-15T17:41:47+13:00",
    "type": "part_ready",
    "title": "[Custom clips] ✂️ Obsession (2026): clip 1 of 1 ready",
@@ -2827,12 +2833,6 @@
    "type": "finished",
    "title": "✅ Finished: Moon Knight S01E02 Summon the Suit",
    "message": "Best stretch: 6 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Moon Knight S01E02 Summon the Suit. The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-14T00:12:01+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 5 of 5 ready",
-   "message": "Part 5: 46:41 to 48:01 (80s)  interest score 63/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe way my jaw hit the floor 🫠\nPart 5 🎬 · the ending. no words. just 🫠\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
