@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T19:13:40+07:00",
+ "updated": "2026-10-15T19:14:11+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -65,7 +65,7 @@
    "size_mb": 2082,
    "modified": "2026-10-15T10:10:44+07:00",
    "sending": false,
-   "style": "classic"
+   "style": "zoom"
   }
  ],
  "library": [
@@ -140,6 +140,10 @@
   "mv9i2hrfus24": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mv9i397fvvtz": {
+   "status": "done",
+   "note": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv: Zoomed + tracking"
   }
  },
  "commands_done": [
@@ -220,7 +224,8 @@
   "mv960yaz3rjh",
   "mv98h5mqfjig",
   "mv98j975nahr",
-  "mv9i2hrfus24"
+  "mv9i2hrfus24",
+  "mv9i397fvvtz"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
