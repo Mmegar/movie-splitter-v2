@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:25:14+13:00",
+ "updated": "2026-10-15T21:25:15+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
   "started": "2026-10-15T21:04:45+13:00",
   "movie": "GONJIAM Haunted Asylum (2017)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 3
  },
  "queue": [],
@@ -1898,6 +1898,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T21:25:15+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
+   "message": "Part 1: 4:05 to 8:25 (260s)  interest score 66/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\nokay who let them cook 🧑‍🍳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-15T21:21:08+13:00",
    "type": "part_ready",
    "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 3 of 3 ready",
@@ -3090,12 +3096,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Notebook (2004): Part 7 of 7 ready",
    "message": "Part 7: 54:41 to 57:37 (176s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nthat's not a plan, that's a cry for help 🆘\nPart 7 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T15:10:15+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Notebook (2004): Part 6 of 7 ready",
-   "message": "Part 6: 50:39 to 54:41 (242s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\na masterclass in bad decisions 🎓\nPart 6 🎬 · Part 7 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
