@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-15T11:41:08+07:00",
+ "updated": "2026-10-15T11:41:49+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-  "percent": 72
+  "percent": 74
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "file": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "percent": 72
+   "percent": 74
   }
  ],
  "uploaded": [
