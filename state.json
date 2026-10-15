@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:40:33+13:00",
+ "updated": "2026-10-16T02:41:48+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -78,7 +78,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 4,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1888.3,
+       "end": 2108.5,
+       "seconds": 220.2,
+       "drive_path": "Ready to post/Superman (2025)/Highlights/Superman (2025) - Part 01.mp4",
+       "caption": "me to my group chat: 'Get off!' 📱\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "superman-2025/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
