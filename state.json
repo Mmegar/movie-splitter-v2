@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:13:29+13:00",
+ "updated": "2026-10-15T15:14:16+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Obsession (2026)/Best stretch/Obsession (2026) - Part 02.mp4",
        "caption": "'Do you have feelings for me?' is my new personality 😤\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "obsession-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2351.5,
+       "end": 2601.6,
+       "seconds": 250.1,
+       "drive_path": "Ready to post/Obsession (2026)/Best stretch/Obsession (2026) - Part 03.mp4",
+       "caption": "'So what do you want to do?' and then THIS happened 😳\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "obsession-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
