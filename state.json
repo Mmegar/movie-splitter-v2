@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:56:01+13:00",
+ "updated": "2026-10-16T02:56:11+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -16,12 +16,12 @@
   {
    "id": "superman-2025",
    "name": "Superman (2025)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-16T02:07:28+13:00",
-   "finished": null,
+   "finished": "2026-10-16T02:56:11+13:00",
    "duration": 7762.8,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -149,7 +149,8 @@
     "w": 160,
     "h": 90,
     "path": "superman-2025/thumbs.bin"
-   }
+   },
+   "subs_preview": "superman-2025/subs.bin"
   },
   {
    "id": "gonjiam-haunted-asylum-2017",
@@ -2067,6 +2068,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T02:56:03+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Superman (2025): Part 4 of 4 ready",
+   "message": "Part 4: 1:46:35 to 1:50:04 (210s)  interest score 68/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\n'Carly down!' and then THIS happened 😳\nPart 4 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T02:51:29+13:00",
    "type": "part_ready",
    "title": "[Highlights] Superman (2025): Part 3 of 4 ready",
@@ -3259,12 +3266,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "The Notebook (2004): 19 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\The Notebook (2004)\nBest stretch: 7 parts, Highlights: 12 parts"
-  },
-  {
-   "at": "2026-10-14T15:55:56+13:00",
-   "type": "started",
-   "title": "Started: Kung Fu Hustle (2004)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Kung Fu Hustle (2004)'."
   }
  ]
 }
