@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:09:40+13:00",
+ "updated": "2026-10-15T15:10:01+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
   "started": "2026-10-15T14:48:49+13:00",
   "movie": "Obsession (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 3
  },
  "queue": [],
@@ -1536,6 +1536,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:09:41+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Obsession (2026): Part 2 of 3 ready",
+   "message": "Part 2: 35:16 to 39:12 (235s)\nOn its way to the laptop (Ready to post/Obsession (2026)/Best stretch).\n\n📝 Caption:\n'Do you have feelings for me?' is my new personality 😤\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-15T15:05:24+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Obsession (2026): Part 1 of 3 ready",
@@ -2728,12 +2734,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 1 of 6 ready",
    "message": "Part 1: 25:49 to 27:03 (74s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-13T23:44:01+13:00",
-   "type": "planned",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Moon Knight S01E02 Summon the Suit/Highlights as they're made."
   }
  ]
 }
