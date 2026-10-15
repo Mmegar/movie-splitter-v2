@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:33:17+13:00",
+ "updated": "2026-10-15T15:33:19+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -1613,6 +1613,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T15:33:19+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Obsession (2026)",
+   "message": "Best stretch: 3 parts, Highlights: 4 parts.\nThe laptop downloads them into Ready to post/Obsession (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-15T15:33:09+13:00",
    "type": "part_ready",
    "title": "[Highlights] Obsession (2026): Part 4 of 4 ready",
@@ -2805,12 +2811,6 @@
    "type": "part_ready",
    "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 1 of 5 ready",
    "message": "Part 1: 0:40 to 3:39 (179s)  interest score 63/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nme to my group chat: 'You ready?' 📱\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-13T23:59:50+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Moon Knight S01E02 Summon the Suit: Part 6 of 6 ready",
-   "message": "Part 6: 35:16 to 38:34 (198s)\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Best stretch).\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
