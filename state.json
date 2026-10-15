@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:41:04+13:00",
+ "updated": "2026-10-15T17:41:45+13:00",
  "run": {
   "active": true,
   "run_id": 38682304394,
@@ -144,7 +144,24 @@
     "clips": {
      "label": "Custom clips",
      "planned": 1,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 2540.5,
+       "end": 2740.5,
+       "seconds": 200.0,
+       "drive_path": "Ready to post/Obsession (2026)/Custom clips/Obsession (2026) - Clip 01 - Dont do thag.mp4",
+       "caption": "me to my group chat: 'Then why does it matter?' 📱\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "obsession-2026/clips-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "title": "Dont do thag"
+      }
+     ]
     }
    },
    "thumbs": {
