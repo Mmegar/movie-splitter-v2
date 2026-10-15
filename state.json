@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:42:20+13:00",
+ "updated": "2026-10-15T18:42:21+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -1804,6 +1804,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:42:21+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Spider-Man Brand New Day (2026)",
+   "message": "Best stretch: 4 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Spider-Man Brand New Day (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-15T18:42:15+13:00",
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Brand New Day (2026): Part 5 of 5 ready",
@@ -2996,12 +3002,6 @@
    "type": "planned",
    "title": "[Highlights] The Notebook (2004): 12 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-14T14:53:31+13:00",
-   "type": "planned",
-   "title": "[Best stretch] The Notebook (2004): 7 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Best stretch as they're made."
   }
  ]
 }
