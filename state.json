@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:56:11+13:00",
+ "updated": "2026-10-16T02:56:13+13:00",
  "run": {
   "active": true,
   "run_id": 38739668704,
@@ -2068,6 +2068,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T02:56:13+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Superman (2025)",
+   "message": "Best stretch: 3 parts, Highlights: 4 parts.\nThe laptop downloads them into Ready to post/Superman (2025). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-16T02:56:03+13:00",
    "type": "part_ready",
    "title": "[Highlights] Superman (2025): Part 4 of 4 ready",
@@ -3260,12 +3266,6 @@
    "type": "planned",
    "title": "[Best stretch] Kung Fu Hustle (2004): 6 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-14T09:56:29+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "The Notebook (2004): 19 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\The Notebook (2004)\nBest stretch: 7 parts, Highlights: 12 parts"
   }
  ]
 }
