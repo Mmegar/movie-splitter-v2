@@ -71,8 +71,8 @@ class CameraPathTest(unittest.TestCase):
 
     def test_crop_has_the_band_shape(self):
         import tracking
-        self.assertEqual(tracking.crop_size(1920, 800), (720, 800))
-        self.assertEqual(tracking.crop_size(640, 1000), (640, 710))
+        self.assertEqual(tracking.crop_size(1920, 800), (900, 800))
+        self.assertEqual(tracking.crop_size(640, 1000), (640, 568))
 
 
 class StylePartsTest(unittest.TestCase):
@@ -117,7 +117,7 @@ class FollowsFaceTest(TempDirTest):
         p.stdin.close()
         p.wait()
         filt = tracking.plan(src, 0, 6, "", W, H, self.tmp)
-        self.assertIn("crop@track=w=360:h=400", filt)
+        self.assertIn("crop@track=w=450:h=400", filt)
         moves = [l.split() for l in (self.tmp / "track.txt").read_text().splitlines() if l.strip()]
         xs = [(float(m[0]), int(m[-1].rstrip(";"))) for m in moves]
         early = [x for t, x in xs if t < 1]
@@ -126,4 +126,4 @@ class FollowsFaceTest(TempDirTest):
         self.assertGreater(late[-1], 450)                    # ends on the right, following it
         for t, x in xs:                                       # the face stays in the picture the whole time
             fx = 30 + (W - 270) * t / 6 + 105
-            self.assertTrue(x - 40 <= fx <= x + 360 + 40, (t, x, fx))
+            self.assertTrue(x - 40 <= fx <= x + 450 + 40, (t, x, fx))
