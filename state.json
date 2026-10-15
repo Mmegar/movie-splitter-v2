@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-16T02:56:13+13:00",
+ "updated": "2026-10-16T02:56:16+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 38739668704,
   "started": "2026-10-16T02:05:13+13:00",
-  "movie": "Superman (2025)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
-  "parts_total": 4
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
