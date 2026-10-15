@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:24:26+13:00",
+ "updated": "2026-10-15T18:24:27+13:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
   "started": "2026-10-15T17:53:25+13:00",
   "movie": "Spider-Man Brand New Day (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -1743,6 +1743,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T18:24:27+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Spider-Man Brand New Day (2026): Part 1 of 5 ready",
+   "message": "Part 1: 2:54 to 7:35 (281s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\ntell me you're in trouble without telling me 🫣\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
+  {
    "at": "2026-10-15T18:19:34+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 4 of 4 ready",
@@ -2935,12 +2941,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "The.Notebook.2004.1080p.BluRay.x264.YIFY.mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-14T08:33:43+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 3",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nwhen they said 'judgement of a weird crocodile lady?' I felt that 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
   }
  ]
 }
