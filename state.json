@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T17:53:25+13:00",
+ "updated": "2026-10-15T11:53:28+07:00",
  "run": {
   "active": true,
   "run_id": 38683803749,
@@ -1635,6 +1635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T11:53:26+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Obsession (2026): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Obsession (2026)\nCustom clips: 1"
+  },
+  {
    "at": "2026-10-15T11:52:54+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -2827,12 +2833,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 1",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-13T18:37:56+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub for clips",
-   "message": "Moon.Knight.S01E02.Summon.the.Suit.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-TBD (1).mkv: 1 custom clip(s) start soon."
   }
  ]
 }
