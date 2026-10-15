@@ -456,7 +456,8 @@ export function sendAllHtml(st, movie) {
 }
 
 // ---------- save every part of a movie to the phone ----------
-const BATCH_BYTES = 250e6;   // the phone holds at most about this much before you save a batch
+const BATCH_BYTES = 110e6;   // the iPhone share sheet goes blank with much more than this at once
+const BATCH_FILES = 3;
 
 /** Downloads every part in order and saves them to Photos a batch at a time (one tap per batch). */
 export async function saveAllParts(ctx, movie, mode) {
@@ -475,7 +476,7 @@ export async function saveAllParts(ctx, movie, mode) {
       <p class="media-sub">${esc(movie.name)} · ${parts.length} ${what}s · full quality</p>
       <div class="save-steps" data-steps></div>
       <div class="sheet-actions"><button class="btn btn--primary btn--block" data-act hidden></button></div>
-      <p class="note">They save in order. Tap the button, then choose “Save Videos” and they all go into Photos at once. Big movies come in a few batches so your phone doesn't run out of memory.</p>`,
+      <p class="note">They save in order. Tap the button, then choose “Save Videos” and they all go into Photos at once. They come a few at a time, so the share sheet opens quickly. If it ever looks blank, give it a few seconds.</p>`,
     onMount(el) {
       const steps = el.querySelector('[data-steps]');
       const act = el.querySelector('[data-act]');
@@ -483,16 +484,29 @@ export async function saveAllParts(ctx, movie, mode) {
       const offerMark = markOffer(el, ctx, movie, mode);
       const show = (icn, text) => { steps.innerHTML = `<div class="save-step">${icn === 'spin' ? '<span class="spinner"></span>' : icon(icn)}<span>${esc(text)}</span></div>`; };
       const label = (list) => list.length === 1 ? `${what[0].toUpperCase()}${what.slice(1)} ${list[0].n}` : `${what[0].toUpperCase()}${what.slice(1)}s ${list[0].n}–${list[list.length - 1].n}`;
+      const nextBatch = () => {
+        const b = [];
+        for (const r of ready) {
+          if (b.length && (b.length >= BATCH_FILES || b.reduce((n, x) => n + x.file.size, 0) + r.file.size > BATCH_BYTES)) break;
+          b.push(r);
+        }
+        return b;
+      };
       const offer = () => {
         if (!ready.length) { act.hidden = true; return; }
-        const mb = Math.round(ready.reduce((s, r) => s + r.file.size, 0) / 1e6);
+        const b = nextBatch();
+        const mb = Math.round(b.reduce((s, r) => s + r.file.size, 0) / 1e6);
         act.hidden = false;
-        act.innerHTML = `${icon('inbox')}Save ${label(ready)} (${ready.length} video${ready.length === 1 ? '' : 's'}, ${mb} MB)`;
+        act.innerHTML = `${icon('inbox')}Save ${label(b)} (${b.length} video${b.length === 1 ? '' : 's'}, ${mb} MB)`;
       };
       act.addEventListener('click', async () => {
         if (!ready.length) return;
         haptic();
-        const batch = ready.slice();
+        const batch = [];                 // the next few that fit the share sheet comfortably
+        for (const r of ready) {
+          if (batch.length && (batch.length >= BATCH_FILES || batch.reduce((n, b) => n + b.file.size, 0) + r.file.size > BATCH_BYTES)) break;
+          batch.push(r);
+        }
         const files = batch.map((r) => r.file);
         try {
           if (navigator.canShare && navigator.canShare({ files })) await navigator.share({ files });
@@ -517,7 +531,7 @@ export async function saveAllParts(ctx, movie, mode) {
       (async () => {
         for (let i = 0; i < parts.length && !closed; i++) {
           const p = parts[i];
-          while (!closed && ready.reduce((s, r) => s + r.file.size, 0) >= BATCH_BYTES) {
+          while (!closed && (ready.reduce((s, r) => s + r.file.size, 0) >= BATCH_BYTES || ready.length >= BATCH_FILES)) {
             show('check', `${savedCount + ready.length} of ${parts.length} downloaded. Save these, then the rest carry on.`);
             await wait(60000);
           }
