@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:08:58+13:00",
+ "updated": "2026-10-15T15:09:40+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/Obsession (2026)/Best stretch/Obsession (2026) - Part 01.mp4",
        "caption": "me to my group chat: 'Did she was acting super fucking weird?' 📱\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "obsession-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 2116.5,
+       "end": 2351.5,
+       "seconds": 235.0,
+       "drive_path": "Ready to post/Obsession (2026)/Best stretch/Obsession (2026) - Part 02.mp4",
+       "caption": "'Do you have feelings for me?' is my new personality 😤\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "obsession-2026/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
