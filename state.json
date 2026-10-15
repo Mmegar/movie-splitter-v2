@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T14:50:56+13:00",
+ "updated": "2026-10-15T14:51:55+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 18.1,
+    "count": 360,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "obsession-2026/thumbs.bin"
    }
   },
   {
