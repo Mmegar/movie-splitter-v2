@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T18:42:22+13:00",
+ "updated": "2026-10-15T12:43:08+07:00",
  "run": {
   "active": false,
   "run_id": 38683803749,
@@ -1804,6 +1804,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T12:43:06+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Spider-Man Brand New Day (2026): 9 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Brand New Day (2026)\nBest stretch: 4 parts, Highlights: 5 parts"
+  },
+  {
    "at": "2026-10-15T18:42:21+13:00",
    "type": "finished",
    "title": "✅ Finished: Spider-Man Brand New Day (2026)",
@@ -2996,12 +3002,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 4",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-14T14:53:32+13:00",
-   "type": "planned",
-   "title": "[Highlights] The Notebook (2004): 12 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/The Notebook (2004)/Highlights as they're made."
   }
  ]
 }
