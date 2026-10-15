@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:27:37+13:00",
+ "updated": "2026-10-15T15:28:29+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -102,6 +102,21 @@
        "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 02.mp4",
        "caption": "explain this to me like I'm 5 🧸\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "obsession-2026/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 5684.0,
+       "end": 5891.5,
+       "seconds": 207.5,
+       "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 03.mp4",
+       "caption": "I'm not crying, my eyes are sweating 🥲\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "obsession-2026/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
