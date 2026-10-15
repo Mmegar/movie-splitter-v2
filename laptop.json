@@ -1,18 +1,11 @@
 {
- "updated": "2026-10-15T15:21:42+07:00",
+ "updated": "2026-10-15T15:21:47+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [
-  {
-   "direction": "receive",
-   "movie": "GONJIAM Haunted Asylum (2017)",
-   "file": "GONJIAM Haunted Asylum (2017) - Part 03.mp4",
-   "percent": 3
-  }
- ],
+ "transfers": [],
  "uploaded": [
   {
    "file": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
