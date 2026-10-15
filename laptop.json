@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-15T14:55:58+07:00",
+ "updated": "2026-10-15T14:56:36+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
-  "percent": 41
+  "percent": 45
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
    "file": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv",
-   "percent": 41
+   "percent": 45
   }
  ],
  "uploaded": [
