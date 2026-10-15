@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-15T08:28:42+07:00",
+ "updated": "2026-10-15T08:29:17+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -41,13 +41,16 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
- "library": [
+ "queue": [
   {
    "name": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
    "size_mb": 1675,
-   "modified": "2026-10-15T04:45:09+07:00"
-  },
+   "modified": "2026-10-15T04:45:09+07:00",
+   "sending": false,
+   "style": "classic"
+  }
+ ],
+ "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2773,
@@ -60,6 +63,10 @@
   "mv8r6zyrp1t9": {
    "status": "done",
    "note": "Ready to save on your phone: share/spider-man-across-the-spider-verse-2023/stretch-003.bin"
+  },
+  "mv8v1r04fsda": {
+   "status": "done",
+   "note": "Moved to To edit"
   }
  },
  "commands_done": [
@@ -130,7 +137,8 @@
   "mv8fsbindxat",
   "mv8gp92oprwa",
   "mv8mh17wipl5",
-  "mv8r6zyrp1t9"
+  "mv8r6zyrp1t9",
+  "mv8v1r04fsda"
  ],
  "originals": [
   "kung-fu-hustle-2004",
