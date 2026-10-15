@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:32:37+13:00",
+ "updated": "2026-10-15T21:32:38+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
@@ -1929,6 +1929,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T21:32:38+13:00",
+   "type": "finished",
+   "title": "✅ Finished: GONJIAM Haunted Asylum (2017)",
+   "message": "Best stretch: 3 parts, Highlights: 3 parts.\nThe laptop downloads them into Ready to post/GONJIAM Haunted Asylum (2017). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-15T21:32:32+13:00",
    "type": "part_ready",
    "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 3 of 3 ready",
@@ -3121,12 +3127,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Notebook (2004): Part 3 of 12 ready",
    "message": "Part 3: 22:03 to 26:25 (262s)  interest score 71/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T15:23:39+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Notebook (2004): Part 2 of 12 ready",
-   "message": "Part 2: 9:56 to 11:20 (84s)  interest score 65/100\nOn its way to the laptop (Ready to post/The Notebook (2004)/Highlights).\n\n📝 Caption:\nwhen they said 'Allie, you remember now, don’t you?' I felt that 😭\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
