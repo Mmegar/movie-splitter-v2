@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T15:23:22+13:00",
+ "updated": "2026-10-15T15:24:09+13:00",
  "run": {
   "active": true,
   "run_id": 38667627214,
@@ -87,6 +87,21 @@
        "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 01.mp4",
        "caption": "watching this instead of sleeping again 🌚\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "obsession-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 651.0,
+       "end": 889.3,
+       "seconds": 238.3,
+       "drive_path": "Ready to post/Obsession (2026)/Highlights/Obsession (2026) - Part 02.mp4",
+       "caption": "explain this to me like I'm 5 🧸\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "obsession-2026/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
