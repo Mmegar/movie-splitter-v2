@@ -1,11 +1,18 @@
 {
- "updated": "2026-10-15T20:43:08+07:00",
+ "updated": "2026-10-15T20:46:47+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [],
+ "transfers": [
+  {
+   "direction": "receive",
+   "movie": "Superman (2025)",
+   "file": "Superman (2025) - Part 02.mp4",
+   "percent": 1
+  }
+ ],
  "uploaded": [
   {
    "file": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv",
