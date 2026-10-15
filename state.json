@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-15T09:34:28+07:00",
+ "updated": "2026-10-15T11:35:48+07:00",
  "run": {
   "active": false,
   "run_id": 38667627214,
@@ -1613,6 +1613,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T11:35:48+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub for clips",
+   "message": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: 1 custom clip(s) start soon."
+  },
+  {
    "at": "2026-10-15T09:34:26+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -2805,12 +2811,6 @@
    "type": "part_ready",
    "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 3 of 5 ready",
    "message": "Part 3: 33:16 to 35:16 (120s)  interest score 65/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nme acting like I saw that coming (I did not) 🙈\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T00:05:21+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Moon Knight S01E02 Summon the Suit: Part 2 of 5 ready",
-   "message": "Part 2: 12:29 to 13:52 (84s)  interest score 74/100\nOn its way to the laptop (Ready to post/Moon Knight S01E02 Summon the Suit/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
