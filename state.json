@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-15T21:17:50+13:00",
+ "updated": "2026-10-15T21:17:51+13:00",
  "run": {
   "active": true,
   "run_id": 38703073768,
   "started": "2026-10-15T21:04:45+13:00",
   "movie": "GONJIAM Haunted Asylum (2017)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 3
  },
  "queue": [],
@@ -1867,6 +1867,12 @@
  },
  "events": [
   {
+   "at": "2026-10-15T21:17:51+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 2 of 3 ready",
+   "message": "Part 2: 55:23 to 59:30 (247s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\nwhen they said 'What is the point of this?' I felt that 😭\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-15T21:14:06+13:00",
    "type": "part_ready",
    "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
@@ -3059,12 +3065,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 5",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
-  },
-  {
-   "at": "2026-10-14T15:03:53+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Notebook (2004): Part 5 of 7 ready",
-   "message": "Part 5: 49:32 to 50:39 (66s)\nOn its way to the laptop (Ready to post/The Notebook (2004)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'And we’ll talk about a date, okay?' 📱\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
