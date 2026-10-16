@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:54:23+13:00",
+ "updated": "2026-10-16T18:54:43+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -2344,6 +2344,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:54:24+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 4 of 5 ready",
+   "message": "Part 4: 1:21:04 to 1:25:03 (239s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\nthe way they said 'Pull it out, you will bleed, and you will' 🫠\nPart 4 🎬 · Part 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T18:50:29+13:00",
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 3 of 5 ready",
@@ -3536,12 +3542,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 10 of 10 ready",
    "message": "Part 10: 1:30:00 to 1:31:35 (95s)  interest score 71/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nwhy is nobody talking about this 🤨\nPart 10 🎬 · FINAL part. how are we feeling? 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T10:46:23+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 4",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114621FF9C0A3476C08904B994\"}}"
   }
  ]
 }
