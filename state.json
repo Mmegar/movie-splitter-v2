@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:04:21+13:00",
+ "updated": "2026-10-16T19:05:07+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
@@ -117,6 +117,21 @@
        "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 01.mp4",
        "caption": "POV: you said 'one more part' 4 hours ago 🤡\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments",
        "preview": "john-wick-chapter-2-2017/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 4531.0,
+       "end": 4739.5,
+       "seconds": 208.5,
+       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 02.mp4",
+       "caption": "this movie said 'hold my popcorn' 🍿\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "john-wick-chapter-2-2017/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
