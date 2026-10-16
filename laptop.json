@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T06:39:35+07:00",
+ "updated": "2026-10-17T06:39:37+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -117,7 +117,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvblyxnn692u": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/pirates-of-the-caribbean-at-worlds-end-2007/stretch-001.bin"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -197,7 +202,8 @@
   "mv98h5mqfjig",
   "mv98j975nahr",
   "mv9i2hrfus24",
-  "mv9i397fvvtz"
+  "mv9i397fvvtz",
+  "mvblyxnn692u"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
