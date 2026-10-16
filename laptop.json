@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-16T11:27:31+07:00",
+ "updated": "2026-10-16T11:29:28+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
+  "percent": 0
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
+   "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
+   "percent": 0
+  }
+ ],
  "uploaded": [
   {
    "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
@@ -76,7 +86,7 @@
    "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
    "size_mb": 2008,
    "modified": "2026-10-16T10:31:01+07:00",
-   "sending": false,
+   "sending": true,
    "style": "zoom"
   }
  ],
