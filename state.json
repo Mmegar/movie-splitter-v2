@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:25:48+13:00",
+ "updated": "2026-10-16T17:26:57+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 19.1,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "the-fantastic-4-first-steps-2025/thumbs.bin"
    }
   },
   {
