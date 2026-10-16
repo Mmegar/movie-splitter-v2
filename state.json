@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:01:36+13:00",
+ "updated": "2026-10-16T19:01:38+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -2375,6 +2375,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T19:01:37+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 1 of 5 ready",
+   "message": "Highlight 1: 7:26 to 11:24 (238s)  interest score 66/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T18:57:33+13:00",
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 5 of 5 ready",
@@ -3567,12 +3573,6 @@
    "type": "started",
    "title": "Started: Colony (2026)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Colony (2026)'."
-  },
-  {
-   "at": "2026-10-14T16:47:04+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Kung Fu Hustle (2004)",
-   "message": "Best stretch: 6 parts, Highlights: 10 parts.\nThe laptop downloads them into Ready to post/Kung Fu Hustle (2004). The copy sent to GitHub has been deleted."
   }
  ]
 }
