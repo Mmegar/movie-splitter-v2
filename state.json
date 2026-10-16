@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:57:32+13:00",
+ "updated": "2026-10-16T18:57:33+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
   "movie": "John Wick Chapter 2 (2017)",
-  "mode": "stretch",
-  "stage": "uploading",
-  "part": 5,
+  "mode": "highlights",
+  "stage": "rendering",
+  "part": 1,
   "parts_total": 5
  },
  "queue": [],
@@ -2359,6 +2359,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:57:33+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 5 of 5 ready",
+   "message": "Part 5: 1:25:03 to 1:28:04 (181s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\n'What’s the number up to now, Earl?' is my new personality 😤\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-16T18:54:24+13:00",
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 4 of 5 ready",
@@ -3551,12 +3557,6 @@
    "type": "finished",
    "title": "✅ Finished: Kung Fu Hustle (2004)",
    "message": "Best stretch: 6 parts, Highlights: 10 parts.\nThe laptop downloads them into Ready to post/Kung Fu Hustle (2004). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-14T16:46:57+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 10 of 10 ready",
-   "message": "Part 10: 1:30:00 to 1:31:35 (95s)  interest score 71/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nwhy is nobody talking about this 🤨\nPart 10 🎬 · FINAL part. how are we feeling? 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
