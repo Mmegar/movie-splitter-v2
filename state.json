@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:09:09+13:00",
+ "updated": "2026-10-16T18:09:10+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -2206,6 +2206,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:09:10+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 2 of 5 ready",
+   "message": "Highlight 2: 40:25 to 43:56 (210s)  interest score 63/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-16T18:05:00+13:00",
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 1 of 5 ready",
@@ -3398,12 +3404,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 4 of 10 ready",
    "message": "Part 4: 35:21 to 36:48 (86s)  interest score 64/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthis scene owes me rent, it lives in my head 🏠\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T16:28:16+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 3 of 10 ready",
-   "message": "Part 3: 23:29 to 24:47 (78s)  interest score 64/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nif this happened to me I'd move countries ✈️\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
