@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:22:00+13:00",
+ "updated": "2026-10-16T18:22:03+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
-  "movie": "The Fantastic 4 First Steps (2025)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
-  "parts_total": 5
+  "movie": "John Wick Chapter 2 (2017)",
+  "mode": null,
+  "stage": "downloading",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "john-wick-chapter-2-2017",
+   "name": "John Wick Chapter 2 (2017)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-16T18:22:03+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
@@ -2252,6 +2275,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:22:03+13:00",
+   "type": "started",
+   "title": "Started: John Wick Chapter 2 (2017)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/John Wick Chapter 2 (2017)'."
+  },
+  {
    "at": "2026-10-16T18:22:00+13:00",
    "type": "finished",
    "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
@@ -3444,12 +3473,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: The Notebook (2004): Part 3",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nwhen they said 'one thing in common.' I felt that 😭\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
-  },
-  {
-   "at": "2026-10-14T16:39:13+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 7 of 10 ready",
-   "message": "Part 7: 1:07:14 to 1:08:42 (88s)  interest score 53/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nPart 7 🎬 · follow or you'll miss Part 8 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
