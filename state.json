@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:25:46+13:00",
+ "updated": "2026-10-16T17:25:48+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
-  "movie": null,
+  "movie": "The Fantastic 4 First Steps (2025)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -2091,6 +2091,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:25:47+13:00",
+   "type": "started",
+   "title": "Started: The Fantastic 4 First Steps (2025)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/The Fantastic 4 First Steps (2025)'."
+  },
+  {
    "at": "2026-10-16T11:24:03+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -3283,12 +3289,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Kung Fu Hustle (2004): Part 2 of 6 ready",
    "message": "Part 2: 1:05:06 to 1:06:24 (78s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T16:07:13+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Kung Fu Hustle (2004): Part 1 of 6 ready",
-   "message": "Part 1: 1:02:34 to 1:05:06 (152s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nbestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
