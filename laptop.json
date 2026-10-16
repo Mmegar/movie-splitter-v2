@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-16T11:04:04+07:00",
+ "updated": "2026-10-16T11:04:57+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
-  "percent": 64
+  "percent": 65
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
    "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
-   "percent": 64
+   "percent": 65
   }
  ],
  "uploaded": [
