@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:29:35+13:00",
+ "updated": "2026-10-16T18:29:38+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "John Wick Chapter 2 (2017)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    },
@@ -2283,6 +2283,18 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:29:38+13:00",
+   "type": "planned",
+   "title": "[Highlights] John Wick Chapter 2 (2017): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/John Wick Chapter 2 (2017)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-16T18:29:38+13:00",
+   "type": "planned",
+   "title": "[Best stretch] John Wick Chapter 2 (2017): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/John Wick Chapter 2 (2017)/Best stretch as they're made."
+  },
+  {
    "at": "2026-10-16T12:22:42+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -3469,18 +3481,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 8 of 10 ready",
    "message": "Part 8: 1:12:25 to 1:14:20 (116s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 8 🎬 · Part 9? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-14T10:42:13+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 5",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114210CAA65109A9E19804CC09\"}}"
-  },
-  {
-   "at": "2026-10-14T10:41:33+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: The Notebook (2004): Part 4",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nexplain this to me like I'm 5 🧸\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist\n#movie #movieclips"
   }
  ]
 }
