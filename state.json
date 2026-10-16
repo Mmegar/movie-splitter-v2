@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-17T11:33:46+13:00",
+ "updated": "2026-10-17T11:34:06+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
   "started": "2026-10-17T11:21:14+13:00",
   "movie": "Pirates Of The Caribbean At Worlds End (2007)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 6,
      "parts": []
     }
    },
@@ -2467,6 +2467,18 @@
  },
  "events": [
   {
+   "at": "2026-10-17T11:33:50+13:00",
+   "type": "planned",
+   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): 6 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-17T11:33:49+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Pirates Of The Caribbean At Worlds End (2007): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Best stretch as they're made."
+  },
+  {
    "at": "2026-10-17T11:23:08+13:00",
    "type": "started",
    "title": "Started: Pirates Of The Caribbean At Worlds End (2007)",
@@ -3653,18 +3665,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Colony (2026): Part 4 of 7 ready",
    "message": "Part 4: 1:02:48 to 1:04:54 (127s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T17:13:58+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Colony (2026): Part 3 of 7 ready",
-   "message": "Part 3: 1:01:22 to 1:02:48 (85s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nwhen they said 'Let’s hurry and move to a safe place.' I felt that 😭\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-14T17:12:07+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Colony (2026): Part 2 of 7 ready",
-   "message": "Part 2: 1:00:12 to 1:01:22 (70s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
