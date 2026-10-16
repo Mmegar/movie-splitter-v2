@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:21:53+13:00",
+ "updated": "2026-10-16T18:21:59+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -16,12 +16,12 @@
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-16T17:25:46+13:00",
-   "finished": null,
+   "finished": "2026-10-16T18:21:59+13:00",
    "duration": 6875.2,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -194,7 +194,8 @@
     "w": 160,
     "h": 90,
     "path": "the-fantastic-4-first-steps-2025/thumbs.bin"
-   }
+   },
+   "subs_preview": "the-fantastic-4-first-steps-2025/subs.bin"
   },
   {
    "id": "superman-2025",
@@ -2251,6 +2252,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:21:54+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 1:33:03 to 1:36:42 (219s)  interest score 66/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-16T18:17:29+13:00",
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 4 of 5 ready",
@@ -3443,12 +3450,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 6 of 10 ready",
    "message": "Part 6: 58:53 to 1:00:10 (77s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\ntherapist: it can't hurt you. this scene: 😈\nPart 6 🎬 · comment 'MORE' if you need Part 7 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T16:35:15+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 5 of 10 ready",
-   "message": "Part 5: 49:57 to 54:14 (257s)  interest score 59/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 5 🎬 · Part 6 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
