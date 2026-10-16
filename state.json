@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:41:40+13:00",
+ "updated": "2026-10-16T17:42:26+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1902.0,
+       "end": 2117.1,
+       "seconds": 215.1,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 01.mp4",
+       "caption": "manifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "the-fantastic-4-first-steps-2025/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
