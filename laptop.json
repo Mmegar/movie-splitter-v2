@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-17T04:57:27+07:00",
+ "updated": "2026-10-17T04:58:18+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
-  "percent": 39
+  "percent": 41
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
    "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
-   "percent": 39
+   "percent": 41
   }
  ],
  "uploaded": [
