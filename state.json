@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:55:06+13:00",
+ "updated": "2026-10-16T17:55:26+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -2160,6 +2160,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:55:08+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 4 of 5 ready",
+   "message": "Part 4: 42:20 to 45:56 (216s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nthe way they said 'Won’t that kill us?' 🫠\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-16T17:50:28+13:00",
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 3 of 5 ready",
@@ -3352,12 +3358,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 1 of 10 ready",
    "message": "Part 1: 5:39 to 7:11 (92s)  interest score 65/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe jump I just did 🦘\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T16:22:02+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Kung Fu Hustle (2004): Part 6 of 6 ready",
-   "message": "Part 6: 1:10:52 to 1:14:46 (234s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
