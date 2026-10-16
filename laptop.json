@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T04:33:33+07:00",
+ "updated": "2026-10-17T04:34:43+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -77,7 +77,15 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
+   "size_mb": 3451,
+   "modified": "2026-10-17T02:50:52+07:00",
+   "sending": false,
+   "style": "zoom"
+  }
+ ],
  "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
