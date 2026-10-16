@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-16T10:22:09+07:00",
+ "updated": "2026-10-16T10:24:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -65,7 +65,15 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
+   "size_mb": 2947,
+   "modified": "2026-10-16T10:21:09+07:00",
+   "sending": false,
+   "style": "zoom"
+  }
+ ],
  "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
