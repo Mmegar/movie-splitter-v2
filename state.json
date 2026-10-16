@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:12:40+13:00",
+ "updated": "2026-10-16T18:13:30+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -132,6 +132,21 @@
        "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 02.mp4",
        "caption": "me to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "the-fantastic-4-first-steps-2025/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2735.0,
+       "end": 2944.5,
+       "seconds": 209.5,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 03.mp4",
+       "caption": "me to my group chat: 'Three, three, push!' 📱\nHighlight 3 🎬 · Highlight 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "the-fantastic-4-first-steps-2025/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
