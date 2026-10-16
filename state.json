@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:38:15+13:00",
+ "updated": "2026-10-16T18:38:17+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
-  "movie": "John Wick Chapter 2 (2017)",
-  "mode": "stretch",
-  "stage": "rendering",
-  "part": 3,
-  "parts_total": 5
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
@@ -2315,6 +2315,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:38:17+13:00",
+   "type": "paused",
+   "title": "⏸ Paused: John Wick Chapter 2 (2017)",
+   "message": "2 parts made so far. It carries on from the next part when you switch Pause off."
+  },
+  {
    "at": "2026-10-16T18:36:40+13:00",
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 2 of 5 ready",
@@ -3507,12 +3513,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 5",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114344D78E5CC26C2E6B051D20\"}}"
-  },
-  {
-   "at": "2026-10-14T10:42:56+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 7",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114254212895D398B730056278\"}}"
   }
  ]
 }
