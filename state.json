@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T12:22:44+07:00",
+ "updated": "2026-10-16T18:23:00+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 20.4,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "john-wick-chapter-2-2017/thumbs.bin"
    }
   },
   {
