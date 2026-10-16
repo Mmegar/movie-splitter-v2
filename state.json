@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-17T11:23:06+13:00",
+ "updated": "2026-10-17T11:23:08+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
   "started": "2026-10-17T11:21:14+13:00",
-  "movie": null,
+  "movie": "Pirates Of The Caribbean At Worlds End (2007)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -2459,6 +2459,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T11:23:08+13:00",
+   "type": "started",
+   "title": "Started: Pirates Of The Caribbean At Worlds End (2007)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Pirates Of The Caribbean At Worlds End (2007)'."
+  },
+  {
    "at": "2026-10-17T05:20:33+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -3651,12 +3657,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Colony (2026): Part 2 of 7 ready",
    "message": "Part 2: 1:00:12 to 1:01:22 (70s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-14T11:11:15+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 6",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014121112D7824CFED2EEB607EF7C\"}}"
   }
  ]
 }
