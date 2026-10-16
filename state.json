@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:24:31+13:00",
+ "updated": "2026-10-16T17:25:46+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -13,6 +13,29 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "the-fantastic-4-first-steps-2025",
+   "name": "The Fantastic 4 First Steps (2025)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-16T17:25:46+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "superman-2025",
    "name": "Superman (2025)",
