@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-17T04:40:02+07:00",
+ "updated": "2026-10-17T04:40:50+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
-  "percent": 0
+  "percent": 2
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
    "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
-   "percent": 0
+   "percent": 2
   }
  ],
  "uploaded": [
@@ -97,6 +97,11 @@
   }
  ],
  "library": [
+  {
+   "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
+   "size_mb": 1723,
+   "modified": "2026-10-17T04:39:58+07:00"
+  },
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2773,
