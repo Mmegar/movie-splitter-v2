@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:46:19+13:00",
+ "updated": "2026-10-16T18:46:20+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
-  "movie": null,
+  "movie": "John Wick Chapter 2 (2017)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -2314,6 +2314,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:46:20+13:00",
+   "type": "started",
+   "title": "▶️ Carrying on: John Wick Chapter 2 (2017)",
+   "message": "2 parts were already made before it stopped; making the rest."
+  },
+  {
    "at": "2026-10-16T18:38:17+13:00",
    "type": "paused",
    "title": "⏸ Paused: John Wick Chapter 2 (2017)",
@@ -3506,12 +3512,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 9 of 10 ready",
    "message": "Part 9: 1:23:16 to 1:25:08 (112s)  interest score 63/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe way my jaw hit the floor 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-14T10:43:47+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 5",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014114344D78E5CC26C2E6B051D20\"}}"
   }
  ]
 }
