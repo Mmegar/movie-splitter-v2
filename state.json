@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T12:01:42+13:00",
+ "updated": "2026-10-17T12:02:03+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
   "started": "2026-10-17T11:21:14+13:00",
   "movie": "Pirates Of The Caribbean At Worlds End (2007)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 6
  },
  "queue": [],
@@ -2589,6 +2589,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T12:01:43+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 3 of 6 ready",
+   "message": "Highlight 3: 2:04:10 to 2:07:40 (210s)  interest score 66/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-17T11:58:13+13:00",
    "type": "part_ready",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 2 of 6 ready",
@@ -3781,12 +3787,6 @@
    "type": "part_ready",
    "title": "[Highlights] Colony (2026): Part 4 of 12 ready",
    "message": "Part 4: 35:55 to 38:21 (146s)  interest score 60/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 4 🎬 · follow or you'll miss Part 5 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-14T17:31:11+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Colony (2026): Part 3 of 12 ready",
-   "message": "Part 3: 25:03 to 26:18 (74s)  interest score 66/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nme to my group chat: 'bastard!' 📱\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
