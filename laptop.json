@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-17T04:38:35+07:00",
+ "updated": "2026-10-17T04:40:02+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
+  "percent": 0
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
+   "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
+   "percent": 0
+  }
+ ],
  "uploaded": [
   {
    "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
@@ -82,7 +92,7 @@
    "name": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
    "size_mb": 3451,
    "modified": "2026-10-17T02:50:52+07:00",
-   "sending": false,
+   "sending": true,
    "style": "zoom"
   }
  ],
