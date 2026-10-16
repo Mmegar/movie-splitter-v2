@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T11:23:08+13:00",
+ "updated": "2026-10-17T11:25:35+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 28.1,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "pirates-of-the-caribbean-at-worlds-end-2007/thumbs.bin"
    }
   },
   {
