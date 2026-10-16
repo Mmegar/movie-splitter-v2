@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:05:07+13:00",
+ "updated": "2026-10-16T19:05:08+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -2390,6 +2390,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T19:05:08+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 2 of 5 ready",
+   "message": "Highlight 2: 1:15:31 to 1:19:00 (208s)  interest score 71/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nthis movie said 'hold my popcorn' 🍿\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T19:01:37+13:00",
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 1 of 5 ready",
@@ -3582,12 +3588,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Kung Fu Hustle (2004): 16 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Kung Fu Hustle (2004)\nBest stretch: 6 parts, Highlights: 10 parts"
-  },
-  {
-   "at": "2026-10-14T16:47:07+13:00",
-   "type": "started",
-   "title": "Started: Colony (2026)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Colony (2026)'."
   }
  ]
 }
