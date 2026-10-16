@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:12:14+13:00",
+ "updated": "2026-10-16T19:13:04+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
@@ -147,6 +147,21 @@
        "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 03.mp4",
        "caption": "bestie made it worse 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "john-wick-chapter-2-2017/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 5637.0,
+       "end": 5846.5,
+       "seconds": 209.5,
+       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 04.mp4",
+       "caption": "'Ma allora non lo vega mire.' 💀 I can't\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "john-wick-chapter-2-2017/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
