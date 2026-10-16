@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T07:15:52+13:00",
+ "updated": "2026-10-16T11:24:03+07:00",
  "run": {
   "active": false,
   "run_id": 38784100906,
@@ -2068,6 +2068,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T11:24:03+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-15T20:57:09+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -3260,12 +3266,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Kung Fu Hustle (2004): Part 1 of 6 ready",
    "message": "Part 1: 1:02:34 to 1:05:06 (152s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nbestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T16:03:41+13:00",
-   "type": "planned",
-   "title": "[Highlights] Kung Fu Hustle (2004): 10 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Highlights as they're made."
   }
  ]
 }
