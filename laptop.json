@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-16T11:45:19+07:00",
+ "updated": "2026-10-16T11:46:14+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-  "percent": 39
+  "percent": 41
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
    "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-   "percent": 39
+   "percent": 41
   }
  ],
  "uploaded": [
