@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T12:09:20+13:00",
+ "updated": "2026-10-17T12:09:23+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
   "started": "2026-10-17T11:21:14+13:00",
   "movie": "Pirates Of The Caribbean At Worlds End (2007)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
+  "stage": "rendering",
+  "part": 6,
   "parts_total": 6
  },
  "queue": [],
@@ -2619,6 +2619,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T12:09:22+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 5 of 6 ready",
+   "message": "Highlight 5: 2:15:10 to 2:18:36 (206s)  interest score 64/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nHighlight 5 🎬 · Highlight 6 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-17T12:05:49+13:00",
    "type": "part_ready",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 4 of 6 ready",
@@ -3811,12 +3817,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141236403789245645404F082FDE\"}}"
-  },
-  {
-   "at": "2026-10-14T17:36:16+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Colony (2026): Part 5 of 12 ready",
-   "message": "Part 5: 41:20 to 42:49 (89s)  interest score 67/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 5 🎬 · Part 6 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
