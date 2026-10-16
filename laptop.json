@@ -1,18 +1,11 @@
 {
- "updated": "2026-10-17T06:13:25+07:00",
+ "updated": "2026-10-17T06:13:34+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [
-  {
-   "direction": "receive",
-   "movie": "Pirates Of The Caribbean At Worlds End (2007)",
-   "file": "Pirates Of The Caribbean At Worlds End (2007) - Highlight 06.mp4",
-   "percent": 1
-  }
- ],
+ "transfers": [],
  "uploaded": [
   {
    "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
