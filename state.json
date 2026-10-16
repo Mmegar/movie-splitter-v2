@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:22:03+13:00",
+ "updated": "2026-10-16T12:22:44+07:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -2275,6 +2275,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T12:22:42+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "The Fantastic 4 First Steps (2025): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\The Fantastic 4 First Steps (2025)\nBest stretch: 5 parts, Highlights: 5 parts"
+  },
+  {
    "at": "2026-10-16T18:22:03+13:00",
    "type": "started",
    "title": "Started: John Wick Chapter 2 (2017)",
@@ -3467,12 +3473,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: The Notebook (2004): Part 4",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nexplain this to me like I'm 5 🧸\nPart 4 🎬 · Part 5 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-14T10:41:10+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: The Notebook (2004): Part 3",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nwhen they said 'one thing in common.' I felt that 😭\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
   }
  ]
 }
