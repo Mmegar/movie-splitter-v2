@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:09:25+13:00",
+ "updated": "2026-10-16T19:09:27+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
   "started": "2026-10-16T18:44:05+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2405,6 +2405,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T19:09:26+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 3 of 5 ready",
+   "message": "Highlight 3: 1:20:41 to 1:25:03 (262s)  interest score 63/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-16T19:05:08+13:00",
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 2 of 5 ready",
@@ -3597,12 +3603,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 5",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014115527F7B53FF216A4FE054D5D\"}}"
-  },
-  {
-   "at": "2026-10-14T10:47:33+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Kung Fu Hustle (2004): 16 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Kung Fu Hustle (2004)\nBest stretch: 6 parts, Highlights: 10 parts"
   }
  ]
 }
