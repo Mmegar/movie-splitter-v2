@@ -1,18 +1,11 @@
 {
- "updated": "2026-10-16T13:18:44+07:00",
+ "updated": "2026-10-16T13:18:46+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [
-  {
-   "direction": "receive",
-   "movie": "John Wick Chapter 2 (2017)",
-   "file": "John Wick Chapter 2 (2017) - Highlight 05.mp4",
-   "percent": 96
-  }
- ],
+ "transfers": [],
  "uploaded": [
   {
    "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
