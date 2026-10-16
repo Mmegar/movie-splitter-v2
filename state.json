@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:36:40+13:00",
+ "updated": "2026-10-16T18:38:15+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -16,7 +16,7 @@
   {
    "id": "john-wick-chapter-2-2017",
    "name": "John Wick Chapter 2 (2017)",
-   "status": "processing",
+   "status": "queued",
    "source": "laptop",
    "started": "2026-10-16T18:22:03+13:00",
    "finished": null,
@@ -73,7 +73,8 @@
     "w": 160,
     "h": 90,
     "path": "john-wick-chapter-2-2017/thumbs.bin"
-   }
+   },
+   "note": "Paused in the app"
   },
   {
    "id": "the-fantastic-4-first-steps-2025",
