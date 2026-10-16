@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:08:16+13:00",
+ "updated": "2026-10-16T18:09:09+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -117,6 +117,21 @@
        "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 01.mp4",
        "caption": "bestie made it worse 😭\nHighlight 1 🎬 · Highlight 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "the-fantastic-4-first-steps-2025/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 2425.0,
+       "end": 2635.5,
+       "seconds": 210.5,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 02.mp4",
+       "caption": "me to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "the-fantastic-4-first-steps-2025/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
