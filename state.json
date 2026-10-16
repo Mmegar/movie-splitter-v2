@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:42:26+13:00",
+ "updated": "2026-10-16T17:42:46+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -2115,6 +2115,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:42:28+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 1 of 5 ready",
+   "message": "Part 1: 31:42 to 35:17 (215s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T17:38:08+13:00",
    "type": "planned",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): 5 parts planned",
@@ -3307,12 +3313,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 6",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
-  },
-  {
-   "at": "2026-10-14T16:14:23+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Kung Fu Hustle (2004): Part 4 of 6 ready",
-   "message": "Part 4: 1:07:57 to 1:09:13 (76s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nthe confidence of this man 😎\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
