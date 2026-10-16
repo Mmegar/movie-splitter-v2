@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:59:44+13:00",
+ "updated": "2026-10-16T18:00:04+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
-  "mode": "stretch",
-  "stage": "uploading",
-  "part": 5,
+  "mode": "highlights",
+  "stage": "rendering",
+  "part": 1,
   "parts_total": 5
  },
  "queue": [],
@@ -2175,6 +2175,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:59:46+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 5 of 5 ready",
+   "message": "Part 5: 45:56 to 49:38 (222s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'What if he’s a monster?' 📱\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-16T17:55:08+13:00",
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 4 of 5 ready",
@@ -3367,12 +3373,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: The Notebook (2004): Part 1",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-14T16:24:09+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 1 of 10 ready",
-   "message": "Part 1: 5:39 to 7:11 (92s)  interest score 65/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe jump I just did 🦘\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
