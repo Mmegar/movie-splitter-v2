@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:21:59+13:00",
+ "updated": "2026-10-16T18:22:00+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -2252,6 +2252,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:22:00+13:00",
+   "type": "finished",
+   "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
+   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/The Fantastic 4 First Steps (2025). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-16T18:21:54+13:00",
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 5 of 5 ready",
@@ -3444,12 +3450,6 @@
    "type": "part_ready",
    "title": "[Highlights] Kung Fu Hustle (2004): Part 7 of 10 ready",
    "message": "Part 7: 1:07:14 to 1:08:42 (88s)  interest score 53/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nPart 7 🎬 · follow or you'll miss Part 8 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T16:37:02+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 6 of 10 ready",
-   "message": "Part 6: 58:53 to 1:00:10 (77s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\ntherapist: it can't hurt you. this scene: 😈\nPart 6 🎬 · comment 'MORE' if you need Part 7 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
