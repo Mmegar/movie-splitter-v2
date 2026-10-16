@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-16T12:03:58+07:00",
+ "updated": "2026-10-16T18:04:04+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 1,
   "parts_total": 5
  },
