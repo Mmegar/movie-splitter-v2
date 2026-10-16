@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T07:01:02+13:00",
+ "updated": "2026-10-17T05:20:33+07:00",
  "run": {
   "active": false,
   "run_id": 38944038915,
@@ -2436,6 +2436,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T05:20:33+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-16T13:18:50+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -3628,12 +3634,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 6",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014121112D7824CFED2EEB607EF7C\"}}"
-  },
-  {
-   "at": "2026-10-14T17:10:37+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Colony (2026): Part 1 of 7 ready",
-   "message": "Part 1: 58:52 to 1:00:12 (80s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\n'wrong with him?' is my new personality 😤\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
