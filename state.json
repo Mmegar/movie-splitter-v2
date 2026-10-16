@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:33:03+13:00",
+ "updated": "2026-10-16T18:33:06+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -2299,6 +2299,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T18:33:05+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 1 of 5 ready",
+   "message": "Part 1: 1:10:38 to 1:14:08 (210s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\n'What is this?' 💀 I can't\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-16T18:29:38+13:00",
    "type": "planned",
    "title": "[Highlights] John Wick Chapter 2 (2017): 5 parts planned",
@@ -3491,12 +3497,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 6",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141142344BD942B1D93F760520AB\"}}"
-  },
-  {
-   "at": "2026-10-14T16:41:53+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Kung Fu Hustle (2004): Part 8 of 10 ready",
-   "message": "Part 8: 1:12:25 to 1:14:20 (116s)  interest score 62/100\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Highlights).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 8 🎬 · Part 9? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
