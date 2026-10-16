@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:45:47+13:00",
+ "updated": "2026-10-16T17:46:28+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 01.mp4",
        "caption": "manifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
        "preview": "the-fantastic-4-first-steps-2025/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 2117.1,
+       "end": 2332.2,
+       "seconds": 215.1,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 02.mp4",
+       "caption": "'So the surfboard, right?' 💀 I can't\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "the-fantastic-4-first-steps-2025/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
