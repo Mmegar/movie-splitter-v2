@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T12:12:47+13:00",
+ "updated": "2026-10-17T12:12:56+13:00",
  "run": {
   "active": true,
   "run_id": 38975169854,
@@ -16,12 +16,12 @@
   {
    "id": "pirates-of-the-caribbean-at-worlds-end-2007",
    "name": "Pirates Of The Caribbean At Worlds End (2007)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-17T11:23:06+13:00",
-   "finished": null,
+   "finished": "2026-10-17T12:12:56+13:00",
    "duration": 10110.1,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -209,7 +209,8 @@
     "w": 160,
     "h": 90,
     "path": "pirates-of-the-caribbean-at-worlds-end-2007/thumbs.bin"
-   }
+   },
+   "subs_preview": "pirates-of-the-caribbean-at-worlds-end-2007/subs.bin"
   },
   {
    "id": "john-wick-chapter-2-2017",
@@ -2634,6 +2635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T12:12:48+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 6 of 6 ready",
+   "message": "Highlight 6: 2:25:19 to 2:28:52 (212s)  interest score 69/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nHighlight 6 🎬 · FINAL part. how are we feeling? 👇\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-17T12:09:22+13:00",
    "type": "part_ready",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 5 of 6 ready",
@@ -3826,12 +3833,6 @@
    "type": "part_ready",
    "title": "[Highlights] Colony (2026): Part 6 of 12 ready",
    "message": "Part 6: 51:56 to 53:36 (100s)  interest score 63/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nif this happened to me I'd move countries ✈️\nPart 6 🎬 · Part 7 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-14T11:36:45+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141236403789245645404F082FDE\"}}"
   }
  ]
 }
