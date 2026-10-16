@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T18:49:41+13:00",
+ "updated": "2026-10-16T18:50:28+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 02.mp4",
        "caption": "me to my group chat: 'Did he tell you not to do this?' 📱\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "john-wick-chapter-2-2017/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 4654.5,
+       "end": 4864.5,
+       "seconds": 210.0,
+       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 03.mp4",
+       "caption": "the plot thickens like gravy 🍲\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "john-wick-chapter-2-2017/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
