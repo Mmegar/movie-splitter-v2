@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:46:28+13:00",
+ "updated": "2026-10-16T17:46:31+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -2130,6 +2130,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:46:31+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 2 of 5 ready",
+   "message": "Part 2: 35:17 to 38:52 (215s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\n'So the surfboard, right?' 💀 I can't\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-16T17:42:28+13:00",
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 1 of 5 ready",
@@ -3322,12 +3328,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Kung Fu Hustle (2004): Part 5 of 6 ready",
    "message": "Part 5: 1:09:13 to 1:10:52 (99s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Who eats meat?' 📱\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T10:15:49+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Moon Knight S01E02 Summon the Suit: Part 6",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n'Away from her, you!' and then THIS happened 😳\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
   }
  ]
 }
