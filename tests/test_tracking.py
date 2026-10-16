@@ -69,6 +69,23 @@ class CameraPathTest(unittest.TestCase):
         path = tracking.camera_path(pts, [True] + [False] * 27, view=0.375)
         self.assertEqual(len(set(path)), 1)
 
+    def test_no_jump_at_a_new_shot_when_the_framing_barely_changes(self):
+        import tracking
+        pts = [0.50] * 10 + [0.55] * 10                     # new shot, subject almost in the same place
+        path = tracking.camera_path(pts, [True] + [False] * 9 + [True] + [False] * 9, view=0.375)
+        self.assertEqual(len(set(path)), 1)
+
+    def test_a_flash_is_not_a_new_shot(self):
+        import cv2
+        import tracking
+        rng = np.random.default_rng(1)
+        scene = cv2.GaussianBlur(rng.integers(0, 120, (90, 160)).astype(np.uint8), (9, 9), 0)
+        flash = cv2.convertScaleAbs(scene, alpha=1.6, beta=90)      # same scene, lights flash brighter
+        h = lambda g: cv2.normalize(cv2.calcHist([g], [0], None, [32], [0, 256]), None)
+        self.assertFalse(tracking.is_cut(h(scene), h(flash), scene, flash))
+        other = cv2.GaussianBlur(rng.integers(100, 255, (90, 160)).astype(np.uint8), (9, 9), 0)
+        self.assertTrue(tracking.is_cut(h(scene), h(other), scene, other))   # a different picture
+
     def test_crop_has_the_band_shape(self):
         import tracking
         self.assertEqual(tracking.crop_size(1920, 800), (1000, 800))

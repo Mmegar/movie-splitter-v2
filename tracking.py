@@ -80,9 +80,24 @@ def read_frames(src, start, length, pre_filter, w, h):
     return np.frombuffer(data[:n * w * h * 3], dtype=np.uint8).reshape(n, h, w, 3)
 
 
-def is_cut(prev_hist, hist):
+def is_cut(prev_hist, hist, prev_gray=None, gray=None):
+    """A real change of shot: the colours AND the picture both change a lot at once. A flash, a fast pan
+    or a lighting change alone doesn't count (those made the camera jump in the middle of a shot)."""
     import cv2
-    return prev_hist is not None and cv2.compareHist(prev_hist, hist, cv2.HISTCMP_CORREL) < 0.55
+    if prev_hist is None:
+        return False
+    corr = cv2.compareHist(prev_hist, hist, cv2.HISTCMP_CORREL)
+    if prev_gray is None or gray is None:
+        return corr < 0.55
+    if corr >= 0.5:
+        return False
+    # compare the shapes in the picture with brightness/contrast taken out: a flash or a lighting change
+    # keeps the same shapes, a new shot doesn't
+    a = prev_gray.astype(np.float32)
+    b = gray.astype(np.float32)
+    a = (a - a.mean()) / (a.std() + 2)
+    b = (b - b.mean()) / (b.std() + 2)
+    return float(np.abs(a - b).mean()) > 0.6
 
 
 def detections(frames):
@@ -99,7 +114,7 @@ def detections(frames):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         hist = cv2.calcHist([gray], [0], None, [32], [0, 256])
         cv2.normalize(hist, hist)
-        cut = prev_gray is None or is_cut(prev_hist, hist)
+        cut = prev_gray is None or is_cut(prev_hist, hist, prev_gray, gray)
         found = []
         for fx, fy, fw, fh, conf in finder.find(frame, gray):
             if fw < w * 0.04:
@@ -197,16 +212,26 @@ def camera_path(points, cuts, view):
     shots = [i for i in range(n) if cuts[i]] + [n]
     if not shots or shots[0] != 0:
         shots = [0] + shots
+    prev = None                                  # where the camera was at the end of the last shot
     for a, b in zip(shots, shots[1:]):
         if b <= a:
             continue
         seen = [p for p in points[a:b] if p is not None]
+        if prev is not None and (b - a < SAMPLE_FPS or not seen):
+            path[a:b] = [prev] * (b - a)         # a very short shot (or nobody in it): keep the framing
+            continue
         if seen and max(seen) - min(seen) <= view * 0.7:
             # everything the shot looks at fits in the frame: one still framing, no panning at all
-            path[a:b] = [clamp((max(seen) + min(seen)) / 2)] * (b - a)
+            still = clamp((max(seen) + min(seen)) / 2)
+            if prev is not None and abs(still - prev) < view * 0.25 and max(seen) - min(seen) <= view * 0.7 - 2 * abs(still - prev):
+                still = prev                     # it fits from where the camera already is: don't jump
+            path[a:b] = [still] * (b - a)
+            prev = still
             continue
         known = [p for p in points[a:min(b, a + SAMPLE_FPS)] if p is not None] or seen
         cam = clamp(float(np.median(known))) if known else 0.5
+        if prev is not None and abs(cam - prev) < view * 0.25:
+            cam = prev                           # close enough: carry on from here instead of jumping
         target = cam
         dead = view * 0.2                        # only start moving when the subject nears the edge of the frame
         moving = False
@@ -225,6 +250,7 @@ def camera_path(points, cuts, view):
             seg = path[a:b]
             path[a:b] = [seg[0]] + [(seg[k - 1] + seg[k] * 2 + seg[k + 1]) / 4 for k in range(1, len(seg) - 1)] + \
                         ([seg[-1]] if len(seg) > 1 else [])
+        prev = path[b - 1]
     return [clamp(c) for c in path]
 
 
