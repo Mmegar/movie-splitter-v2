@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-17T12:12:57+13:00",
+ "updated": "2026-10-17T12:12:59+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 38975169854,
   "started": "2026-10-17T11:21:14+13:00",
-  "movie": "Pirates Of The Caribbean At Worlds End (2007)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 6,
-  "parts_total": 6
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
