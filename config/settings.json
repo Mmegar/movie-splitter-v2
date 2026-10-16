@@ -23,7 +23,7 @@
   "cockroach_size": 60,
   "captions": true,
   "caption_style": "goofy",
-  "paused": true,
+  "paused": false,
   "pause_on_battery": false,
   "upload_limit_mbps": 0,
   "auto_update_laptop": true,
