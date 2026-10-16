@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:17:47+13:00",
+ "updated": "2026-10-16T19:17:48+13:00",
  "run": {
   "active": true,
   "run_id": 38857283752,
@@ -2436,6 +2436,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T19:17:48+13:00",
+   "type": "finished",
+   "title": "✅ Finished: John Wick Chapter 2 (2017)",
+   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/John Wick Chapter 2 (2017). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-16T19:17:41+13:00",
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 5 of 5 ready",
@@ -3628,12 +3634,6 @@
    "type": "planned",
    "title": "[Highlights] Colony (2026): 12 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Colony (2026)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-14T17:08:49+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Colony (2026): 7 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Colony (2026)/Best stretch as they're made."
   }
  ]
 }
