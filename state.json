@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-16T19:17:49+13:00",
+ "updated": "2026-10-16T13:18:52+07:00",
  "run": {
   "active": false,
   "run_id": 38857283752,
@@ -2436,6 +2436,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T13:18:50+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "John Wick Chapter 2 (2017): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\John Wick Chapter 2 (2017)\nBest stretch: 5 parts, Highlights: 5 parts"
+  },
+  {
    "at": "2026-10-16T19:17:48+13:00",
    "type": "finished",
    "title": "✅ Finished: John Wick Chapter 2 (2017)",
@@ -3628,12 +3634,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Colony (2026): Part 1 of 7 ready",
    "message": "Part 1: 58:52 to 1:00:12 (80s)\nOn its way to the laptop (Ready to post/Colony (2026)/Best stretch).\n\n📝 Caption:\n'wrong with him?' is my new personality 😤\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T17:08:50+13:00",
-   "type": "planned",
-   "title": "[Highlights] Colony (2026): 12 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Colony (2026)/Highlights as they're made."
   }
  ]
 }
