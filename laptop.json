@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-16T12:03:54+07:00",
+ "updated": "2026-10-16T12:04:01+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -7,6 +7,12 @@
  "uploading": null,
  "transfers": [],
  "uploaded": [
+  {
+   "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
+   "at": "2026-10-16T12:03:55+07:00",
+   "size_mb": 2008,
+   "source": "laptop"
+  },
   {
    "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
    "at": "2026-10-16T11:24:03+07:00",
@@ -71,15 +77,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-   "size_mb": 2008,
-   "modified": "2026-10-16T10:31:01+07:00",
-   "sending": false,
-   "style": "zoom"
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
