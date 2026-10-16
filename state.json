@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-16T17:50:26+13:00",
+ "updated": "2026-10-16T17:50:46+13:00",
  "run": {
   "active": true,
   "run_id": 38850429113,
   "started": "2026-10-16T17:24:30+13:00",
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2145,6 +2145,12 @@
  },
  "events": [
   {
+   "at": "2026-10-16T17:50:28+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 3 of 5 ready",
+   "message": "Part 3: 38:52 to 42:20 (207s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nbestie made it worse 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-16T17:46:31+13:00",
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 2 of 5 ready",
@@ -3337,12 +3343,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Kung Fu Hustle (2004): Part 6 of 6 ready",
    "message": "Part 6: 1:10:52 to 1:14:46 (234s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-14T16:16:32+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Kung Fu Hustle (2004): Part 5 of 6 ready",
-   "message": "Part 5: 1:09:13 to 1:10:52 (99s)\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Who eats meat?' 📱\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
