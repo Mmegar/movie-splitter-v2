@@ -1,21 +1,11 @@
 {
- "updated": "2026-10-17T10:21:12+07:00",
+ "updated": "2026-10-17T10:21:30+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": {
-  "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-  "percent": 99
- },
- "transfers": [
-  {
-   "direction": "send",
-   "movie": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-   "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-   "percent": 99
-  }
- ],
+ "uploading": null,
+ "transfers": [],
  "uploaded": [
   {
    "file": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
@@ -98,7 +88,7 @@
    "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
    "size_mb": 1723,
    "modified": "2026-10-17T04:39:58+07:00",
-   "sending": true,
+   "sending": false,
    "style": "zoom"
   }
  ],
