@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:09:16+13:00",
+ "updated": "2026-10-17T17:10:18+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -132,6 +132,21 @@
        "drive_path": "Ready to post/One Last Shot (2026)/Highlights/One Last Shot (2026) - Highlight 02.mp4",
        "caption": "'How’s Kelly the kids?' 💀 I can't\nHighlight 2 🎬 · Highlight 3 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments",
        "preview": "one-last-shot-2026/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 4287.0,
+       "end": 4535.4,
+       "seconds": 248.4,
+       "drive_path": "Ready to post/One Last Shot (2026)/Highlights/One Last Shot (2026) - Highlight 03.mp4",
+       "caption": "'Did you order an airstrike?' is my new personality 😤\nHighlight 3 🎬 · Highlight 4 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "one-last-shot-2026/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
