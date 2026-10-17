@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:02:19+13:00",
+ "updated": "2026-10-18T00:02:23+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Toy Story 5 (2026)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    },
@@ -3034,6 +3034,18 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:02:23+13:00",
+   "type": "planned",
+   "title": "[Highlights] Toy Story 5 (2026): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Toy Story 5 (2026)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-18T00:02:22+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Toy Story 5 (2026): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Toy Story 5 (2026)/Best stretch as they're made."
+  },
+  {
    "at": "2026-10-17T17:54:29+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -4220,18 +4232,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 3",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141720362A7405812169931D1CF3\"}}"
-  },
-  {
-   "at": "2026-10-14T16:10:20+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 3",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014171017E545BBFD25BB321ADA2A\"}}"
-  },
-  {
-   "at": "2026-10-14T16:09:46+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 2",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments\n#movie #movieclips"
   }
  ]
 }
