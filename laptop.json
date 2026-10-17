@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-17T17:00:02+07:00",
+ "updated": "2026-10-17T17:00:52+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+  "percent": 1
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "file": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "percent": 1
+  }
+ ],
  "uploaded": [
   {
    "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
@@ -100,7 +110,7 @@
    "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 2048,
    "modified": "2026-10-17T16:11:48+07:00",
-   "sending": false,
+   "sending": true,
    "style": "zoom"
   }
  ],
