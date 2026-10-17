@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T16:19:10+07:00",
+ "updated": "2026-10-17T16:19:28+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -94,6 +94,13 @@
    "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 1955,
    "modified": "2026-10-17T16:11:19+07:00",
+   "sending": false,
+   "style": "zoom"
+  },
+  {
+   "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "size_mb": 2048,
+   "modified": "2026-10-17T16:11:48+07:00",
    "sending": false,
    "style": "zoom"
   }
