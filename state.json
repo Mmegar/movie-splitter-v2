@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:35:19+13:00",
+ "updated": "2026-10-17T23:36:22+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -108,7 +108,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1132.0,
+       "end": 1346.5,
+       "seconds": 214.5,
+       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 01.mp4",
+       "caption": "me to my group chat: 'What are you talking about?' 📱\nHighlight 1 🎬 · comment 'MORE' if you need Highlight 2 👇\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "runner-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
