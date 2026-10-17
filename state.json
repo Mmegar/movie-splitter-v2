@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:05:09+13:00",
+ "updated": "2026-10-18T00:06:00+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -27,7 +27,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1515.7,
+       "end": 1715.0,
+       "seconds": 199.3,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 01.mp4",
+       "caption": "the way they said 'Question. Is Woody gonna perform the wedding ceremony?' 🫠\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "toy-story-5-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
