@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:49:07+13:00",
+ "updated": "2026-10-17T23:49:09+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Runner (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -2987,6 +2987,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T23:49:09+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Runner (2026): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 1:03:25 to 1:06:59 (214s)  interest score 66/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\n'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
+  {
    "at": "2026-10-17T23:44:33+13:00",
    "type": "part_ready",
    "title": "[Highlights] Runner (2026): Highlight 3 of 5 ready",
@@ -4179,12 +4185,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101416481167E1F265424CA615C0B7\"}}"
-  },
-  {
-   "at": "2026-10-14T15:37:52+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141637508FFD1387BBCED8151833\"}}"
   }
  ]
 }
