@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:19:04+13:00",
+ "updated": "2026-10-17T17:19:11+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -16,12 +16,12 @@
   {
    "id": "one-last-shot-2026",
    "name": "One Last Shot (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-17T16:23:10+13:00",
-   "finished": null,
+   "finished": "2026-10-17T17:19:11+13:00",
    "duration": 5900.3,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "stretch": {
@@ -194,7 +194,8 @@
     "w": 160,
     "h": 90,
     "path": "one-last-shot-2026/thumbs.bin"
-   }
+   },
+   "subs_preview": "one-last-shot-2026/subs.bin"
   },
   {
    "id": "pirates-of-the-caribbean-at-worlds-end-2007",
@@ -2818,6 +2819,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T17:19:06+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] One Last Shot (2026): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 1:22:20 to 1:26:08 (228s)  interest score 67/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Go, go, go!' and then THIS happened 😳\nHighlight 5 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
+  },
+  {
    "at": "2026-10-17T17:14:58+13:00",
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 4 of 5 ready",
@@ -4010,12 +4017,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141402151EFA06AA38D9690D7022\"}}"
-  },
-  {
-   "at": "2026-10-14T12:50:09+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014135006441560CB3EC0FB0CE3B4\"}}"
   }
  ]
 }
