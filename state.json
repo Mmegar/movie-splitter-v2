@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:24:17+13:00",
+ "updated": "2026-10-18T00:24:19+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Toy Story 5 (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 1,
+  "stage": "rendering",
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -3126,6 +3126,12 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:24:18+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Toy Story 5 (2026): Highlight 1 of 5 ready",
+   "message": "Highlight 1: 11:20 to 14:58 (218s)  interest score 63/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nwhy is nobody talking about this 🤨\nHighlight 1 🎬 · Highlight 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-18T00:20:27+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Toy Story 5 (2026): Part 5 of 5 ready",
@@ -4318,12 +4324,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 3",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nwhen they said 'Why don’t you stay?' I felt that 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
-  },
-  {
-   "at": "2026-10-14T17:12:25+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 3",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141812225D08B67B570A6A1F00F2\"}}"
   }
  ]
 }
