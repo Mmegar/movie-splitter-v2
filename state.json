@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:44:32+13:00",
+ "updated": "2026-10-17T23:44:34+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Runner (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2972,6 +2972,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T23:44:33+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Runner (2026): Highlight 3 of 5 ready",
+   "message": "Highlight 3: 58:04 to 1:01:34 (210s)  interest score 60/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\nthe side eye at the end 👀\nHighlight 3 🎬 · follow or you'll miss Highlight 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-17T23:40:34+13:00",
    "type": "part_ready",
    "title": "[Highlights] Runner (2026): Highlight 2 of 5 ready",
@@ -4164,12 +4170,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141637508FFD1387BBCED8151833\"}}"
-  },
-  {
-   "at": "2026-10-14T15:27:30+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014162728F5E3AF92C410E9164696\"}}"
   }
  ]
 }
