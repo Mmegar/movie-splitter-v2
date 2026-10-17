@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:59:00+13:00",
+ "updated": "2026-10-17T16:59:50+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -108,7 +108,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 2438.0,
+       "end": 2651.1,
+       "seconds": 213.1,
+       "drive_path": "Ready to post/One Last Shot (2026)/Highlights/One Last Shot (2026) - Highlight 01.mp4",
+       "caption": "when they said 'Hold your fire!' I felt that 😭\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "one-last-shot-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
