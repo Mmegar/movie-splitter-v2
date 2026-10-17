@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:13:57+13:00",
+ "updated": "2026-10-17T17:14:57+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -147,6 +147,21 @@
        "drive_path": "Ready to post/One Last Shot (2026)/Highlights/One Last Shot (2026) - Highlight 03.mp4",
        "caption": "'Did you order an airstrike?' is my new personality 😤\nHighlight 3 🎬 · Highlight 4 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "one-last-shot-2026/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 4597.0,
+       "end": 4807.0,
+       "seconds": 210.0,
+       "drive_path": "Ready to post/One Last Shot (2026)/Highlights/One Last Shot (2026) - Highlight 04.mp4",
+       "caption": "'Bro, go!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "one-last-shot-2026/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
