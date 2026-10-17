@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:23:10+13:00",
+ "updated": "2026-10-17T16:23:12+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
   "started": "2026-10-17T16:22:01+13:00",
-  "movie": null,
+  "movie": "One Last Shot (2026)",
   "mode": null,
-  "stage": "idle",
+  "stage": "downloading",
   "part": null,
   "parts_total": null
  },
@@ -2658,6 +2658,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T16:23:12+13:00",
+   "type": "started",
+   "title": "Started: One Last Shot (2026)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/One Last Shot (2026)'."
+  },
+  {
    "at": "2026-10-17T10:21:32+07:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -3850,12 +3856,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101412472040601DBFAE47C6089D77\"}}"
-  },
-  {
-   "at": "2026-10-14T17:45:01+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Colony (2026): Part 9 of 12 ready",
-   "message": "Part 9: 1:27:08 to 1:28:39 (91s)  interest score 63/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nplot armor? never heard of her 🛡️\nPart 9 🎬 · Part 10 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
