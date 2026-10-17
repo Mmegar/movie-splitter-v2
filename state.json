@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:14:57+13:00",
+ "updated": "2026-10-17T17:15:17+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
   "started": "2026-10-17T16:22:01+13:00",
   "movie": "One Last Shot (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -2803,6 +2803,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T17:14:58+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] One Last Shot (2026): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 1:16:37 to 1:20:07 (210s)  interest score 66/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Bro, go!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
+  },
+  {
    "at": "2026-10-17T17:10:19+13:00",
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 3 of 5 ready",
@@ -3995,12 +4001,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014135006441560CB3EC0FB0CE3B4\"}}"
-  },
-  {
-   "at": "2026-10-14T12:39:47+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101413394426CC0A4142A99A0C9A8E\"}}"
   }
  ]
 }
