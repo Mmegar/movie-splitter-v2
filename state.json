@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:00:55+13:00",
+ "updated": "2026-10-17T23:01:55+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -13,6 +13,29 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "runner-2026",
+   "name": "Runner (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-17T23:01:55+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "one-last-shot-2026",
    "name": "One Last Shot (2026)",
