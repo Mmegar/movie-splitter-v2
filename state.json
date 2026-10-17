@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:39:40+13:00",
+ "updated": "2026-10-17T23:40:32+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -117,6 +117,21 @@
        "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 01.mp4",
        "caption": "me to my group chat: 'What are you talking about?' 📱\nHighlight 1 🎬 · comment 'MORE' if you need Highlight 2 👇\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "runner-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 1968.0,
+       "end": 2177.5,
+       "seconds": 209.5,
+       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 02.mp4",
+       "caption": "the vibes went from 0 to 100 real quick 📈\nHighlight 2 🎬 · follow or you'll miss Highlight 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "runner-2026/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
