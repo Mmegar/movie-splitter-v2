@@ -22,7 +22,7 @@
   "cockroach_chance": 1,
   "cockroach_size": 80,
   "captions": true,
-  "caption_style": "goofy",
+  "caption_style": "plain",
   "paused": false,
   "pause_on_battery": false,
   "upload_limit_mbps": 0,
