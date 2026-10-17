@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:10:20+13:00",
+ "updated": "2026-10-17T17:13:57+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
   "started": "2026-10-17T16:22:01+13:00",
   "movie": "One Last Shot (2026)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 4,
   "parts_total": 5
  },
