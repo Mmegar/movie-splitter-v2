@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:36:35+13:00",
+ "updated": "2026-10-18T00:36:37+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Toy Story 5 (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 4,
+  "stage": "rendering",
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -3171,6 +3171,12 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:36:37+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Toy Story 5 (2026): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 54:36 to 58:27 (232s)  interest score 61/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'Enough with the silly games. Where’s Jessie and Bullseye?' 🫠\nHighlight 4 🎬 · Highlight 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-18T00:32:25+13:00",
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 3 of 5 ready",
@@ -4363,12 +4369,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 6",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141824405A0AB63C1977ED1CCC33\"}}"
-  },
-  {
-   "at": "2026-10-14T17:24:03+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 5",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nme to my group chat: 'Who eats meat?' 📱\nPart 5 🎬 · comment 'MORE' if you need Part 6 👇\n#fyp #moviescenes #viral #cinema #plottwist\n#movie #movieclips"
   }
  ]
 }
