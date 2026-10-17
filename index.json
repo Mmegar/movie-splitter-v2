@@ -1,0 +1,7 @@
+{
+ "movies": [
+  "toy-story-5-2026",
+  "runner-2026"
+ ],
+ "format": "MSP1 AES-256-GCM, key = sha256('movie-splitter-preview:' + ntfy topic)"
+}
