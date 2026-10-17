@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:48:09+13:00",
+ "updated": "2026-10-17T23:49:07+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -147,6 +147,21 @@
        "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 03.mp4",
        "caption": "the side eye at the end 👀\nHighlight 3 🎬 · follow or you'll miss Highlight 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "runner-2026/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 3805.0,
+       "end": 4019.3,
+       "seconds": 214.3,
+       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 04.mp4",
+       "caption": "'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
+       "preview": "runner-2026/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
