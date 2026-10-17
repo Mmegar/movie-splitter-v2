@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:23:12+13:00",
+ "updated": "2026-10-17T16:24:13+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -34,6 +34,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 16.4,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "one-last-shot-2026/thumbs.bin"
    }
   },
   {
