@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:52:20+13:00",
+ "updated": "2026-10-17T23:53:22+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -162,6 +162,21 @@
        "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 04.mp4",
        "caption": "'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "runner-2026/highlights-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 5,
+       "start": 4409.0,
+       "end": 4633.5,
+       "seconds": 224.5,
+       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 05.mp4",
+       "caption": "'How many does Ellie have?' 💀 I can't\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "runner-2026/highlights-005.bin",
        "post": {
         "status": "none",
         "at": null,
