@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T16:59:57+07:00",
+ "updated": "2026-10-17T17:00:02+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -7,6 +7,12 @@
  "uploading": null,
  "transfers": [],
  "uploaded": [
+  {
+   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "at": "2026-10-17T16:59:59+07:00",
+   "size_mb": 1955,
+   "source": "laptop"
+  },
   {
    "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
    "at": "2026-10-17T10:21:32+07:00",
@@ -90,13 +96,6 @@
  "paused": null,
  "battery": false,
  "queue": [
-  {
-   "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "size_mb": 1955,
-   "modified": "2026-10-17T16:11:19+07:00",
-   "sending": false,
-   "style": "zoom"
-  },
   {
    "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 2048,
