@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:22:02+13:00",
+ "updated": "2026-10-17T16:23:10+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -13,6 +13,29 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "one-last-shot-2026",
+   "name": "One Last Shot (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-17T16:23:10+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "pirates-of-the-caribbean-at-worlds-end-2007",
    "name": "Pirates Of The Caribbean At Worlds End (2007)",
