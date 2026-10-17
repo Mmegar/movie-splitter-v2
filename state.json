@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:46:50+13:00",
+ "updated": "2026-10-17T16:46:51+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
   "started": "2026-10-17T16:22:01+13:00",
   "movie": "One Last Shot (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2712,6 +2712,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T16:46:51+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] One Last Shot (2026): Part 3 of 5 ready",
+   "message": "Part 3: 47:58 to 51:28 (210s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 3 🎬 · Part 4? only if this gets 100 comments 😏\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
+  },
+  {
    "at": "2026-10-17T16:42:42+13:00",
    "type": "part_ready",
    "title": "[Best stretch] One Last Shot (2026): Part 2 of 5 ready",
@@ -3904,12 +3910,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Colony (2026): 19 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Colony (2026)\nBest stretch: 7 parts, Highlights: 12 parts"
-  },
-  {
-   "at": "2026-10-14T17:54:42+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Colony (2026)",
-   "message": "Best stretch: 7 parts, Highlights: 12 parts.\nThe laptop downloads them into Ready to post/Colony (2026). The copy sent to GitHub has been deleted."
   }
  ]
 }
