@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:31:30+13:00",
+ "updated": "2026-10-18T00:32:24+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -132,6 +132,21 @@
        "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 02.mp4",
        "caption": "the way they said 'What’s that?' 🫠\nHighlight 2 🎬 · Highlight 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments",
        "preview": "toy-story-5-2026/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2217.9,
+       "end": 2472.8,
+       "seconds": 254.9,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 03.mp4",
+       "caption": "'You know who I don’t miss?' and then THIS happened 😳\nHighlight 3 🎬 · comment 'MORE' if you need Highlight 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "toy-story-5-2026/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
