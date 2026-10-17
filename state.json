@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:40:48+13:00",
+ "updated": "2026-10-18T00:40:50+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
-  "movie": "Toy Story 5 (2026)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
-  "parts_total": 5
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
