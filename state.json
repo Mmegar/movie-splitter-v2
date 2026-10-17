@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:19:13+13:00",
+ "updated": "2026-10-17T11:19:30+07:00",
  "run": {
   "active": false,
   "run_id": 38998474244,
@@ -2819,6 +2819,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T11:19:28+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "One Last Shot (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\One Last Shot (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
+  },
+  {
    "at": "2026-10-17T17:19:12+13:00",
    "type": "finished",
    "title": "✅ Finished: One Last Shot (2026)",
@@ -4011,12 +4017,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101414231125704F09CFEE780FECEA\"}}"
-  },
-  {
-   "at": "2026-10-14T13:12:45+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014141243344C966033EA470DBC9D\"}}"
   }
  ]
 }
