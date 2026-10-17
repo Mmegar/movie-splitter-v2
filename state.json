@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:22:31+13:00",
+ "updated": "2026-10-17T23:23:31+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 02.mp4",
        "caption": "the way they said 'Go get it!' 🫠\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "runner-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 3572.5,
+       "end": 3791.5,
+       "seconds": 219.0,
+       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 03.mp4",
+       "caption": "'Shut up!' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movies #funny #viral #moviemoments",
+       "preview": "runner-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
