@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:40:47+13:00",
+ "updated": "2026-10-18T00:40:48+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -3187,6 +3187,12 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:40:48+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Toy Story 5 (2026)",
+   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Toy Story 5 (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-18T00:40:40+13:00",
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 5 of 5 ready",
@@ -4379,12 +4385,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub for clips",
    "message": "Kung Fu Hustle 2004 1080p x264.mkv: 1 custom clip(s) start soon."
-  },
-  {
-   "at": "2026-10-14T17:35:16+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 6",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014183513D1F6E5404B2E52204D65\"}}"
   }
  ]
 }
