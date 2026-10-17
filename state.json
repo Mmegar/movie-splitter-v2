@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:23:26+13:00",
+ "updated": "2026-10-18T00:24:17+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -108,7 +108,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 680.0,
+       "end": 898.3,
+       "seconds": 218.3,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 01.mp4",
+       "caption": "why is nobody talking about this 🤨\nHighlight 1 🎬 · Highlight 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "toy-story-5-2026/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
