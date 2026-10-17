@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-17T10:15:13+07:00",
+ "updated": "2026-10-17T10:15:30+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-  "percent": 55
+  "percent": 57
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
    "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-   "percent": 55
+   "percent": 57
   }
  ],
  "uploaded": [
