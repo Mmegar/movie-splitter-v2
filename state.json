@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:28:06+13:00",
+ "updated": "2026-10-18T00:28:27+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Toy Story 5 (2026)",
   "mode": "highlights",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -3141,6 +3141,12 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:28:08+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Toy Story 5 (2026): Highlight 2 of 5 ready",
+   "message": "Highlight 2: 23:09 to 26:33 (205s)  interest score 57/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'What’s that?' 🫠\nHighlight 2 🎬 · Highlight 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-18T00:24:18+13:00",
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 1 of 5 ready",
@@ -4333,12 +4339,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 4",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nthe confidence of this man 😎\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
-  },
-  {
-   "at": "2026-10-14T17:22:52+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 3",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nwhen they said 'Why don’t you stay?' I felt that 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged\n#movie"
   }
  ]
 }
