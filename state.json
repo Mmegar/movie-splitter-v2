@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:53:32+13:00",
+ "updated": "2026-10-17T23:53:36+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
-  "movie": "Runner (2026)",
-  "mode": "highlights",
-  "stage": "uploading",
-  "part": 5,
-  "parts_total": 5
+  "movie": "Toy Story 5 (2026)",
+  "mode": null,
+  "stage": "downloading",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "toy-story-5-2026",
+   "name": "Toy Story 5 (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-17T23:53:35+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
@@ -3003,6 +3026,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T23:53:35+13:00",
+   "type": "started",
+   "title": "Started: Toy Story 5 (2026)",
+   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Toy Story 5 (2026)'."
+  },
+  {
    "at": "2026-10-17T23:53:32+13:00",
    "type": "finished",
    "title": "✅ Finished: Runner (2026)",
@@ -4195,12 +4224,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nbestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-14T16:02:23+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141702211B79B2F530D27F1A71FA\"}}"
   }
  ]
 }
