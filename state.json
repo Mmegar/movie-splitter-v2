@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:43:34+13:00",
+ "updated": "2026-10-17T23:44:32+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -132,6 +132,21 @@
        "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 02.mp4",
        "caption": "the vibes went from 0 to 100 real quick 📈\nHighlight 2 🎬 · follow or you'll miss Highlight 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
        "preview": "runner-2026/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 3484.5,
+       "end": 3694.5,
+       "seconds": 210.0,
+       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 03.mp4",
+       "caption": "the side eye at the end 👀\nHighlight 3 🎬 · follow or you'll miss Highlight 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "runner-2026/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
