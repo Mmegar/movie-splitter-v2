@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:46:05+13:00",
+ "updated": "2026-10-17T16:46:50+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/One Last Shot (2026)/Best stretch/One Last Shot (2026) - Part 02.mp4",
        "caption": "'Can you imagine?' and then THIS happened 😳\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "one-last-shot-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 2877.7,
+       "end": 3087.7,
+       "seconds": 210.0,
+       "drive_path": "Ready to post/One Last Shot (2026)/Best stretch/One Last Shot (2026) - Part 03.mp4",
+       "caption": "this is why I have trust issues 😶‍🌫️\nPart 3 🎬 · Part 4? only if this gets 100 comments 😏\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
+       "preview": "one-last-shot-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
