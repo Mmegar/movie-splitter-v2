@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:53:36+13:00",
+ "updated": "2026-10-17T17:54:31+07:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -3026,6 +3026,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T17:54:29+07:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Runner (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Runner (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
+  },
+  {
    "at": "2026-10-17T23:53:35+13:00",
    "type": "started",
    "title": "Started: Toy Story 5 (2026)",
@@ -4218,12 +4224,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 2",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nmain character energy, side character luck 🍀\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-14T16:09:11+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nbestie made it worse 😭\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch\n#movie #movieclips"
   }
  ]
 }
