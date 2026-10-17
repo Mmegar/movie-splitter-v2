@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T12:36:23+13:00",
+ "updated": "2026-10-17T10:21:32+07:00",
  "run": {
   "active": false,
   "run_id": 38982280429,
@@ -2635,6 +2635,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T10:21:32+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-17T06:13:38+07:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -3827,12 +3833,6 @@
    "type": "part_ready",
    "title": "[Highlights] Colony (2026): Part 9 of 12 ready",
    "message": "Part 9: 1:27:08 to 1:28:39 (91s)  interest score 63/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nplot armor? never heard of her 🛡️\nPart 9 🎬 · Part 10 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T17:43:03+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Colony (2026): Part 8 of 12 ready",
-   "message": "Part 8: 1:19:44 to 1:21:48 (124s)  interest score 62/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nthis scene owes me rent, it lives in my head 🏠\nPart 8 🎬 · Part 9? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
