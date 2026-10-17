@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:09:25+13:00",
+ "updated": "2026-10-18T00:09:27+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Toy Story 5 (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 2,
+  "stage": "rendering",
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -3065,6 +3065,12 @@
  },
  "events": [
   {
+   "at": "2026-10-18T00:09:27+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Toy Story 5 (2026): Part 2 of 5 ready",
+   "message": "Part 2: 28:35 to 31:56 (201s)\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Best stretch).\n\n📝 Caption:\n'Okay. Wow, that’s your name?' 💀 I can't\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged"
+  },
+  {
    "at": "2026-10-18T00:06:02+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Toy Story 5 (2026): Part 1 of 5 ready",
@@ -4257,12 +4263,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 3",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014174119D8E1608B631F0E18FD69\"}}"
-  },
-  {
-   "at": "2026-10-14T16:30:59+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 3",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014173057E7468FE6D6A840176984\"}}"
   }
  ]
 }
