@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:34:12+13:00",
+ "updated": "2026-10-17T16:34:16+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
   "started": "2026-10-17T16:22:01+13:00",
   "movie": "One Last Shot (2026)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "stretch",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -26,12 +26,12 @@
    "modes": {
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    },
@@ -2666,6 +2666,18 @@
  },
  "events": [
   {
+   "at": "2026-10-17T16:34:16+13:00",
+   "type": "planned",
+   "title": "[Highlights] One Last Shot (2026): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/One Last Shot (2026)/Highlights as they're made."
+  },
+  {
+   "at": "2026-10-17T16:34:15+13:00",
+   "type": "planned",
+   "title": "[Best stretch] One Last Shot (2026): 5 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/One Last Shot (2026)/Best stretch as they're made."
+  },
+  {
    "at": "2026-10-17T16:23:12+13:00",
    "type": "started",
    "title": "Started: One Last Shot (2026)",
@@ -3852,18 +3864,6 @@
    "type": "part_ready",
    "title": "[Highlights] Colony (2026): Part 11 of 12 ready",
    "message": "Part 11: 1:47:16 to 1:50:48 (212s)  interest score 59/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 11 🎬 · Part 12 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-14T17:47:45+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Colony (2026): Part 10 of 12 ready",
-   "message": "Part 10: 1:33:11 to 1:35:20 (130s)  interest score 61/100\nOn its way to the laptop (Ready to post/Colony (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'What does that have to do with me?' 🫠\nPart 10 🎬 · comment 'MORE' if you need Part 11 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-14T11:47:24+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101412472040601DBFAE47C6089D77\"}}"
   }
  ]
 }
