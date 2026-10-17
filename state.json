@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:23:31+13:00",
+ "updated": "2026-10-17T23:23:51+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Runner (2026)",
   "mode": "stretch",
-  "stage": "uploading",
-  "part": 3,
+  "stage": "rendering",
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2896,6 +2896,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T23:23:34+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Runner (2026): Part 3 of 5 ready",
+   "message": "Part 3: 59:32 to 1:03:12 (219s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\n'Shut up!' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movies #funny #viral #moviemoments"
+  },
+  {
    "at": "2026-10-17T23:19:08+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Runner (2026): Part 2 of 5 ready",
@@ -4088,12 +4094,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141535413D50B4B3D5F18F14750D\"}}"
-  },
-  {
-   "at": "2026-10-14T14:25:19+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014152517EA0CC663AC2B3010FB5B\"}}"
   }
  ]
 }
