@@ -1,11 +1,21 @@
 {
- "updated": "2026-10-17T16:22:37+07:00",
+ "updated": "2026-10-17T16:24:25+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "uploading": null,
- "transfers": [],
+ "uploading": {
+  "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+  "percent": 0
+ },
+ "transfers": [
+  {
+   "direction": "send",
+   "movie": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "percent": 0
+  }
+ ],
  "uploaded": [
   {
    "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
@@ -94,7 +104,7 @@
    "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 1955,
    "modified": "2026-10-17T16:11:19+07:00",
-   "sending": false,
+   "sending": true,
    "style": "zoom"
   },
   {
