@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:18:02+13:00",
+ "updated": "2026-10-17T23:19:06+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 01.mp4",
        "caption": "when they said 'You okay?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "runner-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 3314.5,
+       "end": 3572.5,
+       "seconds": 258.0,
+       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 02.mp4",
+       "caption": "the way they said 'Go get it!' 🫠\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "runner-2026/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
