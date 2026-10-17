@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:40:53+13:00",
+ "updated": "2026-10-17T23:43:34+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
   "started": "2026-10-17T23:00:33+13:00",
   "movie": "Runner (2026)",
   "mode": "highlights",
-  "stage": "rendering",
+  "stage": "uploading",
   "part": 3,
   "parts_total": 5
  },
