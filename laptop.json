@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T11:19:24+07:00",
+ "updated": "2026-10-17T11:19:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -99,6 +99,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
+  {
+   "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
+   "size_mb": 1723,
+   "modified": "2026-10-17T04:39:58+07:00",
+   "folder": "done"
+  },
   {
    "name": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
    "size_mb": 3451,
@@ -212,6 +218,7 @@
   "kung-fu-hustle-2004",
   "moon-knight-s01e02-summon-the-suit",
   "obsession-2026",
+  "one-last-shot-2026",
   "pirates-of-the-caribbean-at-worlds-end-2007",
   "spider-man-across-the-spider-verse-2023",
   "spider-man-brand-new-day-2026",
