@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-18T00:12:14+13:00",
+ "updated": "2026-10-18T00:13:02+13:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -51,6 +51,21 @@
        "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 02.mp4",
        "caption": "'Okay. Wow, that’s your name?' 💀 I can't\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "toy-story-5-2026/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 1915.8,
+       "end": 2133.2,
+       "seconds": 217.4,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 03.mp4",
+       "caption": "sound ON. trust me. 🔊\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
+       "preview": "toy-story-5-2026/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
