@@ -20,7 +20,7 @@
   "line_thickness": 5,
   "cockroach": true,
   "cockroach_chance": 1,
-  "cockroach_size": 60,
+  "cockroach_size": 80,
   "captions": true,
   "caption_style": "goofy",
   "paused": false,
