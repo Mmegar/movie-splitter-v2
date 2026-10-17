@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T23:31:58+13:00",
+ "updated": "2026-10-17T17:33:51+07:00",
  "run": {
   "active": true,
   "run_id": 39023222639,
@@ -2926,6 +2926,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T17:33:49+07:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-17T23:31:58+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Runner (2026): Part 5 of 5 ready",
@@ -4118,12 +4124,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101416064708F62A3246C5EC1662A1\"}}"
-  },
-  {
-   "at": "2026-10-14T14:56:28+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014155625BDD0AA913E82CF148F4D\"}}"
   }
  ]
 }
