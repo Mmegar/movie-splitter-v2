@@ -1,11 +1,18 @@
 {
- "updated": "2026-10-17T11:05:47+07:00",
+ "updated": "2026-10-17T11:06:28+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "transfers": [],
+ "transfers": [
+  {
+   "direction": "receive",
+   "movie": "One Last Shot (2026)",
+   "file": "One Last Shot (2026) - Highlight 02.mp4",
+   "percent": 1
+  }
+ ],
  "uploaded": [
   {
    "file": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
