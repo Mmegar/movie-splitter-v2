@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T16:41:57+13:00",
+ "updated": "2026-10-17T16:42:41+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/One Last Shot (2026)/Best stretch/One Last Shot (2026) - Part 01.mp4",
        "caption": "'Have you surrounded?' and then THIS happened 😳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
        "preview": "one-last-shot-2026/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 2674.0,
+       "end": 2877.7,
+       "seconds": 203.7,
+       "drive_path": "Ready to post/One Last Shot (2026)/Best stretch/One Last Shot (2026) - Part 02.mp4",
+       "caption": "'Can you imagine?' and then THIS happened 😳\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
+       "preview": "one-last-shot-2026/stretch-002.bin",
        "post": {
         "status": "none",
         "at": null,
