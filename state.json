@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-17T17:19:11+13:00",
+ "updated": "2026-10-17T17:19:12+13:00",
  "run": {
   "active": true,
   "run_id": 38998474244,
@@ -2819,6 +2819,12 @@
  },
  "events": [
   {
+   "at": "2026-10-17T17:19:12+13:00",
+   "type": "finished",
+   "title": "✅ Finished: One Last Shot (2026)",
+   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/One Last Shot (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-17T17:19:06+13:00",
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 5 of 5 ready",
@@ -4011,12 +4017,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014141243344C966033EA470DBC9D\"}}"
-  },
-  {
-   "at": "2026-10-14T13:02:17+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610141402151EFA06AA38D9690D7022\"}}"
   }
  ]
 }
