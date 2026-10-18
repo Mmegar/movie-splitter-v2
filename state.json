@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-19T06:49:14+07:00",
+ "updated": "2026-10-19T06:49:49+07:00",
  "run": {
   "active": false,
   "run_id": 39149099339,
@@ -353,10 +353,11 @@
        "caption": "'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
        "preview": "runner-2026/highlights-004.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "posted",
+        "at": "2026-10-19T06:49:49+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 1
        }
       },
       {
