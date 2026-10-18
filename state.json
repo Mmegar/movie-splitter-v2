@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-19T06:49:49+07:00",
+ "updated": "2026-10-19T06:50:24+07:00",
  "run": {
   "active": false,
   "run_id": 39149099339,
@@ -369,10 +369,11 @@
        "caption": "'How many does Ellie have?' 💀 I can't\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
        "preview": "runner-2026/highlights-005.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "posted",
+        "at": "2026-10-19T06:50:24+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 1
        }
       }
      ]
