@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-19T06:54:06+07:00",
+ "updated": "2026-10-19T10:48:29+07:00",
  "run": {
   "active": false,
   "run_id": 39149099339,
@@ -52,10 +52,11 @@
        "caption": "'Okay. Wow, that’s your name?' 💀 I can't\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
        "preview": "toy-story-5-2026/stretch-002.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "posted",
+        "at": "2026-10-19T10:48:29+07:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 1
        }
       },
       {
