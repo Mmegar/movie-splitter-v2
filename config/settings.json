@@ -17,7 +17,7 @@
   "whisper_model": "small",
   "line": true,
   "line_opacity": 0.45,
-  "line_thickness": 5,
+  "line_thickness": 12,
   "cockroach": true,
   "cockroach_chance": 1,
   "cockroach_size": 80,
