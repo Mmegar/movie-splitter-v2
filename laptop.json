@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T19:59:56+07:00",
+ "updated": "2026-10-20T20:07:47+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -153,56 +153,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mvblyxnn692u": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/pirates-of-the-caribbean-at-worlds-end-2007/stretch-001.bin"
-  },
-  "mveh4fot3ufj": {
-   "status": "done",
-   "note": "Marked as posted: 5"
-  },
-  "mveh4g0u8n92": {
-   "status": "done",
-   "note": "Same as the request just before (done once)"
-  },
-  "mveh6bxx9e0m": {
-   "status": "done",
-   "note": "Marked as posted"
-  },
-  "mveh6d40klat": {
-   "status": "done",
-   "note": "Marked as posted"
-  },
-  "mveh6ewaj2qa": {
-   "status": "done",
-   "note": "Marked as posted"
-  },
-  "mveh6gx61rgs": {
-   "status": "done",
-   "note": "Marked as posted"
-  },
-  "mveh8m5nidx8": {
-   "status": "done",
-   "note": "Marked as posted: 3"
-  },
-  "mveh998p92zg": {
-   "status": "done",
-   "note": "Marked as posted: 4"
-  },
-  "mveha3qn3fwg": {
-   "status": "done",
-   "note": "Marked as posted: 5"
-  },
-  "mveps1sicy0z": {
-   "status": "done",
-   "note": "Marked as posted: 2"
-  },
-  "mveptmavbb0a": {
-   "status": "done",
-   "note": "Marked as posted: 5"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
