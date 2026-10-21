@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:35:11+13:00",
+ "updated": "2026-10-22T08:38:22+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -333,7 +333,23 @@
     "character": {
      "label": "Character story",
      "planned": 11,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 378.0,
+       "end": 1899.0,
+       "seconds": 1521.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
+       "caption": "I wasn't ready for this 😭\nPart 1 🎬 · Follow so you don't miss Part 2 🔔\n#fyp #foryou #viral #movie #movieclips",
+       "preview": "spider-man-across-the-spider-verse-2023/character-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
