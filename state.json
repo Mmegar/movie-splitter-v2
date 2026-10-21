@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:00:57+13:00",
+ "updated": "2026-10-21T21:01:30+13:00",
  "run": {
   "active": true,
   "run_id": 39559111364,
@@ -83,11 +83,11 @@
        "caption": "This deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "runner-2026/hype-001.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-21T21:00:57+13:00",
+        "status": "inbox",
+        "at": "2026-10-21T21:01:30+13:00",
         "url": null,
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       }
      ]
