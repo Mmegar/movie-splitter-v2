@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:29:10+13:00",
+ "updated": "2026-10-21T21:32:23+13:00",
  "run": {
   "active": false,
   "run_id": 39559111364,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:32:23+13:00",
+   "type": "failed",
+   "title": "❌ Edit failed",
+   "message": "FilmCraft couldn't make Spider-Man Across The Spider-Verse (2023) - Part 02.mp4 after 3 tries. The edit pack is kept in its folder.\ncommand_run: edit failed: a caption already covers this time"
+  },
+  {
    "at": "2026-10-21T21:29:10+13:00",
    "type": "failed",
    "title": "❌ Edit failed",
@@ -4058,12 +4064,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Across The Spider-Verse (2023): Part 2 of 4 ready",
    "message": "Part 2: 1:05:28 to 1:08:29 (181s)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch).\n\n📝 Caption:\n'Huh? - Wow. How are you?' 💀 I can't\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-15T07:52:11+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Spider-Man Across The Spider-Verse (2023): Part 1 of 4 ready",
-   "message": "Part 1: 1:04:03 to 1:05:28 (85s)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch).\n\n📝 Caption:\n'Sorry. Congratulations!' 💀 I can't\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
