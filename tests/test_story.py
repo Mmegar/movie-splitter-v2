@@ -97,7 +97,7 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(sum(len(b) for b in blocks), len(story.transcript(cues).splitlines()))
 
     def test_local_model_is_the_default(self):
-        self.assertEqual(settings.load(path="nope.json", env={})["story_model"], "gemma3:4b")
+        self.assertEqual(settings.load(path="nope.json", env={})["story_model"], "claude-haiku-5-5")
         with mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": ""}):
             self.assertFalse(story.using_claude())
 

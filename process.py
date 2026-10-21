@@ -1142,6 +1142,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
             parts = [(float(a), float(b), sc) for a, b, sc in plan[mode]]
         elif mode in story.MODE_NAMES:
             try:
+                story.set_source(src)
                 parts = story.plan(mode, name, total, cues, loud, motion, score)
             except story.Skip as e:
                 print(f"Skipping {MODE_NAMES[mode]}: {e}", flush=True)

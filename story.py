@@ -47,7 +47,7 @@ NEEDS_TRANSCRIPT = set(MODE_NAMES)
 
 FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "mystery", 0.5, "", "en-US-GuyNeural", "+8%"
 RECAP_PART_SECONDS, RECAP_PARTS, MUSIC, MUSIC_VOLUME = 90.0, 0, True, 0.12
-HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL = 1, 15.0, "gemma3:4b"
+HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL = 1, 15.0, "claude-haiku-5-5"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434")
 
 
@@ -67,12 +67,12 @@ def load_settings(env=None):
     MUSIC_VOLUME = float(env.get("MUSIC_VOLUME", "0.12"))            # under the narration
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
-    MODEL = env.get("STORY_MODEL", "gemma3:4b").strip() or "gemma3:4b"   # local (Ollama) or a claude-... model
+    MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"   # local (Ollama) or a claude-... model
     global EDITOR
-    EDITOR = env.get("STORY_EDITOR", "filmcraft").strip().lower()    # filmcraft (on the laptop) or ffmpeg (here)
+    EDITOR = env.get("STORY_EDITOR", "ffmpeg").strip().lower()       # ffmpeg (cut + narrate here) or filmcraft (laptop)
 
 
-EDITOR = "filmcraft"
+EDITOR = "ffmpeg"
 PACK_SUFFIX = ".editpack.zip"
 
 
@@ -160,13 +160,56 @@ def using_claude():
     return MODEL.startswith("claude") and bool(os.environ.get("ANTHROPIC_API_KEY"))
 
 
+MAX_FRAMES = 100      # frames Claude "watches" per movie (about one every 30 s of a 50-minute show, 70 s of a 2-hour film)
+_FRAMES = {"src": None, "list": None}
+
+
+def set_source(src):
+    """The movie file being cut (so Claude can watch frames of it)."""
+    _FRAMES.update(src=src, list=None)
+
+
+def frames():
+    """[(second, base64 JPEG)]: small stills spread evenly through the movie, made once per movie."""
+    import base64
+    if _FRAMES["list"] is not None or not _FRAMES["src"] or P is None:
+        return _FRAMES["list"] or []
+    src = Path(_FRAMES["src"])
+    out = []
+    try:
+        total = P.duration(src)
+        step = max(30.0, total / MAX_FRAMES)
+        t = step / 2
+        tmp = Path("frame.jpg")
+        print(f"Grabbing {int(total / step)} frames for Claude to watch...", flush=True)
+        while t < total:
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{t:.1f}", "-i", str(src.resolve()), "-frames:v", "1",
+                            "-vf", f"{P.CROP['filter']}scale=512:-2", "-q:v", "5", str(tmp)], check=True)
+            out.append((int(t), base64.b64encode(tmp.read_bytes()).decode("ascii")))
+            t += step
+        tmp.unlink(missing_ok=True)
+    except Exception as e:
+        print(f"(no frames to watch: {e})", flush=True)
+    _FRAMES["list"] = out
+    return out
+
+
 def ask_claude(system, prompt):
-    """One request to Claude; returns the JSON object it answers with."""
+    """One request to Claude, with frames from the movie so it sees who's on screen; returns its JSON."""
     import anthropic
     client = anthropic.Anthropic()
     extra = {}
+    content = []
+    shots = frames()
+    if shots:
+        content.append({"type": "text", "text": "Frames from the movie, each labelled with its second. Use them to see "
+                        "who is on screen and which moments look most dramatic, so the footage you pick matches the words."})
+        for t, b64 in shots:
+            content.append({"type": "text", "text": f"[frame at {t}s]"})
+            content.append({"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": b64}})
+    content.append({"type": "text", "text": prompt})
     kw = dict(model=MODEL, max_tokens=32000, system=system, output_config={"effort": "medium"},
-              messages=[{"role": "user", "content": prompt}])
+              messages=[{"role": "user", "content": content}])
     if MODEL in FALLBACK_MODELS:    # if a safety check declines, the server retries on a fallback model
         kw["betas"] = ["server-side-fallback-2026-07-01"]
         extra = {"fallbacks": "default"}
@@ -519,7 +562,9 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
                 print(f"(the story model couldn't plan the hype edit, using loud moments instead: {e})", flush=True)
         return hype_from_sound(total, list(loud), list(motion), list(score))
     if not ready:
-        raise Skip(f"The story model ({MODEL}) isn't available on this run, so there's no narration.")
+        why = ("add the ANTHROPIC_API_KEY secret on GitHub" if MODEL.startswith("claude")
+               else f"the story model ({MODEL}) isn't available on this run")
+        raise Skip(f"No narration: {why}.")
     if not cues:
         raise Skip("No dialogue was found, so there's nothing to write the narration from.")
     return clean_story(ask(SYSTEM, story_prompt(name, total, source(name, cues), mode, who), STORY_SCHEMA), total)
