@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:54:21+13:00",
+ "updated": "2026-10-22T08:56:59+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -432,6 +432,21 @@
        "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story/Spider-Man Across The Spider-Verse (2023) - Part 07.mp4",
        "caption": "This is why I don't trust anyone 😶\nPart 7 🎬 · Should I post Part 8? 👇\n#fyp #foryoupage #movies #film #mustwatch",
        "preview": "spider-man-across-the-spider-verse-2023/character-007.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 8,
+       "start": 5340.0,
+       "end": 6176.0,
+       "seconds": 836.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story/Spider-Man Across The Spider-Verse (2023) - Part 08.mp4",
+       "caption": "Tell me you saw that coming 👇\nPart 8 🎬 · Should I post Part 9? 👇\n#viral #fyp #movietok #filmtok #scene",
+       "preview": "spider-man-across-the-spider-verse-2023/character-008.bin",
        "post": {
         "status": "none",
         "at": null,
