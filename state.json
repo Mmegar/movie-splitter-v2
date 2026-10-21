@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:49:28+13:00",
+ "updated": "2026-10-22T08:49:31+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 11
  },
  "queue": [],
@@ -3247,6 +3247,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:49:30+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 5 of 11 ready",
+   "message": "Part 5: Following Gwen Through the Portal (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:46:35+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 4 of 11 ready",
@@ -4439,12 +4445,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Brand New Day (2026): Part 4 of 5 ready",
    "message": "Part 4: 1:20:37 to 1:24:27 (230s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\nwhen they said 'Get out of the building!' I felt that 😭\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T18:33:09+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Brand New Day (2026): Part 3 of 5 ready",
-   "message": "Part 3: 51:58 to 55:34 (216s)  interest score 64/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\nme acting like I saw that coming (I did not) 🙈\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
