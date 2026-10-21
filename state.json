@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:38:28+13:00",
+ "updated": "2026-10-22T02:38:30+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Runner (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -2853,6 +2853,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:38:30+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Runner (2026): Part 1 of 5 ready",
+   "message": "Part 1: A Fixer's Impossible Errands (6 narrated beats, about 77s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-22T02:36:33+13:00",
    "type": "planned",
    "title": "[Character story] Runner (2026): 5 parts planned",
@@ -4045,12 +4051,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 11 of 12 ready",
    "message": "Part 11: 1:46:58 to 1:49:21 (143s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 11 🎬 · follow or you'll miss Part 12 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:33:24+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 10 of 12 ready",
-   "message": "Part 10: 1:41:48 to 1:43:00 (73s)  interest score 68/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'And I’m pretty sure you know the rest, jerk!' 📱\nPart 10 🎬 · Part 11 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
