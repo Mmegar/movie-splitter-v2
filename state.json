@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:03:22+13:00",
+ "updated": "2026-10-21T17:17:25+13:00",
  "run": {
   "active": false,
   "run_id": 39537512350,
@@ -3057,6 +3057,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:17:23+13:00",
+   "type": "new_file",
+   "title": "📥 Sent to GitHub",
+   "message": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
+  },
+  {
    "at": "2026-10-21T17:03:20+13:00",
    "type": "finished",
    "title": "✅ Finished: Runner (2026)",
@@ -4249,12 +4255,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 4",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015010046EBA2415C99D9F03B4F65\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-14T18:13:23+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 6",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
   }
  ]
 }
