@@ -60,7 +60,7 @@
   "cut_style": "classic",
   "filter": "mystery",
   "filter_strength": 0.5,
-  "character": "",
+  "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "recap_part_seconds": 120,
   "music": true,
