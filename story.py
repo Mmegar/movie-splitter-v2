@@ -504,11 +504,12 @@ def source(name, cues):
 
 
 MIN_STORY_PARTS = 5
+MAX_STORY_PARTS = 8
 
 
 def part_count(total):
     """The fewest parts to aim for: at least 5, more for a long movie (the writer may use more still)."""
-    return max(MIN_STORY_PARTS, RECAP_PARTS or round(total / 900))
+    return min(MAX_STORY_PARTS, max(MIN_STORY_PARTS, RECAP_PARTS or round(total / 900)))
 
 
 def story_prompt(name, total, text, mode, who):
@@ -524,9 +525,12 @@ Length: {int(total)} seconds
 
 {focus}
 
-Make at least {n} parts, each about {int(RECAP_PART_SECONDS)} seconds when read aloud (about {words} words of
-narration per part), in story order. Use as many more parts as the story needs: never squeeze or skip important
-story to fit a number of parts.
+Make {n} to {MAX_STORY_PARTS} parts (at least {MIN_STORY_PARTS}, never more than {MAX_STORY_PARTS}), each about {int(RECAP_PART_SECONDS)} seconds when read
+aloud (about {words} words of narration per part), in story order. Use more parts (up to {MAX_STORY_PARTS}) rather
+than squeezing or skipping important story.
+
+Skip the intro and the outro: never use the opening logos, titles or credits, or the end credits. Only use
+seconds from {int(WINDOW[0])} to {int(WINDOW[1])}.
 
 Voice: a funny, intense recap narrator: punchy, dramatic, a little sarcastic, with jokes about the characters'
 choices, but every fact true to the movie. Present tense, third person, plain spoken English.
@@ -569,7 +573,7 @@ Each edit has three pieces:
    outsmarting someone, a fight won).
 3. montage: 8 to 14 short moments (each 1 to 4 seconds, anywhere in the movie) of the character looking
    their coolest, for a fast music edit.
-Use only seconds that appear below. The title is their name or nickname, 1 to 3 words, for big on-screen text.
+Skip the intro and end credits: only use seconds from {int(WINDOW[0])} to {int(WINDOW[1])}. The title is their name or nickname, 1 to 3 words, for big on-screen text.
 
 Answer with this JSON shape:
 {{"character": "<name>",
@@ -581,9 +585,23 @@ Answer with this JSON shape:
 """
 
 
+WINDOW = [0.0, 1e9]       # the movie without its intro and end credits (set per movie by plan)
+
+
+def story_window(total, cues):
+    """Where the story is: after the opening logos/titles and before the end credits. Taken from where the
+    dialogue starts and stops, never more than 8% in from the start or 12% from the end."""
+    if cues:
+        lo = min(max(0.0, cues[0][0] - 5.0), total * 0.08)
+        hi = max(min(total, cues[-1][1] + 20.0), total * 0.88)
+    else:
+        lo, hi = total * 0.02, total * 0.92
+    return [round(lo, 2), round(min(hi, total - 1.0), 2)]
+
+
 def _num(v, total, default=0.0):
     try:
-        return max(0.0, min(float(v), max(0.0, total - 1.0)))
+        return max(WINDOW[0], min(float(v), max(0.0, total - 1.0), WINDOW[1]))
     except (TypeError, ValueError):
         return default
 
@@ -610,6 +628,9 @@ def clean_story(data, total):
         beats = parts[0]["beats"]
         half = len(beats) // 2
         parts = [{"title": parts[0]["title"], "beats": beats[:half]}, {"title": "", "beats": beats[half:]}]
+    if len(parts) > MAX_STORY_PARTS:                            # never more than 8: the extra goes into the last
+        extra = [b for p in parts[MAX_STORY_PARTS - 1:] for b in p["beats"]]
+        parts = parts[:MAX_STORY_PARTS - 1] + [{"title": parts[MAX_STORY_PARTS - 1]["title"], "beats": extra}]
     if len(parts) < 2:
         raise Skip("The story plan didn't have enough to make at least 2 parts.")
     who = str(data.get("character") or "").strip()
@@ -676,6 +697,8 @@ def hype_from_sound(total, loud, motion, score):
 def plan(mode, name, total, cues, loud=(), motion=(), score=()):
     """The parts for one of these modes: [(start, end, info)] (info is saved, so a stopped run carries on)."""
     who = character()
+    WINDOW[:] = story_window(total, cues)
+    print(f"Story window (no intro or end credits): {int(WINDOW[0])}s to {int(WINDOW[1])}s", flush=True)
     ready = using_claude() or local_ready()
     if mode == "hype":
         if ready and cues:

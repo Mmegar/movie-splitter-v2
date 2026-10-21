@@ -27,6 +27,7 @@ class StoryTest(unittest.TestCase):
         story.P = FakeP
         story.load_settings({})
         story.set_character(None)
+        story.WINDOW[:] = [0.0, 1e9]
 
     def test_defaults_switch_to_the_new_modes(self):
         s = settings.load(path="nope.json", env={})
@@ -124,6 +125,24 @@ class StoryTest(unittest.TestCase):
                 story.MUSIC = False
                 self.assertIsNone(story.pick_music("calm"))
                 self.assertIsNone(story.last_credit())
+
+    def test_story_window_skips_intro_and_credits(self):
+        cues = [(95.0, 97.0, "First line"), (5000.0, 5003.0, "Last line")]
+        self.assertEqual(story.story_window(6000, cues), [90.0, 5280.0])     # end credits: at least 12% cut
+        self.assertEqual(story.story_window(6000, []), [120.0, 5520.0])
+        story.WINDOW[:] = [90.0, 5280.0]
+        parts = story.clean_story({"parts": [{"title": "a", "beats": [{"say": "Logos.", "at": 10}]},
+                                             {"title": "b", "beats": [{"say": "Credits.", "at": 5900}]}]}, 6000)
+        self.assertEqual(parts[0][2]["beats"][0]["at"], 90.0)
+        self.assertEqual(parts[1][2]["beats"][0]["at"], 5280.0)
+
+    def test_never_more_than_8_parts(self):
+        data = {"parts": [{"title": f"p{i}", "beats": [{"say": f"s{i}", "at": i * 10}]} for i in range(11)]}
+        parts = story.clean_story(data, 600)
+        self.assertEqual(len(parts), 8)
+        self.assertEqual(len(parts[-1][2]["beats"]), 4)            # the extra parts' beats join the last one
+        self.assertEqual(story.part_count(20000), 8)
+        self.assertEqual(story.part_count(1200), 5)
 
     def test_clean_story_needs_two_parts(self):
         one = {"parts": [{"title": "x", "beats": [{"say": "s", "at": 1}]}]}
