@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:17:32+13:00",
+ "updated": "2026-10-21T21:18:09+13:00",
  "run": {
   "active": true,
   "run_id": 39559111364,
   "started": "2026-10-21T20:03:19+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": "recap",
-  "stage": "rendering",
-  "part": 1,
+  "stage": "uploading",
+  "part": 2,
   "parts_total": 2
  },
  "queue": [],
@@ -27,7 +27,23 @@
     "recap": {
      "label": "Movie recap",
      "planned": 2,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 7267.0,
+       "end": 7638.0,
+       "seconds": 371.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
+       "caption": "Plot twist incoming 🌀\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "character": {
      "label": "Character story",
@@ -2819,6 +2835,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:17:57+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 1 of 2 ready",
+   "message": "Part 1: Dimensional Drift and a Twisted Game (23 narrated beats, about 166s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nPlot twist incoming 🌀\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+  },
+  {
    "at": "2026-10-21T21:17:32+13:00",
    "type": "planned",
    "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): 1 part planned",
@@ -4011,12 +4033,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 3",
    "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015014654F5C726D6B144E740EC13\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-15T00:41:39+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 2",
-   "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101501413651DF75B143AFCE4690D6\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
   }
  ]
 }
