@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:42:20+13:00",
+ "updated": "2026-10-22T02:42:23+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Runner (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -2883,6 +2883,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:42:23+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Runner (2026): Part 3 of 5 ready",
+   "message": "Part 3: Chased Through a Tunnel (6 narrated beats, about 58s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-22T02:40:27+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 2 of 5 ready",
@@ -4075,12 +4081,6 @@
    "type": "finished",
    "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
    "message": "Best stretch: 4 parts, Highlights: 12 parts.\nThe laptop downloads them into Ready to post/Spider-Man Across The Spider-Verse (2023). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-15T08:40:41+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 12 of 12 ready",
-   "message": "Part 12: 1:55:41 to 1:58:42 (181s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 12 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
