@@ -1,8 +1,7 @@
 {
   "modes": [
     "recap",
-    "character",
-    "hype"
+    "character"
   ],
   "stretch_minutes": 12,
   "stretch_from": 0.2,
