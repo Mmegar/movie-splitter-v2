@@ -247,5 +247,5 @@ def decide(state, posting, now, force=False, available=None):
             return None, f"Already posted {count} today (limit {posting.get('per_day')})."
         if posted_this_hour(state, now):
             return None, "Already posted in this hour's slot."
-    pick = next_part(state, posting.get("modes") or ["stretch"], available)
+    pick = next_part(state, posting.get("modes") or ["recap", "character", "hype", "stretch", "highlights"], available)
     return (pick, None) if pick else (None, "Nothing to post yet.")

@@ -35,7 +35,8 @@ STAGES = {"idle", "downloading", "analysing", "subtitles", "planning", "renderin
           "posting", "done", "failed"}
 EVENT_TYPES = {"new_file", "started", "planned", "part_ready", "finished", "failed", "posted",
                "post_failed", "paused", "info"}
-LABELS = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips"}
+LABELS = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips",
+          "recap": "Movie recap", "character": "Character story", "hype": "Hype edit"}
 KEEP = object()   # "leave this as it is"
 
 

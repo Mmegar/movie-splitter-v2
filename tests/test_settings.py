@@ -25,7 +25,7 @@ class SettingsTest(TempDirTest):
 
     def test_broken_file_gives_defaults(self):
         s = settings.load(self.write("{not json"), env={})
-        self.assertEqual(s["modes"], ["stretch", "highlights"])
+        self.assertEqual(s["modes"], ["recap", "character", "hype"])
 
     def test_file_values_and_partial_posting(self):
         s = settings.load(self.write({"cockroach_size": 90, "posting": {"enabled": True}}), env={})

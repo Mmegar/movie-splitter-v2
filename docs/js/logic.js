@@ -1,12 +1,20 @@
 // Pure helpers (no DOM, no network) so they can be unit-tested under node.
 
-export const MODE_LABELS = { stretch: 'Best stretch', highlights: 'Highlights', all: 'Whole movie', clips: 'Custom clips' };
+export const MODE_LABELS = {
+  recap: 'Movie recap', character: 'Character story', hype: 'Hype edit',
+  stretch: 'Best stretch', highlights: 'Highlights', all: 'Whole movie', clips: 'Custom clips',
+};
 export const MODE_HINTS = {
+  recap: 'A narrator tells the whole story, in parts',
+  character: 'The story of one character, narrated',
+  hype: 'Disrespected, answers it, then a beat-synced edit',
   stretch: 'The best few minutes, back to back',
   highlights: 'Best moments from the whole movie',
   all: 'Everything, back to back',
 };
-export const ALL_MODES = ['stretch', 'highlights', 'all'];
+export const ALL_MODES = ['recap', 'character', 'hype'];
+// the older modes: still made if settings.json lists them, but no longer offered
+export const OLD_MODES = ['stretch', 'highlights', 'all'];
 
 // Stepper shown on the run card. Contract stages map onto these five steps.
 export const STEPS = [
@@ -155,6 +163,13 @@ export const WISH_STATUS_TEXT = {
 // ---------- settings ----------
 export const SETTING_LABELS = {
   modes: 'Modes & order',
+  filter: 'Film look',
+  filter_strength: 'Film look strength',
+  character: 'Character to follow',
+  narrator_voice: 'Narrator voice',
+  recap_part_seconds: 'Narrated part length',
+  music: 'Background music',
+  hype_count: 'Hype edits per movie',
   stretch_minutes: 'Best stretch length',
   stretch_from: 'Best stretch starts at',
   stretch_to: 'Best stretch ends by',
@@ -198,8 +213,8 @@ export const SETTING_LABELS = {
   'posting.hashtags': 'Hashtags',
 };
 
-const PCT_KEYS = new Set(['stretch_from', 'stretch_to', 'line_opacity', 'cockroach_chance']);
-const SEC_KEYS = new Set(['stretch_part_seconds', 'part_max_extra', 'highlight_seconds', 'part_seconds']);
+const PCT_KEYS = new Set(['stretch_from', 'stretch_to', 'line_opacity', 'cockroach_chance', 'filter_strength']);
+const SEC_KEYS = new Set(['stretch_part_seconds', 'part_max_extra', 'highlight_seconds', 'part_seconds', 'recap_part_seconds']);
 
 export function describeFlipEvery(v) {
   const s = String(v ?? '').trim();

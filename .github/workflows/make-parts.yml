@@ -6,8 +6,10 @@ name: Make TikTok parts
 # which the iPhone app edits. To override one just for this workflow, add it under "env:"
 # below with its old name, e.g.  MODES: "stretch"
 #
-# The only secret (GitHub > repo > Settings > Secrets and variables > Actions):
-#   NTFY_TOPIC   your ntfy notification name (phone notifications). Without it, no notifications.
+# Secrets (GitHub > repo > Settings > Secrets and variables > Actions):
+#   NTFY_TOPIC         your ntfy notification name (phone notifications). Without it, no notifications.
+#   ANTHROPIC_API_KEY  optional: only used if story_model is set to a Claude model. By default the narration
+#                      is written by a small free model (story_model, e.g. gemma3:4b) running on this runner.
 
 on:
   schedule:
@@ -29,6 +31,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ github.token }}
       NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +40,7 @@ jobs:
           python-version: "3.12"
 
       - name: Read settings
-        run: python3 -c "import settings; s = settings.load(); print('WHISPER_MODEL=' + str(s['whisper_model']))" >> "$GITHUB_ENV"
+        run: python3 -c "import settings; s = settings.load(); print('WHISPER_MODEL=' + str(s['whisper_model'])); print('STORY_MODEL=' + str(s['story_model']))" >> "$GITHUB_ENV"
 
       - name: Keep the speech model between runs
         uses: actions/cache@v4
@@ -45,8 +48,32 @@ jobs:
           path: ~/.cache/huggingface
           key: whisper-${{ env.WHISPER_MODEL }}
 
-      - name: Install the subtitle maker (Whisper) and preview encryption
-        run: pip install faster-whisper cryptography "opencv-python-headless>=4.8,<5"
+      - name: Install the subtitle maker (Whisper), preview encryption, story planner and narrator voice
+        run: pip install faster-whisper cryptography "opencv-python-headless>=4.8,<5" anthropic edge-tts
+
+      - name: Keep the story model and music between runs
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.ollama/models
+            assets/music/*.mp3
+          key: story-${{ env.STORY_MODEL }}-${{ hashFiles('assets/music/tracks.json') }}
+          restore-keys: story-${{ env.STORY_MODEL }}-
+
+      - name: Start the story writer (small free AI model, no API key)
+        if: ${{ !startsWith(env.STORY_MODEL, 'claude') }}
+        continue-on-error: true      # without it, the narrated modes are skipped (with a notification)
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama || true
+          mkdir -p ~/.ollama/models
+          OLLAMA_MODELS=$HOME/.ollama/models nohup ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 1 30); do curl -s http://127.0.0.1:11434/api/tags > /dev/null && break; sleep 1; done
+          OLLAMA_MODELS=$HOME/.ollama/models ollama pull "$STORY_MODEL"
+
+      - name: Get the background music
+        continue-on-error: true
+        run: python3 story.py --get-music
 
       - name: Make parts
         run: python3 process.py

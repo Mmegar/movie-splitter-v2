@@ -16,7 +16,20 @@ SETTINGS_FILE = HERE / "config" / "settings.json"
 
 # Used when settings.json is missing a key (or is missing / broken altogether).
 DEFAULTS = {
-    "modes": ["stretch", "highlights"],
+    "modes": ["recap", "character", "hype"],   # see story.py; the older stretch / highlights / all still work
+    "filter": "mystery",                 # film look on every part: mystery / warm / teal_orange / noir / none
+    "filter_strength": 0.5,              # 0 = off ... 1 = strong (0.5: clearly graded, original still obvious)
+    "character": "",                     # Character story + Hype edit: who to follow; blank = the main character
+    "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
+    "narrator_speed": "+8%",
+    "recap_part_seconds": 90,            # Movie recap / Character story: length of each narrated part
+    "recap_parts": 0,                    # 0 = automatic (3 to 8 parts, by movie length)
+    "music": True,                       # background music from assets/music (royalty-free tracks you add)
+    "music_volume": 0.12,                # under the narration (hype montages play the song at full volume)
+    "hype_count": 1,                     # Hype edits per movie
+    "hype_montage_seconds": 15,
+    "story_model": "gemma3:4b",          # small free model that writes the narration (runs on GitHub, no API key);
+                                         # e.g. qwen2.5:7b for better writing but slower, or claude-opus-5-5 + ANTHROPIC_API_KEY
     "stretch_minutes": 12,
     "stretch_from": 0.20,
     "stretch_to": 0.75,
@@ -36,7 +49,7 @@ DEFAULTS = {
     "cockroach_chance": 1,
     "cockroach_size": 60,
     "captions": True,
-    "cut_style": "zoom",                 # zoom = zoomed band that follows faces (default); classic = whole picture on a blurred background
+    "cut_style": "classic",              # classic = whole picture on a blurred background (default); zoom = zoomed band that follows faces
     "zoom_part_seconds": 210,            # zoom style: parts of about 3.5 minutes...
     "zoom_part_max_extra": 90,           # ...that may run up to this much longer to end at a pause (so 3-5 min)
     "caption_style": "goofy",            # goofy = jokes + a quote from the clip; plain = the older, calmer captions
@@ -55,7 +68,7 @@ DEFAULTS = {
         "privacy": "self_only",
         "when": "times",                 # times = at the post times below; as_ready = each part as soon as it's on the laptop
         "method": "draft",               # draft = sent to your TikTok inbox, you tap Post; direct = posted straight away (needs a private account until TikTok approves the app)
-        "modes": ["stretch"],
+        "modes": ["recap", "character", "hype", "stretch", "highlights"],   # older parts still get posted
         "per_day": 3,
         "times": ["12:00", "18:00", "21:00"],
         "timezone": "Pacific/Auckland",

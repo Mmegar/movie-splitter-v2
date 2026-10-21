@@ -54,3 +54,45 @@ class RenderTest(TempDirTest):
             self.assertEqual(probe(p), (1080, 1920))
         st = json.loads((self.tmp / "status" / "state.json").read_text())
         self.assertEqual(st["run"]["stage"], "rendering")
+
+    def test_story_modes_render(self):
+        """Movie recap and Hype edit end to end, with the plan and the voice faked (no Claude, no internet)."""
+        src = self.tmp / "Mystery.1999.mp4"
+        make_video(src, 60)
+        music = self.tmp / "music"
+        music.mkdir()
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i",
+                        "aevalsrc='0.6*sin(90*2*PI*t)*lt(mod(t,0.5),0.08)':s=44100:d=40",
+                        str(music / "beat.wav")], check=True)
+        env = self.base_env({"modes": ["recap", "hype"], "auto_subtitles": False, "video_quality": 28,
+                             "hype_montage_seconds": 4, "filter": "mystery", "flip": "none"})
+        code = r'''
+import subprocess, sys, process, story
+from pathlib import Path
+story.MUSIC_DIR = Path(sys.argv[2])
+def speak(text, mp3):
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "sine=f=300:d=1.5", str(mp3)], check=True)
+    return 1.5, [(0.0, 0.7, "The"), (0.7, 1.4, "butler.")]
+story.speak = speak
+def plan(mode, name, total, cues, *a):
+    if mode == "hype":
+        return [(5, 40, {"title": "Detective", "character": "Detective", "setup": [5, 9], "payoff": [30, 35],
+                         "montage": [[12, 13], [20, 21], [44, 45], [50, 51]]})]
+    return [(0, 30, {"title": "One", "beats": [{"say": "A body.", "at": 3}, {"keep": 10, "until": 13}]}),
+            (30, 60, {"title": "Two", "beats": [{"say": "A clue.", "at": 33}]})]
+story.plan = plan
+r = process.process_local(Path(sys.argv[1]), 'Mystery (1999)', None, Path('out'), Path('work'))
+print('RESULT', {m: [str(f) for f in fs] for m, fs in r.items()})
+'''
+        res = subprocess.run([sys.executable, "-c", code, str(src), str(music)], cwd=self.tmp, env=env,
+                             capture_output=True, text=True, timeout=900)
+        self.assertEqual(res.returncode, 0, res.stdout[-3000:] + res.stderr[-3000:])
+        recap = sorted((self.tmp / "out" / "Movie recap").glob("*.mp4"))
+        hype = sorted((self.tmp / "out" / "Hype edit").glob("*.mp4"))
+        self.assertEqual(len(recap), 2)
+        self.assertEqual(len(hype), 1)
+        for p in recap + hype:
+            self.assertEqual(probe(p), (1080, 1920))
+        length = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                       str(hype[0])], capture_output=True, text=True).stdout)
+        self.assertGreater(length, 4 + 5 + 3)       # setup + payoff + montage
