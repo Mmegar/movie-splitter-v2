@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:36:34+13:00",
+ "updated": "2026-10-22T02:38:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,23 @@
     "recap": {
      "label": "Movie recap",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 88.0,
+       "end": 570.0,
+       "seconds": 482.0,
+       "drive_path": "Ready to post/Runner (2026)/Movie recap/Runner (2026) - Part 01.mp4",
+       "caption": "Not me staying up till 3am for this 🌙\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "character": {
      "label": "Character story",
