@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:36:31+13:00",
+ "updated": "2026-10-22T02:36:34+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T02:28:41+13:00",
   "movie": "Runner (2026)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -2837,6 +2837,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:36:33+13:00",
+   "type": "planned",
+   "title": "[Character story] Runner (2026): 5 parts planned",
+   "message": "Runner (2026)\nMode: Character story\n\nPart 1: A Sober Man's Last Job (10 narrated beats, about 85s of voice)\nPart 2: A Child's Life on the Line (8 narrated beats, about 67s of voice)\nPart 3: Ben Bishop Doesn't Make It (8 narrated beats, about 63s of voice)\nPart 4: Countdown in the Hospital (9 narrated beats, about 64s of voice)\nPart 5: A Quiet Ending in Paris (8 narrated beats, about 62s of voice)\n"
+  },
+  {
    "at": "2026-10-22T02:34:29+13:00",
    "type": "planned",
    "title": "[Movie recap] Runner (2026): 5 parts planned",
@@ -4029,12 +4035,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 10 of 12 ready",
    "message": "Part 10: 1:41:48 to 1:43:00 (73s)  interest score 68/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'And I’m pretty sure you know the rest, jerk!' 📱\nPart 10 🎬 · Part 11 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T08:31:27+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 9 of 12 ready",
-   "message": "Part 9: 1:35:16 to 1:37:08 (112s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Can this day get any damn weirder?' 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
