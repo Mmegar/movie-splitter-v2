@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:59:48+13:00",
+ "updated": "2026-10-22T08:59:51+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 9,
+  "part": 10,
   "parts_total": 11
  },
  "queue": [],
@@ -3307,6 +3307,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:59:50+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 9 of 11 ready",
+   "message": "Part 9: The Original Anomaly (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:57:01+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 8 of 11 ready",
@@ -4499,12 +4505,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Obsession (2026): Part 2",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n'Do you have feelings for me?' is my new personality 😤\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
-  },
-  {
-   "at": "2026-10-15T12:43:06+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Spider-Man Brand New Day (2026): 9 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Brand New Day (2026)\nBest stretch: 4 parts, Highlights: 5 parts"
   }
  ]
 }
