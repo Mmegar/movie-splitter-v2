@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:56:59+13:00",
+ "updated": "2026-10-22T08:57:02+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 8,
+  "part": 9,
   "parts_total": 11
  },
  "queue": [],
@@ -3292,6 +3292,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:57:01+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 8 of 11 ready",
+   "message": "Part 8: Refusing the Canon (5 narrated beats, about 59s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:54:20+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 7 of 11 ready",
@@ -4484,12 +4490,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Spider-Man Brand New Day (2026): 9 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Brand New Day (2026)\nBest stretch: 4 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-15T18:42:21+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Spider-Man Brand New Day (2026)",
-   "message": "Best stretch: 4 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Spider-Man Brand New Day (2026). The copy sent to GitHub has been deleted."
   }
  ]
 }
