@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:13:13+13:00",
+ "updated": "2026-10-22T07:13:21+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T07:13:13+13:00",
-  "movie": null,
+  "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "spider-man-across-the-spider-verse-2023",
+   "name": "Spider-Man Across The Spider-Verse (2023)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-22T07:13:15+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
@@ -128,90 +151,6 @@
       }
      ]
     }
-   }
-  },
-  {
-   "id": "spider-man-across-the-spider-verse-2023",
-   "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-21T17:20:40+13:00",
-   "finished": "2026-10-21T21:18:18+13:00",
-   "duration": 8405.8,
-   "subtitles": "made automatically (English)",
-   "error": null,
-   "modes": {
-    "recap": {
-     "label": "Movie recap",
-     "planned": 2,
-     "parts": [
-      {
-       "n": 1,
-       "start": 7267.0,
-       "end": 7638.0,
-       "seconds": 371.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
-       "caption": "Plot twist incoming 🌀\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
-       "preview": null,
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 7718.0,
-       "end": 8092.0,
-       "seconds": 374.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
-       "caption": "Nobody talks about this part 👀\nPart 2 🎬 · And that's a wrap 🎬 Follow for the next one\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
-       "preview": null,
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    },
-    "character": {
-     "label": "Character story",
-     "planned": 0,
-     "parts": []
-    },
-    "hype": {
-     "label": "Hype edit",
-     "planned": 1,
-     "parts": [
-      {
-       "n": 1,
-       "start": 7267.0,
-       "end": 7349.0,
-       "seconds": 82.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit/Spider-Man Across The Spider-Verse (2023) - Edit 01.mp4",
-       "caption": "Me pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
-       "preview": null,
-       "post": {
-        "status": "inbox",
-        "at": "2026-10-22T00:05:57+13:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 23.3,
-    "count": 360,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "spider-man-across-the-spider-verse-2023/thumbs.bin"
    }
   },
   {
@@ -2931,6 +2870,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:13:15+13:00",
+   "type": "started",
+   "title": "Started: Spider-Man Across The Spider-Verse (2023)",
+   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/Spider-Man Across The Spider-Verse (2023)'."
+  },
+  {
    "at": "2026-10-22T07:01:04+13:00",
    "type": "posted",
    "title": "📲 In your TikTok drafts: Runner (2026): Part 2",
@@ -4123,12 +4068,6 @@
    "type": "planned",
    "title": "[Best stretch] Obsession (2026): 3 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-15T14:50:55+13:00",
-   "type": "started",
-   "title": "Started: Obsession (2026)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Obsession (2026)'."
   }
  ]
 }
