@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T00:04:57+13:00",
+ "updated": "2026-10-22T00:05:57+13:00",
  "run": {
   "active": false,
   "run_id": 39559111364,
@@ -78,11 +78,11 @@
        "caption": "Me pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": null,
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-22T00:04:57+13:00",
+        "status": "inbox",
+        "at": "2026-10-22T00:05:57+13:00",
         "url": null,
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       }
      ]
