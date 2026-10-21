@@ -67,7 +67,10 @@ def load_settings(env=None):
     MUSIC_VOLUME = float(env.get("MUSIC_VOLUME", "0.12"))            # under the narration
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
-    MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"   # local (Ollama) or a claude-... model
+    MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
+    global VOICE_ENGINE, INTENSITY
+    VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
+    INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.8"))   # local (Ollama) or a claude-... model
     global EDITOR
     EDITOR = env.get("STORY_EDITOR", "ffmpeg").strip().lower()       # ffmpeg (cut + narrate here) or filmcraft (laptop)
 
@@ -160,8 +163,51 @@ def parse_json(text):
 FALLBACK_MODELS = ("claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5", "claude-fable-5-1")
 
 
+def claude_app():
+    """The Claude Code program on this computer (the one the Claude app installs), or None. Using it runs
+    on your Claude plan instead of a paid API key."""
+    import shutil
+    home = Path.home()
+    windows = os.name == "nt"
+    for p in [os.environ.get("CLAUDE_CLI"), home / ".local" / "bin" / ("claude.exe" if windows else "claude"),
+              Path(os.environ.get("APPDATA", "")) / "npm" / "claude.cmd", shutil.which("claude.exe"),
+              shutil.which("claude.cmd"), None if windows else shutil.which("claude")]:
+        if p and Path(p).is_file():
+            return str(p)
+    return None
+
+
 def using_claude():
-    return MODEL.startswith("claude") and bool(os.environ.get("ANTHROPIC_API_KEY"))
+    return MODEL.startswith("claude") and bool(claude_app() or os.environ.get("ANTHROPIC_API_KEY"))
+
+
+CLI_FRAMES = 24       # stills shown to Claude through the app (each one is a file it opens)
+
+
+def ask_claude_app(system, prompt):
+    """One request through the Claude app's command line (your Claude plan, no API key), with some frames
+    from the movie as image files it can look at. Returns the JSON object it answers with."""
+    import base64
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="frames-") as tmp:
+        shots = frames()
+        if len(shots) > CLI_FRAMES:
+            shots = [shots[round(i * (len(shots) - 1) / (CLI_FRAMES - 1))] for i in range(CLI_FRAMES)]
+        listing = []
+        for t, b64 in shots:
+            f = Path(tmp) / f"frame_{t:05d}s.jpg"
+            f.write_bytes(base64.b64decode(b64))
+            listing.append(f"{f} (second {t})")
+        look = ("Before writing, open these frames from the movie (use the Read tool on each) to see who is on "
+                "screen and which moments look most dramatic:\n" + "\n".join(listing) + "\n\n") if listing else ""
+        text = f"{system}\n\n{look}{prompt}\n\nReply with the JSON only, no other text."
+        env = {k: v for k, v in os.environ.items() if k != "ANTHROPIC_API_KEY"}   # so it uses your Claude plan
+        r = subprocess.run([claude_app(), "-p", "--model", MODEL, "--output-format", "text", "--allowedTools", "Read",
+                            "--add-dir", tmp], input=text, capture_output=True, text=True, encoding="utf-8",
+                           timeout=2400, env=env)
+        if r.returncode != 0:
+            raise RuntimeError(f"Claude app: {(r.stderr or r.stdout)[-300:]}")
+        return parse_json(r.stdout)
 
 
 MAX_FRAMES = 100      # frames Claude "watches" per movie (about one every 30 s of a 50-minute show, 70 s of a 2-hour film)
@@ -248,6 +294,14 @@ def local_ready():
 
 
 def ask(system, prompt, schema):
+    if using_claude() and claude_app():
+        print(f"Asking Claude ({MODEL}) through the Claude app to plan the story...", flush=True)
+        try:
+            return ask_claude_app(system, prompt)
+        except Exception as e:
+            if not os.environ.get("ANTHROPIC_API_KEY"):
+                raise
+            print(f"(the Claude app didn't answer, using the API key instead: {e})", flush=True)
     if using_claude():
         print(f"Asking Claude ({MODEL}) to plan the story...", flush=True)
         return ask_claude(system, prompt)
@@ -592,8 +646,46 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
 
 
 # ---------------------------------------------------------------- the narrator's voice
+VOICE_ENGINE = os.environ.get("NARRATOR_ENGINE", "chatterbox")   # chatterbox (expressive, online) or edge
+INTENSITY = float(os.environ.get("NARRATOR_INTENSITY", "0.8"))     # Chatterbox exaggeration: 0.5 calm ... 1 wild
+CHATTERBOX_SPACE = "ResembleAI/Chatterbox"
+_CHATTER = {"client": None, "ref": None, "fails": 0}
+
+
 def speak(text, mp3):
-    """Reads text aloud into mp3. Returns (seconds, [(start, end, word)])."""
+    """Reads text aloud into mp3: Chatterbox's funny, intense delivery when it's reachable (free online model,
+    in the voice of NARRATOR_VOICE), Microsoft's voice otherwise. Returns (seconds, [(start, end, word)])."""
+    if VOICE_ENGINE == "chatterbox" and _CHATTER["fails"] < 2:
+        try:
+            return speak_chatterbox(text, mp3)
+        except Exception as e:
+            _CHATTER["fails"] += 1
+            print(f"  (Chatterbox didn't answer{', using the standard voice from now on' if _CHATTER['fails'] >= 2 else ''}: {e})",
+                  flush=True)
+    return speak_edge(text, mp3)
+
+
+def speak_chatterbox(text, mp3):
+    """One line from Chatterbox (Resemble AI's open model, run on its free Hugging Face page)."""
+    from gradio_client import Client, handle_file
+    if _CHATTER["client"] is None:
+        _CHATTER["client"] = Client(CHATTERBOX_SPACE, hf_token=os.environ.get("HF_TOKEN") or None, verbose=False)
+    if _CHATTER["ref"] is None:                  # a sample of the narrator's voice for Chatterbox to copy
+        ref = Path("narrator_voice.mp3").resolve()
+        speak_edge("Listen. This man is about to make the worst decision of his entire life, and honestly? I respect it.",
+                   ref)
+        _CHATTER["ref"] = ref
+    wav = _CHATTER["client"].predict(text, handle_file(str(_CHATTER["ref"])), INTENSITY, 0.8, 0, 0.3, True,
+                                     api_name="/generate_tts_audio")
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav), "-c:a", "libmp3lame", "-b:a", "160k",
+           str(Path(mp3).resolve())])
+    _CHATTER["fails"] = 0
+    length = P.duration(mp3)
+    return length, word_times(text, [], length)     # no word timings: captions are shared out evenly
+
+
+def speak_edge(text, mp3):
+    """Microsoft's free neural voice (edge-tts), with exact word timings."""
     import asyncio
     import edge_tts
 

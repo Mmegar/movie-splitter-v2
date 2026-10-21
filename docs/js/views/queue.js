@@ -187,6 +187,7 @@ export function createQueueView(ctx) {
       className: 'sheet--action',
       body: `<div class="action-card">
           <div class="action-msg"><strong>${esc(cleanTitle(name))}</strong><p>In To edit on the laptop, waiting to be cut.</p></div>
+          <button class="action-btn" data-v="character">Character to follow…</button>
           ${i > 0 ? '<button class="action-btn" data-v="top">Do this one next</button>' : ''}
           ${i < total - 1 ? '<button class="action-btn" data-v="bottom">Move to the end</button>' : ''}
           <button class="action-btn is-destructive" data-v="out">Take it out of To edit</button>
@@ -197,6 +198,28 @@ export function createQueueView(ctx) {
     if (v === 'top') await reorder(lastSt, name, 0);
     if (v === 'bottom') await reorder(lastSt, name, 1e6);
     if (v === 'out') await send({ type: 'to_library', file: name, from: 'queue' }, 'Moving it back to your Movies folder');
+    if (v === 'character') await pickCharacter(name);
+  }
+
+  /** Character story and Hype edit follow this character for this movie only (blank = the main character). */
+  async function pickCharacter(name) {
+    const f = ((lastSt && lastSt.data.laptop && lastSt.data.laptop.queue) || []).find((q) => q.name === name) || {};
+    const who = await openSheet({
+      title: 'Character to follow',
+      body: `<p class="note">For ${esc(cleanTitle(name))} only. Type the name the way the movie says it, or leave it blank for the main character.</p>
+        <input class="input" data-who value="${esc(f.character || '')}" autocomplete="off" spellcheck="false" placeholder="e.g. Benoit Blanc">
+        <button class="btn btn--primary btn--block" data-save style="margin-top:12px">Save</button>`,
+      onMount: (el, close) => {
+        const input = el.querySelector('[data-who]');
+        el.querySelector('[data-save]').addEventListener('click', () => close(input.value.trim() || ' '));
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') close(input.value.trim() || ' '); });
+        setTimeout(() => input.focus(), 300);
+      },
+    });
+    if (who === undefined) return;
+    const character = who.trim();
+    await send({ type: 'set_character', file: name, character },
+      character ? `It will follow ${character}` : 'It will follow the main character');
   }
 
   async function libraryActions(name) {
@@ -252,7 +275,7 @@ export function createQueueView(ctx) {
     return head + `<div class="group">${q.map((f, i) => fileRow(f, {
       busy: busy.get(f.name) === 'to_library' ? 'Taking it out…' : f.sending ? '' : '',
       lead: `<span class="row-ic ${i === 0 ? 'tone-accent' : 'tone-muted'}"><span class="num" style="font-weight:700;font-size:15px">${i + 1}</span></span>`,
-      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to cut' : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
+      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to cut' : '', f.character ? `Following ${f.character}` : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
       extra: styleChip(st, f),
       action: `<span class="reorder">
         <button class="icon-btn" data-up="${esc(f.name)}" ${i === 0 ? 'disabled' : ''} aria-label="Move ${esc(cleanTitle(f.name))} up">${icon('chevL', 'rot90')}</button>

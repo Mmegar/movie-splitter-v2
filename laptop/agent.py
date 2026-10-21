@@ -235,10 +235,10 @@ def find_ffmpeg():
 def ensure_cutter_packages():
     """What cutting on this laptop needs (speech-to-text, the narrator voice, Claude): installed once."""
     try:
-        import anthropic, edge_tts, faster_whisper, numpy  # noqa: F401,E401
+        import anthropic, cryptography, edge_tts, faster_whisper, gradio_client, numpy  # noqa: F401,E401
     except ImportError:
         log.info("Installing what cutting needs (once, a few minutes)...")
-        subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "faster-whisper", "edge-tts", "anthropic",
+        subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "faster-whisper", "edge-tts", "anthropic", "cryptography", "gradio_client",
                         "numpy"], timeout=1800, capture_output=True)
 
 
@@ -347,7 +347,7 @@ class Agent:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
                      ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {}),
-                     ("styles", {})):
+                     ("styles", {}), ("characters", {})):
             m.setdefault(k, v)
         return m
 
@@ -442,7 +442,8 @@ class Agent:
         meta = {"kind": "incoming", "id": rid, "file": path.name, "size": size,
                 "srt": Path(entry["srt"]).name if entry.get("srt") else None, "source": source,
                 "sent": entry["started"], "laptop": socket.gethostname(), "complete": False,
-                "style": entry.get("style") or self.style_for(path.name)}
+                "style": entry.get("style") or self.style_for(path.name),
+                "character": (self.memory.get("characters") or {}).get(path.name, "")}
         if entry.get("clips"):
             meta.update(clips=entry["clips"], movie=entry.get("movie"))
         release = transport.find(self.gh.releases(), "incoming", rid)
@@ -534,6 +535,9 @@ class Agent:
                    PYTHONIOENCODING="utf-8")
         if self.cfg.get("anthropic_api_key"):
             env["ANTHROPIC_API_KEY"] = self.cfg["anthropic_api_key"]
+        who = (self.memory.get("characters") or {}).get(path.name)
+        if who:                                          # picked for this movie in the app
+            env["CHARACTER"] = who
         ff = find_ffmpeg()
         env["PATH"] = str(Path(ff).parent) + os.pathsep + env.get("PATH", "")
         if os.name == "nt":
@@ -958,6 +962,15 @@ class Agent:
                 self.memory["styles"][name] = style
                 self._save_memory()
             return f"{name}: {'Zoomed + tracking' if style == 'zoom' else 'Classic'}"
+        if kind == "set_character":
+            who = str(c.get("character") or "").strip()[:80]
+            with self.lock:
+                if who:
+                    self.memory["characters"][name] = who
+                else:
+                    self.memory["characters"].pop(name, None)
+                self._save_memory()
+            return f"{name}: following {who or 'the main character'}"
         if kind == "cancel_post":
             return self.cancel_post(str(c.get("target") or "all"))
         if kind == "mark_posted" and c.get("ns"):
@@ -1529,6 +1542,7 @@ class Agent:
             if info:
                 info["sending"] = p.name in sending
                 info["style"] = self.style_for(p.name)
+                info["character"] = (self.memory.get("characters") or {}).get(p.name, "")
                 out.append(info)
         return out
 

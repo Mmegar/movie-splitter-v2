@@ -1617,6 +1617,14 @@ def cut_here(src, srt, ready):
     labels = ", ".join(MODE_NAMES[m] for m in MODES)
     work = Path(tempfile.mkdtemp(prefix="msplit-"))
     captions = {}
+    mid = status.movie_id(name)
+    WORK.mkdir(parents=True, exist_ok=True)
+    try:                                  # finished parts also go to GitHub, for quick saving from the phone
+        prev = new_previews(github())
+        prev.start_movie(mid)
+    except Exception as e:
+        print(f"(parts won't be uploaded to GitHub: {e})", flush=True)
+        prev = None
     status.run_started(None)
     status.movie_started(name, "laptop", MODES)
     notify(f"Started: {name}", f"Cutting on the laptop: {labels}. Parts go into '{READY}/{name}'.",
@@ -1641,7 +1649,14 @@ def cut_here(src, srt, ready):
             with open(out.parent / "captions.txt", "a", encoding="utf-8") as f:
                 f.write(f"{part_word(mode)} {i}  ({out.name})\n{text}\n\n")
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
-        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text)
+        pv = None
+        if prev:
+            try:
+                pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
+                prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
+            except Exception as e:
+                print(f"(couldn't upload {out.name} to GitHub: {e})", flush=True)
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv)
         notify(f"{name}: {part_word(mode)} {i} of {count} ready", f"{line}\nIn {READY}/{name}/{label}.",
                ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
 

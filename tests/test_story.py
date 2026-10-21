@@ -96,10 +96,13 @@ class StoryTest(unittest.TestCase):
         self.assertGreater(len(blocks), 3)
         self.assertEqual(sum(len(b) for b in blocks), len(story.transcript(cues).splitlines()))
 
-    def test_local_model_is_the_default(self):
+    def test_haiku_is_the_default_writer(self):
         self.assertEqual(settings.load(path="nope.json", env={})["story_model"], "claude-haiku-5-5")
-        with mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": ""}):
-            self.assertFalse(story.using_claude())
+        story.MODEL = "claude-haiku-5-5"
+        with mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": ""}), mock.patch.object(story, "claude_app", lambda: None):
+            self.assertFalse(story.using_claude())         # no Claude app and no key: nothing to ask
+        with mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": ""}), mock.patch.object(story, "claude_app", lambda: "claude"):
+            self.assertTrue(story.using_claude())          # the Claude app is enough
 
     def test_music_picks_by_kind_and_keeps_the_credit(self):
         import json

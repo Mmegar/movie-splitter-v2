@@ -22,6 +22,8 @@ DEFAULTS = {
     "character": "",                     # Character story + Hype edit: who to follow; blank = the main character
     "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
     "narrator_speed": "+8%",
+    "narrator_engine": "chatterbox",     # chatterbox = expressive funny/intense delivery (free online model), edge = standard
+    "narrator_intensity": 0.8,           # Chatterbox: 0.5 calm ... 1.0 wild
     "recap_part_seconds": 90,            # Movie recap / Character story: length of each narrated part
     "recap_parts": 0,                    # 0 = automatic (3 to 8 parts, by movie length)
     "music": True,                       # background music from assets/music (royalty-free tracks you add)
