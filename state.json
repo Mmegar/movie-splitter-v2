@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:17:25+13:00",
+ "updated": "2026-10-21T17:17:40+13:00",
  "run": {
   "active": false,
   "run_id": 39537512350,
@@ -3057,6 +3057,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:17:40+13:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Runner (2026): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Runner (2026)\nHype edit: 1 part"
+  },
+  {
    "at": "2026-10-21T17:17:23+13:00",
    "type": "new_file",
    "title": "📥 Sent to GitHub",
@@ -4249,12 +4255,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 7",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150105444F768DDD1B419046CB5A\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-15T00:00:48+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 4",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015010046EBA2415C99D9F03B4F65\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
   }
  ]
 }
