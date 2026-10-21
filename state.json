@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T09:02:15+13:00",
+ "updated": "2026-10-22T09:02:18+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 10,
+  "part": 11,
   "parts_total": 11
  },
  "queue": [],
@@ -3322,6 +3322,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T09:02:17+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 10 of 11 ready",
+   "message": "Part 10: Home Isn't Home Anymore (5 narrated beats, about 63s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:59:50+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 9 of 11 ready",
@@ -4514,12 +4520,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T13:36:51+07:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Obsession (2026): Part 2",
-   "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\n'Do you have feelings for me?' is my new personality 😤\nPart 2 🎬 · follow or you'll miss Part 3 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
   }
  ]
 }
