@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T01:03:07+13:00",
+ "updated": "2026-10-22T01:03:10+13:00",
  "run": {
   "active": true,
   "run_id": 39595375193,
   "started": "2026-10-22T00:56:32+13:00",
   "movie": "Runner (2026)",
-  "mode": null,
-  "stage": "analysing",
-  "part": null,
-  "parts_total": null
+  "mode": "hype",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 1
  },
  "queue": [],
  "movies": [
@@ -36,7 +36,7 @@
     },
     "hype": {
      "label": "Hype edit",
-     "planned": 0,
+     "planned": 1,
      "parts": []
     }
    },
@@ -2850,6 +2850,24 @@
  },
  "events": [
   {
+   "at": "2026-10-22T01:03:10+13:00",
+   "type": "planned",
+   "title": "[Hype edit] Runner (2026): 1 part planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Runner (2026)/Hype edit as they're made."
+  },
+  {
+   "at": "2026-10-22T01:03:10+13:00",
+   "type": "info",
+   "title": "[Character story] Skipped for Runner (2026)",
+   "message": "No narration: add the ANTHROPIC_API_KEY secret on GitHub."
+  },
+  {
+   "at": "2026-10-22T01:03:10+13:00",
+   "type": "info",
+   "title": "[Movie recap] Skipped for Runner (2026)",
+   "message": "No narration: add the ANTHROPIC_API_KEY secret on GitHub."
+  },
+  {
    "at": "2026-10-22T00:58:01+13:00",
    "type": "started",
    "title": "Started: Runner (2026)",
@@ -4030,24 +4048,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 4 of 12 ready",
    "message": "Part 4: 32:52 to 34:12 (80s)  interest score 67/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Spider-Man, why did you create that guy?' 🫠\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-15T08:12:55+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 3 of 12 ready",
-   "message": "Part 3: 23:08 to 25:44 (157s)  interest score 64/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\n'Psych. - Whoa!' 💀 I can't\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-15T08:09:47+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 2 of 12 ready",
-   "message": "Part 2: 14:34 to 15:55 (81s)  interest score 69/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'You’re just gonna have to shut up and trust me. No!' 📱\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:07:59+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 1 of 12 ready",
-   "message": "Part 1: 1:34 to 2:56 (82s)  interest score 74/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
