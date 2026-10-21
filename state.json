@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:28:41+13:00",
+ "updated": "2026-10-22T02:28:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T02:28:41+13:00",
-  "movie": null,
+  "movie": "Runner (2026)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
@@ -16,12 +16,12 @@
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
-   "status": "done",
+   "status": "processing",
    "source": "laptop",
-   "started": "2026-10-22T00:57:59+13:00",
-   "finished": "2026-10-22T01:04:55+13:00",
-   "duration": 5926.0,
-   "subtitles": "from your .srt file",
+   "started": "2026-10-22T02:28:44+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
    "error": null,
    "modes": {
     "recap": {
@@ -33,36 +33,7 @@
      "label": "Character story",
      "planned": 0,
      "parts": []
-    },
-    "hype": {
-     "label": "Hype edit",
-     "planned": 1,
-     "parts": [
-      {
-       "n": 1,
-       "start": 5568.0,
-       "end": 5610.0,
-       "seconds": 42.0,
-       "drive_path": "Ready to post/Runner (2026)/Hype edit/Runner (2026) - Edit 01.mp4",
-       "caption": "Rewatching this hits even harder\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
-       "preview": "runner-2026/hype-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
     }
-   },
-   "thumbs": {
-    "every": 16.5,
-    "count": 359,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "runner-2026/thumbs.bin"
    }
   },
   {
@@ -2866,6 +2837,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:28:44+13:00",
+   "type": "started",
+   "title": "Started: Runner (2026)",
+   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/Runner (2026)'."
+  },
+  {
    "at": "2026-10-22T01:05:53+13:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -4058,12 +4035,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 8 of 12 ready",
    "message": "Part 8: 1:11:28 to 1:15:44 (255s)  interest score 67/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'You’re not a joke!' 📱\nPart 8 🎬 · Part 9 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:23:10+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 7 of 12 ready",
-   "message": "Part 7: 1:05:04 to 1:08:29 (205s)  interest score 65/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\n'Hey, who’s the new guy?' is my new personality 😤\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
