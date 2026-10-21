@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T01:04:36+13:00",
+ "updated": "2026-10-22T01:04:55+13:00",
  "run": {
   "active": true,
   "run_id": 39595375193,
@@ -16,12 +16,12 @@
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-22T00:57:59+13:00",
-   "finished": null,
+   "finished": "2026-10-22T01:04:55+13:00",
    "duration": 5926.0,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -37,7 +37,23 @@
     "hype": {
      "label": "Hype edit",
      "planned": 1,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 5568.0,
+       "end": 5610.0,
+       "seconds": 42.0,
+       "drive_path": "Ready to post/Runner (2026)/Hype edit/Runner (2026) - Edit 01.mp4",
+       "caption": "Rewatching this hits even harder\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "runner-2026/hype-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
@@ -2850,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T01:04:53+13:00",
+   "type": "part_ready",
+   "title": "[Hype edit] Runner (2026): Edit 1 of 1 ready",
+   "message": "Edit 1: Side Character: setup 1:32:48, payoff 1:33:10, 12 montage shots\nOn its way to the laptop (Ready to post/Runner (2026)/Hype edit).\n\n📝 Caption:\nRewatching this hits even harder\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+  },
+  {
    "at": "2026-10-22T01:03:10+13:00",
    "type": "planned",
    "title": "[Hype edit] Runner (2026): 1 part planned",
@@ -4042,12 +4064,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 5 of 12 ready",
    "message": "Part 5: 47:34 to 49:17 (102s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nwhen they said 'Hey, Gw-- Uh, Gwen?' I felt that 😭\nPart 5 🎬 · Part 6? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:14:38+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 4 of 12 ready",
-   "message": "Part 4: 32:52 to 34:12 (80s)  interest score 67/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Spider-Man, why did you create that guy?' 🫠\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
