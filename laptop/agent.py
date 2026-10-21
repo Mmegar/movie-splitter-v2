@@ -1488,6 +1488,7 @@ class Agent:
                     "watch_folder": str(self.watch).replace("\\", "/"),
                     "ready_folder": str(self.ready_dir).replace("\\", "/"),
                     "uploading": {"file": send["file"], "percent": send["percent"]} if send else None,
+                    "cutting": {"file": Path(self.cutting).name} if self.cutting else None,
                     "transfers": transfers,
                     "uploaded": self.memory["uploaded"][:20], "wishlist": wl,
                     "paused": self.paused_reason(), "battery": self.battery,

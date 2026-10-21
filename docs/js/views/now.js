@@ -1,6 +1,6 @@
 import { esc, icon, toast, confirmSheet, haptic } from '../ui.js';
 import { laptopStatus, activeMakeRun } from '../api.js';
-import { STEPS, stepIndex, STAGE_TEXT, MODE_LABELS, elapsed, relTime, clock, mergeFeed } from '../logic.js';
+import { STEPS, stepIndex, STAGE_TEXT, MODE_LABELS, elapsed, relTime, clock, mergeFeed, cutPercent } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, skeleton, chip } from './common.js';
 import { pauseRow, togglePause } from './queue.js';
 
@@ -45,7 +45,7 @@ function runCard(st) {
       </div>
       <h2 class="run-movie">${esc(run.movie)}</h2>
       ${pausing
-        ? `<p class="run-stage"><span class="live-dot"></span>Pausing: GitHub stops within about a minute</p>`
+        ? `<p class="run-stage"><span class="live-dot"></span>Pausing: stops within about a minute</p>`
         : `<p class="run-stage"><span class="live-dot"></span>${esc(STAGE_TEXT[run.stage] || run.stage)}${run.stage === 'rendering' ? ` · <strong>${partLine}</strong>` : ''}</p>`}
       ${frameStrip(done, run.parts_total || 0, run.stage === 'rendering' ? run.part : 0)}
       ${stepper(run.stage)}
@@ -90,8 +90,11 @@ function glanceRows(st) {
 
   // Laptop
   let lapDetail;
+  const cut = laptop && laptop.cutting ? cutPercent(s.run) : null;
   if (!laptop) lapDetail = '<span class="muted">Not set up yet</span>';
-  else if (lst.online) {
+  else if (lst.online && laptop.cutting) {
+    lapDetail = `<span>Cutting ${esc(laptop.cutting.file)}</span><span class="bar"><span style="width:${cut}%"></span></span>`;
+  } else if (lst.online) {
     lapDetail = laptop.uploading
       ? `<span>Sending ${esc(laptop.uploading.file)} to GitHub</span><span class="bar"><span style="width:${laptop.uploading.percent}%"></span></span>`
       : '<span class="muted">Watching the folder</span>';
@@ -99,7 +102,8 @@ function glanceRows(st) {
   rows.push(`<a class="row" href="#/queue">
     <span class="row-ic ${lst.online ? 'tone-ok' : 'tone-muted'}">${icon('laptop')}</span>
     <span class="row-main"><span class="row-title">${esc((laptop && laptop.host) || 'Laptop')} <span class="status-dot ${lst.online ? 'on' : ''}"></span><span class="sr">${lst.online ? 'online' : 'offline'}</span></span><span class="row-sub">${lapDetail}</span></span>
-    ${laptop && laptop.uploading && lst.online ? `<span class="row-val">${laptop.uploading.percent}%</span>` : `<span class="row-val">${lst.online ? 'Online' : 'Offline'}</span>`}
+    ${laptop && laptop.cutting && lst.online ? `<span class="row-val">${cut}%</span>`
+      : laptop && laptop.uploading && lst.online ? `<span class="row-val">${laptop.uploading.percent}%</span>` : `<span class="row-val">${lst.online ? 'Online' : 'Offline'}</span>`}
   </a>`);
 
   // Posting

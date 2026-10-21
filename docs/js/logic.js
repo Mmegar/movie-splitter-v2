@@ -30,6 +30,17 @@ export const STAGE_TEXT = {
   subtitles: 'Making subtitles', planning: 'Planning the parts', rendering: 'Making parts',
   uploading: 'Sending parts back', posting: 'Posting to TikTok', done: 'Finished', failed: 'Failed',
 };
+/** How far a cutting run is, 0-100, from its stage and part (for the laptop's progress bar). */
+export function cutPercent(run) {
+  if (!run || !run.active) return 0;
+  const before = { downloading: 2, analysing: 5, subtitles: 12, planning: 25 };
+  if (run.stage in before) return before[run.stage];
+  if ((run.stage === 'rendering' || run.stage === 'uploading') && run.parts_total) {
+    return Math.min(99, Math.round(30 + 70 * (Math.max(1, run.part || 1) - 1) / run.parts_total));
+  }
+  return run.stage === 'done' ? 100 : 30;
+}
+
 export function stepIndex(stage) {
   return STAGE_TO_STEP[stage] ?? -1;
 }

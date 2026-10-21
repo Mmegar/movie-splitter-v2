@@ -1,6 +1,6 @@
 import { esc, icon, toast, haptic, openSheet, swipeRows, longPress, confirmSheet } from '../ui.js';
 import { laptopStatus } from '../api.js';
-import { relTime, parseWishlist, serializeWishlist, wishTitles, wishEntryFor, formatWishTitle, titleKey, fileNameOf, pendingCommands } from '../logic.js';
+import { relTime, parseWishlist, serializeWishlist, wishTitles, wishEntryFor, formatWishTitle, titleKey, fileNameOf, pendingCommands, cutPercent } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, skeleton } from './common.js';
 
 function sizeText(mb) {
@@ -350,6 +350,15 @@ export function createQueueView(ctx) {
         <span class="row-sub">${ls.online ? `Watching ${esc(lp.watch_folder || 'the folder')}` : `Offline, last seen ${ls.ageMs != null ? esc(relTime(Date.now() - ls.ageMs)) : 'never'}`}</span></span>
       <span class="row-val">${ls.online ? 'Online' : 'Offline'}</span>
     </div>`];
+    if (lp.cutting) {
+      const pc = cutPercent(st.data.state && st.data.state.run);
+      rows.push(`<div class="row">
+        <span class="row-ic tone-accent">${icon('scissors')}</span>
+        <span class="row-main"><span class="row-title clamp1">${esc(fileNameOf(lp.cutting.file))}</span>
+          <span class="row-sub"><span>Cutting on the laptop</span><span class="bar" role="progressbar" aria-valuenow="${pc}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pc}%"></span></span></span></span>
+        <span class="row-val">${pc}%</span>
+      </div>`);
+    }
     if (lp.uploading) {
       rows.push(`<div class="row">
         <span class="row-ic tone-accent">${icon('cloud')}</span>
@@ -399,7 +408,7 @@ export function createQueueView(ctx) {
     if (!st.data) { content.innerHTML = banner(st) + skeleton(4); return; }
     // Don't redraw under a finger mid-swipe.
     if (content.querySelector('.wish-row.swiped')) return;
-    content.innerHTML = banner(st) + notesHtml(st) + laptopGroup(st) + laptopQueueGroup(st) + queueGroup(st)
+    content.innerHTML = banner(st) + notesHtml(st) + laptopGroup(st) + laptopQueueGroup(st)
       + libraryGroup(st) + wishGroup(st) + binGroup(st);
   }
 
