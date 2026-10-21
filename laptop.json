@@ -1,10 +1,11 @@
 {
- "updated": "2026-10-21T20:34:41+07:00",
+ "updated": "2026-10-21T20:34:45+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
+ "cutting": null,
  "transfers": [],
  "uploaded": [
   {
