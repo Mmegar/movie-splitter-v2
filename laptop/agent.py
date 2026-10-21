@@ -201,7 +201,8 @@ def file_info(p):
 
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
-              "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py"]
+              "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
+              "process.py", "tracking.py"]   # (process + tracking: for cutting on the laptop)
 PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
 SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
