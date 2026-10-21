@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:40:24+13:00",
+ "updated": "2026-10-22T02:40:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Runner (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -2868,6 +2868,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:40:27+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Runner (2026): Part 2 of 5 ready",
+   "message": "Part 2: The Liver and the Talkative Courier (6 narrated beats, about 61s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-22T02:38:30+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 1 of 5 ready",
@@ -4060,12 +4066,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 12 of 12 ready",
    "message": "Part 12: 1:55:41 to 1:58:42 (181s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 12 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:36:37+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 11 of 12 ready",
-   "message": "Part 11: 1:46:58 to 1:49:21 (143s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 11 🎬 · follow or you'll miss Part 12 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
