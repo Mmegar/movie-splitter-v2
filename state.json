@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T01:04:58+13:00",
+ "updated": "2026-10-22T01:05:56+13:00",
  "run": {
   "active": false,
   "run_id": 39595375193,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T01:05:53+13:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Runner (2026): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Runner (2026)\nHype edit: 1 part"
+  },
+  {
    "at": "2026-10-22T01:04:56+13:00",
    "type": "finished",
    "title": "✅ Finished: Runner (2026)",
@@ -4058,12 +4064,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 7 of 12 ready",
    "message": "Part 7: 1:05:04 to 1:08:29 (205s)  interest score 65/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\n'Hey, who’s the new guy?' is my new personality 😤\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T08:18:44+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 6 of 12 ready",
-   "message": "Part 6: 59:51 to 1:01:04 (73s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nwatching this instead of sleeping again 🌚\nPart 6 🎬 · Part 7 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
