@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:20:40+13:00",
+ "updated": "2026-10-22T08:20:43+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 14,
+  "part": 15,
   "parts_total": 20
  },
  "queue": [],
@@ -3081,6 +3081,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:20:42+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 14 of 20 ready",
+   "message": "Part 14: Locked Up for Trying (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:18:27+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 13 of 20 ready",
@@ -4273,12 +4279,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Obsession (2026): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Obsession (2026)\nCustom clips: 1"
-  },
-  {
-   "at": "2026-10-15T11:52:54+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
