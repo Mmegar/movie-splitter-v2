@@ -59,7 +59,7 @@
   "cut_style": "classic",
   "filter": "vivid",
   "filter_strength": 0.4,
-  "character": "Main Character",
+  "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "recap_part_seconds": 120,
   "music": true,
