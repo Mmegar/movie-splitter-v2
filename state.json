@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T12:03:15+13:00",
+ "updated": "2026-10-22T12:03:18+13:00",
  "run": {
   "active": false,
   "run_id": 39654089493,
@@ -3338,6 +3338,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T12:03:18+13:00",
+   "type": "posted",
+   "title": "📲 In your TikTok drafts: Runner (2026): Part 3",
+   "message": "[Movie recap] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nI've watched this 10 times already 🔁\nPart 3 🎬 · Part 4 coming soon ⏳\n#fyp #foryou #viral #movie #movieclips"
+  },
+  {
    "at": "2026-10-22T09:04:45+13:00",
    "type": "finished",
    "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
@@ -4530,12 +4536,6 @@
    "type": "planned",
    "title": "[Highlights] GONJIAM Haunted Asylum (2017): 3 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/GONJIAM Haunted Asylum (2017)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-15T21:10:40+13:00",
-   "type": "planned",
-   "title": "[Best stretch] GONJIAM Haunted Asylum (2017): 3 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch as they're made."
   }
  ]
 }
