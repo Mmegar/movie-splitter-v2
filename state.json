@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T00:58:02+13:00",
+ "updated": "2026-10-22T00:59:00+13:00",
  "run": {
   "active": true,
   "run_id": 39595375193,
@@ -39,6 +39,14 @@
      "planned": 0,
      "parts": []
     }
+   },
+   "thumbs": {
+    "every": 16.5,
+    "count": 359,
+    "cols": 10,
+    "w": 160,
+    "h": 90,
+    "path": "runner-2026/thumbs.bin"
    }
   },
   {
