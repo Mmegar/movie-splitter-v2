@@ -9,7 +9,11 @@ Draft releases are only visible to people with write access to the repo (not pub
 The uploaded movie is deleted once all parts are made. If cutting fails, it's kept and marked
 "failed" (the laptop then moves the original into its "Failed" folder).
 
-Every movie is made in each mode listed in MODES (default: all three):
+Every movie is made in each mode listed in MODES (default: the three storytelling modes, see story.py):
+  recap       "Movie recap": a narrator tells the whole story over the matching scenes, in parts.
+  character   "Character story": the same, following one character's arc.
+  hype        "Hype edit": disrespected -> answers it in style -> beat-synced montage over music.
+The older modes still work if you list them:
   highlights  Scores the whole video for "interesting" moments (loud audio,
               sudden sound spikes, fast scene cuts, lots of movement, busy
               dialogue) and keeps only the best stretches as Part 1, Part 2...
@@ -40,18 +44,21 @@ from zoneinfo import ZoneInfo
 import previews
 import settings
 import status
+import story
 import tracking
 import transport
 
 # Settings come from config/settings.json (the iPhone app edits it). Any environment variable
 # with the old v1 name (MODES, FLIP_EVERY, COCKROACH_SIZE, ...) still wins over the file.
 SETTINGS = settings.apply_to_env()
+story.bind(sys.modules[__name__])
 
 READY = "Ready to post"
 
-MODE_NAMES = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips"}
-MODES = [m.strip().lower() for m in os.environ.get("MODES", "highlights,stretch,all").split(",")
-         if m.strip().lower() in MODE_NAMES and m.strip().lower() != "clips"] or ["highlights"]
+MODE_NAMES = {"highlights": "Highlights", "stretch": "Best stretch", "all": "Whole movie", "clips": "Custom clips",
+              **story.MODE_NAMES}
+MODES = [m.strip().lower() for m in os.environ.get("MODES", "recap,character,hype").split(",")
+         if m.strip().lower() in MODE_NAMES and m.strip().lower() != "clips"] or ["recap"]
 MODE = ""   # the mode being made right now (labels the notifications)
 STRETCH_MINUTES = float(os.environ.get("STRETCH_MINUTES", "12"))           # "stretch" mode: how much of the movie
 STRETCH_FROM = float(os.environ.get("STRETCH_FROM", "0.20"))   # "stretch" mode: only look from 20%...
@@ -397,8 +404,9 @@ def pick_quote(part_cues):
 
 
 def part_word(mode=None):
-    """What a part is called on the video, in captions and notifications: highlights are "Highlight N"."""
-    return "Highlight" if (mode if mode is not None else MODE) == "highlights" else "Part"
+    """What a part is called on the video, in captions and notifications: highlights are "Highlight N",
+    hype edits "Edit N"."""
+    return {"highlights": "Highlight", "hype": "Edit"}.get(mode if mode is not None else MODE, "Part")
 
 
 def make_captions(count, quotes=None, style=None, word="Part"):
@@ -1021,14 +1029,14 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         # zoomed band that follows faces, punchier colours, black above and below
         W, H = picture_size(src)
         track = tracking.plan(src, start, end - start, CROP["filter"], W, H, workdir)
-        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}{track}", 1)
+        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}{track}{story.grade()}", 1)
         filters = (
             f"{first}scale={tracking.BAND_W}:{tracking.BAND_H},setsar=1,"
             "eq=contrast=1.08:saturation=1.3:brightness=0.01,unsharp=5:5:0.5,"
             f"pad=1080:1920:0:{tracking.BAND_TOP}:black"
         )
     else:
-        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}", 1)
+        first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}{story.grade()}", 1)
         filters = (
             f"{first}split=2[bg][fg];"
             "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
@@ -1086,6 +1094,7 @@ def picture_size(src):
 
 
 PART_TIMES = {}   # (mode, part number) -> (start, end) in the movie, for the status file
+PART_CREDITS = {}  # (mode, part number) -> the music credit its licence asks for (added to the caption)
 
 
 def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, modes=None, plan=None, skip=()):
@@ -1112,7 +1121,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         status.set_stage("analysing", movie=name, mode=None)
         total, loud, motion, cuts, quiet = analyse(src, workdir)
         status.movie_duration(name, total)
-    if not cues and AUTO_SUBS and "all" in modes:
+    if not cues and AUTO_SUBS and ("all" in modes or story.NEEDS_TRANSCRIPT & set(modes)):
         try:
             checkpoint(force=True)
             status.set_stage("subtitles")
@@ -1131,6 +1140,13 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         MODE = mode
         if mode in plan:
             parts = [(float(a), float(b), sc) for a, b, sc in plan[mode]]
+        elif mode in story.MODE_NAMES:
+            try:
+                parts = story.plan(mode, name, total, cues, loud, motion, score)
+            except story.Skip as e:
+                print(f"Skipping {MODE_NAMES[mode]}: {e}", flush=True)
+                notify(f"Skipped for {name}", str(e), ["warning"], kind="info")
+                continue
         elif mode == "all":
             parts = choose_cuts(total, candidates)
         elif mode == "stretch":
@@ -1144,8 +1160,11 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         width = max(2, len(str(len(parts))))
         lines = []
         for i, (a, b, sc) in enumerate(parts, 1):
-            line = f"{part_word(mode)} {i}: {fmt_time(a)} to {fmt_time(b)} ({b - a:.0f}s)"
-            if sc is not None:
+            if isinstance(sc, dict):
+                line = f"{part_word(mode)} {i}: {story.describe(mode, sc)}"
+            else:
+                line = f"{part_word(mode)} {i}: {fmt_time(a)} to {fmt_time(b)} ({b - a:.0f}s)"
+            if isinstance(sc, (int, float)):
                 line += f"  interest score {sc * 100:.0f}/100"
             print("  " + line, flush=True)
             lines.append(line)
@@ -1160,14 +1179,19 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
         MODE = mode
         reset_flip()
         files = []
-        for i, ((a, b, _), line) in enumerate(zip(parts, lines), 1):
+        for i, ((a, b, sc), line) in enumerate(zip(parts, lines), 1):
             if (mode, i) in skip:                         # made by an earlier run that stopped
                 PART_TIMES[(mode, i)] = (a, b)
                 continue
             out = mdir / f"{name} - {part_word(mode)} {str(i).zfill(width)}.mp4"
             print(f"Making {label} part {i} of {len(parts)}...", flush=True)
             status.set_stage("rendering", mode=mode, part=i, parts_total=len(parts))
-            render_part(src, a, b, i, cues, out, workdir)
+            if mode in story.MODE_NAMES:
+                said = story.render(mode, src, i, sc, cues, out, workdir, total)
+                PART_CUES[(mode, i)] = said
+                PART_CREDITS[(mode, i)] = story.last_credit()
+            else:
+                render_part(src, a, b, i, cues, out, workdir)
             PART_TIMES[(mode, i)] = (a, b)
             files.append(out)
             if on_part:
@@ -1251,6 +1275,7 @@ def process_release(gh, release):
     srt_name = Path(meta["srt"]).name if meta.get("srt") else None
     name = meta.get("movie") or clean_name(video)
     style = apply_style(meta.get("style") or SETTINGS.get("cut_style"))
+    story.set_character(meta.get("character"))
     print(f"Cutting style: {'zoomed + tracking' if style == 'zoom' else 'classic'}", flush=True)
     if meta.get("clips"):
         return process_clips(gh, release, meta, rid, video, name)
@@ -1304,6 +1329,8 @@ def process_release(gh, release):
         q = pick_quote(PART_CUES.get((mode, i)))
         if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
             text = random.choice(GOOFY_QUOTE).format(q=q) + "\n" + text.split("\n", 1)[1]
+        if text and PART_CREDITS.get((mode, i)):
+            text += f"\n🎵 {PART_CREDITS[(mode, i)]}"
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
         out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": out.name,
                                   "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),

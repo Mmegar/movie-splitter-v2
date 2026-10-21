@@ -1,0 +1,71 @@
+{
+  "about": "Free-to-use songs, downloaded by the GitHub workflow (not stored here). 'calm' plays quietly under the narrator, 'hype' drives the Hype edit montage. Each credit line is added to the caption, as the CC BY licence asks. Add your own: put an .mp3 in this folder, or add an entry here.",
+  "tracks": [
+    {
+      "file": "investigations.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Investigations.mp3",
+      "kind": "calm",
+      "credit": "\"Investigations\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "spy-glass.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Spy%20Glass.mp3",
+      "kind": "calm",
+      "credit": "\"Spy Glass\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "darkling.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Darkling.mp3",
+      "kind": "calm",
+      "credit": "\"Darkling\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "crypto.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Crypto.mp3",
+      "kind": "calm",
+      "credit": "\"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "black-vortex.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Black%20Vortex.mp3",
+      "kind": "calm",
+      "credit": "\"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "hitman.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Hitman.mp3",
+      "kind": "hype",
+      "credit": "\"Hitman\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "volatile-reaction.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Volatile%20Reaction.mp3",
+      "kind": "hype",
+      "credit": "\"Volatile Reaction\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "five-armies.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Five%20Armies.mp3",
+      "kind": "hype",
+      "credit": "\"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "movement-proposition.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Movement%20Proposition.mp3",
+      "kind": "hype",
+      "credit": "\"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "night-of-chaos.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Night%20of%20Chaos.mp3",
+      "kind": "hype",
+      "credit": "\"Night of Chaos\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    },
+    {
+      "file": "clash-defiant.mp3",
+      "url": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Clash%20Defiant.mp3",
+      "kind": "hype",
+      "credit": "\"Clash Defiant\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+    }
+  ]
+}

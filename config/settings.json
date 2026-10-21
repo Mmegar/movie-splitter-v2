@@ -1,7 +1,8 @@
 {
   "modes": [
-    "stretch",
-    "highlights"
+    "recap",
+    "character",
+    "hype"
   ],
   "stretch_minutes": 12,
   "stretch_from": 0.2,
@@ -38,6 +39,9 @@
     "method": "draft",
     "privacy": "self_only",
     "modes": [
+      "recap",
+      "character",
+      "hype",
       "stretch",
       "highlights"
     ],
@@ -52,5 +56,13 @@
     "timezone": "Pacific/Auckland",
     "hashtags": "#movie #movieclips #fyp",
     "when": "times"
-  }
+  },
+  "cut_style": "classic",
+  "filter": "mystery",
+  "filter_strength": 0.5,
+  "character": "",
+  "narrator_voice": "en-US-GuyNeural",
+  "recap_part_seconds": 90,
+  "music": true,
+  "hype_count": 1
 }

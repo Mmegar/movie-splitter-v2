@@ -1,5 +1,5 @@
 import { esc, icon, toast, haptic, openSheet, confirmSheet } from '../ui.js';
-import { MODE_LABELS, MODE_HINTS, ALL_MODES, diffSettings, validateSettings, formatSetting, describeFlipEvery } from '../logic.js';
+import { MODE_LABELS, MODE_HINTS, ALL_MODES, OLD_MODES, diffSettings, validateSettings, formatSetting, describeFlipEvery } from '../logic.js';
 import { makePage, freshness, banner, skeleton, empty } from './common.js';
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -97,18 +97,34 @@ function buildForm(d) {
   const p = d.posting || {};
   const fk = flipEveryKind(d.flip_every);
   const from = Math.round(Number(d.stretch_from) * 100), to = Math.round(Number(d.stretch_to) * 100);
+  const old = (d.modes || []).some((m) => OLD_MODES.includes(m));
+  const narrated = (d.modes || []).some((m) => m === 'recap' || m === 'character');
   const tz = timeZones();
   if (p.timezone && !tz.includes(p.timezone)) tz.unshift(p.timezone);
   return [
     modesGroup(d),
 
+    group('Story modes', [
+      `<label class="row row--stack"><span class="row-title">Character to follow</span>
+        <input class="input" data-k="character" data-t="str" value="${esc(d.character || '')}" autocomplete="off" spellcheck="false" placeholder="Blank = the main character"></label>`,
+      narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
+      narrated ? segRow(d, 'narrator_voice', 'Narrator voice', [['en-US-GuyNeural', 'Guy'], ['en-US-ChristopherNeural', 'Christopher'], ['en-US-AriaNeural', 'Aria'], ['en-GB-RyanNeural', 'Ryan (UK)']]) : '',
+      (d.modes || []).includes('hype') ? stepRow(d, 'hype_count', 'Hype edits per movie', { def: 1, min: 1, max: 5, step: 1 }) : '',
+      swRow(d, 'music', 'Background music', 'Songs you add to assets/music on GitHub: quiet under the narrator, full volume in hype montages'),
+    ], 'Character story and Hype edit follow this character (type it the way the movie spells the name). Claude writes the narration from the subtitles, so mystery twists stay hidden until the last part.'),
+
+    group('Film look', [
+      segRow(d, 'filter', 'Look', [['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
+      d.filter === 'none' ? '' : sliderRow(d, 'filter_strength', 'Strength', { min: 0.1, max: 1, step: 0.05, ends: ['Subtle', 'Strong'] }),
+    ], 'A colour grade, soft vignette and light grain on every part. The whole picture is always shown, never zoomed.'),
+
     group('Cutting style', [
       segRow(d, 'cut_style', 'New movies', [['zoom', 'Zoomed + tracking'], ['classic', 'Classic']],
-        (d.cut_style || 'zoom') === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
-      (d.cut_style || 'zoom') === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
+        (d.cut_style || 'classic') === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
+      (d.cut_style || 'classic') === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
     ], 'You can also pick the style for each movie in Queue, under Up next.'),
 
-    group('Part lengths', [
+    !old ? '' : group('Part lengths', [
       stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
       stepRow(d, 'stretch_part_seconds', 'Best stretch parts', { min: 30, max: 180, step: 5 }),
       stepRow(d, 'highlight_seconds', 'Highlight clips', { min: 30, max: 180, step: 5 }),
@@ -117,7 +133,7 @@ function buildForm(d) {
       stepRow(d, 'part_max_extra', 'Extra time to end well', { min: 0, max: 300, step: 15, sub: 'A part may run this much longer to finish on a pause' }),
     ]),
 
-    group('Best stretch window', [`<div class="row row--stack">
+    !(d.modes || []).includes('stretch') ? '' : group('Best stretch window', [`<div class="row row--stack">
       <div class="range2-labels"><span>Starts at <strong data-out="stretch_from">${from}%</strong></span><span>Ends by <strong data-out="stretch_to">${to}%</strong></span></div>
       <div class="range2">
         <div class="range2-track"><div class="range2-fill" data-fill style="left:${from}%;width:${to - from}%"></div></div>
