@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T12:02:51+13:00",
+ "updated": "2026-10-22T12:03:15+13:00",
  "run": {
   "active": false,
   "run_id": 39654089493,
@@ -559,11 +559,11 @@
        "caption": "I've watched this 10 times already 🔁\nPart 3 🎬 · Part 4 coming soon ⏳\n#fyp #foryou #viral #movie #movieclips",
        "preview": null,
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-22T12:02:51+13:00",
+        "status": "inbox",
+        "at": "2026-10-22T12:03:15+13:00",
         "url": null,
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       },
       {
