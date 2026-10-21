@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:03:18+13:00",
+ "updated": "2026-10-21T17:03:20+13:00",
  "run": {
   "active": true,
   "run_id": 39537512350,
@@ -3057,6 +3057,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:03:20+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Runner (2026)",
+   "message": "Hype edit: 1 part.\nThe laptop downloads them into Ready to post/Runner (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-21T17:03:16+13:00",
    "type": "part_ready",
    "title": "[Hype edit] Runner (2026): Edit 1 of 1 ready",
@@ -4249,12 +4255,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Kung Fu Hustle (2004): Part 6",
    "message": "[Best stretch] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nPart 6 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie\n#movieclips"
-  },
-  {
-   "at": "2026-10-14T18:07:14+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Kung Fu Hustle (2004): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Kung Fu Hustle (2004)\nCustom clips: 1"
   }
  ]
 }
