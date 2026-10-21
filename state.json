@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T16:16:29+13:00",
+ "updated": "2026-10-21T16:17:51+13:00",
  "run": {
   "active": true,
   "run_id": 39537512350,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "runner-2026",
+   "name": "Runner (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-21T16:17:51+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    },
+    "hype": {
+     "label": "Hype edit",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "toy-story-5-2026",
    "name": "Toy Story 5 (2026)",
@@ -198,198 +226,6 @@
     "path": "toy-story-5-2026/thumbs.bin"
    },
    "subs_preview": "toy-story-5-2026/subs.bin"
-  },
-  {
-   "id": "runner-2026",
-   "name": "Runner (2026)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-17T23:01:55+13:00",
-   "finished": "2026-10-17T23:53:31+13:00",
-   "duration": 5926.0,
-   "subtitles": "made automatically (English)",
-   "error": null,
-   "modes": {
-    "stretch": {
-     "label": "Best stretch",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 3093.7,
-       "end": 3314.5,
-       "seconds": 220.8,
-       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 01.mp4",
-       "caption": "when they said 'You okay?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "runner-2026/stretch-001.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:47:43+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 2,
-       "start": 3314.5,
-       "end": 3572.5,
-       "seconds": 258.0,
-       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 02.mp4",
-       "caption": "the way they said 'Go get it!' 🫠\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "runner-2026/stretch-002.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:47:48+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 3,
-       "start": 3572.5,
-       "end": 3791.5,
-       "seconds": 219.0,
-       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 03.mp4",
-       "caption": "'Shut up!' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "runner-2026/stretch-003.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:47:51+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 4,
-       "start": 3791.5,
-       "end": 4019.3,
-       "seconds": 227.8,
-       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 04.mp4",
-       "caption": "a masterclass in bad decisions 🎓\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "runner-2026/stretch-004.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:47:57+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 5,
-       "start": 4019.3,
-       "end": 4199.4,
-       "seconds": 180.1,
-       "drive_path": "Ready to post/Runner (2026)/Best stretch/Runner (2026) - Part 05.mp4",
-       "caption": "'Why are you getting ice?' and then THIS happened 😳\nPart 5 🎬 · FINAL part. how are we feeling? 👇\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "runner-2026/stretch-005.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:46:06+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      }
-     ]
-    },
-    "highlights": {
-     "label": "Highlights",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 1132.0,
-       "end": 1346.5,
-       "seconds": 214.5,
-       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 01.mp4",
-       "caption": "me to my group chat: 'What are you talking about?' 📱\nHighlight 1 🎬 · comment 'MORE' if you need Highlight 2 👇\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "runner-2026/highlights-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 1968.0,
-       "end": 2177.5,
-       "seconds": 209.5,
-       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 02.mp4",
-       "caption": "the vibes went from 0 to 100 real quick 📈\nHighlight 2 🎬 · follow or you'll miss Highlight 3 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "runner-2026/highlights-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 3484.5,
-       "end": 3694.5,
-       "seconds": 210.0,
-       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 03.mp4",
-       "caption": "the side eye at the end 👀\nHighlight 3 🎬 · follow or you'll miss Highlight 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "runner-2026/highlights-003.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:49:14+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 4,
-       "start": 3805.0,
-       "end": 4019.3,
-       "seconds": 214.3,
-       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 04.mp4",
-       "caption": "'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "runner-2026/highlights-004.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:49:49+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 5,
-       "start": 4409.0,
-       "end": 4633.5,
-       "seconds": 224.5,
-       "drive_path": "Ready to post/Runner (2026)/Highlights/Runner (2026) - Highlight 05.mp4",
-       "caption": "'How many does Ellie have?' 💀 I can't\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "runner-2026/highlights-005.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T06:50:24+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 16.5,
-    "count": 359,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "runner-2026/thumbs.bin"
-   },
-   "subs_preview": "runner-2026/subs.bin"
   },
   {
    "id": "one-last-shot-2026",
