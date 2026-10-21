@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:18:25+13:00",
+ "updated": "2026-10-22T08:18:28+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 13,
+  "part": 14,
   "parts_total": 20
  },
  "queue": [],
@@ -3066,6 +3066,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:18:27+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 13 of 20 ready",
+   "message": "Part 13: Canon, Captains, and Calls (6 narrated beats, about 75s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:16:15+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 12 of 20 ready",
@@ -4258,12 +4264,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Spider-Man.Brand.New.Day.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T17:41:50+13:00",
-   "type": "finished",
-   "title": "[Custom clips] ✅ Clips done: Obsession (2026)",
-   "message": "1 custom clip made."
   }
  ]
 }
