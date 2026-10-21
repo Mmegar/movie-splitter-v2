@@ -17,8 +17,8 @@ SETTINGS_FILE = HERE / "config" / "settings.json"
 # Used when settings.json is missing a key (or is missing / broken altogether).
 DEFAULTS = {
     "modes": ["recap", "character", "hype"],   # see story.py; the older stretch / highlights / all still work
-    "filter": "mystery",                 # film look on every part: mystery / warm / teal_orange / noir / none
-    "filter_strength": 0.5,              # 0 = off ... 1 = strong (0.5: clearly graded, original still obvious)
+    "filter": "vivid",                   # film look on every part: vivid (crisp + white specks) / mystery / warm / teal_orange / noir / none
+    "filter_strength": 0.4,              # 0 = off ... 1 = strong
     "character": "",                     # Character story + Hype edit: who to follow; blank = the main character
     "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
     "narrator_speed": "+8%",

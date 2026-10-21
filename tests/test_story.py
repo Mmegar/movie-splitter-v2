@@ -32,13 +32,13 @@ class StoryTest(unittest.TestCase):
         s = settings.load(path="nope.json", env={})
         self.assertEqual(s["modes"], ["recap", "character", "hype"])
         self.assertEqual(s["cut_style"], "classic")       # whole picture, no zoom
-        self.assertEqual(s["filter"], "mystery")
+        self.assertEqual(s["filter"], "vivid")
 
     def test_settings_reach_the_story_module(self):
         env = {}
         settings.apply_to_env(settings.load(path="nope.json", env={}), env)
         story.load_settings(env)
-        self.assertEqual(story.FILTER, "mystery")
+        self.assertEqual(story.FILTER, "vivid")
         self.assertEqual(story.RECAP_PART_SECONDS, 90)
         self.assertTrue(story.MUSIC)
         env.update(MUSIC="off", CHARACTER="Poirot")

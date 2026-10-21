@@ -45,7 +45,7 @@ OFF = ("off", "no", "0", "false", "none", "")
 MODE_NAMES = {"recap": "Movie recap", "character": "Character story", "hype": "Hype edit"}
 NEEDS_TRANSCRIPT = set(MODE_NAMES)
 
-FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "mystery", 0.5, "", "en-US-GuyNeural", "+8%"
+FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "vivid", 0.4, "", "en-US-GuyNeural", "+8%"
 RECAP_PART_SECONDS, RECAP_PARTS, MUSIC, MUSIC_VOLUME = 90.0, 0, True, 0.12
 HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL = 1, 15.0, "claude-haiku-5-5"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434")
@@ -56,7 +56,7 @@ def load_settings(env=None):
     global FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED, RECAP_PART_SECONDS, RECAP_PARTS
     global MUSIC, MUSIC_VOLUME, HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL
     env = os.environ if env is None else env
-    FILTER = env.get("FILTER", "mystery").strip().lower()            # mystery / warm / teal_orange / noir / none
+    FILTER = env.get("FILTER", "vivid").strip().lower()              # vivid / mystery / warm / teal_orange / noir / none
     FILTER_STRENGTH = float(env.get("FILTER_STRENGTH", "0.5"))       # 0 = off ... 1 = strong
     CHARACTER = env.get("CHARACTER", "").strip()                     # blank = the most important character
     VOICE = env.get("NARRATOR_VOICE", "en-US-GuyNeural")
@@ -108,6 +108,10 @@ def grade(name=None, strength=None):
     s = max(0.0, min(1.0, FILTER_STRENGTH if strength is None else float(strength)))
     if name in OFF or s <= 0:
         return ""
+    if name == "vivid":    # bright, crisp and colourful, but not oversaturated (white specks are added per part)
+        parts = [f"eq=contrast={1 + 0.15 * s:.3f}:saturation={1 + 0.45 * s:.3f}:brightness={0.02 * s:.3f}",
+                 f"unsharp=5:5:{0.8 * s:.2f}"]
+        return ",".join(parts) + ","
     if name == "noir":
         parts = [f"eq=contrast={1 + 0.15 * s:.3f}:saturation={1 - 0.75 * s:.3f}:gamma={1 - 0.04 * s:.3f}"]
     elif name == "warm":
@@ -398,8 +402,12 @@ def source(name, cues):
     return plot_text(name) + "Scene notes ([second] what happens):\n" + "\n".join(f"[{int(a)}] {t}" for a, t in notes)
 
 
+MIN_STORY_PARTS = 5
+
+
 def part_count(total):
-    return RECAP_PARTS or max(3, min(8, round(total / 1200)))
+    """The fewest parts to aim for: at least 5, more for a long movie (the writer may use more still)."""
+    return max(MIN_STORY_PARTS, RECAP_PARTS or round(total / 900))
 
 
 def story_prompt(name, total, text, mode, who):
@@ -415,9 +423,21 @@ Length: {int(total)} seconds
 
 {focus}
 
-Make {n} parts (at least 2), each about {int(RECAP_PART_SECONDS)} seconds when read aloud (about {words} words of
-narration per part), in story order. Part 1 opens with a hook. Each part except the last ends on a cliffhanger
-line. Narrate in the present tense, third person, plain spoken English, like a recap YouTuber.
+Make at least {n} parts, each about {int(RECAP_PART_SECONDS)} seconds when read aloud (about {words} words of
+narration per part), in story order. Use as many more parts as the story needs: never squeeze or skip important
+story to fit a number of parts.
+
+Voice: a funny, intense recap narrator: punchy, dramatic, a little sarcastic, with jokes about the characters'
+choices, but every fact true to the movie. Present tense, third person, plain spoken English.
+
+Flow, which matters most:
+- Part 1 opens with a hook.
+- Every part except the last ends on a real cliffhanger: stop right before a reveal or a decision, and end with a
+  line that makes people need the next part (a question, a threat, "and that's when..."). Never end a part on a
+  calm moment or mid-thought.
+- Each new part picks up exactly where the last one stopped. Never recap or repeat what earlier parts said.
+- When the story jumps in time or place, the first sentence after the jump bridges it ("Meanwhile, across
+  town...", "Three days later...", "But back at the house..."), so the viewer never feels a sudden cut.
 
 Each part is a list of beats. A narration beat has "say" (one or two sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
@@ -694,9 +714,11 @@ def title_filter(text, workdir, until=1.4):
 
 
 def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None, flash=False,
-                   slow=1.0, movie_volume=1.0, title=""):
+                   slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False):
     """One piece of a part: the movie from `start` for `length` seconds (whole picture, graded), with the
-    narrator over it (voice), the movie's own subtitles (cues), a white flash in, or slow motion."""
+    narrator over it (voice), the movie's own subtitles (cues), a white flash in, or slow motion.
+    bridge: a quick dip from black, so a jump to another scene doesn't feel like a sudden cut.
+    ending: the last piece of a part eases out instead of stopping dead."""
     src_len = length / slow
     first = P.flip_filter(src, start, start + src_len).replace("[0:v]", f"[0:v]{P.CROP['filter']}{grade()}", 1)
     v = first + FRAME
@@ -712,6 +734,10 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
     v += title_filter(title, workdir)
     if flash:
         v += ",fade=t=in:st=0:d=0.16:color=white"
+    if bridge:
+        v += ",fade=t=in:st=0:d=0.3"
+    if ending:
+        v += f",fade=t=out:st={max(0.0, length - 0.6):.3f}:d=0.6"
     v += "[v]"
     inputs = ["-ss", f"{start:.3f}", "-t", f"{src_len:.3f}", "-i", str(Path(src).resolve())]
     movie_a = "[0:a]" if has_audio(src) else None
@@ -728,6 +754,10 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
         a += f";[{vi}:a]volume=1.6,apad[na];[ma][na]amix=inputs=2:duration=first:normalize=0[a]"
     else:
         a += ";[ma]apad[a]"
+    if bridge or ending:
+        fades = (["afade=t=in:d=0.25"] if bridge else []) + ([f"afade=t=out:st={max(0.0, length - 0.6):.3f}:d=0.6"]
+                                                            if ending else [])
+        a = a[:-3] + "[a0];[a0]" + ",".join(fades) + "[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f"{v};{a}",
            "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *ENC, str(Path(out).resolve())], cwd=workdir)
     for f in list(workdir.glob("sub*.txt")) + list(workdir.glob("nar*.txt")):
@@ -846,21 +876,58 @@ def download_music():
             print(f"  (couldn't download it: {e})", flush=True)
 
 
+LIGHT_SWEEP = True
+SWEEP_EVERY = 6.0          # seconds between light sweeps
+
+
+def sweep_image(workdir):
+    """A big transparent image with one soft, faint white streak along its diagonal (made once)."""
+    f = workdir / "sweep.png"
+    if not f.exists():
+        P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i",
+               "color=c=white:s=3000x3000:d=1", "-vf",
+               "format=rgba,geq=r=255:g=255:b=255:a='46*exp(-pow(Y-X,2)/(2*70*70))+30*exp(-pow(Y-X-260,2)/(2*20*20))'",
+               "-frames:v", "1", str(f.resolve())], cwd=workdir)
+    return f.resolve()
+
+
+def specks_image(workdir):
+    """Tiny fixed white specks sprinkled over the frame, for the vivid look (made once)."""
+    f = workdir / "specks.png"
+    if not f.exists():
+        P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i",
+               "color=c=white:s=1080x1920:d=1", "-vf",
+               "format=rgba,geq=r=255:g=255:b=255:a='170*lt(random(1),0.0004)'",
+               "-frames:v", "1", str(f.resolve())], cwd=workdir)
+    return f.resolve()
+
+
 def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None):
     """Joins the pieces, then adds the part-level touches in one last encode: the top label, the line,
     the cockroach, and quiet background music."""
     joined = workdir / "joined.mp4"
     concat(segs, joined, workdir)
     length = P.duration(joined)
+    with classic():
+        roach = P.cockroach_filter(length, src)
+    extra = roach[0] if roach else []
+    n = 1 + extra.count("-i")                         # the next input's number
     v = "[0:v]null"
+    if LIGHT_SWEEP:                                   # a soft white streak sweeping top-right -> bottom-left
+        extra += ["-loop", "1", "-framerate", str(FPS), "-t", f"{length:.3f}", "-i", str(sweep_image(workdir))]
+        u = f"(-910+1800*clip((mod(t,{SWEEP_EVERY})-0.6)/1.2,0,1))"
+        v += f"[pre0];[pre0][{n}:v]overlay=x='-960-{u}':y='-540+{u}':eval=frame"
+        n += 1
+    if FILTER == "vivid":                             # the vivid look's fixed sprinkle of tiny white specks
+        extra += ["-loop", "1", "-framerate", str(FPS), "-t", f"{length:.3f}", "-i", str(specks_image(workdir))]
+        v += f"[pre1];[pre1][{n}:v]overlay=0:0"
+        n += 1
     if top_text:
         (workdir / "toptext.txt").write_text(top_text, encoding="utf-8")
         v += (f",drawtext=fontfile={P.FONT}:textfile=toptext.txt:expansion=none:"
               "fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y=230")
     with classic():
         v += "[txt0]" + P.line_filter(src, length)
-        roach = P.cockroach_filter(length, src)
-    extra = roach[0] if roach else []
     v += roach[1] if roach else ";[txt]null[v]"
     a = "[0:a]anull[a]"
     if music:
@@ -880,19 +947,28 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
 def render_story(src, number, info, cues, out, workdir, total):
     """A narrated part (Movie recap / Character story). Returns the narration lines (for captions)."""
     segs, said = [], []
-    for k, beat in enumerate(info["beats"]):
+    last_end = None          # where the previous piece's footage ended: a big jump gets a dip from black
+    beats = info["beats"]
+    for k, beat in enumerate(beats):
         P.checkpoint()
         seg = workdir / f"seg{k:03}.mp4"
+        end_of_part = k == len(beats) - 1
         if "say" in beat:
             mp3 = workdir / f"say{k:03}.mp3"
             length, words = speak(beat["say"], mp3)
-            length += 0.35
+            length += 0.35 + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
             at = max(0.0, min(beat["at"], total - length - 0.1))
-            render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK)
+            jump = last_end is not None and abs(at - last_end) > 20
+            render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
+                           bridge=jump, ending=end_of_part)
             mp3.unlink(missing_ok=True)
             said.append((0.0, length, beat["say"]))
+            last_end = at + length
         else:
-            render_segment(src, beat["keep"], beat["until"] - beat["keep"], seg, workdir, cues=cues)
+            jump = last_end is not None and abs(beat["keep"] - last_end) > 20
+            render_segment(src, beat["keep"], beat["until"] - beat["keep"], seg, workdir, cues=cues,
+                           bridge=jump, ending=end_of_part)
+            last_end = beat["until"]
         segs.append(seg)
     finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music("calm", number))
     return said

@@ -114,7 +114,7 @@ function buildForm(d) {
     ], 'Character story and Hype edit follow this character (type it the way the movie spells the name). Claude writes the narration from the subtitles, so mystery twists stay hidden until the last part.'),
 
     group('Film look', [
-      segRow(d, 'filter', 'Look', [['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
+      segRow(d, 'filter', 'Look', [['vivid', 'Vivid'], ['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
       d.filter === 'none' ? '' : sliderRow(d, 'filter_strength', 'Strength', { min: 0.1, max: 1, step: 0.05, ends: ['Subtle', 'Strong'] }),
     ], 'A colour grade, soft vignette and light grain on every part. The whole picture is always shown, never zoomed.'),
 
