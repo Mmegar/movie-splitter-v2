@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:01:01+13:00",
+ "updated": "2026-10-22T07:01:04+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -2931,6 +2931,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:01:04+13:00",
+   "type": "posted",
+   "title": "📲 In your TikTok drafts: Runner (2026): Part 2",
+   "message": "[Movie recap] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nThe ending of this part 😳\nPart 2 🎬 · Part 3 coming soon ⏳\n#foryou #trending #movie #cinema #fypシ\n#movieclips #fyp"
+  },
+  {
    "at": "2026-10-22T02:48:57+13:00",
    "type": "part_ready",
    "title": "[Character story] Runner (2026): Part 1 of 5 ready",
@@ -4123,12 +4129,6 @@
    "type": "started",
    "title": "Started: Obsession (2026)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Obsession (2026)'."
-  },
-  {
-   "at": "2026-10-15T08:48:20+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
