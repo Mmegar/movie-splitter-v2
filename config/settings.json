@@ -62,7 +62,7 @@
   "filter_strength": 0.5,
   "character": "",
   "narrator_voice": "en-US-GuyNeural",
-  "recap_part_seconds": 90,
+  "recap_part_seconds": 120,
   "music": true,
   "hype_count": 1
 }
