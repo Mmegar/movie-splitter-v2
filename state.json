@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:18:23+13:00",
+ "updated": "2026-10-21T21:22:17+13:00",
  "run": {
   "active": false,
   "run_id": 39559111364,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:22:15+13:00",
+   "type": "info",
+   "title": "📥 Parts downloaded",
+   "message": "Spider-Man Across The Spider-Verse (2023): 3 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Across The Spider-Verse (2023)\nMovie recap: 2 parts, Hype edit: 1 part"
+  },
+  {
    "at": "2026-10-21T21:18:21+13:00",
    "type": "finished",
    "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
@@ -4058,12 +4064,6 @@
    "type": "planned",
    "title": "[Best stretch] Spider-Man Across The Spider-Verse (2023): 4 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-15T07:40:51+13:00",
-   "type": "started",
-   "title": "Started: Spider-Man Across The Spider-Verse (2023)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Spider-Man Across The Spider-Verse (2023)'."
   }
  ]
 }
