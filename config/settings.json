@@ -35,7 +35,7 @@
   "delete_originals": "permanent",
   "cleanup_parts_after_days": 3,
   "posting": {
-    "enabled": false,
+    "enabled": true,
     "method": "draft",
     "privacy": "self_only",
     "modes": [
@@ -55,7 +55,7 @@
     ],
     "timezone": "Pacific/Auckland",
     "hashtags": "#movie #movieclips #fyp",
-    "when": "times"
+    "when": "as_ready"
   },
   "cut_style": "classic",
   "filter": "mystery",
