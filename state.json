@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:19:24+13:00",
+ "updated": "2026-10-21T17:20:40+13:00",
  "run": {
   "active": true,
   "run_id": 39543226609,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "spider-man-across-the-spider-verse-2023",
+   "name": "Spider-Man Across The Spider-Verse (2023)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-21T17:20:40+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    },
+    "hype": {
+     "label": "Hype edit",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
@@ -1595,281 +1623,6 @@
     "path": "obsession-2026/thumbs.bin"
    },
    "subs_preview": "obsession-2026/subs.bin"
-  },
-  {
-   "id": "spider-man-across-the-spider-verse-2023",
-   "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-15T07:40:50+13:00",
-   "finished": "2026-10-15T08:40:47+13:00",
-   "duration": 8405.8,
-   "subtitles": "from your .srt file",
-   "error": null,
-   "modes": {
-    "stretch": {
-     "label": "Best stretch",
-     "planned": 4,
-     "parts": [
-      {
-       "n": 1,
-       "start": 3843.4,
-       "end": 3928.0,
-       "seconds": 84.6,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
-       "caption": "'Sorry. Congratulations!' 💀 I can't\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "spider-man-across-the-spider-verse-2023/stretch-001.bin",
-       "post": {
-        "status": "failed",
-        "at": "2026-10-15T04:29:31+07:00",
-        "url": null,
-        "error": "{\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150529301106C315AC104651C2B4\"}}",
-        "attempts": 1
-       }
-      },
-      {
-       "n": 2,
-       "start": 3928.0,
-       "end": 4108.7,
-       "seconds": 180.7,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
-       "caption": "'Huh? - Wow. How are you?' 💀 I can't\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "spider-man-across-the-spider-verse-2023/stretch-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 4108.7,
-       "end": 4278.5,
-       "seconds": 169.8,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch/Spider-Man Across The Spider-Verse (2023) - Part 03.mp4",
-       "caption": "red flag? that's the whole parade 🚩\nPart 3 🎬 · Part 4 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "spider-man-across-the-spider-verse-2023/stretch-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 4278.5,
-       "end": 4567.5,
-       "seconds": 289.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch/Spider-Man Across The Spider-Verse (2023) - Part 04.mp4",
-       "caption": "explain this to me like I'm 5 🧸\nPart 4 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/stretch-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    },
-    "highlights": {
-     "label": "Highlights",
-     "planned": 12,
-     "parts": [
-      {
-       "n": 1,
-       "start": 94.4,
-       "end": 176.4,
-       "seconds": 82.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
-       "caption": "manifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 873.7,
-       "end": 954.7,
-       "seconds": 81.0,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
-       "caption": "me to my group chat: 'You’re just gonna have to shut up and trust me. No!' 📱\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 1387.7,
-       "end": 1544.3,
-       "seconds": 156.6,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 03.mp4",
-       "caption": "'Psych. - Whoa!' 💀 I can't\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 1972.3,
-       "end": 2052.2,
-       "seconds": 79.9,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 04.mp4",
-       "caption": "the way they said 'Spider-Man, why did you create that guy?' 🫠\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 2854.2,
-       "end": 2956.6,
-       "seconds": 102.4,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 05.mp4",
-       "caption": "when they said 'Hey, Gw-- Uh, Gwen?' I felt that 😭\nPart 5 🎬 · Part 6? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 6,
-       "start": 3591.0,
-       "end": 3663.6,
-       "seconds": 72.6,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 06.mp4",
-       "caption": "watching this instead of sleeping again 🌚\nPart 6 🎬 · Part 7 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-006.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 7,
-       "start": 3904.0,
-       "end": 4108.7,
-       "seconds": 204.7,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 07.mp4",
-       "caption": "'Hey, who’s the new guy?' is my new personality 😤\nPart 7 🎬 · comment 'MORE' if you need Part 8 👇\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-007.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 8,
-       "start": 4288.3,
-       "end": 4543.5,
-       "seconds": 255.2,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 08.mp4",
-       "caption": "me to my group chat: 'You’re not a joke!' 📱\nPart 8 🎬 · Part 9 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-008.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 9,
-       "start": 5716.0,
-       "end": 5828.3,
-       "seconds": 112.3,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 09.mp4",
-       "caption": "the way they said 'Can this day get any damn weirder?' 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-009.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 10,
-       "start": 6107.6,
-       "end": 6180.5,
-       "seconds": 72.9,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 10.mp4",
-       "caption": "me to my group chat: 'And I’m pretty sure you know the rest, jerk!' 📱\nPart 10 🎬 · Part 11 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-010.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 11,
-       "start": 6418.0,
-       "end": 6560.9,
-       "seconds": 142.9,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 11.mp4",
-       "caption": "red flag? that's the whole parade 🚩\nPart 11 🎬 · follow or you'll miss Part 12 (I warned you) 🔔\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-011.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 12,
-       "start": 6941.5,
-       "end": 7122.0,
-       "seconds": 180.5,
-       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights/Spider-Man Across The Spider-Verse (2023) - Part 12.mp4",
-       "caption": "I'm not crying, my eyes are sweating 🥲\nPart 12 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "spider-man-across-the-spider-verse-2023/highlights-012.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 23.3,
-    "count": 360,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "spider-man-across-the-spider-verse-2023/thumbs.bin"
-   },
-   "subs_preview": "spider-man-across-the-spider-verse-2023/subs.bin"
   },
   {
    "id": "colony-2026",
