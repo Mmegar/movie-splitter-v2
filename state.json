@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:48:54+13:00",
+ "updated": "2026-10-22T02:48:58+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Runner (2026)",
   "mode": "character",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -2930,6 +2930,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:48:57+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Runner (2026): Part 1 of 5 ready",
+   "message": "Part 1: A Sober Man's Last Job (10 narrated beats, about 85s of voice)\nIn Ready to post/Runner (2026)/Character story."
+  },
+  {
    "at": "2026-10-22T02:46:36+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 5 of 5 ready",
@@ -4122,12 +4128,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T04:29:33+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Spider-Man Across The Spider-Verse (2023): Part 1",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150529301106C315AC104651C2B4\"}}"
   }
  ]
 }
