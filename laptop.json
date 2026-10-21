@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T17:35:39+07:00",
+ "updated": "2026-10-21T17:43:45+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -150,12 +150,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mvhuxons6yxg": {
-   "status": "failed",
-   "note": "The part isn't on the laptop (not downloaded yet, or it was cleaned up)"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
