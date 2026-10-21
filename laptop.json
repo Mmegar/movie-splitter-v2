@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T20:21:46+07:00",
+ "updated": "2026-10-21T20:22:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -101,7 +101,15 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "size_mb": 1955,
+   "modified": "2026-10-17T16:11:19+07:00",
+   "sending": false,
+   "style": "classic"
+  }
+ ],
  "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -126,12 +134,6 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
-  {
-   "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "size_mb": 1955,
-   "modified": "2026-10-17T16:11:19+07:00",
-   "folder": "done"
-  },
   {
    "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
    "size_mb": 1723,
