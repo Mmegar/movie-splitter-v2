@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:42:23+13:00",
+ "updated": "2026-10-22T02:44:17+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -65,6 +65,21 @@
        "seconds": 660.0,
        "drive_path": "Ready to post/Runner (2026)/Movie recap/Runner (2026) - Part 03.mp4",
        "caption": "I've watched this 10 times already 🔁\nPart 3 🎬 · Part 4 coming soon ⏳\n#fyp #foryou #viral #movie #movieclips",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 1748.0,
+       "end": 2230.0,
+       "seconds": 482.0,
+       "drive_path": "Ready to post/Runner (2026)/Movie recap/Runner (2026) - Part 04.mp4",
+       "caption": "This is why I don't trust anyone 😶\nPart 4 🎬 · Part 5 is up next 👀\n#fyp #foryoupage #movies #film #mustwatch",
        "preview": null,
        "post": {
         "status": "none",
