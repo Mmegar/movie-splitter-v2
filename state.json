@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:11:46+13:00",
+ "updated": "2026-10-21T21:11:49+13:00",
  "run": {
   "active": true,
   "run_id": 39559111364,
@@ -2819,6 +2819,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:11:49+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): 2 parts planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap as they're made."
+  },
+  {
    "at": "2026-10-21T21:01:33+13:00",
    "type": "posted",
    "title": "📲 In your TikTok drafts: Runner (2026): Part 1",
@@ -4011,12 +4017,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 2",
    "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015013115442845FCD457BB414027\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-15T00:26:24+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 1",
-   "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015012621BAE6F4176B3AC041A621\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
   }
  ]
 }
