@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T17:35:13+07:00",
+ "updated": "2026-10-21T17:35:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -109,19 +109,23 @@
    "modified": "2026-10-19T22:58:35+07:00"
   },
   {
+   "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "size_mb": 2048,
+   "modified": "2026-10-17T16:11:48+07:00"
+  },
+  {
    "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 1955,
    "modified": "2026-10-17T16:11:19+07:00"
+  },
+  {
+   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
+   "size_mb": 2947,
+   "modified": "2026-10-16T10:21:09+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
-  {
-   "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "size_mb": 2048,
-   "modified": "2026-10-17T16:11:48+07:00",
-   "folder": "done"
-  },
   {
    "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
    "size_mb": 1723,
@@ -138,12 +142,6 @@
    "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
    "size_mb": 2008,
    "modified": "2026-10-16T10:31:01+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
-   "size_mb": 2947,
-   "modified": "2026-10-16T10:21:09+07:00",
    "folder": "done"
   },
   {
