@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:40:28+13:00",
+ "updated": "2026-10-22T02:42:20+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -50,6 +50,21 @@
        "seconds": 245.0,
        "drive_path": "Ready to post/Runner (2026)/Movie recap/Runner (2026) - Part 02.mp4",
        "caption": "The ending of this part 😳\nPart 2 🎬 · Part 3 coming soon ⏳\n#foryou #trending #movie #cinema #fypシ",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 977.0,
+       "end": 1637.0,
+       "seconds": 660.0,
+       "drive_path": "Ready to post/Runner (2026)/Movie recap/Runner (2026) - Part 03.mp4",
+       "caption": "I've watched this 10 times already 🔁\nPart 3 🎬 · Part 4 coming soon ⏳\n#fyp #foryou #viral #movie #movieclips",
        "preview": null,
        "post": {
         "status": "none",
