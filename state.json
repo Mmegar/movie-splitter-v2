@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:45:57+13:00",
+ "updated": "2026-10-22T07:45:59+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
   "started": "2026-10-22T07:35:53+13:00",
   "movie": null,
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 20
  },
  "queue": [],
  "movies": [
@@ -2870,6 +2870,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:45:59+13:00",
+   "type": "planned",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): 11 parts planned",
+   "message": "Spider-Man Across The Spider-Verse (2023)\nMode: Character story\n\nPart 1: Brooklyn's Only Spider-Man (6 narrated beats, about 76s of voice)\nPart 2: A Grudge Made of Portals (6 narrated beats, about 82s of voice)\nPart 3: Late to the Captain's Party (6 narrated beats, about 68s of voice)\nPart 4: The Window Visitor (6 narrated beats, about 70s of voice)\nPart 5: Following Gwen Through the Portal (6 narrated beats, about 64s of voice)\nPart 6: Hobie Joins the Fight (6 narrated beats, about 67s of voice)\nPart 7: The Collider Goes Critical (6 narrated beats, about 73s of voice)\nPart 8: Refusing the Canon (5 narrated beats, about 59s of voice)\nPart 9: The Original Anomaly (6 narrated beats, about 64s of voice)\nPart 10: Home Isn't Home Anymore (5 narrated beats, about 63s of voice)\nPart 11: The Prowler and the Promise (5 narrated beats, about 64s of voice)\n"
+  },
+  {
    "at": "2026-10-22T07:43:08+13:00",
    "type": "planned",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): 20 parts planned",
@@ -4062,12 +4068,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Obsession (2026): Part 1 of 3 ready",
    "message": "Part 1: 31:16 to 35:16 (240s)\nOn its way to the laptop (Ready to post/Obsession (2026)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Did she was acting super fucking weird?' 📱\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-15T15:00:37+13:00",
-   "type": "planned",
-   "title": "[Highlights] Obsession (2026): 4 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Highlights as they're made."
   }
  ]
 }
