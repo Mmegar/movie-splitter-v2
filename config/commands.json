@@ -23,6 +23,16 @@
    "movie_id": "runner-2026",
    "mode": "recap",
    "n": 1
+  },
+  {
+   "id": "mvi63j0fszgl",
+   "at": "2026-10-21T13:48:15.999Z",
+   "type": "mark_posted",
+   "movie_id": "runner-2026",
+   "mode": "recap",
+   "ns": [
+    1
+   ]
   }
  ]
 }
