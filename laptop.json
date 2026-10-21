@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T18:53:44+07:00",
+ "updated": "2026-10-21T18:53:49+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -8,15 +8,15 @@
  "transfers": [],
  "uploaded": [
   {
-   "file": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "at": "2026-10-21T11:17:23+07:00",
-   "size_mb": 2773,
+   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
+   "at": "2026-10-21T18:53:46+07:00",
+   "size_mb": 1955,
    "source": "laptop"
   },
   {
-   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "at": "2026-10-21T10:14:43+07:00",
-   "size_mb": 1955,
+   "file": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
+   "at": "2026-10-21T11:17:23+07:00",
+   "size_mb": 2773,
    "source": "laptop"
   },
   {
@@ -101,15 +101,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "size_mb": 1955,
-   "modified": "2026-10-17T16:11:19+07:00",
-   "sending": false,
-   "style": "classic"
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
