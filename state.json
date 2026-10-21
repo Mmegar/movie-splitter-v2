@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:41:09+13:00",
+ "updated": "2026-10-22T08:41:12+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 11
  },
  "queue": [],
@@ -3202,6 +3202,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:41:11+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 2 of 11 ready",
+   "message": "Part 2: A Grudge Made of Portals (6 narrated beats, about 82s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:38:25+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 1 of 11 ready",
@@ -4394,12 +4400,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Brand New Day (2026): Part 1 of 5 ready",
    "message": "Part 1: 2:54 to 7:35 (281s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\ntell me you're in trouble without telling me 🫣\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T18:19:34+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 4 of 4 ready",
-   "message": "Part 4: 1:23:13 to 1:26:16 (183s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nthe jump I just did 🦘\nPart 4 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
