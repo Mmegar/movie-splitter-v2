@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:30:47+13:00",
+ "updated": "2026-10-21T17:32:01+13:00",
  "run": {
   "active": true,
   "run_id": 39543226609,
@@ -16,7 +16,7 @@
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "processing",
+   "status": "queued",
    "source": "laptop",
    "started": "2026-10-21T17:20:40+13:00",
    "finished": null,
@@ -47,7 +47,8 @@
     "w": 160,
     "h": 90,
     "path": "spider-man-across-the-spider-verse-2023/thumbs.bin"
-   }
+   },
+   "note": "Paused in the app"
   },
   {
    "id": "runner-2026",
