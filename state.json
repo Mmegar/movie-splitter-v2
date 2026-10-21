@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:38:22+13:00",
+ "updated": "2026-10-22T08:38:25+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 11
  },
  "queue": [],
@@ -3187,6 +3187,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:38:25+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 1 of 11 ready",
+   "message": "Part 1: Brooklyn's Only Spider-Man (6 narrated beats, about 76s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:35:10+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 20 of 20 ready",
@@ -4379,12 +4385,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 4 of 4 ready",
    "message": "Part 4: 1:23:13 to 1:26:16 (183s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nthe jump I just did 🦘\nPart 4 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T18:16:06+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 3 of 4 ready",
-   "message": "Part 3: 1:20:00 to 1:23:13 (193s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
