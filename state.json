@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:00:33+13:00",
+ "updated": "2026-10-22T07:00:35+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -53,10 +53,11 @@
        "caption": "The ending of this part 😳\nPart 2 🎬 · Part 3 coming soon ⏳\n#foryou #trending #movie #cinema #fypシ",
        "preview": null,
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "scheduled",
+        "at": "2026-10-22T07:00:35+13:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 0
        }
       },
       {
