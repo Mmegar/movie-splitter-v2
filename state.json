@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:32:01+13:00",
+ "updated": "2026-10-21T17:32:04+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 39543226609,
   "started": "2026-10-21T17:19:22+13:00",
-  "movie": "Spider-Man Across The Spider-Verse (2023)",
+  "movie": null,
   "mode": null,
-  "stage": "subtitles",
+  "stage": "done",
   "part": null,
   "parts_total": null
  },
@@ -2819,6 +2819,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:32:03+13:00",
+   "type": "paused",
+   "title": "⏸ Paused: Spider-Man Across The Spider-Verse (2023)",
+   "message": "0 parts made so far. It carries on from the next part when you switch Pause off."
+  },
+  {
    "at": "2026-10-21T17:20:41+13:00",
    "type": "started",
    "title": "Started: Spider-Man Across The Spider-Verse (2023)",
@@ -4011,12 +4017,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: The Notebook (2004): Part 1",
    "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"2026101501160168350E4ECE0CFD484CBF\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-15T00:11:04+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 7",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015011058408D1FDBEC02D0476707\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
   }
  ]
 }
