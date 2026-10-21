@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:35:08+13:00",
+ "updated": "2026-10-22T08:35:11+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
   "started": "2026-10-22T07:35:53+13:00",
   "movie": null,
-  "mode": "recap",
+  "mode": "character",
   "stage": "rendering",
-  "part": 20,
-  "parts_total": 20
+  "part": 1,
+  "parts_total": 11
  },
  "queue": [],
  "movies": [
@@ -3171,6 +3171,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:35:10+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 20 of 20 ready",
+   "message": "Part 20: The Team Assembles (6 narrated beats, about 59s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:32:55+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 19 of 20 ready",
@@ -4363,12 +4369,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 3 of 4 ready",
    "message": "Part 3: 1:20:00 to 1:23:13 (193s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-15T18:12:20+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 2 of 4 ready",
-   "message": "Part 2: 1:17:02 to 1:20:00 (178s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nthe way they said 'Are you just trying to get out of fighting the Hulk?' 🫠\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
