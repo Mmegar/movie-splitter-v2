@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:54:18+13:00",
+ "updated": "2026-10-22T08:54:21+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "character",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 11
  },
  "queue": [],
@@ -3277,6 +3277,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:54:20+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 7 of 11 ready",
+   "message": "Part 7: The Collider Goes Critical (6 narrated beats, about 73s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T08:51:54+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 6 of 11 ready",
@@ -4469,12 +4475,6 @@
    "type": "finished",
    "title": "✅ Finished: Spider-Man Brand New Day (2026)",
    "message": "Best stretch: 4 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Spider-Man Brand New Day (2026). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-15T18:42:15+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Brand New Day (2026): Part 5 of 5 ready",
-   "message": "Part 5: 1:51:50 to 1:55:56 (246s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Highlights).\n\n📝 Caption:\n'What... - What do you want?' and then THIS happened 😳\nPart 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
