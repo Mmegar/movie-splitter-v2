@@ -1,14 +1,14 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:46:34+13:00",
+ "updated": "2026-10-22T02:46:37+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T02:28:41+13:00",
   "movie": "Runner (2026)",
-  "mode": "recap",
+  "mode": "character",
   "stage": "rendering",
-  "part": 5,
+  "part": 1,
   "parts_total": 5
  },
  "queue": [],
@@ -2913,6 +2913,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:46:36+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Runner (2026): Part 5 of 5 ready",
+   "message": "Part 5: Hospital, Lies and a Last Stand (8 narrated beats, about 83s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-22T02:44:21+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 4 of 5 ready",
@@ -4105,12 +4111,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Spider-Man Across The Spider-Verse (2023): Part 1",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"202610150529301106C315AC104651C2B4\"}}"
-  },
-  {
-   "at": "2026-10-15T02:41:07+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Spider-Man Across The Spider-Verse (2023): 16 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Across The Spider-Verse (2023)\nBest stretch: 4 parts, Highlights: 12 parts"
   }
  ]
 }
