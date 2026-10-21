@@ -1586,7 +1586,7 @@ class Agent:
                 self.cleanup_old_parts()
             except Exception as e:
                 log.error("Cleaning up old parts failed: %s", e)
-        if now - self.last["update"] >= 60 and not self.transfers:      # new versions: checked every minute
+        if now - self.last["update"] >= 300 and not self.transfers:
             self.last["update"] = now
             try:
                 if self.self_update():
