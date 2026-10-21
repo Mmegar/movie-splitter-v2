@@ -175,6 +175,30 @@ class StoryTest(unittest.TestCase):
         fast = story.montage_steps(0.3, 6)                              # fast songs cut every 2 beats
         self.assertTrue(all(n >= 2 for _, n in fast))
 
+    def test_plot_comes_from_wikipedia(self):
+        article = ("Knives Out is a 2019 American mystery film.\n\n== Plot ==\n"
+                   + "Harlan is found dead. Blanc investigates. " * 20 + "\n\n== Cast ==\nDaniel Craig")
+
+        def wiki(params):
+            if params.get("list") == "search":
+                return {"query": {"search": [{"title": "Knives Out (film series)"}, {"title": "Knives Out"}]}}
+            text = article if params["titles"] == "Knives Out" else "A film series.\n== Films ==\nx"
+            return {"query": {"pages": [{"extract": text}]}}
+        with mock.patch.object(story, "_wiki", wiki):
+            story._PLOTS.clear()
+            plot = story.movie_plot("Knives Out (2019)")
+        self.assertTrue(plot.startswith("Harlan is found dead."))
+        self.assertNotIn("Daniel Craig", plot)
+        self.assertIn("This is what really happens", story.plot_text("Knives Out (2019)"))
+
+    def test_no_plot_when_wikipedia_is_unreachable(self):
+        def down(params):
+            raise OSError("offline")
+        with mock.patch.object(story, "_wiki", down):
+            story._PLOTS.clear()
+            self.assertIsNone(story.movie_plot("Some Film (2020)"))
+            self.assertEqual(story.plot_text("Some Film (2020)"), "")
+
 
 if __name__ == "__main__":
     unittest.main()

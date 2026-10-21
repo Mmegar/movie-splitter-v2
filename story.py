@@ -27,6 +27,7 @@ import random
 import re
 import subprocess
 import time
+import urllib.parse
 import urllib.request
 from contextlib import contextmanager
 from pathlib import Path
@@ -242,6 +243,73 @@ def blocks_of(cues, chunk_chars=9000):
     return out
 
 
+_PLOTS = {}
+WIKI = "https://en.wikipedia.org/w/api.php"
+
+
+def _wiki(params):
+    url = WIKI + "?" + urllib.parse.urlencode(dict(params, format="json", formatversion=2))
+    req = urllib.request.Request(url, headers={"User-Agent": "movie-splitter (github.com/Mmegar/movie-splitter-v2)"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+def plot_section(extract):
+    """The Plot / Synopsis / Premise section of a Wikipedia article's plain text, or None."""
+    m = re.search(r"\n==+ ?(Plot|Synopsis|Plot summary|Premise|Story) ?==+\n(.*?)(?=\n==[^=]|\Z)", extract, re.S)
+    return re.sub(r"\n{2,}", "\n", m.group(2)).strip() if m else None
+
+
+def movie_plot(name):
+    """What actually happens in the movie, from its Wikipedia article ('Knives Out (2019)' -> the Plot
+    section), so the writer knows the story instead of guessing it from dialogue. None if not found."""
+    if name in _PLOTS:
+        return _PLOTS[name]
+    m = re.match(r"(.*?)\s*\((\d{4})\)\s*$", name)
+    title, year = (m.group(1), m.group(2)) if m else (name, "")
+    best = None
+    try:
+        seen = []
+        for q in ([f"{title} {year} film", f"{title} film"] if year else []) + [title]:
+            for r in _wiki({"action": "query", "list": "search", "srsearch": q, "srlimit": 5})["query"]["search"]:
+                if r["title"] not in seen:
+                    seen.append(r["title"])
+        for t in seen[:8]:
+            try:
+                pages = _wiki({"action": "query", "prop": "extracts", "explaintext": 1, "titles": t,
+                               "redirects": 1})["query"]["pages"]
+            except Exception as e:
+                print(f"(couldn't read '{t}' on Wikipedia: {e})", flush=True)
+                continue
+            text = pages[0].get("extract") or ""
+            plot = plot_section(text)
+            if not plot or len(plot) < 300:
+                continue
+            head = text[:600].lower()
+            score = ((2 if year and year in head else 0) + (1 if "film" in head or "series" in head else 0)
+                     + (1 if title.lower() in t.lower() else 0))
+            if best is None or score > best[0]:
+                best = (score, t, plot)
+            if score >= 4:
+                break
+    except Exception as e:
+        print(f"(couldn't look up the plot on Wikipedia: {e})", flush=True)
+    if best and best[0] >= 2:
+        print(f"Plot found on Wikipedia: '{best[1]}' ({len(best[2])} characters)", flush=True)
+        _PLOTS[name] = best[2][:12000]
+    else:
+        print("(no Wikipedia plot found; the writer works from the dialogue only)", flush=True)
+        _PLOTS[name] = None
+    return _PLOTS[name]
+
+
+def plot_text(name):
+    """The plot summary as the first thing the writer reads (or "" when there isn't one)."""
+    plot = movie_plot(name)
+    return ("Plot summary (from Wikipedia). This is what really happens: narrate from it, and use the notes "
+            f"or subtitles only to find the second each event is on screen:\n{plot}\n\n") if plot else ""
+
+
 def scene_notes(name, cues):
     """Short '[second] what happens' notes for the whole movie, one stretch of subtitles at a time.
     Made once per movie and shared by all the modes."""
@@ -255,7 +323,8 @@ def scene_notes(name, cues):
         prompt = (f"Movie: {name}\nHere is one stretch of its subtitles ([second] line). Write 5 to 10 scene notes "
                   "in story order. Each note is one sentence saying who does or learns what (clues, suspects, "
                   "accusations, insults, threats, reveals, fights, cool moments), with the second it happens. Use "
-                  "character names when the dialogue gives them.\n\n" + "\n".join(b))
+                  "character names when the dialogue gives them.\n\n" + plot_text(name)
+                  + "Subtitles:\n" + "\n".join(b))
         try:
             got = ask_local(SYSTEM, prompt, NOTES_SCHEMA, max_tokens=1200).get("notes") or []
         except Exception as e:
@@ -273,11 +342,11 @@ def scene_notes(name, cues):
 def source(name, cues):
     """What the writer reads: the full subtitles for Claude, scene notes for the small local model."""
     if using_claude():
-        return "Subtitles ([second] line):\n" + transcript(cues)
+        return plot_text(name) + "Subtitles ([second] line):\n" + transcript(cues)
     notes = scene_notes(name, cues)
     if not notes:
         raise Skip("The story model couldn't make sense of the dialogue.")
-    return "Scene notes ([second] what happens):\n" + "\n".join(f"[{int(a)}] {t}" for a, t in notes)
+    return plot_text(name) + "Scene notes ([second] what happens):\n" + "\n".join(f"[{int(a)}] {t}" for a, t in notes)
 
 
 def part_count(total):
