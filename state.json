@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:00:25+13:00",
+ "updated": "2026-10-21T17:00:45+13:00",
  "run": {
   "active": true,
   "run_id": 39537512350,
   "started": "2026-10-21T16:16:27+13:00",
   "movie": "Runner (2026)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "hype",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 1
  },
  "queue": [],
  "movies": [
@@ -36,7 +36,7 @@
     },
     "hype": {
      "label": "Hype edit",
-     "planned": 0,
+     "planned": 1,
      "parts": []
     }
    },
@@ -3041,6 +3041,18 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:00:28+13:00",
+   "type": "planned",
+   "title": "[Hype edit] Runner (2026): 1 part planned",
+   "message": "Parts will arrive on the laptop in Ready to post/Runner (2026)/Hype edit as they're made."
+  },
+  {
+   "at": "2026-10-21T17:00:28+13:00",
+   "type": "info",
+   "title": "[Character story] Skipped for Runner (2026)",
+   "message": "The story model couldn't make sense of the dialogue."
+  },
+  {
    "at": "2026-10-21T17:00:24+13:00",
    "type": "info",
    "title": "[Movie recap] Skipped for Runner (2026)",
@@ -4227,18 +4239,6 @@
    "type": "finished",
    "title": "[Custom clips] ✅ Clips done: Kung Fu Hustle (2004)",
    "message": "1 custom clip made."
-  },
-  {
-   "at": "2026-10-15T00:05:57+13:00",
-   "type": "part_ready",
-   "title": "[Custom clips] ✂️ Kung Fu Hustle (2004): clip 1 of 1 ready",
-   "message": "Clip 1: 9:56 to 19:56 (600s)  Funny\nOn its way to the laptop (Ready to post/Kung Fu Hustle (2004)/Custom clips)."
-  },
-  {
-   "at": "2026-10-14T18:02:31+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 6",
-   "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014190228A97AFFE3DD07632378EA\"}}"
   }
  ]
 }
