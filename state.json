@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:18:21+13:00",
+ "updated": "2026-10-21T21:18:23+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": 39559111364,
   "started": "2026-10-21T20:03:19+13:00",
-  "movie": "Spider-Man Across The Spider-Verse (2023)",
-  "mode": "hype",
-  "stage": "uploading",
-  "part": 1,
-  "parts_total": 1
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
