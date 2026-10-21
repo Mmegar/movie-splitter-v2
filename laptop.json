@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-21T18:48:30+07:00",
+ "updated": "2026-10-21T18:49:15+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-  "percent": 78
+  "percent": 81
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "percent": 78
+   "percent": 81
   }
  ],
  "uploaded": [
