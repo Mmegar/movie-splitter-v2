@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:01:08+13:00",
+ "updated": "2026-10-22T07:13:13+13:00",
  "run": {
   "active": true,
   "run_id": null,
-  "started": "2026-10-22T02:28:41+13:00",
-  "movie": "Runner (2026)",
-  "mode": "character",
-  "stage": "rendering",
-  "part": 2,
-  "parts_total": 5
+  "started": "2026-10-22T07:13:13+13:00",
+  "movie": null,
+  "mode": null,
+  "stage": "idle",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
