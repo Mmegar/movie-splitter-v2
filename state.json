@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:28:01+13:00",
+ "updated": "2026-10-22T08:28:04+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 17,
+  "part": 18,
   "parts_total": 20
  },
  "queue": [],
@@ -3126,6 +3126,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:28:03+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 17 of 20 ready",
+   "message": "Part 17: Arrest Me, Dad (6 narrated beats, about 65s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:25:48+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 16 of 20 ready",
@@ -4318,12 +4324,6 @@
    "type": "planned",
    "title": "[Highlights] Spider-Man Brand New Day (2026): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Brand New Day (2026)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-15T18:05:29+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Spider-Man Brand New Day (2026): 4 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Brand New Day (2026)/Best stretch as they're made."
   }
  ]
 }
