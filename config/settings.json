@@ -16,7 +16,7 @@
   "flip_every": "25-30",
   "auto_subtitles": true,
   "whisper_model": "small",
-  "line": true,
+  "line": false,
   "line_opacity": 0.45,
   "line_thickness": 12,
   "cockroach": true,
