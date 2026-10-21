@@ -323,6 +323,7 @@ NOTES_SCHEMA = {"type": "object", "required": ["notes"], "properties": {"notes":
     "properties": {"at": {"type": "number"}, "note": {"type": "string"}}}}}}
 STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "properties": {
     "character": {"type": "string"},
+    "cast": {"type": "array", "items": {"type": "string"}},
     "parts": {"type": "array", "items": {"type": "object", "required": ["title", "beats"], "properties": {
         "title": {"type": "string"},
         "beats": {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
@@ -330,6 +331,7 @@ STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "propertie
 SPAN = {"type": "array", "items": {"type": "number"}}
 HYPE_SCHEMA = {"type": "object", "required": ["character", "edits"], "properties": {
     "character": {"type": "string"},
+    "cast": {"type": "array", "items": {"type": "string"}},
     "edits": {"type": "array", "items": {"type": "object", "required": ["title", "setup", "payoff", "montage"],
                                          "properties": {"title": {"type": "string"}, "setup": SPAN, "payoff": SPAN,
                                                         "montage": {"type": "array", "items": SPAN}}}}}}
@@ -397,6 +399,7 @@ def movie_plot(name):
                      + (1 if title.lower() in t.lower() else 0))
             if best is None or score > best[0]:
                 best = (score, t, plot)
+                _ARTICLES[name] = text
             if score >= 4:
                 break
     except Exception as e:
@@ -407,7 +410,51 @@ def movie_plot(name):
     else:
         print("(no Wikipedia plot found; the writer works from the dialogue only)", flush=True)
         _PLOTS[name] = None
+        _ARTICLES.pop(name, None)
     return _PLOTS[name]
+
+
+_ARTICLES = {}      # the Wikipedia article found by movie_plot, for the cast list
+_PLAN_CAST = {}     # the cast the story writer named, used when Wikipedia has no cast list
+
+
+def remember_cast(name, data):
+    cast = [str(c).strip() for c in (data.get("cast") or []) if str(c).strip()] if isinstance(data, dict) else []
+    if cast:
+        _PLAN_CAST[name] = cast[:3]
+    return data
+
+
+def movie_cast(name, n=3):
+    """The first few actors in the movie's Wikipedia Cast section ('Daniel Craig as Benoit Blanc' -> 'Daniel Craig')."""
+    movie_plot(name)
+    m = re.search(r"\n==+ ?(Cast|Starring|Cast and characters|Voice cast) ?==+\n(.*?)(?=\n==[^=]|\Z)",
+                  _ARTICLES.get(name) or "", re.S)
+    out = []
+    for line in (m.group(2) if m else "").split("\n"):
+        actor = re.split(r"\s+as\s+|\s*[,:(–—-]\s*", line.strip(), maxsplit=1)[0].strip()
+        if 2 <= len(actor) <= 40 and len(actor.split()) <= 4 and actor[0].isupper() and actor not in out:
+            out.append(actor)
+        if len(out) >= n:
+            break
+    return out or _PLAN_CAST.get(name, [])[:n]
+
+
+def _tag(text):
+    """'Ana de Armas' -> '#AnaDeArmas' (each word capitalised, so it reads in the hashtag)."""
+    words = re.split(r"[\s\-]+", text)
+    return "#" + re.sub(r"[^0-9A-Za-z]", "", "".join(w[:1].upper() + w[1:] for w in words))
+
+
+def movie_hashtags(name):
+    """At most 5 hashtags that hit search: the movie's title, its top cast, then #movie / #fyp."""
+    title = re.sub(r"\s*\(\d{4}\)\s*$", "", name)
+    tags = [_tag(title)] + [_tag(a) for a in movie_cast(name)] + ["#movie", "#fyp"]
+    out = []
+    for t in tags:
+        if len(t) > 2 and t.lower() not in (x.lower() for x in out):
+            out.append(t)
+    return " ".join(out[:5])
 
 
 def plot_text(name):
@@ -501,6 +548,7 @@ with its own sound. Only use seconds that appear below.
 
 Answer with this JSON shape:
 {{"character": "<who it follows; empty for a whole-movie recap>",
+  "cast": ["<the real names of the movie's top 3 billed actors>"],
   "parts": [{{"title": "<3 to 6 words>",
              "beats": [{{"say": "<narration>", "at": <second>}},
                        {{"say": "", "at": <start second>, "until": <end second>}}]}}]}}
@@ -525,6 +573,7 @@ Use only seconds that appear below. The title is their name or nickname, 1 to 3 
 
 Answer with this JSON shape:
 {{"character": "<name>",
+  "cast": ["<the real names of the movie's top 3 billed actors>"],
   "edits": [{{"title": "<name>", "setup": [<start>, <end>], "payoff": [<start>, <end>],
              "montage": [[<start>, <end>], ...]}}]}}
 
@@ -631,7 +680,8 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
     if mode == "hype":
         if ready and cues:
             try:
-                return clean_hype(ask(SYSTEM, hype_prompt(name, total, source(name, cues), who), HYPE_SCHEMA), total)
+                return clean_hype(remember_cast(name, ask(SYSTEM, hype_prompt(name, total, source(name, cues), who),
+                                                          HYPE_SCHEMA)), total)
             except Exception as e:
                 print(f"(the story model couldn't plan the hype edit, using loud moments instead: {e})", flush=True)
         return hype_from_sound(total, list(loud), list(motion), list(score))
@@ -642,7 +692,8 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
         raise Skip(f"No narration: {why}.")
     if not cues:
         raise Skip("No dialogue was found, so there's nothing to write the narration from.")
-    return clean_story(ask(SYSTEM, story_prompt(name, total, source(name, cues), mode, who), STORY_SCHEMA), total)
+    return clean_story(remember_cast(name, ask(SYSTEM, story_prompt(name, total, source(name, cues), mode, who),
+                                               STORY_SCHEMA)), total)
 
 
 # ---------------------------------------------------------------- the narrator's voice

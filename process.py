@@ -409,7 +409,7 @@ def part_word(mode=None):
     return {"highlights": "Highlight", "hype": "Edit"}.get(mode if mode is not None else MODE, "Part")
 
 
-def make_captions(count, quotes=None, style=None, word="Part"):
+def make_captions(count, quotes=None, style=None, word="Part", movie=None):
     """One caption per part: a hook (sometimes a quote from the part), a 'next part' line, and hashtags.
     No repeated hooks within a movie. style: goofy (default) or plain."""
     style = (style or CAPTION_STYLE or "goofy").lower()
@@ -433,8 +433,17 @@ def make_captions(count, quotes=None, style=None, word="Part"):
             tags = random.choice(HASHTAG_SETS)
         if word != "Part":
             end = end.replace("Part ", f"{word} ")
-        out.append(f"{hook}\n{word} {i} 🎬 · {end}\n{tags}")
+        out.append(f"{hook}\n{word} {i} 🎬 · {end}\n{movie or tags}")
     return out
+
+
+def movie_tags(name):
+    """At most 5 hashtags from the movie's title and cast (story.movie_hashtags), or None for the stock sets."""
+    try:
+        return story.movie_hashtags(name) or None
+    except Exception as e:
+        print(f"(no movie hashtags: {e})", flush=True)
+        return None
 
 
 def make_clip_caption(quote=None, style=None):
@@ -1334,7 +1343,7 @@ def process_release(gh, release):
         video_name = out.name[:-len(story.PACK_SUFFIX)] + ".mp4" if pack else out.name
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
-            captions[mode] = make_captions(count, word=part_word(mode))
+            captions[mode] = make_captions(count, word=part_word(mode), movie=movie_tags(name))
         text = captions[mode][i - 1] if mode in captions else None
         q = pick_quote(PART_CUES.get((mode, i)))
         if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
@@ -1638,7 +1647,7 @@ def cut_here(src, srt, ready):
     def on_part(mode, i, count, out, line):
         label = MODE_NAMES[mode]
         if CAPTIONS_ON and mode not in captions:
-            captions[mode] = make_captions(count, word=part_word(mode))
+            captions[mode] = make_captions(count, word=part_word(mode), movie=movie_tags(name))
         text = captions[mode][i - 1] if mode in captions else None
         q = pick_quote(PART_CUES.get((mode, i)))
         if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:

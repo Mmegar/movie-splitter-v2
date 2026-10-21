@@ -194,6 +194,28 @@ class StoryTest(unittest.TestCase):
         self.assertNotIn("Daniel Craig", plot)
         self.assertIn("This is what really happens", story.plot_text("Knives Out (2019)"))
 
+    def test_hashtags_use_title_and_cast(self):
+        article = ("Runner is a 2026 thriller film.\n\n== Plot ==\n" + "Maia runs across London. " * 20
+                   + "\n\n== Cast ==\nGal Gadot as Maia Marten\nDamian Lewis as Victor\nAlfred Enoch\nX\n\n== Production ==\nx")
+
+        def wiki(params):
+            if params.get("list") == "search":
+                return {"query": {"search": [{"title": "Runner (2026 film)"}]}}
+            return {"query": {"pages": [{"extract": article}]}}
+        with mock.patch.object(story, "_wiki", wiki):
+            story._PLOTS.clear()
+            tags = story.movie_hashtags("Runner (2026)")
+        self.assertEqual(tags, "#Runner #GalGadot #DamianLewis #AlfredEnoch #movie")
+        self.assertLessEqual(len(tags.split()), 5)
+
+    def test_hashtags_fall_back_to_the_writers_cast(self):
+        def down(params):
+            raise OSError("offline")
+        with mock.patch.object(story, "_wiki", down):
+            story._PLOTS.clear()
+            story.remember_cast("Some Film (2020)", {"cast": ["Ana de Armas", "Chris Evans"]})
+            self.assertEqual(story.movie_hashtags("Some Film (2020)"), "#SomeFilm #AnaDeArmas #ChrisEvans #movie #fyp")
+
     def test_no_plot_when_wikipedia_is_unreachable(self):
         def down(params):
             raise OSError("offline")
