@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:08:03+13:00",
+ "updated": "2026-10-22T08:08:06+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 9,
+  "part": 10,
   "parts_total": 20
  },
  "queue": [],
@@ -3006,6 +3006,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:08:05+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 9 of 20 ready",
+   "message": "Part 9: Pavitr Has Questions (6 narrated beats, about 75s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:05:17+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 8 of 20 ready",
@@ -4198,12 +4204,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub for clips",
    "message": "Obsession 2026 1080p WEB-DL HEVC x265 5.1 BONE.mkv: 1 custom clip(s) start soon."
-  },
-  {
-   "at": "2026-10-15T09:34:26+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Obsession (2026): 7 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Obsession (2026)\nBest stretch: 3 parts, Highlights: 4 parts"
   }
  ]
 }
