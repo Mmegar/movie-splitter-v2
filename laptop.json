@@ -1,19 +1,19 @@
 {
- "updated": "2026-10-21T10:01:04+07:00",
+ "updated": "2026-10-21T10:01:11+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": {
   "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-  "percent": 22
+  "percent": 23
  },
  "transfers": [
   {
    "direction": "send",
    "movie": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "file": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "percent": 22
+   "percent": 23
   }
  ],
  "uploaded": [
@@ -113,6 +113,13 @@
  "battery": false,
  "queue": [
   {
+   "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
+   "size_mb": 2773,
+   "modified": "2026-10-14T05:54:27+07:00",
+   "sending": false,
+   "style": "zoom"
+  },
+  {
    "name": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 1955,
    "modified": "2026-10-17T16:11:19+07:00",
@@ -125,11 +132,6 @@
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2948,
    "modified": "2026-10-19T22:58:35+07:00"
-  },
-  {
-   "name": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2773,
-   "modified": "2026-10-14T05:54:27+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -165,7 +167,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvhiys7lk8gs": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -257,7 +264,8 @@
   "mveh998p92zg",
   "mveha3qn3fwg",
   "mveps1sicy0z",
-  "mveptmavbb0a"
+  "mveptmavbb0a",
+  "mvhiys7lk8gs"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
