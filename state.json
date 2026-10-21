@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:48:23+13:00",
+ "updated": "2026-10-22T02:48:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -109,7 +109,23 @@
     "character": {
      "label": "Character story",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 148.0,
+       "end": 1282.0,
+       "seconds": 1134.0,
+       "drive_path": "Ready to post/Runner (2026)/Character story/Runner (2026) - Part 01.mp4",
+       "caption": "Not me staying up till 3am for this 🌙\nPart 1 🎬 · Part 2 coming soon ⏳\n#foryou #trending #movie #cinema #fypシ",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
