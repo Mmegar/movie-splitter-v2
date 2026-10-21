@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T16:37:26+13:00",
+ "updated": "2026-10-21T17:00:25+13:00",
  "run": {
   "active": true,
   "run_id": 39537512350,
@@ -3041,6 +3041,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:00:24+13:00",
+   "type": "info",
+   "title": "[Movie recap] Skipped for Runner (2026)",
+   "message": "The story model couldn't make sense of the dialogue."
+  },
+  {
    "at": "2026-10-21T16:17:52+13:00",
    "type": "started",
    "title": "Started: Runner (2026)",
@@ -4233,12 +4239,6 @@
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Kung Fu Hustle (2004): Part 6",
    "message": "[Best stretch] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261014190228A97AFFE3DD07632378EA\"}}"
-  },
-  {
-   "at": "2026-10-14T23:54:45+13:00",
-   "type": "started",
-   "title": "✂️ Making 1 custom clip: Kung Fu Hustle (2004)",
-   "message": "They'll arrive on the laptop in Ready to post/Kung Fu Hustle (2004)/Custom clips."
   }
  ]
 }
