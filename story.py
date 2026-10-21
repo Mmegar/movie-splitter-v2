@@ -734,7 +734,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
     v = "[0:v]null"
     if top_text:
         (workdir / "toptext.txt").write_text(top_text, encoding="utf-8")
-        v += (f",drawtext=fontfile={P.FONT}:textfile={(workdir / 'toptext.txt').resolve()}:expansion=none:"
+        v += (f",drawtext=fontfile={P.FONT}:textfile=toptext.txt:expansion=none:"
               "fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y=230")
     with classic():
         v += "[txt0]" + P.line_filter(src, length)
