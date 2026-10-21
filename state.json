@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:18:18+13:00",
+ "updated": "2026-10-21T21:18:21+13:00",
  "run": {
   "active": true,
   "run_id": 39559111364,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:18:21+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
+   "message": "Movie recap: 2 parts, Hype edit: 1 part.\nThe laptop downloads them into Ready to post/Spider-Man Across The Spider-Verse (2023). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-21T21:18:15+13:00",
    "type": "part_ready",
    "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): Edit 1 of 1 ready",
@@ -4058,12 +4064,6 @@
    "type": "started",
    "title": "Started: Spider-Man Across The Spider-Verse (2023)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Spider-Man Across The Spider-Verse (2023)'."
-  },
-  {
-   "at": "2026-10-15T01:39:02+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
