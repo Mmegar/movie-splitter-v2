@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T09:04:40+13:00",
+ "updated": "2026-10-22T09:04:43+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -16,12 +16,12 @@
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-22T07:13:15+13:00",
-   "finished": null,
+   "finished": "2026-10-22T09:04:43+13:00",
    "duration": 8405.8,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "recap": {
@@ -3337,6 +3337,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T09:04:42+13:00",
+   "type": "part_ready",
+   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 11 of 11 ready",
+   "message": "Part 11: The Prowler and the Promise (5 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
+  },
+  {
    "at": "2026-10-22T09:02:17+13:00",
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 10 of 11 ready",
@@ -4529,12 +4535,6 @@
    "type": "started",
    "title": "Started: GONJIAM Haunted Asylum (2017)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/GONJIAM Haunted Asylum (2017)'."
-  },
-  {
-   "at": "2026-10-15T15:04:18+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "GONJIAM.Haunted.Asylum.2017.720p.HDRip.Ganool.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
