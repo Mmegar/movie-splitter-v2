@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:43:05+13:00",
+ "updated": "2026-10-22T07:43:08+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -2870,6 +2870,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:43:08+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): 20 parts planned",
+   "message": "Spider-Man Across The Spider-Verse (2023)\nMode: Movie recap\n\nPart 1: Welcome to the Multiverse Mess (6 narrated beats, about 82s of voice)\nPart 2: Portals, Vultures, and a Badge (6 narrated beats, about 81s of voice)\nPart 3: Sixteen Months of Bad Luck (5 narrated beats, about 62s of voice)\nPart 4: Late to the Party (6 narrated beats, about 70s of voice)\nPart 5: Holes, Grounded, and Two Months (5 narrated beats, about 58s of voice)\nPart 6: The Girl at the Window (6 narrated beats, about 63s of voice)\nPart 7: Rooftops and Bad Timing (6 narrated beats, about 73s of voice)\nPart 8: Mom Has Opinions (6 narrated beats, about 69s of voice)\nPart 9: Pavitr Has Questions (6 narrated beats, about 75s of voice)\nPart 10: Hobie Brown Enters the Chaos (5 narrated beats, about 65s of voice)\nPart 11: The Collapse and the Captain (6 narrated beats, about 74s of voice)\nPart 12: Peter, Mayday, and Miguel (5 "
+  },
+  {
    "at": "2026-10-22T07:13:15+13:00",
    "type": "started",
    "title": "Started: Spider-Man Across The Spider-Verse (2023)",
@@ -4062,12 +4068,6 @@
    "type": "planned",
    "title": "[Highlights] Obsession (2026): 4 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-15T15:00:36+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Obsession (2026): 3 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Obsession (2026)/Best stretch as they're made."
   }
  ]
 }
