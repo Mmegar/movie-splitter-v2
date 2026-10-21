@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:48:56+13:00",
+ "updated": "2026-10-22T07:51:25+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -36,6 +36,21 @@
        "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
        "caption": "Drop a 🔥 if you're still watching\nPart 1 🎬 · Follow so you don't miss Part 2 🔔\n#fyp #foryoupage #movies #film #mustwatch",
        "preview": "spider-man-across-the-spider-verse-2023/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 564.0,
+       "end": 1116.0,
+       "seconds": 552.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
+       "caption": "Me pretending I understood everything 🤡\nPart 2 🎬 · Part 3 is up next 👀\n#fyp #foryoupage #movies #film #mustwatch",
+       "preview": "spider-man-across-the-spider-verse-2023/recap-002.bin",
        "post": {
         "status": "none",
         "at": null,
