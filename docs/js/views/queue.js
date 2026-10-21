@@ -186,7 +186,7 @@ export function createQueueView(ctx) {
     const v = await openSheet({
       className: 'sheet--action',
       body: `<div class="action-card">
-          <div class="action-msg"><strong>${esc(cleanTitle(name))}</strong><p>In To edit on the laptop, waiting to be sent to GitHub.</p></div>
+          <div class="action-msg"><strong>${esc(cleanTitle(name))}</strong><p>In To edit on the laptop, waiting to be cut.</p></div>
           ${i > 0 ? '<button class="action-btn" data-v="top">Do this one next</button>' : ''}
           ${i < total - 1 ? '<button class="action-btn" data-v="bottom">Move to the end</button>' : ''}
           <button class="action-btn is-destructive" data-v="out">Take it out of To edit</button>
@@ -252,7 +252,7 @@ export function createQueueView(ctx) {
     return head + `<div class="group">${q.map((f, i) => fileRow(f, {
       busy: busy.get(f.name) === 'to_library' ? 'Taking it out…' : f.sending ? '' : '',
       lead: `<span class="row-ic ${i === 0 ? 'tone-accent' : 'tone-muted'}"><span class="num" style="font-weight:700;font-size:15px">${i + 1}</span></span>`,
-      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to send' : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
+      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to cut' : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
       extra: styleChip(st, f),
       action: `<span class="reorder">
         <button class="icon-btn" data-up="${esc(f.name)}" ${i === 0 ? 'disabled' : ''} aria-label="Move ${esc(cleanTitle(f.name))} up">${icon('chevL', 'rot90')}</button>
