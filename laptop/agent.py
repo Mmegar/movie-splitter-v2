@@ -200,7 +200,8 @@ def file_info(p):
 
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
-              "settings.py", "status.py", "transport.py", "mp4fix.py"]
+              "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py"]
+PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
 SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
 
@@ -302,6 +303,7 @@ class Agent:
         self.memory_file = self.dir / "agent_memory.json"
         self.memory = self._load_memory()
         self.transfers = {}            # (direction, file) -> {direction, movie, file, percent}
+        self.building = False          # FilmCraft is making an edit (build_edits)
         self.to_send = []              # wish-list downloads waiting to be sent: (path, wish line)
         self.online = True
         self.last_push, self.last_sent, self.progress_changed = 0.0, None, False
@@ -639,7 +641,9 @@ class Agent:
         received = set(self.memory["received"])
         complete = True
         for p in body.get("parts", []):
-            dest = base / p["label"] / p["file"]
+            video = base / p["label"] / p["file"]
+            # an edit pack: the plan and voice for FilmCraft, which builds the video here (build_edits)
+            dest = video.with_name(video.stem + PACK_SUFFIX) if p.get("pack") else video
             rel = f"Ready to post/{safe_name(movie)}/{p['label']}/{p['file']}"
             chunks = [assets[n] for n in p.get("assets", []) if n in assets]
             if chunks and len(chunks) == len(p["assets"]) and all(a.get("state", "uploaded") == "uploaded"
@@ -648,7 +652,8 @@ class Agent:
                 transport.receive(self.gh, chunks, dest,
                                   lambda pc, f=p["file"]: self.set_transfer("receive", f, movie, pc),
                                   gate=self.gate)
-                repair_part(dest)
+                if not p.get("pack"):
+                    repair_part(dest)
                 if p.get("mode") == "clips" and p.get("caption"):
                     dest.with_name(dest.stem + " - caption.txt").write_text(p["caption"] + "\n", encoding="utf-8")
                 self.set_transfer("receive", p["file"], movie, None)
@@ -657,7 +662,7 @@ class Agent:
                 with self.lock:
                     self.memory["received"] = (self.memory["received"] + [rel])[-2000:]
                     self._save_memory()
-            elif rel not in received and not dest.exists():
+            elif rel not in received and not dest.exists() and not video.exists():
                 complete = False                    # still on its way
         self.write_lists(base, body)
         if body.get("done") and complete:
@@ -674,6 +679,71 @@ class Agent:
                 self.clip_job_over(rid, ok=not body.get("failed"))
             else:
                 self.finish_original(rid, failed=bool(body.get("failed")), movie=movie)
+
+    def find_movie_file(self, file_name):
+        """The original movie an edit pack was made from, wherever it is on this laptop now."""
+        for s in self.memory["sends"].values():
+            if Path(s.get("path", "")).name == file_name and Path(s["path"]).is_file():
+                return Path(s["path"])
+        path, _ = self.find_original(status.movie_id(names.clean_name(file_name)), None)
+        if path:
+            return path
+        for folder in (self.watch, self.output / "Done", self.downloads):
+            if (folder / file_name).is_file():
+                return folder / file_name
+        return None
+
+    def build_edits(self):
+        """Edit packs from GitHub -> finished videos, built and exported by FilmCraft from the original
+        movie on this laptop. Runs in the background; a pack stays put until its video is made."""
+        if self.building or self.paused_reason():
+            return
+        packs = sorted(self.ready_dir.rglob("*" + PACK_SUFFIX))
+        if not packs:
+            return
+        import fc_editor
+        import filmcraft
+        if not filmcraft.find_cli():
+            if not self.memory.get("filmcraft_warned"):
+                self.notify("🎬 FilmCraft needed", "Edits are waiting for FilmCraft. Install it on this laptop "
+                            "and they'll be made automatically.", tags=["clapper"])
+                with self.lock:
+                    self.memory["filmcraft_warned"] = True
+                    self._save_memory()
+            return
+        self.building = True
+        try:
+            for pack in packs:
+                out = pack.with_name(pack.name[:-len(PACK_SUFFIX)] + ".mp4")
+                if out.exists():
+                    pack.unlink(missing_ok=True)
+                    continue
+                try:
+                    import zipfile
+                    with zipfile.ZipFile(pack) as z:
+                        file_name = json.loads(z.read("plan.json")).get("movie_file", "")
+                    movie = self.find_movie_file(file_name)
+                    if not movie:
+                        raise FileNotFoundError(f"the original movie ({file_name}) isn't on this laptop any more")
+                    tmp = out.with_name(out.stem + ".building.mp4")
+                    fc_editor.build_from_pack(pack, tmp, movie, log=log.info)
+                    os.replace(tmp, out)
+                    pack.unlink(missing_ok=True)
+                    log.info("Made %s in FilmCraft", out.name)
+                    self.notify("🎬 Edit ready", f"{out.parent.parent.name}: {out.name}", tags=["clapper"])
+                except Exception as e:
+                    fails = self.memory.setdefault("edit_failures", {})
+                    fails[pack.name] = fails.get(pack.name, 0) + 1
+                    log.error("FilmCraft couldn't make %s (try %d): %s", out.name, fails[pack.name], e)
+                    if fails[pack.name] == 3:
+                        self.notify("❌ Edit failed", f"FilmCraft couldn't make {out.name} after 3 tries. The edit pack "
+                                    f"is kept in its folder.\n{e}", kind="failed", tags=["x"])
+                    if fails[pack.name] >= 3:
+                        pack.rename(pack.with_name(pack.name + ".failed"))
+                    with self.lock:
+                        self._save_memory()
+        finally:
+            self.building = False
 
     def write_lists(self, base, body):
         """_parts list.txt and captions.txt in each mode folder, ready for posting by hand."""
@@ -1649,6 +1719,7 @@ def main(argv=None):
                          daemon=True).start()
         threading.Thread(target=every, args=(1, lambda: agent.refresh_settings(force=True)), daemon=True).start()
         threading.Thread(target=every, args=(0.5, agent.check_commands), daemon=True).start()   # app taps, every 30 s
+        threading.Thread(target=every, args=(1, agent.build_edits), daemon=True).start()   # FilmCraft edits
         threading.Thread(target=agent.check_wishlist, daemon=True).start()   # first look straight away
         while True:
             try:

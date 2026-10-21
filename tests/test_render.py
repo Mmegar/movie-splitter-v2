@@ -65,7 +65,8 @@ class RenderTest(TempDirTest):
                         "aevalsrc='0.6*sin(90*2*PI*t)*lt(mod(t,0.5),0.08)':s=44100:d=40",
                         str(music / "beat.wav")], check=True)
         env = self.base_env({"modes": ["recap", "hype"], "auto_subtitles": False, "video_quality": 28,
-                             "hype_montage_seconds": 4, "filter": "mystery", "flip": "none"})
+                             "hype_montage_seconds": 4, "filter": "mystery", "flip": "none",
+                             "story_editor": "ffmpeg"})
         code = r'''
 import subprocess, sys, process, story
 from pathlib import Path

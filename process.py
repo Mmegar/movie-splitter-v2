@@ -1060,7 +1060,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
     if label:
         (workdir / "toptext.txt").write_text(label, encoding="utf-8")
         filters += (
-            f",drawtext=fontfile={FONT}:textfile={(workdir / 'toptext.txt').resolve()}:expansion=none:"
+            f",drawtext=fontfile={FONT}:textfile=toptext.txt:expansion=none:"
             "fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y=230"
         )
     filters += "[txt0]"
@@ -1186,7 +1186,12 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
             out = mdir / f"{name} - {part_word(mode)} {str(i).zfill(width)}.mp4"
             print(f"Making {label} part {i} of {len(parts)}...", flush=True)
             status.set_stage("rendering", mode=mode, part=i, parts_total=len(parts))
-            if mode in story.MODE_NAMES:
+            if mode in story.MODE_NAMES and story.EDITOR == "filmcraft":   # the laptop edits it in FilmCraft
+                out = out.with_name(out.stem + story.PACK_SUFFIX)
+                said = story.make_pack(mode, src, i, sc, out, workdir, total)
+                PART_CUES[(mode, i)] = said
+                PART_CREDITS[(mode, i)] = story.last_credit()
+            elif mode in story.MODE_NAMES:
                 said = story.render(mode, src, i, sc, cues, out, workdir, total)
                 PART_CUES[(mode, i)] = said
                 PART_CREDITS[(mode, i)] = story.last_credit()
@@ -1319,9 +1324,13 @@ def process_release(gh, release):
         label = MODE_NAMES[mode]
         status.set_stage("uploading", mode=mode, part=i, parts_total=count)
         prefix = f"{mode}-{i:02}"
-        pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
-        prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
+        pack = out.name.endswith(story.PACK_SUFFIX)      # an edit pack: the laptop makes the video in FilmCraft
+        pv = None
+        if not pack:
+            pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
+            prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
         assets = transport.send(gh, out_rel, out, prefix)
+        video_name = out.name[:-len(story.PACK_SUFFIX)] + ".mp4" if pack else out.name
         out.unlink(missing_ok=True)  # free up disk space straight away
         if CAPTIONS_ON and mode not in captions:
             captions[mode] = make_captions(count, word=part_word(mode))
@@ -1332,11 +1341,11 @@ def process_release(gh, release):
         if text and PART_CREDITS.get((mode, i)):
             text += f"\n🎵 {PART_CREDITS[(mode, i)]}"
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
-        out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": out.name,
+        out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": video_name,
                                   "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),
-                                  "seconds": round(b - a, 1), "line": line})
+                                  "seconds": round(b - a, 1), "line": line, "pack": pack})
         save_body()
-        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv)
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{video_name}", text, preview=pv)
         caption = f"\n\n📝 Caption:\n{text}" if text else ""
         notify(f"{name}: {part_word(mode)} {i} of {count} ready",
                f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",

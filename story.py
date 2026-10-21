@@ -68,6 +68,12 @@ def load_settings(env=None):
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "gemma3:4b").strip() or "gemma3:4b"   # local (Ollama) or a claude-... model
+    global EDITOR
+    EDITOR = env.get("STORY_EDITOR", "filmcraft").strip().lower()    # filmcraft (on the laptop) or ffmpeg (here)
+
+
+EDITOR = "filmcraft"
+PACK_SUFFIX = ".editpack.zip"
 
 
 MUSIC_DIR = Path(__file__).resolve().parent / "assets" / "music"
@@ -941,6 +947,54 @@ def render_hype(src, number, info, cues, out, workdir, total):
     segs.append(montage)
     finish_part(segs, out, workdir, src, "")
     return [(0.0, 1.0, info.get("title") or "")]
+
+
+def make_pack(mode, src, number, info, out, workdir, total):
+    """
+    Instead of a finished video: an edit pack for the laptop, where FilmCraft builds the edit from the
+    original movie (much better masks, keyframes and transitions than ffmpeg). The zip holds plan.json
+    (the part's plan, the look, the beat) plus the narrator's voice files and the song, cut to start at
+    its drop for hype montages. Returns the narration lines (for the caption quote).
+    """
+    import zipfile
+    plan = {"version": 1, "mode": mode, "number": number, "info": info, "look": FILTER, "movie_file": Path(src).name,
+            "voices": [], "music": None, "beat": 0.5, "montage_seconds": HYPE_MONTAGE_SECONDS}
+    files, said = [], []
+    if mode == "hype":
+        music = pick_music("hype", info.get("title"))
+        if music:
+            offset, beat = beat_grid(music, HYPE_MONTAGE_SECONDS)
+            cut = workdir / "music.m4a"
+            P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{offset:.3f}", "-t",
+                   f"{HYPE_MONTAGE_SECONDS + 3:.1f}", "-i", str(Path(music).resolve()), "-c:a", "aac", "-b:a", "192k",
+                   str(cut.resolve())], cwd=workdir)
+            plan.update(music="music.m4a", beat=beat)
+            files.append(cut)
+        said.append((0.0, 1.0, info.get("title") or ""))
+    else:
+        for k, beat in enumerate(info["beats"]):
+            if "say" not in beat:
+                continue
+            P.checkpoint()
+            mp3 = workdir / f"voice{k:03}.mp3"
+            length, words = speak(beat["say"], mp3)
+            plan["voices"].append({"beat": k, "file": mp3.name, "seconds": round(length, 3),
+                                   "words": [[round(a, 3), round(b, 3), w] for a, b, w in words]})
+            files.append(mp3)
+            said.append((0.0, length, beat["say"]))
+        music = pick_music("calm", number)
+        if music:
+            plan["music"] = "music" + Path(music).suffix.lower()
+            files.append((Path(music), plan["music"]))
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_STORED) as z:
+        z.writestr("plan.json", json.dumps(plan, ensure_ascii=False, indent=1))
+        for f in files:
+            src_f, name = f if isinstance(f, tuple) else (f, f.name)
+            z.write(src_f, name)
+    for f in files:
+        if not isinstance(f, tuple):
+            f.unlink(missing_ok=True)
+    return said
 
 
 def render(mode, src, number, info, cues, out, workdir, total):

@@ -28,6 +28,8 @@ DEFAULTS = {
     "music_volume": 0.12,                # under the narration (hype montages play the song at full volume)
     "hype_count": 1,                     # Hype edits per movie
     "hype_montage_seconds": 15,
+    "story_editor": "filmcraft",         # filmcraft = the laptop builds the edits in FilmCraft (best look);
+                                         # ffmpeg = GitHub renders them itself (no FilmCraft needed)
     "story_model": "gemma3:4b",          # small free model that writes the narration (runs on GitHub, no API key);
                                          # e.g. qwen2.5:7b for better writing but slower, or claude-opus-5-5 + ANTHROPIC_API_KEY
     "stretch_minutes": 12,
