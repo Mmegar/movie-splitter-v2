@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:45:59+13:00",
+ "updated": "2026-10-22T07:48:54+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -27,7 +27,23 @@
     "recap": {
      "label": "Movie recap",
      "planned": 20,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 42.0,
+       "end": 597.0,
+       "seconds": 555.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 01.mp4",
+       "caption": "Drop a 🔥 if you're still watching\nPart 1 🎬 · Follow so you don't miss Part 2 🔔\n#fyp #foryoupage #movies #film #mustwatch",
+       "preview": "spider-man-across-the-spider-verse-2023/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "character": {
      "label": "Character story",
