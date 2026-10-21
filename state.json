@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:23:13+13:00",
+ "updated": "2026-10-22T08:23:16+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 15,
+  "part": 16,
   "parts_total": 20
  },
  "queue": [],
@@ -3096,6 +3096,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:23:15+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 15 of 20 ready",
+   "message": "Part 15: The Mistake That Made Him (5 narrated beats, about 57s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:20:42+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 14 of 20 ready",
@@ -4288,12 +4294,6 @@
    "type": "started",
    "title": "Started: Spider-Man Brand New Day (2026)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Spider-Man Brand New Day (2026)'."
-  },
-  {
-   "at": "2026-10-15T11:53:26+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Obsession (2026): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Obsession (2026)\nCustom clips: 1"
   }
  ]
 }
