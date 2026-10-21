@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T01:25:46+07:00",
+ "updated": "2026-10-22T01:26:40+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -158,6 +158,10 @@
   "mvifyw4dr6vl": {
    "status": "done",
    "note": "Ready to save on your phone: share/runner-2026/recap-004.bin"
+  },
+  "mvig0x7d08cg": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/runner-2026/recap-005.bin"
   }
  },
  "commands_done": [
@@ -259,7 +263,8 @@
   "mvifx7ob25li",
   "mvifxazpfxop",
   "mvify3foxxae",
-  "mvifyw4dr6vl"
+  "mvifyw4dr6vl",
+  "mvig0x7d08cg"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
@@ -282,7 +287,8 @@
   "share/pirates-of-the-caribbean-at-worlds-end-2007/stretch-001.bin",
   "share/runner-2026/recap-001.bin",
   "share/runner-2026/recap-003.bin",
-  "share/runner-2026/recap-004.bin"
+  "share/runner-2026/recap-004.bin",
+  "share/runner-2026/recap-005.bin"
  ],
  "version": 2
 }
