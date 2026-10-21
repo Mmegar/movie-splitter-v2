@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:30:31+13:00",
+ "updated": "2026-10-22T08:30:33+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 18,
+  "part": 19,
   "parts_total": 20
  },
  "queue": [],
@@ -3141,6 +3141,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:30:33+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 18 of 20 ready",
+   "message": "Part 18: The Wrong Universe (5 narrated beats, about 60s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:28:03+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 17 of 20 ready",
@@ -4333,12 +4339,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Spider-Man Brand New Day (2026): Part 1 of 4 ready",
    "message": "Part 1: 1:13:47 to 1:17:02 (196s)\nOn its way to the laptop (Ready to post/Spider-Man Brand New Day (2026)/Best stretch).\n\n📝 Caption:\nwhen they said 'What the hell?' I felt that 😭\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-15T18:05:29+13:00",
-   "type": "planned",
-   "title": "[Highlights] Spider-Man Brand New Day (2026): 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Brand New Day (2026)/Highlights as they're made."
   }
  ]
 }
