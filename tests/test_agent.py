@@ -135,7 +135,9 @@ class AgentTestBase(TempDirTest):
         super().tearDown()
 
     def make_agent(self, **extra):
-        return agent.Agent(dict(self.cfg, **extra), self.tmp)
+        a = agent.Agent(dict(self.cfg, **extra), self.tmp)
+        a.remote_settings["cut_on"] = "github"      # these tests cover sending movies to GitHub
+        return a
 
     def send_ready(self, a):
         a.watcher.ready(now=0)

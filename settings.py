@@ -28,6 +28,7 @@ DEFAULTS = {
     "music_volume": 0.12,                # under the narration (hype montages play the song at full volume)
     "hype_count": 1,                     # Hype edits per movie
     "hype_montage_seconds": 15,
+    "cut_on": "laptop",                  # laptop = the laptop cuts movies itself (no upload); github = GitHub cuts them
     "story_editor": "ffmpeg",            # ffmpeg = GitHub cuts and narrates the parts (default);
                                          # filmcraft = the laptop builds them in FilmCraft
     "story_model": "claude-haiku-5-5",   # reads the subtitles + plot and watches frames (secret ANTHROPIC_API_KEY);

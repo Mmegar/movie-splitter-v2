@@ -1604,7 +1604,74 @@ def main():
             return
 
 
+def cut_here(src, srt, ready):
+    """
+    The laptop cuts a movie itself (setting cut_on: laptop), so nothing is uploaded: the parts go
+    straight into <ready>/<movie>/<mode>/, with the same status, notifications and captions as a
+    GitHub run. The laptop helper starts this as its own program: process.py --here <movie> [--srt f] --out <ready>.
+    """
+    global MODE
+    import tempfile
+    name = clean_name(src.name)
+    apply_style(SETTINGS.get("cut_style"))
+    labels = ", ".join(MODE_NAMES[m] for m in MODES)
+    work = Path(tempfile.mkdtemp(prefix="msplit-"))
+    captions = {}
+    status.run_started(None)
+    status.movie_started(name, "laptop", MODES)
+    notify(f"Started: {name}", f"Cutting on the laptop: {labels}. Parts go into '{READY}/{name}'.",
+           ["clapper"], kind="started")
+
+    def on_plan(mode, count, list_file, parts):
+        status.movie_planned(name, mode, count)
+        notify(f"{name}: {count} part{'s' if count != 1 else ''} planned", list_file.read_text(encoding="utf-8")[:900],
+               ["scissors"], kind="planned")
+
+    def on_part(mode, i, count, out, line):
+        label = MODE_NAMES[mode]
+        if CAPTIONS_ON and mode not in captions:
+            captions[mode] = make_captions(count, word=part_word(mode))
+        text = captions[mode][i - 1] if mode in captions else None
+        q = pick_quote(PART_CUES.get((mode, i)))
+        if text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
+            text = random.choice(GOOFY_QUOTE).format(q=q) + "\n" + text.split("\n", 1)[1]
+        if text and PART_CREDITS.get((mode, i)):
+            text += f"\n🎵 {PART_CREDITS[(mode, i)]}"
+        if text:
+            with open(out.parent / "captions.txt", "a", encoding="utf-8") as f:
+                f.write(f"{part_word(mode)} {i}  ({out.name})\n{text}\n\n")
+        a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text)
+        notify(f"{name}: {part_word(mode)} {i} of {count} ready", f"{line}\nIn {READY}/{name}/{label}.",
+               ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
+
+    try:
+        results = process_local(src, name, srt, ready / safe(name), work, on_plan, on_part)
+        summary = ", ".join(f"{MODE_NAMES[m]}: {len(f)} part{'s' if len(f) != 1 else ''}" for m, f in results.items())
+        status.movie_finished(name, SUB_INFO["note"] or "none (no speech found)")
+        notify(f"✅ Finished: {name}", f"{summary}.\nIn {READY}/{name}.", ["tada"], kind="finished")
+        status.run_finished()
+    except BaseException as e:
+        MODE = ""
+        status.movie_failed(name, e)
+        notify(f"❌ Failed: {name}", str(e)[:500], ["x"], kind="failed")
+        status.run_finished(failed=True)
+        raise
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+        status.flush()
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 2 and sys.argv[1] == "--here":
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--here", type=Path, required=True)
+        ap.add_argument("--srt", type=Path)
+        ap.add_argument("--out", type=Path, required=True)
+        a = ap.parse_args()
+        cut_here(a.here, a.srt, a.out)
+        sys.exit(0)
     # Local test: python3 process.py --local video.mp4 [subs.srt]
     if len(sys.argv) > 2 and sys.argv[1] == "--local":
         src = Path(sys.argv[2])

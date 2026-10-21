@@ -562,7 +562,8 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
                 print(f"(the story model couldn't plan the hype edit, using loud moments instead: {e})", flush=True)
         return hype_from_sound(total, list(loud), list(motion), list(score))
     if not ready:
-        why = ("add the ANTHROPIC_API_KEY secret on GitHub" if MODEL.startswith("claude")
+        why = ("add your Anthropic API key (anthropic_api_key in the laptop's config.json, or the "
+               "ANTHROPIC_API_KEY secret on GitHub)" if MODEL.startswith("claude")
                else f"the story model ({MODEL}) isn't available on this run")
         raise Skip(f"No narration: {why}.")
     if not cues:

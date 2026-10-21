@@ -87,6 +87,7 @@ DEFAULTS = {
     "composio_tiktok_version": "latest",
     "tiktok_username": "",
     "posting_dry_run": False,
+    "anthropic_api_key": "",           # for cutting on this laptop: Claude (Haiku) writes the stories
 }
 PLACEHOLDER = re.compile(r"PASTE|YOUR-|^$")
 log = logging.getLogger("agent")
@@ -220,6 +221,26 @@ def ensure_previews():
     return previews
 
 
+def find_ffmpeg():
+    """ffmpeg on this laptop (PATH, or where winget puts it), or None."""
+    found = shutil.which("ffmpeg")
+    if found:
+        return found
+    base = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages"
+    hits = sorted(base.glob("Gyan.FFmpeg*/*/bin/ffmpeg.exe")) if base.is_dir() else []
+    return str(hits[-1]) if hits else None
+
+
+def ensure_cutter_packages():
+    """What cutting on this laptop needs (speech-to-text, the narrator voice, Claude): installed once."""
+    try:
+        import anthropic, edge_tts, faster_whisper, numpy  # noqa: F401,E401
+    except ImportError:
+        log.info("Installing what cutting needs (once, a few minutes)...")
+        subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "faster-whisper", "edge-tts", "anthropic",
+                        "numpy"], timeout=1800, capture_output=True)
+
+
 # ---------------------------------------------------------------- watch folder
 class Watcher:
     """Finds movie files in the folder that have stopped changing size for `stable` seconds."""
@@ -304,6 +325,7 @@ class Agent:
         self.memory = self._load_memory()
         self.transfers = {}            # (direction, file) -> {direction, movie, file, percent}
         self.building = False          # FilmCraft is making an edit (build_edits)
+        self.cutting = None            # the movie being cut on this laptop right now (cut_movie)
         self.to_send = []              # wish-list downloads waiting to be sent: (path, wish line)
         self.online = True
         self.last_push, self.last_sent, self.progress_changed = 0.0, None, False
@@ -481,12 +503,59 @@ class Agent:
 
     def waiting_paths(self):
         """Originals already sent (or kept after their parts came back): don't send them again."""
-        return {s["path"] for s in self.memory["sends"].values() if s["status"] in ("sent", "done")}
+        return {s["path"] for s in self.memory["sends"].values() if s["status"] in ("sent", "done", "cutting")}
 
     def queue_sorted(self, paths):
         """Files in the order chosen in the app (anything not ordered goes last, by name)."""
         order = {n: i for i, n in enumerate(self.memory.get("queue_order") or [])}
         return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), p.name.lower()))
+
+    # ---- 1b. or cut it right here (setting cut_on: laptop): no upload at all
+    def laptop_cutting(self):
+        return str(self.remote_settings.get("cut_on", "laptop")).lower() == "laptop" and bool(find_ffmpeg())
+
+    def cut_movie(self, path):
+        """Cuts one movie on this laptop (process.py --here, as its own program), parts straight into Ready to post."""
+        path = Path(path)
+        srt = matching_srt(path)
+        rid = datetime.now().strftime("%Y%m%d-%H%M%S-") + secrets.token_hex(2)
+        with self.lock:
+            self.memory["sends"][rid] = {"path": str(path), "file": path.name, "size": path.stat().st_size,
+                                         "srt": str(srt) if srt else None, "source": "laptop", "status": "cutting",
+                                         "started": now_iso(), "style": self.style_for(path.name)}
+            self._save_memory()
+        ensure_cutter_packages()
+        settings_file = self.dir / "settings-for-cutting.json"
+        settings_file.write_text(json.dumps(self.remote_settings), encoding="utf-8")
+        env = dict(os.environ, SETTINGS_FILE=str(settings_file), STATUS_BACKEND="api",
+                   GITHUB_REPOSITORY=f"{self.cfg['github_owner']}/{self.cfg['github_repo']}",
+                   GITHUB_TOKEN=self.cfg["github_token"], NTFY_TOPIC=self.cfg.get("ntfy_topic") or "-",
+                   PYTHONIOENCODING="utf-8")
+        if self.cfg.get("anthropic_api_key"):
+            env["ANTHROPIC_API_KEY"] = self.cfg["anthropic_api_key"]
+        ff = find_ffmpeg()
+        env["PATH"] = str(Path(ff).parent) + os.pathsep + env.get("PATH", "")
+        if os.name == "nt":
+            env.setdefault("FONT_FILE", r"'C\:/Windows/Fonts/arialbd.ttf'")   # quoted: the drive's ":" in ffmpeg
+        cmd = [sys.executable, str(HERE.parent / "process.py"), "--here", str(path), "--out", str(self.ready_dir)]
+        if srt:
+            cmd += ["--srt", str(srt)]
+        log.info("Cutting %s on this laptop", path.name)
+        with open(self.dir / "cutting.log", "a", encoding="utf-8") as logf:
+            code = subprocess.run(cmd, cwd=str(HERE.parent), env=env, stdout=logf, stderr=subprocess.STDOUT).returncode
+        with self.lock:
+            self.memory["sends"][rid]["status"] = "sent"
+            self._save_memory()
+        self.finish_original(rid, failed=code != 0, error=None if code == 0 else "see laptop/cutting.log",
+                             movie=names.clean_name(path.name))
+
+    def _cut_in_background(self, path):
+        try:
+            self.cut_movie(path)
+        except Exception as e:
+            log.error("Cutting %s failed: %s", Path(path).name, e)
+        finally:
+            self.cutting = None
 
     def check_folder(self):
         busy = self.waiting_paths()
@@ -494,6 +563,12 @@ class Agent:
             if str(p) in busy:
                 continue
             if self.paused_reason():
+                return
+            if self.laptop_cutting():
+                if not self.cutting:                     # one movie at a time, in the background
+                    self.cutting = str(p)
+                    threading.Thread(target=self._cut_in_background, args=(p,), daemon=True).start()
+                    self.watcher.forget(p)
                 return
             try:
                 self.send_movie(p, "laptop")
