@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T08:02:55+13:00",
+ "updated": "2026-10-22T08:02:58+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 20
  },
  "queue": [],
@@ -2976,6 +2976,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T08:02:58+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 7 of 20 ready",
+   "message": "Part 7: Rooftops and Bad Timing (6 narrated beats, about 73s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T08:00:44+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 6 of 20 ready",
@@ -4168,12 +4174,6 @@
    "type": "finished",
    "title": "✅ Finished: Obsession (2026)",
    "message": "Best stretch: 3 parts, Highlights: 4 parts.\nThe laptop downloads them into Ready to post/Obsession (2026). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-15T15:33:09+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Obsession (2026): Part 4 of 4 ready",
-   "message": "Part 4: 1:40:37 to 1:44:54 (257s)  interest score 60/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nnobody: \nthis movie: 🤯\nPart 4 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
