@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:22:17+13:00",
+ "updated": "2026-10-21T21:28:17+13:00",
  "run": {
   "active": false,
   "run_id": 39559111364,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:28:17+13:00",
+   "type": "info",
+   "title": "🎬 Edit ready",
+   "message": "Spider-Man Across The Spider-Verse (2023): Spider-Man Across The Spider-Verse (2023) - Edit 01.mp4"
+  },
+  {
    "at": "2026-10-21T21:22:15+13:00",
    "type": "info",
    "title": "📥 Parts downloaded",
@@ -4058,12 +4064,6 @@
    "type": "planned",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): 12 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-15T07:50:05+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Spider-Man Across The Spider-Verse (2023): 4 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Best stretch as they're made."
   }
  ]
 }
