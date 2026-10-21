@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:53:44+13:00",
+ "updated": "2026-10-22T07:53:46+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 20
  },
  "queue": [],
@@ -2916,6 +2916,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:53:46+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 3 of 20 ready",
+   "message": "Part 3: Sixteen Months of Bad Luck (5 narrated beats, about 62s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T07:51:27+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 2 of 20 ready",
@@ -4108,12 +4114,6 @@
    "type": "part_ready",
    "title": "[Highlights] Obsession (2026): Part 1 of 4 ready",
    "message": "Part 1: 1:35 to 5:06 (210s)  interest score 63/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nwatching this instead of sleeping again 🌚\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-15T15:14:18+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Obsession (2026): Part 3 of 3 ready",
-   "message": "Part 3: 39:12 to 43:22 (250s)\nOn its way to the laptop (Ready to post/Obsession (2026)/Best stretch).\n\n📝 Caption:\n'So what do you want to do?' and then THIS happened 😳\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
