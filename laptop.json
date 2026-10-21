@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T17:35:22+07:00",
+ "updated": "2026-10-21T17:35:39+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -119,6 +119,11 @@
    "modified": "2026-10-17T16:11:19+07:00"
   },
   {
+   "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
+   "size_mb": 2008,
+   "modified": "2026-10-16T10:31:01+07:00"
+  },
+  {
    "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
    "size_mb": 2947,
    "modified": "2026-10-16T10:21:09+07:00"
@@ -136,12 +141,6 @@
    "name": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
    "size_mb": 3451,
    "modified": "2026-10-17T02:50:52+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-   "size_mb": 2008,
-   "modified": "2026-10-16T10:31:01+07:00",
    "folder": "done"
   },
   {
