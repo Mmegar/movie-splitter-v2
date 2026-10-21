@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:03:14+13:00",
+ "updated": "2026-10-21T17:03:18+13:00",
  "run": {
   "active": true,
   "run_id": 39537512350,
@@ -16,12 +16,12 @@
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-21T16:17:51+13:00",
-   "finished": null,
+   "finished": "2026-10-21T17:03:18+13:00",
    "duration": 5926.0,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "recap": {
@@ -3057,6 +3057,12 @@
  },
  "events": [
   {
+   "at": "2026-10-21T17:03:16+13:00",
+   "type": "part_ready",
+   "title": "[Hype edit] Runner (2026): Edit 1 of 1 ready",
+   "message": "Edit 1: Side Character: setup 1:32:48, payoff 1:33:10, 12 montage shots\nOn its way to the laptop (Ready to post/Runner (2026)/Hype edit).\n\n📝 Caption:\nThis deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+  },
+  {
    "at": "2026-10-21T17:00:28+13:00",
    "type": "planned",
    "title": "[Hype edit] Runner (2026): 1 part planned",
@@ -4249,12 +4255,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Kung Fu Hustle (2004): 1 part in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Kung Fu Hustle (2004)\nCustom clips: 1"
-  },
-  {
-   "at": "2026-10-15T00:06:00+13:00",
-   "type": "finished",
-   "title": "[Custom clips] ✅ Clips done: Kung Fu Hustle (2004)",
-   "message": "1 custom clip made."
   }
  ]
 }
