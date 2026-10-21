@@ -1,27 +1,27 @@
 {
  "version": 1,
- "updated": "2026-10-21T21:18:09+13:00",
+ "updated": "2026-10-21T21:18:18+13:00",
  "run": {
   "active": true,
   "run_id": 39559111364,
   "started": "2026-10-21T20:03:19+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
-  "mode": "recap",
+  "mode": "hype",
   "stage": "uploading",
-  "part": 2,
-  "parts_total": 2
+  "part": 1,
+  "parts_total": 1
  },
  "queue": [],
  "movies": [
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-21T17:20:40+13:00",
-   "finished": null,
+   "finished": "2026-10-21T21:18:18+13:00",
    "duration": 8405.8,
-   "subtitles": null,
+   "subtitles": "made automatically (English)",
    "error": null,
    "modes": {
     "recap": {
@@ -42,6 +42,21 @@
         "url": null,
         "error": null
        }
+      },
+      {
+       "n": 2,
+       "start": 7718.0,
+       "end": 8092.0,
+       "seconds": 374.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap/Spider-Man Across The Spider-Verse (2023) - Part 02.mp4",
+       "caption": "Nobody talks about this part 👀\nPart 2 🎬 · And that's a wrap 🎬 Follow for the next one\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
       }
      ]
     },
@@ -53,7 +68,23 @@
     "hype": {
      "label": "Hype edit",
      "planned": 1,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 7267.0,
+       "end": 7349.0,
+       "seconds": 82.0,
+       "drive_path": "Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit/Spider-Man Across The Spider-Verse (2023) - Edit 01.mp4",
+       "caption": "Me pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": null,
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    },
    "thumbs": {
@@ -2835,6 +2866,18 @@
  },
  "events": [
   {
+   "at": "2026-10-21T21:18:15+13:00",
+   "type": "part_ready",
+   "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): Edit 1 of 1 ready",
+   "message": "Edit 1: The Doubt: setup 2:01:07, payoff 2:02:07, 4 montage shots\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit).\n\n📝 Caption:\nMe pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+  },
+  {
+   "at": "2026-10-21T21:18:12+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 2 of 2 ready",
+   "message": "Part 2: The Spot's Vision and Miles' Descent (11 narrated beats, about 92s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nNobody talks about this part 👀\nPart 2 🎬 · And that's a wrap 🎬 Follow for the next one\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
+  },
+  {
    "at": "2026-10-21T21:17:57+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 1 of 2 ready",
@@ -4021,18 +4064,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Spider-Man.Across.The.Spider-Verse.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T00:51:59+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 3",
-   "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015015156B36322CE73A855493D5B\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
-  },
-  {
-   "at": "2026-10-15T00:46:58+07:00",
-   "type": "post_failed",
-   "title": "⚠️ TikTok post failed: The Notebook (2004): Part 3",
-   "message": "[Highlights] {\"error\":{\"code\":\"spam_risk_too_many_pending_share\",\"message\":\"spam_risk_too_many_pending_share\",\"log_id\":\"20261015014654F5C726D6B144E740EC13\"}}\nIt will be tried again at the next posting time (up to 3 tries)."
   }
  ]
 }
