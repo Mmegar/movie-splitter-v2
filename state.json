@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:58:22+13:00",
+ "updated": "2026-10-22T07:58:25+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 20
  },
  "queue": [],
@@ -2946,6 +2946,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T07:58:24+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 5 of 20 ready",
+   "message": "Part 5: Holes, Grounded, and Two Months (5 narrated beats, about 58s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
+  },
+  {
    "at": "2026-10-22T07:56:12+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 4 of 20 ready",
@@ -4138,12 +4144,6 @@
    "type": "part_ready",
    "title": "[Highlights] Obsession (2026): Part 3 of 4 ready",
    "message": "Part 3: 1:34:44 to 1:38:12 (207s)  interest score 68/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-15T15:24:11+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Obsession (2026): Part 2 of 4 ready",
-   "message": "Part 2: 10:51 to 14:49 (238s)  interest score 62/100\nOn its way to the laptop (Ready to post/Obsession (2026)/Highlights).\n\n📝 Caption:\nexplain this to me like I'm 5 🧸\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
