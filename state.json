@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T01:04:55+13:00",
+ "updated": "2026-10-22T01:04:56+13:00",
  "run": {
   "active": true,
   "run_id": 39595375193,
@@ -2866,6 +2866,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T01:04:56+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Runner (2026)",
+   "message": "Hype edit: 1 part.\nThe laptop downloads them into Ready to post/Runner (2026). The copy sent to GitHub has been deleted."
+  },
+  {
    "at": "2026-10-22T01:04:53+13:00",
    "type": "part_ready",
    "title": "[Hype edit] Runner (2026): Edit 1 of 1 ready",
@@ -4058,12 +4064,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 6 of 12 ready",
    "message": "Part 6: 59:51 to 1:01:04 (73s)  interest score 62/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nwatching this instead of sleeping again 🌚\nPart 6 🎬 · Part 7 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T08:16:56+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 5 of 12 ready",
-   "message": "Part 5: 47:34 to 49:17 (102s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nwhen they said 'Hey, Gw-- Uh, Gwen?' I felt that 😭\nPart 5 🎬 · Part 6? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
