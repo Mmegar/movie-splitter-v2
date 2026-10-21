@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T02:34:27+13:00",
+ "updated": "2026-10-22T02:34:29+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -2837,6 +2837,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T02:34:29+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Runner (2026): 5 parts planned",
+   "message": "Runner (2026)\nMode: Movie recap\n\nPart 1: A Fixer's Impossible Errands (6 narrated beats, about 77s of voice)\nPart 2: The Liver and the Talkative Courier (6 narrated beats, about 61s of voice)\nPart 3: Chased Through a Tunnel (6 narrated beats, about 58s of voice)\nPart 4: Damian Makes His Demands (6 narrated beats, about 61s of voice)\nPart 5: Hospital, Lies and a Last Stand (8 narrated beats, about 83s of voice)\n"
+  },
+  {
    "at": "2026-10-22T02:28:44+13:00",
    "type": "started",
    "title": "Started: Runner (2026)",
@@ -4029,12 +4035,6 @@
    "type": "part_ready",
    "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 9 of 12 ready",
    "message": "Part 9: 1:35:16 to 1:37:08 (112s)  interest score 66/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nthe way they said 'Can this day get any damn weirder?' 🫠\nPart 9 🎬 · Part 10 drops soon, stay hydrated 💧\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-15T08:28:51+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Spider-Man Across The Spider-Verse (2023): Part 8 of 12 ready",
-   "message": "Part 8: 1:11:28 to 1:15:44 (255s)  interest score 67/100\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Highlights).\n\n📝 Caption:\nme to my group chat: 'You’re not a joke!' 📱\nPart 8 🎬 · Part 9 is where it gets wild 🌪️\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
