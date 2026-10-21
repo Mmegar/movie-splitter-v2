@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T07:43:08+13:00",
+ "updated": "2026-10-22T07:45:57+13:00",
  "run": {
   "active": true,
   "run_id": 39654089493,
@@ -31,7 +31,7 @@
     },
     "character": {
      "label": "Character story",
-     "planned": 0,
+     "planned": 11,
      "parts": []
     }
    }
