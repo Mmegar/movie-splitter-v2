@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T00:56:34+13:00",
+ "updated": "2026-10-22T00:57:59+13:00",
  "run": {
   "active": true,
   "run_id": 39595375193,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "runner-2026",
+   "name": "Runner (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-22T00:57:59+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    },
+    "hype": {
+     "label": "Hype edit",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
@@ -95,59 +123,6 @@
     "w": 160,
     "h": 90,
     "path": "spider-man-across-the-spider-verse-2023/thumbs.bin"
-   }
-  },
-  {
-   "id": "runner-2026",
-   "name": "Runner (2026)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-21T16:17:51+13:00",
-   "finished": "2026-10-21T17:03:18+13:00",
-   "duration": 5926.0,
-   "subtitles": "made automatically (English)",
-   "error": null,
-   "modes": {
-    "recap": {
-     "label": "Movie recap",
-     "planned": 0,
-     "parts": []
-    },
-    "character": {
-     "label": "Character story",
-     "planned": 0,
-     "parts": []
-    },
-    "hype": {
-     "label": "Hype edit",
-     "planned": 1,
-     "parts": [
-      {
-       "n": 1,
-       "start": 5568.0,
-       "end": 5610.0,
-       "seconds": 42.0,
-       "drive_path": "Ready to post/Runner (2026)/Hype edit/Runner (2026) - Edit 01.mp4",
-       "caption": "This deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
-       "preview": "runner-2026/hype-001.bin",
-       "post": {
-        "status": "inbox",
-        "at": "2026-10-21T21:01:30+13:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 16.5,
-    "count": 359,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "runner-2026/thumbs.bin"
    }
   },
   {
