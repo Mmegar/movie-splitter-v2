@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-21T17:30:45+13:00",
+ "updated": "2026-10-21T17:30:47+13:00",
  "run": {
   "active": true,
   "run_id": 39543226609,
   "started": "2026-10-21T17:19:22+13:00",
   "movie": "Spider-Man Across The Spider-Verse (2023)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "subtitles",
   "part": null,
   "parts_total": null
  },
