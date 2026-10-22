@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:28:01+13:00",
+ "updated": "2026-10-23T06:28:04+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T06:24:37+13:00",
   "movie": "Toy Story 5 (2026)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
