@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:49:43+13:00",
+ "updated": "2026-10-23T06:53:24+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -107,6 +107,22 @@
         "error": null
        },
        "cover": "toy-story-5-2026/recap-05-cover.bin"
+      },
+      {
+       "n": 6,
+       "start": 2639.0,
+       "end": 2844.0,
+       "seconds": 107.3,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Movie recap/Toy Story 5 (2026) - Part 06.mp4",
+       "caption": "Lily wanted the toys gone. Lily got her wish. 🤖 Woody and Buzz are NOT done.\nPart 6 🎬 · Should I post Part 7? 👇\n#ToyStory5 #TomHanks #TimAllenAs #BuzzLightyear #movie",
+       "preview": "toy-story-5-2026/recap-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "toy-story-5-2026/recap-06-cover.bin"
       }
      ]
     }
