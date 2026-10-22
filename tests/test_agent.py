@@ -1,6 +1,8 @@
 import http.server
 import json
 import os
+import subprocess
+import sys
 import threading
 import urllib.parse
 from unittest import mock
@@ -354,6 +356,72 @@ class StuckCutTest(AgentTestBase):
         self.assertEqual(a.run_command("cut_now", {}), "Nothing in To edit to cut")
         a.cutting = str(self.watch / "Busy.mp4")
         self.assertEqual(a.run_command("cut_now", {}), "Already cutting Busy.mp4")
+
+
+    def test_stuck_cut_with_its_file_gone_is_cleared(self):
+        a = self.make_agent()
+        gone = self.watch / "Gone Girl (2014).mp4"
+        a.memory["sends"] = {"r1": {"path": str(gone), "file": gone.name, "source": "laptop", "status": "cutting"}}
+        a.state_ready()
+        status.run_started(None)
+        status.movie_started("Gone Girl (2014)", "laptop", ["recap"])
+        status.flush()
+        a.recover_stuck_cuts()
+        self.assertEqual(a.memory["sends"], {})
+        st = status.load_state()
+        self.assertFalse(st["run"]["active"])
+        self.assertEqual(st["movies"][0]["status"], "failed")
+        self.assertIn("⚠️ Movie file gone", [n["title"] for n in self.web.ntfy])
+
+    def test_stuck_cut_with_its_file_still_there_waits_in_the_queue(self):
+        a = self.make_agent()
+        (self.watch / "Here (2020).mp4").write_bytes(b"movie")
+        a.state_ready()
+        status.run_started(None)
+        status.movie_started("Here (2020)", "laptop", ["recap"])
+        status.flush()
+        self.assertTrue(a.clear_stuck_run())
+        st = status.load_state()
+        self.assertFalse(st["run"]["active"])
+        self.assertEqual(st["movies"][0]["status"], "queued")
+        self.assertFalse(a.clear_stuck_run())                # nothing left to clear
+
+    def test_github_runs_are_left_alone(self):
+        a = self.make_agent()
+        a.state_ready()
+        status.run_started(12345)
+        status.movie_started("Remote (2020)", "laptop", ["recap"])
+        status.flush()
+        self.assertFalse(a.clear_stuck_run())
+        self.assertTrue(status.load_state()["run"]["active"])
+
+    def test_stop_button_on_the_laptop(self):
+        a = self.make_agent()
+        self.assertEqual(a.run_command("stop_cut", {}), "Nothing is cutting on the laptop")
+        movie = self.watch / "Long (2020).mp4"
+        movie.write_bytes(b"movie")
+        a.cutting = str(movie)
+        a.cut_proc = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"], start_new_session=True)
+        self.assertEqual(a.run_command("stop_cut", {}), "Stopping Long (2020).mp4")
+        self.assertNotEqual(a.cut_proc.wait(timeout=10), 0)
+        self.assertTrue(a.stop_asked)
+
+    def test_stopped_movie_waits_for_start(self):
+        a = self.make_agent()
+        a.remote_settings["cut_on"] = "laptop"
+        movie = self.watch / "Paused (2020).mp4"
+        movie.write_bytes(b"movie")
+        a.memory["stopped"] = [movie.name]
+        started = []
+        with mock.patch.object(agent, "find_ffmpeg", return_value="/usr/bin/ffmpeg"), \
+                mock.patch.object(a, "_cut_in_background", side_effect=started.append):
+            a.watcher.ready(now=0)
+            a.check_folder()
+            self.assertEqual(a.cutting, None)
+            a.run_command("cut_now", {})
+            self.assertEqual(a.memory["stopped"], [])
+            a.check_folder()
+            self.assertEqual(a.cutting, str(movie))
 
 
 class SubtitleTest(TempDirTest):

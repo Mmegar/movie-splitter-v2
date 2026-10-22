@@ -7,6 +7,20 @@ $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $LogFile = Join-Path $Here "startup_apps.log"
 function Log($m) { "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $m" | Out-File -FilePath $LogFile -Append -Encoding utf8 }
 
+# The helper itself: started now if it isn't running (normally the "Movie Splitter laptop helper" task does this).
+# A second copy just quits, so this is always safe. After a restart it carries on with any cut that was interrupted.
+$running = Get-NetTCPConnection -LocalPort 47231 -State Listen -ErrorAction SilentlyContinue
+if (-not $running) {
+    $task = Get-ScheduledTask -TaskName "Movie Splitter laptop helper" -ErrorAction SilentlyContinue
+    if ($task) { Start-ScheduledTask -TaskName "Movie Splitter laptop helper"; Log "Started the helper (task)" }
+    else {
+        $pyw = Get-Command pyw -ErrorAction SilentlyContinue
+        if (-not $pyw) { $pyw = Get-Command pythonw -ErrorAction SilentlyContinue | Where-Object { $_.Source -notlike "*WindowsApps*" } | Select-Object -First 1 }
+        if ($pyw) { Start-Process -FilePath $pyw.Source -ArgumentList "`"$(Join-Path $Here 'agent.py')`"" -WorkingDirectory $Here -WindowStyle Hidden; Log "Started the helper ($($pyw.Source))" }
+        else { Log "Couldn't start the helper: Python isn't installed (run install_windows.ps1)" }
+    }
+}
+
 $cfg = @{}
 try { $cfg = Get-Content (Join-Path $Here "config.json") -Raw | ConvertFrom-Json } catch { }
 if ($cfg.startup_apps -eq $false) { Log "Turned off in config.json"; exit 0 }
