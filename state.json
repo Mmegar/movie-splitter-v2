@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:54:09+13:00",
+ "updated": "2026-10-22T22:54:12+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3081,6 +3081,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T22:54:12+13:00",
+   "type": "planned",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): 8 parts planned",
+   "message": "The Fantastic 4 First Steps (2025)\nMode: Movie recap\n\nPart 1: Four Heroes, One Hungry Giant (12 narrated beats, about 64s of voice)\nPart 2: The Surfer Brings Bad News (14 narrated beats, about 69s of voice)\nPart 3: Blowing Up Our Own Ride (14 narrated beats, about 68s of voice)\nPart 4: The World Wants The Baby (13 narrated beats, about 61s of voice)\nPart 5: Moving Planet Earth (14 narrated beats, about 66s of voice)\nPart 6: The Herald Who Turned (14 narrated beats, about 65s of voice)\nPart 7: The Trap That Almost Worked (11 narrated beats, about 50s of voice)\nPart 8: Our Tiny Miracle Worker (11 narrated beats, about 50s of voice)\n"
+  },
+  {
    "at": "2026-10-22T22:44:09+13:00",
    "type": "started",
    "title": "Started: The Fantastic 4 First Steps (2025)",
@@ -4273,12 +4279,6 @@
    "type": "started",
    "title": "Started: Superman (2025)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Superman (2025)'."
-  },
-  {
-   "at": "2026-10-15T20:04:32+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
