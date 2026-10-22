@@ -65,7 +65,7 @@
   "narrator_tempo": 1.2,
   "light_sweep": true,
   "light_sweep_seconds": 3,
-  "narrator_funny": 0.75,
+  "narrator_funny": 0.6,
   "script_direction": "",
   "recap_part_seconds": 120,
   "music": true,
