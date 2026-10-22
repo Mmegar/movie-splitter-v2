@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:10:40+13:00",
+ "updated": "2026-10-22T23:10:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 8
  },
  "queue": [],
@@ -3162,6 +3162,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T23:10:42+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 5 of 8 ready",
+   "message": "Part 5: Moving Planet Earth (14 narrated beats, about 66s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
+  },
+  {
    "at": "2026-10-22T23:07:37+13:00",
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 4 of 8 ready",
@@ -4354,12 +4360,6 @@
    "type": "part_ready",
    "title": "[Highlights] Superman (2025): Part 1 of 4 ready",
    "message": "Part 1: 31:28 to 35:08 (220s)  interest score 70/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Get off!' 📱\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T02:36:46+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Superman (2025): Part 3 of 3 ready",
-   "message": "Part 3: 38:22 to 42:24 (241s)\nOn its way to the laptop (Ready to post/Superman (2025)/Best stretch).\n\n📝 Caption:\n'You have the footage?' and then THIS happened 😳\nPart 3 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
