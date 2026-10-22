@@ -1,11 +1,13 @@
 {
- "updated": "2026-10-22T11:13:22+07:00",
+ "updated": "2026-10-22T11:13:37+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4"
+ },
  "transfers": [],
  "uploaded": [
   {
@@ -102,16 +104,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-   "size_mb": 2008,
-   "modified": "2026-10-16T10:31:01+07:00",
-   "sending": false,
-   "style": "classic",
-   "character": ""
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
