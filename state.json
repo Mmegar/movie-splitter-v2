@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:26:05+13:00",
+ "updated": "2026-10-22T22:28:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,7 +16,7 @@
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
-   "status": "processing",
+   "status": "queued",
    "source": "laptop",
    "started": "2026-10-22T22:25:54+13:00",
    "finished": null,
@@ -34,7 +34,8 @@
      "planned": 0,
      "parts": []
     }
-   }
+   },
+   "note": "Stopped from the app. Tap Start to cut it again."
   },
   {
    "id": "john-wick-chapter-2-2017",
