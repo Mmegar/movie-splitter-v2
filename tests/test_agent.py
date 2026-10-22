@@ -356,6 +356,35 @@ class StuckCutTest(AgentTestBase):
         self.assertEqual(a.run_command("cut_now", {}), "Already cutting Busy.mp4")
 
 
+class SubtitleTest(TempDirTest):
+    def test_downloads_english_subtitles_named_like_the_movie(self):
+        movie = self.tmp / "Knives.Out.2019.1080p.mkv"
+        movie.write_bytes(b"x" * 200000)
+        calls = []
+
+        def http(method, url, headers=None, body=None, timeout=60):
+            calls.append((method, url))
+            if "/subtitles?" in url and "moviehash" in url:
+                return 200, json.dumps({"data": []}).encode()
+            if "/subtitles?" in url:
+                self.assertIn("query=Knives+Out", url)
+                self.assertIn("year=2019", url)
+                return 200, json.dumps({"data": [
+                    {"attributes": {"language": "en", "download_count": 5, "hearing_impaired": True,
+                                    "files": [{"file_id": 1}]}},
+                    {"attributes": {"language": "en", "download_count": 3, "files": [{"file_id": 2}]}},
+                    {"attributes": {"language": "fr", "download_count": 99, "files": [{"file_id": 3}]}}]}).encode()
+            if url.endswith("/download"):
+                self.assertEqual(json.loads(body), {"file_id": 2})
+                return 200, json.dumps({"link": "https://dl.example/sub.srt"}).encode()
+            return 200, b"1\n00:00:01,000 --> 00:00:02,000\nHello\n"
+
+        out = agent.download_subtitles(movie, {"opensubtitles_api_key": "k"}, http)
+        self.assertEqual(out, self.tmp / "Knives.Out.2019.1080p.srt")
+        self.assertEqual(agent.matching_srt(movie), out)
+        self.assertIsNone(agent.download_subtitles(movie, {}, http))     # no key: nothing to do
+
+
 class PostingTest(AgentTestBase):
     def setUp(self):
         super().setUp()

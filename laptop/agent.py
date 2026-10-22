@@ -37,6 +37,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 
@@ -71,6 +72,7 @@ DEFAULTS = {
     "github_token": "",
     "github_api_url": ghapi.API,
     "ntfy_topic": "",
+    "opensubtitles_api_key": "",       # free key from opensubtitles.com/consumers: English .srt downloaded for each movie
     "original_after": "move",          # keep | move (to <output>/Done) | delete
     "poll_seconds": 15,
     "stable_seconds": 60,
@@ -302,6 +304,84 @@ class Watcher:
                 return True
         except OSError:
             return False
+
+
+# ---------------------------------------------------------------- English subtitles from OpenSubtitles
+OPENSUBS = "https://api.opensubtitles.com/api/v1"
+
+
+def movie_hash(path):
+    """OpenSubtitles' file hash: the size plus the first and last 64 KB read as 64-bit numbers."""
+    import struct
+    size = path.stat().st_size
+    if size < 131072:
+        return None
+    h = size
+    with open(path, "rb") as f:
+        for offset in (0, size - 65536):
+            f.seek(offset)
+            for (n,) in struct.iter_unpack("<Q", f.read(65536)):
+                h = (h + n) & 0xFFFFFFFFFFFFFFFF
+    return f"{h:016x}"
+
+
+def pick_subtitle(results):
+    """The best English subtitle: an exact file match first, then not-for-hearing-impaired, then most downloaded."""
+    best = None
+    for r in results or []:
+        a = r.get("attributes") or {}
+        files = a.get("files") or []
+        if a.get("language") != "en" or not files or a.get("ai_translated") or a.get("machine_translated"):
+            continue
+        key = (bool(a.get("moviehash_match")), not a.get("hearing_impaired"), a.get("download_count") or 0)
+        if best is None or key > best[0]:
+            best = (key, files[0]["file_id"], a.get("release") or "")
+    return best and (best[1], best[2])
+
+
+def download_subtitles(movie, cfg, http=None):
+    """Finds English subtitles for a movie online (OpenSubtitles: by file hash, then by title and year) and saves
+    them next to it as '<same name>.srt'. Returns the .srt path, or None (the cutter then transcribes the audio)."""
+    http = http or archive.http_request
+    key = str(cfg.get("opensubtitles_api_key") or "").strip()
+    if not key:
+        return None
+    head = {"Api-Key": key, "User-Agent": "MovieSplitter v1.0", "Accept": "application/json",
+            "Content-Type": "application/json"}
+    user, pw = cfg.get("opensubtitles_username"), cfg.get("opensubtitles_password")
+    if user and pw:                                  # optional: a login gives more downloads a day
+        code, data = http("POST", OPENSUBS + "/login", head, json.dumps({"username": user, "password": pw}).encode())
+        if code == 200:
+            head["Authorization"] = "Bearer " + json.loads(data)["token"]
+    name = names.clean_name(movie.name)
+    m = re.match(r"(.+) \((\d{4})\)$", name)
+    title, year = (m.group(1), m.group(2)) if m else (name, None)
+    searches = []
+    h = movie_hash(movie)
+    if h:
+        searches.append({"moviehash": h, "languages": "en"})
+    searches.append(dict({"query": title, "languages": "en"}, **({"year": year} if year else {})))
+    for q in searches:
+        code, data = http("GET", OPENSUBS + "/subtitles?" + urllib.parse.urlencode(sorted(q.items())), head)
+        if code != 200:
+            log.warning("Subtitle search for %s failed (%s): %s", movie.name, code, data[:200])
+            continue
+        hit = pick_subtitle(json.loads(data).get("data"))
+        if not hit:
+            continue
+        code, data = http("POST", OPENSUBS + "/download", head, json.dumps({"file_id": hit[0]}).encode())
+        if code != 200:
+            log.warning("Subtitle download for %s failed (%s): %s", movie.name, code, data[:200])
+            return None
+        code, srt = http("GET", json.loads(data)["link"], {"User-Agent": "MovieSplitter v1.0"})
+        if code != 200 or b"-->" not in srt:
+            return None
+        out = movie.with_suffix(".srt")
+        out.write_bytes(srt)
+        log.info("Downloaded English subtitles for %s (%s)", movie.name, hit[1] or "OpenSubtitles")
+        return out
+    log.info("No English subtitles online for %s: the cutter will transcribe it", movie.name)
+    return None
 
 
 def matching_srt(movie):
@@ -586,6 +666,19 @@ class Agent:
         finally:
             self.cutting = None
 
+    def get_subtitles(self, movie):
+        """Once per movie: English subtitles from the internet when there's no .srt next to it."""
+        tried = self.memory.setdefault("subs_tried", [])
+        if matching_srt(movie) or movie.name in tried or not self.cfg.get("opensubtitles_api_key"):
+            return
+        try:
+            download_subtitles(movie, self.cfg)
+        except Exception as e:
+            log.warning("Couldn't get subtitles for %s: %s", movie.name, e)
+        with self.lock:
+            self.memory["subs_tried"] = (tried + [movie.name])[-500:]
+            self._save_memory()
+
     def check_folder(self):
         busy = self.waiting_paths()
         for p in self.queue_sorted(self.watcher.ready()):
@@ -593,6 +686,7 @@ class Agent:
                 continue
             if self.paused_reason():
                 return
+            self.get_subtitles(p)
             if self.laptop_cutting():
                 if not self.cutting:                     # one movie at a time, in the background
                     self.cutting = str(p)
