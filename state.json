@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:29:51+13:00",
+ "updated": "2026-10-22T17:29:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3194,6 +3194,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:29:54+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 1 of 8 ready",
+   "message": "Part 1: Stolen Car, Very Bad Week (13 narrated beats, about 64s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
+  },
+  {
    "at": "2026-10-22T17:24:53+13:00",
    "type": "planned",
    "title": "[Character story] John Wick Chapter 2 (2017): 8 parts planned",
@@ -4386,12 +4392,6 @@
    "type": "part_ready",
    "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
    "message": "Part 1: 4:05 to 8:25 (260s)  interest score 66/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\nokay who let them cook 🧑‍🍳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T21:21:08+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 3 of 3 ready",
-   "message": "Part 3: 59:30 to 1:03:28 (239s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\n'Is there anything windy up there?' is my new personality 😤\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
