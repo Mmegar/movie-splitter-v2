@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T21:52:39+13:00",
+ "updated": "2026-10-22T21:52:41+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -594,10 +594,10 @@
   {
    "id": "runner-2026",
    "name": "Runner (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-22T02:28:44+13:00",
-   "finished": null,
+   "finished": "2026-10-22T21:52:41+13:00",
    "duration": 5926.0,
    "subtitles": null,
    "error": null,
