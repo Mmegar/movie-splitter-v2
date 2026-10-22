@@ -524,7 +524,7 @@ class Agent:
         with self.lock:
             self.memory["sends"][rid] = {"path": str(path), "file": path.name, "size": path.stat().st_size,
                                          "srt": str(srt) if srt else None, "source": "laptop", "status": "cutting",
-                                         "started": now_iso(), "style": self.style_for(path.name)}
+                                         "started": now_iso(), "style": self.style_for(path.name), "local": True}
             self._save_memory()
         ensure_cutter_packages()
         settings_file = self.dir / "settings-for-cutting.json"
@@ -553,6 +553,29 @@ class Agent:
             self._save_memory()
         self.finish_original(rid, failed=code != 0, error=None if code == 0 else "see laptop/cutting.log",
                              movie=names.clean_name(path.name))
+
+    def recover_stuck_cuts(self):
+        """A laptop cut the helper lost track of (it restarted mid-cut, e.g. to update itself): once the cutter
+        has gone quiet, the movie goes to Done if parts were made, or is cut again if none were."""
+        log_file = self.dir / "cutting.log"
+        if log_file.exists() and time.time() - log_file.stat().st_mtime < 600:
+            return                                       # a cutter may still be running: wait until it's quiet
+        stuck = [(rid, s) for rid, s in list(self.memory["sends"].items())
+                 if (s.get("status") == "cutting" or (s.get("status") == "sent" and s.get("local")))
+                 and not s.get("clips") and str(s.get("path")) != str(self.cutting)]   # (only cuts made here)
+        for rid, s in stuck:
+            movie = names.clean_name(s["file"])
+            folder = self.ready_dir / safe_name(movie)
+            made = folder.is_dir() and any(folder.rglob("*.mp4"))
+            if made:
+                log.info("Finishing %s (its cut was interrupted; the parts are in Ready to post)", s["file"])
+                self.memory["sends"][rid]["status"] = "sent"
+                self.finish_original(rid, movie=movie)
+            else:
+                log.info("Cutting %s again (its cut was interrupted before any part was made)", s["file"])
+                with self.lock:
+                    del self.memory["sends"][rid]
+                    self._save_memory()
 
     def _cut_in_background(self, path):
         try:
@@ -856,7 +879,14 @@ class Agent:
                 folder = self.output / ("Failed" if failed else "Done")
                 folder.mkdir(parents=True, exist_ok=True)
                 to = unique(folder / f.name)
-                shutil.move(str(f), str(to))
+                for attempt in range(5):                 # Windows / OneDrive can hold the file for a moment
+                    try:
+                        shutil.move(str(f), str(to))
+                        break
+                    except PermissionError:
+                        if attempt == 4:
+                            raise
+                        time.sleep(3)
                 kept["srt" if f.suffix.lower() == ".srt" else "path"] = str(to)
             else:
                 kept["srt" if f.suffix.lower() == ".srt" else "path"] = str(f)
@@ -1601,7 +1631,13 @@ class Agent:
                 self.cleanup_old_parts()
             except Exception as e:
                 log.error("Cleaning up old parts failed: %s", e)
-        if now - self.last["update"] >= 300 and not self.transfers:
+        if not self.cutting and now - self.last.get("stuck", 0) >= 120:
+            self.last["stuck"] = now
+            try:
+                self.recover_stuck_cuts()
+            except Exception as e:
+                log.error("Tidying up an interrupted cut failed: %s", e)
+        if now - self.last["update"] >= 300 and not self.transfers and not self.cutting:   # never mid-cut
             self.last["update"] = now
             try:
                 if self.self_update():

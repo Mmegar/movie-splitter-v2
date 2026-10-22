@@ -329,6 +329,27 @@ class ReceiveTest(AgentTestBase):
         self.assertTrue(new.exists())
 
 
+class StuckCutTest(AgentTestBase):
+    def test_interrupted_laptop_cut_goes_to_done_or_is_cut_again(self):
+        a = self.make_agent()
+        made, lost = self.watch / "Made It (2020).mp4", self.watch / "Lost It (2021).mp4"
+        for f in (made, lost):
+            f.write_bytes(b"movie")
+        parts = a.ready_dir / "Made It (2020)" / "Movie recap"
+        parts.mkdir(parents=True)
+        (parts / "Made It (2020) - Part 1.mp4").write_bytes(b"part")
+        a.memory["sends"] = {
+            "r1": {"path": str(made), "file": made.name, "source": "laptop", "status": "cutting"},
+            "r2": {"path": str(lost), "file": lost.name, "source": "laptop", "status": "sent", "local": True},
+            "r3": {"path": str(self.watch / "Github.mp4"), "file": "Github.mp4", "source": "laptop", "status": "sent"}}
+        a.recover_stuck_cuts()
+        self.assertFalse(made.exists())
+        self.assertTrue((a.output / "Done" / made.name).exists())
+        self.assertTrue(lost.exists())                       # nothing was made: it gets cut again
+        self.assertNotIn("r2", a.memory["sends"])
+        self.assertIn("r3", a.memory["sends"])               # waiting for GitHub: left alone
+
+
 class PostingTest(AgentTestBase):
     def setUp(self):
         super().setUp()
