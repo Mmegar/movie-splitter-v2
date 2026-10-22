@@ -1,18 +1,36 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:24:37+13:00",
+ "updated": "2026-10-23T06:24:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T06:24:37+13:00",
-  "movie": null,
+  "movie": "Toy Story 5 (2026)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "toy-story-5-2026",
+   "name": "Toy Story 5 (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-23T06:24:40+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
@@ -860,192 +878,6 @@
      ]
     }
    }
-  },
-  {
-   "id": "toy-story-5-2026",
-   "name": "Toy Story 5 (2026)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-17T23:53:35+13:00",
-   "finished": "2026-10-18T00:40:47+13:00",
-   "duration": 6206.8,
-   "subtitles": "from your .srt file",
-   "error": null,
-   "modes": {
-    "stretch": {
-     "label": "Best stretch",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 1515.7,
-       "end": 1715.0,
-       "seconds": 199.3,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 01.mp4",
-       "caption": "the way they said 'Question. Is Woody gonna perform the wedding ceremony?' 🫠\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "toy-story-5-2026/stretch-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 1715.0,
-       "end": 1915.8,
-       "seconds": 200.8,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 02.mp4",
-       "caption": "'Okay. Wow, that’s your name?' 💀 I can't\nPart 2 🎬 · Part 3 drops soon, stay hydrated 💧\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "toy-story-5-2026/stretch-002.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T10:48:29+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      },
-      {
-       "n": 3,
-       "start": 1915.8,
-       "end": 2133.2,
-       "seconds": 217.4,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 03.mp4",
-       "caption": "sound ON. trust me. 🔊\nPart 3 🎬 · Part 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "toy-story-5-2026/stretch-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 2133.2,
-       "end": 2369.5,
-       "seconds": 236.3,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 04.mp4",
-       "caption": "'What, what, what?' 💀 I can't\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "toy-story-5-2026/stretch-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 2369.5,
-       "end": 2560.7,
-       "seconds": 191.2,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Best stretch/Toy Story 5 (2026) - Part 05.mp4",
-       "caption": "red flag? that's the whole parade 🚩\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "toy-story-5-2026/stretch-005.bin",
-       "post": {
-        "status": "posted",
-        "at": "2026-10-19T10:49:31+07:00",
-        "url": null,
-        "error": null,
-        "attempts": 1
-       }
-      }
-     ]
-    },
-    "highlights": {
-     "label": "Highlights",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 680.0,
-       "end": 898.3,
-       "seconds": 218.3,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 01.mp4",
-       "caption": "why is nobody talking about this 🤨\nHighlight 1 🎬 · Highlight 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "toy-story-5-2026/highlights-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 1388.7,
-       "end": 1593.2,
-       "seconds": 204.5,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 02.mp4",
-       "caption": "the way they said 'What’s that?' 🫠\nHighlight 2 🎬 · Highlight 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "toy-story-5-2026/highlights-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 2217.9,
-       "end": 2472.8,
-       "seconds": 254.9,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 03.mp4",
-       "caption": "'You know who I don’t miss?' and then THIS happened 😳\nHighlight 3 🎬 · comment 'MORE' if you need Highlight 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "toy-story-5-2026/highlights-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 3275.7,
-       "end": 3507.3,
-       "seconds": 231.6,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 04.mp4",
-       "caption": "the way they said 'Enough with the silly games. Where’s Jessie and Bullseye?' 🫠\nHighlight 4 🎬 · Highlight 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "toy-story-5-2026/highlights-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 4671.3,
-       "end": 4884.9,
-       "seconds": 213.6,
-       "drive_path": "Ready to post/Toy Story 5 (2026)/Highlights/Toy Story 5 (2026) - Highlight 05.mp4",
-       "caption": "who wrote this and are they okay 😭\nHighlight 5 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "toy-story-5-2026/highlights-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 17.2,
-    "count": 360,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "toy-story-5-2026/thumbs.bin"
-   },
-   "subs_preview": "toy-story-5-2026/subs.bin"
   },
   {
    "id": "one-last-shot-2026",
@@ -3210,6 +3042,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:24:40+13:00",
+   "type": "started",
+   "title": "Started: Toy Story 5 (2026)",
+   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Toy Story 5 (2026)'."
+  },
+  {
    "at": "2026-10-22T23:18:53+13:00",
    "type": "finished",
    "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
@@ -4402,12 +4240,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Superman (2025): 7 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Superman (2025)\nBest stretch: 3 parts, Highlights: 4 parts"
-  },
-  {
-   "at": "2026-10-16T02:56:13+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Superman (2025)",
-   "message": "Best stretch: 3 parts, Highlights: 4 parts.\nThe laptop downloads them into Ready to post/Superman (2025). The copy sent to GitHub has been deleted."
   }
  ]
 }
