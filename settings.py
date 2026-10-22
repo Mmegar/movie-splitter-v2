@@ -60,6 +60,8 @@ DEFAULTS = {
     "cut_style": "classic",              # classic = whole picture on a blurred background (default); zoom = zoomed band that follows faces
     "zoom_part_seconds": 210,            # zoom style: parts of about 3.5 minutes...
     "zoom_part_max_extra": 90,           # ...that may run up to this much longer to end at a pause (so 3-5 min)
+    "caption_writer": "claude",          # claude = the story writer (Haiku) writes each part's caption; templates = stock lines
+    "caption_direction": "",             # free text for how captions should sound, e.g. "short, Gen Z, end with a question"
     "caption_style": "goofy",            # goofy = jokes + a quote from the clip; plain = the older, calmer captions
     "paused": False,                     # True = laptop stops sending/receiving and GitHub doesn't start cutting
     "pause_on_battery": False,           # laptop waits while it's running on battery

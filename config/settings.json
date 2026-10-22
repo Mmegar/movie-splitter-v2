@@ -22,6 +22,8 @@
   "cockroach_chance": 1,
   "cockroach_size": 80,
   "captions": true,
+  "caption_writer": "claude",
+  "caption_direction": "",
   "caption_style": "plain",
   "paused": false,
   "pause_on_battery": false,

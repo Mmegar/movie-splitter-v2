@@ -181,6 +181,8 @@ export const SETTING_LABELS = {
   narrator_tempo: 'Narrator speed',
   narrator_funny: 'Funny dial',
   script_direction: 'Script direction',
+  caption_writer: 'Captions written by',
+  caption_direction: 'Caption direction',
   recap_part_seconds: 'Narrated part length',
   music: 'Background music',
   hype_count: 'Hype edits per movie',
@@ -260,7 +262,8 @@ export function formatSetting(path, v) {
   if (path === 'preview_keep_movies') return `${v} movie${Number(v) === 1 ? '' : 's'}`;
   if (path === 'narrator_tempo') return `${v}x`;
   if (path === 'narrator_funny') { const n = Number(v); return n < 0.25 ? 'Serious' : n < 0.6 ? 'A bit funny' : n < 0.85 ? 'Funny' : 'Full comedy'; }
-  if (path === 'script_direction') return v ? (String(v).length > 40 ? `${String(v).slice(0, 40)}…` : String(v)) : 'None';
+  if (path === 'caption_writer') return v === 'templates' ? 'Stock lines' : 'Claude (Haiku)';
+  if (path === 'script_direction' || path === 'caption_direction') return v ? (String(v).length > 40 ? `${String(v).slice(0, 40)}…` : String(v)) : 'None';
   if (path === 'caption_style') return v === 'plain' ? 'Plain' : 'Goofy';
   if (path === 'flip') return { none: 'None', mirror: 'Mirror', upsidedown: 'Upside down', both: 'Both' }[v] || String(v);
   return String(v);

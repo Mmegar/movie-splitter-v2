@@ -71,6 +71,10 @@ def load_settings(env=None):
     global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION
     FUNNY = min(1.0, max(0.0, float(env.get("NARRATOR_FUNNY", "0.7"))))  # 0 straight ... 1 full comedy
     DIRECTION = env.get("SCRIPT_DIRECTION", "").strip()[:600]           # the owner's own notes for the writer
+    global CAPTIONS_BY_WRITER, CAPTION_DIRECTION
+    CAPTIONS_BY_WRITER = (env.get("CAPTIONS", "on").strip().lower() not in OFF
+                          and env.get("CAPTION_WRITER", "claude").strip().lower() == "claude")
+    CAPTION_DIRECTION = env.get("CAPTION_DIRECTION", "").strip()[:600]
     TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
     INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.8"))   # local (Ollama) or a claude-... model
@@ -89,6 +93,7 @@ WORDS_PER_SECOND = 2.6
 JOKE_PAUSE = 0.8     # seconds of footage (no voice) after a joke, so it lands
 MAX_PART_FACTOR = 1.6  # a part estimated longer than this x the part length is split in two
 FUNNY, DIRECTION = 0.7, ""
+CAPTIONS_BY_WRITER, CAPTION_DIRECTION = True, ""
 FPS = 30
 
 _override = {"character": None}
@@ -332,6 +337,7 @@ STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "propertie
     "cast": {"type": "array", "items": {"type": "string"}},
     "parts": {"type": "array", "items": {"type": "object", "required": ["title", "beats"], "properties": {
         "title": {"type": "string"},
+        "caption": {"type": "string"},
         "beats": {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
             "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"},
             "joke": {"type": "boolean"}}}}}}}}}
@@ -538,10 +544,33 @@ def voice_rules():
 - Punchy: short sentences, mostly under 15 words. Cut filler. Start lines strong. One idea per beat.
 - {fun}
 - Jokes land: end a joke beat on its punchline (and mark it "joke": true); the next beat moves the story on.
+- Humour is dry and deadpan: understatement, flat observations, comparisons to everyday real life (rent, group
+  chats, bosses, Monday mornings). If the movie is based on a manhwa, manga, comic, book or game, you may nod to
+  the source ("manhwa readers already know..."), but never spoil what the movie hasn't shown yet.
+- One continuous story, not separate episodes: every part remembers the earlier parts. Use callbacks and running
+  gags ("remember that suspicious umbrella from Part 2?"), keep nicknames you gave characters, and let jokes build
+  on earlier ones. Never re-introduce a character or setting the viewer already met; don't recap, just reference.
 - Every fact stays true to the movie. Present tense, plain spoken English."""
     if DIRECTION:
         rules += f"\n- The channel owner's direction for this script (follow it unless it breaks the rules above): {DIRECTION}"
     return rules
+
+
+def caption_field():
+    return '\n             "caption": "<the TikTok caption for this part>",' if CAPTIONS_BY_WRITER else ""
+
+
+def caption_rules():
+    """The caption each part gets on TikTok, written with the story (the part number and hashtags are added after)."""
+    if not CAPTIONS_BY_WRITER:
+        return ""
+    rules = """Each part also gets a "caption" for TikTok: one or two short lines that make people stop and watch this
+part, about what happens in it, without spoiling its cliffhanger or the ending. Talk to the viewer, in the same
+voice as the narration; one or two emoji are fine. No hashtags and no part numbers (they are added after).
+"""
+    if CAPTION_DIRECTION:
+        rules += f"The channel owner's direction for captions: {CAPTION_DIRECTION}\n"
+    return rules + "\n"
 
 
 def story_prompt(name, total, text, mode, who):
@@ -582,10 +611,10 @@ so pick a moment that shows what the sentence says. When a beat's "say" ends on 
 instead: "say" is empty, and "at" and "until" mark a 3 to 8 second stretch where a key line is spoken, played
 with its own sound. Only use seconds that appear below.
 
-Answer with this JSON shape:
+{caption_rules()}Answer with this JSON shape:
 {{"character": "<who it follows; empty for a whole-movie recap>",
   "cast": ["<the real names of the movie's top 3 billed actors>"],
-  "parts": [{{"title": "<3 to 6 words, for the thumbnail>",
+  "parts": [{{"title": "<3 to 6 words, for the thumbnail>",{caption_field()}
              "beats": [{{"say": "<narration>", "at": <second>}},
                        {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true}},
                        {{"say": "", "at": <start second>, "until": <end second>}}]}}]}}
@@ -658,15 +687,18 @@ def clean_story(data, total):
                 if e - a >= 1.0:
                     beats.append({"keep": round(a, 2), "until": round(e, 2)})
         if any("say" in b for b in beats):
-            parts.append({"title": str(p.get("title") or "").strip()[:60], "beats": beats})
+            parts.append({"title": str(p.get("title") or "").strip()[:60], "beats": beats,
+                          "caption": re.sub(r"\s*#\w+", "", str(p.get("caption") or "")).strip()[:300]})
     if len(parts) == 1 and len(parts[0]["beats"]) >= 6:          # one long part: share it out into two
         beats = parts[0]["beats"]
         half = len(beats) // 2
-        parts = [{"title": parts[0]["title"], "beats": beats[:half]}, {"title": "", "beats": beats[half:]}]
+        parts = [{"title": parts[0]["title"], "beats": beats[:half], "caption": parts[0]["caption"]},
+                 {"title": "", "beats": beats[half:], "caption": ""}]
     parts = [q for p in parts for q in split_long(p)]          # never a part that runs for many minutes
     if len(parts) > MAX_STORY_PARTS:                            # never more than 8: the extra goes into the last
         extra = [b for p in parts[MAX_STORY_PARTS - 1:] for b in p["beats"]]
-        parts = parts[:MAX_STORY_PARTS - 1] + [{"title": parts[MAX_STORY_PARTS - 1]["title"], "beats": extra}]
+        parts = parts[:MAX_STORY_PARTS - 1] + [{"title": parts[MAX_STORY_PARTS - 1]["title"], "beats": extra,
+                                                "caption": parts[MAX_STORY_PARTS - 1]["caption"]}]
     if len(parts) < 2:
         raise Skip("The story plan didn't have enough to make at least 2 parts.")
     who = str(data.get("character") or "").strip()
@@ -703,7 +735,8 @@ def split_long(part):
     first, second = beats[:cut], beats[cut:]
     if not any("say" in b for b in second) or not any("say" in b for b in first):
         return [part]
-    return split_long({"title": part["title"], "beats": first}) + split_long({"title": part["title"], "beats": second})
+    return (split_long({"title": part["title"], "beats": first, "caption": part.get("caption", "")}) +
+            split_long({"title": part["title"], "beats": second, "caption": ""}))
 
 
 def clean_hype(data, total):

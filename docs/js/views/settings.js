@@ -218,6 +218,11 @@ function buildForm(d) {
     group('Wish list', [swRow(d, 'wishlist_archive', 'Find wish-list films on archive.org', 'Public-domain films only. Turn off to stop the laptop searching and downloading')]),
     group('Captions', [
       swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and hashtags, ready to copy'),
+      d.captions ? segRow(d, 'caption_writer', 'Written by', [['claude', 'Claude (Haiku)'], ['templates', 'Stock lines']],
+        (d.caption_writer || 'claude') === 'claude' ? 'Claude writes each narrated part\'s caption along with its story. Hype edits and clips use stock lines.' : '') : '',
+      d.captions && (d.caption_writer || 'claude') === 'claude' ? `<label class="row row--stack"><span class="row-title">Caption direction</span>
+        <textarea class="input" rows="3" data-k="caption_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. short and mysterious, ask a question, Gen Z slang">${esc(d.caption_direction || '')}</textarea>
+        <span class="row-sub">How you want the captions written. Used for the next movies.</span></label>` : '',
       d.captions ? segRow(d, 'caption_style', 'Style', [['goofy', 'Goofy 🤪'], ['plain', 'Plain']],
         d.caption_style === 'plain' ? 'Calm hooks like "Wait for it 😳".' : 'Jokes, chaos and sometimes a line quoted from the part: "\'Run!\' and then THIS happened 😳".') : '',
     ]),

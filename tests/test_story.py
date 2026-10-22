@@ -280,6 +280,17 @@ class StoryTest(unittest.TestCase):
             self.assertLessEqual(story.part_seconds(p["beats"]), 60 * story.MAX_PART_FACTOR)
         self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 13)
 
+    def test_the_writer_writes_each_parts_caption(self):
+        story.load_settings({"CAPTION_DIRECTION": "ask a question"})
+        p = story.story_prompt("Film (2020)", 3600, "subs", "recap", "")
+        self.assertIn('"caption"', p)
+        self.assertIn("ask a question", p)
+        parts = story.clean_story({"parts": [{"title": "A", "caption": "You won't guess who #fyp", "beats": [{"say": "Hi.", "at": 10}]},
+                                             {"title": "B", "beats": [{"say": "Bye.", "at": 20}]}]}, 3600)
+        self.assertEqual(parts[0][2]["caption"], "You won't guess who")
+        story.load_settings({"CAPTION_WRITER": "templates"})
+        self.assertNotIn('"caption"', story.story_prompt("Film (2020)", 3600, "subs", "recap", ""))
+
 
 if __name__ == "__main__":
     unittest.main()
