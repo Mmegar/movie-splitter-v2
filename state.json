@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:31:45+13:00",
+ "updated": "2026-10-23T06:31:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T06:24:37+13:00",
   "movie": "Toy Story 5 (2026)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -3042,6 +3042,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:31:47+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Toy Story 5 (2026): 8 parts planned",
+   "message": "Toy Story 5 (2026)\nMode: Movie recap\n\nPart 1: A Frog Takes Over Bonnie's Room (11 narrated beats, about 65s of voice)\nPart 2: Woody Answers the Walkie (11 narrated beats, about 72s of voice)\nPart 3: Stowaways in a Suitcase (12 narrated beats, about 75s of voice)\nPart 4: Wrong House, Jimmy (13 narrated beats, about 82s of voice)\nPart 5: Smarty Pants Wakes Up (13 narrated beats, about 74s of voice)\nPart 6: Toys Locked in the Garage (12 narrated beats, about 76s of voice)\nPart 7: Snappy Sends the Photo (9 narrated beats, about 58s of voice)\nPart 8: Blaze Plays for Real (29 narrated beats, about 190s of voice)\n"
+  },
+  {
    "at": "2026-10-23T06:24:40+13:00",
    "type": "started",
    "title": "Started: Toy Story 5 (2026)",
@@ -4234,12 +4240,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T20:57:09+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Superman (2025): 7 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Superman (2025)\nBest stretch: 3 parts, Highlights: 4 parts"
   }
  ]
 }
