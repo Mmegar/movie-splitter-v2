@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:35:34+13:00",
+ "updated": "2026-10-23T06:35:38+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3059,6 +3059,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:35:37+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 1 of 8 ready",
+   "message": "Part 1: A Frog Takes Over Bonnie's Room (11 narrated beats, about 65s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:31:47+13:00",
    "type": "planned",
    "title": "[Movie recap] Toy Story 5 (2026): 8 parts planned",
@@ -4251,12 +4257,6 @@
    "type": "started",
    "title": "Started: The Fantastic 4 First Steps (2025)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/The Fantastic 4 First Steps (2025)'."
-  },
-  {
-   "at": "2026-10-16T11:24:03+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
