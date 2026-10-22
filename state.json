@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:10:43+13:00",
+ "updated": "2026-10-22T23:13:36+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -107,6 +107,22 @@
         "error": null
        },
        "cover": "the-fantastic-4-first-steps-2025/recap-05-cover.bin"
+      },
+      {
+       "n": 6,
+       "start": 4503.0,
+       "end": 5061.0,
+       "seconds": 67.2,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Movie recap/The Fantastic 4 First Steps (2025) - Part 06.mp4",
+       "caption": "The Surfer finally gets a name, and a reason nobody saw coming 😶\nPart 6 🎬 · Should I post Part 7? 👇\n#TheFantastic4FirstSteps #PedroPascal #VanessaKirby #EbonMoss #movie",
+       "preview": "the-fantastic-4-first-steps-2025/recap-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "the-fantastic-4-first-steps-2025/recap-06-cover.bin"
       }
      ]
     },
