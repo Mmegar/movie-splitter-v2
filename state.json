@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:16:27+13:00",
+ "updated": "2026-10-22T23:16:30+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 8
  },
  "queue": [],
@@ -3194,6 +3194,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T23:16:29+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 7 of 8 ready",
+   "message": "Part 7: The Trap That Almost Worked (11 narrated beats, about 50s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
+  },
+  {
    "at": "2026-10-22T23:13:38+13:00",
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 6 of 8 ready",
@@ -4386,12 +4392,6 @@
    "type": "part_ready",
    "title": "[Highlights] Superman (2025): Part 3 of 4 ready",
    "message": "Part 3: 1:40:01 to 1:43:30 (210s)  interest score 69/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\nnobody: \nthis movie: 🤯\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-16T02:46:43+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Superman (2025): Part 2 of 4 ready",
-   "message": "Part 2: 1:31:24 to 1:34:56 (212s)  interest score 70/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\n'We got it, Cole, man!' is my new personality 😤\nPart 2 🎬 · Part 3? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
