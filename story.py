@@ -68,7 +68,8 @@ def load_settings(env=None):
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
-    global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION, SWEEP_SECONDS
+    global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION, SWEEP_SECONDS, LIGHT_SWEEP
+    LIGHT_SWEEP = env.get("LIGHT_SWEEP", "on").strip().lower() not in OFF
     SWEEP_SECONDS = float(env.get("LIGHT_SWEEP_SECONDS", "3"))
     FUNNY = min(1.0, max(0.0, float(env.get("NARRATOR_FUNNY", "0.7"))))  # 0 straight ... 1 full comedy
     DIRECTION = env.get("SCRIPT_DIRECTION", "").strip()[:600]           # the owner's own notes for the writer

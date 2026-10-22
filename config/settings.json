@@ -64,6 +64,7 @@
   "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "narrator_tempo": 1.2,
+  "light_sweep": true,
   "light_sweep_seconds": 3,
   "narrator_funny": 0.75,
   "script_direction": "",

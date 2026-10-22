@@ -180,6 +180,7 @@ export const SETTING_LABELS = {
   narrator_voice: 'Narrator voice',
   narrator_tempo: 'Narrator speed',
   narrator_funny: 'Funny dial',
+  light_sweep: 'Light sweep',
   light_sweep_seconds: 'Light sweep speed',
   script_direction: 'Script direction',
   caption_writer: 'Captions written by',

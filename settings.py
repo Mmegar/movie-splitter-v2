@@ -23,6 +23,7 @@ DEFAULTS = {
     "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
     "narrator_speed": "+0%",             # edge voice's own rate, before narrator_tempo
     "narrator_tempo": 1.2,               # every narrated line is sped up this much (1.2 = 1.2x, pitch kept)
+    "light_sweep": True,                 # the diagonal light sweep on narrated parts
     "light_sweep_seconds": 3,            # the one diagonal light sweep per part: seconds to cross (1 fast ... 6 slow)
     "narrator_funny": 0.7,               # Funny dial: 0 = serious ... 1 = full comedy
     "script_direction": "",              # free text for the script writer, e.g. "roast the villain, more Gen Z slang"
