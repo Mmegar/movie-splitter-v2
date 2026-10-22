@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:49:38+13:00",
+ "updated": "2026-10-23T06:49:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 8
  },
  "queue": [],
@@ -3123,6 +3123,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:49:42+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 5 of 8 ready",
+   "message": "Part 5: Smarty Pants Wakes Up (13 narrated beats, about 74s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:45:58+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 4 of 8 ready",
@@ -4315,12 +4321,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 2 of 5 ready",
    "message": "Part 2: 35:17 to 38:52 (215s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\n'So the surfboard, right?' 💀 I can't\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-16T17:42:28+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 1 of 5 ready",
-   "message": "Part 1: 31:42 to 35:17 (215s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
