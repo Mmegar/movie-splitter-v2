@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:35:42+13:00",
+ "updated": "2026-10-22T17:35:44+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3210,6 +3210,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:35:44+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 2 of 8 ready",
+   "message": "Part 2: Retirement Lasts Two Minutes (14 narrated beats, about 73s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
+  },
+  {
    "at": "2026-10-22T17:29:54+13:00",
    "type": "part_ready",
    "title": "[Movie recap] John Wick Chapter 2 (2017): Part 1 of 8 ready",
@@ -4402,12 +4408,6 @@
    "type": "part_ready",
    "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 2 of 3 ready",
    "message": "Part 2: 9:14 to 12:56 (223s)  interest score 72/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-15T21:25:15+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
-   "message": "Part 1: 4:05 to 8:25 (260s)  interest score 66/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\nokay who let them cook 🧑‍🍳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
