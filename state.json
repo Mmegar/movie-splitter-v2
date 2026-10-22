@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:58:30+13:00",
+ "updated": "2026-10-22T22:58:33+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3098,6 +3098,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T22:58:32+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 1 of 8 ready",
+   "message": "Part 1: Four Heroes, One Hungry Giant (12 narrated beats, about 64s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
+  },
+  {
    "at": "2026-10-22T22:55:11+13:00",
    "type": "info",
    "title": "[Character story] Skipped for The Fantastic 4 First Steps (2025)",
@@ -4290,12 +4296,6 @@
    "type": "planned",
    "title": "[Highlights] Superman (2025): 4 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Superman (2025)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-16T02:20:29+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Superman (2025): 3 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Superman (2025)/Best stretch as they're made."
   }
  ]
 }
