@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:13:58+13:00",
+ "updated": "2026-10-22T17:14:07+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T17:13:58+13:00",
-  "movie": null,
+  "movie": "John Wick Chapter 2 (2017)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "john-wick-chapter-2-2017",
+   "name": "John Wick Chapter 2 (2017)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-22T17:14:00+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "spider-man-across-the-spider-verse-2023",
    "name": "Spider-Man Across The Spider-Verse (2023)",
@@ -1189,190 +1212,6 @@
     "path": "pirates-of-the-caribbean-at-worlds-end-2007/thumbs.bin"
    },
    "subs_preview": "pirates-of-the-caribbean-at-worlds-end-2007/subs.bin"
-  },
-  {
-   "id": "john-wick-chapter-2-2017",
-   "name": "John Wick Chapter 2 (2017)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-16T18:22:03+13:00",
-   "finished": "2026-10-16T19:17:47+13:00",
-   "duration": 7342.4,
-   "subtitles": "made automatically (English)",
-   "error": null,
-   "modes": {
-    "stretch": {
-     "label": "Best stretch",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 4238.0,
-       "end": 4447.7,
-       "seconds": 209.7,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 01.mp4",
-       "caption": "'What is this?' 💀 I can't\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "john-wick-chapter-2-2017/stretch-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 4447.7,
-       "end": 4654.5,
-       "seconds": 206.8,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 02.mp4",
-       "caption": "me to my group chat: 'Did he tell you not to do this?' 📱\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist",
-       "preview": "john-wick-chapter-2-2017/stretch-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 4654.5,
-       "end": 4864.5,
-       "seconds": 210.0,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 03.mp4",
-       "caption": "the plot thickens like gravy 🍲\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "john-wick-chapter-2-2017/stretch-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 4864.5,
-       "end": 5103.4,
-       "seconds": 238.9,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 04.mp4",
-       "caption": "the way they said 'Pull it out, you will bleed, and you will' 🫠\nPart 4 🎬 · Part 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "john-wick-chapter-2-2017/stretch-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 5103.4,
-       "end": 5284.5,
-       "seconds": 181.1,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Best stretch/John Wick Chapter 2 (2017) - Part 05.mp4",
-       "caption": "'What’s the number up to now, Earl?' is my new personality 😤\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "john-wick-chapter-2-2017/stretch-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    },
-    "highlights": {
-     "label": "Highlights",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 446.0,
-       "end": 684.2,
-       "seconds": 238.2,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 01.mp4",
-       "caption": "POV: you said 'one more part' 4 hours ago 🤡\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "john-wick-chapter-2-2017/highlights-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 4531.0,
-       "end": 4739.5,
-       "seconds": 208.5,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 02.mp4",
-       "caption": "this movie said 'hold my popcorn' 🍿\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "john-wick-chapter-2-2017/highlights-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 4841.0,
-       "end": 5103.4,
-       "seconds": 262.4,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 03.mp4",
-       "caption": "bestie made it worse 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "john-wick-chapter-2-2017/highlights-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 5637.0,
-       "end": 5846.5,
-       "seconds": 209.5,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 04.mp4",
-       "caption": "'Ma allora non lo vega mire.' 💀 I can't\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "john-wick-chapter-2-2017/highlights-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 5957.9,
-       "end": 6194.5,
-       "seconds": 236.6,
-       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Highlights/John Wick Chapter 2 (2017) - Highlight 05.mp4",
-       "caption": "explain this to me like I'm 5 🧸\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "john-wick-chapter-2-2017/highlights-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 20.4,
-    "count": 359,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "john-wick-chapter-2-2017/thumbs.bin"
-   },
-   "subs_preview": "john-wick-chapter-2-2017/subs.bin"
   },
   {
    "id": "the-fantastic-4-first-steps-2025",
@@ -3338,6 +3177,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:14:00+13:00",
+   "type": "started",
+   "title": "Started: John Wick Chapter 2 (2017)",
+   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/John Wick Chapter 2 (2017)'."
+  },
+  {
    "at": "2026-10-22T12:03:18+13:00",
    "type": "posted",
    "title": "📲 In your TikTok drafts: Runner (2026): Part 3",
@@ -4530,12 +4375,6 @@
    "type": "part_ready",
    "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
    "message": "Part 1: 51:20 to 55:23 (243s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-15T21:10:41+13:00",
-   "type": "planned",
-   "title": "[Highlights] GONJIAM Haunted Asylum (2017): 3 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/GONJIAM Haunted Asylum (2017)/Highlights as they're made."
   }
  ]
 }
