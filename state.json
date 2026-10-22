@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:01:40+13:00",
+ "updated": "2026-10-22T23:01:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "The Fantastic 4 First Steps (2025)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3114,6 +3114,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T23:01:42+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 2 of 8 ready",
+   "message": "Part 2: The Surfer Brings Bad News (14 narrated beats, about 69s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
+  },
+  {
    "at": "2026-10-22T22:58:32+13:00",
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 1 of 8 ready",
@@ -4306,12 +4312,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Superman (2025): Part 1 of 3 ready",
    "message": "Part 1: 30:28 to 34:24 (236s)\nOn its way to the laptop (Ready to post/Superman (2025)/Best stretch).\n\n📝 Caption:\nyou're not ready for the last 10 seconds ⏳\nPart 1 🎬 · Part 2 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T02:20:30+13:00",
-   "type": "planned",
-   "title": "[Highlights] Superman (2025): 4 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Superman (2025)/Highlights as they're made."
   }
  ]
 }
