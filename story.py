@@ -68,7 +68,8 @@ def load_settings(env=None):
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
-    global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION
+    global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION, SWEEP_SECONDS
+    SWEEP_SECONDS = float(env.get("LIGHT_SWEEP_SECONDS", "3"))
     FUNNY = min(1.0, max(0.0, float(env.get("NARRATOR_FUNNY", "0.7"))))  # 0 straight ... 1 full comedy
     DIRECTION = env.get("SCRIPT_DIRECTION", "").strip()[:600]           # the owner's own notes for the writer
     global CAPTIONS_BY_WRITER, CAPTION_DIRECTION
@@ -600,13 +601,20 @@ seconds from {int(WINDOW[0])} to {int(WINDOW[1])}.
 {voice_rules()}
 
 Flow, which matters most:
-- Part 1 opens with a hook.
+- Part 1 opens with a hook for the whole series before the story starts: one to three beats that tell the viewer
+  what they're in for and why they should care (the central question, the stakes, the wildest thing that's coming,
+  e.g. "One locked room. One body. And six people who all swear they were asleep. Let's get into it."), over the
+  most gripping footage (it may come from later in the movie, but never shows or tells the ending or a twist).
+  Then the story starts from the beginning ("But it all starts three days earlier...").
 - Every part except the last ends on a real cliffhanger: stop right before a reveal or a decision, and end with a
   line that makes people need the next part (a question, a threat, "and that's when..."). Never end a part on a
   calm moment or mid-thought.
 - Each new part picks up exactly where the last one stopped. Never recap or repeat what earlier parts said.
-- When the story jumps in time or place, the first sentence after the jump bridges it ("Meanwhile, across
-  town...", "Three days later...", "But back at the house..."), so the viewer never feels a sudden cut.
+- Smooth footage: inside a part, footage moves forward through the movie in order. Consecutive beats use the
+  same scene or the next moments of it; never jump back and forth between scenes or back to footage already used.
+- Every change of scene is led by the narration, never cut first and explained after: the beat whose footage is
+  the new scene starts with the transition itself ("Meanwhile, our boy heads to the station...", "Cut to the
+  mansion, where...", "Three days later...", "Back at the house..."), so the words and the cut arrive together.
 
 Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
@@ -1162,7 +1170,9 @@ def download_music():
 
 
 LIGHT_SWEEP = True
-SWEEP_EVERY = 6.0          # seconds between light sweeps
+SWEEP_SECONDS = 3.0        # how long the one light sweep in each part takes to cross the screen (app: Light sweep speed)
+SWEEP_AT = 0.3             # ...and where in the part it happens (0.3 = 30% of the way in)
+CONTINUE_GAP = 12.0        # narration footage this close to where the last piece ended just carries on from there
 
 
 def sweep_image(workdir):
@@ -1200,7 +1210,8 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
     v = "[0:v]null"
     if LIGHT_SWEEP:                                   # a soft white streak sweeping top-right -> bottom-left
         extra += ["-loop", "1", "-framerate", str(FPS), "-t", f"{length:.3f}", "-i", str(sweep_image(workdir))]
-        u = f"(-910+1800*clip((mod(t,{SWEEP_EVERY})-0.6)/1.2,0,1))"
+        start = max(1.0, length * SWEEP_AT)                # once per part
+        u = f"(-910+1800*clip((t-{start:.2f})/{max(0.5, SWEEP_SECONDS):.2f},0,1))"
         v += f"[pre0];[pre0][{n}:v]overlay=x='-960-{u}':y='-540+{u}':eval=frame"
         n += 1
     if FILTER == "vivid":                             # the vivid look's fixed sprinkle of tiny white specks
@@ -1245,6 +1256,8 @@ def render_story(src, number, info, cues, out, workdir, total):
             if beat.get("joke") and not end_of_part:
                 length += JOKE_PAUSE                            # a moment of footage so the joke lands
             at = max(0.0, min(beat["at"], total - length - 0.1))
+            if last_end is not None and -CONTINUE_GAP < at - last_end < CONTINUE_GAP:
+                at = max(0.0, min(last_end, total - length - 0.1))   # same scene: carry on, no jump back and forth
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
                            bridge=jump, ending=end_of_part)

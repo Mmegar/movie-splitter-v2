@@ -156,6 +156,7 @@ function buildForm(d) {
     group('Film look', [
       segRow(d, 'filter', 'Look', [['vivid', 'Vivid'], ['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
       d.filter === 'none' ? '' : sliderRow(d, 'filter_strength', 'Strength', { min: 0.1, max: 1, step: 0.05, ends: ['Subtle', 'Strong'] }),
+      sliderRow({ light_sweep_seconds: 3, ...d }, 'light_sweep_seconds', 'Light sweep speed', { min: 1, max: 6, step: 0.5, ends: ['Fast', 'Slow'], sub: 'The diagonal light that slides across the picture, once in each narrated part.' }),
     ], 'A colour grade, soft vignette and light grain on every part. The whole picture is always shown, never zoomed.'),
 
     group('Cutting style', [

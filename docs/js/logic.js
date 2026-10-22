@@ -180,6 +180,7 @@ export const SETTING_LABELS = {
   narrator_voice: 'Narrator voice',
   narrator_tempo: 'Narrator speed',
   narrator_funny: 'Funny dial',
+  light_sweep_seconds: 'Light sweep speed',
   script_direction: 'Script direction',
   caption_writer: 'Captions written by',
   caption_direction: 'Caption direction',
@@ -261,6 +262,7 @@ export function formatSetting(path, v) {
   if (path === 'upload_limit_mbps') return Number(v) ? `${v} Mbit/s` : 'No limit';
   if (path === 'preview_keep_movies') return `${v} movie${Number(v) === 1 ? '' : 's'}`;
   if (path === 'narrator_tempo') return `${v}x`;
+  if (path === 'light_sweep_seconds') return `${v} s across`;
   if (path === 'narrator_funny') { const n = Number(v); return n < 0.25 ? 'Serious' : n < 0.6 ? 'A bit funny' : n < 0.85 ? 'Funny' : 'Full comedy'; }
   if (path === 'caption_writer') return v === 'templates' ? 'Stock lines' : 'Claude (Haiku)';
   if (path === 'script_direction' || path === 'caption_direction') return v ? (String(v).length > 40 ? `${String(v).slice(0, 40)}…` : String(v)) : 'None';
