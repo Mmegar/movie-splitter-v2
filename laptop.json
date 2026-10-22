@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T16:40:44+07:00",
+ "updated": "2026-10-22T16:43:54+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -145,7 +145,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvjcskpd6uxd": {
+   "status": "done",
+   "note": "Starting The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv on the laptop"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -253,7 +258,8 @@
   "mvjbybm1i5kr",
   "mvjc9d1bn6f9",
   "mvjcat73qrsz",
-  "mvjcb74492c8"
+  "mvjcb74492c8",
+  "mvjcskpd6uxd"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
