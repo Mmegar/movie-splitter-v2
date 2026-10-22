@@ -1,11 +1,13 @@
 {
- "updated": "2026-10-23T00:24:03+07:00",
+ "updated": "2026-10-23T00:24:33+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4"
+ },
  "transfers": [],
  "uploaded": [
   {
