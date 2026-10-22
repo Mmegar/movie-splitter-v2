@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:04:55+13:00",
+ "updated": "2026-10-22T23:07:35+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -75,6 +75,22 @@
         "error": null
        },
        "cover": "the-fantastic-4-first-steps-2025/recap-03-cover.bin"
+      },
+      {
+       "n": 4,
+       "start": 3609.0,
+       "end": 3892.0,
+       "seconds": 65.2,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Movie recap/The Fantastic 4 First Steps (2025) - Part 04.mp4",
+       "caption": "Turns out saving the planet doesn't mean everyone's on your side 😬\nPart 4 🎬 · Should I post Part 5? 👇\n#TheFantastic4FirstSteps #PedroPascal #VanessaKirby #EbonMoss #movie",
+       "preview": "the-fantastic-4-first-steps-2025/recap-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "the-fantastic-4-first-steps-2025/recap-04-cover.bin"
       }
      ]
     },
