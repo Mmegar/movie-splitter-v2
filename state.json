@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:56:31+13:00",
+ "updated": "2026-10-23T07:05:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -139,6 +139,22 @@
         "error": null
        },
        "cover": "toy-story-5-2026/recap-07-cover.bin"
+      },
+      {
+       "n": 8,
+       "start": 3246.0,
+       "end": 5459.0,
+       "seconds": 235.2,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Movie recap/Toy Story 5 (2026) - Part 08.mp4",
+       "caption": "Turns out Blaze's playtime is a full spy movie. 🕵️ And then the donation box shows up.\nPart 8 🎬 · And that's a wrap 🎬 Follow for the next one\n#ToyStory5 #TomHanks #TimAllenAs #BuzzLightyear #movie",
+       "preview": "toy-story-5-2026/recap-008.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "toy-story-5-2026/recap-08-cover.bin"
       }
      ]
     }
