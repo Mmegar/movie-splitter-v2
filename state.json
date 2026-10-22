@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:38:47+13:00",
+ "updated": "2026-10-23T06:38:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3075,6 +3075,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:38:50+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 2 of 8 ready",
+   "message": "Part 2: Woody Answers the Walkie (11 narrated beats, about 72s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:35:37+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 1 of 8 ready",
@@ -4267,12 +4273,6 @@
    "type": "planned",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/The Fantastic 4 First Steps (2025)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-16T17:25:47+13:00",
-   "type": "started",
-   "title": "Started: The Fantastic 4 First Steps (2025)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/The Fantastic 4 First Steps (2025)'."
   }
  ]
 }
