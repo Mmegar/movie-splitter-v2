@@ -21,7 +21,8 @@ DEFAULTS = {
     "filter_strength": 0.4,              # 0 = off ... 1 = strong
     "character": "",                     # Character story + Hype edit: who to follow; blank = the main character
     "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
-    "narrator_speed": "+8%",
+    "narrator_speed": "+0%",             # edge voice's own rate, before narrator_tempo
+    "narrator_tempo": 1.2,               # every narrated line is sped up this much (1.2 = 1.2x, pitch kept)
     "narrator_engine": "chatterbox",     # chatterbox = expressive funny/intense delivery (free online model), edge = standard
     "narrator_intensity": 0.8,           # Chatterbox: 0.5 calm ... 1.0 wild
     "recap_part_seconds": 90,            # Movie recap / Character story: length of each narrated part

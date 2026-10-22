@@ -178,6 +178,7 @@ export const SETTING_LABELS = {
   filter_strength: 'Film look strength',
   character: 'Character to follow',
   narrator_voice: 'Narrator voice',
+  narrator_tempo: 'Narrator speed',
   recap_part_seconds: 'Narrated part length',
   music: 'Background music',
   hype_count: 'Hype edits per movie',

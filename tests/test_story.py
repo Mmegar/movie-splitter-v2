@@ -1,6 +1,7 @@
 """The storytelling modes' planning and timing logic (no ffmpeg, no network)."""
 import os
 import unittest
+from pathlib import Path
 from unittest import mock
 
 import settings
@@ -242,6 +243,20 @@ class StoryTest(unittest.TestCase):
             story._PLOTS.clear()
             self.assertIsNone(story.movie_plot("Some Film (2020)"))
             self.assertEqual(story.plot_text("Some Film (2020)"), "")
+
+    def test_narration_is_sped_up_with_its_word_timings(self):
+        import subprocess, tempfile
+        import process
+        story.P = process
+        story.load_settings({"NARRATOR_TEMPO": "1.2"})
+        with tempfile.TemporaryDirectory() as d:
+            mp3 = Path(d) / "line.mp3"
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "sine=f=300:d=6", str(mp3)], check=True)
+            length, words = story.faster(6.0, [(0.0, 1.2, "The"), (3.0, 6.0, "butler.")], mp3)
+        self.assertAlmostEqual(length, 5.0, delta=0.15)
+        self.assertEqual(words, [(0.0, 1.0, "The"), (2.5, 5.0, "butler.")])
+        story.load_settings({"NARRATOR_TEMPO": "1"})
+        self.assertEqual(story.faster(6.0, [], "unused.mp3"), (6.0, []))
 
 
 if __name__ == "__main__":

@@ -45,7 +45,7 @@ OFF = ("off", "no", "0", "false", "none", "")
 MODE_NAMES = {"recap": "Movie recap", "character": "Character story", "hype": "Hype edit"}
 NEEDS_TRANSCRIPT = set(MODE_NAMES)
 
-FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "vivid", 0.4, "", "en-US-GuyNeural", "+8%"
+FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "vivid", 0.4, "", "en-US-GuyNeural", "+0%"
 RECAP_PART_SECONDS, RECAP_PARTS, MUSIC, MUSIC_VOLUME = 90.0, 0, True, 0.12
 HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL = 1, 15.0, "claude-haiku-5-5"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434")
@@ -60,7 +60,7 @@ def load_settings(env=None):
     FILTER_STRENGTH = float(env.get("FILTER_STRENGTH", "0.5"))       # 0 = off ... 1 = strong
     CHARACTER = env.get("CHARACTER", "").strip()                     # blank = the most important character
     VOICE = env.get("NARRATOR_VOICE", "en-US-GuyNeural")
-    SPEED = env.get("NARRATOR_SPEED", "+8%")
+    SPEED = env.get("NARRATOR_SPEED", "+0%")
     RECAP_PART_SECONDS = float(env.get("RECAP_PART_SECONDS", "90"))
     RECAP_PARTS = int(float(env.get("RECAP_PARTS", "0")))            # 0 = automatic (at least 3)
     MUSIC = env.get("MUSIC", "on").strip().lower() not in OFF
@@ -68,7 +68,8 @@ def load_settings(env=None):
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
-    global VOICE_ENGINE, INTENSITY
+    global VOICE_ENGINE, INTENSITY, TEMPO
+    TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
     INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.8"))   # local (Ollama) or a claude-... model
     global EDITOR
@@ -722,28 +723,46 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
 # ---------------------------------------------------------------- the narrator's voice
 VOICE_ENGINE = os.environ.get("NARRATOR_ENGINE", "chatterbox")   # chatterbox (expressive, online) or edge
 INTENSITY = float(os.environ.get("NARRATOR_INTENSITY", "0.8"))     # Chatterbox exaggeration: 0.5 calm ... 1 wild
+TEMPO = float(os.environ.get("NARRATOR_TEMPO", "1.2"))             # narration plays this much faster (pitch kept)
 CHATTERBOX_SPACE = "ResembleAI/Chatterbox"
 _CHATTER = {"client": None, "ref": None, "fails": 0}
 
 
 def speak(text, mp3):
     """Reads text aloud into mp3: Chatterbox's funny, intense delivery when it's reachable (free online model,
-    in the voice of NARRATOR_VOICE), Microsoft's voice otherwise. Returns (seconds, [(start, end, word)])."""
+    in the voice of NARRATOR_VOICE), Microsoft's voice otherwise, sped up by TEMPO.
+    Returns (seconds, [(start, end, word)])."""
     if VOICE_ENGINE == "chatterbox" and _CHATTER["fails"] < 2:
         try:
-            return speak_chatterbox(text, mp3)
+            return faster(*speak_chatterbox(text, mp3), mp3)
         except Exception as e:
             _CHATTER["fails"] += 1
             print(f"  (Chatterbox didn't answer{', using the standard voice from now on' if _CHATTER['fails'] >= 2 else ''}: {e})",
                   flush=True)
-    return speak_edge(text, mp3)
+    return faster(*speak_edge(text, mp3), mp3)
+
+
+def faster(length, words, mp3):
+    """Speeds a spoken line up by TEMPO (pitch kept), with its word timings scaled to match."""
+    if abs(TEMPO - 1) < 0.01:
+        return length, words
+    mp3 = Path(mp3).resolve()
+    tmp = mp3.with_name(mp3.stem + ".tempo" + mp3.suffix)
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(mp3), "-filter:a", f"atempo={TEMPO:.3f}",
+           "-c:a", "libmp3lame", "-b:a", "160k", str(tmp)])
+    os.replace(tmp, mp3)
+    return P.duration(mp3), [(a / TEMPO, b / TEMPO, w) for a, b, w in words]
 
 
 def speak_chatterbox(text, mp3):
     """One line from Chatterbox (Resemble AI's open model, run on its free Hugging Face page)."""
     from gradio_client import Client, handle_file
     if _CHATTER["client"] is None:
-        _CHATTER["client"] = Client(CHATTERBOX_SPACE, hf_token=os.environ.get("HF_TOKEN") or None, verbose=False)
+        token = os.environ.get("HF_TOKEN") or None
+        try:                                     # newer gradio_client renamed hf_token= to token=
+            _CHATTER["client"] = Client(CHATTERBOX_SPACE, token=token, verbose=False)
+        except TypeError:
+            _CHATTER["client"] = Client(CHATTERBOX_SPACE, hf_token=token, verbose=False)
     if _CHATTER["ref"] is None:                  # a sample of the narrator's voice for Chatterbox to copy
         ref = Path("narrator_voice.mp3").resolve()
         speak_edge("Listen. This man is about to make the worst decision of his entire life, and honestly? I respect it.",

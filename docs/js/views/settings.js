@@ -109,6 +109,7 @@ function buildForm(d) {
         <input class="input" data-k="character" data-t="str" value="${esc(d.character || '')}" autocomplete="off" spellcheck="false" placeholder="Blank = the main character"></label>`,
       narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
       narrated ? segRow(d, 'narrator_voice', 'Narrator voice', [['en-US-GuyNeural', 'Guy'], ['en-US-ChristopherNeural', 'Christopher'], ['en-US-AriaNeural', 'Aria'], ['en-GB-RyanNeural', 'Ryan (UK)']]) : '',
+      narrated ? segRow(d, 'narrator_tempo', 'Narrator speed', [['1.2', '1.2x'], ['1', '1x'], ['1.1', '1.1x'], ['1.3', '1.3x'], ['1.5', '1.5x']]) : '',
       (d.modes || []).includes('hype') ? stepRow(d, 'hype_count', 'Hype edits per movie', { def: 1, min: 1, max: 5, step: 1 }) : '',
       swRow(d, 'music', 'Background music', 'Songs you add to assets/music on GitHub: quiet under the narrator, full volume in hype montages'),
     ], 'Character story and Hype edit follow this character (type it the way the movie spells the name). Claude writes the narration from the subtitles, so mystery twists stay hidden until the last part.'),
