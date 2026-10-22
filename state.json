@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:01:43+13:00",
+ "updated": "2026-10-22T23:04:53+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "the-fantastic-4-first-steps-2025/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 2715.0,
+       "end": 3273.0,
+       "seconds": 70.4,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Movie recap/The Fantastic 4 First Steps (2025) - Part 03.mp4",
+       "caption": "The team says no, then does something wild to escape 🚀\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#TheFantastic4FirstSteps #PedroPascal #VanessaKirby #EbonMoss #movie",
+       "preview": "the-fantastic-4-first-steps-2025/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "the-fantastic-4-first-steps-2025/recap-03-cover.bin"
       }
      ]
     },
