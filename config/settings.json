@@ -25,7 +25,7 @@
   "caption_writer": "claude",
   "caption_direction": "",
   "caption_style": "plain",
-  "paused": false,
+  "paused": true,
   "pause_on_battery": false,
   "upload_limit_mbps": 0,
   "auto_update_laptop": true,
