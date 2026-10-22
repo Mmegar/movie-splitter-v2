@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:44:07+13:00",
+ "updated": "2026-10-22T22:44:15+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T22:44:07+13:00",
-  "movie": null,
+  "movie": "The Fantastic 4 First Steps (2025)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
@@ -16,9 +16,9 @@
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
-   "status": "queued",
+   "status": "processing",
    "source": "laptop",
-   "started": "2026-10-22T22:25:54+13:00",
+   "started": "2026-10-22T22:44:09+13:00",
    "finished": null,
    "duration": null,
    "subtitles": null,
@@ -34,8 +34,7 @@
      "planned": 0,
      "parts": []
     }
-   },
-   "note": "Stopped from the app. Tap Start to cut it again."
+   }
   },
   {
    "id": "john-wick-chapter-2-2017",
@@ -3082,6 +3081,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T22:44:09+13:00",
+   "type": "started",
+   "title": "Started: The Fantastic 4 First Steps (2025)",
+   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/The Fantastic 4 First Steps (2025)'."
+  },
+  {
    "at": "2026-10-22T22:25:54+13:00",
    "type": "started",
    "title": "Started: The Fantastic 4 First Steps (2025)",
@@ -4274,12 +4279,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Superman 2025 1080p WEB-DL HEVC x265 5.1 BONE.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-15T15:33:26+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "GONJIAM Haunted Asylum (2017): 6 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\GONJIAM Haunted Asylum (2017)\nBest stretch: 3 parts, Highlights: 3 parts"
   }
  ]
 }
