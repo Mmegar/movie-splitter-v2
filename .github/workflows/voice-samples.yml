@@ -9,6 +9,8 @@ on:
     paths:
       - tools/voice_samples.py
       - docs/js/views/settings.js
+  schedule:
+    - cron: "40 */6 * * *"   # fills in samples the free Chatterbox page was too busy to make
   workflow_dispatch:
 
 permissions:
