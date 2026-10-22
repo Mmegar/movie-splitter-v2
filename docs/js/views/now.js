@@ -57,7 +57,8 @@ function runCard(st) {
     </article>`;
   }
 
-  if (st.starting || gh) {
+  const onLaptop = (((st.data.settings && st.data.settings.json) || {}).cut_on || 'laptop') === 'laptop';
+  if ((st.starting && !onLaptop) || gh) {
     return `<article class="run-card">
       <div class="run-top"><span class="mode-pill is-on">Starting</span></div>
       <h2 class="run-movie">Waiting for GitHub</h2>
@@ -75,7 +76,7 @@ function runCard(st) {
       ? `Next up: <strong>${esc(next.name)}</strong>${queue.length > 1 ? ` and ${queue.length - 1} more` : ''}.`
       : 'Add a movie on the laptop or the wish list. A run also starts by itself once a day.'}</p>
     <div class="run-actions">
-      <button class="btn btn--primary" data-start>${icon('play')}Start run</button>
+      <button class="btn btn--primary" data-start>${icon('play')}${onLaptop ? 'Start cutting on the laptop' : 'Start run'}</button>
     </div>
   </article>`;
 }
@@ -203,7 +204,14 @@ export function createNowView(ctx) {
       haptic();
       const btn = e.target.closest('[data-start]');
       btn.disabled = true;
+      const s = (ctx.store.state.data.settings && ctx.store.state.data.settings.json) || {};
       try {
+        if ((s.cut_on || 'laptop') === 'laptop' && !ctx.store.isDemo()) {
+          await ctx.store.sendCommand({ type: 'cut_now' });
+          toast('Sent to the laptop. It starts the next movie within 30 seconds.');
+          btn.disabled = false;
+          return;
+        }
         await ctx.store.startRun();
         toast(ctx.store.isDemo() ? 'Run started (demo)' : 'Run requested. GitHub usually starts it within a minute.');
       } catch (err) {

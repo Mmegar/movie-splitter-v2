@@ -349,6 +349,12 @@ class StuckCutTest(AgentTestBase):
         self.assertNotIn("r2", a.memory["sends"])
         self.assertIn("r3", a.memory["sends"])               # waiting for GitHub: left alone
 
+    def test_start_button_on_the_laptop(self):
+        a = self.make_agent()
+        self.assertEqual(a.run_command("cut_now", {}), "Nothing in To edit to cut")
+        a.cutting = str(self.watch / "Busy.mp4")
+        self.assertEqual(a.run_command("cut_now", {}), "Already cutting Busy.mp4")
+
 
 class PostingTest(AgentTestBase):
     def setUp(self):

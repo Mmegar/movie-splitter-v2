@@ -986,6 +986,20 @@ class Agent:
             return self.post_all(c)
         if kind == "share_all":
             return self.share_all(c)
+        if kind == "cut_now":                            # the app's Start button when cutting is on the laptop
+            if self.cutting:
+                return f"Already cutting {Path(self.cutting).name}"
+            if self.paused_reason():
+                return f"Waiting: {self.paused_reason()}"
+            if not find_ffmpeg():
+                return "FFmpeg isn't installed on the laptop, so movies go to GitHub instead"
+            busy = self.waiting_paths()
+            nxt = next((p for p in self.queue_sorted(self.watcher.candidates()) if str(p) not in busy), None)
+            if not nxt:
+                return "Nothing in To edit to cut"
+            for p in list(self.watcher.seen):              # skip the "is it still copying?" wait
+                self.watcher.seen[p] = self.watcher.seen[p][:2] + (0.0,)
+            return f"Starting {nxt.name} on the laptop"
         if kind == "set_style":
             style = "zoom" if c.get("style") == "zoom" else "classic"
             with self.lock:
