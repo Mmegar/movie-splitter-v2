@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:07:38+13:00",
+ "updated": "2026-10-22T23:10:40+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -91,6 +91,22 @@
         "error": null
        },
        "cover": "the-fantastic-4-first-steps-2025/recap-04-cover.bin"
+      },
+      {
+       "n": 5,
+       "start": 3884.0,
+       "end": 4167.0,
+       "seconds": 67.6,
+       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Movie recap/The Fantastic 4 First Steps (2025) - Part 05.mp4",
+       "caption": "Reed's plan is wild, the Surfer is back, and things go sideways 🌍\nPart 5 🎬 · Comment 'more' for Part 6 👇\n#TheFantastic4FirstSteps #PedroPascal #VanessaKirby #EbonMoss #movie",
+       "preview": "the-fantastic-4-first-steps-2025/recap-005.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "the-fantastic-4-first-steps-2025/recap-05-cover.bin"
       }
      ]
     },
