@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:24:50+13:00",
+ "updated": "2026-10-22T17:24:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T17:13:58+13:00",
   "movie": "John Wick Chapter 2 (2017)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -3177,6 +3177,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:24:53+13:00",
+   "type": "planned",
+   "title": "[Character story] John Wick Chapter 2 (2017): 8 parts planned",
+   "message": "John Wick Chapter 2 (2017)\nMode: Character story\n\nPart 1: Gianna's Bodyguard Has Problems (14 narrated beats, about 68s of voice)\nPart 2: Cassian Hunts John Underground (14 narrated beats, about 70s of voice)\nPart 3: Brawl Inside The Continental (11 narrated beats, about 55s of voice)\nPart 4: An Eye For An Eye Drink (9 narrated beats, about 43s of voice)\nPart 5: Seven Million Reasons (13 narrated beats, about 64s of voice)\nPart 6: The C Train Stabbing (12 narrated beats, about 65s of voice)\nPart 7: The Bowery King's Gift (14 narrated beats, about 69s of voice)\nPart 8: Santino's Museum Party Goes Bad (14 narrated beats, about 68s of voice)\n"
+  },
+  {
    "at": "2026-10-22T17:21:46+13:00",
    "type": "planned",
    "title": "[Movie recap] John Wick Chapter 2 (2017): 8 parts planned",
@@ -4369,12 +4375,6 @@
    "type": "part_ready",
    "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 3 of 3 ready",
    "message": "Part 3: 59:30 to 1:03:28 (239s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\n'Is there anything windy up there?' is my new personality 😤\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-15T21:17:51+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 2 of 3 ready",
-   "message": "Part 2: 55:23 to 59:30 (247s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\nwhen they said 'What is the point of this?' I felt that 😭\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
