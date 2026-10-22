@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:40:22+13:00",
+ "updated": "2026-10-22T17:40:25+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "John Wick Chapter 2 (2017)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 8
  },
  "queue": [],
@@ -3226,6 +3226,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:40:24+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 3 of 8 ready",
+   "message": "Part 3: Grenade Launcher Says Hello (15 narrated beats, about 69s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
+  },
+  {
    "at": "2026-10-22T17:35:44+13:00",
    "type": "part_ready",
    "title": "[Movie recap] John Wick Chapter 2 (2017): Part 2 of 8 ready",
@@ -4418,12 +4424,6 @@
    "type": "part_ready",
    "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 3 of 3 ready",
    "message": "Part 3: 56:34 to 1:00:10 (216s)  interest score 61/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\n'What are you doing now?' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · FINAL part. how are we feeling? 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-15T21:29:18+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] GONJIAM Haunted Asylum (2017): Part 2 of 3 ready",
-   "message": "Part 2: 9:14 to 12:56 (223s)  interest score 72/100\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
