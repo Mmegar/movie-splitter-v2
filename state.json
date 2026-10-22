@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:53:24+13:00",
+ "updated": "2026-10-23T06:53:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 6,
+  "part": 7,
   "parts_total": 8
  },
  "queue": [],
@@ -3139,6 +3139,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:53:28+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 6 of 8 ready",
+   "message": "Part 6: Toys Locked in the Garage (12 narrated beats, about 76s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:49:42+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 5 of 8 ready",
@@ -4331,12 +4337,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 3 of 5 ready",
    "message": "Part 3: 38:52 to 42:20 (207s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nbestie made it worse 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T17:46:31+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 2 of 5 ready",
-   "message": "Part 2: 35:17 to 38:52 (215s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\n'So the surfboard, right?' 💀 I can't\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
