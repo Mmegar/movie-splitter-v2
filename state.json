@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:24:54+13:00",
+ "updated": "2026-10-22T17:29:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 8,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 215.0,
+       "end": 830.0,
+       "seconds": 62.6,
+       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Movie recap/John Wick Chapter 2 (2017) - Part 01.mp4",
+       "caption": "A stolen car, a dead dog, and a very bad week for the mob. 🚗 Don't say we didn't warn you.\nPart 1 🎬 · Part 2 is up next 👀\n#JohnWickChapter2 #KeanuReeves #RiccardoScamarcio #ClaudiaGerini #movie",
+       "preview": "john-wick-chapter-2-2017/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "john-wick-chapter-2-2017/recap-01-cover.bin"
+      }
+     ]
     },
     "character": {
      "label": "Character story",
