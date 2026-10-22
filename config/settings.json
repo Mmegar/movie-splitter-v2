@@ -60,7 +60,7 @@
   },
   "cut_style": "classic",
   "filter": "vivid",
-  "filter_strength": 0.4,
+  "filter_strength": 0.35,
   "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "narrator_tempo": 1.2,
