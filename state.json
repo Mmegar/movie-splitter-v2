@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T07:05:47+13:00",
+ "updated": "2026-10-23T07:05:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "toy-story-5-2026",
    "name": "Toy Story 5 (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-23T06:24:40+13:00",
-   "finished": null,
+   "finished": "2026-10-23T07:05:51+13:00",
    "duration": 6206.8,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3171,6 +3171,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T07:05:51+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 8 of 8 ready",
+   "message": "Part 8: Blaze Plays for Real (29 narrated beats, about 190s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:56:30+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 7 of 8 ready",
@@ -4363,12 +4369,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 5 of 5 ready",
    "message": "Part 5: 45:56 to 49:38 (222s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'What if he’s a monster?' 📱\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-16T17:55:08+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 4 of 5 ready",
-   "message": "Part 4: 42:20 to 45:56 (216s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nthe way they said 'Won’t that kill us?' 🫠\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
