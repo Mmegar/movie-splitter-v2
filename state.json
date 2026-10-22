@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:56:27+13:00",
+ "updated": "2026-10-23T06:56:31+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 8
  },
  "queue": [],
@@ -3155,6 +3155,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:56:30+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 7 of 8 ready",
+   "message": "Part 7: Snappy Sends the Photo (9 narrated beats, about 58s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:53:28+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 6 of 8 ready",
@@ -4347,12 +4353,6 @@
    "type": "part_ready",
    "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 4 of 5 ready",
    "message": "Part 4: 42:20 to 45:56 (216s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nthe way they said 'Won’t that kill us?' 🫠\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-16T17:50:28+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] The Fantastic 4 First Steps (2025): Part 3 of 5 ready",
-   "message": "Part 3: 38:52 to 42:20 (207s)\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Best stretch).\n\n📝 Caption:\nbestie made it worse 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
