@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T17:15:59+07:00",
+ "updated": "2026-10-22T17:18:58+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -135,6 +135,12 @@
    "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
    "size_mb": 2008,
    "modified": "2026-10-16T10:31:01+07:00",
+   "folder": "done"
+  },
+  {
+   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
+   "size_mb": 2947,
+   "modified": "2026-10-16T10:21:09+07:00",
    "folder": "done"
   }
  ],
