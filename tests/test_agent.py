@@ -386,6 +386,18 @@ class StuckCutTest(AgentTestBase):
         self.assertEqual(st["movies"][0]["status"], "queued")
         self.assertFalse(a.clear_stuck_run())                # nothing left to clear
 
+    def test_stuck_cut_with_parts_made_shows_as_done(self):
+        a = self.make_agent()
+        parts = a.ready_dir / "Half (2020)" / "Movie recap"
+        parts.mkdir(parents=True)
+        (parts / "Half (2020) - Part 1.mp4").write_bytes(b"part")
+        a.state_ready()
+        status.run_started(None)
+        status.movie_started("Half (2020)", "laptop", ["recap"])
+        status.flush()
+        self.assertTrue(a.clear_stuck_run())
+        self.assertEqual(status.load_state()["movies"][0]["status"], "done")
+
     def test_github_runs_are_left_alone(self):
         a = self.make_agent()
         a.state_ready()

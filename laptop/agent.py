@@ -699,7 +699,10 @@ class Agent:
         if not run.get("active") and not stuck:
             return False
         for m in stuck:
-            if m.get("name") in here:
+            folder = self.ready_dir / safe_name(m.get("name", ""))
+            if folder.is_dir() and any(folder.rglob("*.mp4")):
+                status.movie_finished(m["name"])         # some parts were made: they're in Ready to post
+            elif m.get("name") in here:
                 status.movie_paused(m["name"], note or "Cutting was interrupted. It starts again soon.")
             else:
                 status.movie_failed(m["name"], "The movie file isn't in To edit any more")
