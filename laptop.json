@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T15:50:03+07:00",
+ "updated": "2026-10-22T15:50:05+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -139,6 +139,10 @@
   "mvjah4nx9vqn": {
    "status": "failed",
    "note": "no file name given"
+  },
+  "mvjaigr2c4wv": {
+   "status": "failed",
+   "note": "no file name given"
   }
  },
  "commands_done": [
@@ -242,7 +246,8 @@
   "mvify3foxxae",
   "mvifyw4dr6vl",
   "mvig0x7d08cg",
-  "mvjah4nx9vqn"
+  "mvjah4nx9vqn",
+  "mvjaigr2c4wv"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
