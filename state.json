@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T23:18:48+13:00",
+ "updated": "2026-10-22T23:18:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "the-fantastic-4-first-steps-2025",
    "name": "The Fantastic 4 First Steps (2025)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-22T22:44:09+13:00",
-   "finished": null,
+   "finished": "2026-10-22T23:18:51+13:00",
    "duration": 6875.2,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3210,6 +3210,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T23:18:50+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 8 of 8 ready",
+   "message": "Part 8: Our Tiny Miracle Worker (11 narrated beats, about 50s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
+  },
+  {
    "at": "2026-10-22T23:16:29+13:00",
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 7 of 8 ready",
@@ -4402,12 +4408,6 @@
    "type": "part_ready",
    "title": "[Highlights] Superman (2025): Part 4 of 4 ready",
    "message": "Part 4: 1:46:35 to 1:50:04 (210s)  interest score 68/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\n'Carly down!' and then THIS happened 😳\nPart 4 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T02:51:29+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Superman (2025): Part 3 of 4 ready",
-   "message": "Part 3: 1:40:01 to 1:43:30 (210s)  interest score 69/100\nOn its way to the laptop (Ready to post/Superman (2025)/Highlights).\n\n📝 Caption:\nnobody: \nthis movie: 🤯\nPart 3 🎬 · follow or you'll miss Part 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
