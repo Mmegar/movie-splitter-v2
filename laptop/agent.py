@@ -202,7 +202,8 @@ def file_info(p):
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
               "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
-              "process.py", "tracking.py"]   # (process + tracking: for cutting on the laptop)
+              "process.py", "tracking.py",   # (process + tracking: for cutting on the laptop)
+              "laptop/startup_apps.ps1"]     # Windows: opens the project's apps at login (install_startup_apps)
 PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
 SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
@@ -1153,7 +1154,8 @@ class Agent:
             old = local.read_bytes() if local.exists() else b""
             if git_blob_sha(old) == sha or old.replace(b"\r\n", b"\n") == data:
                 continue
-            compile(text, rel, "exec")                      # never install something broken
+            if rel.endswith(".py"):
+                compile(text, rel, "exec")                  # never install something broken
             changed.append((local, data, old))
         if head:
             with self.lock:
@@ -1780,6 +1782,31 @@ def single_instance(wait=40):
     return False
 
 
+def install_startup_apps(config_dir):
+    """Windows: a small file in the Startup folder that runs startup_apps.ps1 at each login (Claude, FilmCraft,
+    RustDesk, To edit + Downloads folders, FFmpeg check). "startup_apps": false in config.json removes it."""
+    if os.name != "nt":
+        return
+    startup = Path(os.environ.get("APPDATA", "")) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
+    launcher = startup / "Movie Splitter apps.cmd"
+    try:
+        cfg = json.loads((Path(config_dir) / "config.json").read_text(encoding="utf-8"))
+    except Exception:
+        cfg = {}
+    try:
+        if cfg.get("startup_apps") is False:
+            launcher.unlink(missing_ok=True)
+            return
+        script = HERE / "startup_apps.ps1"
+        text = ('@echo off\r\nstart "" /min powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden '
+                f'-File "{script}"\r\n')
+        if startup.is_dir() and script.exists() and (not launcher.exists() or launcher.read_bytes() != text.encode()):
+            launcher.write_text(text, newline="")
+            log.info("Added %s: the project's apps open at each login", launcher)
+    except Exception as e:
+        log.warning("Couldn't set up the apps to open at login: %s", e)
+
+
 def restart():
     """Starts the helper again (new code). Mac: launchd starts it by itself when this one ends."""
     if _LOCK:
@@ -1818,6 +1845,7 @@ def main(argv=None):
         return 0 if ok else 1
     setup_logging(cfg_path.parent)
     agent = Agent(ensure_secrets(cfg_path), cfg_path.parent)
+    install_startup_apps(cfg_path.parent)
     for folder in (agent.watch, agent.ready_dir):
         folder.mkdir(parents=True, exist_ok=True)
     log.info("Started. Watching %s, parts go to %s", agent.watch, agent.ready_dir)
