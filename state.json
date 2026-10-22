@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:42:25+13:00",
+ "updated": "2026-10-23T06:42:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Toy Story 5 (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 8
  },
  "queue": [],
@@ -3091,6 +3091,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T06:42:27+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Toy Story 5 (2026): Part 3 of 8 ready",
+   "message": "Part 3: Stowaways in a Suitcase (12 narrated beats, about 75s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T06:38:50+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 2 of 8 ready",
@@ -4283,12 +4289,6 @@
    "type": "planned",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/The Fantastic 4 First Steps (2025)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-16T17:38:08+13:00",
-   "type": "planned",
-   "title": "[Best stretch] The Fantastic 4 First Steps (2025): 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/The Fantastic 4 First Steps (2025)/Best stretch as they're made."
   }
  ]
 }
