@@ -1,11 +1,13 @@
 {
- "updated": "2026-10-22T16:43:56+07:00",
+ "updated": "2026-10-22T16:43:58+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv"
+ },
  "transfers": [],
  "uploaded": [
   {
