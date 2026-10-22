@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:18:34+13:00",
+ "updated": "2026-10-22T17:18:36+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T17:13:58+13:00",
   "movie": "John Wick Chapter 2 (2017)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
