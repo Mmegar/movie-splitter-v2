@@ -538,9 +538,13 @@ def voice_rules():
         fun = ("Full comedy: almost every beat has a punchline, roast or absurd comparison, delivered deadpan, but the "
                "story still moves forward every beat.")
     rules = f"""Voice: a recap narrator talking straight to the viewer, like a friend watching the movie with them.
-- Personal: say "you" and "we" ("you just know this is a bad idea", "and we're not ready for what's behind that
-  door"), react with the viewer, and pull them into the scene. Never sound like a detached third-person summary.
-  The characters are still "he", "she" or their names.
+- Personal and connected, never a detached third-person summary. You are in the story with the viewer:
+  - Talk to the viewer with "you" and "we" ("you just know this is a bad idea", "and we're not ready for what's
+    behind that door"), and put them in the scene ("you're standing in that hallway with him").
+  - Talk to the characters directly now and then ("Sir. Put the knife down." "Girl, don't open that door.").
+  - Give the main characters warm or teasing nicknames and keep using them ("our boy", "my guy", "Detective
+    Sunglasses", "the world's worst roommate"); call the lead "our" or "my" so the viewer is on their side.
+  - React like you're watching it live with a friend ("and I'm already stressed", "no, because why would he...").
 - Punchy: short sentences, mostly under 15 words. Cut filler. Start lines strong. One idea per beat.
 - {fun}
 - Jokes land: end a joke beat on its punchline (and mark it "joke": true); the next beat moves the story on.
