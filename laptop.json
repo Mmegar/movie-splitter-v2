@@ -1,13 +1,11 @@
 {
- "updated": "2026-10-22T16:28:35+07:00",
+ "updated": "2026-10-22T16:28:52+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": {
-  "file": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv"
- },
+ "cutting": null,
  "transfers": [],
  "uploaded": [
   {
@@ -104,7 +102,16 @@
  "wishlist": [],
  "paused": "Paused in the app",
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
+   "size_mb": 2947,
+   "modified": "2026-10-16T10:21:09+07:00",
+   "sending": false,
+   "style": "classic",
+   "character": ""
+  }
+ ],
  "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
