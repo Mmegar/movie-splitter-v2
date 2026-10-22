@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:31:48+13:00",
+ "updated": "2026-10-23T06:35:34+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 8,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 613.0,
+       "end": 4818.0,
+       "seconds": 88.2,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Movie recap/Toy Story 5 (2026) - Part 01.mp4",
+       "caption": "A frog tablet just moved into Bonnie's room. 🐸 Our sheriff is NOT having it.\nPart 1 🎬 · Follow so you don't miss Part 2 🔔\n#ToyStory5 #TomHanks #TimAllenAs #BuzzLightyear #movie",
+       "preview": "toy-story-5-2026/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "toy-story-5-2026/recap-01-cover.bin"
+      }
+     ]
     }
    }
   },
