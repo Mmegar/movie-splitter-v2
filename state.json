@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:40:25+13:00",
+ "updated": "2026-10-22T17:46:36+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -75,6 +75,22 @@
         "error": null
        },
        "cover": "john-wick-chapter-2-2017/recap-03-cover.bin"
+      },
+      {
+       "n": 4,
+       "start": 1993.0,
+       "end": 2717.0,
+       "seconds": 89.5,
+       "drive_path": "Ready to post/John Wick Chapter 2 (2017)/Movie recap/John Wick Chapter 2 (2017) - Part 04.mp4",
+       "caption": "Twelve seats, one family, and a hit nobody wants to take. 🪑 Which one would you pick?\nPart 4 🎬 · Follow so you don't miss Part 5 🔔\n#JohnWickChapter2 #KeanuReeves #RiccardoScamarcio #ClaudiaGerini #movie",
+       "preview": "john-wick-chapter-2-2017/recap-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "john-wick-chapter-2-2017/recap-04-cover.bin"
       }
      ]
     },
