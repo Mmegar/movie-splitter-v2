@@ -66,6 +66,41 @@ function segRow(d, path, title, options, sub = '') {
   </div>`;
 }
 
+// Microsoft voices the narrator can use (Chatterbox copies the chosen one with its funny, intense delivery).
+// Samples live in docs/voices (tools/voice_samples.py makes them on GitHub).
+export const VOICES = [
+  ['en-US-GuyNeural', 'Guy'], ['en-US-ChristopherNeural', 'Christopher'], ['en-US-AndrewNeural', 'Andrew'],
+  ['en-US-BrianNeural', 'Brian'], ['en-US-EricNeural', 'Eric'], ['en-US-RogerNeural', 'Roger'],
+  ['en-US-SteffanNeural', 'Steffan'], ['en-US-AriaNeural', 'Aria'], ['en-US-AvaNeural', 'Ava'],
+  ['en-US-JennyNeural', 'Jenny'], ['en-GB-RyanNeural', 'Ryan (UK)'], ['en-GB-ThomasNeural', 'Thomas (UK)'],
+  ['en-GB-SoniaNeural', 'Sonia (UK)'], ['en-AU-WilliamNeural', 'William (AU)'],
+];
+
+function voiceRow(d) {
+  const v = d.narrator_voice || VOICES[0][0];
+  const funny = (d.narrator_engine || 'chatterbox') === 'chatterbox';
+  return `<div class="row row--stack">
+    <div class="row-head"><span class="row-title">Narrator voice</span></div>
+    <div class="seg-sm seg-wrap" role="group" aria-label="Narrator voice">${VOICES.map(([val, label]) => `<button type="button" data-seg="narrator_voice" data-v="${esc(val)}" aria-pressed="${v === val}">${esc(label)}</button>`).join('')}</div>
+    <div class="voice-play">
+      <button type="button" class="btn btn--small btn--quiet" data-voice-sample="${esc(v)}" data-voice-kind="${funny ? 'funny' : 'plain'}">${icon('play')}Play ${funny ? 'funny ' : ''}sample</button>
+      ${funny ? `<button type="button" class="btn btn--small btn--quiet" data-voice-sample="${esc(v)}" data-voice-kind="plain">${icon('play')}Standard voice</button>` : ''}
+    </div>
+    <p class="note">Samples play at 1x here; your Narrator speed is added when parts are made.</p>
+  </div>`;
+}
+
+let sampleAudio = null;
+function playSample(voice, kind) {
+  try { if (sampleAudio) sampleAudio.pause(); } catch { /* ignore */ }
+  const tryPlay = (k) => {
+    sampleAudio = new Audio(`voices/${voice}${k === 'funny' ? '-funny' : ''}.mp3`);
+    sampleAudio.onerror = () => { if (k === 'funny') tryPlay('plain'); else toast('No sample for this voice yet.', { kind: 'err' }); };
+    return sampleAudio.play().catch(() => { /* onerror handles a missing file */ });
+  };
+  tryPlay(kind);
+}
+
 function group(title, rows, foot = '') {
   return `${title ? `<h3 class="group-title">${esc(title)}</h3>` : ''}<div class="group">${rows.join('')}</div>${foot ? `<p class="group-foot">${foot}</p>` : ''}`;
 }
@@ -108,7 +143,11 @@ function buildForm(d) {
       `<label class="row row--stack"><span class="row-title">Character to follow</span>
         <input class="input" data-k="character" data-t="str" value="${esc(d.character || '')}" autocomplete="off" spellcheck="false" placeholder="Blank = the main character"></label>`,
       narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
-      narrated ? segRow(d, 'narrator_voice', 'Narrator voice', [['en-US-GuyNeural', 'Guy'], ['en-US-ChristopherNeural', 'Christopher'], ['en-US-AriaNeural', 'Aria'], ['en-GB-RyanNeural', 'Ryan (UK)']]) : '',
+      narrated ? voiceRow(d) : '',
+      narrated ? sliderRow(d, 'narrator_funny', 'Funny dial', { min: 0, max: 1, step: 0.05, ends: ['Serious', 'Full comedy'] }) : '',
+      narrated ? `<label class="row row--stack"><span class="row-title">Script direction</span>
+        <textarea class="input" rows="3" data-k="script_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. roast the villain, more Gen Z slang, hype up the twist">${esc(d.script_direction || '')}</textarea>
+        <span class="row-sub">Claude follows this when it writes the narration for the next movies.</span></label>` : '',
       narrated ? segRow(d, 'narrator_tempo', 'Narrator speed', [['1.2', '1.2x'], ['1', '1x'], ['1.1', '1.1x'], ['1.3', '1.3x'], ['1.5', '1.5x']]) : '',
       (d.modes || []).includes('hype') ? stepRow(d, 'hype_count', 'Hype edits per movie', { def: 1, min: 1, max: 5, step: 1 }) : '',
       swRow(d, 'music', 'Background music', 'Songs you add to assets/music on GitHub: quiet under the narrator, full volume in hype montages'),
@@ -352,6 +391,8 @@ export function createSettingsView(ctx) {
       set(path, nv);
       return;
     }
+    const vs = e.target.closest('[data-voice-sample]');
+    if (vs) { haptic(); playSample(vs.dataset.voiceSample, vs.dataset.voiceKind); return; }
     const sg = e.target.closest('[data-seg]');
     if (sg) {
       haptic();

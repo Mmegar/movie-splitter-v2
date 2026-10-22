@@ -1,0 +1,43 @@
+name: Voice samples
+
+# Makes the narrator voice samples the app plays in Settings (docs/voices). Runs when the voice list
+# or this script changes, or by hand. Only missing samples are made; delete one to make it again.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/voice_samples.py
+      - docs/js/views/settings.js
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-samples
+  cancel-in-progress: false
+
+jobs:
+  samples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: pip install edge-tts gradio_client
+      - run: python3 tools/voice_samples.py
+      - name: Save the samples
+        run: |
+          git add docs/voices
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898274+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Voice samples"
+          for i in 1 2 3; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 5; done
+          exit 1

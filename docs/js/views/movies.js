@@ -1,7 +1,7 @@
 import { esc, icon, toast, copyText, haptic } from '../ui.js';
 import { partLabel, MODE_LABELS, timecode, shortDuration, relTime, dayLabel, clock, postCounts, movieLength } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, chip, empty, skeleton } from './common.js';
-import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml, saveAllParts, cancelSending } from './media.js';
+import { openPreview, openClipEditor, pendingClipsHtml, openPartActions, partPendingHtml, sendAllParts, sendAllHtml, saveAllParts, cancelSending, saveCover } from './media.js';
 
 const FILTERS = [['all', 'All'], ['processing', 'Working'], ['done', 'Done'], ['failed', 'Failed']];
 
@@ -91,6 +91,7 @@ export function createMoviesView(ctx) {
       <div class="part-actions">
         <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>
         <button class="btn btn--small btn--quiet" data-clip="${p.n}">${icon('scissors')}Clip</button>
+        ${p.cover ? `<button class="btn btn--small btn--quiet" data-cover="${p.n}">${icon('download')}Thumbnail</button>` : ''}
         ${p.caption ? `<button class="btn btn--small btn--quiet" data-copy="${esc(p.caption)}">${icon('copy')}Copy caption</button>` : ''}
         <button class="btn btn--small btn--quiet" data-partmore="${p.n}" aria-label="More for ${mode === 'clips' ? 'clip' : 'part'} ${p.n}">${icon('more')}More</button>
       </div>
@@ -161,6 +162,14 @@ export function createMoviesView(ctx) {
         const m = movieNow();
         const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === pv.dataset.preview);
         if (part) openPreview(ctx, m, detail.mode, part);
+        return;
+      }
+      const cv = e.target.closest('[data-cover]');
+      if (cv) {
+        haptic();
+        const m = movieNow();
+        const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === cv.dataset.cover);
+        if (part) { try { await saveCover(ctx, m, part); } catch (err) { toast(err.message || "Couldn't get the thumbnail.", { kind: 'err' }); } }
         return;
       }
       const cl = e.target.closest('[data-clip]');

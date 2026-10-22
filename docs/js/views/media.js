@@ -18,6 +18,22 @@ async function blobUrl(store, path, type) {
   cache.set(path, p);
   try { return await p; } catch (e) { cache.delete(path); throw e; }
 }
+/** The part's thumbnail (made with the part, encrypted): share sheet on the phone (Save Image), download elsewhere. */
+export async function saveCover(ctx, movie, part) {
+  const buf = await ctx.store.getPreview(part.cover);
+  if (!buf) { toast("The thumbnail isn't on GitHub yet.", { kind: 'err' }); return; }
+  const name = `${movie.name} - Part ${part.n} thumbnail.jpg`.replace(/[\\/:*?"<>|]/g, '');
+  const file = new File([buf], name, { type: 'image/jpeg' });
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file] }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  const url = URL.createObjectURL(file);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+
 async function jsonFile(store, path) {
   const url = await blobUrl(store, path, 'application/json');
   if (!url) return null;

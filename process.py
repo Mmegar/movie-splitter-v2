@@ -1103,6 +1103,7 @@ def picture_size(src):
 
 
 PART_TIMES = {}   # (mode, part number) -> (start, end) in the movie, for the status file
+COVERS = {}       # (mode, part number) -> the part's thumbnail JPEG (story modes)
 PART_CREDITS = {}  # (mode, part number) -> the music credit its licence asks for (added to the caption)
 
 
@@ -1205,6 +1206,11 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
                 said = story.render(mode, src, i, sc, cues, out, workdir, total)
                 PART_CUES[(mode, i)] = said
                 PART_CREDITS[(mode, i)] = story.last_credit()
+                try:
+                    COVERS[(mode, i)] = story.make_cover(out, i, (sc or {}).get("title") or "",
+                                                         out.with_name(out.stem + " - thumbnail.jpg"), workdir)
+                except Exception as e:
+                    print(f"(no thumbnail for part {i}: {e})", flush=True)
             else:
                 render_part(src, a, b, i, cues, out, workdir)
             PART_TIMES[(mode, i)] = (a, b)
@@ -1339,6 +1345,8 @@ def process_release(gh, release):
         if not pack:
             pv = save_preview(prev, out, previews.part_path(mid, mode, i), f"preview {name} {mode} {i}")
             prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
+        seconds = video_seconds(out)
+        cover = save_cover(prev, mid, mode, i, name)
         assets = transport.send(gh, out_rel, out, prefix)
         video_name = out.name[:-len(story.PACK_SUFFIX)] + ".mp4" if pack else out.name
         out.unlink(missing_ok=True)  # free up disk space straight away
@@ -1355,7 +1363,8 @@ def process_release(gh, release):
                                   "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),
                                   "seconds": round(b - a, 1), "line": line, "pack": pack})
         save_body()
-        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{video_name}", text, preview=pv)
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{video_name}", text, preview=pv,
+                          cover=cover, seconds=seconds)
         caption = f"\n\n📝 Caption:\n{text}" if text else ""
         notify(f"{name}: {part_word(mode)} {i} of {count} ready",
                f"{line}\nOn its way to the laptop ({READY}/{name}/{label}).{caption}",
@@ -1441,6 +1450,22 @@ def process_release(gh, release):
 def new_previews(gh):
     return previews.Previews(gh, NTFY_TOPIC, SETTINGS.get("preview_keep_movies", 3), SETTINGS.get("previews", True),
                              log=lambda m: print(m, flush=True))
+
+
+def video_seconds(path):
+    """How long a finished part really plays (None if it can't be read, e.g. an edit pack)."""
+    try:
+        return round(duration(path), 1)
+    except Exception:
+        return None
+
+
+def save_cover(prev, mid, mode, n, name):
+    """The part's thumbnail, encrypted for the app to download. Returns its path (or None)."""
+    cover = COVERS.get((mode, n))
+    if not cover or not Path(cover).is_file() or not prev.enabled:
+        return None
+    return prev.add(f"{mid}/{mode}-{n:02}-cover.bin", Path(cover).read_bytes(), f"thumbnail {name} {mode} {n}")
 
 
 def save_preview(prev, video, path, message):
@@ -1665,7 +1690,9 @@ def cut_here(src, srt, ready):
                 prev.add_full(previews.full_path(mid, mode, i), out.read_bytes(), f"full {name} {mode} {i}")
             except Exception as e:
                 print(f"(couldn't upload {out.name} to GitHub: {e})", flush=True)
-        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv)
+        cover = save_cover(prev, mid, mode, i, name) if prev else None
+        status.part_ready(name, mode, i, a, b, f"{READY}/{name}/{label}/{out.name}", text, preview=pv,
+                          cover=cover, seconds=video_seconds(out))
         notify(f"{name}: {part_word(mode)} {i} of {count} ready", f"{line}\nIn {READY}/{name}/{label}.",
                ["white_check_mark"] if i == count else ["film_frames"], kind="part_ready")
 

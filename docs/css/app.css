@@ -702,3 +702,8 @@ input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; bo
 .style-chip.is-fixed { opacity: .7; }
 .action-btn .action-sub { display: block; font-size: 13px; font-weight: 400; color: var(--text-2, var(--muted)); margin-top: 2px; }
 .action-btn.is-on { color: var(--accent-text); }
+
+.seg-wrap { flex-wrap: wrap; }
+.seg-wrap button { flex: 1 0 30%; }
+.voice-play { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+textarea.input { resize: vertical; min-height: 72px; line-height: 1.4; }

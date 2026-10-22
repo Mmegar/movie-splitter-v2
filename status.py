@@ -422,7 +422,8 @@ def movie_planned(name, mode, count):
 
 
 @safe
-def part_ready(name, mode, n, start, end, drive_path, caption=None, preview=None, title=None):
+def part_ready(name, mode, n, start, end, drive_path, caption=None, preview=None, title=None, cover=None,
+               seconds=None):
     def f(st):
         m = _find(st, name)
         if not m:
@@ -434,6 +435,10 @@ def part_ready(name, mode, n, start, end, drive_path, caption=None, preview=None
                 "post": (old or {}).get("post") or {"status": "none", "at": None, "url": None, "error": None}}
         if title:
             part["title"] = title
+        if cover:
+            part["cover"] = cover            # the part's thumbnail (encrypted, previews branch)
+        if seconds:
+            part["seconds"] = seconds        # how long the video plays (a narrated part spans more of the movie)
         md["parts"] = sorted([p for p in md["parts"] if p.get("n") != n] + [part], key=lambda p: p["n"])
     store().change(f, message=f"{name} part {n}")
 

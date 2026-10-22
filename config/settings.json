@@ -62,6 +62,8 @@
   "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "narrator_tempo": 1.2,
+  "narrator_funny": 0.7,
+  "script_direction": "",
   "recap_part_seconds": 120,
   "music": true,
   "hype_count": 1

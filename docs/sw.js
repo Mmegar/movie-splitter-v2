@@ -1,6 +1,6 @@
 // Offline shell. App files: stale-while-revalidate. Live data (GitHub, ntfy) is never cached here;
 // the app keeps its own last-good copy in localStorage.
-const VERSION = 'ms-v2-20';
+const VERSION = 'ms-v2-21';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/api.js', 'js/logic.js', 'js/store.js', 'js/demo.js', 'js/ui.js', 'js/crypto.js', 'js/mp4fix.js',
@@ -24,6 +24,7 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // api.github.com, ntfy.sh: straight to network
+  if (url.pathname.includes('/voices/')) return;   // voice samples: audio wants range requests
   e.respondWith((async () => {
     const cache = await caches.open(VERSION);
     const hit = await cache.match(req, { ignoreSearch: true });

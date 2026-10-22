@@ -258,6 +258,28 @@ class StoryTest(unittest.TestCase):
         story.load_settings({"NARRATOR_TEMPO": "1"})
         self.assertEqual(story.faster(6.0, [], "unused.mp3"), (6.0, []))
 
+    def test_funny_dial_direction_and_personal_voice_reach_the_prompt(self):
+        story.load_settings({"NARRATOR_FUNNY": "0.9", "SCRIPT_DIRECTION": "roast the villain"})
+        p = story.story_prompt("Film (2020)", 3600, "subs", "recap", "")
+        self.assertIn("Full comedy", p)
+        self.assertIn("roast the villain", p)
+        self.assertIn('say "you"', p)
+        self.assertNotIn("third person", p)
+        story.load_settings({"NARRATOR_FUNNY": "0.1"})
+        self.assertIn("Mostly serious", story.story_prompt("Film (2020)", 3600, "subs", "recap", ""))
+
+    def test_jokes_are_kept_and_long_parts_are_split(self):
+        story.load_settings({"RECAP_PART_SECONDS": "60", "NARRATOR_TEMPO": "1"})
+        long_part = {"title": "Way too long", "beats": [{"say": " ".join(["word"] * 30), "at": 100 + k * 10,
+                                                          **({"joke": True} if k == 0 else {})} for k in range(12)]}
+        short = {"title": "Fine", "beats": [{"say": "A clue.", "at": 900}]}
+        parts = story.clean_story({"character": "", "parts": [long_part, short]}, 3600)
+        self.assertTrue(parts[0][2]["beats"][0].get("joke"))
+        self.assertGreater(len(parts), 2)
+        for _, _, p in parts[:-1]:
+            self.assertLessEqual(story.part_seconds(p["beats"]), 60 * story.MAX_PART_FACTOR)
+        self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 13)
+
 
 if __name__ == "__main__":
     unittest.main()

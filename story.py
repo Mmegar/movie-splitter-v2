@@ -68,7 +68,9 @@ def load_settings(env=None):
     HYPE_COUNT = int(float(env.get("HYPE_COUNT", "1")))
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
-    global VOICE_ENGINE, INTENSITY, TEMPO
+    global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION
+    FUNNY = min(1.0, max(0.0, float(env.get("NARRATOR_FUNNY", "0.7"))))  # 0 straight ... 1 full comedy
+    DIRECTION = env.get("SCRIPT_DIRECTION", "").strip()[:600]           # the owner's own notes for the writer
     TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
     INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.8"))   # local (Ollama) or a claude-... model
@@ -84,6 +86,9 @@ MUSIC_DIR = Path(__file__).resolve().parent / "assets" / "music"
 AUDIO_EXT = {".mp3", ".m4a", ".aac", ".wav", ".ogg", ".flac", ".opus"}
 DUCK = 0.18          # movie sound under the narrator
 WORDS_PER_SECOND = 2.6
+JOKE_PAUSE = 0.8     # seconds of footage (no voice) after a joke, so it lands
+MAX_PART_FACTOR = 1.6  # a part estimated longer than this x the part length is split in two
+FUNNY, DIRECTION = 0.7, ""
 FPS = 30
 
 _override = {"character": None}
@@ -328,7 +333,8 @@ STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "propertie
     "parts": {"type": "array", "items": {"type": "object", "required": ["title", "beats"], "properties": {
         "title": {"type": "string"},
         "beats": {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
-            "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"}}}}}}}}}
+            "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"},
+            "joke": {"type": "boolean"}}}}}}}}}
 SPAN = {"type": "array", "items": {"type": "number"}}
 HYPE_SCHEMA = {"type": "object", "required": ["character", "edits"], "properties": {
     "character": {"type": "string"},
@@ -513,6 +519,31 @@ def part_count(total):
     return min(MAX_STORY_PARTS, max(MIN_STORY_PARTS, RECAP_PARTS or round(total / 900)))
 
 
+def voice_rules():
+    """How the narrator talks: personal ("you"), punchy, and as funny as the Funny dial says."""
+    if FUNNY < 0.25:
+        fun = "Mostly serious and gripping; at most one light joke per part."
+    elif FUNNY < 0.6:
+        fun = "Dramatic with a sense of humour: a joke or a sarcastic aside every few beats."
+    elif FUNNY < 0.85:
+        fun = ("Funny first: a joke, roast or sarcastic aside in most beats (about the characters' choices, the "
+               "danger, the obvious red flags), like a friend who can't help commenting.")
+    else:
+        fun = ("Full comedy: almost every beat has a punchline, roast or absurd comparison, delivered deadpan, but the "
+               "story still moves forward every beat.")
+    rules = f"""Voice: a recap narrator talking straight to the viewer, like a friend watching the movie with them.
+- Personal: say "you" and "we" ("you just know this is a bad idea", "and we're not ready for what's behind that
+  door"), react with the viewer, and pull them into the scene. Never sound like a detached third-person summary.
+  The characters are still "he", "she" or their names.
+- Punchy: short sentences, mostly under 15 words. Cut filler. Start lines strong. One idea per beat.
+- {fun}
+- Jokes land: end a joke beat on its punchline (and mark it "joke": true); the next beat moves the story on.
+- Every fact stays true to the movie. Present tense, plain spoken English."""
+    if DIRECTION:
+        rules += f"\n- The channel owner's direction for this script (follow it unless it breaks the rules above): {DIRECTION}"
+    return rules
+
+
 def story_prompt(name, total, text, mode, who):
     n = part_count(total)
     words = int(RECAP_PART_SECONDS * WORDS_PER_SECOND * 0.8)
@@ -533,8 +564,7 @@ than squeezing or skipping important story.
 Skip the intro and the outro: never use the opening logos, titles or credits, or the end credits. Only use
 seconds from {int(WINDOW[0])} to {int(WINDOW[1])}.
 
-Voice: a funny, intense recap narrator: punchy, dramatic, a little sarcastic, with jokes about the characters'
-choices, but every fact true to the movie. Present tense, third person, plain spoken English.
+{voice_rules()}
 
 Flow, which matters most:
 - Part 1 opens with a hook.
@@ -545,17 +575,19 @@ Flow, which matters most:
 - When the story jumps in time or place, the first sentence after the jump bridges it ("Meanwhile, across
   town...", "Three days later...", "But back at the house..."), so the viewer never feels a sudden cut.
 
-Each part is a list of beats. A narration beat has "say" (one or two sentences) and "at" (the second in the movie
+Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
-so pick a moment that shows what the sentence says. One to three times per part, use an original-moment beat
+so pick a moment that shows what the sentence says. When a beat's "say" ends on a joke or punchline, add
+"joke": true and the footage keeps playing for a moment with no voice, so the joke lands. One to three times per part, use an original-moment beat
 instead: "say" is empty, and "at" and "until" mark a 3 to 8 second stretch where a key line is spoken, played
 with its own sound. Only use seconds that appear below.
 
 Answer with this JSON shape:
 {{"character": "<who it follows; empty for a whole-movie recap>",
   "cast": ["<the real names of the movie's top 3 billed actors>"],
-  "parts": [{{"title": "<3 to 6 words>",
+  "parts": [{{"title": "<3 to 6 words, for the thumbnail>",
              "beats": [{{"say": "<narration>", "at": <second>}},
+                       {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true}},
                        {{"say": "", "at": <start second>, "until": <end second>}}]}}]}}
 
 {text}
@@ -617,6 +649,8 @@ def clean_story(data, total):
                 continue
             if str(b.get("say") or "").strip() and b.get("at") is not None:
                 beats.append({"say": str(b["say"]).strip(), "at": round(_num(b["at"], total), 2)})
+                if b.get("joke") is True:
+                    beats[-1]["joke"] = True
             elif b.get("keep") is not None or (b.get("at") is not None and b.get("until") is not None):
                 a = _num(b["keep"] if b.get("keep") is not None else b["at"], total)
                 e = _num(b.get("until", a + 5), total, a + 5)
@@ -629,6 +663,7 @@ def clean_story(data, total):
         beats = parts[0]["beats"]
         half = len(beats) // 2
         parts = [{"title": parts[0]["title"], "beats": beats[:half]}, {"title": "", "beats": beats[half:]}]
+    parts = [q for p in parts for q in split_long(p)]          # never a part that runs for many minutes
     if len(parts) > MAX_STORY_PARTS:                            # never more than 8: the extra goes into the last
         extra = [b for p in parts[MAX_STORY_PARTS - 1:] for b in p["beats"]]
         parts = parts[:MAX_STORY_PARTS - 1] + [{"title": parts[MAX_STORY_PARTS - 1]["title"], "beats": extra}]
@@ -641,6 +676,34 @@ def clean_story(data, total):
         p["character"] = who
         out.append((min(times), max(times) + 8.0, p))
     return out
+
+
+def part_seconds(beats):
+    """About how long a part plays: the narration (sped up by TEMPO), the pauses, and the original moments."""
+    out = 0.0
+    for b in beats:
+        if "say" in b:
+            out += len(b["say"].split()) / WORDS_PER_SECOND / max(0.5, TEMPO) + 0.35 + (JOKE_PAUSE if b.get("joke") else 0)
+        else:
+            out += b["until"] - b["keep"]
+    return out
+
+
+def split_long(part):
+    """A part much longer than the part length is cut in two (or more) at a narration beat."""
+    beats = part["beats"]
+    if part_seconds(beats) <= RECAP_PART_SECONDS * MAX_PART_FACTOR or len(beats) < 4:
+        return [part]
+    target, acc, cut = part_seconds(beats) / 2, 0.0, len(beats) // 2
+    for k, b in enumerate(beats):
+        acc += part_seconds([b])
+        if acc >= target and "say" in b:
+            cut = k + 1
+            break
+    first, second = beats[:cut], beats[cut:]
+    if not any("say" in b for b in second) or not any("say" in b for b in first):
+        return [part]
+    return split_long({"title": part["title"], "beats": first}) + split_long({"title": part["title"], "beats": second})
 
 
 def clean_hype(data, total):
@@ -1142,6 +1205,8 @@ def render_story(src, number, info, cues, out, workdir, total):
             mp3 = workdir / f"say{k:03}.mp3"
             length, words = speak(beat["say"], mp3)
             length += 0.35 + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
+            if beat.get("joke") and not end_of_part:
+                length += JOKE_PAUSE                            # a moment of footage so the joke lands
             at = max(0.0, min(beat["at"], total - length - 0.1))
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
@@ -1309,6 +1374,35 @@ def render(mode, src, number, info, cues, out, workdir, total):
     if mode == "hype":
         return render_hype(src, number, info, cues, out, workdir, total)
     return render_story(src, number, info, cues, out, workdir, total)
+
+
+def wrap(text, width=16, lines=3):
+    """Breaks a title into short lines for the thumbnail."""
+    out = []
+    for w in text.split():
+        if out and len(out[-1]) + 1 + len(w) <= width:
+            out[-1] += " " + w
+        else:
+            out.append(w)
+    return "\n".join(out[:lines])
+
+
+def make_cover(video, number, title, out, workdir):
+    """The part's thumbnail (1080x1920 JPEG): a frame from the part with "PART n" and its title on it."""
+    workdir = Path(workdir)
+    at = max(0.0, P.duration(video) * 0.3)
+    (workdir / "cover_part.txt").write_text(f"PART {number}", encoding="utf-8")
+    vf = ("scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,eq=brightness=-0.06:saturation=1.15,"
+          "drawbox=y=ih*0.58:w=iw:h=ih*0.42:color=black@0.45:t=fill,"
+          f"drawtext=fontfile={P.FONT}:textfile=cover_part.txt:expansion=none:fontsize=190:fontcolor=0xFFD400:"
+          "borderw=12:bordercolor=black:x=(w-text_w)/2:y=h*0.62")
+    for k, line in enumerate(wrap(title.upper()).splitlines() if title else []):    # each line centred
+        (workdir / f"cover_title{k}.txt").write_text(line, encoding="utf-8")
+        vf += (f",drawtext=fontfile={P.FONT}:textfile=cover_title{k}.txt:expansion=none:fontsize=96:fontcolor=white:"
+               f"borderw=8:bordercolor=black:x=(w-text_w)/2:y=h*0.62+230+{k * 115}")
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(Path(video).resolve()),
+           "-frames:v", "1", "-vf", vf, "-q:v", "3", str(Path(out).resolve())], cwd=workdir)
+    return Path(out)
 
 
 def describe(mode, info):
