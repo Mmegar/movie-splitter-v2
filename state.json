@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:46:38+13:00",
+ "updated": "2026-10-22T21:52:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,10 +16,10 @@
   {
    "id": "john-wick-chapter-2-2017",
    "name": "John Wick Chapter 2 (2017)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-22T17:14:00+13:00",
-   "finished": null,
+   "finished": "2026-10-22T21:52:39+13:00",
    "duration": 7342.4,
    "subtitles": null,
    "error": null,
