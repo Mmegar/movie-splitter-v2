@@ -408,6 +408,8 @@ class Agent:
         self.transfers = {}            # (direction, file) -> {direction, movie, file, percent}
         self.building = False          # FilmCraft is making an edit (build_edits)
         self.cutting = None            # the movie being cut on this laptop right now (cut_movie)
+        self.cut_proc = None           # its cutter program (process.py --here), so Stop can end it
+        self.stop_asked = False        # the app's Stop button was tapped during this cut
         self.to_send = []              # wish-list downloads waiting to be sent: (path, wish line)
         self.online = True
         self.last_push, self.last_sent, self.progress_changed = 0.0, None, False
@@ -428,7 +430,7 @@ class Agent:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
                      ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {}),
-                     ("styles", {}), ("characters", {})):
+                     ("styles", {}), ("characters", {}), ("stopped", [])):
             m.setdefault(k, v)
         return m
 
@@ -627,8 +629,24 @@ class Agent:
         if srt:
             cmd += ["--srt", str(srt)]
         log.info("Cutting %s on this laptop", path.name)
+        self.stop_asked = False
         with open(self.dir / "cutting.log", "a", encoding="utf-8") as logf:
-            code = subprocess.run(cmd, cwd=str(HERE.parent), env=env, stdout=logf, stderr=subprocess.STDOUT).returncode
+            self.cut_proc = subprocess.Popen(cmd, cwd=str(HERE.parent), env=env, stdout=logf, stderr=subprocess.STDOUT,
+                                             start_new_session=os.name != "nt")
+            code = self.cut_proc.wait()
+            self.cut_proc = None
+        if self.stop_asked:                              # Stop in the app: stays in To edit until Start is tapped
+            with self.lock:
+                del self.memory["sends"][rid]
+                self.memory["stopped"] = (self.memory["stopped"] + [path.name])[-50:]
+                self._save_memory()
+            self.state_ready()
+            status.movie_paused(names.clean_name(path.name), "Stopped from the app. Tap Start to cut it again.")
+            status.run_finished()
+            status.flush()
+            self.notify("⏹ Cutting stopped", f"{path.name} stays in To edit. Tap Start in the app to cut it again.",
+                        event=False, tags=["stop_button"])
+            return
         with self.lock:
             self.memory["sends"][rid]["status"] = "sent"
             self._save_memory()
@@ -653,10 +671,60 @@ class Agent:
                 self.memory["sends"][rid]["status"] = "sent"
                 self.finish_original(rid, movie=movie)
             else:
-                log.info("Cutting %s again (its cut was interrupted before any part was made)", s["file"])
+                gone = not Path(s["path"]).exists()
+                log.info("%s (its cut was interrupted before any part was made)",
+                         f"Dropping {s['file']}: the file isn't there any more" if gone else f"Cutting {s['file']} again")
                 with self.lock:
                     del self.memory["sends"][rid]
                     self._save_memory()
+                if gone:
+                    self.notify("⚠️ Movie file gone", f"{s['file']} was being cut but isn't in To edit any more, "
+                                "so it was cleared. Put it back in To edit to cut it.", event=False, tags=["warning"])
+        self.clear_stuck_run()
+
+    def clear_stuck_run(self, note=None):
+        """The app still shows a laptop cut as running, but nothing is cutting here (the cutter was killed, the
+        laptop was switched off, the file was deleted...): the run is ended and the movie marked as stopped
+        (still in To edit: it's cut again) or failed (its file is gone). GitHub runs are left alone."""
+        if self.cutting:
+            return False
+        self.state_ready()
+        status.refresh()
+        st = status.load_state() or {}
+        run = st.get("run") or {}
+        if run.get("active") and run.get("run_id"):
+            return False                                 # a GitHub run: not ours
+        here = {names.clean_name(p.name) for p in self.watcher.candidates()}
+        stuck = [m for m in st.get("movies") or [] if m.get("status") == "processing"]
+        if not run.get("active") and not stuck:
+            return False
+        for m in stuck:
+            if m.get("name") in here:
+                status.movie_paused(m["name"], note or "Cutting was interrupted. It starts again soon.")
+            else:
+                status.movie_failed(m["name"], "The movie file isn't in To edit any more")
+        if run.get("active"):
+            status.run_finished(failed=bool(stuck) and not note)
+        status.flush()
+        log.info("Cleared a stuck cut in the app (%s)", ", ".join(m.get("name", "?") for m in stuck) or "no movie")
+        return True
+
+    def stop_cut(self):
+        """The app's Stop button when cutting is on the laptop: ends the cutter (and its FFmpeg)."""
+        proc, name = self.cut_proc, Path(self.cutting).name if self.cutting else None
+        if not proc:
+            return ("Cleared the stuck cut" if self.clear_stuck_run("Stopped from the app. Tap Start to cut it again.")
+                    else "Nothing is cutting on the laptop")
+        self.stop_asked = True
+        try:
+            if os.name == "nt":                          # /T: FFmpeg and the narrator too
+                subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
+            else:
+                os.killpg(proc.pid, signal.SIGTERM)
+        except Exception as e:
+            log.warning("Couldn't stop the cutter cleanly: %s", e)
+            proc.kill()
+        return f"Stopping {name}"
 
     def _cut_in_background(self, path):
         try:
@@ -682,7 +750,7 @@ class Agent:
     def check_folder(self):
         busy = self.waiting_paths()
         for p in self.queue_sorted(self.watcher.ready()):
-            if str(p) in busy:
+            if str(p) in busy or (p.name in self.memory["stopped"] and self.laptop_cutting()):
                 continue
             if self.paused_reason():
                 return
@@ -1088,6 +1156,9 @@ class Agent:
                 return f"Waiting: {self.paused_reason()}"
             if not find_ffmpeg():
                 return "FFmpeg isn't installed on the laptop, so movies go to GitHub instead"
+            with self.lock:
+                self.memory["stopped"] = []              # Start: stopped movies may go again
+                self._save_memory()
             busy = self.waiting_paths()
             nxt = next((p for p in self.queue_sorted(self.watcher.candidates()) if str(p) not in busy), None)
             if not nxt:
@@ -1095,6 +1166,8 @@ class Agent:
             for p in list(self.watcher.seen):              # skip the "is it still copying?" wait
                 self.watcher.seen[p] = self.watcher.seen[p][:2] + (0.0,)
             return f"Starting {nxt.name} on the laptop"
+        if kind == "stop_cut":                           # the app's Stop button when cutting is on the laptop
+            return self.stop_cut()
         if kind == "set_style":
             style = "zoom" if c.get("style") == "zoom" else "classic"
             with self.lock:

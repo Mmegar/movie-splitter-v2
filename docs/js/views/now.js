@@ -224,12 +224,20 @@ export function createNowView(ctx) {
       const run = (ctx.store.state.data.state || {}).run || {};
       const ok = await confirmSheet({
         title: `Stop ${run.movie ? `“${run.movie}”` : 'this run'}?`,
-        message: 'The part being made right now is lost. Parts already sent back stay on the laptop, and the movie can be run again later.',
+        message: run.run_id ? 'The part being made right now is lost. Parts already sent back stay on the laptop, and the movie can be run again later.'
+          : 'The part being made right now is lost. Finished parts stay in Ready to post, and the movie stays in To edit until you tap Start.',
         confirm: 'Stop run', destructive: true,
       });
       if (!ok) return;
       haptic();
+      const s = (ctx.store.state.data.settings && ctx.store.state.data.settings.json) || {};
       try {
+        // a cut on the laptop has no GitHub run: the laptop stops it (it checks every 30 s)
+        if (!run.run_id && (run.active || (s.cut_on || 'laptop') === 'laptop') && !ctx.store.isDemo()) {
+          await ctx.store.sendCommand({ type: 'stop_cut' });
+          toast('Sent to the laptop. It stops cutting within 30 seconds.');
+          return;
+        }
         await ctx.store.stopRun();
         toast(ctx.store.isDemo() ? 'Run stopped (demo)' : 'Stop requested. GitHub stops the run in a few seconds.');
       } catch (err) { toast(err.message, { kind: 'err', ms: 4000 }); }
