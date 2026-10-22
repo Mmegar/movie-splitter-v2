@@ -1,7 +1,6 @@
 {
   "modes": [
-    "recap",
-    "character"
+    "recap"
   ],
   "stretch_minutes": 12,
   "stretch_from": 0.2,
