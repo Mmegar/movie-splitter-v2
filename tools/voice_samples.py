@@ -11,8 +11,23 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(HERE))
 os.environ.setdefault("NARRATOR_TEMPO", "1")
-import process  # noqa: E402  (binds story to process's helpers)
+import subprocess  # noqa: E402
 import story  # noqa: E402
+
+
+class Tools:
+    """The two process.py helpers the voice code uses (process.py itself needs the whole cutting setup)."""
+    @staticmethod
+    def run(cmd, **kw):
+        return subprocess.run(cmd, check=True, **kw)
+
+    @staticmethod
+    def duration(path):
+        return float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0",
+                                     str(path)], capture_output=True, text=True, check=True).stdout.strip())
+
+
+story.P = Tools
 
 LINE = ("Okay, so you're the new detective in a town where everybody lies. Great start. "
         "And the one witness who saw everything? He just bought a one-way ticket to anywhere. Totally normal.")
@@ -51,6 +66,8 @@ def main():
     print(f"Made {made} samples.")
     for f in failed:
         print("  failed:", f)
+    if failed and not made:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
