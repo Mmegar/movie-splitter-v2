@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T16:19:09+07:00",
+ "updated": "2026-10-22T16:20:25+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,7 +102,16 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
+   "size_mb": 2947,
+   "modified": "2026-10-16T10:21:09+07:00",
+   "sending": false,
+   "style": "classic",
+   "character": ""
+  }
+ ],
  "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -113,11 +122,6 @@
    "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
    "size_mb": 2048,
    "modified": "2026-10-17T16:11:48+07:00"
-  },
-  {
-   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
-   "size_mb": 2947,
-   "modified": "2026-10-16T10:21:09+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -141,7 +145,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvjbybm1i5kr": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -245,7 +254,8 @@
   "mvig0x7d08cg",
   "mvjah4nx9vqn",
   "mvjaigr2c4wv",
-  "mvjaw77saxoh"
+  "mvjaw77saxoh",
+  "mvjbybm1i5kr"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
