@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:54:12+13:00",
+ "updated": "2026-10-22T22:55:11+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3081,6 +3081,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T22:55:11+13:00",
+   "type": "info",
+   "title": "[Character story] Skipped for The Fantastic 4 First Steps (2025)",
+   "message": "The story plan didn't have enough to make at least 2 parts."
+  },
+  {
    "at": "2026-10-22T22:54:12+13:00",
    "type": "planned",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): 8 parts planned",
@@ -4273,12 +4279,6 @@
    "type": "planned",
    "title": "[Best stretch] Superman (2025): 3 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Superman (2025)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-16T02:07:30+13:00",
-   "type": "started",
-   "title": "Started: Superman (2025)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Superman (2025)'."
   }
  ]
 }
