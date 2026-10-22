@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-22T22:25:53+13:00",
+ "updated": "2026-10-22T22:26:05+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-22T22:25:53+13:00",
-  "movie": null,
+  "movie": "The Fantastic 4 First Steps (2025)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "the-fantastic-4-first-steps-2025",
+   "name": "The Fantastic 4 First Steps (2025)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-22T22:25:54+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "character": {
+     "label": "Character story",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "john-wick-chapter-2-2017",
    "name": "John Wick Chapter 2 (2017)",
@@ -1277,190 +1300,6 @@
     "path": "pirates-of-the-caribbean-at-worlds-end-2007/thumbs.bin"
    },
    "subs_preview": "pirates-of-the-caribbean-at-worlds-end-2007/subs.bin"
-  },
-  {
-   "id": "the-fantastic-4-first-steps-2025",
-   "name": "The Fantastic 4 First Steps (2025)",
-   "status": "done",
-   "source": "laptop",
-   "started": "2026-10-16T17:25:46+13:00",
-   "finished": "2026-10-16T18:21:59+13:00",
-   "duration": 6875.2,
-   "subtitles": "made automatically (English)",
-   "error": null,
-   "modes": {
-    "stretch": {
-     "label": "Best stretch",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 1902.0,
-       "end": 2117.1,
-       "seconds": 215.1,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 01.mp4",
-       "caption": "manifesting this level of chaos 🌀\nPart 1 🎬 · follow or you'll miss Part 2 (I warned you) 🔔\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "the-fantastic-4-first-steps-2025/stretch-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 2117.1,
-       "end": 2332.2,
-       "seconds": 215.1,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 02.mp4",
-       "caption": "'So the surfboard, right?' 💀 I can't\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "the-fantastic-4-first-steps-2025/stretch-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 2332.2,
-       "end": 2539.5,
-       "seconds": 207.3,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 03.mp4",
-       "caption": "bestie made it worse 😭\nPart 3 🎬 · Part 4 drops soon, stay hydrated 💧\n#fyp #movies #funny #viral #moviemoments",
-       "preview": "the-fantastic-4-first-steps-2025/stretch-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 2539.5,
-       "end": 2755.5,
-       "seconds": 216.0,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 04.mp4",
-       "caption": "the way they said 'Won’t that kill us?' 🫠\nPart 4 🎬 · Part 5 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "the-fantastic-4-first-steps-2025/stretch-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 2755.5,
-       "end": 2977.5,
-       "seconds": 222.0,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Best stretch/The Fantastic 4 First Steps (2025) - Part 05.mp4",
-       "caption": "me to my group chat: 'What if he’s a monster?' 📱\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "the-fantastic-4-first-steps-2025/stretch-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    },
-    "highlights": {
-     "label": "Highlights",
-     "planned": 5,
-     "parts": [
-      {
-       "n": 1,
-       "start": 1729.0,
-       "end": 1991.5,
-       "seconds": 262.5,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 01.mp4",
-       "caption": "bestie made it worse 😭\nHighlight 1 🎬 · Highlight 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "the-fantastic-4-first-steps-2025/highlights-001.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 2,
-       "start": 2425.0,
-       "end": 2635.5,
-       "seconds": 210.5,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 02.mp4",
-       "caption": "me to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "the-fantastic-4-first-steps-2025/highlights-002.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 3,
-       "start": 2735.0,
-       "end": 2944.5,
-       "seconds": 209.5,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 03.mp4",
-       "caption": "me to my group chat: 'Three, three, push!' 📱\nHighlight 3 🎬 · Highlight 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch",
-       "preview": "the-fantastic-4-first-steps-2025/highlights-003.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 4,
-       "start": 5073.0,
-       "end": 5286.3,
-       "seconds": 213.3,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 04.mp4",
-       "caption": "who wrote this and are they okay 😭\nHighlight 4 🎬 · follow or you'll miss Highlight 5 (I warned you) 🔔\n#fyp #filmclips #foryou #whatdidijustwatch #movie",
-       "preview": "the-fantastic-4-first-steps-2025/highlights-004.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      },
-      {
-       "n": 5,
-       "start": 5583.0,
-       "end": 5802.3,
-       "seconds": 219.3,
-       "drive_path": "Ready to post/The Fantastic 4 First Steps (2025)/Highlights/The Fantastic 4 First Steps (2025) - Highlight 05.mp4",
-       "caption": "manifesting this level of chaos 🌀\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged",
-       "preview": "the-fantastic-4-first-steps-2025/highlights-005.bin",
-       "post": {
-        "status": "none",
-        "at": null,
-        "url": null,
-        "error": null
-       }
-      }
-     ]
-    }
-   },
-   "thumbs": {
-    "every": 19.1,
-    "count": 359,
-    "cols": 10,
-    "w": 160,
-    "h": 90,
-    "path": "the-fantastic-4-first-steps-2025/thumbs.bin"
-   },
-   "subs_preview": "the-fantastic-4-first-steps-2025/subs.bin"
   },
   {
    "id": "superman-2025",
@@ -3242,6 +3081,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T22:25:54+13:00",
+   "type": "started",
+   "title": "Started: The Fantastic 4 First Steps (2025)",
+   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/The Fantastic 4 First Steps (2025)'."
+  },
+  {
    "at": "2026-10-22T17:46:38+13:00",
    "type": "part_ready",
    "title": "[Movie recap] John Wick Chapter 2 (2017): Part 4 of 8 ready",
@@ -4434,12 +4279,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "GONJIAM Haunted Asylum (2017): 6 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\GONJIAM Haunted Asylum (2017)\nBest stretch: 3 parts, Highlights: 3 parts"
-  },
-  {
-   "at": "2026-10-15T21:32:38+13:00",
-   "type": "finished",
-   "title": "✅ Finished: GONJIAM Haunted Asylum (2017)",
-   "message": "Best stretch: 3 parts, Highlights: 3 parts.\nThe laptop downloads them into Ready to post/GONJIAM Haunted Asylum (2017). The copy sent to GitHub has been deleted."
   }
  ]
 }
