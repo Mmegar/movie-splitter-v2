@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-22T17:21:45+13:00",
+ "updated": "2026-10-22T17:21:46+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3177,6 +3177,12 @@
  },
  "events": [
   {
+   "at": "2026-10-22T17:21:46+13:00",
+   "type": "planned",
+   "title": "[Movie recap] John Wick Chapter 2 (2017): 8 parts planned",
+   "message": "John Wick Chapter 2 (2017)\nMode: Movie recap\n\nPart 1: Stolen Car, Very Bad Week (13 narrated beats, about 64s of voice)\nPart 2: Retirement Lasts Two Minutes (14 narrated beats, about 73s of voice)\nPart 3: Grenade Launcher Says Hello (15 narrated beats, about 69s of voice)\nPart 4: Twelve Seats, One Hit (18 narrated beats, about 85s of voice)\nPart 5: The Dressing Room Confession (11 narrated beats, about 53s of voice)\nPart 6: Catacombs, Double Cross, Courtesy (17 narrated beats, about 75s of voice)\nPart 7: Seven Million Dollar Bounty (15 narrated beats, about 64s of voice)\nPart 8: Excommunicado in One Hour (23 narrated beats, about 102s of voice)\n"
+  },
+  {
    "at": "2026-10-22T17:14:00+13:00",
    "type": "started",
    "title": "Started: John Wick Chapter 2 (2017)",
@@ -4369,12 +4375,6 @@
    "type": "part_ready",
    "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 2 of 3 ready",
    "message": "Part 2: 55:23 to 59:30 (247s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\nwhen they said 'What is the point of this?' I felt that 😭\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-15T21:14:06+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] GONJIAM Haunted Asylum (2017): Part 1 of 3 ready",
-   "message": "Part 1: 51:20 to 55:23 (243s)\nOn its way to the laptop (Ready to post/GONJIAM Haunted Asylum (2017)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 1 🎬 · Part 2? only if this gets 100 comments 😏\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
