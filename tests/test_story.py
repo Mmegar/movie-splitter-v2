@@ -128,14 +128,41 @@ class StoryTest(unittest.TestCase):
                 self.assertIsNone(story.last_credit())
 
     def test_story_window_skips_intro_and_credits(self):
-        cues = [(95.0, 97.0, "First line"), (5000.0, 5003.0, "Last line")]
-        self.assertEqual(story.story_window(6000, cues), [90.0, 5280.0])     # end credits: at least 12% cut
+        cues = ([(2.0, 5.0, "Advertise your product or brand here contact www.OpenSubtitles.org today")] +
+                [(95.0 + i * 500, 97.0 + i * 500, f"Line {i}") for i in range(10)] +
+                [(5000.0, 5003.0, "Last line"), (5100.0, 5104.0, "♪ the end credits song ♪"), (5200.0, 5203.0, "[music]"),
+                 (5900.0, 5903.0, "Subtitles by explosiveskull")])
+        self.assertEqual(story.story_window(6000, cues), [90.0, 5023.0])    # no dark picture: 20s after the last line
+        bright = [120.0] * 6000
+        bright[5010:] = [10.0] * 990                                        # fades to the dark end credits
+        self.assertEqual(story.story_window(6000, cues, bright), [90.0, 5010.0])
         self.assertEqual(story.story_window(6000, []), [120.0, 5520.0])
         story.WINDOW[:] = [90.0, 5280.0]
         parts = story.clean_story({"parts": [{"title": "a", "beats": [{"say": "Logos.", "at": 10}]},
                                              {"title": "b", "beats": [{"say": "Credits.", "at": 5900}]}]}, 6000)
         self.assertEqual(parts[0][2]["beats"][0]["at"], 90.0)
         self.assertEqual(parts[1][2]["beats"][0]["at"], 5280.0)
+        self.assertEqual(parts[1][2]["story_end"], 5280.0)
+
+    def test_dialogue_filter(self):
+        self.assertTrue(story.is_dialogue("Where were you last night?"))
+        self.assertTrue(story.is_dialogue("<i>(whispers) Run.</i>"))
+        for t in ["♪ la la ♪", "[door slams]", "(SIGHS)", "Synced & corrected by -robtor-", "www.addic7ed.com", ""]:
+            self.assertFalse(story.is_dialogue(t), t)
+
+    def test_narrated_intro_and_outro(self):
+        data = {"intro": [{"say": "You need to see this one.", "at": 3000}, {"say": "Let's get into it.", "at": 3010}],
+                "outro": [{"say": "And that's the movie.", "at": 5900}, {"say": "Follow for the next one.", "at": 5905}],
+                "parts": [{"title": "a", "beats": [{"say": "It starts here.", "at": 100}]},
+                          {"title": "b", "beats": [{"say": "The ending.", "at": 5000}]}]}
+        story.WINDOW[:] = [90.0, 5280.0]
+        parts = story.clean_story(data, 6000)
+        first, last = parts[0][2]["beats"], parts[-1][2]["beats"]
+        self.assertEqual([b["say"] for b in first[:3]], ["You need to see this one.", "Let's get into it.", "It starts here."])
+        self.assertEqual([b["say"] for b in last[-2:]], ["And that's the movie.", "Follow for the next one."])
+        self.assertEqual(last[-1]["at"], 5280.0)                           # the outro's footage stops before the credits
+        self.assertIn('"intro"', story.story_prompt("M", 6000, "", "recap", ""))
+        self.assertIn("outro", story.STORY_SCHEMA["properties"])
 
     def test_never_more_than_8_parts(self):
         data = {"parts": [{"title": f"p{i}", "beats": [{"say": f"s{i}", "at": i * 10}]} for i in range(11)]}

@@ -561,7 +561,7 @@ def analyse(path, workdir):
     scene_file, audio_file = workdir / "scene.txt", workdir / "audio.txt"
     cmd = ["ffmpeg", "-hide_banner", "-nostats", "-loglevel", "error", "-i", str(path.resolve()),
            "-map", "0:v:0",
-           "-vf", f"fps=5,scale=192:-2,select='gte(scene,0)',metadata=print:file={scene_file.name}"]
+           "-vf", f"fps=5,scale=192:-2,signalstats,select='gte(scene,0)',metadata=print:file={scene_file.name}"]
     audio = has_audio(path)
     if audio:
         cmd += ["-map", "0:a:0",
@@ -574,11 +574,17 @@ def analyse(path, workdir):
     motion = [0.0] * n
     motion_count = [0] * n
     cuts = [0] * n
+    bright, bright_count = [0.0] * n, [0] * n
     t = None
     for line in scene_file.read_text().splitlines():
         m = re.search(r"pts_time:([\d.]+)", line)
         if m:
             t = float(m.group(1))
+            continue
+        m = re.search(r"lavfi\.signalstats\.YAVG=([\d.]+)", line)
+        if m and t is not None and int(t) < n:
+            bright[int(t)] += float(m.group(1))
+            bright_count[int(t)] += 1
             continue
         m = re.search(r"lavfi\.scene_score=([\d.]+)", line)
         if m and t is not None and int(t) < n:
@@ -588,6 +594,7 @@ def analyse(path, workdir):
             if s > 0.35:
                 cuts[int(t)] += 1
     motion = [motion[i] / motion_count[i] if motion_count[i] else 0.0 for i in range(n)]
+    BRIGHT[:] = [bright[i] / bright_count[i] if bright_count[i] else 255.0 for i in range(n)] if any(bright_count) else []
 
     loud = [-90.0] * n
     if audio and audio_file.exists():
@@ -622,6 +629,7 @@ def quiet_moments(path):
 
 
 QUIET_LEN = []     # (middle of pause, pause length) from the last quiet_moments() call
+BRIGHT = []        # average picture brightness (0-255) per second, from the last analyse() call
 ENDINGS = []       # (time, how good an ending it is), built per movie by build_endings()
 
 

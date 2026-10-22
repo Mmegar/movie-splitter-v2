@@ -241,8 +241,10 @@ def frames():
     out = []
     try:
         total = P.duration(src)
-        step = max(30.0, total / MAX_FRAMES)
-        t = step / 2
+        lo, hi = max(0.0, WINDOW[0]), min(total, WINDOW[1])         # never the opening titles or end credits
+        step = max(30.0, (hi - lo) / MAX_FRAMES)
+        t = lo + step / 2
+        total = hi
         tmp = Path("frame.jpg")
         print(f"Grabbing {int(total / step)} frames for Claude to watch...", flush=True)
         while t < total:
@@ -334,15 +336,17 @@ SYSTEM = (
 NOTES_SCHEMA = {"type": "object", "required": ["notes"], "properties": {"notes": {"type": "array", "items": {
     "type": "object", "required": ["at", "note"],
     "properties": {"at": {"type": "number"}, "note": {"type": "string"}}}}}}
+BEATS = {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
+    "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"}, "joke": {"type": "boolean"}}}}
 STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "properties": {
     "character": {"type": "string"},
     "cast": {"type": "array", "items": {"type": "string"}},
+    "intro": BEATS,
+    "outro": BEATS,
     "parts": {"type": "array", "items": {"type": "object", "required": ["title", "beats"], "properties": {
         "title": {"type": "string"},
         "caption": {"type": "string"},
-        "beats": {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
-            "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"},
-            "joke": {"type": "boolean"}}}}}}}}}
+        "beats": BEATS}}}}}
 SPAN = {"type": "array", "items": {"type": "number"}}
 HYPE_SCHEMA = {"type": "object", "required": ["character", "edits"], "properties": {
     "character": {"type": "string"},
@@ -596,17 +600,22 @@ Make {n} to {MAX_STORY_PARTS} parts (at least {MIN_STORY_PARTS}, never more than
 aloud (about {words} words of narration per part), in story order. Use more parts (up to {MAX_STORY_PARTS}) rather
 than squeezing or skipping important story.
 
-Skip the intro and the outro: never use the opening logos, titles or credits, or the end credits. Only use
-seconds from {int(WINDOW[0])} to {int(WINDOW[1])}.
+Footage: never use the movie's own opening logos, title cards or credits, or its end credits. Only use seconds
+from {int(WINDOW[0])} to {int(WINDOW[1])}, and skip any moment there that still has credits or a title on screen.
 
 {voice_rules()}
 
 Flow, which matters most:
-- Part 1 opens with a hook for the whole series before the story starts: one to three beats that tell the viewer
-  what they're in for and why they should care (the central question, the stakes, the wildest thing that's coming,
-  e.g. "One locked room. One body. And six people who all swear they were asleep. Let's get into it."), over the
-  most gripping footage (it may come from later in the movie, but never shows or tells the ending or a twist).
-  Then the story starts from the beginning ("But it all starts three days earlier...").
+- The narrated intro ("intro", played at the very start of Part 1): two to four beats that welcome the viewer and
+  hook them for the whole series: what they're in for and why they should care (the central question, the
+  stakes, the wildest thing that's coming), e.g. "Okay, you need to see this one. One locked room. One body. And
+  six people who all swear they were asleep. Let's get into it." Its footage is the most gripping moments of the
+  story (it may come from later in the movie, but never shows or tells the ending or a twist). Part 1's own beats
+  then start the story from the beginning ("But it all starts three days earlier...").
+- The narrated outro ("outro", played at the very end of the last part, after the ending): two to four beats
+  that wrap the movie up: what it all meant, a last callback or joke, your verdict, and a sign-off to the viewer
+  (ask what they'd have done, or tell them to follow for the next recap). Its footage is the movie's final
+  scenes and closing shots of the main characters, from before the end credits start.
 - Every part except the last ends on a real cliffhanger: stop right before a reveal or a decision, and end with a
   line that makes people need the next part (a question, a threat, "and that's when..."). Never end a part on a
   calm moment or mid-thought.
@@ -627,6 +636,8 @@ with its own sound. Only use seconds that appear below.
 {caption_rules()}Answer with this JSON shape:
 {{"character": "<who it follows; empty for a whole-movie recap>",
   "cast": ["<the real names of the movie's top 3 billed actors>"],
+  "intro": [{{"say": "<narration>", "at": <second>}}],
+  "outro": [{{"say": "<narration>", "at": <second>}}],
   "parts": [{{"title": "<3 to 6 words, for the thumbnail>",{caption_field()}
              "beats": [{{"say": "<narration>", "at": <second>}},
                        {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true}},
@@ -662,16 +673,50 @@ Answer with this JSON shape:
 
 WINDOW = [0.0, 1e9]       # the movie without its intro and end credits (set per movie by plan)
 
+# subtitle lines that aren't the movie's dialogue: subtitle-site ads and credits, song lyrics, sound labels
+NOT_DIALOGUE = re.compile(r"opensubtitles|subtitles? (by|from|ripped|downloaded)|sync(ed|hronized)? (&|and |by)|"
+                          r"corrected by|captioning|captions by|translated by|www\.|https?:|\.(com|org|net)\b|"
+                          r"addic7ed|subscene|yts\b|yify|advertise your", re.I)
 
-def story_window(total, cues):
-    """Where the story is: after the opening logos/titles and before the end credits. Taken from where the
-    dialogue starts and stops, never more than 8% in from the start or 12% from the end."""
-    if cues:
-        lo = min(max(0.0, cues[0][0] - 5.0), total * 0.08)
-        hi = max(min(total, cues[-1][1] + 20.0), total * 0.88)
-    else:
-        lo, hi = total * 0.02, total * 0.92
-    return [round(lo, 2), round(min(hi, total - 1.0), 2)]
+
+def is_dialogue(text):
+    t = re.sub(r"<[^>]+>|\{[^}]*\}", "", str(text)).strip()
+    if not t or NOT_DIALOGUE.search(t):
+        return False
+    if "♪" in t or "♫" in t or t.startswith("#"):                    # song lyrics (the end-credits song)
+        return False
+    return bool(re.sub(r"\[[^\]]*\]|\([^)]*\)|[-\s.…!?]", "", t))   # not just "[music]" or "(door slams)"
+
+
+def dark_from(bright, start, end, run=30, share=0.8, level=40.0):
+    """The first second in start..end where the picture stays dark (black, or white text on black) for most
+    of the next `run` seconds: where the end credits start. None if it never does."""
+    if not bright:
+        return None
+    if max(bright) > 300:                                          # 10-bit video: brightness runs to 1023
+        level *= 4
+    dark = [1 if v < level else 0 for v in bright]
+    for c in range(max(0, int(start)), min(int(end), len(dark) - run) + 1):
+        if sum(dark[c:c + run]) >= share * run:
+            return float(c + dark[c:c + run].index(1))
+    return None
+
+
+def story_window(total, cues, bright=()):
+    """Where the story is: after the opening logos/titles and before the end credits. Starts just before the
+    first line of real dialogue (never more than 8% in) and ends where the picture fades into the dark end
+    credits after the last line of dialogue (or 20 seconds after it). Subtitle-site ads and end-credit song
+    lyrics don't count as dialogue."""
+    real = [c for c in cues if is_dialogue(c[2])]
+    if len(real) < 10:
+        return [round(total * 0.02, 2), round(total * 0.92, 2)]
+    lo = min(max(0.0, real[0][0] - 5.0), total * 0.08)
+    last = real[-1][1]
+    if last < total * 0.6:                                         # subtitles stop early: they're not the whole movie
+        return [round(lo, 2), round(total * 0.92, 2)]
+    fade = dark_from(list(bright), last, last + 180)
+    hi = fade if fade is not None else last + 20.0
+    return [round(lo, 2), round(max(last, min(hi, total - 1.0)), 2)]
 
 
 def _num(v, total, default=0.0):
@@ -681,24 +726,30 @@ def _num(v, total, default=0.0):
         return default
 
 
+def clean_beats(raw, total):
+    """The writer's beats with valid times: narration {"say", "at"} or original moments {"keep", "until"}."""
+    beats = []
+    for b in raw or []:
+        if not isinstance(b, dict):
+            continue
+        if str(b.get("say") or "").strip() and b.get("at") is not None:
+            beats.append({"say": str(b["say"]).strip(), "at": round(_num(b["at"], total), 2)})
+            if b.get("joke") is True:
+                beats[-1]["joke"] = True
+        elif b.get("keep") is not None or (b.get("at") is not None and b.get("until") is not None):
+            a = _num(b["keep"] if b.get("keep") is not None else b["at"], total)
+            e = _num(b.get("until", a + 5), total, a + 5)
+            e = min(max(e, a + 2.0), a + 10.0, total)
+            if e - a >= 1.0:
+                beats.append({"keep": round(a, 2), "until": round(e, 2)})
+    return beats
+
+
 def clean_story(data, total):
     """Checks the writer's plan: valid times, at least 2 parts. Returns [(start, end, part info)]."""
     parts = []
     for p in data.get("parts") or []:
-        beats = []
-        for b in p.get("beats") or []:
-            if not isinstance(b, dict):
-                continue
-            if str(b.get("say") or "").strip() and b.get("at") is not None:
-                beats.append({"say": str(b["say"]).strip(), "at": round(_num(b["at"], total), 2)})
-                if b.get("joke") is True:
-                    beats[-1]["joke"] = True
-            elif b.get("keep") is not None or (b.get("at") is not None and b.get("until") is not None):
-                a = _num(b["keep"] if b.get("keep") is not None else b["at"], total)
-                e = _num(b.get("until", a + 5), total, a + 5)
-                e = min(max(e, a + 2.0), a + 10.0, total)
-                if e - a >= 1.0:
-                    beats.append({"keep": round(a, 2), "until": round(e, 2)})
+        beats = clean_beats(p.get("beats"), total)
         if any("say" in b for b in beats):
             parts.append({"title": str(p.get("title") or "").strip()[:60], "beats": beats,
                           "caption": re.sub(r"\s*#\w+", "", str(p.get("caption") or "")).strip()[:300]})
@@ -714,11 +765,17 @@ def clean_story(data, total):
                                                 "caption": parts[MAX_STORY_PARTS - 1]["caption"]}]
     if len(parts) < 2:
         raise Skip("The story plan didn't have enough to make at least 2 parts.")
+    intro = [b for b in clean_beats(data.get("intro"), total) if "say" in b]     # narrated intro and outro
+    outro = [b for b in clean_beats(data.get("outro"), total) if "say" in b]
+    parts[0]["beats"] = intro + parts[0]["beats"]
+    parts[-1]["beats"] = parts[-1]["beats"] + outro
     who = str(data.get("character") or "").strip()
     out = []
     for p in parts:
         times = [b.get("at", b.get("keep")) for b in p["beats"]]
         p["character"] = who
+        if WINDOW[1] < total:
+            p["story_end"] = WINDOW[1]                         # footage never runs on into the end credits
         out.append((min(times), max(times) + 8.0, p))
     return out
 
@@ -807,8 +864,9 @@ def hype_from_sound(total, loud, motion, score):
 def plan(mode, name, total, cues, loud=(), motion=(), score=()):
     """The parts for one of these modes: [(start, end, info)] (info is saved, so a stopped run carries on)."""
     who = character()
-    WINDOW[:] = story_window(total, cues)
+    WINDOW[:] = story_window(total, cues, getattr(P, "BRIGHT", ()))
     print(f"Story window (no intro or end credits): {int(WINDOW[0])}s to {int(WINDOW[1])}s", flush=True)
+    cues = [c for c in cues if is_dialogue(c[2]) and WINDOW[0] - 2 <= c[0] <= WINDOW[1]]   # the writer never sees the credits
     ready = using_claude() or local_ready()
     if mode == "hype":
         if ready and cues:
@@ -1246,6 +1304,7 @@ def render_story(src, number, info, cues, out, workdir, total):
     segs, said = [], []
     last_end = None          # where the previous piece's footage ended: a big jump gets a dip from black
     beats = info["beats"]
+    total = min(total, info.get("story_end") or total)
     for k, beat in enumerate(beats):
         P.checkpoint()
         seg = workdir / f"seg{k:03}.mp4"
