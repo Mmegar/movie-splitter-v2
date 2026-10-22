@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T06:53:28+13:00",
+ "updated": "2026-10-23T06:56:27+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -123,6 +123,22 @@
         "error": null
        },
        "cover": "toy-story-5-2026/recap-06-cover.bin"
+      },
+      {
+       "n": 7,
+       "start": 2862.0,
+       "end": 3235.0,
+       "seconds": 80.3,
+       "drive_path": "Ready to post/Toy Story 5 (2026)/Movie recap/Toy Story 5 (2026) - Part 07.mp4",
+       "caption": "The devices finally get a plan going, and it's honestly kind of sweet. 📸 Pick the poop.\nPart 7 🎬 · Follow so you don't miss Part 8 🔔\n#ToyStory5 #TomHanks #TimAllenAs #BuzzLightyear #movie",
+       "preview": "toy-story-5-2026/recap-007.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "toy-story-5-2026/recap-07-cover.bin"
       }
      ]
     }
