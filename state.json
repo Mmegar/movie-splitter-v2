@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:33:27+13:00",
+ "updated": "2026-10-23T21:33:29+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 8
  },
  "queue": [],
@@ -3711,6 +3711,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:33:29+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 5 of 8 ready",
+   "message": "Part 5: Stay In Your Seat, Michelle (9 narrated beats, about 62s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:29:15+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 4 of 8 ready",
@@ -4903,12 +4909,6 @@
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 1 of 5 ready",
    "message": "Highlight 1: 40:38 to 44:11 (213s)  interest score 67/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\nwhen they said 'Hold your fire!' I felt that 😭\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-17T16:55:21+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] One Last Shot (2026): Part 5 of 5 ready",
-   "message": "Part 5: 55:31 to 58:34 (183s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\n'Someone else can deal with them.' and then THIS happened 😳\nPart 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
