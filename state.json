@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:43:17+13:00",
+ "updated": "2026-10-23T15:43:19+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T15:39:15+13:00",
   "movie": "Heretic (2024)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
