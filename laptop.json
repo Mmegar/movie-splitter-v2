@@ -1,11 +1,13 @@
 {
- "updated": "2026-10-23T12:35:53+07:00",
+ "updated": "2026-10-23T12:40:11+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "10 Cloverfield Lane 2016 1080p HDRip x264 AAC-JYK.mkv"
+ },
  "transfers": [],
  "uploaded": [
   {
