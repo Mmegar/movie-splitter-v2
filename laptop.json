@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T09:07:07+07:00",
+ "updated": "2026-10-23T09:08:59+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -158,7 +158,14 @@
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
- "bin": [],
+ "bin": [
+  {
+   "name": "Once.Upon.A.Time.In.The.Middle.East.2026.HC.1080p.WEB.H264-NGP.mkv",
+   "size_mb": 3302,
+   "modified": "2026-10-23T08:21:59+07:00",
+   "folder": "done"
+  }
+ ],
  "commands": {
   "mvkbiulfuepm": {
    "status": "failed",
@@ -284,6 +291,7 @@
   "kung-fu-hustle-2004",
   "moon-knight-s01e02-summon-the-suit",
   "obsession-2026",
+  "once-upon-a-time-in-the-middle-east-2026",
   "one-last-shot-2026",
   "pirates-of-the-caribbean-at-worlds-end-2007",
   "runner-2026",
