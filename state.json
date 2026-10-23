@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-23T18:44:28+13:00",
+ "updated": "2026-10-23T18:44:31+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T18:40:16+13:00",
   "movie": "10 Cloverfield Lane (2016)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
