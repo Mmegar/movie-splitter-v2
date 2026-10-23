@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T17:02:07+13:00",
+ "updated": "2026-10-23T17:02:10+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Speak No Evil (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 8
  },
  "queue": [],
@@ -3564,6 +3564,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T17:02:10+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Speak No Evil (2024): Part 5 of 8 ready",
+   "message": "Part 5: Sorry, But Not Really (12 narrated beats, about 73s of voice)\nIn Ready to post/Speak No Evil (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:58:04+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Speak No Evil (2024): Part 4 of 8 ready",
@@ -4756,12 +4762,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Pirates Of The Caribbean At Worlds End (2007): Part 1 of 5 ready",
    "message": "Part 1: 1:48:24 to 1:52:02 (218s)\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'The enemy is here!' 📱\nPart 1 🎬 · Part 2 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-17T11:33:50+13:00",
-   "type": "planned",
-   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): 6 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights as they're made."
   }
  ]
 }
