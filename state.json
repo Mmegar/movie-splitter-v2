@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:39:25+13:00",
+ "updated": "2026-10-23T14:39:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T14:30:59+13:00",
   "movie": "Once Upon A Time In The Middle East (2026)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -3189,6 +3189,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T14:39:27+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): 8 parts planned",
+   "message": "Once Upon A Time In The Middle East (2026)\nMode: Movie recap\n\nPart 1: Chef Xu Walks Into Chaos (12 narrated beats, about 64s of voice)\nPart 2: Stay, Chef. Please. (9 narrated beats, about 45s of voice)\nPart 3: Business Booms in a Warzone (9 narrated beats, about 45s of voice)\nPart 4: Zaid's Fall From Grace (7 narrated beats, about 37s of voice)\nPart 5: Alifah Prison Gets Weird (8 narrated beats, about 44s of voice)\nPart 6: Christmas Feast Gone Wrong (7 narrated beats, about 37s of voice)\nPart 7: Cooking for Child Soldiers (7 narrated beats, about 41s of voice)\nPart 8: The Mosque Escape Plan (12 narrated beats, about 70s of voice)\n"
+  },
+  {
    "at": "2026-10-23T14:31:01+13:00",
    "type": "started",
    "title": "Started: Once Upon A Time In The Middle East (2026)",
@@ -4381,12 +4387,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 2 of 5 ready",
    "message": "Highlight 2: 40:25 to 43:56 (210s)  interest score 63/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-16T18:05:00+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 1 of 5 ready",
-   "message": "Highlight 1: 28:49 to 33:12 (262s)  interest score 63/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nHighlight 1 🎬 · Highlight 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
