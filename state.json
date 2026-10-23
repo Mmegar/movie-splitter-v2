@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T19:15:55+13:00",
+ "updated": "2026-10-23T19:15:57+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3759,6 +3759,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T19:15:57+13:00",
+   "type": "finished",
+   "title": "✅ Finished: 10 Cloverfield Lane (2016)",
+   "message": "Movie recap: 8 parts.\nIn Ready to post/10 Cloverfield Lane (2016)."
+  },
+  {
    "at": "2026-10-23T19:15:54+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 8 of 8 ready",
@@ -4951,12 +4957,6 @@
    "type": "planned",
    "title": "[Best stretch] One Last Shot (2026): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/One Last Shot (2026)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-17T16:23:12+13:00",
-   "type": "started",
-   "title": "Started: One Last Shot (2026)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/One Last Shot (2026)'."
   }
  ]
 }
