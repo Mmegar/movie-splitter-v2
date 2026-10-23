@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:08:49+13:00",
+ "updated": "2026-10-23T15:08:52+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "once-upon-a-time-in-the-middle-east-2026",
    "name": "Once Upon A Time In The Middle East (2026)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-23T14:31:01+13:00",
-   "finished": null,
+   "finished": "2026-10-23T15:08:52+13:00",
    "duration": 8403.7,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3318,6 +3318,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:08:51+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 8 of 8 ready",
+   "message": "Part 8: The Mosque Escape Plan (12 narrated beats, about 70s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T15:05:41+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 7 of 8 ready",
@@ -4510,12 +4516,6 @@
    "type": "planned",
    "title": "[Highlights] John Wick Chapter 2 (2017): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/John Wick Chapter 2 (2017)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-16T18:29:38+13:00",
-   "type": "planned",
-   "title": "[Best stretch] John Wick Chapter 2 (2017): 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/John Wick Chapter 2 (2017)/Best stretch as they're made."
   }
  ]
 }
