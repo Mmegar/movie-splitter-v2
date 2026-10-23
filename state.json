@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:20:48+13:00",
+ "updated": "2026-10-23T21:20:52+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3663,6 +3663,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:20:51+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 2 of 8 ready",
+   "message": "Part 2: The Air Up Top Is Poisoned (7 narrated beats, about 59s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:16:47+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 1 of 8 ready",
@@ -4855,12 +4861,6 @@
    "type": "part_ready",
    "title": "[Best stretch] One Last Shot (2026): Part 3 of 5 ready",
    "message": "Part 3: 47:58 to 51:28 (210s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 3 🎬 · Part 4? only if this gets 100 comments 😏\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-17T16:42:42+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] One Last Shot (2026): Part 2 of 5 ready",
-   "message": "Part 2: 44:34 to 47:58 (204s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\n'Can you imagine?' and then THIS happened 😳\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
