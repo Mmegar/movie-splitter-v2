@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:48:18+13:00",
+ "updated": "2026-10-23T14:51:27+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "once-upon-a-time-in-the-middle-east-2026/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 2206.0,
+       "end": 3025.0,
+       "seconds": 52.4,
+       "drive_path": "Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap/Once Upon A Time In The Middle East (2026) - Part 03.mp4",
+       "caption": "Shortages, violence, and one restaurant with the lights on. Suspicious? Maybe. Profitable? Very. 🔥\nPart 3 🎬 · Should I post Part 4? 👇\n#OnceUponATimeInTheMiddleEast #ShenTeng #JiangQiming #ZhangXiwei #movie",
+       "preview": "once-upon-a-time-in-the-middle-east-2026/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "once-upon-a-time-in-the-middle-east-2026/recap-03-cover.bin"
       }
      ]
     }
