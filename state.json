@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:16:45+13:00",
+ "updated": "2026-10-23T21:16:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3647,6 +3647,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:16:47+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 1 of 8 ready",
+   "message": "Part 1: She Walked Out On Ben (10 narrated beats, about 76s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:12:12+13:00",
    "type": "planned",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): 8 parts planned",
@@ -4839,12 +4845,6 @@
    "type": "part_ready",
    "title": "[Best stretch] One Last Shot (2026): Part 2 of 5 ready",
    "message": "Part 2: 44:34 to 47:58 (204s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\n'Can you imagine?' and then THIS happened 😳\nPart 2 🎬 · comment 'MORE' if you need Part 3 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-17T16:38:40+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] One Last Shot (2026): Part 1 of 5 ready",
-   "message": "Part 1: 41:04 to 44:34 (210s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\n'Have you surrounded?' and then THIS happened 😳\nPart 1 🎬 · comment 'MORE' if you need Part 2 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
