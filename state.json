@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:06:09+13:00",
+ "updated": "2026-10-23T16:06:12+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Heretic (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3401,6 +3401,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:06:12+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 4 of 8 ready",
+   "message": "Part 4: Iterations, Jar Jar, and Fear (15 narrated beats, about 65s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:01:22+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Heretic (2024): Part 3 of 8 ready",
@@ -4593,12 +4599,6 @@
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 5 of 5 ready",
    "message": "Part 5: 1:25:03 to 1:28:04 (181s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\n'What’s the number up to now, Earl?' is my new personality 😤\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-16T18:54:24+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 4 of 5 ready",
-   "message": "Part 4: 1:21:04 to 1:25:03 (239s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\nthe way they said 'Pull it out, you will bleed, and you will' 🫠\nPart 4 🎬 · Part 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
