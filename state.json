@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:45:30+13:00",
+ "updated": "2026-10-23T15:45:33+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T15:39:15+13:00",
   "movie": "Heretic (2024)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -3336,6 +3336,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:45:33+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Heretic (2024): 8 parts planned",
+   "message": "Heretic (2024)\nMode: Movie recap\n\nPart 1: Two Missionaries, One Locked Door (16 narrated beats, about 82s of voice)\nPart 2: Blueberry Disease and Butterflies (13 narrated beats, about 67s of voice)\nPart 3: Pick a Door, Any Door (11 narrated beats, about 58s of voice)\nPart 4: Iterations, Jar Jar, and Fear (15 narrated beats, about 65s of voice)\nPart 5: Basement Pie, Dead Prophet (13 narrated beats, about 58s of voice)\nPart 6: She's Coming Back, Right? (13 narrated beats, about 60s of voice)\nPart 7: The Chute and the Cages (12 narrated beats, about 55s of voice)\nPart 8: The One True Religion (12 narrated beats, about 59s of voice)\n"
+  },
+  {
    "at": "2026-10-23T15:39:17+13:00",
    "type": "started",
    "title": "Started: Heretic (2024)",
@@ -4528,12 +4534,6 @@
    "type": "paused",
    "title": "⏸ Paused: John Wick Chapter 2 (2017)",
    "message": "2 parts made so far. It carries on from the next part when you switch Pause off."
-  },
-  {
-   "at": "2026-10-16T18:36:40+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 2 of 5 ready",
-   "message": "Part 2: 1:14:08 to 1:17:34 (207s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Did he tell you not to do this?' 📱\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
