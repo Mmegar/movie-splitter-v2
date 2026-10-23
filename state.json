@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:58:02+13:00",
+ "updated": "2026-10-23T16:58:05+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Speak No Evil (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3548,6 +3548,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:58:04+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Speak No Evil (2024): Part 4 of 8 ready",
+   "message": "Part 4: The Bunny Left Behind (10 narrated beats, about 58s of voice)\nIn Ready to post/Speak No Evil (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:54:17+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Speak No Evil (2024): Part 3 of 8 ready",
@@ -4740,12 +4746,6 @@
    "type": "planned",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): 6 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights as they're made."
-  },
-  {
-   "at": "2026-10-17T11:33:49+13:00",
-   "type": "planned",
-   "title": "[Best stretch] Pirates Of The Caribbean At Worlds End (2007): 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Best stretch as they're made."
   }
  ]
 }
