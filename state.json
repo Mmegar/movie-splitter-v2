@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:57:28+13:00",
+ "updated": "2026-10-23T16:01:20+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "heretic-2024/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 1645.0,
+       "end": 2280.0,
+       "seconds": 79.9,
+       "drive_path": "Ready to post/Heretic (2024)/Movie recap/Heretic (2024) - Part 03.mp4",
+       "caption": "Two doors. One says belief. One says disbelief. Which one would you pick? 🚪 The choice is not as simple as it sounds.\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Heretic #HughGrant #SophieThatcher #ChloeEast #movie",
+       "preview": "heretic-2024/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "heretic-2024/recap-03-cover.bin"
       }
      ]
     }
