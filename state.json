@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:44:41+13:00",
+ "updated": "2026-10-23T16:44:44+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Speak No Evil (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3500,6 +3500,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:44:43+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Speak No Evil (2024): Part 1 of 8 ready",
+   "message": "Part 1: Sunny Italy, Shady Friends (14 narrated beats, about 84s of voice)\nIn Ready to post/Speak No Evil (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:39:02+13:00",
    "type": "planned",
    "title": "[Movie recap] Speak No Evil (2024): 8 parts planned",
@@ -4692,12 +4698,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-16T13:18:50+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "John Wick Chapter 2 (2017): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\John Wick Chapter 2 (2017)\nBest stretch: 5 parts, Highlights: 5 parts"
   }
  ]
 }
