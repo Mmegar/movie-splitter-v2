@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:51:43+13:00",
+ "updated": "2026-10-23T15:51:45+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Heretic (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3353,6 +3353,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:51:45+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 1 of 8 ready",
+   "message": "Part 1: Two Missionaries, One Locked Door (16 narrated beats, about 82s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T15:45:33+13:00",
    "type": "planned",
    "title": "[Movie recap] Heretic (2024): 8 parts planned",
@@ -4545,12 +4551,6 @@
    "type": "started",
    "title": "▶️ Carrying on: John Wick Chapter 2 (2017)",
    "message": "2 parts were already made before it stopped; making the rest."
-  },
-  {
-   "at": "2026-10-16T18:38:17+13:00",
-   "type": "paused",
-   "title": "⏸ Paused: John Wick Chapter 2 (2017)",
-   "message": "2 parts made so far. It carries on from the next part when you switch Pause off."
   }
  ]
 }
