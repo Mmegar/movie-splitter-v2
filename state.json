@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:15:44+13:00",
+ "updated": "2026-10-23T16:15:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Heretic (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 6,
+  "part": 7,
   "parts_total": 8
  },
  "queue": [],
@@ -3433,6 +3433,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:15:46+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 6 of 8 ready",
+   "message": "Part 6: She's Coming Back, Right? (13 narrated beats, about 60s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:10:48+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Heretic (2024): Part 5 of 8 ready",
@@ -4625,12 +4631,6 @@
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 2 of 5 ready",
    "message": "Highlight 2: 1:15:31 to 1:19:00 (208s)  interest score 71/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nthis movie said 'hold my popcorn' 🍿\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T19:01:37+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 1 of 5 ready",
-   "message": "Highlight 1: 7:26 to 11:24 (238s)  interest score 66/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nPOV: you said 'one more part' 4 hours ago 🤡\nHighlight 1 🎬 · Highlight 2? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
