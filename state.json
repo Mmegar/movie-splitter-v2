@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:37:31+13:00",
+ "updated": "2026-10-23T14:37:33+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T14:30:59+13:00",
   "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
