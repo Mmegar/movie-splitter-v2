@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:48:30+13:00",
+ "updated": "2026-10-23T21:48:32+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": null,
   "started": "2026-10-23T21:05:27+13:00",
-  "movie": "10 Cloverfield Lane (2016)",
-  "mode": "recap",
-  "stage": "rendering",
-  "part": 8,
-  "parts_total": 8
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
