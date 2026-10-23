@@ -1,0 +1,7 @@
+{
+ "movies": [
+  "10-cloverfield-lane-2016",
+  "speak-no-evil-2024"
+ ],
+ "format": "MSP1 AES-256-GCM, key = sha256('movie-splitter-preview:' + ntfy topic)"
+}
