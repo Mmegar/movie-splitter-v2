@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:05:42+13:00",
+ "updated": "2026-10-23T15:08:49+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -139,6 +139,22 @@
         "error": null
        },
        "cover": "once-upon-a-time-in-the-middle-east-2026/recap-07-cover.bin"
+      },
+      {
+       "n": 8,
+       "start": 6260.0,
+       "end": 6268.0,
+       "seconds": 65.4,
+       "drive_path": "Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap/Once Upon A Time In The Middle East (2026) - Part 08.mp4",
+       "caption": "A plan to buy time, a border run, and a final rice stew nobody will forget. Hold on tight. 🥣\nPart 8 🎬 · That's the last part. Follow for more 🍿\n#OnceUponATimeInTheMiddleEast #ShenTeng #JiangQiming #ZhangXiwei #movie",
+       "preview": "once-upon-a-time-in-the-middle-east-2026/recap-008.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "once-upon-a-time-in-the-middle-east-2026/recap-08-cover.bin"
       }
      ]
     }
