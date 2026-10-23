@@ -1,18 +1,36 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:33:12+13:00",
+ "updated": "2026-10-23T16:33:18+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T16:33:12+13:00",
-  "movie": null,
+  "movie": "Speak No Evil (2024)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "speak-no-evil-2024",
+   "name": "Speak No Evil (2024)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-23T16:33:14+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "heretic-2024",
    "name": "Heretic (2024)",
@@ -3465,6 +3483,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:33:14+13:00",
+   "type": "started",
+   "title": "Started: Speak No Evil (2024)",
+   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Speak No Evil (2024)'."
+  },
+  {
    "at": "2026-10-23T16:24:11+13:00",
    "type": "finished",
    "title": "✅ Finished: Heretic (2024)",
@@ -4657,12 +4681,6 @@
    "type": "finished",
    "title": "✅ Finished: John Wick Chapter 2 (2017)",
    "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/John Wick Chapter 2 (2017). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-16T19:17:41+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 5 of 5 ready",
-   "message": "Highlight 5: 1:39:18 to 1:43:14 (237s)  interest score 68/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nexplain this to me like I'm 5 🧸\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
