@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:48:46+13:00",
+ "updated": "2026-10-23T16:48:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Speak No Evil (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3516,6 +3516,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:48:48+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Speak No Evil (2024): Part 2 of 8 ready",
+   "message": "Part 2: Welcome to the Farm (12 narrated beats, about 66s of voice)\nIn Ready to post/Speak No Evil (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:44:43+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Speak No Evil (2024): Part 1 of 8 ready",
@@ -4708,12 +4714,6 @@
    "type": "started",
    "title": "Started: Pirates Of The Caribbean At Worlds End (2007)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Pirates Of The Caribbean At Worlds End (2007)'."
-  },
-  {
-   "at": "2026-10-17T05:20:33+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
