@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:54:15+13:00",
+ "updated": "2026-10-23T16:54:18+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Speak No Evil (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 8
  },
  "queue": [],
@@ -3532,6 +3532,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:54:17+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Speak No Evil (2024): Part 3 of 8 ready",
+   "message": "Part 3: Swim, Dinner, and Red Flags (13 narrated beats, about 82s of voice)\nIn Ready to post/Speak No Evil (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:48:48+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Speak No Evil (2024): Part 2 of 8 ready",
@@ -4724,12 +4730,6 @@
    "type": "planned",
    "title": "[Best stretch] Pirates Of The Caribbean At Worlds End (2007): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-17T11:23:08+13:00",
-   "type": "started",
-   "title": "Started: Pirates Of The Caribbean At Worlds End (2007)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Pirates Of The Caribbean At Worlds End (2007)'."
   }
  ]
 }
