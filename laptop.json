@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T10:33:08+07:00",
+ "updated": "2026-10-23T10:33:25+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -104,16 +104,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Speak.No.Evil.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2180,
-   "modified": "2026-10-23T08:42:07+07:00",
-   "sending": false,
-   "style": "classic",
-   "character": ""
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
@@ -175,6 +166,10 @@
   "mvketa11qfvg": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mvkf0cqa3u0p": {
+   "status": "done",
+   "note": "Already cutting Speak.No.Evil.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
   }
  },
  "commands_done": [
@@ -289,7 +284,8 @@
   "mvjcsvcmdbok",
   "mvjt2ixt1070",
   "mvkbiulfuepm",
-  "mvketa11qfvg"
+  "mvketa11qfvg",
+  "mvkf0cqa3u0p"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
