@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:08:54+13:00",
+ "updated": "2026-10-23T15:08:57+13:00",
  "run": {
-  "active": true,
+  "active": false,
   "run_id": null,
   "started": "2026-10-23T14:30:59+13:00",
-  "movie": "Once Upon A Time In The Middle East (2026)",
-  "mode": "recap",
-  "stage": "rendering",
-  "part": 8,
-  "parts_total": 8
+  "movie": null,
+  "mode": null,
+  "stage": "done",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
