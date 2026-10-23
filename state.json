@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:48:25+13:00",
+ "updated": "2026-10-23T21:48:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "10-cloverfield-lane-2016",
    "name": "10 Cloverfield Lane (2016)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-23T21:05:30+13:00",
-   "finished": null,
+   "finished": "2026-10-23T21:48:28+13:00",
    "duration": 6210.4,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3759,6 +3759,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:48:27+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 8 of 8 ready",
+   "message": "Part 8: Family Of Two, Then Fire (13 narrated beats, about 84s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:42:40+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 7 of 8 ready",
@@ -4951,12 +4957,6 @@
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 4 of 5 ready",
    "message": "Highlight 4: 1:16:37 to 1:20:07 (210s)  interest score 66/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Bro, go!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-17T17:10:19+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] One Last Shot (2026): Highlight 3 of 5 ready",
-   "message": "Highlight 3: 1:11:27 to 1:15:35 (248s)  interest score 64/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Did you order an airstrike?' is my new personality 😤\nHighlight 3 🎬 · Highlight 4 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
