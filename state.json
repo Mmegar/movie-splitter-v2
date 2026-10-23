@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T17:11:21+13:00",
+ "updated": "2026-10-23T17:18:16+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -139,6 +139,22 @@
         "error": null
        },
        "cover": "speak-no-evil-2024/recap-07-cover.bin"
+      },
+      {
+       "n": 8,
+       "start": 4929.0,
+       "end": 6281.0,
+       "seconds": 101.3,
+       "drive_path": "Ready to post/Speak No Evil (2024)/Movie recap/Speak No Evil (2024) - Part 08.mp4",
+       "caption": "Paddy is calm, Ciara is begging, and the Daltons have one shot left 🔥 Is this the end of the family?\nPart 8 🎬 · That's the last part. Follow for more 🍿\n#SpeakNoEvil #JamesMcAvoy #MackenzieDavis #ScootMcNairy #movie",
+       "preview": "speak-no-evil-2024/recap-008.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "speak-no-evil-2024/recap-08-cover.bin"
       }
      ]
     }
