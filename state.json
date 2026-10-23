@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:39:00+13:00",
+ "updated": "2026-10-23T16:39:03+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T16:33:12+13:00",
   "movie": "Speak No Evil (2024)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -3483,6 +3483,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:39:02+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Speak No Evil (2024): 8 parts planned",
+   "message": "Speak No Evil (2024)\nMode: Movie recap\n\nPart 1: Sunny Italy, Shady Friends (14 narrated beats, about 84s of voice)\nPart 2: Welcome to the Farm (12 narrated beats, about 66s of voice)\nPart 3: Swim, Dinner, and Red Flags (13 narrated beats, about 82s of voice)\nPart 4: The Bunny Left Behind (10 narrated beats, about 58s of voice)\nPart 5: Sorry, But Not Really (12 narrated beats, about 73s of voice)\nPart 6: The Shed Full of Secrets (11 narrated beats, about 71s of voice)\nPart 7: Flat Tyre, Long Night (12 narrated beats, about 74s of voice)\nPart 8: Ransom, Ketamine, and a Roof (17 narrated beats, about 109s of voice)\n"
+  },
+  {
    "at": "2026-10-23T16:33:14+13:00",
    "type": "started",
    "title": "Started: Speak No Evil (2024)",
@@ -4675,12 +4681,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "John Wick Chapter 2 (2017): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\John Wick Chapter 2 (2017)\nBest stretch: 5 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-16T19:17:48+13:00",
-   "type": "finished",
-   "title": "✅ Finished: John Wick Chapter 2 (2017)",
-   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/John Wick Chapter 2 (2017). The copy sent to GitHub has been deleted."
   }
  ]
 }
