@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T19:15:52+13:00",
+ "updated": "2026-10-23T19:15:55+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "10-cloverfield-lane-2016",
    "name": "10 Cloverfield Lane (2016)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-23T18:40:18+13:00",
-   "finished": null,
+   "finished": "2026-10-23T19:15:55+13:00",
    "duration": 6210.4,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3759,6 +3759,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T19:15:54+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 8 of 8 ready",
+   "message": "Part 8: Family of Two (19 narrated beats, about 109s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T19:09:34+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 7 of 8 ready",
@@ -4951,12 +4957,6 @@
    "type": "started",
    "title": "Started: One Last Shot (2026)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/One Last Shot (2026)'."
-  },
-  {
-   "at": "2026-10-17T10:21:32+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
