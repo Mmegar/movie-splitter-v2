@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:51:30+13:00",
+ "updated": "2026-10-23T14:54:45+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -75,6 +75,22 @@
         "error": null
        },
        "cover": "once-upon-a-time-in-the-middle-east-2026/recap-03-cover.bin"
+      },
+      {
+       "n": 4,
+       "start": 3329.0,
+       "end": 4148.0,
+       "seconds": 45.3,
+       "drive_path": "Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap/Once Upon A Time In The Middle East (2026) - Part 04.mp4",
+       "caption": "Money, medicine, and a family that paid the price. This is where the mood turns. 😢\nPart 4 🎬 · Follow so you don't miss Part 5 🔔\n#OnceUponATimeInTheMiddleEast #ShenTeng #JiangQiming #ZhangXiwei #movie",
+       "preview": "once-upon-a-time-in-the-middle-east-2026/recap-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "once-upon-a-time-in-the-middle-east-2026/recap-04-cover.bin"
       }
      ]
     }
