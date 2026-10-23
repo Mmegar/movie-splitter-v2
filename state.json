@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:08:52+13:00",
+ "updated": "2026-10-23T15:08:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3318,6 +3318,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:08:54+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Once Upon A Time In The Middle East (2026)",
+   "message": "Movie recap: 8 parts.\nIn Ready to post/Once Upon A Time In The Middle East (2026)."
+  },
+  {
    "at": "2026-10-23T15:08:51+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 8 of 8 ready",
@@ -4510,12 +4516,6 @@
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 1 of 5 ready",
    "message": "Part 1: 1:10:38 to 1:14:08 (210s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\n'What is this?' 💀 I can't\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-16T18:29:38+13:00",
-   "type": "planned",
-   "title": "[Highlights] John Wick Chapter 2 (2017): 5 parts planned",
-   "message": "Parts will arrive on the laptop in Ready to post/John Wick Chapter 2 (2017)/Highlights as they're made."
   }
  ]
 }
