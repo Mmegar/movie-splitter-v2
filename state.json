@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:48:28+13:00",
+ "updated": "2026-10-23T21:48:30+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3759,6 +3759,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:48:30+13:00",
+   "type": "finished",
+   "title": "✅ Finished: 10 Cloverfield Lane (2016)",
+   "message": "Movie recap: 8 parts.\nIn Ready to post/10 Cloverfield Lane (2016)."
+  },
+  {
    "at": "2026-10-23T21:48:27+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 8 of 8 ready",
@@ -4951,12 +4957,6 @@
    "type": "part_ready",
    "title": "[Highlights] One Last Shot (2026): Highlight 5 of 5 ready",
    "message": "Highlight 5: 1:22:20 to 1:26:08 (228s)  interest score 67/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Go, go, go!' and then THIS happened 😳\nHighlight 5 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-17T17:14:58+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] One Last Shot (2026): Highlight 4 of 5 ready",
-   "message": "Highlight 4: 1:16:37 to 1:20:07 (210s)  interest score 66/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Bro, go!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
