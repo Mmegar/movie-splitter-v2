@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T12:30:51+07:00",
+ "updated": "2026-10-23T12:34:56+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,7 +102,16 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "10 Cloverfield Lane 2016 1080p HDRip x264 AAC-JYK.mkv",
+   "size_mb": 2953,
+   "modified": "2026-10-23T08:37:03+07:00",
+   "sending": false,
+   "style": "classic",
+   "character": ""
+  }
+ ],
  "library": [
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
@@ -128,11 +137,6 @@
    "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
    "size_mb": 1509,
    "modified": "2026-10-23T08:42:54+07:00"
-  },
-  {
-   "name": "10 Cloverfield Lane 2016 1080p HDRip x264 AAC-JYK.mkv",
-   "size_mb": 2953,
-   "modified": "2026-10-23T08:37:03+07:00"
   },
   {
    "name": "Fall.2022.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -174,6 +178,10 @@
   "mvkf0cqa3u0p": {
    "status": "done",
    "note": "Already cutting Speak.No.Evil.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
+  },
+  "mvkjcj5w4uqa": {
+   "status": "done",
+   "note": "Moved to To edit"
   }
  },
  "commands_done": [
@@ -289,7 +297,8 @@
   "mvjt2ixt1070",
   "mvkbiulfuepm",
   "mvketa11qfvg",
-  "mvkf0cqa3u0p"
+  "mvkf0cqa3u0p",
+  "mvkjcj5w4uqa"
  ],
  "originals": [
   "gonjiam-haunted-asylum-2017",
