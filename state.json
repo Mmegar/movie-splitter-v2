@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:57:25+13:00",
+ "updated": "2026-10-23T15:57:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Heretic (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3369,6 +3369,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:57:28+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 2 of 8 ready",
+   "message": "Part 2: Blueberry Disease and Butterflies (13 narrated beats, about 67s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T15:51:45+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Heretic (2024): Part 1 of 8 ready",
@@ -4561,12 +4567,6 @@
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 3 of 5 ready",
    "message": "Part 3: 1:17:34 to 1:21:04 (210s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\nthe plot thickens like gravy 🍲\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-16T18:46:20+13:00",
-   "type": "started",
-   "title": "▶️ Carrying on: John Wick Chapter 2 (2017)",
-   "message": "2 parts were already made before it stopped; making the rest."
   }
  ]
 }
