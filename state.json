@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:15:47+13:00",
+ "updated": "2026-10-23T16:19:59+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -123,6 +123,22 @@
         "error": null
        },
        "cover": "heretic-2024/recap-06-cover.bin"
+      },
+      {
+       "n": 7,
+       "start": 4781.0,
+       "end": 5541.0,
+       "seconds": 79.6,
+       "drive_path": "Ready to post/Heretic (2024)/Movie recap/Heretic (2024) - Part 07.mp4",
+       "caption": "A fake microchip, a secret chute and locked cages 🚨 Paxton is in way over her head, and Reed has a plan for her.\nPart 7 🎬 · Part 8 coming soon ⏳\n#Heretic #HughGrant #SophieThatcher #ChloeEast #movie",
+       "preview": "heretic-2024/recap-007.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "heretic-2024/recap-07-cover.bin"
       }
      ]
     }
