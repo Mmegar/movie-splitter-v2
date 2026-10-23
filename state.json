@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:58:58+13:00",
+ "updated": "2026-10-23T14:59:01+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 8
  },
  "queue": [],
@@ -3270,6 +3270,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T14:59:00+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 5 of 8 ready",
+   "message": "Part 5: Alifah Prison Gets Weird (8 narrated beats, about 44s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T14:54:47+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 4 of 8 ready",
@@ -4462,12 +4468,6 @@
    "type": "started",
    "title": "Started: John Wick Chapter 2 (2017)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/John Wick Chapter 2 (2017)'."
-  },
-  {
-   "at": "2026-10-16T18:22:00+13:00",
-   "type": "finished",
-   "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
-   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/The Fantastic 4 First Steps (2025). The copy sent to GitHub has been deleted."
   }
  ]
 }
