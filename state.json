@@ -1,18 +1,36 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:39:15+13:00",
+ "updated": "2026-10-23T15:39:21+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T15:39:15+13:00",
-  "movie": null,
+  "movie": "Heretic (2024)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "heretic-2024",
+   "name": "Heretic (2024)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-23T15:39:17+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "once-upon-a-time-in-the-middle-east-2026",
    "name": "Once Upon A Time In The Middle East (2026)",
@@ -3318,6 +3336,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:39:17+13:00",
+   "type": "started",
+   "title": "Started: Heretic (2024)",
+   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Heretic (2024)'."
+  },
+  {
    "at": "2026-10-23T15:08:54+13:00",
    "type": "finished",
    "title": "✅ Finished: Once Upon A Time In The Middle East (2026)",
@@ -4510,12 +4534,6 @@
    "type": "part_ready",
    "title": "[Best stretch] John Wick Chapter 2 (2017): Part 2 of 5 ready",
    "message": "Part 2: 1:14:08 to 1:17:34 (207s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\nme to my group chat: 'Did he tell you not to do this?' 📱\nPart 2 🎬 · Part 3 is even more unhinged 👀\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-16T18:33:05+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] John Wick Chapter 2 (2017): Part 1 of 5 ready",
-   "message": "Part 1: 1:10:38 to 1:14:08 (210s)\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Best stretch).\n\n📝 Caption:\n'What is this?' 💀 I can't\nPart 1 🎬 · Part 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
