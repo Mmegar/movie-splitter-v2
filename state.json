@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:54:48+13:00",
+ "updated": "2026-10-23T14:58:58+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -91,6 +91,22 @@
         "error": null
        },
        "cover": "once-upon-a-time-in-the-middle-east-2026/recap-04-cover.bin"
+      },
+      {
+       "n": 5,
+       "start": 4140.0,
+       "end": 4646.0,
+       "seconds": 52.2,
+       "drive_path": "Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap/Once Upon A Time In The Middle East (2026) - Part 05.mp4",
+       "caption": "A prison kitchen, a hanging, and one very bad interrogation. Hold my rice. 🍚⛓️\nPart 5 🎬 · Comment 'more' for Part 6 👇\n#OnceUponATimeInTheMiddleEast #ShenTeng #JiangQiming #ZhangXiwei #movie",
+       "preview": "once-upon-a-time-in-the-middle-east-2026/recap-005.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "once-upon-a-time-in-the-middle-east-2026/recap-05-cover.bin"
       }
      ]
     }
