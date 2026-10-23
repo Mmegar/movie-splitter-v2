@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:39:03+13:00",
+ "updated": "2026-10-23T16:44:41+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 8,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 139.0,
+       "end": 5289.0,
+       "seconds": 83.1,
+       "drive_path": "Ready to post/Speak No Evil (2024)/Movie recap/Speak No Evil (2024) - Part 01.mp4",
+       "caption": "Two nice families, one sunny Italian holiday, and one very, very friendly dad 😬 Watch the toilet paper debate.\nPart 1 🎬 · Comment 'more' for Part 2 👇\n#SpeakNoEvil #JamesMcAvoy #MackenzieDavis #ScootMcNairy #movie",
+       "preview": "speak-no-evil-2024/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "speak-no-evil-2024/recap-01-cover.bin"
+      }
+     ]
     }
    }
   },
