@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T18:46:31+13:00",
+ "updated": "2026-10-23T18:49:41+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 8,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 278.0,
+       "end": 5302.0,
+       "seconds": 44.0,
+       "drive_path": "Ready to post/10 Cloverfield Lane (2016)/Movie recap/10 Cloverfield Lane (2016) - Part 01.mp4",
+       "caption": "She walks out on her fiancé, hits a dark road, and wakes up chained in a basement. 😬\nPart 1 🎬 · Should I post Part 2? 👇\n#10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
+       "preview": "10-cloverfield-lane-2016/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "10-cloverfield-lane-2016/recap-01-cover.bin"
+      }
+     ]
     }
    }
   },
