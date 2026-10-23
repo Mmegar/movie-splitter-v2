@@ -59,7 +59,7 @@
   },
   "cut_style": "classic",
   "filter": "mystery",
-  "filter_strength": 0.2,
+  "filter_strength": 0.35,
   "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
   "narrator_tempo": "1.3",
