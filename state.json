@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:20:02+13:00",
+ "updated": "2026-10-23T16:24:06+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -139,6 +139,22 @@
         "error": null
        },
        "cover": "heretic-2024/recap-07-cover.bin"
+      },
+      {
+       "n": 8,
+       "start": 5596.0,
+       "end": 6294.0,
+       "seconds": 70.9,
+       "drive_path": "Ready to post/Heretic (2024)/Movie recap/Heretic (2024) - Part 08.mp4",
+       "caption": "The final showdown, a plank full of nails and a butterfly 🦋 Heretic ends on a moment that will stay with you.\nPart 8 🎬 · And that's a wrap 🎬 Follow for the next one\n#Heretic #HughGrant #SophieThatcher #ChloeEast #movie",
+       "preview": "heretic-2024/recap-008.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "heretic-2024/recap-08-cover.bin"
       }
      ]
     }
