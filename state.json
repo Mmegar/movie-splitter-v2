@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:03:00+13:00",
+ "updated": "2026-10-23T15:05:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -123,6 +123,22 @@
         "error": null
        },
        "cover": "once-upon-a-time-in-the-middle-east-2026/recap-06-cover.bin"
+      },
+      {
+       "n": 7,
+       "start": 5699.0,
+       "end": 6018.0,
+       "seconds": 47.1,
+       "drive_path": "Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap/Once Upon A Time In The Middle East (2026) - Part 07.mp4",
+       "caption": "Captured, forced to cook, and stuck with a kid who wants to be a warrior. This one hits. 😳\nPart 7 🎬 · Part 8 coming soon ⏳\n#OnceUponATimeInTheMiddleEast #ShenTeng #JiangQiming #ZhangXiwei #movie",
+       "preview": "once-upon-a-time-in-the-middle-east-2026/recap-007.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "once-upon-a-time-in-the-middle-east-2026/recap-07-cover.bin"
       }
      ]
     }
