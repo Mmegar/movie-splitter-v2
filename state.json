@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:24:06+13:00",
+ "updated": "2026-10-23T16:24:09+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "heretic-2024",
    "name": "Heretic (2024)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-23T15:39:17+13:00",
-   "finished": null,
+   "finished": "2026-10-23T16:24:09+13:00",
    "duration": 6681.0,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3465,6 +3465,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:24:08+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 8 of 8 ready",
+   "message": "Part 8: The One True Religion (12 narrated beats, about 59s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:20:01+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Heretic (2024): Part 7 of 8 ready",
@@ -4657,12 +4663,6 @@
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 4 of 5 ready",
    "message": "Highlight 4: 1:33:57 to 1:37:26 (210s)  interest score 61/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\n'Ma allora non lo vega mire.' 💀 I can't\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-16T19:09:26+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 3 of 5 ready",
-   "message": "Highlight 3: 1:20:41 to 1:25:03 (262s)  interest score 63/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
