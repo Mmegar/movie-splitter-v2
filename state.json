@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T15:02:57+13:00",
+ "updated": "2026-10-23T15:03:00+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 6,
+  "part": 7,
   "parts_total": 8
  },
  "queue": [],
@@ -3286,6 +3286,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T15:02:59+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 6 of 8 ready",
+   "message": "Part 6: Christmas Feast Gone Wrong (7 narrated beats, about 37s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T14:59:00+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 5 of 8 ready",
@@ -4478,12 +4484,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "The Fantastic 4 First Steps (2025): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\The Fantastic 4 First Steps (2025)\nBest stretch: 5 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-16T18:22:03+13:00",
-   "type": "started",
-   "title": "Started: John Wick Chapter 2 (2017)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/John Wick Chapter 2 (2017)'."
   }
  ]
 }
