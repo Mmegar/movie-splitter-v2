@@ -66,7 +66,7 @@
   "light_sweep": true,
   "light_sweep_seconds": 3,
   "narrator_funny": 0,
-  "script_direction": "Narrate the transition between scenes with smooth commentary that keeps the story moving. E.g, the girl went to the bathroom thats why we’re here. Complete each sub-story or scene arc fully before wrapping up the part. If the part didn’t end with the sub story, end with a cliff-hanger. Each part should last to 4-5 minutes. Include quick, funny side commentary or witty observations on background details, weird logic, and character reactions. New sentence starts with a hook. Don’t pause for too long, make it sounds natural.\n",
+  "script_direction": "Narrate the transition between scenes with smooth commentary that keeps the story moving. E.g, the girl went to the bathroom thats why we’re here. Complete each sub-story or scene arc fully before wrapping up the part. If the part didn’t end with the sub story, end with a cliff-hanger. Each part have should have at least 1050 words. Include quick, funny side commentary or witty observations on background details, weird logic, and character reactions. New sentence starts with a hook. Don’t pause for too long, make it sounds natural.\n",
   "recap_part_seconds": 120,
   "music": true,
   "hype_count": 1
