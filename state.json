@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:05:34+13:00",
+ "updated": "2026-10-23T21:09:50+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -20,7 +20,7 @@
    "source": "laptop",
    "started": "2026-10-23T21:05:30+13:00",
    "finished": null,
-   "duration": null,
+   "duration": 6210.4,
    "subtitles": null,
    "error": null,
    "modes": {
