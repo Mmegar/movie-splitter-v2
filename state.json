@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:37:12+13:00",
+ "updated": "2026-10-23T16:39:00+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -26,7 +26,7 @@
    "modes": {
     "recap": {
      "label": "Movie recap",
-     "planned": 0,
+     "planned": 8,
      "parts": []
     }
    }
