@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:29:13+13:00",
+ "updated": "2026-10-23T21:29:16+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3695,6 +3695,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:29:15+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 4 of 8 ready",
+   "message": "Part 4: Emmett Saw The Flash (8 narrated beats, about 59s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:25:01+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 3 of 8 ready",
@@ -4887,12 +4893,6 @@
    "type": "part_ready",
    "title": "[Best stretch] One Last Shot (2026): Part 5 of 5 ready",
    "message": "Part 5: 55:31 to 58:34 (183s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\n'Someone else can deal with them.' and then THIS happened 😳\nPart 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-17T16:51:49+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] One Last Shot (2026): Part 4 of 5 ready",
-   "message": "Part 4: 51:28 to 55:31 (244s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
