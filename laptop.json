@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T08:24:34+07:00",
+ "updated": "2026-10-23T08:25:30+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,13 +102,17 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
- "library": [
+ "queue": [
   {
    "name": "Once.Upon.A.Time.In.The.Middle.East.2026.HC.1080p.WEB.H264-NGP.mkv",
    "size_mb": 3302,
-   "modified": "2026-10-23T08:21:59+07:00"
-  },
+   "modified": "2026-10-23T08:21:59+07:00",
+   "sending": false,
+   "style": "classic",
+   "character": ""
+  }
+ ],
+ "library": [
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2948,
