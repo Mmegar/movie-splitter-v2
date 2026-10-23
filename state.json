@@ -1,18 +1,36 @@
 {
  "version": 1,
- "updated": "2026-10-23T18:40:16+13:00",
+ "updated": "2026-10-23T18:40:23+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T18:40:16+13:00",
-  "movie": null,
+  "movie": "10 Cloverfield Lane (2016)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "10-cloverfield-lane-2016",
+   "name": "10 Cloverfield Lane (2016)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-23T18:40:18+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "speak-no-evil-2024",
    "name": "Speak No Evil (2024)",
@@ -3612,6 +3630,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T18:40:18+13:00",
+   "type": "started",
+   "title": "Started: 10 Cloverfield Lane (2016)",
+   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/10 Cloverfield Lane (2016)'."
+  },
+  {
    "at": "2026-10-23T17:18:21+13:00",
    "type": "finished",
    "title": "✅ Finished: Speak No Evil (2024)",
@@ -4804,12 +4828,6 @@
    "type": "part_ready",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 1 of 6 ready",
    "message": "Highlight 1: 54:13 to 57:42 (210s)  interest score 69/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\n'Time out!' and then THIS happened 😳\nHighlight 1 🎬 · follow or you'll miss Highlight 2 (I warned you) 🔔\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-17T11:51:10+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Pirates Of The Caribbean At Worlds End (2007): Part 5 of 5 ready",
-   "message": "Part 5: 2:02:42 to 2:06:22 (220s)\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Best stretch).\n\n📝 Caption:\n'Nobody move!' and then THIS happened 😳\nPart 5 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
