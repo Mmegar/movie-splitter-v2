@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:19:59+13:00",
+ "updated": "2026-10-23T16:20:02+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Heretic (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 8
  },
  "queue": [],
@@ -3449,6 +3449,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T16:20:01+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Heretic (2024): Part 7 of 8 ready",
+   "message": "Part 7: The Chute and the Cages (12 narrated beats, about 55s of voice)\nIn Ready to post/Heretic (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-23T16:15:46+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Heretic (2024): Part 6 of 8 ready",
@@ -4641,12 +4647,6 @@
    "type": "part_ready",
    "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 3 of 5 ready",
    "message": "Highlight 3: 1:20:41 to 1:25:03 (262s)  interest score 63/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nHighlight 3 🎬 · Highlight 4? only if this gets 100 comments 😏\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-16T19:05:08+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] John Wick Chapter 2 (2017): Highlight 2 of 5 ready",
-   "message": "Highlight 2: 1:15:31 to 1:19:00 (208s)  interest score 71/100\nOn its way to the laptop (Ready to post/John Wick Chapter 2 (2017)/Highlights).\n\n📝 Caption:\nthis movie said 'hold my popcorn' 🍿\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
