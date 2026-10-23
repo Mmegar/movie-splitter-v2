@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T21:24:59+13:00",
+ "updated": "2026-10-23T21:25:02+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 8
  },
  "queue": [],
@@ -3679,6 +3679,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T21:25:01+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 3 of 8 ready",
+   "message": "Part 3: Welcome, Dead Pigs, Ducky Curtains (7 narrated beats, about 50s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T21:20:51+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 2 of 8 ready",
@@ -4871,12 +4877,6 @@
    "type": "part_ready",
    "title": "[Best stretch] One Last Shot (2026): Part 4 of 5 ready",
    "message": "Part 4: 51:28 to 55:31 (244s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\nI paused 3 times to process this 🧐\nPart 4 🎬 · comment 'MORE' if you need Part 5 👇\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-17T16:46:51+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] One Last Shot (2026): Part 3 of 5 ready",
-   "message": "Part 3: 47:58 to 51:28 (210s)\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Best stretch).\n\n📝 Caption:\nthis is why I have trust issues 😶‍🌫️\nPart 3 🎬 · Part 4? only if this gets 100 comments 😏\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
