@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:44:23+13:00",
+ "updated": "2026-10-23T14:44:25+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3206,6 +3206,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T14:44:25+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 1 of 8 ready",
+   "message": "Part 1: Chef Xu Walks Into Chaos (12 narrated beats, about 64s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T14:39:27+13:00",
    "type": "planned",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): 8 parts planned",
@@ -4398,12 +4404,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 3 of 5 ready",
    "message": "Highlight 3: 45:35 to 49:04 (210s)  interest score 68/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Three, three, push!' 📱\nHighlight 3 🎬 · Highlight 4 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-16T18:09:10+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 2 of 5 ready",
-   "message": "Highlight 2: 40:25 to 43:56 (210s)  interest score 63/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nme to my group chat: 'Watch this.' 📱\nHighlight 2 🎬 · comment 'MORE' if you need Highlight 3 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
