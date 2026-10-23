@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T08:49:47+07:00",
+ "updated": "2026-10-23T08:54:01+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -138,38 +138,7 @@
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
- "bin": [
-  {
-   "name": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4",
-   "size_mb": 2048,
-   "modified": "2026-10-17T16:11:48+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv",
-   "size_mb": 1723,
-   "modified": "2026-10-17T04:39:58+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "Pirates.Of.The.Caribbean.At.Worlds.End.2007.1080p.BluRay.H264.-RBG.mp4",
-   "size_mb": 3451,
-   "modified": "2026-10-17T02:50:52+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4",
-   "size_mb": 2008,
-   "modified": "2026-10-16T10:31:01+07:00",
-   "folder": "done"
-  },
-  {
-   "name": "The Fantastic 4 First Steps 2025 1080p WebRip EAC3 5 1 X265-Lootera.mkv",
-   "size_mb": 2947,
-   "modified": "2026-10-16T10:21:09+07:00",
-   "folder": "done"
-  }
- ],
+ "bin": [],
  "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
