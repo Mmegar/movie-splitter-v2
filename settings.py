@@ -72,7 +72,7 @@ DEFAULTS = {
     "previews": True,                    # small encrypted copies of each part, so the app can play them
     "preview_keep_movies": 3,            # previews are kept for this many most recent movies
     "wishlist_archive": True,            # look up wish-list titles on archive.org (public domain only); False = off
-    "video_quality": 23,                 # x264 CRF: 18 = best/biggest ... 28 = smallest
+    "video_quality": 18,                 # x264 CRF: 18 = best/biggest ... 28 = smallest
     "delete_originals": "permanent",     # "permanent" = gone for good, "bin" = Google Drive's bin (30 days)
     "cleanup_parts_after_days": 0,       # delete finished parts older than this; 0 = never
     "posting": {

@@ -115,7 +115,21 @@ ASSETS = Path(__file__).resolve().parent / "assets"
 AUTO_SUBS = os.environ.get("AUTO_SUBTITLES", "on").strip().lower() not in ("off", "no", "0", "false")
 WHISPER_MODEL = os.environ.get("WHISPER_MODEL", "small")
 FONT = os.environ.get("FONT_FILE", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
-VIDEO_QUALITY = int(float(os.environ.get("VIDEO_QUALITY", "23")))   # x264 CRF: 18 = best/biggest ... 28 = smallest
+VIDEO_QUALITY = int(float(os.environ.get("VIDEO_QUALITY", "18")))   # x264 CRF: 18 = best/biggest ... 28 = smallest
+HD_PRESET = os.environ.get("HD_PRESET", "medium")
+
+
+def hd_video(crf=None):
+    """x264 settings for a finished part, so TikTok keeps it HD when it's uploaded from a phone: 1080x1920
+    at a steady 30 fps, H.264 High 4.2, 8-bit 4:2:0 tagged BT.709, a keyframe every 2 seconds, and a bitrate
+    cap (10 Mbps) that keeps detail without making files too big to send to the phone."""
+    return ["-r", "30", "-c:v", "libx264", "-preset", HD_PRESET, "-crf", str(VIDEO_QUALITY if crf is None else crf),
+            "-profile:v", "high", "-level:v", "4.2", "-pix_fmt", "yuv420p", "-maxrate", "10M", "-bufsize", "20M",
+            "-g", "60", "-keyint_min", "30", "-colorspace", "bt709", "-color_primaries", "bt709",
+            "-color_trc", "bt709", "-color_range", "tv"]
+
+
+HD_AUDIO = ["-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "192k"]   # AAC-LC 48 kHz stereo
 TZ = ZoneInfo(SETTINGS["posting"]["timezone"])
 WORK = Path("work")
 
@@ -1090,8 +1104,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         "-ss", f"{start:.3f}", "-t", f"{end - start:.3f}", "-i", str(src.resolve()),
         *extra_inputs,
         "-filter_complex", filters, "-map", "[v]", "-map", "0:a:0?",
-        "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", str(VIDEO_QUALITY), "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-b:a", "160k", "-ac", "2",
+        *hd_video(), *HD_AUDIO,
         "-map_chapters", "-1",            # the movie's chapter list made every part look movie-length
         "-movflags", "+faststart",
         str(out_path.resolve()),

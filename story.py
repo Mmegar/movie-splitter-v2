@@ -1017,8 +1017,9 @@ FRAME = ("split=2[bg][fg];"
          "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.08[bgb];"
          "[fg]scale=1080:1920:force_original_aspect_ratio=decrease[fgs];"
          "[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1")
-ENC = ["-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
-       "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "192k"]
+def enc():
+    """Encoding for each piece: hype edits are these pieces joined as they are, so they get the HD settings."""
+    return [*P.hd_video(18), *P.HD_AUDIO]
 _AUDIO = {}
 
 
@@ -1111,7 +1112,7 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
                                                             if ending else [])
         a = a[:-3] + "[a0];[a0]" + ",".join(fades) + "[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f"{v};{a}",
-           "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *ENC, str(Path(out).resolve())], cwd=workdir)
+           "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *enc(), str(Path(out).resolve())], cwd=workdir)
     for f in list(workdir.glob("sub*.txt")) + list(workdir.glob("nar*.txt")):
         f.unlink(missing_ok=True)
 
@@ -1157,14 +1158,14 @@ def render_slide3(src, starts, length, out, workdir):
         inputs += ["-f", "lavfi", "-t", f"{length:.3f}", "-i", "anullsrc=r=48000:cl=stereo"]
         f += ";[4:a]anull[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f,
-           "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *ENC, str(Path(out).resolve())], cwd=workdir)
+           "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *enc(), str(Path(out).resolve())], cwd=workdir)
 
 
 def concat(segs, out, workdir):
     lst = workdir / "segments.txt"
     lst.write_text("".join(f"file '{Path(s).resolve().as_posix()}'\n" for s in segs), encoding="utf-8")
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "concat", "-safe", "0", "-i",
-           str(lst.resolve()), "-c", "copy", str(Path(out).resolve())], cwd=workdir)
+           str(lst.resolve()), "-c", "copy", "-movflags", "+faststart", str(Path(out).resolve())], cwd=workdir)
 
 
 _CREDIT = {"last": None}
@@ -1292,8 +1293,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
              f"[0:a][mu]amix=inputs=2:duration=first:normalize=0[a]")
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y", "-i", str(joined.resolve()), *extra,
            "-filter_complex", f"{v};{a}", "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}",
-           "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", str(P.VIDEO_QUALITY),
-           "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-ac", "2", "-movflags", "+faststart",
+           *P.hd_video(), *P.HD_AUDIO, "-movflags", "+faststart",
            str(Path(out).resolve())], cwd=workdir)
     for f in [joined, *segs]:
         Path(f).unlink(missing_ok=True)
@@ -1411,7 +1411,7 @@ def render_montage(src, info, out, workdir, total):
            f"[1:a]volume=1.0,afade=t=out:st={max(0.0, length - 0.6):.2f}:d=0.6[mu];"
            "[0:a][mu]amix=inputs=2:duration=first:normalize=0[a]",
            "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "192k",
-           "-t", f"{length:.3f}", str(Path(out).resolve())], cwd=workdir)
+           "-t", f"{length:.3f}", "-movflags", "+faststart", str(Path(out).resolve())], cwd=workdir)
     raw.unlink(missing_ok=True)
 
 

@@ -49,7 +49,7 @@ class SettingsTest(TempDirTest):
 
     def test_bad_env_value_ignored(self):
         s = settings.load(self.write({}), env={"VIDEO_QUALITY": "high"})
-        self.assertEqual(s["video_quality"], 23)
+        self.assertEqual(s["video_quality"], 18)
 
     def test_apply_to_env_keeps_existing(self):
         env = {"MODES": "all"}
@@ -63,7 +63,7 @@ class SettingsTest(TempDirTest):
         s = settings.load(text='{"posting": {"enabled": true, "per_day": 5}}', env={})
         self.assertTrue(s["posting"]["enabled"])
         self.assertEqual(s["posting"]["per_day"], 5)
-        self.assertEqual(settings.load(text="broken", env={})["video_quality"], 23)
+        self.assertEqual(settings.load(text="broken", env={})["video_quality"], 18)
 
     def test_process_reads_settings_and_env_wins(self):
         p = self.write({"modes": ["all"], "cockroach_size": 99, "video_quality": 27, "flip_every": "10-12"})
