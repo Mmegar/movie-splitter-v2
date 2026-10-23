@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T19:09:32+13:00",
+ "updated": "2026-10-23T19:09:34+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 8
  },
  "queue": [],
@@ -3743,6 +3743,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T19:09:34+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 7 of 8 ready",
+   "message": "Part 7: HELP Scratched Inside (10 narrated beats, about 52s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T19:05:51+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 6 of 8 ready",
@@ -4935,12 +4941,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "One.Last.Shot.2026.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir.mkv: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-17T06:13:38+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Pirates Of The Caribbean At Worlds End (2007): 11 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Pirates Of The Caribbean At Worlds End (2007)\nBest stretch: 5 parts, Highlights: 6 parts"
   }
  ]
 }
