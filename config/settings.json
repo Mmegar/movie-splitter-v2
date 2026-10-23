@@ -62,11 +62,11 @@
   "filter_strength": 0.2,
   "character": "Side Character",
   "narrator_voice": "en-US-GuyNeural",
-  "narrator_tempo": "1.3",
+  "narrator_tempo": "1",
   "light_sweep": true,
   "light_sweep_seconds": 3,
   "narrator_funny": 0.3,
-  "script_direction": "Narrate like a relatable best friend watching with you—snappy, high-energy, and reaction-driven. Seamlessly transition between scenes with smooth commentary that keeps the story moving fast. Roast the main characters' dumb decisions and plot holes with deadpan humor, aggressively mock the villain when they fail, and build up major plot twists like high-stakes gossip.",
+  "script_direction": "Narrate like a relatable best friend watching with you—snappy, high-energy, and reaction-driven. Seamlessly transition between scenes with smooth commentary that keeps the story moving. Roast the main characters' dumb decisions and plot holes with deadpan humor, aggressively mock the villain when they fail. ",
   "recap_part_seconds": 120,
   "music": true,
   "hype_count": 1
