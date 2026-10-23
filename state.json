@@ -1,18 +1,36 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:30:59+13:00",
+ "updated": "2026-10-23T14:31:05+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-23T14:30:59+13:00",
-  "movie": null,
+  "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "once-upon-a-time-in-the-middle-east-2026",
+   "name": "Once Upon A Time In The Middle East (2026)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-23T14:31:01+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "toy-story-5-2026",
    "name": "Toy Story 5 (2026)",
@@ -3171,6 +3189,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T14:31:01+13:00",
+   "type": "started",
+   "title": "Started: Once Upon A Time In The Middle East (2026)",
+   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Once Upon A Time In The Middle East (2026)'."
+  },
+  {
    "at": "2026-10-23T07:05:55+13:00",
    "type": "finished",
    "title": "✅ Finished: Toy Story 5 (2026)",
@@ -4363,12 +4387,6 @@
    "type": "part_ready",
    "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 1 of 5 ready",
    "message": "Highlight 1: 28:49 to 33:12 (262s)  interest score 63/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nbestie made it worse 😭\nHighlight 1 🎬 · Highlight 2 is where it gets wild 🌪️\n#fyp #movieclips #foryou #filmtok #unhinged"
-  },
-  {
-   "at": "2026-10-16T12:03:56+07:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "John.Wick.Chapter.2.2017.1080p.BluRay.x264-[YTS.AG].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
   }
  ]
 }
