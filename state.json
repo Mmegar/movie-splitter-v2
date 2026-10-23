@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T14:54:45+13:00",
+ "updated": "2026-10-23T14:54:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Once Upon A Time In The Middle East (2026)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3254,6 +3254,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T14:54:47+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 4 of 8 ready",
+   "message": "Part 4: Zaid's Fall From Grace (7 narrated beats, about 37s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
+  },
+  {
    "at": "2026-10-23T14:51:29+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 3 of 8 ready",
@@ -4446,12 +4452,6 @@
    "type": "finished",
    "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
    "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/The Fantastic 4 First Steps (2025). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-16T18:21:54+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] The Fantastic 4 First Steps (2025): Highlight 5 of 5 ready",
-   "message": "Highlight 5: 1:33:03 to 1:36:42 (219s)  interest score 66/100\nOn its way to the laptop (Ready to post/The Fantastic 4 First Steps (2025)/Highlights).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
