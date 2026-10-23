@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T16:48:48+13:00",
+ "updated": "2026-10-23T16:54:15+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "speak-no-evil-2024/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 1378.0,
+       "end": 2315.0,
+       "seconds": 81.6,
+       "drive_path": "Ready to post/Speak No Evil (2024)/Movie recap/Speak No Evil (2024) - Part 03.mp4",
+       "caption": "Cold water, a secret chef and a dinner table full of 'honest' opinions 🍽️ Louise is starting to see the cracks.\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#SpeakNoEvil #JamesMcAvoy #MackenzieDavis #ScootMcNairy #movie",
+       "preview": "speak-no-evil-2024/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "speak-no-evil-2024/recap-03-cover.bin"
       }
      ]
     }
