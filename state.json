@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-23T18:59:26+13:00",
+ "updated": "2026-10-23T18:59:29+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "10 Cloverfield Lane (2016)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3695,6 +3695,12 @@
  },
  "events": [
   {
+   "at": "2026-10-23T18:59:28+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 4 of 8 ready",
+   "message": "Part 4: Frank, Mildred, and Emmett (9 narrated beats, about 52s of voice)\nIn Ready to post/10 Cloverfield Lane (2016)/Movie recap."
+  },
+  {
    "at": "2026-10-23T18:55:49+13:00",
    "type": "part_ready",
    "title": "[Movie recap] 10 Cloverfield Lane (2016): Part 3 of 8 ready",
@@ -4887,12 +4893,6 @@
    "type": "part_ready",
    "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 6 of 6 ready",
    "message": "Highlight 6: 2:25:19 to 2:28:52 (212s)  interest score 69/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\nI'm not crying, my eyes are sweating 🥲\nHighlight 6 🎬 · FINAL part. how are we feeling? 👇\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-17T12:09:22+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Pirates Of The Caribbean At Worlds End (2007): Highlight 5 of 6 ready",
-   "message": "Highlight 5: 2:15:10 to 2:18:36 (206s)  interest score 64/100\nOn its way to the laptop (Ready to post/Pirates Of The Caribbean At Worlds End (2007)/Highlights).\n\n📝 Caption:\nmanifesting this level of chaos 🌀\nHighlight 5 🎬 · Highlight 6 drops soon, stay hydrated 💧\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
