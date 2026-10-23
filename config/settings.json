@@ -66,7 +66,7 @@
   "light_sweep": true,
   "light_sweep_seconds": 3,
   "narrator_funny": 0,
-  "script_direction": "Narrate the transition between scenes with smooth commentary that keeps the story moving. E.g, the girl went to the bathroom thats why we’re here. Roast the main characters' dumb decisions and plot holes with deadpan humor, aggressively mock the villain when they fail. Narrate with context to the video clips. Complete each sub-story or scene arc fully before wrapping up the part.",
+  "script_direction": "Narrate the transition between scenes with smooth commentary that keeps the story moving. E.g, the girl went to the bathroom thats why we’re here. Complete each sub-story or scene arc fully before wrapping up the part. If the part didn’t end with the sub story, end with a cliff-hanger.",
   "recap_part_seconds": 120,
   "music": true,
   "hype_count": 1
