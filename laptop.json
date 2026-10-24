@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T23:00:12+07:00",
+ "updated": "2026-10-24T23:09:07+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -167,20 +167,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mvketa11qfvg": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mvkf0cqa3u0p": {
-   "status": "done",
-   "note": "Already cutting Speak.No.Evil.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
-  },
-  "mvkjcj5w4uqa": {
-   "status": "done",
-   "note": "Moved to To edit"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
