@@ -36,7 +36,8 @@ function alertHtml(it) {
 }
 
 export function createAlertsView(ctx) {
-  const page = makePage({ title: 'Alerts' });
+  const page = makePage({ title: 'Alerts', back: 'Dashboard' });
+  page.navbar.addEventListener('click', (e) => { if (e.target.closest('[data-back]')) location.hash = '#/now'; });
   let filter = 'all';
   let lastSt = null;
   let lastKey = '';

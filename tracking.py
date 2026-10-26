@@ -4,8 +4,12 @@ phone screen, and the crop follows what your eyes would follow in each shot:
 
   1. the face of whoever is talking (the face whose mouth moves most),
   2. otherwise the biggest / most important face (staying with the same person while they're on screen),
-  3. otherwise where the movement is (someone running, a car),
-  4. otherwise it stays where it was (or the middle, at the start of a shot).
+  3. otherwise a person's body (back to the camera, too far away for a face),
+  4. otherwise where the movement is (someone running, a car),
+  5. otherwise it stays where it was (or the middle, at the start of a shot).
+
+Small faces far behind the main person (extras, posters, crowds) are ignored, so the crop stays on the
+character rather than on something in the background.
 
 It moves smoothly like a camera operator (ignores small wobbles, glides after the subject) and only
 jumps when the movie itself cuts to a new shot.
@@ -26,6 +30,7 @@ MODEL_URL = ("https://media.githubusercontent.com/media/opencv/opencv_zoo/main/m
 
 BAND_W, BAND_H = 1080, 864      # the zoomed picture on the 1080x1920 screen (shorter = more of the scene)
 BAND_TOP = (1920 - BAND_H) // 2
+BACKGROUND_FACE = 0.4           # a face under this share of the biggest face in the frame is background
 
 
 def get_model():
@@ -55,6 +60,22 @@ class Faces:
         if self.yunet is None:
             self.front = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
             self.side = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_profileface.xml")
+
+    def bodies(self, frame):
+        """[(x, y, w, h)] of whole people (OpenCV's people finder), biggest first."""
+        if not hasattr(self, "hog"):
+            self.hog = self.cv2.HOGDescriptor()
+            self.hog.setSVMDetector(self.cv2.HOGDescriptor_getDefaultPeopleDetector())
+        h = frame.shape[0]
+        scale = 2 if h < 300 else 1                  # people are often under half the height of a small frame
+        img = self.cv2.resize(frame, None, fx=scale, fy=scale) if scale > 1 else frame
+        try:
+            boxes, weights = self.hog.detectMultiScale(img, winStride=(8, 8), padding=(8, 8), scale=1.08)
+        except Exception:
+            return []
+        out = [(x / scale, y / scale, w / scale, bh / scale) for (x, y, w, bh), wt in
+               zip(boxes, list(weights) if len(weights) else []) if float(wt) > 0.5]
+        return sorted(out, key=lambda b: -b[2] * b[3])
 
     def find(self, frame, gray):
         """[(x, y, w, h, confidence)] in this frame's pixels."""
@@ -116,9 +137,11 @@ def detections(frames):
         cv2.normalize(hist, hist)
         cut = prev_gray is None or is_cut(prev_hist, hist, prev_gray, gray)
         found = []
-        for fx, fy, fw, fh, conf in finder.find(frame, gray):
-            if fw < w * 0.04:
-                continue
+        seen = [f for f in finder.find(frame, gray) if f[2] >= w * 0.04]
+        biggest = max((f[2] for f in seen), default=0)
+        for fx, fy, fw, fh, conf in seen:
+            if fw < biggest * BACKGROUND_FACE:
+                continue                                                # an extra far behind the main person
             mouth = 0.0
             if prev_gray is not None and not cut:
                 y0, y1 = int(fy + fh * 0.6), int(min(h, fy + fh * 1.05))
@@ -126,6 +149,10 @@ def detections(frames):
                 if y1 > y0 and x1 > x0:
                     mouth = float(cv2.absdiff(gray[y0:y1, x0:x1], prev_gray[y0:y1, x0:x1]).mean()) / 255
             found.append(((fx + fw / 2) / w, fw / w, mouth))
+        if not found:                                                   # no face: look for a whole person
+            for bx, by, bw, bh in finder.bodies(frame)[:2]:
+                if bh >= h * 0.3:
+                    found.append(((bx + bw / 2) / w, bw * 0.6 / w, 0.0))
         move = None
         if not found and prev_gray is not None and not cut:
             diff = cv2.absdiff(gray, prev_gray).astype(np.float32)
@@ -169,6 +196,9 @@ def plan_shot(faces, moves, view):
             p["mouth"] += mouth
     need = max(2, int(n * 0.2))      # ignore faces seen only for a moment (background, mistakes)
     people = [p for p in people if len(p["xs"]) >= min(need, n)]
+    if people:                       # small faces behind the main people are extras, not the story
+        big = max(p["size"] / len(p["xs"]) for p in people)
+        people = [p for p in people if p["size"] / len(p["xs"]) >= big * BACKGROUND_FACE]
     if not people:
         out, last = [], None
         for m in moves:
@@ -254,21 +284,24 @@ def camera_path(points, cuts, view):
     return [clamp(c) for c in path]
 
 
-def crop_size(W, H):
+def crop_size(W, H, band=(BAND_W, BAND_H)):
     """Crop (in the movie's pixels) with the band's shape, as tall as the picture."""
-    cw, ch = int(H * BAND_W / BAND_H) // 2 * 2, H // 2 * 2
+    bw, bh = band
+    cw, ch = int(H * bw / bh) // 2 * 2, H // 2 * 2
     if cw > W:
-        cw, ch = W // 2 * 2, int(W * BAND_H / BAND_W) // 2 * 2
+        cw, ch = W // 2 * 2, int(W * bh / bw) // 2 * 2
     return cw, ch
 
 
-def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30):
+def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30, band=(BAND_W, BAND_H), name="track"):
     """
     Works out the moving crop for one part. Writes the camera moves for ffmpeg (sendcmd) and returns
     the filter text that crops the picture to the band: "sendcmd=...,crop@track=...,"
-    W, H: the picture's size after pre_filter (black bars already cut off).
+    W, H: the picture's size after pre_filter (black bars already cut off). band: the zoomed picture's
+    shape on screen (taller = more zoomed in).
     """
-    cw, ch = crop_size(W, H)
+    get_model()
+    cw, ch = crop_size(W, H, band)
     sw = SAMPLE_W
     sh = max(2, int(round(sw * H / W / 2)) * 2)
     try:
@@ -300,7 +333,7 @@ def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30):
         print(f"  tracking: {found} of {len(path)} moments had a face or movement to follow; "
               f"{len(lines)} camera moves", flush=True)
     x0 = (W - cw) // 2 if not lines else int(lines[0].split()[-1].rstrip(";"))
-    cmd_file = Path(workdir) / "track.txt"
+    cmd_file = Path(workdir) / f"{name}.txt"
     cmd_file.write_text("\n".join(lines) + "\n" if lines else "", encoding="utf-8")
     send = f"sendcmd=f={cmd_file.name}," if lines else ""
     return f"{send}crop@track=w={cw}:h={ch}:x={x0}:y={y},"

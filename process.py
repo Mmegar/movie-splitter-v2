@@ -75,7 +75,7 @@ MAX_EXTRA = float(os.environ.get("PART_MAX_EXTRA", "225"))  # a part may run thi
 GOOD_ENDING = 3.0   # an ending at least this good is taken as soon as one turns up
 # cutting style, per movie: "classic" (whole picture, blurred background) or "zoom" (zoomed band that
 # follows faces, longer parts, fewer of them). Chosen in the app per movie; default in Settings.
-STYLE = "classic"
+STYLE = "zoom"
 _CLASSIC = {}
 
 
@@ -85,7 +85,7 @@ def apply_style(style):
     if not _CLASSIC:
         _CLASSIC.update(STRETCH_PART_SECONDS=STRETCH_PART_SECONDS, HIGHLIGHT_SECONDS=HIGHLIGHT_SECONDS,
                         PART_SECONDS=PART_SECONDS, MAX_EXTRA=MAX_EXTRA)
-    STYLE = "zoom" if str(style or "").lower() in ("zoom", "zoomed", "tracking") else "classic"
+    STYLE = "classic" if str(style or "").lower() == "classic" else "zoom"     # zoomed + tracking is the default
     if STYLE == "zoom":
         part = float(SETTINGS.get("zoom_part_seconds", 210))
         STRETCH_PART_SECONDS = HIGHLIGHT_SECONDS = PART_SECONDS = part

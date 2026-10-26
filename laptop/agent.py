@@ -238,11 +238,11 @@ def find_ffmpeg():
 def ensure_cutter_packages():
     """What cutting on this laptop needs (speech-to-text, the narrator voice, Claude): installed once."""
     try:
-        import anthropic, cryptography, edge_tts, faster_whisper, gradio_client, numpy  # noqa: F401,E401
+        import anthropic, cryptography, cv2, edge_tts, faster_whisper, gradio_client, numpy  # noqa: F401,E401
     except ImportError:
         log.info("Installing what cutting needs (once, a few minutes)...")
         subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "faster-whisper", "edge-tts", "anthropic", "cryptography", "gradio_client",
-                        "numpy"], timeout=1800, capture_output=True)
+                        "numpy", "opencv-python-headless>=4.8,<5"], timeout=1800, capture_output=True)
 
 
 # ---------------------------------------------------------------- watch folder
@@ -1136,6 +1136,23 @@ class Agent:
         if self.memory.get("post_jobs"):
             self.run_post_jobs()
 
+    def make_now(self, c):
+        """Puts one movie first in To edit (moving it from the Movies folder if needed) with its cutting style and
+        character, then starts cutting like the Start button."""
+        name = plain_name(c.get("file"))
+        if not name:
+            raise ValueError("no file name given")
+        if (c.get("from") or "queue") != "queue" and not (self.watch / name).is_file():
+            self.run_command("to_queue", dict(c, first=True))
+            name = (self.memory.get("queue_order") or [name])[0]
+        with self.lock:
+            self.memory["queue_order"] = [name] + [n for n in self.memory.get("queue_order") or [] if n != name]
+            self._save_memory()
+        if c.get("style"):
+            self.run_command("set_style", {"file": name, "style": c["style"]})
+        self.run_command("set_character", {"file": name, "character": c.get("character") or ""})
+        return f"{name} is next. {self.run_command('cut_now', {})}"
+
     def command_over(self, cid, ok, note=None):
         with self.lock:
             self.cmd_status[cid] = {"status": "done" if ok else "failed", "note": note}
@@ -1169,6 +1186,8 @@ class Agent:
             for p in list(self.watcher.seen):              # skip the "is it still copying?" wait
                 self.watcher.seen[p] = self.watcher.seen[p][:2] + (0.0,)
             return f"Starting {nxt.name} on the laptop"
+        if kind == "make_now":                           # the app's Make one now: this movie, next, in this style
+            return self.make_now(c)
         if kind == "stop_cut":                           # the app's Stop button when cutting is on the laptop
             return self.stop_cut()
         if kind == "set_style":
@@ -1745,7 +1764,7 @@ class Agent:
     def style_for(self, name):
         """Cutting style picked in the app for this movie, else the default from Settings."""
         return (self.memory.get("styles") or {}).get(name) or \
-            ("zoom" if (self.remote_settings or {}).get("cut_style") == "zoom" else "classic")
+            ("classic" if (self.remote_settings or {}).get("cut_style") == "classic" else "zoom")
 
     def queue_files(self):
         """Movies in To edit that haven't been sent yet, in the order they'll go."""

@@ -13,8 +13,10 @@ timed subtitles and plans the parts: which scenes, and what the narrator says. A
 take a whole movie in at once, so it first writes short scene notes for each stretch of subtitles,
 then plans the story from those notes. Set STORY_MODEL to a Claude model (and add the secret
 ANTHROPIC_API_KEY) for better writing. The voice is Microsoft's free neural text-to-speech
-(edge-tts); everything else is ffmpeg. The whole picture is always shown (never zoomed in), with
-the film look (FILTER) on top. If the model can't be reached, the narrated modes are skipped (with
+(edge-tts); everything else is ffmpeg. By default the picture is zoomed in (a tall 4:5 picture on the
+phone screen) and the crop follows the characters (tracking.py: whoever is talking, else the main face,
+else a person's body, never the background); the "classic" cutting style shows the whole picture
+instead. The film look (FILTER) goes on top. If the model can't be reached, the narrated modes are skipped (with
 a notification saying why) and the Hype edit picks its scenes from loud, fast moments instead.
 
 Music: assets/music/tracks.json lists free-to-use songs (downloaded by the workflow) with the credit
@@ -79,7 +81,7 @@ def load_settings(env=None):
     CAPTION_DIRECTION = env.get("CAPTION_DIRECTION", "").strip()[:600]
     TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
-    INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.8"))   # local (Ollama) or a claude-... model
+    INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.9"))   # Expressiveness: 0.5 calm ... 1 wild (every voice)
     global EDITOR
     EDITOR = env.get("STORY_EDITOR", "ffmpeg").strip().lower()       # ffmpeg (cut + narrate here) or filmcraft (laptop)
 
@@ -97,6 +99,9 @@ MAX_PART_FACTOR = 1.6  # a part estimated longer than this x the part length is 
 FUNNY, DIRECTION = 0.7, ""
 CAPTIONS_BY_WRITER, CAPTION_DIRECTION = True, ""
 FPS = 30
+STORY_BAND = (1080, 1350)               # zoomed: the picture on the 1080x1920 screen (4:5, followed by tracking)
+STORY_BAND_TOP = (1920 - STORY_BAND[1]) // 2
+ZOOM_TEXT_BOTTOM = 1300                 # zoomed: captions sit on the lower part of the picture, clear of TikTok's buttons
 
 _override = {"character": None}
 
@@ -337,7 +342,8 @@ NOTES_SCHEMA = {"type": "object", "required": ["notes"], "properties": {"notes":
     "type": "object", "required": ["at", "note"],
     "properties": {"at": {"type": "number"}, "note": {"type": "string"}}}}}}
 BEATS = {"type": "array", "items": {"type": "object", "required": ["say", "at"], "properties": {
-    "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"}, "joke": {"type": "boolean"}}}}
+    "say": {"type": "string"}, "at": {"type": "number"}, "until": {"type": "number"}, "joke": {"type": "boolean"},
+    "mood": {"type": "string", "enum": ["calm", "curious", "tense", "funny", "shocked", "sad", "hype", "whisper"]}}}}
 STORY_SCHEMA = {"type": "object", "required": ["character", "parts"], "properties": {
     "character": {"type": "string"},
     "cast": {"type": "array", "items": {"type": "string"}},
@@ -628,7 +634,11 @@ Flow, which matters most:
 
 Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
-so pick a moment that shows what the sentence says. When a beat's "say" ends on a joke or punchline, add
+so pick a moment that shows what the sentence says. Give every narration beat a "mood" for how it is read aloud:
+calm, curious, tense, funny, shocked, sad, hype or whisper (a secret or a creepy detail). Vary it the way a real
+storyteller does: build tension before a reveal, go shocked on the twist, funny on the jokes, whisper the creepy
+bits, hype on the big win; write the line to match (short words and a "?" or "!" where the delivery needs one).
+When a beat's "say" ends on a joke or punchline, add
 "joke": true and the footage keeps playing for a moment with no voice, so the joke lands. One to three times per part, use an original-moment beat
 instead: "say" is empty, and "at" and "until" mark a 3 to 8 second stretch where a key line is spoken, played
 with its own sound. Only use seconds that appear below.
@@ -639,8 +649,8 @@ with its own sound. Only use seconds that appear below.
   "intro": [{{"say": "<narration>", "at": <second>}}],
   "outro": [{{"say": "<narration>", "at": <second>}}],
   "parts": [{{"title": "<3 to 6 words, for the thumbnail>",{caption_field()}
-             "beats": [{{"say": "<narration>", "at": <second>}},
-                       {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true}},
+             "beats": [{{"say": "<narration>", "at": <second>, "mood": "tense"}},
+                       {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true, "mood": "funny"}},
                        {{"say": "", "at": <start second>, "until": <end second>}}]}}]}}
 
 {text}
@@ -736,6 +746,11 @@ def clean_beats(raw, total):
             beats.append({"say": str(b["say"]).strip(), "at": round(_num(b["at"], total), 2)})
             if b.get("joke") is True:
                 beats[-1]["joke"] = True
+            mood = str(b.get("mood") or "").strip().lower()
+            if mood in MOODS:
+                beats[-1]["mood"] = mood
+            elif b.get("joke") is True:
+                beats[-1]["mood"] = "funny"
         elif b.get("keep") is not None or (b.get("at") is not None and b.get("until") is not None):
             a = _num(b["keep"] if b.get("keep") is not None else b["at"], total)
             e = _num(b.get("until", a + 5), total, a + 5)
@@ -889,24 +904,72 @@ def plan(mode, name, total, cues, loud=(), motion=(), score=()):
 
 # ---------------------------------------------------------------- the narrator's voice
 VOICE_ENGINE = os.environ.get("NARRATOR_ENGINE", "chatterbox")   # chatterbox (expressive, online) or edge
-INTENSITY = float(os.environ.get("NARRATOR_INTENSITY", "0.8"))     # Chatterbox exaggeration: 0.5 calm ... 1 wild
+INTENSITY = float(os.environ.get("NARRATOR_INTENSITY", "0.9"))     # Expressiveness: 0.5 calm ... 1 wild (every voice)
 TEMPO = float(os.environ.get("NARRATOR_TEMPO", "1.2"))             # narration plays this much faster (pitch kept)
 CHATTERBOX_SPACE = "ResembleAI/Chatterbox"
 _CHATTER = {"client": None, "ref": None, "fails": 0}
 
 
-def speak(text, mp3):
-    """Reads text aloud into mp3: Chatterbox's funny, intense delivery when it's reachable (free online model,
-    in the voice of NARRATOR_VOICE), Microsoft's voice otherwise, sped up by TEMPO.
-    Returns (seconds, [(start, end, word)])."""
+# How each mood is read. INTENSITY (the app's Expressiveness) scales all of it, for every voice:
+#   exag/cfg/temp: Chatterbox (exaggeration added to INTENSITY, lower cfg = freer pacing, temperature)
+#   rate/pitch/volume: Microsoft's voice (percent, Hz, percent at INTENSITY 1)
+MOODS = {
+    "calm":    {"exag": -0.15, "cfg": 0.45, "temp": 0.75, "rate": -4,  "pitch": -2, "volume": 0},
+    "curious": {"exag": 0.0,   "cfg": 0.4,  "temp": 0.8,  "rate": 0,   "pitch": 4,  "volume": 0},
+    "tense":   {"exag": 0.1,   "cfg": 0.35, "temp": 0.8,  "rate": -6,  "pitch": -4, "volume": 5},
+    "funny":   {"exag": 0.2,   "cfg": 0.3,  "temp": 0.9,  "rate": 6,   "pitch": 6,  "volume": 5},
+    "shocked": {"exag": 0.35,  "cfg": 0.25, "temp": 0.9,  "rate": 10,  "pitch": 12, "volume": 12},
+    "sad":     {"exag": -0.1,  "cfg": 0.45, "temp": 0.75, "rate": -12, "pitch": -8, "volume": -5},
+    "hype":    {"exag": 0.45,  "cfg": 0.25, "temp": 0.95, "rate": 12,  "pitch": 10, "volume": 15},
+    "whisper": {"exag": -0.05, "cfg": 0.4,  "temp": 0.8,  "rate": -10, "pitch": -6, "volume": -20},
+}
+DEFAULT_MOOD = "curious"
+
+
+def mood_of(text, mood=None):
+    """The beat's mood from the writer, or a guess from the line itself."""
+    if mood in MOODS:
+        return mood
+    t = text.strip()
+    if t.endswith("!") or t.isupper():
+        return "shocked" if "?" in t else "hype"
+    if t.endswith("?"):
+        return "curious"
+    return DEFAULT_MOOD
+
+
+def chatterbox_style(mood):
+    """(exaggeration, cfg weight, temperature) for Chatterbox."""
+    m = MOODS[mood]
+    return (round(min(1.6, max(0.3, INTENSITY + m["exag"] * INTENSITY / 0.8)), 2), m["cfg"], m["temp"])
+
+
+def edge_style(mood):
+    """(rate, pitch, volume) strings for Microsoft's voice: NARRATOR_SPEED plus the mood, scaled by INTENSITY."""
+    m = MOODS[mood]
+    k = max(0.0, min(1.5, INTENSITY)) / 0.8
+    try:
+        base = int(str(SPEED).strip().rstrip("%"))
+    except ValueError:
+        base = 0
+    rate = base + round(m["rate"] * k)
+    pitch, volume = round(m["pitch"] * k), max(-50, round(m["volume"] * k))
+    return f"{rate:+d}%", f"{pitch:+d}Hz", f"{volume:+d}%"
+
+
+def speak(text, mp3, mood=None):
+    """Reads text aloud into mp3 in the beat's mood: Chatterbox's expressive delivery when it's reachable (free
+    online model, in the voice of NARRATOR_VOICE), Microsoft's voice otherwise (pitch, pace and loudness follow
+    the mood), sped up by TEMPO. Returns (seconds, [(start, end, word)])."""
+    mood = mood_of(text, mood)
     if VOICE_ENGINE == "chatterbox" and _CHATTER["fails"] < 2:
         try:
-            return faster(*speak_chatterbox(text, mp3), mp3)
+            return faster(*speak_chatterbox(text, mp3, mood), mp3)
         except Exception as e:
             _CHATTER["fails"] += 1
             print(f"  (Chatterbox didn't answer{', using the standard voice from now on' if _CHATTER['fails'] >= 2 else ''}: {e})",
                   flush=True)
-    return faster(*speak_edge(text, mp3), mp3)
+    return faster(*speak_edge(text, mp3, mood), mp3)
 
 
 def faster(length, words, mp3):
@@ -921,7 +984,7 @@ def faster(length, words, mp3):
     return P.duration(mp3), [(a / TEMPO, b / TEMPO, w) for a, b, w in words]
 
 
-def speak_chatterbox(text, mp3):
+def speak_chatterbox(text, mp3, mood="funny"):
     """One line from Chatterbox (Resemble AI's open model, run on its free Hugging Face page)."""
     from gradio_client import Client, handle_file
     if _CHATTER["client"] is None:
@@ -932,10 +995,11 @@ def speak_chatterbox(text, mp3):
             _CHATTER["client"] = Client(CHATTERBOX_SPACE, hf_token=token, verbose=False)
     if _CHATTER["ref"] is None:                  # a sample of the narrator's voice for Chatterbox to copy
         ref = Path("narrator_voice.mp3").resolve()
-        speak_edge("Listen. This man is about to make the worst decision of his entire life, and honestly? I respect it.",
-                   ref)
+        speak_edge("Listen. This man is about to make the worst decision of his entire life! And honestly? I respect it.",
+                   ref, "funny")
         _CHATTER["ref"] = ref
-    wav = _CHATTER["client"].predict(text, handle_file(str(_CHATTER["ref"])), INTENSITY, 0.8, 0, 0.3, True,
+    exag, cfg, temp = chatterbox_style(mood if mood in MOODS else DEFAULT_MOOD)
+    wav = _CHATTER["client"].predict(text, handle_file(str(_CHATTER["ref"])), exag, temp, 0, cfg, True,
                                      api_name="/generate_tts_audio")
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(wav), "-c:a", "libmp3lame", "-b:a", "160k",
            str(Path(mp3).resolve())])
@@ -944,16 +1008,18 @@ def speak_chatterbox(text, mp3):
     return length, word_times(text, [], length)     # no word timings: captions are shared out evenly
 
 
-def speak_edge(text, mp3):
-    """Microsoft's free neural voice (edge-tts), with exact word timings."""
+def speak_edge(text, mp3, mood=None):
+    """Microsoft's free neural voice (edge-tts), with exact word timings. mood: pitch, pace and loudness
+    (None = the plain voice)."""
     import asyncio
     import edge_tts
+    rate, pitch, volume = edge_style(mood) if mood in MOODS else (SPEED, "+0Hz", "+0%")
 
     async def go():
         try:
-            com = edge_tts.Communicate(text, VOICE, rate=SPEED, boundary="WordBoundary")
+            com = edge_tts.Communicate(text, VOICE, rate=rate, pitch=pitch, volume=volume, boundary="WordBoundary")
         except TypeError:                       # older edge-tts: word timings come by default
-            com = edge_tts.Communicate(text, VOICE, rate=SPEED)
+            com = edge_tts.Communicate(text, VOICE, rate=rate, pitch=pitch, volume=volume)
         marks = []
         with open(mp3, "wb") as fh:
             async for ch in com.stream():
@@ -1017,6 +1083,25 @@ FRAME = ("split=2[bg][fg];"
          "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.08[bgb];"
          "[fg]scale=1080:1920:force_original_aspect_ratio=decrease[fgs];"
          "[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1")
+ZOOM_FRAME = ("split=2[bg][fg];"
+              "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+              "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.12[bgb];"
+              f"[fg]scale={STORY_BAND[0]}:{STORY_BAND[1]},setsar=1[fgs];"
+              f"[bgb][fgs]overlay=0:{STORY_BAND_TOP},setsar=1")
+
+
+def zoomed():
+    """True when this movie is cut zoomed in with tracking (the default cutting style)."""
+    return getattr(P, "STYLE", "classic") == "zoom"
+
+
+def tracked(src, start, length, workdir, tag):
+    """The moving crop that keeps the characters in the zoomed picture ("" when not zoomed)."""
+    if not zoomed():
+        return ""
+    import tracking
+    W, H = P.picture_size(src)
+    return tracking.plan(src, start, length, P.CROP["filter"], W, H, workdir, band=STORY_BAND, name=tag)
 def enc():
     """Encoding for each piece: hype edits are these pieces joined as they are, so they get the HD settings."""
     return [*P.hd_video(18), *P.HD_AUDIO]
@@ -1025,7 +1110,8 @@ _AUDIO = {}
 
 @contextmanager
 def classic():
-    """These modes always show the whole picture (never the zoomed band)."""
+    """process.py's helpers (caption places, the line, the cockroach) laid out for a full-width picture: these
+    modes place their own zoomed picture (STORY_BAND), not process.py's wide band."""
     old = P.STYLE
     P.STYLE = "classic"
     try:
@@ -1073,12 +1159,13 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
     bridge: a quick dip from black, so a jump to another scene doesn't feel like a sudden cut.
     ending: the last piece of a part eases out instead of stopping dead."""
     src_len = length / slow
-    first = P.flip_filter(src, start, start + src_len).replace("[0:v]", f"[0:v]{P.CROP['filter']}{grade()}", 1)
-    v = first + FRAME
+    track = tracked(src, start, src_len, workdir, f"track_{Path(out).stem}")
+    first = P.flip_filter(src, start, start + src_len).replace("[0:v]", f"[0:v]{P.CROP['filter']}{track}{grade()}", 1)
+    v = first + (ZOOM_FRAME if track else FRAME)
     if slow != 1.0:
         v += f",setpts={slow:.3f}*PTS"
     with classic():
-        bottom = P.movie_bottom(src)
+        bottom = ZOOM_TEXT_BOTTOM if track else P.movie_bottom(src)
         if words:
             v += caption_filters(words, length, bottom, workdir, "nar")
         if cues:
@@ -1113,7 +1200,7 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
         a = a[:-3] + "[a0];[a0]" + ",".join(fades) + "[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f"{v};{a}",
            "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *enc(), str(Path(out).resolve())], cwd=workdir)
-    for f in list(workdir.glob("sub*.txt")) + list(workdir.glob("nar*.txt")):
+    for f in list(workdir.glob("sub*.txt")) + list(workdir.glob("nar*.txt")) + list(workdir.glob("track_*.txt")):
         f.unlink(missing_ok=True)
 
 
@@ -1281,7 +1368,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
     if top_text:
         (workdir / "toptext.txt").write_text(top_text, encoding="utf-8")
         v += (f",drawtext=fontfile={P.FONT}:textfile=toptext.txt:expansion=none:"
-              "fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y=230")
+              f"fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y={150 if zoomed() else 230}")
     with classic():
         v += "[txt0]" + P.line_filter(src, length)
     v += roach[1] if roach else ";[txt]null[v]"
@@ -1311,7 +1398,7 @@ def render_story(src, number, info, cues, out, workdir, total):
         end_of_part = k == len(beats) - 1
         if "say" in beat:
             mp3 = workdir / f"say{k:03}.mp3"
-            length, words = speak(beat["say"], mp3)
+            length, words = speak(beat["say"], mp3, beat.get("mood"))
             length += 0.35 + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
             if beat.get("joke") and not end_of_part:
                 length += JOKE_PAUSE                            # a moment of footage so the joke lands
@@ -1459,7 +1546,7 @@ def make_pack(mode, src, number, info, out, workdir, total):
                 continue
             P.checkpoint()
             mp3 = workdir / f"voice{k:03}.mp3"
-            length, words = speak(beat["say"], mp3)
+            length, words = speak(beat["say"], mp3, beat.get("mood"))
             plan["voices"].append({"beat": k, "file": mp3.name, "seconds": round(length, 3),
                                    "words": [[round(a, 3), round(b, 3), w] for a, b, w in words]})
             files.append(mp3)

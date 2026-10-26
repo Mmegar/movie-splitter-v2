@@ -101,8 +101,41 @@ function playSample(voice, kind) {
   tryPlay(kind);
 }
 
+const slug = (t) => `sec-${String(t).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 function group(title, rows, foot = '') {
-  return `${title ? `<h3 class="group-title">${esc(title)}</h3>` : ''}<div class="group">${rows.join('')}</div>${foot ? `<p class="group-foot">${foot}</p>` : ''}`;
+  return `${title ? `<h3 class="group-title" id="${slug(title)}">${esc(title)}</h3>` : ''}<div class="group">${rows.join('')}</div>${foot ? `<p class="group-foot">${foot}</p>` : ''}`;
+}
+
+/** Chips at the top of Settings that jump to a section. */
+function jumpNav(html) {
+  const titles = [...html.matchAll(/<h3 class="group-title" id="([^"]+)">([^<]+)<\/h3>/g)];
+  if (titles.length < 4) return '';
+  return `<nav class="jump" aria-label="Sections">${titles.map(([, id, t]) => `<button type="button" data-jump-to="${id}">${t}</button>`).join('')}</nav>`;
+}
+
+// ---------- the Memory tab: what the story writer remembers and follows ----------
+function memoryForm(d, st) {
+  const queue = ((st && st.data && st.data.laptop) || {}).queue || [];
+  const per = queue.filter((f) => f.character);
+  return [
+    group('Who to follow', [
+      `<label class="row row--stack"><span class="row-title">Main character</span>
+        <input class="input" data-k="character" data-t="str" value="${esc(d.character || '')}" autocomplete="off" spellcheck="false" placeholder="Blank = the main character">
+        <span class="row-sub">Character story and Hype edit follow this character, and the zoomed picture keeps them in frame. Type the name the way the movie says it.</span></label>`,
+      ...per.map((f) => `<a class="row" href="#/queue"><span class="row-main"><span class="row-title clamp1">${esc(String(f.name).replace(/\.[a-z0-9]{2,4}$/i, ''))}</span><span class="row-sub">This movie only: following ${esc(f.character)}</span></span>${icon('chevR', 'row-chev')}</a>`),
+    ], 'Per-movie characters are set in Queue (⋯ › Character to follow) or Make one now.'),
+    group('Narrator notes', [
+      `<label class="row row--stack"><span class="row-title">Script direction</span>
+        <textarea class="input" rows="6" data-k="script_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. roast the villain, more Gen Z slang, hype up the twist">${esc(d.script_direction || '')}</textarea>
+        <span class="row-sub">Tone, running jokes, names, what to focus on. Claude reads this every time it writes a recap.</span></label>`,
+      sliderRow({ narrator_funny: 0.7, ...d }, 'narrator_funny', 'Funny dial', { min: 0, max: 1, step: 0.05, ends: ['Serious', 'Full comedy'] }),
+    ]),
+    group('Caption notes', [
+      `<label class="row row--stack"><span class="row-title">Caption direction</span>
+        <textarea class="input" rows="4" data-k="caption_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. short and mysterious, ask a question, Gen Z slang">${esc(d.caption_direction || '')}</textarea>
+        <span class="row-sub">How Claude writes each part's TikTok caption.</span></label>`,
+    ]),
+  ].join('');
 }
 
 // ---------- the form ----------
@@ -118,7 +151,7 @@ function modesGroup(d) {
       <button type="button" class="grip" data-grip="${m}" aria-label="Move ${esc(MODE_LABELS[m])} up" ${i < 0 ? 'style="visibility:hidden" tabindex="-1"' : ''}>${icon('grip')}</button>
     </div>`;
   });
-  return group('Modes & order', rows, 'Each movie is cut in these modes, top to bottom. Drag the handle to change the order.');
+  return group('Modes & order', rows, 'Switch on every mode you want: each movie is cut in all of them, top to bottom. Drag the handle to change the order.');
 }
 
 function flipEveryKind(v) {
@@ -139,32 +172,69 @@ function buildForm(d) {
   return [
     modesGroup(d),
 
-    group('Story modes', [
-      `<label class="row row--stack"><span class="row-title">Character to follow</span>
-        <input class="input" data-k="character" data-t="str" value="${esc(d.character || '')}" autocomplete="off" spellcheck="false" placeholder="Blank = the main character"></label>`,
+    group('Story & voice', [
+      `<a class="row" href="#/memory"><span class="row-main"><span class="row-title">Character, narrator notes and Funny dial</span><span class="row-sub">${esc(d.character ? `Following ${d.character}` : 'Following the main character')} · in Memory</span></span>${icon('chevR', 'row-chev')}</a>`,
       narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
       narrated ? voiceRow(d) : '',
-      narrated ? sliderRow(d, 'narrator_funny', 'Funny dial', { min: 0, max: 1, step: 0.05, ends: ['Serious', 'Full comedy'] }) : '',
-      narrated ? `<label class="row row--stack"><span class="row-title">Script direction</span>
-        <textarea class="input" rows="3" data-k="script_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. roast the villain, more Gen Z slang, hype up the twist">${esc(d.script_direction || '')}</textarea>
-        <span class="row-sub">Claude follows this when it writes the narration for the next movies.</span></label>` : '',
+      narrated ? sliderRow({ narrator_intensity: 0.9, ...d }, 'narrator_intensity', 'Expressiveness', { min: 0.5, max: 1.2, step: 0.05, ends: ['Calm', 'Wild'], sub: 'Every voice: each line is read in its mood (tense, shocked, whispered, hyped…), and this sets how far it goes.' }) : '',
       narrated ? segRow(d, 'narrator_tempo', 'Narrator speed', [['1.2', '1.2x'], ['1', '1x'], ['1.1', '1.1x'], ['1.3', '1.3x'], ['1.5', '1.5x']]) : '',
       (d.modes || []).includes('hype') ? stepRow(d, 'hype_count', 'Hype edits per movie', { def: 1, min: 1, max: 5, step: 1 }) : '',
       swRow(d, 'music', 'Background music', 'Songs you add to assets/music on GitHub: quiet under the narrator, full volume in hype montages'),
-    ], 'Character story and Hype edit follow this character (type it the way the movie spells the name). Claude writes the narration from the subtitles, so mystery twists stay hidden until the last part.'),
+    ], 'Claude writes the narration from the subtitles and the plot, so mystery twists stay hidden until the last part.'),
 
     group('Film look', [
       segRow(d, 'filter', 'Look', [['vivid', 'Vivid'], ['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
       d.filter === 'none' ? '' : sliderRow(d, 'filter_strength', 'Strength', { min: 0.1, max: 1, step: 0.05, ends: ['Subtle', 'Strong'] }),
       swRow({ light_sweep: true, ...d }, 'light_sweep', 'Light sweep', 'A diagonal light slides across the picture once in each narrated part'),
       d.light_sweep === false ? '' : sliderRow({ light_sweep_seconds: 3, ...d }, 'light_sweep_seconds', 'Light sweep speed', { min: 1, max: 6, step: 0.5, ends: ['Fast', 'Slow'], sub: 'The diagonal light that slides across the picture, once in each narrated part.' }),
-    ], 'A colour grade, soft vignette and light grain on every part. The whole picture is always shown, never zoomed.'),
+    ], 'A colour grade, soft vignette and light grain on every part.'),
 
     group('Cutting style', [
-      segRow(d, 'cut_style', 'New movies', [['zoom', 'Zoomed + tracking'], ['classic', 'Classic']],
-        (d.cut_style || 'classic') === 'zoom' ? 'Zoomed in on a band across the middle, following who\'s talking or moving. Parts are 3–5 minutes, so there are fewer of them.' : 'The whole picture on a blurred background, with the part lengths below.'),
-      (d.cut_style || 'classic') === 'zoom' ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
+      segRow({ ...d, cut_style: d.cut_style || 'zoom' }, 'cut_style', 'New movies', [['zoom', 'Zoomed + tracking'], ['classic', 'Classic']],
+        (d.cut_style || 'zoom') === 'zoom' ? 'Zoomed in on the characters: the picture follows whoever is talking, else the main person in the shot (never extras in the background). Clip modes get 3–5 minute parts.' : 'The whole picture on a blurred background.'),
+      (d.cut_style || 'zoom') === 'zoom' && old ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
     ], 'You can also pick the style for each movie in Queue, under Up next.'),
+
+    group('Captions', [
+      swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and hashtags, ready to copy'),
+      d.captions ? segRow(d, 'caption_writer', 'Written by', [['claude', 'Claude (Haiku)'], ['templates', 'Stock lines']],
+        (d.caption_writer || 'claude') === 'claude' ? 'Claude writes each narrated part\'s caption along with its story. Hype edits and clips use stock lines.' : '') : '',
+      d.captions && (d.caption_writer || 'claude') === 'claude' ? `<a class="row" href="#/memory"><span class="row-main"><span class="row-title">Caption direction</span><span class="row-sub">${esc(d.caption_direction ? d.caption_direction.slice(0, 80) : 'None yet')} · in Memory</span></span>${icon('chevR', 'row-chev')}</a>` : '',
+      d.captions ? segRow(d, 'caption_style', 'Style', [['goofy', 'Goofy 🤪'], ['plain', 'Plain']],
+        d.caption_style === 'plain' ? 'Calm hooks like "Wait for it 😳".' : 'Jokes, chaos and sometimes a line quoted from the part: "\'Run!\' and then THIS happened 😳".') : '',
+    ]),
+
+
+    group('Posting to TikTok', [
+      swRow(d, 'posting.enabled', 'Send parts to TikTok automatically', 'The next part goes to TikTok at each time below'),
+      ...(p.enabled ? [
+        segRow(d, 'posting.method', 'How to post', [['draft', 'To my TikTok drafts'], ['direct', 'Post straight away']],
+          (p.method || 'draft') === 'draft'
+            ? 'At each time, the part lands in your TikTok inbox as a draft. Tap the TikTok notification, paste the caption and post (public is fine).'
+            : '<span class="note--warn">Straight away only works with a private TikTok account until TikTok approves the app.</span>'),
+        segRow(d, 'posting.when', 'When to post', [['times', 'At set times'], ['as_ready', 'As soon as ready']],
+          p.when === 'as_ready' ? 'Each new part goes to TikTok when it reaches the laptop: one every 5 minutes, up to 15 a day (TikTok\'s limit). The times below are ignored.' : 'The next part goes at each time below.'),
+        ...((p.method || 'draft') === 'direct' ? [segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
+          p.privacy === 'public'
+            ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
+            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.')] : []),
+        `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
+          <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
+            const onm = (p.modes || []).includes(m);
+            return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
+          }).join('')}</div></div>`,
+        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
+        p.when === 'as_ready' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
+          <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
+            <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
+          ${(p.times || []).length !== Number(p.per_day) ? `<p class="note note--warn">${(p.times || []).length} time${(p.times || []).length === 1 ? '' : 's'} for ${p.per_day} post${Number(p.per_day) === 1 ? '' : 's'} a day. Usually these match.</p>` : ''}
+        </div>`,
+        `<label class="row row--stack"><span class="row-title">Time zone</span>
+          <select class="input" data-k="posting.timezone" data-t="str">${tz.map((z) => `<option ${z === p.timezone ? 'selected' : ''}>${esc(z)}</option>`).join('')}</select></label>`,
+        `<label class="row row--stack"><span class="row-title">Hashtags</span>
+          <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
+      ] : []),
+    ], p.enabled ? '' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
 
     !old ? '' : group('Part lengths', [
       stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
@@ -218,22 +288,11 @@ function buildForm(d) {
     ]),
 
     group('Wish list', [swRow(d, 'wishlist_archive', 'Find wish-list films on archive.org', 'Public-domain films only. Turn off to stop the laptop searching and downloading')]),
-    group('Captions', [
-      swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and hashtags, ready to copy'),
-      d.captions ? segRow(d, 'caption_writer', 'Written by', [['claude', 'Claude (Haiku)'], ['templates', 'Stock lines']],
-        (d.caption_writer || 'claude') === 'claude' ? 'Claude writes each narrated part\'s caption along with its story. Hype edits and clips use stock lines.' : '') : '',
-      d.captions && (d.caption_writer || 'claude') === 'claude' ? `<label class="row row--stack"><span class="row-title">Caption direction</span>
-        <textarea class="input" rows="3" data-k="caption_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. short and mysterious, ask a question, Gen Z slang">${esc(d.caption_direction || '')}</textarea>
-        <span class="row-sub">How you want the captions written. Used for the next movies.</span></label>` : '',
-      d.captions ? segRow(d, 'caption_style', 'Style', [['goofy', 'Goofy 🤪'], ['plain', 'Plain']],
-        d.caption_style === 'plain' ? 'Calm hooks like "Wait for it 😳".' : 'Jokes, chaos and sometimes a line quoted from the part: "\'Run!\' and then THIS happened 😳".') : '',
-    ]),
-
     group('Laptop & internet', [
       swRow(d, 'pause_on_battery', 'Pause when on battery', 'The laptop waits until it\'s plugged in before sending or downloading'),
       stepRow(d, 'upload_limit_mbps', 'Upload speed limit', { values: UPLOAD_STEPS, sub: 'Keeps some internet free for you while a movie is sent' }),
       swRow(d, 'auto_update_laptop', 'Laptop helper updates itself', 'Gets new versions from GitHub by itself, so you never copy files again'),
-    ], 'The big Pause switch is on Now and Queue: it stops everything straight away.'),
+    ], 'The big Pause switch is on Dashboard and Queue: it stops everything straight away.'),
 
     group('Previews', [
       swRow(d, 'previews', 'Make previews', 'A small locked copy of every part, so you can watch it here and pick scenes for clips'),
@@ -247,36 +306,6 @@ function buildForm(d) {
       stepRow(d, 'cleanup_parts_after_days', 'Delete old parts', { values: CLEANUP_STEPS, sub: 'Finished parts older than this are removed from the laptop\'s Ready to post folder' }),
     ]),
 
-    group('Posting to TikTok', [
-      swRow(d, 'posting.enabled', 'Send parts to TikTok automatically', 'The next part goes to TikTok at each time below'),
-      ...(p.enabled ? [
-        segRow(d, 'posting.method', 'How to post', [['draft', 'To my TikTok drafts'], ['direct', 'Post straight away']],
-          (p.method || 'draft') === 'draft'
-            ? 'At each time, the part lands in your TikTok inbox as a draft. Tap the TikTok notification, paste the caption and post (public is fine).'
-            : '<span class="note--warn">Straight away only works with a private TikTok account until TikTok approves the app.</span>'),
-        segRow(d, 'posting.when', 'When to post', [['times', 'At set times'], ['as_ready', 'As soon as ready']],
-          p.when === 'as_ready' ? 'Each new part goes to TikTok when it reaches the laptop: one every 5 minutes, up to 15 a day (TikTok\'s limit). The times below are ignored.' : 'The next part goes at each time below.'),
-        ...((p.method || 'draft') === 'direct' ? [segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
-          p.privacy === 'public'
-            ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
-            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.')] : []),
-        `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
-          <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
-            const onm = (p.modes || []).includes(m);
-            return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
-          }).join('')}</div></div>`,
-        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
-        p.when === 'as_ready' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
-          <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
-            <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
-          ${(p.times || []).length !== Number(p.per_day) ? `<p class="note note--warn">${(p.times || []).length} time${(p.times || []).length === 1 ? '' : 's'} for ${p.per_day} post${Number(p.per_day) === 1 ? '' : 's'} a day. Usually these match.</p>` : ''}
-        </div>`,
-        `<label class="row row--stack"><span class="row-title">Time zone</span>
-          <select class="input" data-k="posting.timezone" data-t="str">${tz.map((z) => `<option ${z === p.timezone ? 'selected' : ''}>${esc(z)}</option>`).join('')}</select></label>`,
-        `<label class="row row--stack"><span class="row-title">Hashtags</span>
-          <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
-      ] : []),
-    ], p.enabled ? '' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
   ].join('');
 }
 
@@ -304,8 +333,9 @@ function connForm(c) {
     <div data-conn-out></div>`;
 }
 
-export function createSettingsView(ctx) {
-  const page = makePage({ title: 'Settings' });
+/** Settings, or (memory: true) the Memory tab: the same settings file, showing what the story writer follows. */
+export function createSettingsView(ctx, { memory = false } = {}) {
+  const page = makePage({ title: memory ? 'Memory' : 'Settings' });
   const { content } = page;
   const bar = document.createElement('div');
   bar.className = 'save-bar';
@@ -341,9 +371,14 @@ export function createSettingsView(ctx) {
   function renderForm() {
     if (!draft) return;
     const focusKey = document.activeElement && content.contains(document.activeElement) ? document.activeElement.dataset.k : null;
-    content.querySelector('[data-form]').innerHTML = buildForm(draft);
+    const html = memory ? memoryForm(draft, lastSt) : buildForm(draft);
+    content.querySelector('[data-form]').innerHTML = (memory ? '' : jumpNav(html)) + html;
     if (focusKey) { const el = content.querySelector(`[data-k="${focusKey}"]`); if (el) el.focus({ preventScroll: true }); }
     updateBar();
+  }
+
+  function memoryIntro() {
+    return '<p class="group-foot" style="margin:0">What Claude remembers and follows when it writes each recap: who the story is about, your notes on tone and jokes, and how captions should sound.</p>';
   }
 
   function render(st) {
@@ -353,7 +388,7 @@ export function createSettingsView(ctx) {
     if (!st.data) { content.innerHTML = banner(st) + skeleton(3); return; }
     const s = st.data.settings || {};
     if (!s.json) {
-      content.innerHTML = banner(st) + connCard(st) + empty({ icon: 'settings', title: 'No settings file yet', text: 'config/settings.json is missing from the repo. Push the v2 pipeline first.' });
+      content.innerHTML = banner(st) + (memory ? '' : connCard(st)) + empty({ icon: 'settings', title: 'No settings file yet', text: 'config/settings.json is missing from the repo. Push the v2 pipeline first.' });
       base = null; draft = null; updateBar();
       return;
     }
@@ -361,10 +396,10 @@ export function createSettingsView(ctx) {
     const dirty = changes().length > 0;
     if (fresh) { base = clone(s.json); baseSha = s.sha; if (!dirty) draft = clone(s.json); }
     if (!content.querySelector('[data-form]') || (fresh && !dirty)) {
-      content.innerHTML = `<div data-top>${banner(st) + connCard(st)}</div><div class="content" data-form></div>`;
+      content.innerHTML = `<div data-top>${banner(st) + (memory ? memoryIntro() : connCard(st))}</div><div class="content" data-form></div>`;
       renderForm();
     } else {
-      content.querySelector('[data-top]').innerHTML = banner(st) + connCard(st);
+      content.querySelector('[data-top]').innerHTML = banner(st) + (memory ? memoryIntro() : connCard(st));
       updateBar();
     }
   }
@@ -377,6 +412,12 @@ export function createSettingsView(ctx) {
   // ---------- events ----------
   content.addEventListener('click', (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
+    const jt = e.target.closest('[data-jump-to]');
+    if (jt) {
+      const el = content.querySelector(`#${jt.dataset.jumpTo}`);
+      if (el) page.scroller.scrollTo({ top: el.getBoundingClientRect().top - page.scroller.getBoundingClientRect().top + page.scroller.scrollTop - 64, behavior: 'smooth' });
+      return;
+    }
     const st = e.target.closest('[data-step] button');
     if (st) {
       const box = st.closest('[data-step]');
@@ -661,6 +702,6 @@ export function createSettingsView(ctx) {
   return {
     page,
     render,
-    route(parts) { if (parts[0] === 'connection') openConn(); else closeConn(); },
+    route(parts) { if (memory) return; if (parts[0] === 'connection') openConn(); else closeConn(); },
   };
 }

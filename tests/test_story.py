@@ -33,7 +33,7 @@ class StoryTest(unittest.TestCase):
     def test_defaults_switch_to_the_new_modes(self):
         s = settings.load(path="nope.json", env={})
         self.assertEqual(s["modes"], ["recap", "character", "hype"])
-        self.assertEqual(s["cut_style"], "classic")       # whole picture, no zoom
+        self.assertEqual(s["cut_style"], "zoom")          # zoomed in, following the characters
         self.assertEqual(s["filter"], "vivid")
 
     def test_settings_reach_the_story_module(self):
@@ -307,6 +307,24 @@ class StoryTest(unittest.TestCase):
         for _, _, p in parts[:-1]:
             self.assertLessEqual(story.part_seconds(p["beats"]), 60 * story.MAX_PART_FACTOR)
         self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 13)
+
+    def test_every_line_gets_a_mood_for_its_delivery(self):
+        story.load_settings({"NARRATOR_INTENSITY": "0.9", "NARRATOR_SPEED": "+5%"})
+        beats = story.clean_beats([{"say": "He opens the door.", "at": 10, "mood": "Tense"},
+                                   {"say": "Bad idea.", "at": 20, "joke": True},
+                                   {"say": "Wait.", "at": 30, "mood": "nonsense"}], 3600)
+        self.assertEqual([b.get("mood") for b in beats], ["tense", "funny", None])
+        self.assertEqual(story.mood_of("No way!"), "hype")
+        self.assertEqual(story.mood_of("Who did it?"), "curious")
+        self.assertEqual(story.mood_of("Wait.", None), story.DEFAULT_MOOD)
+        exag, cfg, temp = story.chatterbox_style("shocked")
+        self.assertGreater(exag, story.chatterbox_style("calm")[0])
+        self.assertTrue(0.3 <= exag <= 1.6 and 0 < cfg < 1)
+        rate, pitch, volume = story.edge_style("hype")          # Microsoft voices get it too
+        self.assertTrue(rate.endswith("%") and int(rate[:-1]) > 5 and pitch.startswith("+") and pitch.endswith("Hz"))
+        self.assertEqual(story.edge_style("sad")[1][0], "-")
+        story.load_settings({"NARRATOR_INTENSITY": "0.5"})
+        self.assertLess(int(story.edge_style("hype")[1][:-2]), int(pitch[:-2]))   # less expressive when turned down
 
     def test_the_writer_writes_each_parts_caption(self):
         story.load_settings({"CAPTION_DIRECTION": "ask a question"})

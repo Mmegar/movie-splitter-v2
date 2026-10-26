@@ -1,33 +1,36 @@
 /* Movie Splitter — home-screen app. Editing-bay palette: ink plum, warm paper, amber tally light. */
 
+/* Warm paper look: off-white page, white cards with thin borders, Georgia headings, one orange accent.
+   Follows the phone's dark mode. */
 :root {
-  --bg: #14111b;
-  --bg-elev: #1d1927;
-  --bg-elev2: #282334;
-  --fill: rgba(235, 228, 255, 0.07);
-  --fill-strong: rgba(235, 228, 255, 0.12);
-  --line: rgba(235, 228, 255, 0.09);
-  --text: #f3efe7;
-  --text-2: #a59fb2;
-  --text-3: #6f6880;
-  --accent: #f6b23e;          /* tally light */
-  --accent-ink: #1b1306;
-  --accent-text: #f8c062;
-  --accent-soft: rgba(246, 178, 62, 0.16);
-  --ok: #5fd394;
-  --ok-soft: rgba(95, 211, 148, 0.15);
-  --bad: #ff6f61;
-  --bad-soft: rgba(255, 111, 97, 0.15);
-  --info: #86b6ff;
-  --info-soft: rgba(134, 182, 255, 0.15);
-  --warn: #ffcf5a;
-  --warn-soft: rgba(255, 207, 90, 0.14);
-  --bar-bg: rgba(20, 17, 27, 0.72);
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-  --film: #0c0a11;
-  --perf: rgba(243, 239, 231, 0.18);
+  --bg: #f6f4ef;
+  --bg-elev: #ffffff;
+  --bg-elev2: #efece5;
+  --fill: rgba(28, 27, 25, 0.05);
+  --fill-strong: rgba(28, 27, 25, 0.09);
+  --line: #e4e0d6;
+  --text: #1c1b19;
+  --text-2: #6b675f;
+  --text-3: #9c978d;
+  --accent: #c2410c;
+  --accent-ink: #ffffff;
+  --accent-text: #c2410c;
+  --accent-soft: rgba(194, 65, 12, 0.1);
+  --ok: #15803d;
+  --ok-soft: rgba(21, 128, 61, 0.1);
+  --bad: #b91c1c;
+  --bad-soft: rgba(185, 28, 28, 0.08);
+  --info: #1d4ed8;
+  --info-soft: rgba(29, 78, 216, 0.08);
+  --warn: #a16207;
+  --warn-soft: rgba(202, 138, 4, 0.12);
+  --bar-bg: rgba(246, 244, 239, 0.85);
+  --shadow: 0 18px 50px rgba(40, 30, 20, 0.14);
+  --film: #2a2723;
+  --perf: rgba(255, 255, 255, 0.28);
+  --serif: Georgia, "Times New Roman", serif;
 
-  --r-lg: 22px;
+  --r-lg: 16px;
   --r-md: 14px;
   --r-sm: 10px;
   --nav-h: 44px;
@@ -41,37 +44,37 @@
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-round: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #f3f1f6;
-    --bg-elev: #ffffff;
-    --bg-elev2: #ece9f1;
-    --fill: rgba(40, 30, 60, 0.06);
-    --fill-strong: rgba(40, 30, 60, 0.1);
-    --line: rgba(40, 30, 60, 0.1);
-    --text: #1b1724;
-    --text-2: #6a6377;
-    --text-3: #9e97aa;
-    --accent: #f2a92a;
-    --accent-ink: #241703;
-    --accent-text: #a86800;
-    --accent-soft: rgba(242, 169, 42, 0.18);
-    --ok: #1f9d5c;
-    --ok-soft: rgba(31, 157, 92, 0.12);
-    --bad: #d93a2c;
-    --bad-soft: rgba(217, 58, 44, 0.1);
-    --info: #2f6fd6;
-    --info-soft: rgba(47, 111, 214, 0.1);
-    --warn: #9a6a00;
-    --warn-soft: rgba(242, 169, 42, 0.16);
-    --bar-bg: rgba(243, 241, 246, 0.78);
-    --shadow: 0 18px 50px rgba(40, 30, 60, 0.18);
-    --film: #221d2c;
-    --perf: rgba(255, 255, 255, 0.28);
-    color-scheme: light;
+    --bg: #141311;
+    --bg-elev: #1d1b18;
+    --bg-elev2: #292622;
+    --fill: rgba(255, 244, 230, 0.06);
+    --fill-strong: rgba(255, 244, 230, 0.11);
+    --line: rgba(255, 244, 230, 0.1);
+    --text: #f3efe7;
+    --text-2: #aaa397;
+    --text-3: #76706a;
+    --accent: #fb923c;
+    --accent-ink: #1a0d03;
+    --accent-text: #fdba74;
+    --accent-soft: rgba(251, 146, 60, 0.16);
+    --ok: #4ade80;
+    --ok-soft: rgba(74, 222, 128, 0.13);
+    --bad: #f87171;
+    --bad-soft: rgba(248, 113, 113, 0.14);
+    --info: #93c5fd;
+    --info-soft: rgba(147, 197, 253, 0.13);
+    --warn: #fcd34d;
+    --warn-soft: rgba(252, 211, 77, 0.13);
+    --bar-bg: rgba(20, 19, 17, 0.8);
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    --film: #0d0c0b;
+    --perf: rgba(243, 239, 231, 0.18);
+    color-scheme: dark;
   }
 }
 
@@ -236,7 +239,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .btn--accent { background: var(--accent-soft); color: var(--accent-text); }
 .btn--small { min-height: 40px; padding: 0 14px; border-radius: 12px; font-size: 15px; }
 .btn--small .ic { width: 18px; height: 18px; }
-.btn--block { width: 100%; }
 .btn.is-copied { background: var(--ok-soft); color: var(--ok); }
 .icon-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 22px; color: var(--text-2); }
 .link { color: var(--accent-text); font-size: 15px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
@@ -707,3 +709,40 @@ input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border: 0; bo
 .seg-wrap button { flex: 1 0 30%; }
 .voice-play { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 textarea.input { resize: vertical; min-height: 72px; line-height: 1.4; }
+
+/* ---------- v3 look: serif headings, bordered cards, one centred column ---------- */
+.large-title, .run-movie, .section-head h3, .movie-name, .plan-head h3, .nav-title { font-family: var(--serif); letter-spacing: -0.01em; }
+.large-title { font-weight: 700; }
+.group, .movie-card, .run-card, .plan-card { border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(40, 30, 20, 0.04); }
+.run-card { border-radius: var(--r-md); }
+.group-title { text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px; font-weight: 600; scroll-margin-top: 70px; }
+.btn--ghost { background: transparent; color: var(--accent-text); box-shadow: inset 0 0 0 1.5px var(--accent); }
+.btn--danger { background: transparent; color: var(--bad); box-shadow: inset 0 0 0 1.5px var(--bad); }
+.tone-ok-text { color: var(--ok); }
+
+.plan-card { background: var(--bg-elev); border-radius: var(--r-md); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.plan-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.plan-head h3 { font-size: 20px; }
+.plan-head .muted { font-size: 13px; }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tile { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tile-k { font-size: 11.5px; color: var(--text-2); }
+.tile-v { font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.plan-next { font-size: 15px; color: var(--text-2); }
+.plan-next strong { color: var(--text); }
+.plan-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.plan-actions .btn { flex: 1 1 140px; }
+@media (max-width: 420px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+
+.jump { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 4px; scrollbar-width: none; margin: 0 calc(-1 * var(--gutter)); padding-left: var(--gutter); padding-right: var(--gutter); }
+.jump::-webkit-scrollbar { display: none; }
+.jump button { flex: none; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-elev); font-size: 13.5px; color: var(--text-2); white-space: nowrap; }
+.jump button:active { background: var(--accent-soft); color: var(--accent-text); }
+
+.pick-row input[type="radio"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; margin: 0 4px 0 0; }
+.btn--block { width: 100%; }
+
+.tab-label { white-space: nowrap; }
+@media (min-width: 700px) {
+  .scroller > .content, .scroller > .large-head { max-width: 980px; }
+}
