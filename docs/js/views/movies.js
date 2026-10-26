@@ -30,7 +30,7 @@ export function cutMap(movie, mode, settings, { mini = false } = {}) {
   </figure>`;
 }
 
-function movieCard(m, settings) {
+export function movieCard(m, settings) {
   const c = postCounts(m);
   const modes = Object.entries(m.modes || {});
   const firstMode = modes.find(([, md]) => md.parts && md.parts.length) || modes[0];
@@ -49,7 +49,8 @@ function movieCard(m, settings) {
 }
 
 export function createMoviesView(ctx) {
-  const list = makePage({ title: 'Movies' });
+  const list = makePage({ title: 'Movies', back: 'Dashboard' });
+  list.navbar.addEventListener('click', (e) => { if (e.target.closest('[data-back]')) location.hash = '#/now'; });
   let filter = 'all';
   let detail = null; // { page, id, mode }
   let lastSt = null;

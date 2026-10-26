@@ -71,7 +71,7 @@ class RenderTest(TempDirTest):
 import subprocess, sys, process, story
 from pathlib import Path
 story.MUSIC_DIR = Path(sys.argv[2])
-def speak(text, mp3):
+def speak(text, mp3, mood=None):
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "sine=f=300:d=1.5", str(mp3)], check=True)
     return 1.5, [(0.0, 0.7, "The"), (0.7, 1.4, "butler.")]
 story.speak = speak

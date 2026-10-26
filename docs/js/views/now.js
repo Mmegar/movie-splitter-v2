@@ -3,6 +3,7 @@ import { laptopStatus, activeMakeRun } from '../api.js';
 import { STEPS, stepIndex, STAGE_TEXT, MODE_LABELS, elapsed, relTime, clock, mergeFeed, cutPercent } from '../logic.js';
 import { makePage, freshness, banner, notesHtml, skeleton, chip } from './common.js';
 import { pauseRow, togglePause } from './queue.js';
+import { movieCard } from './movies.js';
 
 export function frameStrip(done, total, current) {
   if (!total) return '';
@@ -68,6 +69,7 @@ function runCard(st) {
   }
 
   const failed = run.stage === 'failed';
+  if (!failed) return '';                  // idle: the Daily plan card above already shows what's next
   const next = queue[0];
   return `<article class="run-card is-idle">
     <div class="run-top"><span class="mode-pill">${failed ? 'Last run failed' : 'Idle'}</span></div>
@@ -154,6 +156,48 @@ function glanceRows(st) {
   return `<div class="group">${rows.join('')}</div>`;
 }
 
+/** The daily plan, like a control desk: four tiles, what's next, Run next now and Pause all. */
+function planCard(st) {
+  const s = (st.data.settings && st.data.settings.json) || {};
+  const p = s.posting || {};
+  const live = (st.data.state || {}).posting || {};
+  const lp = st.data.laptop || {};
+  const enabled = live.enabled ?? p.enabled;
+  const asReady = enabled && p.when === 'as_ready';
+  const perDay = asReady ? 15 : Number(p.per_day) || 0;
+  const how = !enabled ? 'Ready to post' : (p.method || 'draft') === 'draft' ? 'Drafts' : p.privacy === 'public' ? 'Public' : 'Private';
+  const tiles = [
+    ['Auto-posting', enabled ? 'On' : 'Off', enabled ? 'tone-ok-text' : ''],
+    ['Posts go to', how, ''],
+    ['Per day', enabled ? (asReady ? 'As ready' : `${perDay} parts`) : '—', ''],
+    ['Posted today', enabled && perDay ? `${live.posted_today ?? 0} of ${perDay}` : String(live.posted_today ?? 0), ''],
+  ];
+  const queue = lp.queue || (st.data.state || {}).queue || [];
+  const next = queue[0];
+  const run = (st.data.state || {}).run || {};
+  const style = next && (next.style || (s.cut_style === 'classic' ? 'classic' : 'zoom'));
+  return `<section class="plan-card" aria-label="Daily plan">
+    <div class="plan-head"><h3>Daily plan</h3><span class="muted">${s.paused ? 'Paused' : 'Runs whenever the laptop is on'}</span></div>
+    <div class="tiles">${tiles.map(([k, v, cls]) => `<div class="tile"><span class="tile-k">${k}</span><strong class="tile-v ${cls}">${esc(v)}</strong></div>`).join('')}</div>
+    <p class="plan-next">${run.active ? `Making now: <strong>${esc(run.movie)}</strong>`
+      : next ? `Next up: <strong>${esc(next.name.replace(/\.[a-z0-9]{2,4}$/i, ''))}</strong>${style ? ` · ${style === 'classic' ? 'Classic' : 'Zoomed + tracking'}` : ''}${next.character ? ` · following ${esc(next.character)}` : ''}`
+      : 'Nothing in the queue. Add a movie in Queue or Make one now.'}</p>
+    <div class="plan-actions">
+      <button class="btn btn--primary" data-start ${run.active || !next ? 'disabled' : ''}>${icon('play')}Run next now</button>
+      <button class="btn ${s.paused ? 'btn--primary' : 'btn--ghost'}" data-pauseall="${s.paused ? 'off' : 'on'}">${icon('pause')}${s.paused ? 'Resume all' : 'Pause all'}</button>
+    </div>
+  </section>`;
+}
+
+/** The newest movies with their parts, then a link to all of them. */
+function finished(st) {
+  const settings = (st.data.settings && st.data.settings.json) || {};
+  const movies = ((st.data.state || {}).movies || []).slice(0, 3);
+  if (!movies.length) return '';
+  return `<div class="section-head"><h3>Finished videos</h3><a href="#/movies" class="link">All movies</a></div>
+    ${movies.map((m) => movieCard(m, settings)).join('')}`;
+}
+
 function pausedBanner(st) {
   const s = (st.data.settings && st.data.settings.json) || {};
   const lp = st.data.laptop || {};
@@ -178,7 +222,7 @@ function latest(st) {
 }
 
 export function createNowView(ctx) {
-  const page = makePage({ title: 'Now' });
+  const page = makePage({ title: 'Dashboard' });
   const { content } = page;
 
   content.addEventListener('change', async (e) => {
@@ -195,6 +239,15 @@ export function createNowView(ctx) {
   });
   content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
+    const pa = e.target.closest('[data-pauseall]');
+    if (pa) {
+      haptic();
+      pa.disabled = true;
+      const on = pa.dataset.pauseall === 'on';
+      try { await ctx.store.setPaused(on); toast(on ? 'Paused. The laptop stops within a minute.' : 'Resumed', { kind: on ? 'info' : 'ok' }); }
+      catch (err) { toast(err.message, { kind: 'err', ms: 4000 }); pa.disabled = false; }
+      return;
+    }
     if (e.target.closest('[data-resume]')) {
       haptic();
       try { await ctx.store.setPaused(false); toast('Resumed'); } catch (err) { toast(err.message, { kind: 'err', ms: 4000 }); }
@@ -249,7 +302,7 @@ export function createNowView(ctx) {
     render(st) {
       page.setSub(freshness(st));
       if (!st.data) { content.innerHTML = banner(st) + skeleton(4); return; }
-      content.innerHTML = banner(st) + notesHtml(st) + pausedBanner(st) + runCard(st) + glanceRows(st) + latest(st);
+      content.innerHTML = banner(st) + notesHtml(st) + planCard(st) + pausedBanner(st) + runCard(st) + finished(st) + latest(st) + glanceRows(st);
     },
   };
 }

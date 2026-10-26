@@ -7,8 +7,13 @@ import { createMoviesView } from './views/movies.js';
 import { createAlertsView } from './views/alerts.js';
 import { createQueueView } from './views/queue.js';
 import { createSettingsView } from './views/settings.js';
+import { createMakeView } from './views/make.js';
 
-const TABS = ['now', 'movies', 'alerts', 'queue', 'settings'];
+// Tabs in the tab bar (Dashboard, Queue, Make one now, Settings, Memory), plus pages opened from the Dashboard
+// (all movies, alerts) that light up the Dashboard tab.
+const TABS = ['now', 'queue', 'make', 'settings', 'memory', 'movies', 'alerts'];
+const PARENT = { movies: 'now', alerts: 'now' };
+const TITLES = { now: 'Dashboard', queue: 'Queue', make: 'Make one now', settings: 'Settings', memory: 'Memory', movies: 'Movies', alerts: 'Alerts' };
 const LS_SEEN = 'ms.alerts.seen';
 
 const store = createStore();
@@ -47,6 +52,8 @@ const views = {
   alerts: createAlertsView(ctx),
   queue: createQueueView(ctx),
   settings: createSettingsView(ctx),
+  make: createMakeView(ctx),
+  memory: createSettingsView(ctx, { memory: true }),
 };
 
 // Mount each tab in its own container so pushed pages can stack inside it.
@@ -73,12 +80,12 @@ function route() {
   if (tab !== current) {
     for (const name of TABS) holders[name].hidden = name !== tab;
     document.querySelectorAll('.tab').forEach((a) => {
-      const on = a.dataset.tab === tab;
+      const on = a.dataset.tab === (PARENT[tab] || tab);
       a.classList.toggle('is-on', on);
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     current = tab;
-    document.title = `${tab[0].toUpperCase()}${tab.slice(1)} · Splitter`;
+    document.title = `${TITLES[tab]} · Splitter`;
   }
   if (views[tab].route) views[tab].route(parts.slice(1));
   if (tab === 'alerts') markSeen();
@@ -89,9 +96,9 @@ document.querySelector('.tabbar').addEventListener('click', (e) => {
   if (!a) return;
   haptic();
   // Re-tapping the active tab pops to its root and scrolls to the top, like iOS.
-  if (a.dataset.tab === current) {
+  if (a.dataset.tab === (PARENT[current] || current)) {
     e.preventDefault();
-    const root = `#/${current}`;
+    const root = `#/${a.dataset.tab}`;
     if (location.hash !== root) location.hash = root;
     else views[current].page.scroller.scrollTo({ top: 0, behavior: 'smooth' });
   }

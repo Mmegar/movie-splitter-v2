@@ -28,7 +28,7 @@ DEFAULTS = {
     "narrator_funny": 0.7,               # Funny dial: 0 = serious ... 1 = full comedy
     "script_direction": "",              # free text for the script writer, e.g. "roast the villain, more Gen Z slang"
     "narrator_engine": "chatterbox",     # chatterbox = expressive funny/intense delivery (free online model), edge = standard
-    "narrator_intensity": 0.8,           # Chatterbox: 0.5 calm ... 1.0 wild
+    "narrator_intensity": 0.9,           # how expressive the narrator is: 0.5 calm ... 1.0 wild (every voice, each line by its mood)
     "recap_part_seconds": 90,            # Movie recap / Character story: length of each narrated part
     "recap_parts": 0,                    # 0 = automatic (3 to 8 parts, by movie length)
     "music": True,                       # background music from assets/music (royalty-free tracks you add)
@@ -59,7 +59,7 @@ DEFAULTS = {
     "cockroach_chance": 1,
     "cockroach_size": 60,
     "captions": True,
-    "cut_style": "classic",              # classic = whole picture on a blurred background (default); zoom = zoomed band that follows faces
+    "cut_style": "zoom",                 # zoom = zoomed in, following the characters (default); classic = whole picture on a blurred background
     "zoom_part_seconds": 210,            # zoom style: parts of about 3.5 minutes...
     "zoom_part_max_extra": 90,           # ...that may run up to this much longer to end at a pause (so 3-5 min)
     "caption_writer": "claude",          # claude = the story writer (Haiku) writes each part's caption; templates = stock lines

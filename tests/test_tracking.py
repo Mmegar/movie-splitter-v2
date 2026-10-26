@@ -90,6 +90,13 @@ class CameraPathTest(unittest.TestCase):
         import tracking
         self.assertEqual(tracking.crop_size(1920, 800), (1000, 800))
         self.assertEqual(tracking.crop_size(640, 1000), (640, 512))
+        self.assertEqual(tracking.crop_size(1920, 1080, (1080, 1350)), (864, 1080))   # the story modes' 4:5 zoom
+
+    def test_the_main_character_wins_over_a_face_in_the_background(self):
+        import tracking
+        faces = [[(0.30, 0.20, 0.0), (0.80, 0.05, 0.1)] for _ in range(20)]   # big lead, small extra behind
+        pts = tracking.plan_shot(faces, [None] * 20, view=0.45)
+        self.assertEqual(set(pts), {0.30})
 
 
 class StylePartsTest(unittest.TestCase):

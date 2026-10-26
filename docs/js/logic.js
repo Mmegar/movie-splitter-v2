@@ -12,9 +12,9 @@ export const MODE_HINTS = {
   highlights: 'Best moments from the whole movie',
   all: 'Everything, back to back',
 };
-export const ALL_MODES = ['recap', 'character', 'hype'];
-// the older modes: still made if settings.json lists them, but no longer offered
+// the older clip modes, still offered as switches next to the story modes
 export const OLD_MODES = ['stretch', 'highlights', 'all'];
+export const ALL_MODES = ['recap', 'character', 'hype', ...OLD_MODES];
 
 // Stepper shown on the run card. Contract stages map onto these five steps.
 export const STEPS = [
@@ -180,6 +180,7 @@ export const SETTING_LABELS = {
   narrator_voice: 'Narrator voice',
   narrator_tempo: 'Narrator speed',
   narrator_funny: 'Funny dial',
+  narrator_intensity: 'Expressiveness',
   light_sweep: 'Light sweep',
   light_sweep_seconds: 'Light sweep speed',
   script_direction: 'Script direction',
@@ -264,6 +265,7 @@ export function formatSetting(path, v) {
   if (path === 'preview_keep_movies') return `${v} movie${Number(v) === 1 ? '' : 's'}`;
   if (path === 'narrator_tempo') return `${v}x`;
   if (path === 'light_sweep_seconds') return `${v} s across`;
+  if (path === 'narrator_intensity') { const n = Number(v); return n < 0.7 ? 'Calm' : n < 0.95 ? 'Lively' : n < 1.1 ? 'Very expressive' : 'Wild'; }
   if (path === 'narrator_funny') { const n = Number(v); return n < 0.25 ? 'Serious' : n < 0.6 ? 'A bit funny' : n < 0.85 ? 'Funny' : 'Full comedy'; }
   if (path === 'caption_writer') return v === 'templates' ? 'Stock lines' : 'Claude (Haiku)';
   if (path === 'script_direction' || path === 'caption_direction') return v ? (String(v).length > 40 ? `${String(v).slice(0, 40)}…` : String(v)) : 'None';
