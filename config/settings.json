@@ -20,7 +20,7 @@
   "line_thickness": 12,
   "cockroach": true,
   "cockroach_chance": 1,
-  "cockroach_size": 80,
+  "cockroach_size": 100,
   "captions": true,
   "caption_writer": "claude",
   "caption_direction": "",
