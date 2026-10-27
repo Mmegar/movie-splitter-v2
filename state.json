@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T00:36:35+13:00",
+ "updated": "2026-10-28T00:36:37+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -4255,6 +4255,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T00:36:37+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Fall (2022)",
+   "message": "Movie recap: 4 parts, Best stretch: 5 parts, Hype edit: 1 part, Highlights: 5 parts.\nIn Ready to post/Fall (2022)."
+  },
+  {
    "at": "2026-10-28T00:36:34+13:00",
    "type": "part_ready",
    "title": "[Highlights] Fall (2022): Highlight 5 of 5 ready",
@@ -5447,12 +5453,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 2 of 2 ready",
    "message": "Part 2: The Spot's Vision and Miles' Descent (11 narrated beats, about 92s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nNobody talks about this part 👀\nPart 2 🎬 · And that's a wrap 🎬 Follow for the next one\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
-  },
-  {
-   "at": "2026-10-21T21:17:57+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 1 of 2 ready",
-   "message": "Part 1: Dimensional Drift and a Twisted Game (23 narrated beats, about 166s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nPlot twist incoming 🌀\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
   }
  ]
 }
