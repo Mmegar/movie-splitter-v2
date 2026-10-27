@@ -52,7 +52,7 @@ MODE_NAMES = {"recap": "Movie recap", "character": "Character story", "hype": "H
 NEEDS_TRANSCRIPT = set(MODE_NAMES)
 
 FILTER, FILTER_STRENGTH, CHARACTER, VOICE, SPEED = "vivid", 0.4, "", "en-US-GuyNeural", "+0%"
-RECAP_PART_SECONDS, RECAP_PARTS, MUSIC, MUSIC_VOLUME = 90.0, 0, True, 0.12
+RECAP_PART_SECONDS, RECAP_PARTS, MUSIC, MUSIC_VOLUME = 120.0, 0, True, 0.12
 HYPE_COUNT, HYPE_MONTAGE_SECONDS, MODEL = 1, 15.0, "claude-haiku-5-5"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434")
 
@@ -67,7 +67,7 @@ def load_settings(env=None):
     CHARACTER = env.get("CHARACTER", "").strip()                     # blank = the most important character
     VOICE = env.get("NARRATOR_VOICE", "en-US-GuyNeural")
     SPEED = env.get("NARRATOR_SPEED", "+0%")
-    RECAP_PART_SECONDS = float(env.get("RECAP_PART_SECONDS", "90"))
+    RECAP_PART_SECONDS = min(PART_MAX_SECONDS, max(PART_MIN_SECONDS, float(env.get("RECAP_PART_SECONDS", "120"))))
     RECAP_PARTS = int(float(env.get("RECAP_PARTS", "0")))            # 0 = automatic (at least 3)
     MUSIC = env.get("MUSIC", "on").strip().lower() not in OFF
     MUSIC_VOLUME = float(env.get("MUSIC_VOLUME", "0.12"))            # under the narration
@@ -105,6 +105,7 @@ DUCK = 0.18          # movie sound under the narrator
 WORDS_PER_SECOND = 2.6
 JOKE_PAUSE = 0.8     # seconds of footage (no voice) after a joke, so it lands
 MAX_PART_FACTOR = 1.6  # a part estimated longer than this x the part length is split in two
+PART_MIN_SECONDS, PART_MAX_SECONDS = 60.0, 180.0   # every narrated part runs 1 to 3 minutes
 FUNNY, DIRECTION = 0.7, ""
 CAPTIONS_BY_WRITER, CAPTION_DIRECTION = True, ""
 THUMBNAIL_BADGE = "PART {n}"   # the thumbnail's badge text; {n} = the part number
@@ -698,7 +699,8 @@ def flow_rules():
 
 def story_prompt(name, total, text, mode, who):
     n = part_count(total)
-    words = int(RECAP_PART_SECONDS * WORDS_PER_SECOND * 0.8)
+    words, least, most = (part_words(RECAP_PART_SECONDS), part_words(PART_MIN_SECONDS * 1.25),
+                          part_words(PART_MAX_SECONDS * 0.9))
     focus = ("Tell the whole movie's story from start to finish." if mode == "recap" else
              f"Follow {'the character ' + who if who else 'the single most important character (name them in the character field)'} "
              "only: use scenes they are in or that are directly about them, and tell their arc faithfully (what they "
@@ -710,7 +712,8 @@ Length: {int(total)} seconds
 {focus}
 
 Make {n} to {MAX_STORY_PARTS} parts (at least {MIN_STORY_PARTS}, never more than {MAX_STORY_PARTS}), each about {int(RECAP_PART_SECONDS)} seconds when read
-aloud (about {words} words of narration per part), in story order. Use more parts (up to {MAX_STORY_PARTS}) rather
+aloud (about {words} words of narration per part), in story order. Every part must run at least 1 minute and at
+most 3 minutes: never fewer than {least} or more than {most} words of narration in a part. Use more parts (up to {MAX_STORY_PARTS}) rather
 than squeezing or skipping important story.
 
 Footage: never use the movie's own opening logos, title cards or credits, or its end credits. Only use seconds
@@ -853,7 +856,8 @@ def clean_story(data, total):
         half = len(beats) // 2
         parts = [{"title": parts[0]["title"], "beats": beats[:half], "caption": parts[0]["caption"]},
                  {"title": "", "beats": beats[half:], "caption": ""}]
-    parts = [q for p in parts for q in split_long(p)]          # never a part that runs for many minutes
+    parts = [q for p in parts for q in split_long(p)]          # never a part over 3 minutes
+    parts = merge_short(parts)                                 # nor one under a minute
     if len(parts) > MAX_STORY_PARTS:                            # never more than 8: the extra goes into the last
         extra = [b for p in parts[MAX_STORY_PARTS - 1:] for b in p["beats"]]
         parts = parts[:MAX_STORY_PARTS - 1] + [{"title": parts[MAX_STORY_PARTS - 1]["title"], "beats": extra,
@@ -875,6 +879,11 @@ def clean_story(data, total):
     return out
 
 
+def part_words(seconds):
+    """Words of narration that take about this long to read at the narrator's speed."""
+    return int(seconds * WORDS_PER_SECOND * max(0.5, TEMPO))
+
+
 def part_seconds(beats):
     """About how long a part plays: the narration (sped up by TEMPO), the pauses, and the original moments."""
     out = 0.0
@@ -894,7 +903,7 @@ def line_gap():
 def split_long(part):
     """A part much longer than the part length is cut in two (or more) at a narration beat."""
     beats = part["beats"]
-    if part_seconds(beats) <= RECAP_PART_SECONDS * MAX_PART_FACTOR or len(beats) < 4:
+    if part_seconds(beats) <= min(PART_MAX_SECONDS, RECAP_PART_SECONDS * MAX_PART_FACTOR) or len(beats) < 4:
         return [part]
     target, acc, cut = part_seconds(beats) / 2, 0.0, len(beats) // 2
     for k, b in enumerate(beats):
@@ -907,6 +916,29 @@ def split_long(part):
         return [part]
     return (split_long({"title": part["title"], "beats": first, "caption": part.get("caption", "")}) +
             split_long({"title": part["title"], "beats": second, "caption": ""}))
+
+
+def merge_short(parts):
+    """A part under a minute joins its neighbour (the next one, or the one before for the last part),
+    as long as the two together stay within 3 minutes and at least 2 parts are left."""
+    parts = list(parts)
+    k = 0
+    while k < len(parts) and len(parts) > 2:
+        if part_seconds(parts[k]["beats"]) >= PART_MIN_SECONDS:
+            k += 1
+            continue
+        j = k + 1 if k + 1 < len(parts) else k - 1
+        if k + 1 < len(parts) and k > 0 and (part_seconds(parts[k - 1]["beats"]) < part_seconds(parts[k + 1]["beats"])):
+            j = k - 1                                          # the shorter neighbour takes it
+        a, b = sorted((j, k))
+        if part_seconds(parts[a]["beats"] + parts[b]["beats"]) > PART_MAX_SECONDS:
+            k += 1
+            continue
+        parts[a] = {"title": parts[a]["title"] or parts[b]["title"], "beats": parts[a]["beats"] + parts[b]["beats"],
+                    "caption": parts[a].get("caption") or parts[b].get("caption", "")}
+        del parts[b]
+        k = a
+    return parts
 
 
 def clean_hype(data, total):
