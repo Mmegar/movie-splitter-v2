@@ -1859,29 +1859,6 @@ def cover_moment(info, video):
     return None
 
 
-def clean_moment(src, at, tries=8, step=1.5):
-    """The first second from `at` on (every `step` s) whose frame has no subtitle text on it, or None."""
-    try:
-        import numpy as np
-        import tracking
-    except ImportError:
-        return None
-    for k in range(tries):
-        t = at + k * step
-        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", str(src), "-frames:v", "1",
-               "-an", "-sn", "-vf", f"{P.CROP['filter']}scale=480:-2,format=gray", "-f", "rawvideo", "-"]
-        try:
-            data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
-        except Exception:
-            return None
-        h = len(data) // 480
-        if h < 50:
-            return None
-        if tracking.text_rows(np.frombuffer(data[:h * 480], dtype=np.uint8).reshape(h, 480)) is None:
-            return t
-    return None
-
-
 COVER_W, COVER_H = 1080, 1920
 BADGE_COLOR = (0xE1, 0x1D, 0x48)        # deep red (#E11D48) behind bold white text
 BADGE_X, BADGE_Y = 64, 150              # top-left, under TikTok's top bar and above where faces usually are
@@ -1898,27 +1875,107 @@ def badge_text(number, badge=None):
     return text.upper()
 
 
-def subject_x(src, at, pre):
-    """Where the main person is across the frame at `at` (0..1, centre of the faces), or 0.5."""
+COVER_TRIES = 36        # moments looked at for the thumbnail
+COVER_OFFSETS = (0.6, 1.8, 3.2)
+
+
+def cover_times(info, video):
+    """Moments of the part worth a look for its thumbnail: just after each beat (and the payoff)."""
+    starts = []
+    if isinstance(info, dict):
+        for key in ("payoff", "setup"):
+            if info.get(key):
+                starts.append(float(info[key][0]))
+        starts += [float(b.get("at", b.get("keep"))) for b in info.get("beats") or []
+                   if b.get("at", b.get("keep")) is not None]
+    times = sorted({round(t + o, 2) for t in starts for o in COVER_OFFSETS})
+    if len(times) > COVER_TRIES:
+        times = [times[int(i * len(times) / COVER_TRIES)] for i in range(COVER_TRIES)]
+    return times
+
+
+def look_at(src, t, pre, w=480):
+    """The frame at t, small (BGR pixels), or None."""
+    import numpy as np
+    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", str(src), "-frames:v", "1",
+           "-an", "-sn", "-vf", f"{pre}scale={w}:-2,format=bgr24", "-f", "rawvideo", "-"]
     try:
-        import numpy as np
+        data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
+    except Exception:
+        return None
+    h = len(data) // (w * 3)
+    return np.frombuffer(data[:h * w * 3], dtype=np.uint8).reshape(h, w, 3) if h >= 50 else None
+
+
+COVER_MAX_ZOOM = 1.3     # how much more the thumbnail may zoom in to leave the movie's subtitles out
+
+
+def rate_cover(frame, finder=None):
+    """
+    How good one small frame is for a thumbnail: a big, sharp, well-lit face scores highest.
+    Returns (score, subject x 0..1, keep) where keep is the share of the height, from the top, that is free
+    of subtitles (1.0 = no text), or None when its text can't be left out.
+    """
+    import cv2
+    import tracking
+    h, w = frame.shape[:2]
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    keep = 1.0
+    band = tracking.text_rows(gray, top=0.3)
+    if band is not None:
+        keep = (band[0] - h * 0.02) / h
+        if keep < 1 / COVER_MAX_ZOOM:
+            return 0.0, 0.5, None
+    finder = finder or tracking.Faces(w, h)
+    faces = [f for f in finder.find(frame, gray) if f[2] >= w * 0.04 and f[1] + f[3] <= keep * h]
+    biggest = max((f[2] for f in faces), default=0)
+    faces = [f for f in faces if f[2] >= biggest * tracking.BACKGROUND_FACE]
+    view = (COVER_W / COVER_H) / (w / (h * keep))          # share of the width the vertical crop keeps
+    cx = 0.5
+    if faces:
+        lo, hi = min(f[0] for f in faces) / w, max(f[0] + f[2] for f in faces) / w
+        big = max(faces, key=lambda f: f[2])
+        cx = (lo + hi) / 2 if hi - lo <= view * 0.9 else (big[0] + big[2] / 2) / w
+    cw = int(w * view)
+    x0 = int(max(0, min(w - cw, cx * w - cw / 2)))
+    part = gray[:int(h * keep), x0:x0 + cw]
+    sharp = min(1.0, float(cv2.Laplacian(part, cv2.CV_64F).var()) / 400)
+    if faces:                                              # the face itself must be in focus
+        fx, fy, fw, fh = (int(max(0, v)) for v in big[:4])
+        face_px = gray[fy:fy + fh, fx:fx + fw]
+        if face_px.size:
+            sharp = min(sharp, min(1.0, float(cv2.Laplacian(face_px, cv2.CV_64F).var()) / 150))
+    light = float(part.mean())
+    size = biggest / w / view                              # face width as a share of the thumbnail
+    score = (min(size, 0.45) * 10 + 2 if faces else 0) + sharp * 3 - (1.5 if light < 45 else 0) - (1 - keep) * 4
+    return score, cx, keep
+
+
+def best_cover(src, times, pre):
+    """(time, subject x, keep) of the best moment; keep None when every moment had subtitles that won't crop out."""
+    try:
         import tracking
         tracking.get_model()
-        w = tracking.SAMPLE_W
-        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{at:.2f}", "-i", str(src), "-frames:v", "1",
-               "-an", "-sn", "-vf", f"{pre}scale={w}:-2,format=bgr24", "-f", "rawvideo", "-"]
-        data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
-        h = len(data) // (w * 3)
-        faces = tracking.detections(np.frombuffer(data[:h * w * 3], dtype=np.uint8).reshape(1, h, w, 3))[0][0]
     except Exception:
-        return 0.5
-    if not faces:
-        return 0.5
-    view = (COVER_W / COVER_H) / (w / max(h, 1))          # share of the width the vertical crop keeps
-    lo, hi = min(f[0] - f[1] / 2 for f in faces), max(f[0] + f[1] / 2 for f in faces)
-    if hi - lo <= view * 0.9:                              # everyone fits: frame them all
-        return (lo + hi) / 2
-    return max(faces, key=lambda f: f[1])[0]               # else the biggest face
+        return None
+    best = fallback = None
+    finder = None
+    for t in times:
+        frame = look_at(src, t, pre)
+        if frame is None:
+            continue
+        try:
+            if finder is None:
+                finder = tracking.Faces(frame.shape[1], frame.shape[0])
+            score, cx, keep = rate_cover(frame, finder)
+        except Exception:
+            continue
+        if keep is not None and (best is None or score > best[0]):
+            best = (score, t, cx, keep)
+        if fallback is None:
+            fallback = (score, t, cx, None)
+    pick = best or fallback
+    return None if pick is None else pick[1:]
 
 
 def badge_layer(text, workdir):
@@ -1959,17 +2016,26 @@ def make_cover(video, number, title, out, workdir, src=None, info=None, badge=No
     """
     import numpy as np
     workdir = Path(workdir)
-    at = cover_moment(info, video) if src else None
-    if at is None:
-        src, at, pre = video, max(0.0, P.duration(video) * 0.3), ""
-    else:
-        clean = clean_moment(src, at)
-        at, pre = (clean, P.CROP["filter"]) if clean is not None else (at, f"{P.CROP['filter']}{hide_old_subtitles(src)}")
+    times = cover_times(info, video) if src else []
+    if not times:
+        src = video
+        length = P.duration(video)
+        times = [length * k / 12 for k in range(1, 12)]
     src = Path(src).resolve()
-    cx = min(1.0, max(0.0, subject_x(src, at, pre)))
-    # the crop's left edge: centre on cx, kept inside the picture
-    crop = (f"{pre}scale={COVER_W}:{COVER_H}:force_original_aspect_ratio=increase:flags=lanczos,"
-            f"crop={COVER_W}:{COVER_H}:'max(0,min(iw-{COVER_W},iw*{cx:.4f}-{COVER_W // 2}))':'(ih-{COVER_H})/2',format=rgb24")
+    movie = src != Path(video).resolve()
+    pre = P.CROP["filter"] if movie else ""
+    picked = best_cover(src, times, pre)
+    at, cx, keep = picked if picked else (times[len(times) // 3], 0.5, 1.0)
+    if keep is None:                     # every moment had subtitles that won't crop out: blur them at least
+        keep = 1.0
+        if movie:
+            pre = f"{pre}{hide_old_subtitles(src)}"
+    cx = min(1.0, max(0.0, cx))
+    tall = int(COVER_H / keep) // 2 * 2  # zoomed in just enough that the subtitles fall below the picture
+    crop = (f"{pre}scale=-2:{tall}:flags=lanczos,scale='max(iw,{COVER_W})':-2:flags=lanczos,"
+            f"crop={COVER_W}:{COVER_H}:'max(0,min(iw-{COVER_W},iw*{cx:.4f}-{COVER_W // 2}))':"
+            f"'max(0,min(ih-{COVER_H},ih*{keep:.4f}-{COVER_H}))',"
+            "unsharp=5:5:0.7:5:5:0,format=rgb24")
     data = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{at:.2f}", "-i", str(src),
                            "-frames:v", "1", "-an", "-sn", "-vf", crop, "-f", "rawvideo", "-"],
                           capture_output=True, check=True, cwd=workdir, timeout=120).stdout

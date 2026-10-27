@@ -104,6 +104,11 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(story.badge_text(2, "Ep {n}"), "EP 2")
         self.assertEqual(story.badge_text(4, "Finale {x}"), "FINALE {X}")
 
+    def test_cover_times_follow_the_beats(self):
+        self.assertEqual(story.cover_times({"beats": [{"say": "a", "at": 10}]}, None), [10.6, 11.8, 13.2])
+        self.assertEqual(len(story.cover_times({"beats": [{"at": t} for t in range(100)]}, None)), story.COVER_TRIES)
+        self.assertEqual(story.cover_times({}, None), [])
+
     def test_cover_moment_is_a_third_into_the_part(self):
         info = {"beats": [{"say": "a", "at": 10}, {"say": "b", "at": 20}, {"keep": 30, "until": 35}]}
         self.assertEqual(story.cover_moment(info, None), 21.0)
