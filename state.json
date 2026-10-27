@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T19:19:52+13:00",
+ "updated": "2026-10-27T19:19:55+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -3957,6 +3957,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T19:19:54+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Predestination (2014): Highlight 3 of 5 ready",
+   "message": "Highlight 3: 54:39 to 58:04 (205s)  interest score 62/100\nIn Ready to post/Predestination (2014)/Highlights."
+  },
+  {
    "at": "2026-10-27T19:12:54+13:00",
    "type": "part_ready",
    "title": "[Highlights] Predestination (2014): Highlight 2 of 5 ready",
@@ -5149,12 +5155,6 @@
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 1 of 5 ready",
    "message": "Highlight 1: 11:20 to 14:58 (218s)  interest score 63/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nwhy is nobody talking about this 🤨\nHighlight 1 🎬 · Highlight 2 is even more unhinged 👀\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-18T00:20:27+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Toy Story 5 (2026): Part 5 of 5 ready",
-   "message": "Part 5: 39:30 to 42:41 (191s)\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Best stretch).\n\n📝 Caption:\nred flag? that's the whole parade 🚩\nPart 5 🎬 · the ending. no words. just 🫠\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
