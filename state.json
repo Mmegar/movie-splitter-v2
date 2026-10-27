@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-27T23:02:10+13:00",
+ "updated": "2026-10-27T23:02:13+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T22:08:21+13:00",
   "movie": "Fall (2022)",
-  "mode": "recap",
+  "mode": "stretch",
   "stage": "rendering",
-  "part": 4,
-  "parts_total": 4
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -4086,6 +4086,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T23:02:13+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Fall (2022): Part 4 of 4 ready",
+   "message": "Part 4: The Tattoo That Told a Secret (34 narrated beats, about 154s of voice)\nIn Ready to post/Fall (2022)/Movie recap."
+  },
+  {
    "at": "2026-10-27T22:48:53+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Fall (2022): Part 3 of 4 ready",
@@ -5278,12 +5284,6 @@
    "type": "part_ready",
    "title": "[Hype edit] Runner (2026): Edit 1 of 1 ready",
    "message": "Edit 1: Side Character: setup 1:32:48, payoff 1:33:10, 12 montage shots\nOn its way to the laptop (Ready to post/Runner (2026)/Hype edit).\n\n📝 Caption:\nThis deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
-  },
-  {
-   "at": "2026-10-21T17:00:28+13:00",
-   "type": "planned",
-   "title": "[Hype edit] Runner (2026): 1 part planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Runner (2026)/Hype edit as they're made."
   }
  ]
 }
