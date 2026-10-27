@@ -1429,41 +1429,96 @@ def music_list():
         return []
 
 
-MUSIC_FOLDERS = {"hype": "hype", "story": "calm", "calm": "calm"}   # assets/music/<folder>: songs of that kind
+# Your own songs go in folders named after the category, e.g. assets/music/recap-story, assets/music/hype,
+# assets/music/highlight (in assets/music, in a "Music" folder next to "Ready to post", or MUSIC_FOLDER).
+# A folder's name decides its kind by the words in it:
+FOLDER_KINDS = [("hype", ("hype", "phonk", "edit")), ("character", ("character",)),
+                ("highlight", ("highlight", "clip", "stretch")),
+                ("recap", ("recap", "story", "narrat", "calm"))]
+# what each kind falls back to when it has no songs of its own ("calm" = the free tracks in tracks.json)
+MUSIC_FALLBACK = {"recap": ["recap", "calm", "any"], "calm": ["recap", "calm", "any"],
+                  "character": ["character", "recap", "calm", "any"],
+                  "hype": ["hype", "any"], "highlight": ["highlight"]}
+MUSIC_ROOTS = []   # more places to look for song folders (process.py adds the laptop's output folder/Music)
+
+
+def folder_kind(name):
+    n = name.lower()
+    for kind, words in FOLDER_KINDS:
+        if any(w in n for w in words):
+            return kind
+    return "any"
+
+
+def music_roots():
+    roots = [MUSIC_DIR] + [Path(r) for r in MUSIC_ROOTS]
+    if os.environ.get("MUSIC_FOLDER"):
+        roots.append(Path(os.environ["MUSIC_FOLDER"]))
+    out = []
+    for r in roots:
+        if r.is_dir() and r.resolve() not in [o.resolve() for o in out]:
+            out.append(r)
+    return out
 
 
 def available_music():
-    """[(file, credit line, kind)] for every song on this computer: the listed ones that were downloaded,
-    any you dropped into assets/music yourself (kind "any", no credit line), and the ones in
-    assets/music/hype (montages) and assets/music/story (under the narrator)."""
-    if not MUSIC_DIR.is_dir():
-        return []
+    """[(file, credit line, kind)] for every song on this computer: the listed ones that were downloaded
+    (their kind from tracks.json), songs loose in a music folder (kind "any", no credit line), and songs in
+    a sub-folder named after a category (see FOLDER_KINDS), up to two folders deep."""
     listed = {t["file"]: t for t in music_list() if t.get("file")}
     out = []
-    for f in sorted(MUSIC_DIR.iterdir()):
-        if f.suffix.lower() in AUDIO_EXT:
-            t = listed.get(f.name, {})
-            out.append((f, t.get("credit", ""), t.get("kind", "any")))
-    for folder, kind in MUSIC_FOLDERS.items():
-        d = MUSIC_DIR / folder
-        if d.is_dir():
-            out += [(f, "", kind) for f in sorted(d.iterdir()) if f.suffix.lower() in AUDIO_EXT]
+    for root in music_roots():
+        for f in sorted(root.rglob("*")):
+            rel = f.relative_to(root).parts
+            if f.suffix.lower() not in AUDIO_EXT or len(rel) > 3:
+                continue
+            if len(rel) == 1:
+                t = listed.get(f.name, {}) if root == MUSIC_DIR else {}
+                out.append((f, t.get("credit", ""), t.get("kind", "any")))
+            else:
+                kind = next((k for k in map(folder_kind, reversed(rel[:-1])) if k != "any"), "any")
+                out.append((f, "", kind))
     return out
 
 
 def pick_music(kind, seed=None):
-    """A song for this part: "calm" under narration, "hype" for montages (or one of yours), or None.
+    """A song for this part from its category's folder (see MUSIC_FALLBACK), or None.
     Remembers its credit line for the caption (see last_credit)."""
     _CREDIT["last"] = None
     if not MUSIC:
         return None
     songs = available_music()
-    fits = [s for s in songs if s[2] in (kind, "any")] or songs
-    if not fits:
-        return None
-    f, credit, _ = random.Random(seed).choice(fits)
-    _CREDIT["last"] = credit or None
-    return f
+    for k in MUSIC_FALLBACK.get(kind, [kind, "any"]):
+        fits = [s for s in songs if s[2] == k]
+        if fits:
+            f, credit, _ = random.Random(seed).choice(fits)
+            _CREDIT["last"] = credit or None
+            print(f"  music ({kind}): {f.parent.name}/{f.name}", flush=True)
+            return f
+    if kind != "highlight":
+        where = ", ".join(str(r) for r in music_roots()) or str(MUSIC_DIR)
+        print(f"  (no {kind} music found: put songs in a '{kind}' folder in {where})", flush=True)
+    return None
+
+
+def music_under(video, music, workdir, lufs=-30):
+    """Adds a song quietly under a finished clip's own sound (ducked while people talk); the picture is kept."""
+    video = Path(video).resolve()
+    tmp = video.with_name(video.stem + ".music" + video.suffix)
+    length = P.duration(video)
+    graph = (f"[1:a]loudnorm=I={lufs}:TP=-8:LRA=11,aresample=48000,afade=t=in:d=1.5,"
+             f"afade=t=out:st={max(0.0, length - 2):.2f}:d=2[mu0];[0:a]asplit=2[vo][key];"
+             "[mu0][key]sidechaincompress=threshold=0.015:ratio=8:attack=20:release=450[mu];"
+             "[vo][mu]amix=inputs=2:duration=first:normalize=0[a]")
+    try:
+        P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(video), "-stream_loop", "-1",
+               "-i", str(Path(music).resolve()), "-filter_complex", graph, "-map", "0:v", "-map", "[a]",
+               "-c:v", "copy", *P.HD_AUDIO, "-t", f"{length:.3f}", "-map_chapters", "-1", "-movflags", "+faststart",
+               str(tmp)], cwd=workdir)
+        os.replace(tmp, video)
+    except Exception as e:
+        tmp.unlink(missing_ok=True)
+        print(f"  (couldn't add the music: {e})", flush=True)
 
 
 def last_credit():
@@ -1570,7 +1625,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
         Path(f).unlink(missing_ok=True)
 
 
-def render_story(src, number, info, cues, out, workdir, total):
+def render_story(src, number, info, cues, out, workdir, total, mode="recap"):
     """A narrated part (Movie recap / Character story). Returns the narration lines (for captions)."""
     segs, said = [], []
     last_end = None          # where the previous piece's footage ended: a big jump gets a dip from black
@@ -1601,7 +1656,7 @@ def render_story(src, number, info, cues, out, workdir, total):
                            bridge=jump, ending=end_of_part)
             last_end = beat["until"]
         segs.append(seg)
-    finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music("calm", number), loud=fast())
+    finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music(MUSIC_KIND.get(mode, "recap"), number), loud=fast())
     return said
 
 
@@ -1750,11 +1805,14 @@ def make_pack(mode, src, number, info, out, workdir, total):
     return said
 
 
+MUSIC_KIND = {"recap": "recap", "character": "character", "hype": "hype"}
+
+
 def render(mode, src, number, info, cues, out, workdir, total):
     """Makes one part of a storytelling mode. Returns lines for its caption quote."""
     if mode == "hype":
         return render_hype(src, number, info, cues, out, workdir, total)
-    return render_story(src, number, info, cues, out, workdir, total)
+    return render_story(src, number, info, cues, out, workdir, total, mode)
 
 
 def cover_moment(info, video):

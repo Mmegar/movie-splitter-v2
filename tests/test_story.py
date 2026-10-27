@@ -127,15 +127,18 @@ class StoryTest(unittest.TestCase):
         import tempfile
         from pathlib import Path
         d = Path(tempfile.mkdtemp())
-        (d / "hype").mkdir()
-        (d / "story").mkdir()
-        (d / "hype" / "RAVE.mp3").write_bytes(b"x")
-        (d / "story" / "pa.mp3").write_bytes(b"x")
+        for folder, song in [("hype", "RAVE.mp3"), ("recap-story", "pa.mp3"), ("Highlight", "clip.mp3")]:
+            (d / folder).mkdir()
+            (d / folder / song).write_bytes(b"x")
         old = story.MUSIC_DIR
         try:
             story.MUSIC_DIR = d
             self.assertEqual(story.pick_music("hype", 1).name, "RAVE.mp3")
-            self.assertEqual(story.pick_music("calm", 1).name, "pa.mp3")
+            self.assertEqual(story.pick_music("recap", 1).name, "pa.mp3")
+            self.assertEqual(story.pick_music("character", 1).name, "pa.mp3")    # no character folder: recap's
+            self.assertEqual(story.pick_music("highlight", 1).name, "clip.mp3")
+            (d / "Highlight" / "clip.mp3").unlink()
+            self.assertIsNone(story.pick_music("highlight", 1))                 # clips only get their own folder
         finally:
             story.MUSIC_DIR = old
 
