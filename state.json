@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T10:02:00+13:00",
+ "updated": "2026-10-28T10:17:02+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 7,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 139.0,
+       "end": 568.0,
+       "seconds": 144.1,
+       "drive_path": "Ready to post/Elysium (2013)/Movie recap/Elysium (2013) - Part 01.mp4",
+       "caption": "A boy who dreams of a perfect city in the sky 🚀 Years later, a small mistake at a checkpoint changes everything.\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "elysium-2013/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "elysium-2013/recap-01-cover.bin"
+      }
+     ]
     },
     "stretch": {
      "label": "Best stretch",
