@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T01:03:36+07:00",
+ "updated": "2026-10-28T01:05:52+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -178,6 +178,10 @@
   "mvqznu3t5v6a": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mvqzxu2ukvr6": {
+   "status": "done",
+   "note": "Already cutting Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv"
   }
  },
  "commands_done": [
@@ -317,7 +321,8 @@
   "mvqlkz44784p",
   "mvqlneqyph0k",
   "mvqznqzpcwfx",
-  "mvqznu3t5v6a"
+  "mvqznu3t5v6a",
+  "mvqzxu2ukvr6"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
