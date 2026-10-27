@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T00:36:32+13:00",
+ "updated": "2026-10-28T00:36:35+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "fall-2022",
    "name": "Fall (2022)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-27T22:08:23+13:00",
-   "finished": null,
+   "finished": "2026-10-28T00:36:35+13:00",
    "duration": 6144.7,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -4255,6 +4255,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T00:36:34+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Fall (2022): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 1:32:51 to 1:36:24 (214s)  interest score 57/100\nIn Ready to post/Fall (2022)/Highlights."
+  },
+  {
    "at": "2026-10-28T00:28:47+13:00",
    "type": "part_ready",
    "title": "[Highlights] Fall (2022): Highlight 4 of 5 ready",
@@ -5447,12 +5453,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 1 of 2 ready",
    "message": "Part 1: Dimensional Drift and a Twisted Game (23 narrated beats, about 166s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nPlot twist incoming 🌀\nPart 1 🎬 · Part 2 is up next 👀\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
-  },
-  {
-   "at": "2026-10-21T21:17:32+13:00",
-   "type": "planned",
-   "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): 1 part planned",
-   "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit as they're made."
   }
  ]
 }
