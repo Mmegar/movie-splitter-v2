@@ -31,7 +31,7 @@ DEFAULTS = {
     "script_direction": "",              # free text for the script writer, e.g. "roast the villain, more Gen Z slang"
     "narrator_engine": "chatterbox",     # chatterbox = expressive funny/intense delivery (free online model), edge = standard
     "narrator_intensity": 0.9,           # how expressive the narrator is: 0.5 calm ... 1.0 wild (every voice, each line by its mood)
-    "recap_part_seconds": 90,            # Movie recap / Character story: length of each narrated part
+    "recap_part_seconds": 180,           # Movie recap / Character story: length of each narrated part (60 to 300)
     "recap_parts": 0,                    # 0 = automatic (3 to 8 parts, by movie length)
     "music": True,                       # background music from assets/music (royalty-free tracks you add)
     "music_volume": 0.12,                # under the narration (hype montages play the song at full volume)

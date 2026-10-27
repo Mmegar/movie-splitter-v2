@@ -176,7 +176,7 @@ function buildForm(d) {
       `<a class="row" href="#/memory"><span class="row-main"><span class="row-title">Character, narrator notes and Funny dial</span><span class="row-sub">${esc(d.character ? `Following ${d.character}` : 'Following the main character')} · in Memory</span></span>${icon('chevR', 'row-chev')}</a>`,
       narrated ? segRow({ ...d, recap_style: d.recap_style || 'fast' }, 'recap_style', 'Recap style', [['fast', 'Fast storyteller'], ['chatty', 'Chatty']],
         (d.recap_style || 'fast') === 'fast' ? 'Like the big recap channels: the story told straight in the third person, a quick cut every second or so, one big word on screen at a time, loud and non-stop.' : 'Talks to the viewer, jokes (Funny dial), pauses, a welcome intro and a sign-off.') : '',
-      narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
+      narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 180, min: 60, max: 300, step: 15, sub: 'Every part runs 1 to 5 minutes (a little over to end on a cliffhanger): short ones are joined, long ones split' }) : '',
       narrated ? voiceRow(d) : '',
       narrated ? sliderRow({ narrator_intensity: 0.9, ...d }, 'narrator_intensity', 'Expressiveness', { min: 0.5, max: 1.2, step: 0.05, ends: ['Calm', 'Wild'], sub: 'Every voice: each line is read in its mood (tense, shocked, whispered, hyped…), and this sets how far it goes.' }) : '',
       narrated ? segRow(d, 'narrator_tempo', 'Narrator speed', [['1.2', '1.2x'], ['1', '1x'], ['1.1', '1.1x'], ['1.3', '1.3x'], ['1.5', '1.5x']]) : '',
