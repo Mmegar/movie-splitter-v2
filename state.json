@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:37:59+13:00",
+ "updated": "2026-10-28T08:38:02+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
   "started": "2026-10-28T08:25:28+13:00",
   "movie": null,
-  "mode": "recap",
+  "mode": "stretch",
   "stage": "rendering",
-  "part": 6,
-  "parts_total": 6
+  "part": 1,
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -4380,6 +4380,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T08:38:01+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Blink Twice (2024): Part 6 of 6 ready",
+   "message": "Part 6: The Villa Showdown (31 narrated beats, about 172s of voice)\nIn Ready to post/Blink Twice (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-28T08:25:51+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Blink Twice (2024): Part 5 of 6 ready",
@@ -5572,12 +5578,6 @@
    "type": "info",
    "title": "[Movie recap] Skipped for Runner (2026)",
    "message": "No narration: add the ANTHROPIC_API_KEY secret on GitHub."
-  },
-  {
-   "at": "2026-10-22T00:58:01+13:00",
-   "type": "started",
-   "title": "Started: Runner (2026)",
-   "message": "Making: Movie recap, Character story, Hype edit.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Runner (2026)'."
   }
  ]
 }
