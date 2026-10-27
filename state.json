@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T10:17:05+13:00",
+ "updated": "2026-10-28T10:34:04+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -43,6 +43,22 @@
         "error": null
        },
        "cover": "elysium-2013/recap-01-cover.bin"
+      },
+      {
+       "n": 2,
+       "start": 570.0,
+       "end": 1147.0,
+       "seconds": 189.3,
+       "drive_path": "Ready to post/Elysium (2013)/Movie recap/Elysium (2013) - Part 02.mp4",
+       "caption": "A robot parole officer with a very bad feeling about Max 🤖 Then a hacker plans a risky launch.\nPart 2 🎬 · Should I post Part 3? 👇\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "elysium-2013/recap-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "elysium-2013/recap-02-cover.bin"
       }
      ]
     },
