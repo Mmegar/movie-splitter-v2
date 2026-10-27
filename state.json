@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:46:18+13:00",
+ "updated": "2026-10-28T09:46:20+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -4532,6 +4532,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T09:46:20+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Blink Twice (2024)",
+   "message": "Movie recap: 6 parts, Best stretch: 5 parts, Highlights: 5 parts.\nIn Ready to post/Blink Twice (2024)."
+  },
+  {
    "at": "2026-10-28T09:46:17+13:00",
    "type": "part_ready",
    "title": "[Highlights] Blink Twice (2024): Highlight 5 of 5 ready",
@@ -5724,12 +5730,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 3 of 5 ready",
    "message": "Part 3: Chased Through a Tunnel (6 narrated beats, about 58s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T02:40:27+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Runner (2026): Part 2 of 5 ready",
-   "message": "Part 2: The Liver and the Talkative Courier (6 narrated beats, about 61s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
   }
  ]
 }
