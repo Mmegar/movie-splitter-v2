@@ -1,18 +1,51 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:08:21+13:00",
+ "updated": "2026-10-27T22:08:30+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T22:08:21+13:00",
-  "movie": null,
+  "movie": "Fall (2022)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "fall-2022",
+   "name": "Fall (2022)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-27T22:08:23+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "hype": {
+     "label": "Hype edit",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "predestination-2014",
    "name": "Predestination (2014)",
@@ -3988,6 +4021,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T22:08:23+13:00",
+   "type": "started",
+   "title": "Started: Fall (2022)",
+   "message": "Cutting on the laptop: Movie recap, Best stretch, Hype edit, Highlights. Parts go into 'Ready to post/Fall (2022)'."
+  },
+  {
    "at": "2026-10-27T19:35:59+13:00",
    "type": "finished",
    "title": "✅ Finished: Predestination (2014)",
@@ -5180,12 +5219,6 @@
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 5 of 5 ready",
    "message": "Highlight 5: 1:17:51 to 1:21:25 (214s)  interest score 63/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nHighlight 5 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-18T00:36:37+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Toy Story 5 (2026): Highlight 4 of 5 ready",
-   "message": "Highlight 4: 54:36 to 58:27 (232s)  interest score 61/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'Enough with the silly games. Where’s Jessie and Bullseye?' 🫠\nHighlight 4 🎬 · Highlight 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
