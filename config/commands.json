@@ -97,6 +97,14 @@
    "movie_id": "fall-2022",
    "mode": "recap",
    "n": 2
+  },
+  {
+   "id": "mvql6f0j751z",
+   "at": "2026-10-27T11:12:34.437Z",
+   "type": "share_part",
+   "movie_id": "fall-2022",
+   "mode": "stretch",
+   "n": 2
   }
  ]
 }
