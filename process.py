@@ -119,14 +119,24 @@ VIDEO_QUALITY = int(float(os.environ.get("VIDEO_QUALITY", "18")))   # x264 CRF: 
 HD_PRESET = os.environ.get("HD_PRESET", "medium")
 
 
-def hd_video(crf=None):
+TIKTOK_MAX_MB = 270       # TikTok's phone app takes files up to ~287 MB; bigger ones get squeezed harder or refused
+
+
+def hd_video(crf=None, length=None):
     """x264 settings for a finished part, so TikTok keeps it HD when it's uploaded from a phone: 1080x1920
-    at a steady 30 fps, H.264 High 4.2, 8-bit 4:2:0 tagged BT.709, a keyframe every 2 seconds, and a bitrate
-    cap (10 Mbps) that keeps detail without making files too big to send to the phone."""
-    return ["-r", "30", "-c:v", "libx264", "-preset", HD_PRESET, "-crf", str(VIDEO_QUALITY if crf is None else crf),
-            "-profile:v", "high", "-level:v", "4.2", "-pix_fmt", "yuv420p", "-maxrate", "10M", "-bufsize", "20M",
-            "-g", "60", "-keyint_min", "30", "-colorspace", "bt709", "-color_primaries", "bt709",
-            "-color_trc", "bt709", "-color_range", "tv"]
+    at a steady 30 fps, H.264 High 4.2, 8-bit 4:2:0 tagged BT.709, a keyframe every 2 seconds.
+    tune=film and aq-mode=3 keep detail in dark scenes (mystery movies are full of them), which is what
+    TikTok's own re-encode smears into blocks first. The bitrate cap is 16 Mbps for short parts, eased
+    down (never below 10) for long ones (length in seconds) to keep files near what TikTok's app takes."""
+    cap = 16.0
+    if length:
+        cap = max(10.0, min(cap, TIKTOK_MAX_MB * 8 / float(length) - 0.25))
+    return ["-r", "30", "-c:v", "libx264", "-preset", HD_PRESET, "-tune", "film",
+            "-crf", str(VIDEO_QUALITY if crf is None else crf), "-x264-params", "aq-mode=3",
+            "-profile:v", "high", "-level:v", "4.2", "-pix_fmt", "yuv420p",
+            "-maxrate", f"{cap:.1f}M", "-bufsize", f"{2 * cap:.1f}M",
+            "-g", "60", "-keyint_min", "30", "-sws_flags", "lanczos+accurate_rnd",
+            "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv"]
 
 
 HD_AUDIO = ["-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "192k"]   # AAC-LC 48 kHz stereo
@@ -1096,8 +1106,10 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         track = tracking.plan(src, start, end - start, CROP["filter"], W, H, workdir)
         first = flip_filter(src, start, end).replace("[0:v]", f"[0:v]{CROP['filter']}{track}{story.grade()}", 1)
         filters = (
-            f"{first}scale={tracking.BAND_W}:{tracking.BAND_H},setsar=1,"
-            "eq=contrast=1.08:saturation=1.3:brightness=0.01,unsharp=5:5:0.5,"
+            f"{first}scale={tracking.BAND_W}:{tracking.BAND_H}:flags=lanczos,setsar=1,"
+            "eq=contrast=1.08:saturation=1.3:brightness=0.01,"
+            # vivid already sharpens; sharpening twice leaves halos that TikTok's re-encode turns into mush
+            f"{'' if story.FILTER == 'vivid' else 'unsharp=5:5:0.5,'}"
             f"pad=1080:1920:0:{tracking.BAND_TOP}:black"
         )
     else:
@@ -1138,7 +1150,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         "-ss", f"{start:.3f}", "-t", f"{end - start:.3f}", "-i", str(src.resolve()),
         *extra_inputs,
         *graph_args(filters, workdir), "-map", "[v]", "-map", "0:a:0?",
-        *hd_video(), *HD_AUDIO,
+        *hd_video(length=end - start), *HD_AUDIO,
         "-map_chapters", "-1",            # the movie's chapter list made every part look movie-length
         "-movflags", "+faststart",
         str(out_path.resolve()),
