@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T13:34:38+07:00",
+ "updated": "2026-10-27T13:36:05+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -139,6 +139,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
+  {
+   "name": "Predestination.2014.1080p.BluRay.x264.YIFY.mp4",
+   "size_mb": 1550,
+   "modified": "2026-10-23T09:00:40+07:00",
+   "folder": "done"
+  },
   {
    "name": "Heretic.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2203,
@@ -294,6 +300,7 @@
   "once-upon-a-time-in-the-middle-east-2026",
   "one-last-shot-2026",
   "pirates-of-the-caribbean-at-worlds-end-2007",
+  "predestination-2014",
   "runner-2026",
   "speak-no-evil-2024",
   "spider-man-across-the-spider-verse-2023",
