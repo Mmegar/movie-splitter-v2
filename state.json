@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-27T23:51:19+13:00",
+ "updated": "2026-10-27T23:51:22+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T22:08:21+13:00",
   "movie": "Fall (2022)",
-  "mode": "hype",
+  "mode": "highlights",
   "stage": "rendering",
   "part": 1,
-  "parts_total": 1
+  "parts_total": 5
  },
  "queue": [],
  "movies": [
@@ -4179,6 +4179,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T23:51:22+13:00",
+   "type": "part_ready",
+   "title": "[Hype edit] Fall (2022): Edit 1 of 1 ready",
+   "message": "Edit 1: Shiloh: setup 26:40, payoff 1:04:10, 8 montage shots\nIn Ready to post/Fall (2022)/Hype edit."
+  },
+  {
    "at": "2026-10-27T23:45:17+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Fall (2022): Part 5 of 5 ready",
@@ -5371,12 +5377,6 @@
    "type": "started",
    "title": "▶️ Carrying on: Spider-Man Across The Spider-Verse (2023)",
    "message": "0 parts were already made before it stopped; making the rest."
-  },
-  {
-   "at": "2026-10-21T17:32:03+13:00",
-   "type": "paused",
-   "title": "⏸ Paused: Spider-Man Across The Spider-Verse (2023)",
-   "message": "0 parts made so far. It carries on from the next part when you switch Pause off."
   }
  ]
 }
