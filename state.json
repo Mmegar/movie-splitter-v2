@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:40:14+13:00",
+ "updated": "2026-10-28T09:40:17+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "highlights",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -4517,6 +4517,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T09:40:17+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Blink Twice (2024): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 35:39 to 40:34 (296s)  interest score 56/100\nIn Ready to post/Blink Twice (2024)/Highlights."
+  },
+  {
    "at": "2026-10-28T09:31:49+13:00",
    "type": "part_ready",
    "title": "[Highlights] Blink Twice (2024): Highlight 3 of 5 ready",
@@ -5709,12 +5715,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 1 of 5 ready",
    "message": "Part 1: A Fixer's Impossible Errands (6 narrated beats, about 77s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T02:36:33+13:00",
-   "type": "planned",
-   "title": "[Character story] Runner (2026): 5 parts planned",
-   "message": "Runner (2026)\nMode: Character story\n\nPart 1: A Sober Man's Last Job (10 narrated beats, about 85s of voice)\nPart 2: A Child's Life on the Line (8 narrated beats, about 67s of voice)\nPart 3: Ben Bishop Doesn't Make It (8 narrated beats, about 63s of voice)\nPart 4: Countdown in the Hospital (9 narrated beats, about 64s of voice)\nPart 5: A Quiet Ending in Paris (8 narrated beats, about 62s of voice)\n"
   }
  ]
 }
