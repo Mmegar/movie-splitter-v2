@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T00:08:32+13:00",
+ "updated": "2026-10-28T00:08:36+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Fall (2022)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -4210,6 +4210,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T00:08:35+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Fall (2022): Highlight 2 of 5 ready",
+   "message": "Highlight 2: 28:27 to 31:53 (206s)  interest score 64/100\nIn Ready to post/Fall (2022)/Highlights."
+  },
+  {
    "at": "2026-10-27T23:58:45+13:00",
    "type": "part_ready",
    "title": "[Highlights] Fall (2022): Highlight 1 of 5 ready",
@@ -5402,12 +5408,6 @@
    "type": "planned",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): 2 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap as they're made."
-  },
-  {
-   "at": "2026-10-21T21:01:33+13:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Runner (2026): Part 1",
-   "message": "[Hype edit] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nThis deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movie #movieclips"
   }
  ]
 }
