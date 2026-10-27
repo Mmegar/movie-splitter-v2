@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T08:33:19+07:00",
+ "updated": "2026-10-27T08:36:51+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -162,6 +162,12 @@
    "size_mb": 3302,
    "modified": "2026-10-23T08:21:59+07:00",
    "folder": "done"
+  },
+  {
+   "name": "Predestination.2014.1080p.BluRay.x264.YIFY.mp4",
+   "size_mb": 1550,
+   "modified": "2026-10-23T09:00:40+07:00",
+   "folder": "failed"
   }
  ],
  "commands": {
