@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T17:29:26+07:00",
+ "updated": "2026-10-27T17:34:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -181,6 +181,10 @@
   "mvqhjzis9x5z": {
    "status": "done",
    "note": "Moved to your Movies folder"
+  },
+  "mvqjq5kqispe": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/fall-2022/recap-002.bin"
   }
  },
  "commands_done": [
@@ -309,7 +313,8 @@
   "mvqgmcg80q15",
   "mvqgn286rfhm",
   "mvqhjydob1i5",
-  "mvqhjzis9x5z"
+  "mvqhjzis9x5z",
+  "mvqjq5kqispe"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
@@ -340,7 +345,8 @@
   "share/runner-2026/recap-004.bin",
   "share/runner-2026/recap-005.bin",
   "share/predestination-2014/highlights-004.bin",
-  "share/predestination-2014/highlights-005.bin"
+  "share/predestination-2014/highlights-005.bin",
+  "share/fall-2022/recap-002.bin"
  ],
  "version": 2
 }
