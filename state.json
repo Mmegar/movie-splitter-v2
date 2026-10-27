@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:11:44+13:00",
+ "updated": "2026-10-27T18:11:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 8
  },
  "queue": [],
@@ -3799,6 +3799,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T18:11:47+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 1 of 8 ready",
+   "message": "Part 1: The Basement Bomb Burns Him (14 narrated beats, about 79s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T18:06:27+13:00",
    "type": "planned",
    "title": "[Highlights] Predestination (2014): 5 parts planned",
@@ -4991,12 +4997,6 @@
    "type": "finished",
    "title": "✅ Finished: Runner (2026)",
    "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Runner (2026). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-17T23:53:24+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Runner (2026): Highlight 5 of 5 ready",
-   "message": "Highlight 5: 1:13:29 to 1:17:14 (224s)  interest score 64/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\n'How many does Ellie have?' 💀 I can't\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
   }
  ]
 }
