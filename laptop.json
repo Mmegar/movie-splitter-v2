@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T00:58:08+07:00",
+ "updated": "2026-10-28T00:58:10+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -110,14 +110,17 @@
    "sending": false,
    "style": "zoom",
    "character": ""
-  }
- ],
- "library": [
+  },
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
    "size_mb": 2633,
-   "modified": "2026-10-23T09:02:49+07:00"
-  },
+   "modified": "2026-10-23T09:02:49+07:00",
+   "sending": false,
+   "style": "zoom",
+   "character": ""
+  }
+ ],
+ "library": [
   {
    "name": "Upgrade.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
    "size_mb": 1721,
@@ -175,6 +178,10 @@
  ],
  "commands": {
   "mvqznqzpcwfx": {
+   "status": "done",
+   "note": "Moved to To edit"
+  },
+  "mvqznu3t5v6a": {
    "status": "done",
    "note": "Moved to To edit"
   }
@@ -315,7 +322,8 @@
   "mvqlfnixcvgc",
   "mvqlkz44784p",
   "mvqlneqyph0k",
-  "mvqznqzpcwfx"
+  "mvqznqzpcwfx",
+  "mvqznu3t5v6a"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
