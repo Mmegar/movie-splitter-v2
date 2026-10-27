@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:06:56+13:00",
+ "updated": "2026-10-28T07:06:59+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-28T07:03:47+13:00",
   "movie": "Blink Twice (2024)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
