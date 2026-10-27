@@ -84,10 +84,54 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(len(beats), 1)                                     # no silent original moment
         self.assertNotIn("joke", beats[0])                                  # and no joke pause
 
-    def test_fast_style_has_jump_cuts_and_one_word_captions(self):
-        self.assertAlmostEqual(story.jump_span(1.4), 2.2)
+    def test_fast_style_has_one_word_captions(self):
         self.assertEqual([c[2] for c in story.chunks([(0, .2, "The"), (.2, .4, "boy"), (.4, .7, "ran.")], 1, 40)],
                          ["The", "boy", "ran."])
+
+    def test_a_part_is_read_in_one_voice(self):
+        import tempfile
+        from pathlib import Path
+        calls = []
+        old = story.speak_chatterbox, story.speak_edge, story.faster, story.VOICE_ENGINE, dict(story._CHATTER)
+        FakeP.checkpoint = staticmethod(lambda: None)
+
+        def chatter(text, mp3, mood):
+            if text == "two":
+                raise RuntimeError("busy")
+            calls.append(("chatterbox", text, mood))
+            return 1.0, []
+
+        def edge(text, mp3, mood):
+            calls.append(("edge", text, mood))
+            return 1.0, []
+        try:
+            story.speak_chatterbox, story.speak_edge = chatter, edge
+            story.faster = lambda length, words, mp3: (length, words)
+            story.VOICE_ENGINE = "chatterbox"
+            story._CHATTER.update(fails=0, used=set(), edge_only=False)
+            out = story.speak_lines([(0, "one", "hype"), (1, "two", "sad")], Path(tempfile.mkdtemp()))
+        finally:
+            story.speak_chatterbox, story.speak_edge, story.faster, story.VOICE_ENGINE = old[:4]
+            story._CHATTER.clear()
+            story._CHATTER.update(old[4])
+        self.assertEqual(sorted(out), [0, 1])
+        self.assertEqual(calls[-2:], [("edge", "one", "steady"), ("edge", "two", "steady")])  # read again, one voice
+
+    def test_your_own_music_folders(self):
+        import tempfile
+        from pathlib import Path
+        d = Path(tempfile.mkdtemp())
+        (d / "hype").mkdir()
+        (d / "story").mkdir()
+        (d / "hype" / "RAVE.mp3").write_bytes(b"x")
+        (d / "story" / "pa.mp3").write_bytes(b"x")
+        old = story.MUSIC_DIR
+        try:
+            story.MUSIC_DIR = d
+            self.assertEqual(story.pick_music("hype", 1).name, "RAVE.mp3")
+            self.assertEqual(story.pick_music("calm", 1).name, "pa.mp3")
+        finally:
+            story.MUSIC_DIR = old
 
     def test_clean_story_checks_times(self):
         story.load_settings({"RECAP_STYLE": "chatty"})
@@ -357,6 +401,21 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(parts[0][2]["caption"], "You won't guess who")
         story.load_settings({"CAPTION_WRITER": "templates"})
         self.assertNotIn('"caption"', story.story_prompt("Film (2020)", 3600, "subs", "recap", ""))
+
+
+class PlainSubtitlesTest(unittest.TestCase):
+    def test_tags_are_removed(self):
+        import process
+        self.assertEqual(process.plain('{\\an8}<i>Run!</i>\n<font color="#ffff00">Now.</font>'), "Run!\nNow.")
+
+    def test_long_filter_graphs_go_in_a_file(self):
+        import tempfile
+        import process
+        d = tempfile.mkdtemp()
+        self.assertEqual(process.graph_args("null", d), ["-filter_complex", "null"])
+        long = process.graph_args("null," * 3000 + "null", d)
+        self.assertIn(long[0], ("-/filter_complex", "-filter_complex_script"))
+        self.assertTrue(open(long[1]).read().startswith("null,null"))
 
 
 if __name__ == "__main__":

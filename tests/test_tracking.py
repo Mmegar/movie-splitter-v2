@@ -75,6 +75,25 @@ class CameraPathTest(unittest.TestCase):
         path = tracking.camera_path(pts, [True] + [False] * 9 + [True] + [False] * 9, view=0.375)
         self.assertEqual(len(set(path)), 1)
 
+    def test_carries_on_from_the_last_piece_and_pans_instead_of_jumping(self):
+        import tracking
+        pts = [0.62] * 20                                     # same scene, subject a bit to the right
+        path = tracking.camera_path(pts, [True] + [False] * 19, view=0.375, prev=0.5)
+        self.assertAlmostEqual(path[0], 0.5, delta=0.02)     # starts where the last piece stopped
+        steps = [b - a for a, b in zip(path, path[1:])]
+        self.assertTrue(all(0 <= d <= 0.375 * tracking.PAN_MAX + 1e-9 for d in steps))   # a slow, steady pan
+        self.assertGreater(path[-1], 0.58)
+
+    def test_finds_burned_in_subtitles(self):
+        import cv2
+        import tracking
+        frame = np.full((270, 480), 40, np.uint8)
+        cv2.putText(frame, "Where were you last night?", (70, 240), cv2.FONT_HERSHEY_SIMPLEX, 0.8, 0, 6)
+        cv2.putText(frame, "Where were you last night?", (70, 240), cv2.FONT_HERSHEY_SIMPLEX, 0.8, 255, 2)
+        top, bottom = tracking.text_rows(frame)
+        self.assertTrue(215 <= top < bottom <= 250)
+        self.assertIsNone(tracking.text_rows(np.full((270, 480), 40, np.uint8)))
+
     def test_a_flash_is_not_a_new_shot(self):
         import cv2
         import tracking
