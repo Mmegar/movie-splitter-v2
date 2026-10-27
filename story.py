@@ -724,7 +724,9 @@ from {int(WINDOW[0])} to {int(WINDOW[1])}, and skip any moment there that still 
 
 {flow_rules()}Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
-so pick a moment that shows what the sentence says. Give every narration beat a "mood" for how it is read aloud:
+so pick a moment that shows what the sentence says. "at" only goes up, beat after beat, across the whole recap:
+each beat's footage plays for as long as its sentence (3 to 6 seconds), so the next beat's "at" is at least that
+much later, and never on footage an earlier beat already used. Give every narration beat a "mood" for how it is read aloud:
 calm, curious, tense, funny, shocked, sad, hype or whisper (a secret or a creepy detail). {beat_extras()}Only use seconds that appear below.
 
 {caption_rules()}Answer with this JSON shape:
@@ -857,6 +859,7 @@ def clean_story(data, total):
         half = len(beats) // 2
         parts = [{"title": parts[0]["title"], "beats": beats[:half], "caption": parts[0]["caption"]},
                  {"title": "", "beats": beats[half:], "caption": ""}]
+    forward_footage(parts)                                     # footage only moves forward: no jumping back
     parts = [q for p in parts for q in split_long(p)]          # never a part well over 5 minutes
     parts = merge_short(parts)                                 # nor one under a minute
     if len(parts) > MAX_STORY_PARTS:                            # never more than 8: the extra goes into the last
@@ -867,7 +870,7 @@ def clean_story(data, total):
         raise Skip("The story plan didn't have enough to make at least 2 parts.")
     intro = [b for b in clean_beats(data.get("intro"), total) if "say" in b]     # narrated intro and outro
     outro = [b for b in clean_beats(data.get("outro"), total) if "say" in b]
-    parts[0]["beats"] = intro + parts[0]["beats"]
+    parts[0]["beats"] = [dict(b, hook=True) for b in intro] + parts[0]["beats"]   # may show a later moment
     parts[-1]["beats"] = parts[-1]["beats"] + outro
     who = str(data.get("character") or "").strip()
     out = []
@@ -878,6 +881,48 @@ def clean_story(data, total):
             p["story_end"] = WINDOW[1]                         # footage never runs on into the end credits
         out.append((min(times), max(times) + 8.0, p))
     return out
+
+
+def _when(b):
+    return b["at"] if "say" in b else b["keep"]
+
+
+def forward_footage(parts):
+    """
+    The writer's footage times often jump back to a scene already shown, so the part keeps cutting back to it.
+    Keeps the longest run of beats whose times move forward through the movie; any other narration beat gets
+    a time between its neighbours in that run, and an original moment that would go back is dropped.
+    """
+    beats = [b for p in parts for b in p["beats"]]
+    n = len(beats)
+    if n < 2:
+        return parts
+    best, prev = [1] * n, [-1] * n                     # longest non-decreasing run of times (by index)
+    for i in range(n):
+        for j in range(i):
+            if _when(beats[j]) <= _when(beats[i]) and best[j] + 1 > best[i]:
+                best[i], prev[i] = best[j] + 1, j
+    i, keep = max(range(n), key=lambda k: (best[k], -_when(beats[k]))), set()   # ties: the run ending earliest
+    while i >= 0:
+        keep.add(i)
+        i = prev[i]
+    anchors = sorted(keep)
+    drop = set()
+    for i in range(n):
+        if i in keep:
+            continue
+        if "say" not in beats[i]:
+            drop.add(id(beats[i]))
+            continue
+        lo = max([a for a in anchors if a < i], default=None)
+        hi = min([a for a in anchors if a > i], default=None)
+        t0 = _when(beats[lo]) if lo is not None else WINDOW[0]
+        t1 = _when(beats[hi]) if hi is not None else max(t0, _when(beats[i]))
+        a, b = (lo if lo is not None else -1), (hi if hi is not None else n)
+        beats[i]["at"] = round(t0 + (t1 - t0) * (i - a) / (b - a), 2)
+    for p in parts:
+        p["beats"] = [b for b in p["beats"] if id(b) not in drop]
+    return parts
 
 
 def part_words(seconds):
@@ -919,13 +964,18 @@ def split_long(part):
             split_long({"title": part["title"], "beats": second, "caption": ""}))
 
 
+def short_part():
+    """Parts under this join a neighbour: a minute, or 60% of the chosen part length if that's longer."""
+    return max(PART_MIN_SECONDS, 0.6 * RECAP_PART_SECONDS)
+
+
 def merge_short(parts):
-    """A part under a minute joins its neighbour (the next one, or the one before for the last part),
+    """A part that's too short (short_part) joins its neighbour (the next one, or the one before for the last part),
     as long as the two together stay within 5 minutes and at least 2 parts are left."""
     parts = list(parts)
     k = 0
     while k < len(parts) and len(parts) > 2:
-        if part_seconds(parts[k]["beats"]) >= PART_MIN_SECONDS:
+        if part_seconds(parts[k]["beats"]) >= short_part():
             k += 1
             continue
         j = k + 1 if k + 1 < len(parts) else k - 1
@@ -1705,21 +1755,25 @@ def render_story(src, number, info, cues, out, workdir, total, mode="recap"):
             if beat.get("joke") and not end_of_part:
                 length += JOKE_PAUSE                            # a moment of footage so the joke lands
             at = max(0.0, min(beat["at"], total - length - 0.1))
-            if last_end is not None and -CONTINUE_GAP < at - last_end < CONTINUE_GAP:
-                at = max(0.0, min(last_end, total - length - 0.1))   # same scene: carry on, no jump back and forth
+            if last_end is not None and at - last_end < CONTINUE_GAP:
+                at = max(0.0, min(last_end, total - length - 0.1))   # carry on: never back to footage already shown
             else:
                 at = clean_start(src, at, length, total)              # a new spot: no cut right next to ours
+                if last_end is not None:
+                    at = max(at, min(last_end, total - length - 0.1))
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
                            bridge=jump, ending=end_of_part)
             mp3.unlink(missing_ok=True)
             said.append((0.0, length, beat["say"]))
-            last_end = at + length
+            last_end = None if beat.get("hook") else at + length   # the intro's teaser doesn't hold the story back
         else:
-            jump = last_end is not None and abs(beat["keep"] - last_end) > 20
-            render_segment(src, beat["keep"], beat["until"] - beat["keep"], seg, workdir, cues=cues,
-                           bridge=jump, ending=end_of_part)
-            last_end = beat["until"]
+            keep, length = beat["keep"], beat["until"] - beat["keep"]
+            if last_end is not None and keep < last_end:
+                keep = max(0.0, min(last_end, total - length - 0.1))   # never replay footage already shown
+            jump = last_end is not None and abs(keep - last_end) > 20
+            render_segment(src, keep, length, seg, workdir, cues=cues, bridge=jump, ending=end_of_part)
+            last_end = keep + length
         segs.append(seg)
     finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music(MUSIC_KIND.get(mode, "recap"), number), loud=fast())
     return said

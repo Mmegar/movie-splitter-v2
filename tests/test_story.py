@@ -180,7 +180,8 @@ class StoryTest(unittest.TestCase):
         beats = parts[0][2]["beats"]
         self.assertEqual(beats[1], {"keep": 50.0, "until": 60.0})
         self.assertEqual(len(beats), 3)
-        self.assertEqual(beats[2]["at"], 599.0)
+        self.assertEqual(story.clean_beats([{"say": "Late.", "at": 99999}], 600)[0]["at"], 599.0)
+        self.assertTrue(50 < beats[2]["at"] < 200)                         # it went back: placed between its neighbours
         self.assertEqual(parts[1][0], 200.0)
 
     def test_original_moment_beats_from_the_small_model(self):
@@ -263,7 +264,33 @@ class StoryTest(unittest.TestCase):
         self.assertIn('"intro"', story.story_prompt("M", 6000, "", "recap", ""))
         self.assertIn("outro", story.STORY_SCHEMA["properties"])
 
+    def test_footage_only_moves_forward(self):
+        story.load_settings({"RECAP_PART_SECONDS": "60", "RECAP_STYLE": "fast"})
+        story.WINDOW[:] = [0.0, 1e9]
+        # the writer keeps going back to the scene at 600 s (the part kept cutting back to it)
+        ats = [100, 300, 600, 605, 600, 610, 602, 900, 600, 950]
+        data = {"parts": [{"title": "a", "beats": [{"say": " ".join(["word"] * 60), "at": t} for t in ats[:5]]},
+                          {"title": "b", "beats": [{"say": " ".join(["word"] * 60), "at": t} for t in ats[5:]]}]}
+        parts = story.clean_story(data, 3600)
+        got = [b["at"] for _, _, p in parts for b in p["beats"]]
+        self.assertEqual(len(got), 10)
+        self.assertEqual(got, sorted(got))                                 # never back to an earlier moment
+        self.assertEqual([got[0], got[1], got[-1]], [100, 300, 950])
+
+    def test_short_parts_join_up_to_the_chosen_length(self):
+        story.load_settings({"RECAP_PART_SECONDS": "180", "NARRATOR_TEMPO": "1.2", "RECAP_STYLE": "fast"})
+        self.assertEqual(story.short_part(), 108)
+        # ~75 s parts (like the 1:14 one) are now joined in pairs, staying under 5 minutes
+        data = {"parts": [{"title": f"p{i}", "beats": [{"say": " ".join(["word"] * 40), "at": i * 100 + k * 10}
+                                                        for k in range(8)]} for i in range(6)]}
+        parts = story.clean_story(data, 3600)
+        self.assertEqual(len(parts), 3)
+        for _, _, p in parts:
+            self.assertGreaterEqual(story.part_seconds(p["beats"]), story.short_part())
+            self.assertLessEqual(story.part_seconds(p["beats"]), story.PART_MAX_SECONDS)
+
     def test_never_more_than_8_parts(self):
+        story.load_settings({"RECAP_PART_SECONDS": "60"})
         data = {"parts": [{"title": f"p{i}", "beats": [{"say": f"s{i} " + "word " * 200, "at": i * 10}]}
                           for i in range(11)]}                  # each part over a minute, so none are joined
         parts = story.clean_story(data, 600)
