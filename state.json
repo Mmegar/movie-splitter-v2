@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T13:48:49+13:00",
+ "updated": "2026-10-27T13:48:52+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3815,6 +3815,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T13:48:51+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 2 of 8 ready",
+   "message": "Part 2: The Bar Bet That Changed Everything (11 narrated beats, about 68s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T13:42:58+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 1 of 8 ready",
@@ -5007,12 +5013,6 @@
    "type": "planned",
    "title": "[Best stretch] Runner (2026): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Runner (2026)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-17T23:01:57+13:00",
-   "type": "started",
-   "title": "Started: Runner (2026)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Runner (2026)'."
   }
  ]
 }
