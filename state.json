@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:57:15+13:00",
+ "updated": "2026-10-27T19:06:19+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -161,7 +161,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 240.7,
+       "end": 449.5,
+       "seconds": 208.8,
+       "drive_path": "Ready to post/Predestination (2014)/Highlights/Predestination (2014) - Highlight 01.mp4",
+       "caption": "Late night watch 🍿🌙\nHighlight 1 🎬 · Comment 'more' for Highlight 2 👇\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
+       "preview": "predestination-2014/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
