@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:06:28+13:00",
+ "updated": "2026-10-27T18:11:44+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -27,7 +27,24 @@
     "recap": {
      "label": "Movie recap",
      "planned": 8,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 258.0,
+       "end": 451.0,
+       "seconds": 61.7,
+       "drive_path": "Ready to post/Predestination (2014)/Movie recap/Predestination (2014) - Part 01.mp4",
+       "caption": "A bomb, a burn, and a secret time agent 😱 Watch him hunt the Fizzle Bomber.\nPart 1 🎬 · Part 2 coming soon ⏳\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
+       "preview": "predestination-2014/recap-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "predestination-2014/recap-01-cover.bin"
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
