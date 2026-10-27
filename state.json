@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:26:08+13:00",
+ "updated": "2026-10-28T09:31:47+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -234,6 +234,21 @@
        "drive_path": "Ready to post/Blink Twice (2024)/Highlights/Blink Twice (2024) - Highlight 02.mp4",
        "caption": "The way I gasped 😮\nHighlight 2 🎬 · Follow so you don't miss Highlight 3 🔔\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
        "preview": "blink-twice-2024/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 1123.8,
+       "end": 1330.9,
+       "seconds": 207.1,
+       "drive_path": "Ready to post/Blink Twice (2024)/Highlights/Blink Twice (2024) - Highlight 03.mp4",
+       "caption": "Tell me you saw that coming 👇\nHighlight 3 🎬 · Highlight 4 coming soon ⏳\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
+       "preview": "blink-twice-2024/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
