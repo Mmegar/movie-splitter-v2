@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T03:43:22+07:00",
+ "updated": "2026-10-28T03:46:26+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -143,6 +143,12 @@
    "name": "Heretic.2024.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 2203,
    "modified": "2026-10-23T08:54:30+07:00",
+   "folder": "done"
+  },
+  {
+   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
+   "size_mb": 1509,
+   "modified": "2026-10-23T08:42:54+07:00",
    "folder": "done"
   },
   {
@@ -331,6 +337,7 @@
  ],
  "originals": [
   "10-cloverfield-lane-2016",
+  "blink-twice-2024",
   "fall-2022",
   "gonjiam-haunted-asylum-2017",
   "heretic-2024",
