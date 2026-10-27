@@ -1,6 +1,7 @@
 {
   "modes": [
-    "recap"
+    "recap",
+    "highlights"
   ],
   "stretch_minutes": 12,
   "stretch_from": 0.2,
