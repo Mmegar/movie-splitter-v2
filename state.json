@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:37:28+13:00",
+ "updated": "2026-10-27T22:48:51+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "fall-2022/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 2483.0,
+       "end": 3475.0,
+       "seconds": 86.7,
+       "drive_path": "Ready to post/Fall (2022)/Movie recap/Fall (2022) - Part 03.mp4",
+       "caption": "Stuck hundreds of feet up with no way down 🚨 Their phones can't reach anyone.\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "fall-2022/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "fall-2022/recap-03-cover.bin"
       }
      ]
     },
