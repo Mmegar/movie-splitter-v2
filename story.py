@@ -110,7 +110,7 @@ FUNNY, DIRECTION = 0.7, ""
 CAPTIONS_BY_WRITER, CAPTION_DIRECTION = True, ""
 THUMBNAIL_BADGE = "PART {n}"   # the thumbnail's badge text; {n} = the part number
 FPS = 30
-STORY_BAND = (1080, 1350)               # zoomed: the picture on the 1080x1920 screen (4:5, followed by tracking)
+STORY_BAND = (1080, 1038)               # zoomed: the picture on the 1080x1920 screen (~1:1, 30% more of the scene than 4:5; followed by tracking)
 STORY_BAND_TOP = (1920 - STORY_BAND[1]) // 2
 ZOOM_TEXT_BOTTOM = 1300                 # zoomed: captions sit on the lower part of the picture, clear of TikTok's buttons
 
