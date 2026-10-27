@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:38:48+13:00",
+ "updated": "2026-10-28T07:56:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "blink-twice-2024/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 1343.0,
+       "end": 2122.0,
+       "seconds": 175.6,
+       "drive_path": "Ready to post/Blink Twice (2024)/Movie recap/Blink Twice (2024) - Part 03.mp4",
+       "caption": "A fancy dinner, a weird astrology app, and a drink that changes everything 🍷 Things get strange fast.\nPart 3 🎬 · Comment 'more' for Part 4 👇\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "blink-twice-2024/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "blink-twice-2024/recap-03-cover.bin"
       }
      ]
     },
