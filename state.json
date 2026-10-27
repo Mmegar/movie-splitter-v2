@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:12:07+13:00",
+ "updated": "2026-10-27T22:12:09+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T22:08:21+13:00",
   "movie": "Fall (2022)",
   "mode": null,
-  "stage": "analysing",
+  "stage": "planning",
   "part": null,
   "parts_total": null
  },
