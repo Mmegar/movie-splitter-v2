@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T10:41:20+07:00",
+ "updated": "2026-10-27T10:41:23+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -168,16 +168,7 @@
    "folder": "failed"
   }
  ],
- "commands": {
-  "mvpy0xdm5tek": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mvpy5ulz5s1e": {
-   "status": "done",
-   "note": "Starting Predestination.2014.1080p.BluRay.x264.YIFY.mp4 on the laptop"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
