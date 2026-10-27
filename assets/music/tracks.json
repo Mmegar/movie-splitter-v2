@@ -1,5 +1,5 @@
 {
-  "about": "Free-to-use songs, downloaded by the GitHub workflow (not stored here). 'calm' plays quietly under the narrator, 'hype' drives the Hype edit montage. Each credit line is added to the caption, as the CC BY licence asks. Add your own: put an .mp3 in this folder, or add an entry here.",
+  "about": "Free-to-use songs, downloaded by the GitHub workflow (not stored here). 'calm' plays quietly under the narrator, 'hype' drives the Hype edit montage. Credit lines are not added to captions. Add your own: put an .mp3 in this folder, or add an entry here.",
   "tracks": [
     {
       "file": "investigations.mp3",

@@ -1261,7 +1261,6 @@ def picture_size(src):
 PART_TIMES = {}   # (mode, part number) -> (start, end) in the movie, for the status file
 COVERS = {}       # (mode, part number) -> the part's thumbnail JPEG (story modes)
 PART_HOOKS = {}   # (mode, part number) -> the caption the story writer (Haiku) wrote for it
-PART_CREDITS = {}  # (mode, part number) -> the music credit its licence asks for (added to the caption)
 
 
 def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, modes=None, plan=None, skip=()):
@@ -1358,11 +1357,9 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
                 out = out.with_name(out.stem + story.PACK_SUFFIX)
                 said = story.make_pack(mode, src, i, sc, out, workdir, total)
                 PART_CUES[(mode, i)] = said
-                PART_CREDITS[(mode, i)] = story.last_credit()
             elif mode in story.MODE_NAMES:
                 said = story.render(mode, src, i, sc, cues, out, workdir, total)
                 PART_CUES[(mode, i)] = said
-                PART_CREDITS[(mode, i)] = story.last_credit()
                 if isinstance(sc, dict) and sc.get("caption"):
                     PART_HOOKS[(mode, i)] = sc["caption"]
                 try:
@@ -1518,8 +1515,6 @@ def process_release(gh, release):
             text = PART_HOOKS[(mode, i)] + "\n" + text.split("\n", 1)[1]
         elif text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
             text = random.choice(GOOFY_QUOTE).format(q=q) + "\n" + text.split("\n", 1)[1]
-        if text and PART_CREDITS.get((mode, i)):
-            text += f"\n🎵 {PART_CREDITS[(mode, i)]}"
         a, b = PART_TIMES.get((mode, i), (0.0, 0.0))
         out_body["parts"].append({"mode": mode, "label": label, "n": i, "of": count, "file": video_name,
                                   "assets": assets, "caption": text, "start": round(a, 1), "end": round(b, 1),
@@ -1843,8 +1838,6 @@ def cut_here(src, srt, ready):
             text = PART_HOOKS[(mode, i)] + "\n" + text.split("\n", 1)[1]
         elif text and q and CAPTION_STYLE != "plain" and random.random() < 0.5:
             text = random.choice(GOOFY_QUOTE).format(q=q) + "\n" + text.split("\n", 1)[1]
-        if text and PART_CREDITS.get((mode, i)):
-            text += f"\n🎵 {PART_CREDITS[(mode, i)]}"
         if text:
             with open(out.parent / "captions.txt", "a", encoding="utf-8") as f:
                 f.write(f"{part_word(mode)} {i}  ({out.name})\n{text}\n\n")
