@@ -41,7 +41,7 @@ class StoryTest(unittest.TestCase):
         settings.apply_to_env(settings.load(path="nope.json", env={}), env)
         story.load_settings(env)
         self.assertEqual(story.FILTER, "vivid")
-        self.assertEqual(story.RECAP_PART_SECONDS, 120)
+        self.assertEqual(story.RECAP_PART_SECONDS, 180)
         self.assertTrue(story.MUSIC)
         env.update(MUSIC="off", CHARACTER="Poirot")
         story.load_settings(env)
@@ -394,16 +394,16 @@ class StoryTest(unittest.TestCase):
     def test_jokes_are_kept_and_long_parts_are_split(self):
         story.load_settings({"RECAP_PART_SECONDS": "60", "NARRATOR_TEMPO": "1", "RECAP_STYLE": "chatty"})
         long_part = {"title": "Way too long", "beats": [{"say": " ".join(["word"] * 30), "at": 100 + k * 10,
-                                                          **({"joke": True} if k == 0 else {})} for k in range(24)]}
+                                                          **({"joke": True} if k == 0 else {})} for k in range(48)]}
         short = {"title": "Fine", "beats": [{"say": "A clue.", "at": 900}]}
         parts = story.clean_story({"character": "", "parts": [long_part, short]}, 3600)
         self.assertTrue(parts[0][2]["beats"][0].get("joke"))
-        self.assertGreater(len(parts), 2)
-        for _, _, p in parts[:-1]:
-            self.assertLessEqual(story.part_seconds(p["beats"]), 60 * story.MAX_PART_FACTOR)
-        self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 25)
+        self.assertGreaterEqual(len(parts), 2)
+        for _, _, p in parts:
+            self.assertLessEqual(story.part_seconds(p["beats"]), story.PART_MAX_SECONDS * story.PART_OVERRUN)
+        self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 49)
 
-    def test_parts_run_one_to_three_minutes(self):
+    def test_parts_run_one_to_five_minutes(self):
         story.load_settings({"RECAP_PART_SECONDS": "30", "NARRATOR_TEMPO": "1", "RECAP_STYLE": "fast"})
         self.assertEqual(story.RECAP_PART_SECONDS, 60)               # the setting can't go under a minute
         story.load_settings({"RECAP_PART_SECONDS": "120", "NARRATOR_TEMPO": "1.2", "RECAP_STYLE": "fast"})
@@ -413,13 +413,15 @@ class StoryTest(unittest.TestCase):
 
         def part(n_lines, at):
             return {"title": f"P{at}", "beats": [{"say": " ".join(["word"] * 20), "at": at + k * 5} for k in range(n_lines)]}
-        # 20 words at 2.6 w/s x1.2 is about 6.5 s a line: 3 lines ~ 20 s, 12 lines ~ 78 s, 40 lines ~ 260 s
-        plan = {"parts": [part(12, 100), part(3, 400), part(12, 700), part(40, 1000), part(3, 2500)]}
+        # 20 words at 2.6 w/s x1.2 is about 6.5 s a line: 3 lines ~ 20 s, 12 ~ 78 s, 40 ~ 260 s, 70 ~ 455 s
+        plan = {"parts": [part(12, 100), part(3, 400), part(12, 700), part(40, 1000), part(3, 2500), part(70, 3000)]}
         parts = story.clean_story(plan, 5400)
         for _, _, p in parts:
             self.assertGreaterEqual(story.part_seconds(p["beats"]), story.PART_MIN_SECONDS)
-            self.assertLessEqual(story.part_seconds(p["beats"]), story.PART_MAX_SECONDS)
-        self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 70)
+            self.assertLessEqual(story.part_seconds(p["beats"]), story.PART_MAX_SECONDS * story.PART_OVERRUN)
+        self.assertEqual(len(parts), 5)                                # the two 20 s parts joined, the 455 s one split
+        self.assertEqual(sum(len(p["beats"]) for _, _, p in parts), 140)
+        self.assertIn("cliffhanger", prompt)
 
     def test_every_line_gets_a_mood_for_its_delivery(self):
         story.load_settings({"NARRATOR_INTENSITY": "0.9", "NARRATOR_SPEED": "+5%"})

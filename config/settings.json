@@ -70,7 +70,7 @@
   "recap_style": "fast",
   "narrator_funny": 0,
   "script_direction": "Complete each sub-story or scene arc fully before wrapping up the part. If the part didn’t end with the sub story, end with a cliff-hanger. Include quick, funny side commentary or witty observations on background details, weird logic, and character reactions.\n",
-  "recap_part_seconds": 120,
+  "recap_part_seconds": 180,
   "music": true,
   "hype_count": 1
 }
