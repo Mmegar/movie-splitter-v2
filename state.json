@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-28T10:01:55+13:00",
+ "updated": "2026-10-28T10:02:00+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-28T09:46:47+13:00",
   "movie": "Elysium (2013)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 7
  },
  "queue": [],
  "movies": [
@@ -31,12 +31,12 @@
     },
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -4560,6 +4560,24 @@
  },
  "events": [
   {
+   "at": "2026-10-28T10:01:59+13:00",
+   "type": "planned",
+   "title": "[Highlights] Elysium (2013): 5 parts planned",
+   "message": "Elysium (2013)\nMode: Highlights\n\nHighlight 1: 43:18 to 46:51 (213s)  interest score 64/100\nHighlight 2: 48:26 to 52:36 (250s)  interest score 67/100\nHighlight 3: 1:15:53 to 1:19:19 (206s)  interest score 62/100\nHighlight 4: 1:25:48 to 1:29:20 (211s)  interest score 59/100\nHighlight 5: 1:30:58 to 1:35:45 (287s)  interest score 66/100\n"
+  },
+  {
+   "at": "2026-10-28T10:01:58+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Elysium (2013): 5 parts planned",
+   "message": "Elysium (2013)\nMode: Best stretch\n\nPart 1: 39:39 to 43:02 (203s)\nPart 2: 43:02 to 46:35 (213s)\nPart 3: 46:35 to 50:14 (219s)\nPart 4: 50:14 to 53:40 (206s)\nPart 5: 53:40 to 57:12 (212s)\n"
+  },
+  {
+   "at": "2026-10-28T10:01:58+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Elysium (2013): 7 parts planned",
+   "message": "Elysium (2013)\nMode: Movie recap\n\nPart 1: Max's Dream of Elysium (27 narrated beats, about 186s of voice)\nPart 2: Illegal Shuttles Take Off (33 narrated beats, about 221s of voice)\nPart 3: The Factory Accident (32 narrated beats, about 204s of voice)\nPart 4: The Brain Heist Offer (31 narrated beats, about 227s of voice)\nPart 5: The Data Heist Turns Deadly (36 narrated beats, about 235s of voice)\nPart 6: The Final Race to Elysium (50 narrated beats, about 362s of voice)\nPart 7: The Final Race to Elysium (54 narrated beats, about 371s of voice)\n"
+  },
+  {
    "at": "2026-10-28T09:46:49+13:00",
    "type": "started",
    "title": "Started: Elysium (2013)",
@@ -5740,24 +5758,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Runner (2026): Part 2",
    "message": "[Movie recap] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nThe ending of this part 😳\nPart 2 🎬 · Part 3 coming soon ⏳\n#foryou #trending #movie #cinema #fypシ\n#movieclips #fyp"
-  },
-  {
-   "at": "2026-10-22T02:48:57+13:00",
-   "type": "part_ready",
-   "title": "[Character story] Runner (2026): Part 1 of 5 ready",
-   "message": "Part 1: A Sober Man's Last Job (10 narrated beats, about 85s of voice)\nIn Ready to post/Runner (2026)/Character story."
-  },
-  {
-   "at": "2026-10-22T02:46:36+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Runner (2026): Part 5 of 5 ready",
-   "message": "Part 5: Hospital, Lies and a Last Stand (8 narrated beats, about 83s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T02:44:21+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Runner (2026): Part 4 of 5 ready",
-   "message": "Part 4: Damian Makes His Demands (6 narrated beats, about 61s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
   }
  ]
 }
