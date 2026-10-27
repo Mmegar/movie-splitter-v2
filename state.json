@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:15:08+13:00",
+ "updated": "2026-10-27T22:15:10+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -31,7 +31,7 @@
     },
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "hype": {
@@ -4021,6 +4021,18 @@
  },
  "events": [
   {
+   "at": "2026-10-27T22:15:10+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Fall (2022): 5 parts planned",
+   "message": "Fall (2022)\nMode: Best stretch\n\nPart 1: 21:12 to 24:42 (210s)\nPart 2: 24:42 to 28:32 (229s)\nPart 3: 28:32 to 31:56 (204s)\nPart 4: 31:56 to 35:35 (219s)\nPart 5: 35:35 to 38:50 (195s)\n"
+  },
+  {
+   "at": "2026-10-27T22:15:10+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Fall (2022): 4 parts planned",
+   "message": "Fall (2022)\nMode: Movie recap\n\nPart 1: A Fall, A Grief, A Dangerous Plan (21 narrated beats, about 100s of voice)\nPart 2: The Rusty Tower Turns Deadly (18 narrated beats, about 82s of voice)\nPart 3: Stranded Hundreds of Feet Up (26 narrated beats, about 117s of voice)\nPart 4: The Tattoo That Told a Secret (34 narrated beats, about 154s of voice)\n"
+  },
+  {
    "at": "2026-10-27T22:08:23+13:00",
    "type": "started",
    "title": "Started: Fall (2022)",
@@ -5207,18 +5219,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Toy Story 5 (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Toy Story 5 (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-18T00:40:48+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Toy Story 5 (2026)",
-   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Toy Story 5 (2026). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-18T00:40:40+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Toy Story 5 (2026): Highlight 5 of 5 ready",
-   "message": "Highlight 5: 1:17:51 to 1:21:25 (214s)  interest score 63/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nwho wrote this and are they okay 😭\nHighlight 5 🎬 · the ending. no words. just 🫠\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
