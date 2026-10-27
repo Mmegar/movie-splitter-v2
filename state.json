@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:28:40+13:00",
+ "updated": "2026-10-27T22:29:03+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Fall (2022)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 4
  },
  "queue": [],
@@ -4038,6 +4038,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T22:28:43+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Fall (2022): Part 1 of 4 ready",
+   "message": "Part 1: A Fall, A Grief, A Dangerous Plan (21 narrated beats, about 100s of voice)\nIn Ready to post/Fall (2022)/Movie recap."
+  },
+  {
    "at": "2026-10-27T22:16:42+13:00",
    "type": "planned",
    "title": "[Highlights] Fall (2022): 5 parts planned",
@@ -5230,12 +5236,6 @@
    "type": "info",
    "title": "[Movie recap] Skipped for Runner (2026)",
    "message": "The story model couldn't make sense of the dialogue."
-  },
-  {
-   "at": "2026-10-21T16:17:52+13:00",
-   "type": "started",
-   "title": "Started: Runner (2026)",
-   "message": "Making: Movie recap, Character story, Hype edit.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Runner (2026)'."
   }
  ]
 }
