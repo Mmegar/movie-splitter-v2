@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:47:19+13:00",
+ "updated": "2026-10-27T18:57:13+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -139,6 +139,22 @@
         "error": null
        },
        "cover": "predestination-2014/recap-07-cover.bin"
+      },
+      {
+       "n": 8,
+       "start": 2997.0,
+       "end": 5134.0,
+       "seconds": 99.2,
+       "drive_path": "Ready to post/Predestination (2014)/Movie recap/Predestination (2014) - Part 08.mp4",
+       "caption": "A time machine, a deal, and a jump to 1963 ⏳ Who will he choose?\nPart 8 🎬 · Final part! What did you think? 👇\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
+       "preview": "predestination-2014/recap-008.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "predestination-2014/recap-08-cover.bin"
       }
      ]
     },
