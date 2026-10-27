@@ -187,6 +187,7 @@ export const SETTING_LABELS = {
   script_direction: 'Script direction',
   caption_writer: 'Captions written by',
   caption_direction: 'Caption direction',
+  thumbnail_badge: 'Thumbnail badge',
   recap_part_seconds: 'Narrated part length',
   music: 'Background music',
   hype_count: 'Hype edits per movie',

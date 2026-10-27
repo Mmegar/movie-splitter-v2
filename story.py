@@ -83,6 +83,8 @@ def load_settings(env=None):
     CAPTIONS_BY_WRITER = (env.get("CAPTIONS", "on").strip().lower() not in OFF
                           and env.get("CAPTION_WRITER", "claude").strip().lower() == "claude")
     CAPTION_DIRECTION = env.get("CAPTION_DIRECTION", "").strip()[:600]
+    global THUMBNAIL_BADGE
+    THUMBNAIL_BADGE = env.get("THUMBNAIL_BADGE", "PART {n}").strip()[:40] or "PART {n}"
     TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
     INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.9"))   # Expressiveness: 0.5 calm ... 1 wild (every voice)
@@ -105,6 +107,7 @@ JOKE_PAUSE = 0.8     # seconds of footage (no voice) after a joke, so it lands
 MAX_PART_FACTOR = 1.6  # a part estimated longer than this x the part length is split in two
 FUNNY, DIRECTION = 0.7, ""
 CAPTIONS_BY_WRITER, CAPTION_DIRECTION = True, ""
+THUMBNAIL_BADGE = "PART {n}"   # the thumbnail's badge text; {n} = the part number
 FPS = 30
 STORY_BAND = (1080, 1350)               # zoomed: the picture on the 1080x1920 screen (4:5, followed by tracking)
 STORY_BAND_TOP = (1920 - STORY_BAND[1]) // 2
@@ -1879,13 +1882,82 @@ def clean_moment(src, at, tries=8, step=1.5):
     return None
 
 
+COVER_W, COVER_H = 1080, 1920
+BADGE_COLOR = (0xE1, 0x1D, 0x48)        # deep red (#E11D48) behind bold white text
+BADGE_X, BADGE_Y = 64, 150              # top-left, under TikTok's top bar and above where faces usually are
+BADGE_SIZE, BADGE_PAD, BADGE_RADIUS = 84, (40, 26), 26
+
+
+def badge_text(number, badge=None):
+    """The badge's words: badge, else THUMBNAIL_BADGE with {n} as the part number."""
+    text = badge or THUMBNAIL_BADGE
+    try:
+        text = str(text).format(n=number)
+    except (KeyError, IndexError, ValueError):
+        text = str(text).replace("{n}", str(number))
+    return text.upper()
+
+
+def subject_x(src, at, pre):
+    """Where the main person is across the frame at `at` (0..1, centre of the faces), or 0.5."""
+    try:
+        import numpy as np
+        import tracking
+        tracking.get_model()
+        w = tracking.SAMPLE_W
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{at:.2f}", "-i", str(src), "-frames:v", "1",
+               "-an", "-sn", "-vf", f"{pre}scale={w}:-2,format=bgr24", "-f", "rawvideo", "-"]
+        data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
+        h = len(data) // (w * 3)
+        faces = tracking.detections(np.frombuffer(data[:h * w * 3], dtype=np.uint8).reshape(1, h, w, 3))[0][0]
+    except Exception:
+        return 0.5
+    if not faces:
+        return 0.5
+    view = (COVER_W / COVER_H) / (w / max(h, 1))          # share of the width the vertical crop keeps
+    lo, hi = min(f[0] - f[1] / 2 for f in faces), max(f[0] + f[1] / 2 for f in faces)
+    if hi - lo <= view * 0.9:                              # everyone fits: frame them all
+        return (lo + hi) / 2
+    return max(faces, key=lambda f: f[1])[0]               # else the biggest face
+
+
+def badge_layer(text, workdir):
+    """The badge as RGBA pixels (a rounded red box with the white text centred on it)."""
+    import numpy as np
+    (Path(workdir) / "cover_badge.txt").write_text(text, encoding="utf-8")
+    cw, ch = 1000, BADGE_SIZE * 2
+    data = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-loglevel", "error", "-f", "lavfi", "-i", f"color=black:s={cw}x{ch}",
+         "-vf", f"drawtext=fontfile={P.FONT}:textfile=cover_badge.txt:expansion=none:fontsize={BADGE_SIZE}:"
+                f"fontcolor=white:x=20:y=(h-th)/2,format=gray", "-frames:v", "1", "-f", "rawvideo", "-"],
+        capture_output=True, check=True, cwd=workdir, timeout=60).stdout
+    ink = np.frombuffer(data[:cw * ch], dtype=np.uint8).reshape(ch, cw)
+    rows, cols = np.nonzero(ink > 8)
+    if not len(rows):
+        raise RuntimeError("badge text drew nothing")
+    ink = ink[rows.min():rows.max() + 1, cols.min():cols.max() + 1].astype(np.float32) / 255
+    th, tw = ink.shape
+    px, py = BADGE_PAD
+    W, H, r = tw + px * 2, th + py * 2, BADGE_RADIUS
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32) + 0.5
+    dx = np.maximum(np.maximum(r - xx, xx - (W - r)), 0)
+    dy = np.maximum(np.maximum(r - yy, yy - (H - r)), 0)
+    box = np.clip(r - np.sqrt(dx * dx + dy * dy) + 0.5, 0, 1)    # 1 inside, smooth (anti-aliased) corners
+    out = np.zeros((H, W, 4), dtype=np.float32)
+    out[..., :3] = BADGE_COLOR
+    out[py:py + th, px:px + tw, :3] += (255 - out[py:py + th, px:px + tw, :3]) * ink[..., None]
+    out[..., 3] = box
+    return out
+
+
 def make_cover(video, number, title, out, workdir, src=None, info=None, badge=None):
     """
-    The part's thumbnail (1080x1920 JPEG): a clean frame from the movie itself (no captions, no part label,
-    its own burned-in subtitles blurred), the whole 16:9 picture in the middle, the top and bottom filled
-    with a blurred, darkened copy of it, and a bold badge in the top-left corner: badge, or "PART n".
-    Without src (or a moment to take), the frame comes from the finished part instead.
+    The part's thumbnail (1080x1920, top-quality JPEG): a clean frame from the movie itself (no captions,
+    its own burned-in subtitles avoided or blurred), zoomed and cropped straight to fill the whole vertical
+    screen, centred on the people in it, with a red rounded badge in the top-left corner: badge, or
+    THUMBNAIL_BADGE ("PART n"). Without src (or a moment to take), the frame comes from the finished part.
     """
+    import numpy as np
     workdir = Path(workdir)
     at = cover_moment(info, video) if src else None
     if at is None:
@@ -1893,17 +1965,28 @@ def make_cover(video, number, title, out, workdir, src=None, info=None, badge=No
     else:
         clean = clean_moment(src, at)
         at, pre = (clean, P.CROP["filter"]) if clean is not None else (at, f"{P.CROP['filter']}{hide_old_subtitles(src)}")
-    (workdir / "cover_badge.txt").write_text(str(badge or f"PART {number}").upper(), encoding="utf-8")
-    graph = (f"[0:v]{pre}split=2[cb][cf];"
-             "[cb]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=24:3,"
-             "eq=brightness=-0.28:saturation=0.85[cbg];"
-             "[cf]scale=1080:-2,setsar=1[cfg];"
-             "[cbg][cfg]overlay=0:(H-h)/2,"
-             f"drawtext=fontfile={P.FONT}:textfile=cover_badge.txt:expansion=none:fontsize=84:fontcolor=black:"
-             "box=1:boxcolor=0xFFD400:boxborderw=26:x=70:y=170[v]")
-    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(Path(src).resolve()),
-           "-filter_complex", graph, "-map", "[v]", "-frames:v", "1", "-q:v", "3", str(Path(out).resolve())],
-          cwd=workdir)
+    src = Path(src).resolve()
+    cx = min(1.0, max(0.0, subject_x(src, at, pre)))
+    # the crop's left edge: centre on cx, kept inside the picture
+    crop = (f"{pre}scale={COVER_W}:{COVER_H}:force_original_aspect_ratio=increase:flags=lanczos,"
+            f"crop={COVER_W}:{COVER_H}:'max(0,min(iw-{COVER_W},iw*{cx:.4f}-{COVER_W // 2}))':'(ih-{COVER_H})/2',format=rgb24")
+    data = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{at:.2f}", "-i", str(src),
+                           "-frames:v", "1", "-an", "-sn", "-vf", crop, "-f", "rawvideo", "-"],
+                          capture_output=True, check=True, cwd=workdir, timeout=120).stdout
+    img = np.frombuffer(data[:COVER_W * COVER_H * 3], dtype=np.uint8).reshape(COVER_H, COVER_W, 3).astype(np.float32)
+    layer = badge_layer(badge_text(number, badge), workdir)
+    h, w = layer.shape[:2]
+    w, h = min(w, COVER_W - BADGE_X * 2), min(h, COVER_H - BADGE_Y)
+    layer = layer[:h, :w]
+    spot = img[BADGE_Y:BADGE_Y + h, BADGE_X:BADGE_X + w]
+    a = layer[..., 3:]
+    spot[:] = spot * (1 - a) + layer[..., :3] * a
+    raw = workdir / "cover.rgb"
+    raw.write_bytes(np.clip(img + 0.5, 0, 255).astype(np.uint8).tobytes())
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
+           "-s", f"{COVER_W}x{COVER_H}", "-i", str(raw), "-frames:v", "1", "-pix_fmt", "yuvj444p",
+           "-q:v", "1", "-qmin", "1", str(Path(out).resolve())], cwd=workdir)
+    raw.unlink(missing_ok=True)
     return Path(out)
 
 

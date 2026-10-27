@@ -197,6 +197,12 @@ function buildForm(d) {
       (d.cut_style || 'zoom') === 'zoom' && old ? stepRow(d, 'zoom_part_seconds', 'Zoomed part length', { def: 210, min: 120, max: 420, step: 15, sub: 'Each part runs about this long, up to 1½ minutes more to end on a pause' }) : '',
     ], 'You can also pick the style for each movie in Queue, under Up next.'),
 
+    group('Thumbnails', [
+      `<label class="row row--stack"><span class="row-title">Badge text</span>
+        <input class="input" data-k="thumbnail_badge" data-t="str" maxlength="40" value="${esc(d.thumbnail_badge || 'PART {n}')}" autocomplete="off" spellcheck="false" placeholder="PART {n}">
+        <span class="row-sub">The red badge in the top-left of each part's thumbnail. {n} becomes the part number.</span></label>`,
+    ]),
+
     group('Captions', [
       swRow(d, 'captions', 'Write a caption for each part', 'A hook line, part number and hashtags, ready to copy'),
       d.captions ? segRow(d, 'caption_writer', 'Written by', [['claude', 'Claude (Haiku)'], ['templates', 'Stock lines']],
