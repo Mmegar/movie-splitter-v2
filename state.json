@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T10:51:17+13:00",
+ "updated": "2026-10-28T10:51:20+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Elysium (2013)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 7
  },
  "queue": [],
@@ -4609,6 +4609,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T10:51:20+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Elysium (2013): Part 3 of 7 ready",
+   "message": "Part 3: The Factory Accident (32 narrated beats, about 204s of voice)\nIn Ready to post/Elysium (2013)/Movie recap."
+  },
+  {
    "at": "2026-10-28T10:34:07+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Elysium (2013): Part 2 of 7 ready",
@@ -5801,12 +5807,6 @@
    "type": "planned",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): 11 parts planned",
    "message": "Spider-Man Across The Spider-Verse (2023)\nMode: Character story\n\nPart 1: Brooklyn's Only Spider-Man (6 narrated beats, about 76s of voice)\nPart 2: A Grudge Made of Portals (6 narrated beats, about 82s of voice)\nPart 3: Late to the Captain's Party (6 narrated beats, about 68s of voice)\nPart 4: The Window Visitor (6 narrated beats, about 70s of voice)\nPart 5: Following Gwen Through the Portal (6 narrated beats, about 64s of voice)\nPart 6: Hobie Joins the Fight (6 narrated beats, about 67s of voice)\nPart 7: The Collider Goes Critical (6 narrated beats, about 73s of voice)\nPart 8: Refusing the Canon (5 narrated beats, about 59s of voice)\nPart 9: The Original Anomaly (6 narrated beats, about 64s of voice)\nPart 10: Home Isn't Home Anymore (5 narrated beats, about 63s of voice)\nPart 11: The Prowler and the Promise (5 narrated beats, about 64s of voice)\n"
-  },
-  {
-   "at": "2026-10-22T07:43:08+13:00",
-   "type": "planned",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): 20 parts planned",
-   "message": "Spider-Man Across The Spider-Verse (2023)\nMode: Movie recap\n\nPart 1: Welcome to the Multiverse Mess (6 narrated beats, about 82s of voice)\nPart 2: Portals, Vultures, and a Badge (6 narrated beats, about 81s of voice)\nPart 3: Sixteen Months of Bad Luck (5 narrated beats, about 62s of voice)\nPart 4: Late to the Party (6 narrated beats, about 70s of voice)\nPart 5: Holes, Grounded, and Two Months (5 narrated beats, about 58s of voice)\nPart 6: The Girl at the Window (6 narrated beats, about 63s of voice)\nPart 7: Rooftops and Bad Timing (6 narrated beats, about 73s of voice)\nPart 8: Mom Has Opinions (6 narrated beats, about 69s of voice)\nPart 9: Pavitr Has Questions (6 narrated beats, about 75s of voice)\nPart 10: Hobie Brown Enters the Chaos (5 narrated beats, about 65s of voice)\nPart 11: The Collapse and the Captain (6 narrated beats, about 74s of voice)\nPart 12: Peter, Mayday, and Miguel (5 "
   }
  ]
 }
