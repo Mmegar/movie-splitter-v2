@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:38:44+13:00",
+ "updated": "2026-10-28T07:38:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Blink Twice (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 6
  },
  "queue": [],
@@ -4316,6 +4316,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T07:38:48+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Blink Twice (2024): Part 2 of 6 ready",
+   "message": "Part 2: Phones Gone On The Island (26 narrated beats, about 156s of voice)\nIn Ready to post/Blink Twice (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-28T07:27:16+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Blink Twice (2024): Part 1 of 6 ready",
@@ -5508,12 +5514,6 @@
    "type": "failed",
    "title": "❌ Edit failed",
    "message": "FilmCraft couldn't make Spider-Man Across The Spider-Verse (2023) - Part 02.mp4 after 3 tries. The edit pack is kept in its folder.\ncommand_run: edit failed: a caption already covers this time"
-  },
-  {
-   "at": "2026-10-21T21:29:10+13:00",
-   "type": "failed",
-   "title": "❌ Edit failed",
-   "message": "FilmCraft couldn't make Spider-Man Across The Spider-Verse (2023) - Part 01.mp4 after 3 tries. The edit pack is kept in its folder.\ncommand_run: edit failed: a caption already covers this time"
   }
  ]
 }
