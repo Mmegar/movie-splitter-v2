@@ -84,6 +84,21 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(len(beats), 1)                                     # no silent original moment
         self.assertNotIn("joke", beats[0])                                  # and no joke pause
 
+    def test_no_double_cut_next_to_a_movie_cut(self):
+        old = getattr(FakeP, "scene_cuts", None)
+        try:
+            FakeP.scene_cuts = staticmethod(lambda src, start, length: [c - start for c in (100.3, 205.7, 300.5)
+                                                                      if start < c < start + length])
+            self.assertAlmostEqual(story.clean_start("m.mp4", 100.0, 5.0, 3600), 100.35)  # starts on the cut
+            self.assertAlmostEqual(story.clean_start("m.mp4", 201.0, 5.0, 3600), 200.65)  # ends before it
+            self.assertEqual(story.clean_start("m.mp4", 50.0, 5.0, 3600), 50.0)           # nothing near
+            self.assertAlmostEqual(story.clean_start("m.mp4", 300.0, 1.0, 3600), 300.55)  # a montage shot: one shot
+        finally:
+            if old is None:
+                del FakeP.scene_cuts
+            else:
+                FakeP.scene_cuts = old
+
     def test_cover_moment_is_a_third_into_the_part(self):
         info = {"beats": [{"say": "a", "at": 10}, {"say": "b", "at": 20}, {"keep": 30, "until": 35}]}
         self.assertEqual(story.cover_moment(info, None), 21.0)
