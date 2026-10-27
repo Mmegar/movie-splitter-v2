@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T21:20:40+13:00",
+ "updated": "2026-10-27T21:21:46+13:00",
  "run": {
   "active": false,
   "run_id": null,
@@ -3984,7 +3984,7 @@
  "posting": {
   "enabled": false,
   "next_at": null,
-  "posted_today": 0
+  "posted_today": 1
  },
  "events": [
   {
