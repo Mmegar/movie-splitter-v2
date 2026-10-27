@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:31:47+13:00",
+ "updated": "2026-10-28T09:31:50+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "highlights",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -4502,6 +4502,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T09:31:49+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Blink Twice (2024): Highlight 3 of 5 ready",
+   "message": "Highlight 3: 18:44 to 22:11 (207s)  interest score 59/100\nIn Ready to post/Blink Twice (2024)/Highlights."
+  },
+  {
    "at": "2026-10-28T09:26:08+13:00",
    "type": "part_ready",
    "title": "[Highlights] Blink Twice (2024): Highlight 2 of 5 ready",
@@ -5694,12 +5700,6 @@
    "type": "planned",
    "title": "[Character story] Runner (2026): 5 parts planned",
    "message": "Runner (2026)\nMode: Character story\n\nPart 1: A Sober Man's Last Job (10 narrated beats, about 85s of voice)\nPart 2: A Child's Life on the Line (8 narrated beats, about 67s of voice)\nPart 3: Ben Bishop Doesn't Make It (8 narrated beats, about 63s of voice)\nPart 4: Countdown in the Hospital (9 narrated beats, about 64s of voice)\nPart 5: A Quiet Ending in Paris (8 narrated beats, about 62s of voice)\n"
-  },
-  {
-   "at": "2026-10-22T02:34:29+13:00",
-   "type": "planned",
-   "title": "[Movie recap] Runner (2026): 5 parts planned",
-   "message": "Runner (2026)\nMode: Movie recap\n\nPart 1: A Fixer's Impossible Errands (6 narrated beats, about 77s of voice)\nPart 2: The Liver and the Talkative Courier (6 narrated beats, about 61s of voice)\nPart 3: Chased Through a Tunnel (6 narrated beats, about 58s of voice)\nPart 4: Damian Makes His Demands (6 narrated beats, about 61s of voice)\nPart 5: Hospital, Lies and a Last Stand (8 narrated beats, about 83s of voice)\n"
   }
  ]
 }
