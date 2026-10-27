@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:19:43+13:00",
+ "updated": "2026-10-27T18:19:46+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 8
  },
  "queue": [],
@@ -3815,6 +3815,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T18:19:45+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 2 of 8 ready",
+   "message": "Part 2: A Bet Over a Bottle (25 narrated beats, about 138s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T18:11:47+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 1 of 8 ready",
@@ -5007,12 +5013,6 @@
    "type": "started",
    "title": "Started: Toy Story 5 (2026)",
    "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Toy Story 5 (2026)'."
-  },
-  {
-   "at": "2026-10-17T23:53:32+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Runner (2026)",
-   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/Runner (2026). The copy sent to GitHub has been deleted."
   }
  ]
 }
