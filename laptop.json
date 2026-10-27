@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T00:57:03+07:00",
+ "updated": "2026-10-28T00:58:08+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,7 +102,16 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
+   "size_mb": 1509,
+   "modified": "2026-10-23T08:42:54+07:00",
+   "sending": false,
+   "style": "zoom",
+   "character": ""
+  }
+ ],
  "library": [
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
@@ -118,11 +127,6 @@
    "name": "Companion.2025.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 1922,
    "modified": "2026-10-23T08:47:45+07:00"
-  },
-  {
-   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
-   "size_mb": 1509,
-   "modified": "2026-10-23T08:42:54+07:00"
   },
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -169,7 +173,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvqznqzpcwfx": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -305,7 +314,8 @@
   "mvqlbw3k8m3d",
   "mvqlfnixcvgc",
   "mvqlkz44784p",
-  "mvqlneqyph0k"
+  "mvqlneqyph0k",
+  "mvqznqzpcwfx"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
