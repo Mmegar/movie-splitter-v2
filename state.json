@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T23:58:43+13:00",
+ "updated": "2026-10-27T23:58:46+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Fall (2022)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -4195,6 +4195,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T23:58:45+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Fall (2022): Highlight 1 of 5 ready",
+   "message": "Highlight 1: 21:35 to 25:02 (206s)  interest score 61/100\nIn Ready to post/Fall (2022)/Highlights."
+  },
+  {
    "at": "2026-10-27T23:51:22+13:00",
    "type": "part_ready",
    "title": "[Hype edit] Fall (2022): Edit 1 of 1 ready",
@@ -5387,12 +5393,6 @@
    "type": "posted",
    "title": "📲 In your TikTok drafts: Runner (2026): Part 1",
    "message": "[Hype edit] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nThis deserves way more attention\nEdit 1 🎬 · That's the last part. Follow for more 🍿\n#fyp #movieclip #filmclips #viralvideo #watch\n🎵 \"Movement Proposition\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movie #movieclips"
-  },
-  {
-   "at": "2026-10-21T20:04:43+13:00",
-   "type": "started",
-   "title": "▶️ Carrying on: Spider-Man Across The Spider-Verse (2023)",
-   "message": "0 parts were already made before it stopped; making the rest."
   }
  ]
 }
