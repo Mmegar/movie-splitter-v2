@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T01:03:18+07:00",
+ "updated": "2026-10-28T01:03:36+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -105,14 +105,6 @@
  "paused": null,
  "battery": false,
  "queue": [
-  {
-   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
-   "size_mb": 1509,
-   "modified": "2026-10-23T08:42:54+07:00",
-   "sending": false,
-   "style": "zoom",
-   "character": ""
-  },
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
    "size_mb": 2633,
