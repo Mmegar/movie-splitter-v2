@@ -354,6 +354,7 @@ button.row { width: 100%; text-align: left; }
 .segmented .count { font-size: 12.5px; color: var(--text-2); font-weight: 600; }
 .segmented--scroll { overflow-x: auto; scrollbar-width: none; }
 .segmented--scroll::-webkit-scrollbar { display: none; }
+.segmented--scroll button { flex: 1 0 auto; }
 
 /* ---------- movies ---------- */
 .movie-list { display: flex; flex-direction: column; gap: 10px; }
