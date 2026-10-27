@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T14:12:45+13:00",
+ "updated": "2026-10-27T14:12:48+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 6,
+  "part": 7,
   "parts_total": 8
  },
  "queue": [],
@@ -3879,6 +3879,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T14:12:47+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 6 of 8 ready",
+   "message": "Part 6: John Learns the Truth About Himself (11 narrated beats, about 66s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T14:07:17+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 5 of 8 ready",
@@ -5071,12 +5077,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Runner (2026): Part 3 of 5 ready",
    "message": "Part 3: 59:32 to 1:03:12 (219s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\n'Shut up!' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-17T23:19:08+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Runner (2026): Part 2 of 5 ready",
-   "message": "Part 2: 55:14 to 59:32 (258s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\nthe way they said 'Go get it!' 🫠\nPart 2 🎬 · Part 3 is where it gets wild 🌪️\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
