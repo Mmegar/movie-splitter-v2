@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T00:28:44+13:00",
+ "updated": "2026-10-28T00:28:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Fall (2022)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -4240,6 +4240,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T00:28:47+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Fall (2022): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 1:08:22 to 1:11:57 (215s)  interest score 59/100\nIn Ready to post/Fall (2022)/Highlights."
+  },
+  {
    "at": "2026-10-28T00:18:17+13:00",
    "type": "part_ready",
    "title": "[Highlights] Fall (2022): Highlight 3 of 5 ready",
@@ -5432,12 +5438,6 @@
    "type": "planned",
    "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): 1 part planned",
    "message": "Parts will arrive on the laptop in Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit as they're made."
-  },
-  {
-   "at": "2026-10-21T21:15:23+13:00",
-   "type": "info",
-   "title": "[Character story] Skipped for Spider-Man Across The Spider-Verse (2023)",
-   "message": "The story plan didn't have enough to make at least 2 parts."
   }
  ]
 }
