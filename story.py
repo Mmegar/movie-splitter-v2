@@ -8,7 +8,8 @@ The storytelling modes, made from the movie's subtitles:
   character  "Character story": the same, but following one character's arc (CHARACTER, or the most
              important character when that's blank), staying faithful to what they actually do.
   hype       "Hype edit": the character gets disrespected or doubted, answers it in style, then a
-             beat-synced montage (hard cuts, three-panel diagonal mask slides, slow motion; no flashes)
+             beat-synced montage (white flash cuts, three-panel diagonal mask slides, slow motion). The
+             flashes are only in the Hype edit: narrated parts never flash.
              over music from assets/music.
 
 A small AI model running on GitHub's computer (Ollama, STORY_MODEL, no API key or account) reads the
@@ -1340,11 +1341,11 @@ def clean_start(src, start, length, total):
     return max(0.0, min(start, total - length - 0.1))
 
 
-def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None,
+def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None, flash=False,
                    slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False):
     """One piece of a part: the movie from `start` for `length` seconds (whole picture, graded), with the
-    narrator over it (voice), the movie's own subtitles (cues), or slow motion. No flashes or dips to
-    black anywhere (they hurt to watch): pieces join with plain cuts.
+    narrator over it (voice), the movie's own subtitles (cues), a white flash in (Hype edit only), or slow
+    motion. Narrated parts never flash or dip to black (it hurts to watch): their pieces join with plain cuts.
     bridge: a jump to another scene: the movie sound eases in instead of cutting in.
     ending: the last piece of a part eases out instead of stopping dead."""
     src_len = length / slow
@@ -1363,6 +1364,8 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
             part_cues = [(a - start, b - start, t) for a, b, t in cues if b > start and a < start + src_len]
             v += P.subtitle_filters(part_cues, length, bottom, workdir)
     v += title_filter(title, workdir)
+    if flash:
+        v += ",fade=t=in:st=0:d=0.16:color=white"
     if ending:
         v += f",fade=t=out:st={max(0.0, length - 0.6):.3f}:d=0.6"
     v += "[v]"
@@ -1425,7 +1428,7 @@ def render_slide3(src, starts, length, out, workdir):
               f"pad=1080:{PANEL_H}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,format=rgba[p{i}];[p{i}][m{i}]alphamerge[q{i}]"
               f";[{last}][q{i}]overlay=x='{sx}*pow(1-clip((t-{t0})/{dur},0,1),3)':y={PANEL_Y[i]}:eval=frame[o{i}]")
         last = f"o{i}"
-    f += f";[{last}]null[v]"
+    f += f";[{last}]fade=t=in:st=0:d=0.12:color=white[v]"
     if has_audio(src):
         f += ";[1:a]volume=0.25,apad[a]"
     else:
@@ -1711,7 +1714,7 @@ def beat_grid(music, seconds):
 
 
 def montage_steps(beat, seconds):
-    """The montage's shot pattern in beats: mostly single hard cuts, a three-panel mask slide every so
+    """The montage's shot pattern in beats: mostly single flash cuts, a three-panel mask slide every so
     often, and one slow-motion shot in the middle."""
     unit = 1 if beat >= 0.4 else 2
     pattern = ["single", "single", "single", "slide3", "single", "single", "slow", "single", "single", "slide3"]
@@ -1748,7 +1751,7 @@ def render_montage(src, info, out, workdir, total):
             slow = 2.0 if kind == "slow" else 1.0
             s = min(next(pick), total - length / slow - 0.1)
             s = clean_start(src, max(0.0, s), length / slow, total)       # one shot per beat, no flicker
-            render_segment(src, max(0.0, s), length, seg, workdir, slow=slow,
+            render_segment(src, max(0.0, s), length, seg, workdir, flash=True, slow=slow,
                            movie_volume=0.25 if music else 1.0, title=info.get("title", "") if k == 0 else "")
         segs.append(seg)
     raw = workdir / "montage_raw.mp4"
@@ -1775,7 +1778,7 @@ def render_hype(src, number, info, cues, out, workdir, total):
         P.checkpoint()
         a, b = info[key]
         seg = workdir / f"seg{k:03}.mp4"
-        render_segment(src, a, b - a, seg, workdir, cues=cues)
+        render_segment(src, a, b - a, seg, workdir, cues=cues, flash=(key == "payoff"))
         segs.append(seg)
     montage = workdir / "seg002.mp4"
     render_montage(src, info, montage, workdir, total)
