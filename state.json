@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-27T13:34:03+13:00",
+ "updated": "2026-10-27T13:34:06+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T13:29:12+13:00",
   "movie": "Predestination (2014)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -31,7 +31,7 @@
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -3782,6 +3782,18 @@
  },
  "events": [
   {
+   "at": "2026-10-27T13:34:06+13:00",
+   "type": "planned",
+   "title": "[Highlights] Predestination (2014): 5 parts planned",
+   "message": "Predestination (2014)\nMode: Highlights\n\nHighlight 1: 4:01 to 7:30 (209s)  interest score 57/100\nHighlight 2: 24:41 to 28:17 (216s)  interest score 63/100\nHighlight 3: 54:39 to 58:04 (205s)  interest score 62/100\nHighlight 4: 1:01:21 to 1:05:04 (223s)  interest score 58/100\nHighlight 5: 1:21:34 to 1:25:38 (243s)  interest score 59/100\n"
+  },
+  {
+   "at": "2026-10-27T13:34:05+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Predestination (2014): 8 parts planned",
+   "message": "Predestination (2014)\nMode: Movie recap\n\nPart 1: Burned Agent Hunts the Bomber (12 narrated beats, about 77s of voice)\nPart 2: The Bar Bet That Changed Everything (11 narrated beats, about 68s of voice)\nPart 3: The Orphan Who Was Called Jane (12 narrated beats, about 75s of voice)\nPart 4: Space Corp Dreams Crushed (12 narrated beats, about 65s of voice)\nPart 5: A Pregnancy and a Shocking Secret (12 narrated beats, about 70s of voice)\nPart 6: John Learns the Truth About Himself (11 narrated beats, about 66s of voice)\nPart 7: Cleveland 1963 and a Forbidden Love (12 narrated beats, about 70s of voice)\nPart 8: The Bomber Is His Own Future (12 narrated beats, about 81s of voice)\n"
+  },
+  {
    "at": "2026-10-27T13:29:14+13:00",
    "type": "started",
    "title": "Started: Predestination (2014)",
@@ -4968,18 +4980,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-17T11:19:28+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "One Last Shot (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\One Last Shot (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-17T17:19:12+13:00",
-   "type": "finished",
-   "title": "✅ Finished: One Last Shot (2026)",
-   "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/One Last Shot (2026). The copy sent to GitHub has been deleted."
   }
  ]
 }
