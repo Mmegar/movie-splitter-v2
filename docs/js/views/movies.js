@@ -108,9 +108,11 @@ export function createMoviesView(ctx) {
     page.setTitle(m.name);
     const settings = (st.data.settings && st.data.settings.json) || {};
     const modes = Object.keys(m.modes || {});
-    if (!detail.mode || !modes.includes(detail.mode)) detail.mode = modes.find((k) => (m.modes[k].parts || []).length) || modes[0];
-    const md = m.modes[detail.mode] || { parts: [] };
     const run = (st.data.state && st.data.state.run) || {};
+    const runMode = run.active && run.movie === m.name && modes.includes(run.mode) ? run.mode : null;
+    if (!detail.mode || !modes.includes(detail.mode)) detail.mode = runMode || modes.find((k) => (m.modes[k].parts || []).length) || modes[0];
+    const md = m.modes[detail.mode] || { parts: [] };
+    const nParts = (md.parts || []).length;
     const live = run.active && run.movie === m.name && run.mode === detail.mode;
     const c = postCounts(m);
     page.setSub(`${chip(m.status)} <span class="muted">${m.source === 'wishlist' ? 'From the wish list' : 'From the laptop'}</span>`);
@@ -122,20 +124,28 @@ export function createMoviesView(ctx) {
         <div><dt>Started</dt><dd>${esc(when(m.started)) || '—'}</dd></div>
         <div><dt>${m.status === 'failed' ? 'Stopped' : 'Finished'}</dt><dd>${m.finished ? esc(when(m.finished)) : m.status === 'processing' ? 'Working on it' : '—'}</dd></div>
         <div><dt>Subtitles</dt><dd>${esc(m.subtitles || 'None')}</dd></div>
-        <div><dt>Posted</dt><dd>${c.posted} of ${c.parts}</dd></div>
+        <div><dt>Posted</dt><dd>${c.parts ? `${c.posted} of ${c.parts}` : 'Nothing yet'}</dd></div>
       </dl>
       <button class="btn btn--accent btn--block" data-makeclip>${icon('scissors')}Make a clip of any scene</button>
       ${pendingClipsHtml(st, m)}
-      ${modes.length > 1 ? `<div class="segmented" role="tablist" aria-label="Mode">${modes.map((k) => `<button role="tab" aria-selected="${k === detail.mode}" data-mode="${k}">${esc(m.modes[k].label || MODE_LABELS[k])} <span class="count">${(m.modes[k].parts || []).length}</span></button>`).join('')}</div>` : ''}
+      ${modes.length > 1 ? `<div class="segmented segmented--scroll segmented--modes" role="tablist" aria-label="Mode">${modes.map((k) => `<button role="tab" aria-selected="${k === detail.mode}" data-mode="${k}">${esc(m.modes[k].label || MODE_LABELS[k])} <span class="count">${(m.modes[k].parts || []).length}</span></button>`).join('')}</div>` : ''}
       ${cutMap(m, detail.mode, settings)}
       ${sendAllHtml(st, m)}
-      <div class="section-head"><h3>${(md.parts || []).length} part${(md.parts || []).length === 1 ? '' : 's'}${md.planned ? ` of ${md.planned}` : ''}</h3>
-        ${(() => { const left = (md.parts || []).filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status))).length;
+      <div class="section-head"><h3>${md.planned && nParts < md.planned ? `${nParts} of ${md.planned} parts` : `${nParts} part${nParts === 1 ? '' : 's'}`}</h3>
+        ${(() => { if (!nParts) return '';
+          const left = md.parts.filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status))).length;
           return left ? `<button class="btn btn--small btn--accent" data-sendall>${icon('send')}Send all ${left} to TikTok</button>` : '<span class="muted">All sent</span>'; })()}</div>
       ${(md.parts || []).length ? `<button class="btn btn--quiet btn--block" data-saveall>${icon('inbox')}Save all ${(md.parts || []).length} to phone</button>` : ''}
       ${(md.parts || []).length ? `<ol class="parts">${md.parts.map((p) => partRow(p, m, detail.mode)).join('')}${live ? `<li class="part part--pending"><span class="spinner"></span>Making part ${run.part} of ${run.parts_total}…</li>` : ''}</ol>`
-        : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one is made; they arrive on your laptop shortly after.' : m.status === 'processing' ? 'This mode starts after the current one.' : '' })}
+        : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one is made; they arrive on your laptop shortly after.' : m.status === 'processing' ? (runMode ? `This mode starts after ${esc(m.modes[runMode].label || MODE_LABELS[runMode])}.` : 'This mode starts after the current one.') : '' })}
     `;
+    const sel = page.content.querySelector('.segmented--modes [aria-selected="true"]');
+    // Keep the picked mode in view on a narrow screen (only when it changes, so polling doesn't undo a scroll).
+    if (sel && detail.scrolledTo !== detail.mode) {
+      const row = sel.parentElement;
+      row.scrollLeft += sel.getBoundingClientRect().left - row.getBoundingClientRect().left - (row.clientWidth - sel.offsetWidth) / 2;
+    }
+    detail.scrolledTo = detail.mode;
   }
 
   async function openDetail(id) {
