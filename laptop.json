@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T15:18:35+07:00",
+ "updated": "2026-10-27T15:20:42+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -168,7 +168,12 @@
    "folder": "done"
   }
  ],
- "commands": {},
+ "commands": {
+  "mvqf14yk6kqq": {
+   "status": "done",
+   "note": "Marked as posted: 3"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -285,7 +290,8 @@
   "mvkf0cqa3u0p",
   "mvkjcj5w4uqa",
   "mvpy0xdm5tek",
-  "mvpy5ulz5s1e"
+  "mvpy5ulz5s1e",
+  "mvqf14yk6kqq"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
