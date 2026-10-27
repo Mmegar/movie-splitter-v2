@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:44:40+13:00",
+ "updated": "2026-10-28T08:44:43+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -8,7 +8,7 @@
   "movie": null,
   "mode": "stretch",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -4396,6 +4396,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T08:44:42+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Blink Twice (2024): Part 1 of 5 ready",
+   "message": "Part 1: 21:34 to 25:23 (229s)\nIn Ready to post/Blink Twice (2024)/Best stretch."
+  },
+  {
    "at": "2026-10-28T08:38:01+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Blink Twice (2024): Part 6 of 6 ready",
@@ -5587,12 +5593,6 @@
    "at": "2026-10-22T01:03:10+13:00",
    "type": "info",
    "title": "[Character story] Skipped for Runner (2026)",
-   "message": "No narration: add the ANTHROPIC_API_KEY secret on GitHub."
-  },
-  {
-   "at": "2026-10-22T01:03:10+13:00",
-   "type": "info",
-   "title": "[Movie recap] Skipped for Runner (2026)",
    "message": "No narration: add the ANTHROPIC_API_KEY secret on GitHub."
   }
  ]
