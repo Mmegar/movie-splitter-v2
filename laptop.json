@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T16:05:41+07:00",
+ "updated": "2026-10-27T16:06:02+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -105,14 +105,6 @@
  "paused": null,
  "battery": false,
  "queue": [
-  {
-   "name": "Fall.2022.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2027,
-   "modified": "2026-10-23T08:28:32+07:00",
-   "sending": false,
-   "style": "zoom",
-   "character": ""
-  },
   {
    "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
    "size_mb": 1509,
