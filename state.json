@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:16:39+13:00",
+ "updated": "2026-10-27T22:16:42+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T22:08:21+13:00",
   "movie": "Fall (2022)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 4
  },
  "queue": [],
  "movies": [
@@ -41,7 +41,7 @@
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -4021,6 +4021,18 @@
  },
  "events": [
   {
+   "at": "2026-10-27T22:16:42+13:00",
+   "type": "planned",
+   "title": "[Highlights] Fall (2022): 5 parts planned",
+   "message": "Fall (2022)\nMode: Highlights\n\nHighlight 1: 21:35 to 25:02 (206s)  interest score 61/100\nHighlight 2: 28:27 to 31:53 (206s)  interest score 64/100\nHighlight 3: 35:20 to 40:03 (283s)  interest score 62/100\nHighlight 4: 1:08:22 to 1:11:57 (215s)  interest score 59/100\nHighlight 5: 1:32:51 to 1:36:24 (214s)  interest score 57/100\n"
+  },
+  {
+   "at": "2026-10-27T22:16:41+13:00",
+   "type": "planned",
+   "title": "[Hype edit] Fall (2022): 1 part planned",
+   "message": "Fall (2022)\nMode: Hype edit\n\nEdit 1: Shiloh: setup 26:40, payoff 1:04:10, 8 montage shots\n"
+  },
+  {
    "at": "2026-10-27T22:15:10+13:00",
    "type": "planned",
    "title": "[Best stretch] Fall (2022): 5 parts planned",
@@ -5207,18 +5219,6 @@
    "type": "started",
    "title": "Started: Runner (2026)",
    "message": "Making: Movie recap, Character story, Hype edit.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Runner (2026)'."
-  },
-  {
-   "at": "2026-10-21T16:14:43+13:00",
-   "type": "new_file",
-   "title": "📥 Sent to GitHub",
-   "message": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-17T18:41:45+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Toy Story 5 (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Toy Story 5 (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
   }
  ]
 }
