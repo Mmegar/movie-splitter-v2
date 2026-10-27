@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T14:17:51+13:00",
+ "updated": "2026-10-27T14:17:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 7,
+  "part": 8,
   "parts_total": 8
  },
  "queue": [],
@@ -3895,6 +3895,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T14:17:53+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 7 of 8 ready",
+   "message": "Part 7: Cleveland 1963 and a Forbidden Love (12 narrated beats, about 70s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T14:12:47+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 6 of 8 ready",
@@ -5087,12 +5093,6 @@
    "type": "part_ready",
    "title": "[Best stretch] Runner (2026): Part 4 of 5 ready",
    "message": "Part 4: 1:03:12 to 1:06:59 (228s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\na masterclass in bad decisions 🎓\nPart 4 🎬 · Part 5 is where it gets wild 🌪️\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-17T23:23:34+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Runner (2026): Part 3 of 5 ready",
-   "message": "Part 3: 59:32 to 1:03:12 (219s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\n'Shut up!' is my new personality 😤\nthis movie: 🤯\nPart 3 🎬 · comment 'MORE' if you need Part 4 👇\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
