@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:30:04+13:00",
+ "updated": "2026-10-27T18:30:06+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 8
  },
  "queue": [],
@@ -3847,6 +3847,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T18:30:06+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 4 of 8 ready",
+   "message": "Part 4: The Strange Recruiter's Offer (14 narrated beats, about 78s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T18:24:46+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 3 of 8 ready",
@@ -5039,12 +5045,6 @@
    "type": "planned",
    "title": "[Best stretch] Toy Story 5 (2026): 5 parts planned",
    "message": "Parts will arrive on the laptop in Ready to post/Toy Story 5 (2026)/Best stretch as they're made."
-  },
-  {
-   "at": "2026-10-17T17:54:29+07:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Runner (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Runner (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
   }
  ]
 }
