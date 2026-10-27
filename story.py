@@ -1447,7 +1447,9 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
             v += caption_filters(words, length, bottom, workdir, "nar",
                                  y=caption_y(src, track, None) if old_subtitles(src) else None)
         if cues:
-            part_cues = [(a - start, b - start, t) for a, b, t in cues if b > start and a < start + src_len]
+            # slow motion stretches the picture, so the lines stretch with it to stay on the right words
+            part_cues = [((a - start) * slow, (b - start) * slow, t) for a, b, t in cues
+                         if b > start and a < start + src_len]
             v += P.subtitle_filters(part_cues, length, bottom, workdir)
     v += title_filter(title, workdir)
     if flash:

@@ -310,6 +310,92 @@ def write_part_srt(cues, start, end, out_path):
     return True
 
 
+# A downloaded .srt is often for another release of the movie: it starts a few seconds early or late, runs at
+# another frame rate (25 vs 23.976 fps drifts ~4 s every minute and a half), or is for a different film. So
+# before using one, its lines are lined up with when people actually talk in this file.
+SYNC_STEP = 0.1          # seconds per step of the speech timeline
+SYNC_MAX_SHIFT = 300     # furthest a release's subtitles are moved, in seconds
+SYNC_SPEEDS = (1.0, 25 / 23.976, 23.976 / 25, 24 / 23.976, 23.976 / 24, 25 / 24, 24 / 25)
+SYNC_MIN_GAIN = 0.2      # lines must sit on speech this much more often than chance, or it's the wrong file
+
+
+def speech_timeline(src, workdir):
+    """Per SYNC_STEP of the movie: True while someone is talking (the speech finder Whisper uses)."""
+    import numpy as np
+    from faster_whisper.vad import VadOptions, get_speech_timestamps
+    audio = load_wav(src, workdir / "sync.wav")
+    talk = np.zeros(int(len(audio) / 16000 / SYNC_STEP) + 1, dtype=bool)
+    opts = VadOptions(threshold=0.3, min_speech_duration_ms=150, min_silence_duration_ms=300, speech_pad_ms=100)
+    for s in get_speech_timestamps(audio, opts):
+        talk[int(s["start"] / 16000 / SYNC_STEP):int(s["end"] / 16000 / SYNC_STEP) + 1] = True
+    return talk
+
+
+def fit_cues(cues, talk):
+    """(speed, shift, share of subtitle time on speech, share by chance) that best lines cues up with talk:
+    a line at t seconds belongs at t * speed + shift."""
+    import numpy as np
+    n = len(talk)
+    sign = np.where(talk, 1.0, -1.0)
+    size = 1 << int(2 * n + 2 * SYNC_MAX_SHIFT / SYNC_STEP).bit_length()
+    spec = np.fft.rfft(sign, size)
+    lim = int(SYNC_MAX_SHIFT / SYNC_STEP)
+    best = None
+    for speed in SYNC_SPEEDS:
+        subs = np.zeros(n + lim, dtype=float)
+        for a, b, _ in cues:
+            i, j = int(a * speed / SYNC_STEP), int(b * speed / SYNC_STEP) + 1
+            subs[max(0, i):max(0, min(len(subs), j))] = 1.0
+        on = subs.sum()
+        if not on:
+            continue
+        # score[k] = how well the lines fit when moved k steps later (negative k: earlier)
+        score = np.fft.irfft(spec * np.conj(np.fft.rfft(subs, size)), size)
+        shifts = np.concatenate([np.arange(0, lim + 1), np.arange(-lim, 0)])
+        vals = np.concatenate([score[:lim + 1], score[size - lim:]])
+        k = int(np.argmax(vals))
+        share = (vals[k] / on + 1) / 2          # share of subtitle time that lands on speech
+        if best is None or share > best[2] + 0.005:     # (a tie keeps normal speed)
+            best = (speed, shifts[k] * SYNC_STEP, float(share))
+    return best and (*best, float(talk.mean()))
+
+
+def sync_cues(cues, src, workdir):
+    """The .srt's lines moved to match this movie's speech, or [] when they belong to a different film."""
+    if len(cues) < 20:
+        return cues
+    try:
+        talk = speech_timeline(src, workdir)
+    except Exception as e:                        # no speech finder: use the file as it is
+        print(f"  (couldn't check the subtitles' timing: {e})", flush=True)
+        return cues
+    fit = fit_cues(cues, talk)
+    if not fit:
+        return cues
+    speed, shift, share, chance = fit
+    if share < chance + SYNC_MIN_GAIN:
+        print(f"  the .srt doesn't match this movie's speech ({share:.0%} of its lines on speech, "
+              f"{chance:.0%} by chance): making subtitles from the audio instead", flush=True)
+        return []
+    if speed == 1.0 and abs(shift) < 0.25:
+        print(f"  subtitles are in sync ({share:.0%} of lines on speech)", flush=True)
+        return cues
+    print(f"  subtitles were out of sync: moved {shift:+.1f}s" + (f", speed x{speed:.4f}" if speed != 1.0 else "")
+          + f" ({share:.0%} of lines on speech)", flush=True)
+    moved = [(a * speed + shift, b * speed + shift, t) for a, b, t in cues]
+    return [(max(0.0, a), b, t) for a, b, t in moved if b > 0.2]
+
+
+def srt_cues(srt, src, workdir):
+    """The lines of your .srt, lined up with the movie. [] (so Whisper makes them) when it's for another film."""
+    cues = parse_srt(srt)
+    if cues:
+        cues = sync_cues(cues, src, workdir)
+        if not cues:
+            SUB_INFO["note"] = None
+    return cues
+
+
 # ---------------------------------------------------------------- captions (free, no AI)
 CAPTIONS_ON = os.environ.get("CAPTIONS", "on").strip().lower() not in ("off", "no", "0", "false")
 
@@ -1193,7 +1279,7 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
     workdir.mkdir(parents=True, exist_ok=True)
     detect_black_bars(src, duration(src))
     SUB_INFO.update(lang=None, note="from your .srt file" if srt else None, full=False)
-    cues = parse_srt(srt)
+    cues = srt_cues(srt, src, workdir)
     resumed = all(m in plan for m in modes)
     if resumed:                       # everything is planned already: no need to analyse again
         total, loud, motion, cuts, quiet = duration(src), [], [], [], []
@@ -1600,7 +1686,7 @@ def process_clips(gh, release, meta, rid, video, name):
         out_body["clips"] = True
         total = duration(src)
         detect_black_bars(src, total)
-        cues = parse_srt(srt)
+        cues = srt_cues(srt, src, WORK)
         MODE = "clips"
         first = status.next_clip_number(name)
         label = MODE_NAMES["clips"]
