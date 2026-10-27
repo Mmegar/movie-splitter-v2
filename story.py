@@ -96,6 +96,7 @@ PACK_SUFFIX = ".editpack.zip"
 
 
 MUSIC_DIR = Path(__file__).resolve().parent / "assets" / "music"
+MUSIC_UNDER_LUFS = -32   # narrated parts: songs are evened out to this before mixing (the voice sits around -16)
 AUDIO_EXT = {".mp3", ".m4a", ".aac", ".wav", ".ogg", ".flac", ".opus"}
 DUCK = 0.18          # movie sound under the narrator
 WORDS_PER_SECOND = 2.6
@@ -1244,10 +1245,10 @@ def caption_y(src, track, default):
         return default
     mid = (band[0] + band[1]) / 2
     if track:
-        return STORY_BAND_TOP + mid * STORY_BAND[1] - 50
+        return STORY_BAND_TOP + mid * STORY_BAND[1] - 36
     W, H = P.picture_size(src)
     ph = 1080 * H / W
-    return (1920 - ph) / 2 + mid * ph - 50
+    return (1920 - ph) / 2 + mid * ph - 36
 
 
 def tracked(src, start, length, workdir, tag):
@@ -1283,14 +1284,14 @@ def has_audio(src):
 
 
 def caption_filters(words, length, bottom, workdir, tag, y=None):
-    """Narration captions: big chunks of 2-3 words just under the picture, or (fast style) one big word at a
-    time on the lower part of the picture, like the recap channels."""
+    """Narration captions: big chunks of 2-3 words just under the picture, or (fast style) short phrases of
+    up to 3 words on the lower part of the picture, like the recap channels."""
     out, size, border = [], 72, 6
     if fast():
-        size, border = 88, 7
+        size, border = 70, 6
     if y is None:
         y = (bottom - 110 if bottom < 1650 else 1380) if fast() else (bottom + 40 if bottom < 1650 else 1500)
-    for k, (a, b, text) in enumerate(chunks(words, *((1, 40) if fast() else ()))):
+    for k, (a, b, text) in enumerate(chunks(words, *((3, 20) if fast() else ()))):
         a, b = max(0.0, a), min(length, b)
         if b <= a:
             continue
@@ -1547,8 +1548,18 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
     if music:
         mi = 1 + extra.count("-i")
         extra = extra + ["-stream_loop", "-1", "-i", str(Path(music).resolve())]
-        a = (f"[{mi}:a]volume={MUSIC_VOLUME if music_volume is None else music_volume:.3f},afade=t=in:d=1.5,afade=t=out:st={max(0.0, length - 2):.2f}:d=2[mu];"
-             f"[0:a][mu]amix=inputs=2:duration=first:normalize=0[a]")
+        vol = MUSIC_VOLUME if music_volume is None else music_volume
+        fades = f"afade=t=in:d=1.5,afade=t=out:st={max(0.0, length - 2):.2f}:d=2"
+        if loud:
+            # under the narrator: every song brought to the same quiet level first (some are mastered very loud),
+            # then pushed down further whenever the narrator speaks, so it never covers the words
+            a = (f"[{mi}:a]loudnorm=I={MUSIC_UNDER_LUFS:.0f}:TP=-8:LRA=11,aresample=48000,volume={vol / 0.12:.3f},{fades}[mu0];"
+                 "[0:a]asplit=2[vo][key];"
+                 "[mu0][key]sidechaincompress=threshold=0.015:ratio=8:attack=20:release=450:makeup=1[mu];"
+                 "[vo][mu]amix=inputs=2:duration=first:normalize=0[a]")
+        else:
+            a = (f"[{mi}:a]volume={vol:.3f},{fades}[mu];"
+                 f"[0:a][mu]amix=inputs=2:duration=first:normalize=0[a]")
     if loud:
         a = a[:-3] + "[a1];[a1]loudnorm=I=-14:TP=-1.5:LRA=7[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y", "-i", str(joined.resolve()), *extra,
@@ -1746,32 +1757,65 @@ def render(mode, src, number, info, cues, out, workdir, total):
     return render_story(src, number, info, cues, out, workdir, total)
 
 
-def wrap(text, width=16, lines=3):
-    """Breaks a title into short lines for the thumbnail."""
-    out = []
-    for w in text.split():
-        if out and len(out[-1]) + 1 + len(w) <= width:
-            out[-1] += " " + w
-        else:
-            out.append(w)
-    return "\n".join(out[:lines])
+def cover_moment(info, video):
+    """A second in the movie that shows the part well: about a third of the way into its footage."""
+    if isinstance(info, dict):
+        if info.get("payoff"):
+            return float(info["payoff"][0]) + 1.0
+        times = [b.get("at", b.get("keep")) for b in info.get("beats") or [] if b.get("at", b.get("keep")) is not None]
+        if times:
+            return float(times[len(times) // 3]) + 1.0
+    return None
 
 
-def make_cover(video, number, title, out, workdir):
-    """The part's thumbnail (1080x1920 JPEG): a frame from the part with "PART n" and its title on it."""
+def clean_moment(src, at, tries=8, step=1.5):
+    """The first second from `at` on (every `step` s) whose frame has no subtitle text on it, or None."""
+    try:
+        import numpy as np
+        import tracking
+    except ImportError:
+        return None
+    for k in range(tries):
+        t = at + k * step
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", str(src), "-frames:v", "1",
+               "-an", "-sn", "-vf", f"{P.CROP['filter']}scale=480:-2,format=gray", "-f", "rawvideo", "-"]
+        try:
+            data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
+        except Exception:
+            return None
+        h = len(data) // 480
+        if h < 50:
+            return None
+        if tracking.text_rows(np.frombuffer(data[:h * 480], dtype=np.uint8).reshape(h, 480)) is None:
+            return t
+    return None
+
+
+def make_cover(video, number, title, out, workdir, src=None, info=None, badge=None):
+    """
+    The part's thumbnail (1080x1920 JPEG): a clean frame from the movie itself (no captions, no part label,
+    its own burned-in subtitles blurred), the whole 16:9 picture in the middle, the top and bottom filled
+    with a blurred, darkened copy of it, and a bold badge in the top-left corner: badge, or "PART n".
+    Without src (or a moment to take), the frame comes from the finished part instead.
+    """
     workdir = Path(workdir)
-    at = max(0.0, P.duration(video) * 0.3)
-    (workdir / "cover_part.txt").write_text(f"PART {number}", encoding="utf-8")
-    vf = ("scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,eq=brightness=-0.06:saturation=1.15,"
-          "drawbox=y=ih*0.58:w=iw:h=ih*0.42:color=black@0.45:t=fill,"
-          f"drawtext=fontfile={P.FONT}:textfile=cover_part.txt:expansion=none:fontsize=190:fontcolor=0xFFD400:"
-          "borderw=12:bordercolor=black:x=(w-text_w)/2:y=h*0.62")
-    for k, line in enumerate(wrap(title.upper()).splitlines() if title else []):    # each line centred
-        (workdir / f"cover_title{k}.txt").write_text(line, encoding="utf-8")
-        vf += (f",drawtext=fontfile={P.FONT}:textfile=cover_title{k}.txt:expansion=none:fontsize=96:fontcolor=white:"
-               f"borderw=8:bordercolor=black:x=(w-text_w)/2:y=h*0.62+230+{k * 115}")
-    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(Path(video).resolve()),
-           "-frames:v", "1", "-vf", vf, "-q:v", "3", str(Path(out).resolve())], cwd=workdir)
+    at = cover_moment(info, video) if src else None
+    if at is None:
+        src, at, pre = video, max(0.0, P.duration(video) * 0.3), ""
+    else:
+        clean = clean_moment(src, at)
+        at, pre = (clean, P.CROP["filter"]) if clean is not None else (at, f"{P.CROP['filter']}{hide_old_subtitles(src)}")
+    (workdir / "cover_badge.txt").write_text(str(badge or f"PART {number}").upper(), encoding="utf-8")
+    graph = (f"[0:v]{pre}split=2[cb][cf];"
+             "[cb]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=24:3,"
+             "eq=brightness=-0.28:saturation=0.85[cbg];"
+             "[cf]scale=1080:-2,setsar=1[cfg];"
+             "[cbg][cfg]overlay=0:(H-h)/2,"
+             f"drawtext=fontfile={P.FONT}:textfile=cover_badge.txt:expansion=none:fontsize=84:fontcolor=black:"
+             "box=1:boxcolor=0xFFD400:boxborderw=26:x=70:y=170[v]")
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{at:.2f}", "-i", str(Path(src).resolve()),
+           "-filter_complex", graph, "-map", "[v]", "-frames:v", "1", "-q:v", "3", str(Path(out).resolve())],
+          cwd=workdir)
     return Path(out)
 
 

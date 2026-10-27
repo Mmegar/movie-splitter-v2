@@ -84,7 +84,13 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(len(beats), 1)                                     # no silent original moment
         self.assertNotIn("joke", beats[0])                                  # and no joke pause
 
-    def test_fast_style_has_one_word_captions(self):
+    def test_cover_moment_is_a_third_into_the_part(self):
+        info = {"beats": [{"say": "a", "at": 10}, {"say": "b", "at": 20}, {"keep": 30, "until": 35}]}
+        self.assertEqual(story.cover_moment(info, None), 21.0)
+        self.assertEqual(story.cover_moment({"payoff": [50, 60]}, None), 51.0)
+        self.assertIsNone(story.cover_moment({}, None))
+
+    def test_chunks_of_one_word(self):
         self.assertEqual([c[2] for c in story.chunks([(0, .2, "The"), (.2, .4, "boy"), (.4, .7, "ran.")], 1, 40)],
                          ["The", "boy", "ran."])
 

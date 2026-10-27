@@ -1266,7 +1266,8 @@ def process_local(src, name, srt, outdir, workdir, on_plan=None, on_part=None, m
                     PART_HOOKS[(mode, i)] = sc["caption"]
                 try:
                     COVERS[(mode, i)] = story.make_cover(out, i, (sc or {}).get("title") or "",
-                                                         out.with_name(out.stem + " - thumbnail.jpg"), workdir)
+                                                         out.with_name(out.stem + " - thumbnail.jpg"), workdir,
+                                                         src=src, info=sc)
                 except Exception as e:
                     print(f"(no thumbnail for part {i}: {e})", flush=True)
             else:
