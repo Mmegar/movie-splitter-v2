@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:48:51+13:00",
+ "updated": "2026-10-27T22:48:54+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Fall (2022)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 4
  },
  "queue": [],
@@ -4070,6 +4070,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T22:48:53+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Fall (2022): Part 3 of 4 ready",
+   "message": "Part 3: Stranded Hundreds of Feet Up (26 narrated beats, about 117s of voice)\nIn Ready to post/Fall (2022)/Movie recap."
+  },
+  {
    "at": "2026-10-27T22:37:28+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Fall (2022): Part 2 of 4 ready",
@@ -5262,12 +5268,6 @@
    "type": "planned",
    "title": "[Hype edit] Runner (2026): 1 part planned",
    "message": "Parts will arrive on the laptop in Ready to post/Runner (2026)/Hype edit as they're made."
-  },
-  {
-   "at": "2026-10-21T17:00:28+13:00",
-   "type": "info",
-   "title": "[Character story] Skipped for Runner (2026)",
-   "message": "The story model couldn't make sense of the dialogue."
   }
  ]
 }
