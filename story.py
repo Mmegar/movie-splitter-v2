@@ -1227,12 +1227,12 @@ def chunks(words, max_words=3, max_chars=18):
 FRAME = ("split=2[bg][fg];"
          "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
          "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.08[bgb];"
-         "[fg]scale=1080:1920:force_original_aspect_ratio=decrease[fgs];"
+         "[fg]scale=1080:1920:force_original_aspect_ratio=decrease:flags=lanczos[fgs];"
          "[bgb][fgs]overlay=(W-w)/2:(H-h)/2,setsar=1")
 ZOOM_FRAME = ("split=2[bg][fg];"
               "[bg]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
               "scale=270:480,boxblur=10:2,scale=1080:1920,eq=brightness=-0.12[bgb];"
-              f"[fg]scale={STORY_BAND[0]}:{STORY_BAND[1]},setsar=1[fgs];"
+              f"[fg]scale={STORY_BAND[0]}:{STORY_BAND[1]}:flags=lanczos,setsar=1[fgs];"
               f"[bgb][fgs]overlay=0:{STORY_BAND_TOP},setsar=1")
 
 
@@ -1682,7 +1682,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
         a = a[:-3] + "[a1];[a1]loudnorm=I=-14:TP=-1.5:LRA=7[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y", "-i", str(joined.resolve()), *extra,
            *P.graph_args(f"{v};{a}", workdir), "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}",
-           *P.hd_video(), *P.HD_AUDIO, "-movflags", "+faststart",
+           *P.hd_video(length=length), *P.HD_AUDIO, "-movflags", "+faststart",
            str(Path(out).resolve())], cwd=workdir)
     for f in [joined, *segs]:
         Path(f).unlink(missing_ok=True)
