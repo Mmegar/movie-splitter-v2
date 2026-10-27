@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:46:47+13:00",
+ "updated": "2026-10-28T09:46:49+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "elysium-2013",
+   "name": "Elysium (2013)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-28T09:46:49+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "blink-twice-2024",
    "name": "Blink Twice (2024)",
@@ -4532,6 +4560,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T09:46:49+13:00",
+   "type": "started",
+   "title": "Started: Elysium (2013)",
+   "message": "Cutting on the laptop: Movie recap, Best stretch, Highlights. Parts go into 'Ready to post/Elysium (2013)'."
+  },
+  {
    "at": "2026-10-28T09:46:20+13:00",
    "type": "finished",
    "title": "✅ Finished: Blink Twice (2024)",
@@ -5724,12 +5758,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 4 of 5 ready",
    "message": "Part 4: Damian Makes His Demands (6 narrated beats, about 61s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T02:42:23+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Runner (2026): Part 3 of 5 ready",
-   "message": "Part 3: Chased Through a Tunnel (6 narrated beats, about 58s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
   }
  ]
 }
