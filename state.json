@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T10:34:07+13:00",
+ "updated": "2026-10-28T10:51:17+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "elysium-2013/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 1173.0,
+       "end": 1749.0,
+       "seconds": 165.9,
+       "drive_path": "Ready to post/Elysium (2013)/Movie recap/Elysium (2013) - Part 03.mp4",
+       "caption": "A friend has a plan that sounds like a disaster waiting to happen 😬 Then one shift at the factory goes horribly wrong.\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "elysium-2013/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "elysium-2013/recap-03-cover.bin"
       }
      ]
     },
