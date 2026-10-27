@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:11:47+13:00",
+ "updated": "2026-10-27T18:19:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -43,6 +43,22 @@
         "error": null
        },
        "cover": "predestination-2014/recap-01-cover.bin"
+      },
+      {
+       "n": 2,
+       "start": 506.0,
+       "end": 910.0,
+       "seconds": 101.9,
+       "drive_path": "Ready to post/Predestination (2014)/Movie recap/Predestination (2014) - Part 02.mp4",
+       "caption": "A bet over a bottle at a quiet New York bar 🍺 Who is the mysterious writer?\nPart 2 🎬 · Part 3 is up next 👀\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
+       "preview": "predestination-2014/recap-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "predestination-2014/recap-02-cover.bin"
       }
      ]
     },
