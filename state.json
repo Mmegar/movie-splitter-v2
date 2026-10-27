@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:29:03+13:00",
+ "updated": "2026-10-27T22:37:25+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -43,6 +43,22 @@
         "error": null
        },
        "cover": "fall-2022/recap-01-cover.bin"
+      },
+      {
+       "n": 2,
+       "start": 1077.0,
+       "end": 2257.0,
+       "seconds": 63.1,
+       "drive_path": "Ready to post/Fall (2022)/Movie recap/Fall (2022) - Part 02.mp4",
+       "caption": "A rusty tower, a tiny platform, and one dare too far 😰\nPart 2 🎬 · Should I post Part 3? 👇\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "fall-2022/recap-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "fall-2022/recap-02-cover.bin"
       }
      ]
     },
