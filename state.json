@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T23:20:00+13:00",
+ "updated": "2026-10-27T23:27:19+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -121,6 +121,21 @@
        "drive_path": "Ready to post/Fall (2022)/Best stretch/Fall (2022) - Part 02.mp4",
        "caption": "Me pretending I understood everything 🤡\nPart 2 🎬 · Follow so you don't miss Part 3 🔔\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
        "preview": "fall-2022/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 1711.6,
+       "end": 1916.1,
+       "seconds": 204.5,
+       "drive_path": "Ready to post/Fall (2022)/Best stretch/Fall (2022) - Part 03.mp4",
+       "caption": "The vibes are unmatched ✨\nPart 3 🎬 · Should I post Part 4? 👇\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
+       "preview": "fall-2022/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
