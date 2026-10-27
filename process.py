@@ -1145,6 +1145,9 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
     ], cwd=workdir)
     for f in list(workdir.glob("sub*.txt")) + [workdir / "track.txt"]:
         f.unlink(missing_ok=True)
+    song = story.pick_music("highlight", number)       # your highlight songs, if you have a folder of them
+    if song:
+        story.music_under(out_path, song, workdir)
 
 
 def picture_size(src):
@@ -1709,6 +1712,8 @@ def cut_here(src, srt, ready):
     import tempfile
     name = clean_name(src.name)
     apply_style(SETTINGS.get("cut_style"))
+    story.MUSIC_ROOTS[:] = [Path(ready).parent / "Music", Path(ready).parent / "music"]   # next to "Ready to post"
+    story.download_music()                # the free fallback songs (GitHub downloads its own copy)
     labels = ", ".join(MODE_NAMES[m] for m in MODES)
     work = Path(tempfile.mkdtemp(prefix="msplit-"))
     captions = {}
