@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T19:35:54+13:00",
+ "updated": "2026-10-27T19:35:57+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "predestination-2014",
    "name": "Predestination (2014)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-27T17:59:03+13:00",
-   "finished": null,
+   "finished": "2026-10-27T19:35:57+13:00",
    "duration": 5869.0,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -3987,6 +3987,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T19:35:56+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Predestination (2014): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 1:21:34 to 1:25:38 (243s)  interest score 59/100\nIn Ready to post/Predestination (2014)/Highlights."
+  },
+  {
    "at": "2026-10-27T19:27:56+13:00",
    "type": "part_ready",
    "title": "[Highlights] Predestination (2014): Highlight 4 of 5 ready",
@@ -5179,12 +5185,6 @@
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 3 of 5 ready",
    "message": "Highlight 3: 36:58 to 41:13 (255s)  interest score 59/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\n'You know who I don’t miss?' and then THIS happened 😳\nHighlight 3 🎬 · comment 'MORE' if you need Highlight 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
-  },
-  {
-   "at": "2026-10-18T00:28:08+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Toy Story 5 (2026): Highlight 2 of 5 ready",
-   "message": "Highlight 2: 23:09 to 26:33 (205s)  interest score 57/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'What’s that?' 🫠\nHighlight 2 🎬 · Highlight 3 is even more unhinged 👀\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
