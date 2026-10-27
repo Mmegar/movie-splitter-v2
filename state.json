@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:25:52+13:00",
+ "updated": "2026-10-28T08:37:59+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -107,6 +107,22 @@
         "error": null
        },
        "cover": "blink-twice-2024/recap-05-cover.bin"
+      },
+      {
+       "n": 6,
+       "start": 3881.0,
+       "end": 5818.0,
+       "seconds": 127.2,
+       "drive_path": "Ready to post/Blink Twice (2024)/Movie recap/Blink Twice (2024) - Part 06.mp4",
+       "caption": "Dinner turns deadly, and the villa becomes a trap 🔥 Who survives the night?\nPart 6 🎬 · And that's a wrap 🎬 Follow for the next one\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie\n🎵 \"Spy Glass\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
+       "preview": "blink-twice-2024/recap-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "blink-twice-2024/recap-06-cover.bin"
       }
      ]
     },
