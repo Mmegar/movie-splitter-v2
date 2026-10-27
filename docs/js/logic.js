@@ -180,6 +180,7 @@ export const SETTING_LABELS = {
   narrator_voice: 'Narrator voice',
   narrator_tempo: 'Narrator speed',
   narrator_funny: 'Funny dial',
+  recap_style: 'Recap style',
   narrator_intensity: 'Expressiveness',
   light_sweep: 'Light sweep',
   light_sweep_seconds: 'Light sweep speed',
@@ -249,6 +250,7 @@ export function formatSetting(path, v) {
   if (path === 'posting.times') return (v || []).join(', ') || 'None';
   if (PCT_KEYS.has(path)) return `${Math.round(Number(v) * 100)}%`;
   if (path === 'zoom_part_seconds') return `${Math.floor(v / 60)} min${v % 60 ? ` ${v % 60} s` : ''}`;
+  if (path === 'recap_style') return v === 'chatty' ? 'Chatty' : 'Fast storyteller';
   if (path === 'cut_style') return v === 'classic' ? 'Classic' : 'Zoomed + tracking';
   if (SEC_KEYS.has(path)) return `${v} s`;
   if (path === 'stretch_minutes') return `${v} min`;

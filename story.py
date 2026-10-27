@@ -2,6 +2,9 @@
 The storytelling modes, made from the movie's subtitles:
 
   recap      "Movie recap": a narrator tells the whole story over the matching scenes, in Part 1, 2, 3...
+             RECAP_STYLE "fast" (default) copies the big recap channels: a plain third-person storyteller that
+             never stops talking, a jump cut every 1.4 seconds, one big word on screen at a time, -14 LUFS.
+             "chatty" talks to the viewer, jokes (Funny dial), pauses, and has a welcome intro and sign-off.
   character  "Character story": the same, but following one character's arc (CHARACTER, or the most
              important character when that's blank), staying faithful to what they actually do.
   hype       "Hype edit": the character gets disrespected or doubted, answers it in style, then a
@@ -82,11 +85,14 @@ def load_settings(env=None):
     TEMPO = float(env.get("NARRATOR_TEMPO", "1.2"))
     VOICE_ENGINE = env.get("NARRATOR_ENGINE", "chatterbox").strip().lower()
     INTENSITY = float(env.get("NARRATOR_INTENSITY", "0.9"))   # Expressiveness: 0.5 calm ... 1 wild (every voice)
-    global EDITOR
+    global EDITOR, RECAP_STYLE
     EDITOR = env.get("STORY_EDITOR", "ffmpeg").strip().lower()       # ffmpeg (cut + narrate here) or filmcraft (laptop)
+    RECAP_STYLE = "chatty" if env.get("RECAP_STYLE", "fast").strip().lower() == "chatty" else "fast"
 
 
 EDITOR = "ffmpeg"
+RECAP_STYLE = "fast"   # fast = the TikTok recap-channel style (storyteller, quick jump cuts, one-word captions); chatty = talks to "you"
+JUMP_SHOT, JUMP_EVERY = 1.4, 2.2   # fast style: keep 1.4s of every 2.2s of footage, so the picture cuts every 1.4s
 PACK_SUFFIX = ".editpack.zip"
 
 
@@ -537,8 +543,37 @@ def part_count(total):
     return min(MAX_STORY_PARTS, max(MIN_STORY_PARTS, RECAP_PARTS or round(total / 900)))
 
 
+def fast():
+    """True for the recap-channel style (the default): see voice_rules and render_segment."""
+    return RECAP_STYLE == "fast"
+
+
+def fast_voice_rules():
+    """The recap-channel storyteller: a fast, plain, third-person retelling that never stops moving."""
+    rules = """Voice: a fast recap-channel storyteller, the kind with millions of views on TikTok.
+- Third person, past tense, plain and simple English a 12-year-old can follow: "The boy suddenly realized the man
+  standing in front of him was actually an alien. Terrified, he turned around and ran."
+- Call characters by who they are ("the boy", "the alien", "the woman", "the principal", "the rich man") and use a
+  real name only for the two or three main characters, once the viewer knows who they are.
+- Pure story: what happens, what they do, why, and what it leads to. No "you", no talking to the viewer or the
+  characters, no opinions, no jokes, no welcome, no "let's get into it".
+- Non-stop: every sentence moves the story forward. Link events with "but", "just then", "the next day",
+  "at that moment", "suddenly", "only to find that", "to make things worse", so it flows like one breathless story.
+- Explain the clever or strange details the way a friend retelling it would ("he deliberately tilted the glass to
+  see if the man was thirsty, because infected people can't resist water").
+- Short sentences, mostly 8 to 16 words, one event each.
+- One continuous story across all the parts: each part picks up exactly where the last stopped, never recaps.
+- Every fact stays true to the movie."""
+    if DIRECTION:
+        rules += (f"\n- The channel owner's notes (follow them where they fit this storyteller voice; skip anything that "
+                  f"would add jokes or talk to the viewer): {DIRECTION}")
+    return rules
+
+
 def voice_rules():
     """How the narrator talks: personal ("you"), punchy, and as funny as the Funny dial says."""
+    if fast():
+        return fast_voice_rules()
     if FUNNY < 0.25:
         fun = "Mostly serious and gripping; at most one light joke per part."
     elif FUNNY < 0.6:
@@ -589,6 +624,74 @@ voice as the narration; one or two emoji are fine. No hashtags and no part numbe
     return rules + "\n"
 
 
+CHATTY_FLOW = """Flow, which matters most:
+- The narrated intro ("intro", played at the very start of Part 1): two to four beats that welcome the viewer and
+  hook them for the whole series: what they're in for and why they should care (the central question, the
+  stakes, the wildest thing that's coming), e.g. "Okay, you need to see this one. One locked room. One body. And
+  six people who all swear they were asleep. Let's get into it." Its footage is the most gripping moments of the
+  story (it may come from later in the movie, but never shows or tells the ending or a twist). Part 1's own beats
+  then start the story from the beginning ("But it all starts three days earlier...").
+- The narrated outro ("outro", played at the very end of the last part, after the ending): two to four beats
+  that wrap the movie up: what it all meant, a last callback or joke, your verdict, and a sign-off to the viewer
+  (ask what they'd have done, or tell them to follow for the next recap). Its footage is the movie's final
+  scenes and closing shots of the main characters, from before the end credits start.
+- Every part except the last ends on a real cliffhanger: stop right before a reveal or a decision, and end with a
+  line that makes people need the next part (a question, a threat, "and that's when..."). Never end a part on a
+  calm moment or mid-thought.
+- Each new part picks up exactly where the last one stopped. Never recap or repeat what earlier parts said.
+- Smooth footage: inside a part, footage moves forward through the movie in order. Consecutive beats use the
+  same scene or the next moments of it; never jump back and forth between scenes or back to footage already used.
+- Every change of scene is led by the narration, never cut first and explained after: the beat whose footage is
+  the new scene starts with the transition itself ("Meanwhile, our boy heads to the station...", "Cut to the
+  mansion, where...", "Three days later...", "Back at the house..."), so the words and the cut arrive together.
+
+"""
+
+FAST_FLOW = """Flow, which matters most:
+- No welcome and no intro: "intro" is empty. Part 1's first line drops the viewer straight into the most gripping
+  situation of the opening, mid-action ("While fixing his principal's broken toy cat, the boy found a hidden
+  camera inside."), and the story runs on from there.
+- "outro": one or two beats that finish the story with its final outcome. No verdict, no sign-off, no "follow".
+- Every part except the last ends on a cliffhanger, cut off at the most tense moment: right before a reveal, a
+  decision or a danger hits ("Just then, a mysterious person appeared and gave the boy a hint."). Never end a part
+  on a calm moment.
+- Each new part picks up exactly where the last one stopped. Never recap or repeat what earlier parts said.
+- Smooth footage: inside a part, footage moves forward through the movie in order. Consecutive beats use the
+  same scene or the next moments of it; never jump back and forth between scenes or back to footage already used.
+- Scene changes are led by the narration ("The next day, the boy went to the clinic..."), so words and cut arrive
+  together.
+- Keep talking: the narration covers the whole part with no gaps. Don't use original-moment beats (empty "say")
+  and never mark a "joke".
+
+"""
+
+
+def beat_extras():
+    if fast():
+        return ("Keep the delivery steady and urgent like a storyteller: tense or curious for most lines, shocked on "
+                "a twist, whisper a creepy detail.\n")
+    return ("""Vary it the way a real
+storyteller does: build tension before a reveal, go shocked on the twist, funny on the jokes, whisper the creepy
+bits, hype on the big win; write the line to match (short words and a "?" or "!" where the delivery needs one).
+When a beat's "say" ends on a joke or punchline, add
+"joke": true and the footage keeps playing for a moment with no voice, so the joke lands. One to three times per part, use an original-moment beat
+instead: "say" is empty, and "at" and "until" mark a 3 to 8 second stretch where a key line is spoken, played
+with its own sound. """)
+
+
+def beats_shape():
+    if fast():
+        return ('[{"say": "<narration>", "at": <second>, "mood": "tense"},\n'
+                '                       {"say": "<the next event>", "at": <second>, "mood": "curious"}]')
+    return ('[{"say": "<narration>", "at": <second>, "mood": "tense"},\n'
+            '                       {"say": "<a line ending on a punchline>", "at": <second>, "joke": true, "mood": "funny"},\n'
+            '                       {"say": "", "at": <start second>, "until": <end second>}]')
+
+
+def flow_rules():
+    return FAST_FLOW if fast() else CHATTY_FLOW.format()
+
+
 def story_prompt(name, total, text, mode, who):
     n = part_count(total)
     words = int(RECAP_PART_SECONDS * WORDS_PER_SECOND * 0.8)
@@ -611,37 +714,10 @@ from {int(WINDOW[0])} to {int(WINDOW[1])}, and skip any moment there that still 
 
 {voice_rules()}
 
-Flow, which matters most:
-- The narrated intro ("intro", played at the very start of Part 1): two to four beats that welcome the viewer and
-  hook them for the whole series: what they're in for and why they should care (the central question, the
-  stakes, the wildest thing that's coming), e.g. "Okay, you need to see this one. One locked room. One body. And
-  six people who all swear they were asleep. Let's get into it." Its footage is the most gripping moments of the
-  story (it may come from later in the movie, but never shows or tells the ending or a twist). Part 1's own beats
-  then start the story from the beginning ("But it all starts three days earlier...").
-- The narrated outro ("outro", played at the very end of the last part, after the ending): two to four beats
-  that wrap the movie up: what it all meant, a last callback or joke, your verdict, and a sign-off to the viewer
-  (ask what they'd have done, or tell them to follow for the next recap). Its footage is the movie's final
-  scenes and closing shots of the main characters, from before the end credits start.
-- Every part except the last ends on a real cliffhanger: stop right before a reveal or a decision, and end with a
-  line that makes people need the next part (a question, a threat, "and that's when..."). Never end a part on a
-  calm moment or mid-thought.
-- Each new part picks up exactly where the last one stopped. Never recap or repeat what earlier parts said.
-- Smooth footage: inside a part, footage moves forward through the movie in order. Consecutive beats use the
-  same scene or the next moments of it; never jump back and forth between scenes or back to footage already used.
-- Every change of scene is led by the narration, never cut first and explained after: the beat whose footage is
-  the new scene starts with the transition itself ("Meanwhile, our boy heads to the station...", "Cut to the
-  mansion, where...", "Three days later...", "Back at the house..."), so the words and the cut arrive together.
-
-Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
+{flow_rules()}Each part is a list of beats. A narration beat has "say" (one or two short sentences) and "at" (the second in the movie
 where matching footage starts); that footage plays, with its own sound turned down, while the sentence is read,
 so pick a moment that shows what the sentence says. Give every narration beat a "mood" for how it is read aloud:
-calm, curious, tense, funny, shocked, sad, hype or whisper (a secret or a creepy detail). Vary it the way a real
-storyteller does: build tension before a reveal, go shocked on the twist, funny on the jokes, whisper the creepy
-bits, hype on the big win; write the line to match (short words and a "?" or "!" where the delivery needs one).
-When a beat's "say" ends on a joke or punchline, add
-"joke": true and the footage keeps playing for a moment with no voice, so the joke lands. One to three times per part, use an original-moment beat
-instead: "say" is empty, and "at" and "until" mark a 3 to 8 second stretch where a key line is spoken, played
-with its own sound. Only use seconds that appear below.
+calm, curious, tense, funny, shocked, sad, hype or whisper (a secret or a creepy detail). {beat_extras()}Only use seconds that appear below.
 
 {caption_rules()}Answer with this JSON shape:
 {{"character": "<who it follows; empty for a whole-movie recap>",
@@ -649,9 +725,7 @@ with its own sound. Only use seconds that appear below.
   "intro": [{{"say": "<narration>", "at": <second>}}],
   "outro": [{{"say": "<narration>", "at": <second>}}],
   "parts": [{{"title": "<3 to 6 words, for the thumbnail>",{caption_field()}
-             "beats": [{{"say": "<narration>", "at": <second>, "mood": "tense"}},
-                       {{"say": "<a line ending on a punchline>", "at": <second>, "joke": true, "mood": "funny"}},
-                       {{"say": "", "at": <start second>, "until": <end second>}}]}}]}}
+             "beats": {beats_shape()}}}]}}
 
 {text}
 """
@@ -765,6 +839,8 @@ def clean_story(data, total):
     parts = []
     for p in data.get("parts") or []:
         beats = clean_beats(p.get("beats"), total)
+        if fast():                                             # non-stop narration: no silent moments
+            beats = [{k: v for k, v in b.items() if k != "joke"} for b in beats if "say" in b]
         if any("say" in b for b in beats):
             parts.append({"title": str(p.get("title") or "").strip()[:60], "beats": beats,
                           "caption": re.sub(r"\s*#\w+", "", str(p.get("caption") or "")).strip()[:300]})
@@ -800,10 +876,15 @@ def part_seconds(beats):
     out = 0.0
     for b in beats:
         if "say" in b:
-            out += len(b["say"].split()) / WORDS_PER_SECOND / max(0.5, TEMPO) + 0.35 + (JOKE_PAUSE if b.get("joke") else 0)
+            out += len(b["say"].split()) / WORDS_PER_SECOND / max(0.5, TEMPO) + line_gap() + (JOKE_PAUSE if b.get("joke") else 0)
         else:
             out += b["until"] - b["keep"]
     return out
+
+
+def line_gap():
+    """Seconds of footage after each narrated line: the fast style barely breathes."""
+    return 0.1 if fast() else 0.35
 
 
 def split_long(part):
@@ -1128,16 +1209,20 @@ def has_audio(src):
 
 
 def caption_filters(words, length, bottom, workdir, tag):
-    """Narration captions: big chunks of 2-3 words, just under the picture."""
+    """Narration captions: big chunks of 2-3 words just under the picture, or (fast style) one big word at a
+    time on the lower part of the picture, like the recap channels."""
     out, y = [], (bottom + 40 if bottom < 1650 else 1500)
-    for k, (a, b, text) in enumerate(chunks(words)):
+    size, border = 72, 6
+    if fast():
+        size, border, y = 88, 7, (bottom - 110 if bottom < 1650 else 1380)
+    for k, (a, b, text) in enumerate(chunks(words, *((1, 40) if fast() else ()))):
         a, b = max(0.0, a), min(length, b)
         if b <= a:
             continue
         f = workdir / f"{tag}{k}.txt"
         f.write_text(text.upper(), encoding="utf-8")
-        out.append(f",drawtext=fontfile={P.FONT}:textfile={f.name}:expansion=none:fontsize=72:fontcolor=white:"
-                   f"borderw=6:bordercolor=black:x=(w-text_w)/2:y={y:.0f}:enable='between(t,{a:.3f},{b:.3f})'")
+        out.append(f",drawtext=fontfile={P.FONT}:textfile={f.name}:expansion=none:fontsize={size}:fontcolor=white:"
+                   f"borderw={border}:bordercolor=black:shadowx=0:shadowy=5:shadowcolor=black@0.5:x=(w-text_w)/2:y={y:.0f}:enable='between(t,{a:.3f},{b:.3f})'")
     return "".join(out)
 
 
@@ -1152,16 +1237,26 @@ def title_filter(text, workdir, until=1.4):
             f"enable='lt(t,{until:.2f})'")
 
 
+def jump_span(length):
+    """Seconds of movie a fast-style narrated piece of `length` seconds covers (it keeps JUMP_SHOT of every JUMP_EVERY)."""
+    return length * JUMP_EVERY / JUMP_SHOT
+
+
 def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None, flash=False,
-                   slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False):
+                   slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False, jumps=False):
     """One piece of a part: the movie from `start` for `length` seconds (whole picture, graded), with the
     narrator over it (voice), the movie's own subtitles (cues), a white flash in, or slow motion.
     bridge: a quick dip from black, so a jump to another scene doesn't feel like a sudden cut.
-    ending: the last piece of a part eases out instead of stopping dead."""
-    src_len = length / slow
+    ending: the last piece of a part eases out instead of stopping dead.
+    jumps: quick jump cuts (fast style): keeps JUMP_SHOT seconds of every JUMP_EVERY, so the picture changes
+    every second or so and the story moves through more of the movie."""
+    src_len = jump_span(length) if jumps else length / slow
+    keep = f"lt(mod(t,{JUMP_EVERY}),{JUMP_SHOT})"
     track = tracked(src, start, src_len, workdir, f"track_{Path(out).stem}")
     first = P.flip_filter(src, start, start + src_len).replace("[0:v]", f"[0:v]{P.CROP['filter']}{track}{grade()}", 1)
     v = first + (ZOOM_FRAME if track else FRAME)
+    if jumps:
+        v += f",select='{keep}',setpts=N/FRAME_RATE/TB"
     if slow != 1.0:
         v += f",setpts={slow:.3f}*PTS"
     with classic():
@@ -1181,7 +1276,9 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
     v += "[v]"
     inputs = ["-ss", f"{start:.3f}", "-t", f"{src_len:.3f}", "-i", str(Path(src).resolve())]
     movie_a = "[0:a]" if has_audio(src) else None
-    if movie_a and slow != 1.0:
+    if movie_a and jumps:
+        a = f"{movie_a}aselect='{keep}',asetpts=N/SR/TB,volume={movie_volume:.2f},apad[ma]"
+    elif movie_a and slow != 1.0:
         a = f"{movie_a}atempo={1 / slow:.3f},volume={movie_volume:.2f}[ma]"
     elif movie_a:
         a = f"{movie_a}volume={movie_volume:.2f}[ma]"
@@ -1344,9 +1441,10 @@ def specks_image(workdir):
     return f.resolve()
 
 
-def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None):
+def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None, loud=False):
     """Joins the pieces, then adds the part-level touches in one last encode: the top label, the line,
-    the cockroach, and quiet background music."""
+    the cockroach, and quiet background music. loud: evened out to TikTok loudness (-14 LUFS), like the
+    recap channels' always-full sound."""
     joined = workdir / "joined.mp4"
     concat(segs, joined, workdir)
     length = P.duration(joined)
@@ -1378,6 +1476,8 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
         extra = extra + ["-stream_loop", "-1", "-i", str(Path(music).resolve())]
         a = (f"[{mi}:a]volume={MUSIC_VOLUME if music_volume is None else music_volume:.3f},afade=t=in:d=1.5,afade=t=out:st={max(0.0, length - 2):.2f}:d=2[mu];"
              f"[0:a][mu]amix=inputs=2:duration=first:normalize=0[a]")
+    if loud:
+        a = a[:-3] + "[a1];[a1]loudnorm=I=-14:TP=-1.5:LRA=7[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y", "-i", str(joined.resolve()), *extra,
            "-filter_complex", f"{v};{a}", "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}",
            *P.hd_video(), *P.HD_AUDIO, "-movflags", "+faststart",
@@ -1399,25 +1499,26 @@ def render_story(src, number, info, cues, out, workdir, total):
         if "say" in beat:
             mp3 = workdir / f"say{k:03}.mp3"
             length, words = speak(beat["say"], mp3, beat.get("mood"))
-            length += 0.35 + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
+            length += line_gap() + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
             if beat.get("joke") and not end_of_part:
                 length += JOKE_PAUSE                            # a moment of footage so the joke lands
-            at = max(0.0, min(beat["at"], total - length - 0.1))
+            span = jump_span(length) if fast() else length         # movie seconds this line's footage covers
+            at = max(0.0, min(beat["at"], total - span - 0.1))
             if last_end is not None and -CONTINUE_GAP < at - last_end < CONTINUE_GAP:
-                at = max(0.0, min(last_end, total - length - 0.1))   # same scene: carry on, no jump back and forth
+                at = max(0.0, min(last_end, total - span - 0.1))     # same scene: carry on, no jump back and forth
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
-                           bridge=jump, ending=end_of_part)
+                           bridge=jump and not fast(), ending=end_of_part, jumps=fast())
             mp3.unlink(missing_ok=True)
             said.append((0.0, length, beat["say"]))
-            last_end = at + length
+            last_end = at + span
         else:
             jump = last_end is not None and abs(beat["keep"] - last_end) > 20
             render_segment(src, beat["keep"], beat["until"] - beat["keep"], seg, workdir, cues=cues,
                            bridge=jump, ending=end_of_part)
             last_end = beat["until"]
         segs.append(seg)
-    finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music("calm", number))
+    finish_part(segs, out, workdir, src, f"Part {number}", music=pick_music("calm", number), loud=fast())
     return said
 
 
