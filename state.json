@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T14:29:24+13:00",
+ "updated": "2026-10-27T14:36:13+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -170,6 +170,21 @@
        "drive_path": "Ready to post/Predestination (2014)/Highlights/Predestination (2014) - Highlight 01.mp4",
        "caption": "I need answers 😩\nHighlight 1 🎬 · Follow so you don't miss Highlight 2 🔔\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
        "preview": "predestination-2014/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 1480.7,
+       "end": 1696.7,
+       "seconds": 216.0,
+       "drive_path": "Ready to post/Predestination (2014)/Highlights/Predestination (2014) - Highlight 02.mp4",
+       "caption": "The ending of this part 😳\nHighlight 2 🎬 · Highlight 3 coming soon ⏳\n#Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
+       "preview": "predestination-2014/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
