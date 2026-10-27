@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T14:29:21+13:00",
+ "updated": "2026-10-27T14:29:24+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -3927,6 +3927,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T14:29:24+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Predestination (2014): Highlight 1 of 5 ready",
+   "message": "Highlight 1: 4:01 to 7:30 (209s)  interest score 57/100\nIn Ready to post/Predestination (2014)/Highlights."
+  },
+  {
    "at": "2026-10-27T14:23:13+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 8 of 8 ready",
@@ -5119,12 +5125,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Toy.Story.5.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-17T23:31:58+13:00",
-   "type": "part_ready",
-   "title": "[Best stretch] Runner (2026): Part 5 of 5 ready",
-   "message": "Part 5: 1:06:59 to 1:09:59 (180s)\nOn its way to the laptop (Ready to post/Runner (2026)/Best stretch).\n\n📝 Caption:\n'Why are you getting ice?' and then THIS happened 😳\nPart 5 🎬 · FINAL part. how are we feeling? 👇\n#fyp #movies #funny #viral #moviemoments"
   }
  ]
 }
