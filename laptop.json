@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T16:03:46+07:00",
+ "updated": "2026-10-27T16:03:49+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -175,16 +175,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mvqggoinevrp": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mvqggralzuum": {
-   "status": "done",
-   "note": "Moved to To edit"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
