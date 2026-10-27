@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T12:24:04+13:00",
+ "updated": "2026-10-28T12:31:32+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -145,7 +145,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 2379.4,
+       "end": 2582.2,
+       "seconds": 202.9,
+       "drive_path": "Ready to post/Elysium (2013)/Best stretch/Elysium (2013) - Part 01.mp4",
+       "caption": "I need answers 😩\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie",
+       "preview": "elysium-2013/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
