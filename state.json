@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:06:24+13:00",
+ "updated": "2026-10-27T18:06:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T17:59:01+13:00",
   "movie": "Predestination (2014)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 8
  },
  "queue": [],
  "movies": [
@@ -31,7 +31,7 @@
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -3782,6 +3782,18 @@
  },
  "events": [
   {
+   "at": "2026-10-27T18:06:27+13:00",
+   "type": "planned",
+   "title": "[Highlights] Predestination (2014): 5 parts planned",
+   "message": "Predestination (2014)\nMode: Highlights\n\nHighlight 1: 4:01 to 7:30 (209s)  interest score 57/100\nHighlight 2: 24:41 to 28:17 (216s)  interest score 63/100\nHighlight 3: 54:39 to 58:04 (205s)  interest score 62/100\nHighlight 4: 1:01:21 to 1:05:04 (223s)  interest score 58/100\nHighlight 5: 1:21:34 to 1:25:38 (243s)  interest score 59/100\n"
+  },
+  {
+   "at": "2026-10-27T18:06:26+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Predestination (2014): 8 parts planned",
+   "message": "Predestination (2014)\nMode: Movie recap\n\nPart 1: The Basement Bomb Burns Him (14 narrated beats, about 79s of voice)\nPart 2: A Bet Over a Bottle (25 narrated beats, about 138s of voice)\nPart 3: Jane, the Girl Nobody Wanted (15 narrated beats, about 90s of voice)\nPart 4: The Strange Recruiter's Offer (14 narrated beats, about 78s of voice)\nPart 5: A Stranger Steals Her Heart (15 narrated beats, about 89s of voice)\nPart 6: The Secret Inside Jane (14 narrated beats, about 77s of voice)\nPart 7: The Baby Vanishes in Silence (20 narrated beats, about 113s of voice)\nPart 8: Field Kit and a Jump Back (21 narrated beats, about 146s of voice)\n"
+  },
+  {
    "at": "2026-10-27T17:59:03+13:00",
    "type": "started",
    "title": "Started: Predestination (2014)",
@@ -4968,18 +4980,6 @@
    "type": "part_ready",
    "title": "[Highlights] Runner (2026): Highlight 5 of 5 ready",
    "message": "Highlight 5: 1:13:29 to 1:17:14 (224s)  interest score 64/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\n'How many does Ellie have?' 💀 I can't\nHighlight 5 🎬 · and that's a wrap 🎬 drop the next movie I should do 👇\n#fyp #filmclips #foryou #whatdidijustwatch #movie"
-  },
-  {
-   "at": "2026-10-17T23:49:09+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Runner (2026): Highlight 4 of 5 ready",
-   "message": "Highlight 4: 1:03:25 to 1:06:59 (214s)  interest score 66/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\n'They’re at the church!' is my new personality 😤\nHighlight 4 🎬 · Highlight 5? only if this gets 100 comments 😏\n#fyp #moviescenes #viral #cinema #plottwist"
-  },
-  {
-   "at": "2026-10-17T23:44:33+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Runner (2026): Highlight 3 of 5 ready",
-   "message": "Highlight 3: 58:04 to 1:01:34 (210s)  interest score 60/100\nOn its way to the laptop (Ready to post/Runner (2026)/Highlights).\n\n📝 Caption:\nthe side eye at the end 👀\nHighlight 3 🎬 · follow or you'll miss Highlight 4 (I warned you) 🔔\n#fyp #movieclips #foryou #filmtok #unhinged"
   }
  ]
 }
