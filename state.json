@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T11:53:39+13:00",
+ "updated": "2026-10-28T11:53:42+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Elysium (2013)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 6,
+  "part": 7,
   "parts_total": 7
  },
  "queue": [],
@@ -4657,6 +4657,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T11:53:42+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Elysium (2013): Part 6 of 7 ready",
+   "message": "Part 6: The Final Race to Elysium (50 narrated beats, about 362s of voice)\nIn Ready to post/Elysium (2013)/Movie recap."
+  },
+  {
    "at": "2026-10-28T11:27:04+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Elysium (2013): Part 5 of 7 ready",
@@ -5849,12 +5855,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 3 of 20 ready",
    "message": "Part 3: Sixteen Months of Bad Luck (5 narrated beats, about 62s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T07:51:27+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 2 of 20 ready",
-   "message": "Part 2: Portals, Vultures, and a Badge (6 narrated beats, about 81s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
