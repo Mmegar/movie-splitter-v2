@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:46:15+13:00",
+ "updated": "2026-10-28T09:46:18+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -16,12 +16,12 @@
   {
    "id": "blink-twice-2024",
    "name": "Blink Twice (2024)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-28T07:03:49+13:00",
-   "finished": null,
+   "finished": "2026-10-28T09:46:18+13:00",
    "duration": 6157.3,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -4532,6 +4532,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T09:46:17+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Blink Twice (2024): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 56:33 to 1:00:17 (224s)  interest score 57/100\nIn Ready to post/Blink Twice (2024)/Highlights."
+  },
+  {
    "at": "2026-10-28T09:40:17+13:00",
    "type": "part_ready",
    "title": "[Highlights] Blink Twice (2024): Highlight 4 of 5 ready",
@@ -5724,12 +5730,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Runner (2026): Part 2 of 5 ready",
    "message": "Part 2: The Liver and the Talkative Courier (6 narrated beats, about 61s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T02:38:30+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Runner (2026): Part 1 of 5 ready",
-   "message": "Part 1: A Fixer's Impossible Errands (6 narrated beats, about 77s of voice)\nIn Ready to post/Runner (2026)/Movie recap."
   }
  ]
 }
