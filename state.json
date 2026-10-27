@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:13:59+13:00",
+ "updated": "2026-10-28T08:14:02+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Blink Twice (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 6
  },
  "queue": [],
@@ -4348,6 +4348,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T08:14:01+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Blink Twice (2024): Part 4 of 6 ready",
+   "message": "Part 4: The Snake Bite Night (52 narrated beats, about 265s of voice)\nIn Ready to post/Blink Twice (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-28T07:56:56+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Blink Twice (2024): Part 3 of 6 ready",
@@ -5540,12 +5546,6 @@
    "type": "new_file",
    "title": "📥 Sent to GitHub",
    "message": "Runner.2026.1080p.WEBRip.x264.AAC5.1-[YTS.GG - YTS.BZ].mp4: cutting starts soon. The parts come back to C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post."
-  },
-  {
-   "at": "2026-10-22T00:05:59+13:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Spider-Man Across The Spider-Verse (2023): Part 1",
-   "message": "[Hype edit] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nMe pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movie #movieclips"
   }
  ]
 }
