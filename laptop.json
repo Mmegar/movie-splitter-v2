@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T15:27:42+07:00",
+ "updated": "2026-10-27T15:27:44+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -172,6 +172,10 @@
   "mvqf1vj1x0jo": {
    "status": "done",
    "note": "Ready to save on your phone: share/predestination-2014/highlights-004.bin"
+  },
+  "mvqf2bt4o9zu": {
+   "status": "done",
+   "note": "Same as the request just before (done once)"
   }
  },
  "commands_done": [
@@ -292,7 +296,8 @@
   "mvpy0xdm5tek",
   "mvpy5ulz5s1e",
   "mvqf14yk6kqq",
-  "mvqf1vj1x0jo"
+  "mvqf1vj1x0jo",
+  "mvqf2bt4o9zu"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
