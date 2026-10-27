@@ -187,8 +187,8 @@ function buildForm(d) {
     group('Film look', [
       segRow(d, 'filter', 'Look', [['vivid', 'Vivid'], ['mystery', 'Mystery'], ['noir', 'Noir'], ['teal_orange', 'Teal & orange'], ['warm', 'Warm'], ['none', 'None']]),
       d.filter === 'none' ? '' : sliderRow(d, 'filter_strength', 'Strength', { min: 0.1, max: 1, step: 0.05, ends: ['Subtle', 'Strong'] }),
-      swRow({ light_sweep: true, ...d }, 'light_sweep', 'Light sweep', 'A diagonal light slides across the picture once in each narrated part'),
-      d.light_sweep === false ? '' : sliderRow({ light_sweep_seconds: 3, ...d }, 'light_sweep_seconds', 'Light sweep speed', { min: 1, max: 6, step: 0.5, ends: ['Fast', 'Slow'], sub: 'The diagonal light that slides across the picture, once in each narrated part.' }),
+      swRow({ light_sweep: false, ...d }, 'light_sweep', 'Light sweep', 'A diagonal light slides across the picture once in each narrated part (off by default: bright streaks can hurt to watch)'),
+      !d.light_sweep ? '' : sliderRow({ light_sweep_seconds: 3, ...d }, 'light_sweep_seconds', 'Light sweep speed', { min: 1, max: 6, step: 0.5, ends: ['Fast', 'Slow'], sub: 'The diagonal light that slides across the picture, once in each narrated part.' }),
     ], 'A colour grade, soft vignette and light grain on every part.'),
 
     group('Cutting style', [

@@ -23,7 +23,7 @@ DEFAULTS = {
     "narrator_voice": "en-US-GuyNeural", # Microsoft neural voice (edge-tts), e.g. en-US-ChristopherNeural, en-GB-RyanNeural
     "narrator_speed": "+0%",             # edge voice's own rate, before narrator_tempo
     "narrator_tempo": 1.2,               # every narrated line is sped up this much (1.2 = 1.2x, pitch kept)
-    "light_sweep": True,                 # the diagonal light sweep on narrated parts
+    "light_sweep": False,                # off: a bright streak can hurt to watch (the owner asked for no flashes)                 # the diagonal light sweep on narrated parts
     "light_sweep_seconds": 3,            # the one diagonal light sweep per part: seconds to cross (1 fast ... 6 slow)
     "recap_style": "fast",               # fast = recap-channel storyteller (third person, jump cuts every ~1.4s, one-word
                                          # captions, loud mix); chatty = talks to "you", jokes, pauses, intro + outro

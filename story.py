@@ -8,7 +8,7 @@ The storytelling modes, made from the movie's subtitles:
   character  "Character story": the same, but following one character's arc (CHARACTER, or the most
              important character when that's blank), staying faithful to what they actually do.
   hype       "Hype edit": the character gets disrespected or doubted, answers it in style, then a
-             beat-synced montage (white flash cuts, three-panel diagonal mask slides, slow motion)
+             beat-synced montage (hard cuts, three-panel diagonal mask slides, slow motion; no flashes)
              over music from assets/music.
 
 A small AI model running on GitHub's computer (Ollama, STORY_MODEL, no API key or account) reads the
@@ -74,7 +74,7 @@ def load_settings(env=None):
     HYPE_MONTAGE_SECONDS = float(env.get("HYPE_MONTAGE_SECONDS", "15"))
     MODEL = env.get("STORY_MODEL", "claude-haiku-5-5").strip() or "claude-haiku-5-5"
     global VOICE_ENGINE, INTENSITY, TEMPO, FUNNY, DIRECTION, SWEEP_SECONDS, LIGHT_SWEEP
-    LIGHT_SWEEP = env.get("LIGHT_SWEEP", "on").strip().lower() not in OFF
+    LIGHT_SWEEP = env.get("LIGHT_SWEEP", "off").strip().lower() not in OFF
     SWEEP_SECONDS = float(env.get("LIGHT_SWEEP_SECONDS", "3"))
     FUNNY = min(1.0, max(0.0, float(env.get("NARRATOR_FUNNY", "0.7"))))  # 0 straight ... 1 full comedy
     DIRECTION = env.get("SCRIPT_DIRECTION", "").strip()[:600]           # the owner's own notes for the writer
@@ -1303,7 +1303,7 @@ def caption_filters(words, length, bottom, workdir, tag, y=None):
 
 
 def title_filter(text, workdir, until=1.4):
-    """Big name title that flashes in at the start of the montage."""
+    """Big name title that fades in at the start of the montage."""
     if not text:
         return ""
     f = workdir / "hypetitle.txt"
@@ -1313,11 +1313,39 @@ def title_filter(text, workdir, until=1.4):
             f"enable='lt(t,{until:.2f})'")
 
 
-def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None, flash=False,
+EDGE = 0.6   # a movie cut this close to the start or end of a piece makes a quick double cut (a flicker)
+
+
+def clean_start(src, start, length, total):
+    """
+    Moves a piece's start so no movie cut sits right next to the edit's own cut: two cuts a few frames
+    apart flash the screen. A cut just after the start: start on it. A cut just before the end: end before
+    it. A short piece (montage shot) is kept to one shot. Returns the new start.
+    """
+    try:
+        cuts = [start + c for c in P.scene_cuts(Path(src), start, length)]
+    except Exception:
+        return start
+    short = length < 1.6
+    for c in cuts:
+        if not (start + 0.05 < c < start + length - 0.02):
+            continue
+        if c - start < EDGE or (short and c - start <= start + length - c):
+            start = c + 0.05                       # begin on the movie's own cut
+        elif start + length - c < EDGE or short:
+            start = c - length - 0.05              # finish just before it
+        else:
+            continue
+        break
+    return max(0.0, min(start, total - length - 0.1))
+
+
+def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None,
                    slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False):
     """One piece of a part: the movie from `start` for `length` seconds (whole picture, graded), with the
-    narrator over it (voice), the movie's own subtitles (cues), a white flash in, or slow motion.
-    bridge: a quick dip from black, so a jump to another scene doesn't feel like a sudden cut.
+    narrator over it (voice), the movie's own subtitles (cues), or slow motion. No flashes or dips to
+    black anywhere (they hurt to watch): pieces join with plain cuts.
+    bridge: a jump to another scene: the movie sound eases in instead of cutting in.
     ending: the last piece of a part eases out instead of stopping dead."""
     src_len = length / slow
     track = tracked(src, start, src_len, workdir, f"track_{Path(out).stem}")
@@ -1335,10 +1363,6 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
             part_cues = [(a - start, b - start, t) for a, b, t in cues if b > start and a < start + src_len]
             v += P.subtitle_filters(part_cues, length, bottom, workdir)
     v += title_filter(title, workdir)
-    if flash:
-        v += ",fade=t=in:st=0:d=0.16:color=white"
-    if bridge:
-        v += ",fade=t=in:st=0:d=0.3"
     if ending:
         v += f",fade=t=out:st={max(0.0, length - 0.6):.3f}:d=0.6"
     v += "[v]"
@@ -1401,7 +1425,7 @@ def render_slide3(src, starts, length, out, workdir):
               f"pad=1080:{PANEL_H}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,format=rgba[p{i}];[p{i}][m{i}]alphamerge[q{i}]"
               f";[{last}][q{i}]overlay=x='{sx}*pow(1-clip((t-{t0})/{dur},0,1),3)':y={PANEL_Y[i]}:eval=frame[o{i}]")
         last = f"o{i}"
-    f += f";[{last}]fade=t=in:st=0:d=0.12:color=white[v]"
+    f += f";[{last}]null[v]"
     if has_audio(src):
         f += ";[1:a]volume=0.25,apad[a]"
     else:
@@ -1542,7 +1566,7 @@ def download_music():
             print(f"  (couldn't download it: {e})", flush=True)
 
 
-LIGHT_SWEEP = True
+LIGHT_SWEEP = False        # off by default: a bright streak across the screen can hurt to watch
 SWEEP_SECONDS = 3.0        # how long the one light sweep in each part takes to cross the screen (app: Light sweep speed)
 SWEEP_AT = 0.3             # ...and where in the part it happens (0.3 = 30% of the way in)
 CONTINUE_GAP = 12.0        # narration footage this close to where the last piece ended just carries on from there
@@ -1644,6 +1668,8 @@ def render_story(src, number, info, cues, out, workdir, total, mode="recap"):
             at = max(0.0, min(beat["at"], total - length - 0.1))
             if last_end is not None and -CONTINUE_GAP < at - last_end < CONTINUE_GAP:
                 at = max(0.0, min(last_end, total - length - 0.1))   # same scene: carry on, no jump back and forth
+            else:
+                at = clean_start(src, at, length, total)              # a new spot: no cut right next to ours
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
                            bridge=jump, ending=end_of_part)
@@ -1685,7 +1711,7 @@ def beat_grid(music, seconds):
 
 
 def montage_steps(beat, seconds):
-    """The montage's shot pattern in beats: mostly single flash cuts, a three-panel mask slide every so
+    """The montage's shot pattern in beats: mostly single hard cuts, a three-panel mask slide every so
     often, and one slow-motion shot in the middle."""
     unit = 1 if beat >= 0.4 else 2
     pattern = ["single", "single", "single", "slide3", "single", "single", "slow", "single", "single", "slide3"]
@@ -1721,7 +1747,8 @@ def render_montage(src, info, out, workdir, total):
         else:
             slow = 2.0 if kind == "slow" else 1.0
             s = min(next(pick), total - length / slow - 0.1)
-            render_segment(src, max(0.0, s), length, seg, workdir, flash=True, slow=slow,
+            s = clean_start(src, max(0.0, s), length / slow, total)       # one shot per beat, no flicker
+            render_segment(src, max(0.0, s), length, seg, workdir, slow=slow,
                            movie_volume=0.25 if music else 1.0, title=info.get("title", "") if k == 0 else "")
         segs.append(seg)
     raw = workdir / "montage_raw.mp4"
@@ -1748,7 +1775,7 @@ def render_hype(src, number, info, cues, out, workdir, total):
         P.checkpoint()
         a, b = info[key]
         seg = workdir / f"seg{k:03}.mp4"
-        render_segment(src, a, b - a, seg, workdir, cues=cues, flash=(key == "payoff"))
+        render_segment(src, a, b - a, seg, workdir, cues=cues)
         segs.append(seg)
     montage = workdir / "seg002.mp4"
     render_montage(src, info, montage, workdir, total)
