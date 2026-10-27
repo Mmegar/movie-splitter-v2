@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T09:11:51+13:00",
+ "updated": "2026-10-28T09:19:19+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -210,7 +210,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 243.0,
+       "end": 512.7,
+       "seconds": 269.7,
+       "drive_path": "Ready to post/Blink Twice (2024)/Highlights/Blink Twice (2024) - Highlight 01.mp4",
+       "caption": "The vibes are unmatched ✨\nHighlight 1 🎬 · Follow so you don't miss Highlight 2 🔔\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
+       "preview": "blink-twice-2024/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
