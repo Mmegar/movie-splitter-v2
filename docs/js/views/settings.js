@@ -128,7 +128,7 @@ function memoryForm(d, st) {
       `<label class="row row--stack"><span class="row-title">Script direction</span>
         <textarea class="input" rows="6" data-k="script_direction" data-t="str" maxlength="600" spellcheck="true" placeholder="e.g. roast the villain, more Gen Z slang, hype up the twist">${esc(d.script_direction || '')}</textarea>
         <span class="row-sub">Tone, running jokes, names, what to focus on. Claude reads this every time it writes a recap.</span></label>`,
-      sliderRow({ narrator_funny: 0.7, ...d }, 'narrator_funny', 'Funny dial', { min: 0, max: 1, step: 0.05, ends: ['Serious', 'Full comedy'] }),
+      sliderRow({ narrator_funny: 0.7, ...d }, 'narrator_funny', 'Funny dial', { min: 0, max: 1, step: 0.05, ends: ['Serious', 'Full comedy'], sub: 'Used by the Chatty recap style (Settings › Story & voice). The Fast storyteller tells it straight.' }),
     ]),
     group('Caption notes', [
       `<label class="row row--stack"><span class="row-title">Caption direction</span>
@@ -174,6 +174,8 @@ function buildForm(d) {
 
     group('Story & voice', [
       `<a class="row" href="#/memory"><span class="row-main"><span class="row-title">Character, narrator notes and Funny dial</span><span class="row-sub">${esc(d.character ? `Following ${d.character}` : 'Following the main character')} · in Memory</span></span>${icon('chevR', 'row-chev')}</a>`,
+      narrated ? segRow({ ...d, recap_style: d.recap_style || 'fast' }, 'recap_style', 'Recap style', [['fast', 'Fast storyteller'], ['chatty', 'Chatty']],
+        (d.recap_style || 'fast') === 'fast' ? 'Like the big recap channels: the story told straight in the third person, a quick cut every second or so, one big word on screen at a time, loud and non-stop.' : 'Talks to the viewer, jokes (Funny dial), pauses, a welcome intro and a sign-off.') : '',
       narrated ? stepRow(d, 'recap_part_seconds', 'Narrated part length', { def: 90, min: 45, max: 180, step: 15 }) : '',
       narrated ? voiceRow(d) : '',
       narrated ? sliderRow({ narrator_intensity: 0.9, ...d }, 'narrator_intensity', 'Expressiveness', { min: 0.5, max: 1.2, step: 0.05, ends: ['Calm', 'Wild'], sub: 'Every voice: each line is read in its mood (tense, shocked, whispered, hyped…), and this sets how far it goes.' }) : '',

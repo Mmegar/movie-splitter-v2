@@ -25,6 +25,8 @@ DEFAULTS = {
     "narrator_tempo": 1.2,               # every narrated line is sped up this much (1.2 = 1.2x, pitch kept)
     "light_sweep": True,                 # the diagonal light sweep on narrated parts
     "light_sweep_seconds": 3,            # the one diagonal light sweep per part: seconds to cross (1 fast ... 6 slow)
+    "recap_style": "fast",               # fast = recap-channel storyteller (third person, jump cuts every ~1.4s, one-word
+                                         # captions, loud mix); chatty = talks to "you", jokes, pauses, intro + outro
     "narrator_funny": 0.7,               # Funny dial: 0 = serious ... 1 = full comedy
     "script_direction": "",              # free text for the script writer, e.g. "roast the villain, more Gen Z slang"
     "narrator_engine": "chatterbox",     # chatterbox = expressive funny/intense delivery (free online model), edge = standard

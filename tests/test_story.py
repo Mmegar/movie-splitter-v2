@@ -70,7 +70,27 @@ class StoryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             story.parse_json("no json")
 
+    def test_fast_style_is_the_default_storyteller(self):
+        p = story.story_prompt("Film (2020)", 3600, "subs", "recap", "")
+        self.assertTrue(story.fast())
+        self.assertIn("Third person, past tense", p)
+        self.assertIn('"intro" is empty', p)
+        self.assertNotIn('with "you" and "we"', p)
+        self.assertNotIn('"joke": true', p)
+        data = {"character": "", "parts": [
+            {"title": "a", "beats": [{"say": "The boy ran.", "at": 5, "joke": True}, {"say": "", "at": 20, "until": 26}]},
+            {"title": "b", "beats": [{"say": "It ended.", "at": 300}]}]}
+        beats = story.clean_story(data, 600)[0][2]["beats"]
+        self.assertEqual(len(beats), 1)                                     # no silent original moment
+        self.assertNotIn("joke", beats[0])                                  # and no joke pause
+
+    def test_fast_style_has_jump_cuts_and_one_word_captions(self):
+        self.assertAlmostEqual(story.jump_span(1.4), 2.2)
+        self.assertEqual([c[2] for c in story.chunks([(0, .2, "The"), (.2, .4, "boy"), (.4, .7, "ran.")], 1, 40)],
+                         ["The", "boy", "ran."])
+
     def test_clean_story_checks_times(self):
+        story.load_settings({"RECAP_STYLE": "chatty"})
         data = {"character": "", "parts": [
             {"title": "The body", "beats": [{"say": "A man is found dead.", "at": 30},
                                             {"keep": 50, "until": 90},           # too long: trimmed to 10 s
@@ -86,6 +106,7 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(parts[1][0], 200.0)
 
     def test_original_moment_beats_from_the_small_model(self):
+        story.load_settings({"RECAP_STYLE": "chatty"})
         data = {"character": "", "parts": [
             {"title": "a", "beats": [{"say": "It begins.", "at": 5}, {"say": "", "at": 20, "until": 26}]},
             {"title": "b", "beats": [{"say": "It ends.", "at": 300}]}]}
@@ -286,18 +307,18 @@ class StoryTest(unittest.TestCase):
         self.assertEqual(story.faster(6.0, [], "unused.mp3"), (6.0, []))
 
     def test_funny_dial_direction_and_personal_voice_reach_the_prompt(self):
-        story.load_settings({"NARRATOR_FUNNY": "0.9", "SCRIPT_DIRECTION": "roast the villain"})
+        story.load_settings({"NARRATOR_FUNNY": "0.9", "SCRIPT_DIRECTION": "roast the villain", "RECAP_STYLE": "chatty"})
         p = story.story_prompt("Film (2020)", 3600, "subs", "recap", "")
         self.assertIn("Full comedy", p)
         self.assertIn("roast the villain", p)
         self.assertIn('with "you" and "we"', p)
         self.assertIn("Talk to the characters directly", p)
         self.assertNotIn("third person", p)
-        story.load_settings({"NARRATOR_FUNNY": "0.1"})
+        story.load_settings({"NARRATOR_FUNNY": "0.1", "RECAP_STYLE": "chatty"})
         self.assertIn("Mostly serious", story.story_prompt("Film (2020)", 3600, "subs", "recap", ""))
 
     def test_jokes_are_kept_and_long_parts_are_split(self):
-        story.load_settings({"RECAP_PART_SECONDS": "60", "NARRATOR_TEMPO": "1"})
+        story.load_settings({"RECAP_PART_SECONDS": "60", "NARRATOR_TEMPO": "1", "RECAP_STYLE": "chatty"})
         long_part = {"title": "Way too long", "beats": [{"say": " ".join(["word"] * 30), "at": 100 + k * 10,
                                                           **({"joke": True} if k == 0 else {})} for k in range(12)]}
         short = {"title": "Fine", "beats": [{"say": "A clue.", "at": 900}]}
