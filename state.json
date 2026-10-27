@@ -1,18 +1,41 @@
 {
  "version": 1,
- "updated": "2026-10-27T13:29:12+13:00",
+ "updated": "2026-10-27T13:29:30+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-27T13:29:12+13:00",
-  "movie": null,
+  "movie": "Predestination (2014)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
  "queue": [],
  "movies": [
+  {
+   "id": "predestination-2014",
+   "name": "Predestination (2014)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-27T13:29:14+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "10-cloverfield-lane-2016",
    "name": "10 Cloverfield Lane (2016)",
@@ -3759,6 +3782,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T13:29:14+13:00",
+   "type": "started",
+   "title": "Started: Predestination (2014)",
+   "message": "Cutting on the laptop: Movie recap, Highlights. Parts go into 'Ready to post/Predestination (2014)'."
+  },
+  {
    "at": "2026-10-23T21:48:30+13:00",
    "type": "finished",
    "title": "✅ Finished: 10 Cloverfield Lane (2016)",
@@ -4951,12 +4980,6 @@
    "type": "finished",
    "title": "✅ Finished: One Last Shot (2026)",
    "message": "Best stretch: 5 parts, Highlights: 5 parts.\nThe laptop downloads them into Ready to post/One Last Shot (2026). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-17T17:19:06+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] One Last Shot (2026): Highlight 5 of 5 ready",
-   "message": "Highlight 5: 1:22:20 to 1:26:08 (228s)  interest score 67/100\nOn its way to the laptop (Ready to post/One Last Shot (2026)/Highlights).\n\n📝 Caption:\n'Go, go, go!' and then THIS happened 😳\nHighlight 5 🎬 · that's the end. I need a nap 😮‍💨 follow for the next movie 🍿\n#fyp #moviescenes #viral #cinema #plottwist"
   }
  ]
 }
