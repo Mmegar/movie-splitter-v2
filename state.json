@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T22:15:10+13:00",
+ "updated": "2026-10-27T22:16:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -36,7 +36,7 @@
     },
     "hype": {
      "label": "Hype edit",
-     "planned": 0,
+     "planned": 1,
      "parts": []
     },
     "highlights": {
