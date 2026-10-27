@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:27:14+13:00",
+ "updated": "2026-10-28T07:27:17+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Blink Twice (2024)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 6
  },
  "queue": [],
@@ -4300,6 +4300,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T07:27:16+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Blink Twice (2024): Part 1 of 6 ready",
+   "message": "Part 1: Late For The King-Tech Gala (30 narrated beats, about 208s of voice)\nIn Ready to post/Blink Twice (2024)/Movie recap."
+  },
+  {
    "at": "2026-10-28T07:12:43+13:00",
    "type": "planned",
    "title": "[Highlights] Blink Twice (2024): 5 parts planned",
@@ -5492,12 +5498,6 @@
    "type": "failed",
    "title": "❌ Edit failed",
    "message": "FilmCraft couldn't make Spider-Man Across The Spider-Verse (2023) - Part 01.mp4 after 3 tries. The edit pack is kept in its folder.\ncommand_run: edit failed: a caption already covers this time"
-  },
-  {
-   "at": "2026-10-21T21:28:17+13:00",
-   "type": "info",
-   "title": "🎬 Edit ready",
-   "message": "Spider-Man Across The Spider-Verse (2023): Spider-Man Across The Spider-Verse (2023) - Edit 01.mp4"
   }
  ]
 }
