@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:03:47+13:00",
+ "updated": "2026-10-28T07:03:49+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "blink-twice-2024",
+   "name": "Blink Twice (2024)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-10-28T07:03:49+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "fall-2022",
    "name": "Fall (2022)",
@@ -4255,6 +4283,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T07:03:49+13:00",
+   "type": "started",
+   "title": "Started: Blink Twice (2024)",
+   "message": "Cutting on the laptop: Movie recap, Best stretch, Highlights. Parts go into 'Ready to post/Blink Twice (2024)'."
+  },
+  {
    "at": "2026-10-28T00:36:37+13:00",
    "type": "finished",
    "title": "✅ Finished: Fall (2022)",
@@ -5447,12 +5481,6 @@
    "type": "part_ready",
    "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): Edit 1 of 1 ready",
    "message": "Edit 1: The Doubt: setup 2:01:07, payoff 2:02:07, 4 montage shots\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit).\n\n📝 Caption:\nMe pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
-  },
-  {
-   "at": "2026-10-21T21:18:12+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 2 of 2 ready",
-   "message": "Part 2: The Spot's Vision and Miles' Descent (11 narrated beats, about 92s of voice)\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap).\n\n📝 Caption:\nNobody talks about this part 👀\nPart 2 🎬 · And that's a wrap 🎬 Follow for the next one\n#foryou #trending #movie #cinema #fypシ\n🎵 \"Black Vortex\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
   }
  ]
 }
