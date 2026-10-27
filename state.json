@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-28T07:12:39+13:00",
+ "updated": "2026-10-28T07:12:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-10-28T07:03:47+13:00",
   "movie": "Blink Twice (2024)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 6
  },
  "queue": [],
  "movies": [
@@ -31,12 +31,12 @@
     },
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -4283,6 +4283,24 @@
  },
  "events": [
   {
+   "at": "2026-10-28T07:12:43+13:00",
+   "type": "planned",
+   "title": "[Highlights] Blink Twice (2024): 5 parts planned",
+   "message": "Blink Twice (2024)\nMode: Highlights\n\nHighlight 1: 4:03 to 8:33 (270s)  interest score 59/100\nHighlight 2: 9:19 to 13:38 (259s)  interest score 61/100\nHighlight 3: 18:44 to 22:11 (207s)  interest score 59/100\nHighlight 4: 35:39 to 40:34 (296s)  interest score 56/100\nHighlight 5: 56:33 to 1:00:17 (224s)  interest score 57/100\n"
+  },
+  {
+   "at": "2026-10-28T07:12:42+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Blink Twice (2024): 5 parts planned",
+   "message": "Blink Twice (2024)\nMode: Best stretch\n\nPart 1: 21:34 to 25:23 (229s)\nPart 2: 25:23 to 29:18 (235s)\nPart 3: 29:18 to 33:19 (241s)\nPart 4: 33:19 to 37:10 (231s)\nPart 5: 37:10 to 40:34 (204s)\n"
+  },
+  {
+   "at": "2026-10-28T07:12:42+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Blink Twice (2024): 6 parts planned",
+   "message": "Blink Twice (2024)\nMode: Movie recap\n\nPart 1: Late For The King-Tech Gala (30 narrated beats, about 208s of voice)\nPart 2: Phones Gone On The Island (26 narrated beats, about 156s of voice)\nPart 3: The Psychedelic Dinner Party (45 narrated beats, about 237s of voice)\nPart 4: The Snake Bite Night (52 narrated beats, about 265s of voice)\nPart 5: The Snake Venom Shots (33 narrated beats, about 171s of voice)\nPart 6: The Villa Showdown (31 narrated beats, about 172s of voice)\n"
+  },
+  {
    "at": "2026-10-28T07:03:49+13:00",
    "type": "started",
    "title": "Started: Blink Twice (2024)",
@@ -5463,24 +5481,6 @@
    "type": "info",
    "title": "🎬 Edit ready",
    "message": "Spider-Man Across The Spider-Verse (2023): Spider-Man Across The Spider-Verse (2023) - Edit 01.mp4"
-  },
-  {
-   "at": "2026-10-21T21:22:15+13:00",
-   "type": "info",
-   "title": "📥 Parts downloaded",
-   "message": "Spider-Man Across The Spider-Verse (2023): 3 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Spider-Man Across The Spider-Verse (2023)\nMovie recap: 2 parts, Hype edit: 1 part"
-  },
-  {
-   "at": "2026-10-21T21:18:21+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Spider-Man Across The Spider-Verse (2023)",
-   "message": "Movie recap: 2 parts, Hype edit: 1 part.\nThe laptop downloads them into Ready to post/Spider-Man Across The Spider-Verse (2023). The copy sent to GitHub has been deleted."
-  },
-  {
-   "at": "2026-10-21T21:18:15+13:00",
-   "type": "part_ready",
-   "title": "[Hype edit] Spider-Man Across The Spider-Verse (2023): Edit 1 of 1 ready",
-   "message": "Edit 1: The Doubt: setup 2:01:07, payoff 2:02:07, 4 montage shots\nOn its way to the laptop (Ready to post/Spider-Man Across The Spider-Verse (2023)/Hype edit).\n\n📝 Caption:\nMe pretending I understood everything 🤡\nEdit 1 🎬 · And that's a wrap 🎬 Follow for the next one\n#fyp #foryoupage #movies #film #mustwatch\n🎵 \"Five Armies\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0"
   }
  ]
 }
