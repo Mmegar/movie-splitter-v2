@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T16:31:20+07:00",
+ "updated": "2026-10-27T16:31:22+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -104,16 +104,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
-   "size_mb": 1509,
-   "modified": "2026-10-23T08:42:54+07:00",
-   "sending": false,
-   "style": "zoom",
-   "character": ""
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
@@ -129,6 +120,11 @@
    "name": "Companion.2025.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 1922,
    "modified": "2026-10-23T08:47:45+07:00"
+  },
+  {
+   "name": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
+   "size_mb": 1509,
+   "modified": "2026-10-23T08:42:54+07:00"
   },
   {
    "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
@@ -179,6 +175,10 @@
    "note": "Starting Fall.2022.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4 on the laptop"
   },
   "mvqhjydob1i5": {
+   "status": "done",
+   "note": "Moved to your Movies folder"
+  },
+  "mvqhjzis9x5z": {
    "status": "done",
    "note": "Moved to your Movies folder"
   }
@@ -308,7 +308,8 @@
   "mvqggralzuum",
   "mvqgmcg80q15",
   "mvqgn286rfhm",
-  "mvqhjydob1i5"
+  "mvqhjydob1i5",
+  "mvqhjzis9x5z"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
