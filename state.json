@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:38:02+13:00",
+ "updated": "2026-10-28T08:44:40+13:00",
  "run": {
   "active": true,
   "run_id": 40568893353,
@@ -129,7 +129,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1293.8,
+       "end": 1522.9,
+       "seconds": 229.2,
+       "drive_path": "Ready to post/Blink Twice (2024)/Best stretch/Blink Twice (2024) - Part 01.mp4",
+       "caption": "Rewatching this hits even harder\nPart 1 🎬 · Part 2 coming soon ⏳\n#BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
+       "preview": "blink-twice-2024/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
