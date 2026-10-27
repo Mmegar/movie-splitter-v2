@@ -1,11 +1,13 @@
 {
- "updated": "2026-10-27T11:53:57+07:00",
+ "updated": "2026-10-27T11:58:51+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "Predestination.2014.1080p.BluRay.x264.YIFY.mp4"
+ },
  "transfers": [],
  "uploaded": [
   {
