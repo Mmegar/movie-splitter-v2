@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T01:47:25+07:00",
+ "updated": "2026-10-28T01:50:42+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -182,6 +182,10 @@
   "mvqzxu2ukvr6": {
    "status": "done",
    "note": "Already cutting Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv"
+  },
+  "mvr1ef1hhod7": {
+   "status": "done",
+   "note": "Ready to save on your phone: share/blink-twice-2024/recap-002.bin"
   }
  },
  "commands_done": [
@@ -322,7 +326,8 @@
   "mvqlneqyph0k",
   "mvqznqzpcwfx",
   "mvqznu3t5v6a",
-  "mvqzxu2ukvr6"
+  "mvqzxu2ukvr6",
+  "mvr1ef1hhod7"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
@@ -357,7 +362,8 @@
   "share/predestination-2014/highlights-005.bin",
   "share/fall-2022/recap-002.bin",
   "share/fall-2022/stretch-002.bin",
-  "share/fall-2022/stretch-003.bin"
+  "share/fall-2022/stretch-003.bin",
+  "share/blink-twice-2024/recap-002.bin"
  ],
  "version": 2
 }
