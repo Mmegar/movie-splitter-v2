@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-10-28T08:14:02+13:00",
+ "updated": "2026-10-28T08:25:28+13:00",
  "run": {
   "active": true,
-  "run_id": null,
-  "started": "2026-10-28T07:03:47+13:00",
-  "movie": "Blink Twice (2024)",
-  "mode": "recap",
-  "stage": "rendering",
-  "part": 5,
-  "parts_total": 6
+  "run_id": 40568893353,
+  "started": "2026-10-28T08:25:28+13:00",
+  "movie": null,
+  "mode": null,
+  "stage": "idle",
+  "part": null,
+  "parts_total": null
  },
  "queue": [],
  "movies": [
