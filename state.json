@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T18:24:44+13:00",
+ "updated": "2026-10-27T18:24:46+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Predestination (2014)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 8
  },
  "queue": [],
@@ -3831,6 +3831,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T18:24:46+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Predestination (2014): Part 3 of 8 ready",
+   "message": "Part 3: Jane, the Girl Nobody Wanted (15 narrated beats, about 90s of voice)\nIn Ready to post/Predestination (2014)/Movie recap."
+  },
+  {
    "at": "2026-10-27T18:19:45+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Predestination (2014): Part 2 of 8 ready",
@@ -5023,12 +5029,6 @@
    "type": "info",
    "title": "📥 Parts downloaded",
    "message": "Runner (2026): 10 parts in C:\\Users\\kimme\\OneDrive\\Desktop\\Movies\\Ready to Post\\Ready to post\\Runner (2026)\nBest stretch: 5 parts, Highlights: 5 parts"
-  },
-  {
-   "at": "2026-10-17T23:53:35+13:00",
-   "type": "started",
-   "title": "Started: Toy Story 5 (2026)",
-   "message": "Making: Best stretch, Highlights.\nChecking the movie first, then you'll get a message as each part is made. The laptop downloads them into 'Ready to post/Toy Story 5 (2026)'."
   }
  ]
 }
