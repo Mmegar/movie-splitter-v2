@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T00:02:39+13:00",
+ "updated": "2026-10-28T00:08:32+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -209,6 +209,21 @@
        "drive_path": "Ready to post/Fall (2022)/Highlights/Fall (2022) - Highlight 01.mp4",
        "caption": "Bet you can't watch just one 😏\nHighlight 1 🎬 · Should I post Highlight 2? 👇\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
        "preview": "fall-2022/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 1707.0,
+       "end": 1913.2,
+       "seconds": 206.3,
+       "drive_path": "Ready to post/Fall (2022)/Highlights/Fall (2022) - Highlight 02.mp4",
+       "caption": "Pause at the right moment 😂\nHighlight 2 🎬 · Follow so you don't miss Highlight 3 🔔\n#Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
+       "preview": "fall-2022/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
