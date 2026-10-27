@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-27T19:35:57+13:00",
+ "updated": "2026-10-27T19:35:59+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -3987,6 +3987,12 @@
  },
  "events": [
   {
+   "at": "2026-10-27T19:35:59+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Predestination (2014)",
+   "message": "Movie recap: 8 parts, Highlights: 5 parts.\nIn Ready to post/Predestination (2014)."
+  },
+  {
    "at": "2026-10-27T19:35:56+13:00",
    "type": "part_ready",
    "title": "[Highlights] Predestination (2014): Highlight 5 of 5 ready",
@@ -5179,12 +5185,6 @@
    "type": "part_ready",
    "title": "[Highlights] Toy Story 5 (2026): Highlight 4 of 5 ready",
    "message": "Highlight 4: 54:36 to 58:27 (232s)  interest score 61/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\nthe way they said 'Enough with the silly games. Where’s Jessie and Bullseye?' 🫠\nHighlight 4 🎬 · Highlight 5 is where it gets wild 🌪️\n#fyp #movies #funny #viral #moviemoments"
-  },
-  {
-   "at": "2026-10-18T00:32:25+13:00",
-   "type": "part_ready",
-   "title": "[Highlights] Toy Story 5 (2026): Highlight 3 of 5 ready",
-   "message": "Highlight 3: 36:58 to 41:13 (255s)  interest score 59/100\nOn its way to the laptop (Ready to post/Toy Story 5 (2026)/Highlights).\n\n📝 Caption:\n'You know who I don’t miss?' and then THIS happened 😳\nHighlight 3 🎬 · comment 'MORE' if you need Highlight 4 👇\n#foryoupage #movietok #fyp #chaos #mustwatch"
   }
  ]
 }
