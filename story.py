@@ -3,7 +3,7 @@ The storytelling modes, made from the movie's subtitles:
 
   recap      "Movie recap": a narrator tells the whole story over the matching scenes, in Part 1, 2, 3...
              RECAP_STYLE "fast" (default) copies the big recap channels: a plain third-person storyteller that
-             never stops talking, a jump cut every 1.4 seconds, one big word on screen at a time, -14 LUFS.
+             never stops talking, in one steady voice, with short caption phrases and an even -14 LUFS mix.
              "chatty" talks to the viewer, jokes (Funny dial), pauses, and has a welcome intro and sign-off.
   character  "Character story": the same, but following one character's arc (CHARACTER, or the most
              important character when that's blank), staying faithful to what they actually do.
@@ -91,8 +91,7 @@ def load_settings(env=None):
 
 
 EDITOR = "ffmpeg"
-RECAP_STYLE = "fast"   # fast = the TikTok recap-channel style (storyteller, quick jump cuts, one-word captions); chatty = talks to "you"
-JUMP_SHOT, JUMP_EVERY = 1.4, 2.2   # fast style: keep 1.4s of every 2.2s of footage, so the picture cuts every 1.4s
+RECAP_STYLE = "fast"   # fast = the TikTok recap-channel style (storyteller, steady voice, short captions); chatty = talks to "you"
 PACK_SUFFIX = ".editpack.zip"
 
 
@@ -988,7 +987,7 @@ VOICE_ENGINE = os.environ.get("NARRATOR_ENGINE", "chatterbox")   # chatterbox (e
 INTENSITY = float(os.environ.get("NARRATOR_INTENSITY", "0.9"))     # Expressiveness: 0.5 calm ... 1 wild (every voice)
 TEMPO = float(os.environ.get("NARRATOR_TEMPO", "1.2"))             # narration plays this much faster (pitch kept)
 CHATTERBOX_SPACE = "ResembleAI/Chatterbox"
-_CHATTER = {"client": None, "ref": None, "fails": 0}
+_CHATTER = {"client": None, "ref": None, "fails": 0, "used": set(), "edge_only": False}
 
 
 # How each mood is read. INTENSITY (the app's Expressiveness) scales all of it, for every voice:
@@ -1003,7 +1002,9 @@ MOODS = {
     "sad":     {"exag": -0.1,  "cfg": 0.45, "temp": 0.75, "rate": -12, "pitch": -8, "volume": -5},
     "hype":    {"exag": 0.45,  "cfg": 0.25, "temp": 0.95, "rate": 12,  "pitch": 10, "volume": 15},
     "whisper": {"exag": -0.05, "cfg": 0.4,  "temp": 0.8,  "rate": -10, "pitch": -6, "volume": -20},
+    "steady":  {"exag": 0.0,   "cfg": 0.45, "temp": 0.6,  "rate": 0,   "pitch": 0,  "volume": 0},
 }
+STEADY = "steady"   # fast style: every line in the same even delivery, so the voice never changes
 DEFAULT_MOOD = "curious"
 
 
@@ -1042,15 +1043,41 @@ def speak(text, mp3, mood=None):
     """Reads text aloud into mp3 in the beat's mood: Chatterbox's expressive delivery when it's reachable (free
     online model, in the voice of NARRATOR_VOICE), Microsoft's voice otherwise (pitch, pace and loudness follow
     the mood), sped up by TEMPO. Returns (seconds, [(start, end, word)])."""
-    mood = mood_of(text, mood)
-    if VOICE_ENGINE == "chatterbox" and _CHATTER["fails"] < 2:
+    mood = STEADY if fast() else mood_of(text, mood)
+    if VOICE_ENGINE == "chatterbox" and _CHATTER["fails"] < 2 and not _CHATTER["edge_only"]:
         try:
-            return faster(*speak_chatterbox(text, mp3, mood), mp3)
+            out = faster(*speak_chatterbox(text, mp3, mood), mp3)
+            _CHATTER["used"].add("chatterbox")
+            return out
         except Exception as e:
             _CHATTER["fails"] += 1
             print(f"  (Chatterbox didn't answer{', using the standard voice from now on' if _CHATTER['fails'] >= 2 else ''}: {e})",
                   flush=True)
+    _CHATTER["used"].add("edge")
     return faster(*speak_edge(text, mp3, mood), mp3)
+
+
+def speak_lines(lines, workdir):
+    """Reads all of a part's lines [(beat index, text, mood)] before any footage is cut, in ONE voice: if
+    Chatterbox drops out partway, the whole part is read again with the standard voice, so the narrator
+    never changes in the middle of a part. Returns {beat index: (mp3, seconds, words)}."""
+    def read_all():
+        _CHATTER["used"] = set()
+        out = {}
+        for k, text, mood in lines:
+            P.checkpoint()
+            mp3 = workdir / f"say{k:03}.mp3"
+            out[k] = (mp3, *speak(text, mp3, mood))
+        return out
+    out = read_all()
+    if len(_CHATTER["used"]) > 1:
+        print("  (the voice changed partway through: reading this part again in the standard voice)", flush=True)
+        _CHATTER["edge_only"] = True
+        try:
+            out = read_all()
+        finally:
+            _CHATTER["edge_only"] = False
+    return out
 
 
 def faster(length, words, mp3):
@@ -1176,6 +1203,53 @@ def zoomed():
     return getattr(P, "STYLE", "classic") == "zoom"
 
 
+_SUBS = {}
+
+
+def old_subtitles(src):
+    """(top, bottom) shares of the picture where the movie's own burned-in subtitles are, or None (once a movie)."""
+    key = str(src)
+    if key not in _SUBS:
+        _SUBS[key] = None
+        try:
+            import tracking
+            total = P.duration(src)
+            a, b = (WINDOW[0], min(WINDOW[1], total)) if WINDOW[1] > WINDOW[0] else (0.0, total)
+            _SUBS[key] = tracking.burned_subtitles(src, P.CROP["filter"], a + (b - a) * 0.05, b - (b - a) * 0.05)
+        except Exception as e:
+            print(f"  (couldn't check for burned-in subtitles: {e})", flush=True)
+        if _SUBS[key]:
+            print(f"  burned-in subtitles found ({_SUBS[key][0]:.0%} to {_SUBS[key][1]:.0%} down the picture): "
+                  "blurring them, with the narration captions on top", flush=True)
+    return _SUBS[key]
+
+
+def hide_old_subtitles(src):
+    """Filter text (ending in ",") that blurs the strip where the movie's own subtitles are, like the recap
+    channels do, so they never show under or next to the narration captions. "" when there are none."""
+    band = old_subtitles(src)
+    if not band:
+        return ""
+    W, H = P.picture_size(src)
+    y = int(band[0] * H) // 2 * 2
+    h = max(2, int((band[1] - band[0]) * H) // 2 * 2)
+    return (f"split=2[os0][os1];[os1]crop={W}:{h}:0:{y},boxblur=14:3,eq=brightness=-0.05[os2];"
+            f"[os0][os2]overlay=0:{y},")
+
+
+def caption_y(src, track, default):
+    """Where narration captions go: on the blurred strip over the old subtitles when there is one."""
+    band = old_subtitles(src)
+    if not band:
+        return default
+    mid = (band[0] + band[1]) / 2
+    if track:
+        return STORY_BAND_TOP + mid * STORY_BAND[1] - 50
+    W, H = P.picture_size(src)
+    ph = 1080 * H / W
+    return (1920 - ph) / 2 + mid * ph - 50
+
+
 def tracked(src, start, length, workdir, tag):
     """The moving crop that keeps the characters in the zoomed picture ("" when not zoomed)."""
     if not zoomed():
@@ -1208,13 +1282,14 @@ def has_audio(src):
     return _AUDIO[key]
 
 
-def caption_filters(words, length, bottom, workdir, tag):
+def caption_filters(words, length, bottom, workdir, tag, y=None):
     """Narration captions: big chunks of 2-3 words just under the picture, or (fast style) one big word at a
     time on the lower part of the picture, like the recap channels."""
-    out, y = [], (bottom + 40 if bottom < 1650 else 1500)
-    size, border = 72, 6
+    out, size, border = [], 72, 6
     if fast():
-        size, border, y = 88, 7, (bottom - 110 if bottom < 1650 else 1380)
+        size, border = 88, 7
+    if y is None:
+        y = (bottom - 110 if bottom < 1650 else 1380) if fast() else (bottom + 40 if bottom < 1650 else 1500)
     for k, (a, b, text) in enumerate(chunks(words, *((1, 40) if fast() else ()))):
         a, b = max(0.0, a), min(length, b)
         if b <= a:
@@ -1237,32 +1312,24 @@ def title_filter(text, workdir, until=1.4):
             f"enable='lt(t,{until:.2f})'")
 
 
-def jump_span(length):
-    """Seconds of movie a fast-style narrated piece of `length` seconds covers (it keeps JUMP_SHOT of every JUMP_EVERY)."""
-    return length * JUMP_EVERY / JUMP_SHOT
-
-
 def render_segment(src, start, length, out, workdir, voice=None, words=None, cues=None, flash=False,
-                   slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False, jumps=False):
+                   slow=1.0, movie_volume=1.0, title="", bridge=False, ending=False):
     """One piece of a part: the movie from `start` for `length` seconds (whole picture, graded), with the
     narrator over it (voice), the movie's own subtitles (cues), a white flash in, or slow motion.
     bridge: a quick dip from black, so a jump to another scene doesn't feel like a sudden cut.
-    ending: the last piece of a part eases out instead of stopping dead.
-    jumps: quick jump cuts (fast style): keeps JUMP_SHOT seconds of every JUMP_EVERY, so the picture changes
-    every second or so and the story moves through more of the movie."""
-    src_len = jump_span(length) if jumps else length / slow
-    keep = f"lt(mod(t,{JUMP_EVERY}),{JUMP_SHOT})"
+    ending: the last piece of a part eases out instead of stopping dead."""
+    src_len = length / slow
     track = tracked(src, start, src_len, workdir, f"track_{Path(out).stem}")
-    first = P.flip_filter(src, start, start + src_len).replace("[0:v]", f"[0:v]{P.CROP['filter']}{track}{grade()}", 1)
+    first = P.flip_filter(src, start, start + src_len).replace(
+        "[0:v]", f"[0:v]{P.CROP['filter']}{hide_old_subtitles(src)}{track}{grade()}", 1)
     v = first + (ZOOM_FRAME if track else FRAME)
-    if jumps:
-        v += f",select='{keep}',setpts=N/FRAME_RATE/TB"
     if slow != 1.0:
         v += f",setpts={slow:.3f}*PTS"
     with classic():
         bottom = ZOOM_TEXT_BOTTOM if track else P.movie_bottom(src)
         if words:
-            v += caption_filters(words, length, bottom, workdir, "nar")
+            v += caption_filters(words, length, bottom, workdir, "nar",
+                                 y=caption_y(src, track, None) if old_subtitles(src) else None)
         if cues:
             part_cues = [(a - start, b - start, t) for a, b, t in cues if b > start and a < start + src_len]
             v += P.subtitle_filters(part_cues, length, bottom, workdir)
@@ -1276,9 +1343,7 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
     v += "[v]"
     inputs = ["-ss", f"{start:.3f}", "-t", f"{src_len:.3f}", "-i", str(Path(src).resolve())]
     movie_a = "[0:a]" if has_audio(src) else None
-    if movie_a and jumps:
-        a = f"{movie_a}aselect='{keep}',asetpts=N/SR/TB,volume={movie_volume:.2f},apad[ma]"
-    elif movie_a and slow != 1.0:
+    if movie_a and slow != 1.0:
         a = f"{movie_a}atempo={1 / slow:.3f},volume={movie_volume:.2f}[ma]"
     elif movie_a:
         a = f"{movie_a}volume={movie_volume:.2f}[ma]"
@@ -1295,7 +1360,7 @@ def render_segment(src, start, length, out, workdir, voice=None, words=None, cue
         fades = (["afade=t=in:d=0.25"] if bridge else []) + ([f"afade=t=out:st={max(0.0, length - 0.6):.3f}:d=0.6"]
                                                             if ending else [])
         a = a[:-3] + "[a0];[a0]" + ",".join(fades) + "[a]"
-    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f"{v};{a}",
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, *P.graph_args(f"{v};{a}", workdir),
            "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *enc(), str(Path(out).resolve())], cwd=workdir)
     for f in list(workdir.glob("sub*.txt")) + list(workdir.glob("nar*.txt")) + list(workdir.glob("track_*.txt")):
         f.unlink(missing_ok=True)
@@ -1341,7 +1406,7 @@ def render_slide3(src, starts, length, out, workdir):
     else:
         inputs += ["-f", "lavfi", "-t", f"{length:.3f}", "-i", "anullsrc=r=48000:cl=stereo"]
         f += ";[4:a]anull[a]"
-    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, "-filter_complex", f,
+    P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *inputs, *P.graph_args(f, workdir),
            "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}", *enc(), str(Path(out).resolve())], cwd=workdir)
 
 
@@ -1363,9 +1428,13 @@ def music_list():
         return []
 
 
+MUSIC_FOLDERS = {"hype": "hype", "story": "calm", "calm": "calm"}   # assets/music/<folder>: songs of that kind
+
+
 def available_music():
     """[(file, credit line, kind)] for every song on this computer: the listed ones that were downloaded,
-    plus any you dropped into assets/music yourself (kind "any", no credit line)."""
+    any you dropped into assets/music yourself (kind "any", no credit line), and the ones in
+    assets/music/hype (montages) and assets/music/story (under the narrator)."""
     if not MUSIC_DIR.is_dir():
         return []
     listed = {t["file"]: t for t in music_list() if t.get("file")}
@@ -1374,6 +1443,10 @@ def available_music():
         if f.suffix.lower() in AUDIO_EXT:
             t = listed.get(f.name, {})
             out.append((f, t.get("credit", ""), t.get("kind", "any")))
+    for folder, kind in MUSIC_FOLDERS.items():
+        d = MUSIC_DIR / folder
+        if d.is_dir():
+            out += [(f, "", kind) for f in sorted(d.iterdir()) if f.suffix.lower() in AUDIO_EXT]
     return out
 
 
@@ -1479,7 +1552,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
     if loud:
         a = a[:-3] + "[a1];[a1]loudnorm=I=-14:TP=-1.5:LRA=7[a]"
     P.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y", "-i", str(joined.resolve()), *extra,
-           "-filter_complex", f"{v};{a}", "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}",
+           *P.graph_args(f"{v};{a}", workdir), "-map", "[v]", "-map", "[a]", "-t", f"{length:.3f}",
            *P.hd_video(), *P.HD_AUDIO, "-movflags", "+faststart",
            str(Path(out).resolve())], cwd=workdir)
     for f in [joined, *segs]:
@@ -1492,26 +1565,25 @@ def render_story(src, number, info, cues, out, workdir, total):
     last_end = None          # where the previous piece's footage ended: a big jump gets a dip from black
     beats = info["beats"]
     total = min(total, info.get("story_end") or total)
+    voices = speak_lines([(k, b["say"], b.get("mood")) for k, b in enumerate(beats) if "say" in b], workdir)
     for k, beat in enumerate(beats):
         P.checkpoint()
         seg = workdir / f"seg{k:03}.mp4"
         end_of_part = k == len(beats) - 1
         if "say" in beat:
-            mp3 = workdir / f"say{k:03}.mp3"
-            length, words = speak(beat["say"], mp3, beat.get("mood"))
+            mp3, length, words = voices[k]
             length += line_gap() + (0.5 if end_of_part else 0)      # the cliffhanger line gets a beat to land
             if beat.get("joke") and not end_of_part:
                 length += JOKE_PAUSE                            # a moment of footage so the joke lands
-            span = jump_span(length) if fast() else length         # movie seconds this line's footage covers
-            at = max(0.0, min(beat["at"], total - span - 0.1))
+            at = max(0.0, min(beat["at"], total - length - 0.1))
             if last_end is not None and -CONTINUE_GAP < at - last_end < CONTINUE_GAP:
-                at = max(0.0, min(last_end, total - span - 0.1))     # same scene: carry on, no jump back and forth
+                at = max(0.0, min(last_end, total - length - 0.1))   # same scene: carry on, no jump back and forth
             jump = last_end is not None and abs(at - last_end) > 20
             render_segment(src, at, length, seg, workdir, voice=mp3, words=words, movie_volume=DUCK,
-                           bridge=jump and not fast(), ending=end_of_part, jumps=fast())
+                           bridge=jump, ending=end_of_part)
             mp3.unlink(missing_ok=True)
             said.append((0.0, length, beat["say"]))
-            last_end = at + span
+            last_end = at + length
         else:
             jump = last_end is not None and abs(beat["keep"] - last_end) > 20
             render_segment(src, beat["keep"], beat["until"] - beat["keep"], seg, workdir, cues=cues,

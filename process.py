@@ -235,6 +235,40 @@ def sec_to_ts(s):
     return f"{h:02}:{m:02}:{sec:02},{ms:03}"
 
 
+_FFMPEG_MAJOR = {}
+
+
+def ffmpeg_major():
+    """ffmpeg's major version (0 when it can't be read)."""
+    if "v" not in _FFMPEG_MAJOR:
+        try:
+            out = subprocess.run(["ffmpeg", "-hide_banner", "-version"], capture_output=True, text=True).stdout
+            m = re.search(r"version\s+n?(\d+)\.", out)
+            _FFMPEG_MAJOR["v"] = int(m.group(1)) if m else 0
+        except (OSError, ValueError):
+            _FFMPEG_MAJOR["v"] = 0
+    return _FFMPEG_MAJOR["v"]
+
+
+GRAPH_INLINE = 6000   # longer filter graphs go in a file: Windows refuses commands over ~32,000 characters
+                      # ("The filename or extension is too long"), and every caption is a filter
+
+
+def graph_args(graph, workdir, name="graph"):
+    """ffmpeg arguments for a filter graph: inline when short, else from a file in workdir."""
+    if len(graph) <= GRAPH_INLINE:
+        return ["-filter_complex", graph]
+    f = (Path(workdir) / f"{name}.txt").resolve()
+    f.write_text(graph, encoding="utf-8")
+    return ["-/filter_complex", str(f)] if ffmpeg_major() >= 7 else ["-filter_complex_script", str(f)]
+
+
+def plain(text):
+    """A subtitle line as plain text: no <i>/<b>/<font> tags, {\\an8}-style codes or ASS line breaks."""
+    text = re.sub(r"<[^>]*>|\{[^}]*\}", "", str(text)).replace("\\N", "\n").replace("\\n", "\n")
+    return "\n".join(l.strip() for l in text.split("\n") if l.strip())
+
+
 def parse_srt(path):
     if not path:
         return []
@@ -245,7 +279,7 @@ def parse_srt(path):
         for i, line in enumerate(lines):
             m = re.match(r"\s*([\d:,.]+)\s*-->\s*([\d:,.]+)", line)
             if m:
-                body = "\n".join(lines[i + 1:]).strip()
+                body = plain("\n".join(lines[i + 1:]))
                 if body:
                     cues.append((ts_to_sec(m.group(1)), ts_to_sec(m.group(2)), body))
                 break
@@ -1103,7 +1137,7 @@ def render_part(src, start, end, number, cues, out_path, workdir, top_text=None)
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-stats", "-y",
         "-ss", f"{start:.3f}", "-t", f"{end - start:.3f}", "-i", str(src.resolve()),
         *extra_inputs,
-        "-filter_complex", filters, "-map", "[v]", "-map", "0:a:0?",
+        *graph_args(filters, workdir), "-map", "[v]", "-map", "0:a:0?",
         *hd_video(), *HD_AUDIO,
         "-map_chapters", "-1",            # the movie's chapter list made every part look movie-length
         "-movflags", "+faststart",

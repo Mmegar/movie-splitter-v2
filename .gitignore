@@ -8,3 +8,7 @@ laptop/config.json
 laptop/agent.log*
 laptop/agent_memory.json
 laptop/launchd-errors.log
+
+# your own songs (kept off GitHub): story.py reads them on the computer that cuts
+assets/music/hype/
+assets/music/story/

@@ -228,10 +228,25 @@ def targets(frames, view=0.375):
     return out, cuts
 
 
-def camera_path(points, cuts, view):
+PAN_EASE = 0.15        # each look (1/SAMPLE_FPS s) the camera covers this share of the way to its subject...
+PAN_MAX = 0.05         # ...but at most this share of the crop's width: a slow, steady pan, never a whip
+REFRAME = 0.6          # at a new shot the camera only jumps when the subject is further than this (x the crop width)
+
+
+def glide(cam, target, view):
+    """One step of a smooth pan from cam towards target."""
+    gap = target - cam
+    step = max(-view * PAN_MAX, min(view * PAN_MAX, gap * PAN_EASE))
+    return cam + step
+
+
+def camera_path(points, cuts, view, prev=None):
     """
     Smooth camera centres (0..1 of the width) from the raw targets. view = how much of the width the
-    crop shows (0..1). No panning unless the subject would leave the frame; jumps only at a new shot.
+    crop shows (0..1). No panning unless the subject would leave the frame; it pans slowly and steadily,
+    and only jumps at a new shot whose subject is far from where the camera is.
+    prev: where the camera was at the end of the footage just before this (the same scene carrying on),
+    so it pans on from there instead of snapping back to a new framing.
     """
     n = len(points)
     if not n:
@@ -242,7 +257,8 @@ def camera_path(points, cuts, view):
     shots = [i for i in range(n) if cuts[i]] + [n]
     if not shots or shots[0] != 0:
         shots = [0] + shots
-    prev = None                                  # where the camera was at the end of the last shot
+    if prev is not None:
+        prev = clamp(prev)
     for a, b in zip(shots, shots[1:]):
         if b <= a:
             continue
@@ -255,13 +271,19 @@ def camera_path(points, cuts, view):
             still = clamp((max(seen) + min(seen)) / 2)
             if prev is not None and abs(still - prev) < view * 0.25 and max(seen) - min(seen) <= view * 0.7 - 2 * abs(still - prev):
                 still = prev                     # it fits from where the camera already is: don't jump
-            path[a:b] = [still] * (b - a)
-            prev = still
+            if prev is not None and still != prev and abs(still - prev) < view * REFRAME:
+                cam = prev                       # pan over to the new framing instead of jumping there
+                for i in range(a, b):
+                    cam = glide(cam, still, view)
+                    path[i] = cam
+            else:
+                path[a:b] = [still] * (b - a)
+            prev = path[b - 1]
             continue
         known = [p for p in points[a:min(b, a + SAMPLE_FPS)] if p is not None] or seen
         cam = clamp(float(np.median(known))) if known else 0.5
-        if prev is not None and abs(cam - prev) < view * 0.25:
-            cam = prev                           # close enough: carry on from here instead of jumping
+        if prev is not None and abs(cam - prev) < view * REFRAME:
+            cam = prev                           # close enough: carry on from here and pan, instead of jumping
         target = cam
         dead = view * 0.2                        # only start moving when the subject nears the edge of the frame
         moving = False
@@ -272,7 +294,7 @@ def camera_path(points, cuts, view):
             if not moving and abs(gap) > dead:
                 moving = True
             if moving:                           # glide until they're centred again, then hold still
-                cam += gap * 0.35
+                cam = glide(cam, target, view)
                 if abs(target - cam) < view * 0.05:
                     moving = False
             path[i] = cam
@@ -293,6 +315,9 @@ def crop_size(W, H, band=(BAND_W, BAND_H)):
     return cw, ch
 
 
+_LAST = {"src": None, "end": None, "centre": None}   # where the previous piece's camera stopped
+
+
 def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30, band=(BAND_W, BAND_H), name="track"):
     """
     Works out the moving crop for one part. Writes the camera moves for ffmpeg (sendcmd) and returns
@@ -307,7 +332,9 @@ def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30, band=(BAND_W
     try:
         frames = read_frames(src, start, length, pre_filter, sw, sh)
         pts, cuts = targets(frames, cw / W)
-        path = camera_path(pts, cuts, cw / W)
+        carry = (_LAST["centre"] if _LAST["src"] == str(src) and _LAST["end"] is not None
+                 and abs(start - _LAST["end"]) < 1.0 else None)      # the same scene carrying on
+        path = camera_path(pts, cuts, cw / W, prev=carry)
     except Exception as e:
         print(f"  (tracking failed, keeping the middle: {e})", flush=True)
         path = []
@@ -332,8 +359,67 @@ def plan(src, start, length, pre_filter, W, H, workdir, fps_out=30, band=(BAND_W
                 prev = x
         print(f"  tracking: {found} of {len(path)} moments had a face or movement to follow; "
               f"{len(lines)} camera moves", flush=True)
+    if path:
+        _LAST.update(src=str(src), end=start + length, centre=float(path[-1]))
     x0 = (W - cw) // 2 if not lines else int(lines[0].split()[-1].rstrip(";"))
     cmd_file = Path(workdir) / f"{name}.txt"
     cmd_file.write_text("\n".join(lines) + "\n" if lines else "", encoding="utf-8")
     send = f"sendcmd=f={cmd_file.name}," if lines else ""
     return f"{send}crop@track=w={cw}:h={ch}:x={x0}:y={y},"
+
+
+# ---------------------------------------------------------------- the movie's own burned-in subtitles
+def text_rows(gray, top=0.55):
+    """(first row, last row) of the tallest strip of subtitle-like text in the lower part of a grey frame:
+    bright letters with a dark outline, spread across the middle of the picture. None when there's none."""
+    import cv2
+    h, w = gray.shape
+    y0 = int(h * top)
+    r = gray[y0:]
+    text = (r > 200) & (cv2.dilate((r < 60).astype(np.uint8), np.ones((5, 5), np.uint8)) > 0)
+    ok = []
+    for row in text:
+        xs = np.flatnonzero(row)
+        ok.append(len(xs) >= 6 and xs[0] < w * 0.5 < xs[-1] and xs[-1] - xs[0] < w * 0.95)
+    best, i = None, 0
+    while i < len(ok):
+        if ok[i]:
+            j = i
+            while j < len(ok) and ok[j]:
+                j += 1
+            if j - i >= max(4, int(h * 0.015)) and (best is None or j - i > best[1] - best[0]):
+                best = (i, j)
+            i = j
+        else:
+            i += 1
+    return None if best is None else (y0 + best[0], y0 + best[1])
+
+
+def burned_subtitles(src, pre_filter, start, end, samples=40, width=480):
+    """
+    Where the movie's own burned-in subtitles sit, as (top, bottom) shares of the picture's height (after
+    pre_filter, the black-bar crop), or None when the movie has none. Looks at `samples` frames spread
+    between start and end; it's a subtitle strip when a good share of them have text in the same place.
+    """
+    rows, h = [], 0
+    for k in range(samples):
+        t = start + (end - start) * (k + 0.5) / samples
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-ss", f"{t:.2f}", "-i", str(src), "-frames:v", "1",
+               "-an", "-sn", "-vf", f"{pre_filter}scale={width}:-2,format=gray", "-f", "rawvideo", "-"]
+        try:
+            data = subprocess.run(cmd, capture_output=True, check=True, timeout=60).stdout
+        except Exception:
+            continue
+        h = len(data) // width
+        if h < 50:
+            continue
+        found = text_rows(np.frombuffer(data[:h * width], dtype=np.uint8).reshape(h, width))
+        if found:
+            rows.append(found)
+    if not h or len(rows) < max(3, samples * 0.2):
+        return None
+    top = float(np.percentile([a for a, _ in rows], 10)) / h
+    bottom = float(np.percentile([b for _, b in rows], 90)) / h
+    if bottom - top > 0.22:                       # text all over the place: not a subtitle line
+        return None
+    return max(0.0, top - 0.02), min(1.0, bottom + 0.02)
