@@ -28,7 +28,7 @@ MODEL = Path(__file__).resolve().parent / "assets" / "face_yunet.onnx"
 MODEL_URL = ("https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/"
              "face_detection_yunet_2023mar.onnx")
 
-BAND_W, BAND_H = 1080, 664      # the zoomed picture on the 1080x1920 screen (shorter = more of the scene; 30% wider view than 864)
+BAND_W, BAND_H = 1080, 608      # the zoomed picture on the 1080x1920 screen (shorter = more of the scene; ~full width of a 16:9 movie)
 BAND_TOP = (1920 - BAND_H) // 2
 BACKGROUND_FACE = 0.4           # a face under this share of the biggest face in the frame is background
 
