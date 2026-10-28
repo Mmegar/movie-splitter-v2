@@ -160,32 +160,14 @@ export function createInsightsView(ctx) {
     }).join('')}</div><p class="group-foot">Actors whose movies get the most views per part on your channel.</p>`;
   }
 
-  // Download next: Claude picks these itself from the channel's numbers, the season and what's trending.
+  // Download next now lives in its own tab (Recommended): just a way there.
   function nextCard(ins) {
-    const picks = ins.picks || ((ins.ai && ins.ai.next_movies) || []).map((x) => ({ ...x, status: 'new' }));
-    const waiting = picks.filter((p) => p.status === 'new');
-    const answered = picks.filter((p) => p.status !== 'new').slice().reverse().slice(0, 8);
-    const tr = ins.trends || {};
-    const now = (tr.season || []).map((x) => `<span class="trend-chip trend-chip--season">${esc(x.moment)}: ${esc((x.genres || []).join(', '))}</span>`)
-      .concat((tr.trending || []).slice(0, 6).map((x) => `<span class="trend-chip" title="${esc(x.about || '')}">${icon('insights')}${esc(x.title)}</span>`));
-    if (!waiting.length && !now.length) return '';
-    const row = (p) => `<div class="row pick${p.status !== 'new' ? ' pick--done' : ''}">
-        <span class="row-ic tone-ok">${icon(p.status === 'have' ? 'check' : 'download')}</span>
-        <span class="row-main">
-          <span class="row-title">${esc(p.title || '')}${p.year ? ` <span class="muted">(${esc(p.year)})</span>` : ''}</span>
-          ${(p.genres || []).length ? `<span class="genre-chips">${p.genres.map((g) => `<span class="gchip" style="--g:${genreColor(g)}">${esc(g)}</span>`).join('')}</span>` : ''}
-          ${p.why ? `<span class="row-sub">${esc(p.why)}</span>` : ''}
-          ${p.trend ? `<span class="pick-trend">${icon('insights')}${esc(p.trend)}</span>` : ''}
-          ${p.status === 'new'
-    ? `<span class="pick-actions"><button class="btn btn--quiet btn--small" data-pick="have" data-title="${esc(p.title)}">${icon('check')}Got it</button><button class="btn btn--quiet btn--small" data-pick="skipped" data-title="${esc(p.title)}">Skip</button></span>`
-    : `<span class="pick-actions"><span class="muted">${p.status === 'have' ? 'Downloaded' : 'Skipped'}</span><button class="btn btn--quiet btn--small" data-pick="new" data-title="${esc(p.title)}">Undo</button></span>`}
-        </span>
-      </div>`;
-    return `<h3 class="group-title">Download next</h3>
-      ${now.length ? `<div class="trend-chips" aria-label="What people watch right now">${now.join('')}</div>` : ''}
-      ${waiting.length ? `<div class="group">${waiting.map(row).join('')}</div>` : '<p class="group-foot">Claude picks the next movies on its next look.</p>'}
-      <p class="group-foot">Picked by Claude from what does best on your channel, the season and what people are watching right now. Skip one and it picks another; a movie you put in To edit ticks itself off.</p>
-      ${answered.length ? `<details class="picks-done"><summary>Already answered (${answered.length})</summary><div class="group">${answered.map(row).join('')}</div></details>` : ''}`;
+    const n = (ins.picks || []).filter((p) => p.status === 'new').length;
+    return `<a class="group row rec-link" href="#/recommend">
+        <span class="row-ic tone-rec">${icon('star')}</span>
+        <span class="row-main"><span class="row-title">Movies to download</span><span class="row-sub">${n ? `${n} picked by Claude, in the Recommended tab` : 'Claude\'s picks are in the Recommended tab'}</span></span>
+        ${icon('chevR', 'row-chev')}
+      </a>`;
   }
 
   // What the laptop is doing for Insights right now (laptop.json insights_run), or a tap still on its way to it.
@@ -265,23 +247,6 @@ export function createInsightsView(ctx) {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
     const s = e.target.closest('[data-sort]');
     if (s) { haptic(); sort = s.dataset.sort; lsSet(LS_SORT, sort); render(lastSt); return; }
-    const pk = e.target.closest('[data-pick]');
-    if (pk) {
-      haptic();
-      const { pick, title } = pk.dataset;
-      const ins = lastSt && lastSt.data && lastSt.data.insights;
-      const p = ins && (ins.picks || []).find((x) => x.title === title);
-      const was = p && p.status;
-      if (p) { p.status = pick; render(lastSt); }
-      try {
-        await ctx.store.sendCommand({ type: 'pick', title, status: pick });
-        toast(pick === 'have' ? `Ticked off ${title}.` : pick === 'skipped' ? `Skipped ${title}. Claude picks another next time.` : `${title} is back on the list.`, { kind: 'ok', ms: 3500 });
-      } catch (err) {
-        if (p) { p.status = was; render(lastSt); }
-        toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 });
-      }
-      return;
-    }
     const now = e.target.closest('[data-insights-now]');
     if (now) {
       if (now.disabled) return;

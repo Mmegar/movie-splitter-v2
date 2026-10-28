@@ -168,7 +168,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* tab bar */
 .tabbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   padding: 0 var(--sar) var(--sab) var(--sal);
   background: var(--bar-bg);
   -webkit-backdrop-filter: saturate(180%) blur(22px);
@@ -730,30 +730,34 @@ textarea.input { resize: vertical; min-height: 72px; line-height: 1.4; }
 .pick-row input[type="radio"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; margin: 0 4px 0 0; }
 .btn--block { width: 100%; }
 
-.tab-label { white-space: nowrap; }
+.tab-label { white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.tab-short { display: none; }
+@media (max-width: 520px) { .tab-long { display: none; } .tab-short { display: inline; } }
 @media (min-width: 700px) {
   .scroller > .content, .scroller > .large-head { max-width: 980px; }
 }
 
 /* ---------- colour coding (each tab has its own colour; Insights uses tiers + genre colours) ---------- */
 :root {
-  --c-now: #2563eb; --c-queue: #d97706; --c-make: #7c3aed; --c-insights: #059669; --c-settings: #475569;
+  --c-now: #2563eb; --c-queue: #d97706; --c-make: #7c3aed; --c-insights: #059669; --c-recommend: #e11d48; --c-settings: #475569;
   --tier-hot: #16a34a; --tier-good: #0d9488; --tier-ok: #d97706; --tier-cold: #dc2626;
   --tab-c: var(--c-now);
 }
 @media (prefers-color-scheme: dark) {
-  :root { --c-now: #60a5fa; --c-queue: #fbbf24; --c-make: #a78bfa; --c-insights: #34d399; --c-settings: #94a3b8;
+  :root { --c-now: #60a5fa; --c-queue: #fbbf24; --c-make: #a78bfa; --c-insights: #34d399; --c-recommend: #fb7185; --c-settings: #94a3b8;
     --tier-hot: #4ade80; --tier-good: #2dd4bf; --tier-ok: #fbbf24; --tier-cold: #f87171; }
 }
 html[data-tab="now"] { --tab-c: var(--c-now); }
 html[data-tab="queue"] { --tab-c: var(--c-queue); }
 html[data-tab="make"] { --tab-c: var(--c-make); }
 html[data-tab="insights"] { --tab-c: var(--c-insights); }
+html[data-tab="recommend"] { --tab-c: var(--c-recommend); }
 html[data-tab="settings"] { --tab-c: var(--c-settings); }
 .tab[data-tab="now"] { --c: var(--c-now); }
 .tab[data-tab="queue"] { --c: var(--c-queue); }
 .tab[data-tab="make"] { --c: var(--c-make); }
 .tab[data-tab="insights"] { --c: var(--c-insights); }
+.tab[data-tab="recommend"] { --c: var(--c-recommend); }
 .tab[data-tab="settings"] { --c: var(--c-settings); }
 .tab .tab-ic { color: color-mix(in srgb, var(--c) 55%, var(--text-3)); }
 .tab.is-on { color: var(--c); }
@@ -843,3 +847,35 @@ html[data-tab="settings"] { --tab-c: var(--c-settings); }
 .chat-note { display: flex; gap: 4px; align-items: center; margin-top: 6px; font-size: .85em; opacity: .8; }
 .chat-form { display: flex; gap: 8px; align-items: flex-end; margin-top: 10px; }
 .chat-form textarea { flex: 1; min-height: 44px; }
+
+/* ---------- Recommendations: movies to download, one card each ---------- */
+.tab-badge--rec { background: var(--c-recommend); }
+.rec-summary { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--r-md); margin-bottom: 10px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c-recommend) 16%, var(--bg-elev)), var(--bg-elev)); }
+.rec-count { font-size: 38px; font-weight: 800; line-height: 1; color: var(--c-recommend); font-variant-numeric: tabular-nums; }
+.rec-summary-text { display: flex; flex-direction: column; gap: 2px; font-size: 14px; min-width: 0; }
+.rec-summary-text strong { font-size: 17px; }
+.rec-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.rec-tools .btn { flex: 1 1 auto; }
+.rec-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.rec { display: flex; gap: 12px; padding: 14px; background: var(--bg-elev); border-radius: var(--r-md); border-left: 4px solid var(--c-recommend); }
+.rec-tile { flex: none; width: 46px; height: 64px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: #fff; background: linear-gradient(160deg, var(--g), color-mix(in srgb, var(--g) 55%, #000)); }
+.rec-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.rec-head { display: flex; align-items: flex-start; gap: 8px; }
+.rec-title { flex: 1; min-width: 0; font-size: 17px; font-weight: 650; line-height: 1.25; overflow-wrap: anywhere; }
+.rec-more { margin: -8px -8px 0 0; flex: none; }
+.rec-why { font-size: 14px; color: var(--text-2); line-height: 1.4; margin: 0; }
+.rec-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
+.rec-meta .pick-trend { margin: 0; }
+.rec-left { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; color: var(--text-3); }
+.rec-left .ic { width: 13px; height: 13px; }
+.rec-left--soon { color: var(--tier-ok); font-weight: 600; }
+.rec-left--you { color: var(--c-recommend); font-weight: 600; }
+.rec-actions { display: flex; gap: 8px; margin-top: 2px; }
+.rec-actions .btn { flex: 1; }
+.rec-got { background: var(--c-recommend); color: #fff; }
+@media (prefers-color-scheme: dark) { .rec-got { color: #1c0a0e; } }
+.rec-del { color: var(--tier-cold); }
+.rec-link { margin-bottom: 12px; text-decoration: none; color: inherit; }
+.tone-rec { background: color-mix(in srgb, var(--c-recommend) 14%, transparent); color: var(--c-recommend); }

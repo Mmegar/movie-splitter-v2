@@ -1,5 +1,6 @@
 import http.server
 import json
+from datetime import datetime
 import unittest
 import os
 import subprocess
@@ -646,6 +647,34 @@ class InsightsTest(unittest.TestCase):
         self.assertEqual([p["status"] for p in out[:2]], ["new", "new"])
         self.assertTrue(agent.has_movie("Se7en", ["Se7en (1995)"]))
         self.assertFalse(agent.has_movie("It", ["It Follows (2014)"]))
+
+    def test_picks_expire_after_a_day_but_yours_stay(self):
+        old = [{"title": "Old One", "status": "new", "added": "2026-10-27T08:00:00+00:00"},
+               {"title": "Fresh", "status": "new", "added": "2026-10-28T08:00:00+00:00"},
+               {"title": "Mine", "status": "new", "added": "2026-10-20T08:00:00+00:00", "by": "you"},
+               {"title": "Long Gone", "status": "expired", "at": "2026-10-10T08:00:00+00:00"}]
+        out = agent.merge_picks(old, [{"title": "Old One", "why": "again"}, {"title": "Long Gone"}], [],
+                                now="2026-10-28T09:00:00+00:00")
+        by = {p["title"]: p for p in out}
+        self.assertEqual(by["Old One"]["status"], "expired")         # not downloaded within a day
+        self.assertEqual(by["Fresh"]["status"], "new")
+        self.assertEqual(by["Mine"]["status"], "new")                # your own picks never run out
+        self.assertEqual(by["Long Gone"]["status"], "new")           # a week later it may come back
+        due = agent.picks_due(out)
+        self.assertEqual(due, datetime.fromisoformat("2026-10-29T08:00:00+00:00").timestamp())
+
+    def test_owner_edits_picks(self):
+        picks = [{"title": "Prisoners", "status": "new", "added": "x"}]
+        picks, t = agent.edit_picks(picks, {"type": "pick", "title": "prisoners", "status": "skipped"}, now="n")
+        self.assertEqual((t, picks[0]["status"]), ("Prisoners", "skipped"))
+        picks, t = agent.edit_picks(picks, {"type": "pick", "title": "Prisoners", "status": "new"}, now="n2")
+        self.assertEqual((picks[0]["status"], picks[0]["added"]), ("new", "n2"))
+        picks, t = agent.edit_picks(picks, {"type": "pick_edit", "title": "Prisoners", "new_title": "Prisoners", "year": 2013})
+        self.assertEqual(picks[0]["year"], 2013)
+        picks, t = agent.edit_picks(picks, {"type": "pick_add", "title": "Knives Out", "year": 2019}, now="n3")
+        self.assertEqual((picks[0]["title"], picks[0]["by"], picks[0]["status"]), ("Knives Out", "you", "new"))
+        self.assertEqual(agent.edit_picks(picks, {"type": "pick", "title": "Nope", "status": "have"})[1], None)
+        self.assertEqual(agent.edit_picks(picks, {"type": "pick", "title": "Prisoners", "status": "bad"})[1], None)
 
     def test_insights_prompt_has_trends_and_past_picks(self):
         data = {"totals": {}, "movies": {}, "videos": [], "library": ["Gone Girl (2014)"],

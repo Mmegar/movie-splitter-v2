@@ -477,17 +477,33 @@ def clean_queue_order(answer, files):
 
 
 PICKS_WAITING = 8   # at most this many "download next" titles waiting at once
+PICK_HOURS = 24     # a Claude pick not downloaded within a day makes room for a fresh one
+EXPIRED_DAYS = 7    # after that an expired title may be picked again
+
+
+def _age_hours(stamp, now):
+    try:
+        a = datetime.fromisoformat(str(stamp).replace("Z", "+00:00"))
+        b = datetime.fromisoformat(str(now).replace("Z", "+00:00"))
+        return (b - a).total_seconds() / 3600
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def merge_picks(old, proposed, library, now=None):
-    """Claude's new picks on top, the owner's earlier answers kept: a skipped title stays skipped, a title that
-    turns up on the laptop becomes "have"."""
+    """Claude's new picks on top, the owner's earlier answers kept: a skipped (removed) title stays skipped, a
+    title that turns up on the laptop becomes "have", and a Claude pick still waiting after a day "expired"
+    (your own picks never expire)."""
     now = now or now_iso()
     picks, seen = [], set()
     for p in old or []:
         p = dict(p)
         if p.get("status") == "new" and has_movie(p.get("title"), library):
             p.update(status="have", at=now)
+        elif p.get("status") == "new" and p.get("by") != "you" and _age_hours(p.get("added"), now) >= PICK_HOURS:
+            p.update(status="expired", at=now)
+        if p.get("status") == "expired" and _age_hours(p.get("at"), now) >= EXPIRED_DAYS * 24:
+            continue                             # long gone: Claude may suggest it again
         picks.append(p)
         seen.add(_title_key(p.get("title")))
     fresh = []
@@ -505,9 +521,62 @@ def merge_picks(old, proposed, library, now=None):
         fresh.append({"title": str(x["title"]).strip()[:120], "year": x.get("year"), "genres": g,
                       "why": str(x.get("why") or "")[:200], "trend": (str(x["trend"])[:120] if x.get("trend") else None),
                       "status": "have" if has_movie(x["title"], library) else "new", "added": now})
-    waiting = [p for p in fresh + picks if p.get("status") == "new"][:PICKS_WAITING]
+    waiting = [p for p in fresh + picks if p.get("status") == "new"]
+    waiting = [p for p in waiting if p.get("by") == "you"] + [p for p in waiting if p.get("by") != "you"][:PICKS_WAITING]
     rest = [p for p in picks if p.get("status") != "new"][-40:]
     return waiting + rest
+
+
+def picks_due(picks):
+    """When the oldest waiting Claude pick runs out (epoch seconds), so fresh ones are asked for then; else None."""
+    out = None
+    for p in picks or []:
+        if p.get("status") == "new" and p.get("by") != "you":
+            try:
+                t = datetime.fromisoformat(str(p.get("added")).replace("Z", "+00:00")).timestamp() + PICK_HOURS * 3600
+            except (TypeError, ValueError):
+                continue
+            out = t if out is None else min(out, t)
+    return out
+
+
+def edit_picks(picks, c, now=None):
+    """The owner's change from the Recommendations tab: status (have / skipped = removed / new = undo), a fixed
+    title or year, or a movie of their own. Returns (picks, the title it was about) or (picks, None)."""
+    now = now or now_iso()
+    picks = [dict(p) for p in picks or []]
+    title = str(c.get("title") or "").strip()[:120]
+    if not title:
+        return picks, None
+    k = _title_key(title)
+    hit = [p for p in picks if _title_key(p.get("title")) == k]
+    if c.get("type") == "pick_add":
+        year = c.get("year")
+        if hit:
+            hit[0].update(status="new", by="you", added=now, at=now, year=year or hit[0].get("year"))
+            picks.remove(hit[0])
+            picks.insert(0, hit[0])
+        else:
+            picks.insert(0, {"title": title, "year": year or None, "genres": [], "why": str(c.get("why") or "")[:200],
+                             "trend": None, "status": "new", "added": now, "by": "you"})
+        return picks, title
+    if not hit:
+        return picks, None
+    p = hit[0]
+    if c.get("type") == "pick_edit":
+        new = str(c.get("new_title") or "").strip()[:120]
+        if new:
+            p["title"] = new
+        if "year" in c:
+            p["year"] = c.get("year") or None
+        return picks, p["title"]
+    status_ = str(c.get("status") or "")
+    if status_ not in ("have", "skipped", "new"):
+        return picks, None
+    p.update(status=status_, at=now)
+    if status_ == "new":
+        p["added"] = now                         # undo: a full day again
+    return picks, p["title"]
 
 
 PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
@@ -1547,8 +1616,8 @@ class Agent:
             threading.Thread(target=self.insights_chat, args=(str(c["id"]), str(c.get("text") or "")),
                              daemon=True).start()
             return None                                   # finished by insights_chat
-        if kind == "pick":                               # Insights' Download next: Got it / Skip / Undo
-            return self.answer_pick(str(c.get("title") or ""), str(c.get("status") or ""))
+        if kind in ("pick", "pick_edit", "pick_add"):    # Recommendations: Got it / Remove / Undo / Edit / Add
+            return self.answer_pick(c)
         if kind == "sync_music":
             return self.sync_music()
         if kind == "share_all":
@@ -2329,6 +2398,7 @@ class Agent:
                     if m.get(k):
                         data["movies"][name][k] = m[k]
         with self.lock:                                # what the queue ordering (rank_queue) works from
+            self.memory["picks_due"] = picks_due(data["picks"])
             self.memory["insights_brief"] = {"movies": data["movies"], "trends": data.get("trends") or {},
                                              "summary": (data.get("ai") or {}).get("summary") or ""}
             self._save_memory()
@@ -2405,25 +2475,26 @@ Answer with JSON: {{"reply": "<1-4 sentences>", "note": "<standing rule or null>
         self.gh.save_file("insights.json", edit, "status", "insights: forget note")
         return "Forgot that note"
 
-    def answer_pick(self, title, status_):
-        """The owner's answer to a Download next title: "have" (got it), "skipped" (not this one), "new" (undo)."""
-        if status_ not in ("have", "skipped", "new"):
-            return None
+    def answer_pick(self, c):
+        """The owner's change to a recommendation in the app (see edit_picks)."""
         hit = []
 
         def edit(text):
             data = json.loads(text or "{}")
-            for p in data.get("picks") or []:
-                if _title_key(p.get("title")) == _title_key(title):
-                    p.update(status=status_, at=now_iso())
-                    hit.append(p["title"])
+            data["picks"], title = edit_picks(data.get("picks"), c)
+            hit.append(title)
             return json.dumps(data, indent=1, ensure_ascii=False) + "\n"
-        self.gh.save_file("insights.json", edit, "status", "insights: pick " + status_)
-        if not hit:
+        kind = c.get("type")
+        self.gh.save_file("insights.json", edit, "status", "insights: " + str(kind) + " " + str(c.get("status") or ""))
+        if not hit or not hit[0]:
             return None
-        return {"have": f"Marked {hit[0]} as downloaded", "skipped": f"Skipped {hit[0]}: Claude picks another one next time",
-                "new": f"{hit[0]} is back on Download next"}[status_]
-
+        t = hit[0]
+        if kind == "pick_add":
+            return f"Added {t} to Recommendations"
+        if kind == "pick_edit":
+            return f"Changed it to {t}"
+        return {"have": f"Marked {t} as downloaded", "skipped": f"Removed {t}: Claude picks another one next time",
+                "new": f"{t} is back on Recommendations"}.get(str(c.get("status")))
     def snapshot(self):
         with self.lock:
             wl = []
@@ -2552,8 +2623,10 @@ Answer with JSON: {{"reply": "<1-4 sentences>", "note": "<standing rule or null>
             self.last["rank_busy"] = time.time()         # (set here too, so the cut waits for the order)
             threading.Thread(target=self._rank_quietly, daemon=True).start()
         insights_due = time.time() - float(self.memory.get("insights_at") or 0) >= float(self.cfg["insights_hours"]) * 3600
-        if insights_due and not self.cutting and not self.browser_busy.locked() and not self.last.get("insights_busy"):
-            threading.Thread(target=self._insights_quietly, daemon=True).start()
+        due = self.memory.get("picks_due")             # a recommendation ran out: fresh picks now, not in 6 hours
+        picks_out = bool(due and time.time() >= due and time.time() - float(self.memory.get("insights_at") or 0) >= 1800)
+        if (insights_due or picks_out) and not self.cutting and not self.browser_busy.locked() and not self.last.get("insights_busy"):
+            threading.Thread(target=self._insights_quietly, args=(picks_out,), daemon=True).start()
         if now - self.last["cleanup"] >= 3600:
             self.last["cleanup"] = now
             try:
