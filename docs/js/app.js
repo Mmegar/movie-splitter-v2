@@ -8,12 +8,13 @@ import { createAlertsView } from './views/alerts.js';
 import { createQueueView } from './views/queue.js';
 import { createSettingsView } from './views/settings.js';
 import { createMakeView } from './views/make.js';
+import { createInsightsView } from './views/insights.js';
 
-// Tabs in the tab bar (Dashboard, Queue, Make one now, Settings, Memory), plus pages opened from the Dashboard
-// (all movies, alerts) that light up the Dashboard tab.
-const TABS = ['now', 'queue', 'make', 'settings', 'memory', 'movies', 'alerts'];
-const PARENT = { movies: 'now', alerts: 'now' };
-const TITLES = { now: 'Dashboard', queue: 'Queue', make: 'Make one now', settings: 'Settings', memory: 'Memory', movies: 'Movies', alerts: 'Alerts' };
+// Tabs in the tab bar (Dashboard, Queue, Make one now, Insights, Settings), each with its own colour, plus pages
+// opened from them (all movies, alerts from the Dashboard; Memory from Settings) that light up their parent tab.
+const TABS = ['now', 'queue', 'make', 'insights', 'settings', 'memory', 'movies', 'alerts'];
+const PARENT = { movies: 'now', alerts: 'now', memory: 'settings' };
+const TITLES = { now: 'Dashboard', queue: 'Queue', make: 'Make one now', insights: 'Insights', settings: 'Settings', memory: 'Memory', movies: 'Movies', alerts: 'Alerts' };
 const LS_SEEN = 'ms.alerts.seen';
 
 const store = createStore();
@@ -53,6 +54,7 @@ const views = {
   queue: createQueueView(ctx),
   settings: createSettingsView(ctx),
   make: createMakeView(ctx),
+  insights: createInsightsView(ctx),
   memory: createSettingsView(ctx, { memory: true }),
 };
 
@@ -85,6 +87,7 @@ function route() {
       if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     current = tab;
+    document.documentElement.dataset.tab = PARENT[tab] || tab;   // the page takes its tab's colour
     document.title = `${TITLES[tab]} · Splitter`;
   }
   if (views[tab].route) views[tab].route(parts.slice(1));

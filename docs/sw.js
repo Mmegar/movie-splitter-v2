@@ -1,11 +1,11 @@
 // Offline shell. App files: stale-while-revalidate. Live data (GitHub, ntfy) is never cached here;
 // the app keeps its own last-good copy in localStorage.
-const VERSION = 'ms-v3-2';
+const VERSION = 'ms-v4-1';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
   'js/app.js', 'js/api.js', 'js/logic.js', 'js/store.js', 'js/demo.js', 'js/ui.js', 'js/crypto.js', 'js/mp4fix.js',
-  'js/views/common.js', 'js/views/now.js', 'js/views/movies.js', 'js/views/alerts.js', 'js/views/queue.js', 'js/views/settings.js', 'js/views/media.js', 'js/views/make.js',
-  'demo/state.json', 'demo/laptop.json', 'demo/ntfy.jsonl', 'demo/runs.json', 'demo/settings.json', 'demo/wishlist.txt',
+  'js/views/common.js', 'js/views/now.js', 'js/views/movies.js', 'js/views/alerts.js', 'js/views/queue.js', 'js/views/settings.js', 'js/views/media.js', 'js/views/make.js', 'js/views/insights.js',
+  'demo/state.json', 'demo/laptop.json', 'demo/ntfy.jsonl', 'demo/runs.json', 'demo/settings.json', 'demo/wishlist.txt', 'demo/insights.json',
   'icons/icon-192.png', 'icons/apple-touch-icon.png', 'icons/favicon-64.png',
 ];
 
