@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T07:45:44+07:00",
+ "updated": "2026-10-28T07:45:48+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -171,28 +171,7 @@
    "folder": "done"
   }
  ],
- "commands": {
-  "mvqznqzpcwfx": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mvqznu3t5v6a": {
-   "status": "done",
-   "note": "Moved to To edit"
-  },
-  "mvqzxu2ukvr6": {
-   "status": "done",
-   "note": "Already cutting Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv"
-  },
-  "mvr1ef1hhod7": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/blink-twice-2024/recap-002.bin"
-  },
-  "mvr9t1it51i9": {
-   "status": "done",
-   "note": "Ready to save on your phone: share/blink-twice-2024/recap-006.bin"
-  }
- },
+ "commands": {},
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
