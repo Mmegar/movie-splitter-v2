@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:45:21+13:00",
+ "updated": "2026-10-28T13:45:23+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -4825,6 +4825,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T13:45:23+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Elysium (2013)",
+   "message": "Movie recap: 7 parts, Best stretch: 5 parts, Highlights: 5 parts.\nIn Ready to post/Elysium (2013)."
+  },
+  {
    "at": "2026-10-28T13:45:21+13:00",
    "type": "part_ready",
    "title": "[Highlights] Elysium (2013): Highlight 5 of 5 ready",
@@ -6017,12 +6023,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 15 of 20 ready",
    "message": "Part 15: The Mistake That Made Him (5 narrated beats, about 57s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T08:20:42+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 14 of 20 ready",
-   "message": "Part 14: Locked Up for Trying (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
