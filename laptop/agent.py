@@ -217,6 +217,7 @@ CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "p
               "laptop/startup_apps.ps1",
               "assets/music/tracks.json"]
 MUSIC_RELEASE = "music-library"   # the draft release that holds your songs on GitHub (only you can see it)
+REPO_MUSIC_KINDS = ["hype", "story"]   # your songs committed to the repo, in assets/music/<kind>/
 AUDIO = {".mp3", ".m4a", ".wav", ".aac", ".ogg", ".flac"}    # the free songs the laptop downloads when you have none of your own     # Windows: opens the project's apps at login (install_startup_apps)
 # ---------------------------------------------------------------- Insights (TikTok numbers -> what to change)
 INSIGHTS_SYSTEM = ("You are the growth analyst for a TikTok channel that posts movie recaps in parts (narrated "
@@ -2007,10 +2008,46 @@ class Agent:
                     out[f"{safe_name(kind)}__{f.name}"] = f
         return out
 
+    def repo_music(self):
+        """Your songs kept in the repo (assets/music/<kind>/) that aren't on the laptop yet are downloaded
+        there, so story.py finds them without copying anything by hand. Returns how many were new."""
+        root, got = HERE.parent / "assets" / "music", 0
+        for kind in REPO_MUSIC_KINDS:
+            status, _, data = self.gh.request("GET", f"/contents/assets/music/{kind}")
+            if status == 404:
+                continue
+            if status != 200:
+                raise ghapi.GitHubError(status, data[:300].decode("utf-8", "replace"))
+            for f in json.loads(data):
+                if f.get("type") != "file" or Path(f["name"]).suffix.lower() not in AUDIO:
+                    continue
+                dest = root / kind / f["name"]
+                if dest.exists() and dest.stat().st_size == f.get("size"):
+                    continue
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                tmp = dest.with_suffix(dest.suffix + ".part")
+                with open(tmp, "wb") as fh:
+                    status, _, data = self.gh.request("GET", f"/contents/{urllib.parse.quote(f['path'])}",
+                                                      accept="application/vnd.github.raw", sink=fh.write)
+                if status != 200:
+                    tmp.unlink(missing_ok=True)
+                    raise ghapi.GitHubError(status, data[:300].decode("utf-8", "replace"))
+                os.replace(tmp, dest)
+                got += 1
+        if got:
+            log.info("Music: %s songs from the repo", got)
+        return got
+
     def sync_music(self):
-        """Songs on GitHub that aren't on the laptop are downloaded into Music/<kind>/, and songs you put in
-        the laptop's Music folder are uploaded, so the cutter (here or on GitHub) always has music."""
-        rel = self.music_release()
+        """Songs on GitHub that aren't on the laptop are downloaded (the repo's assets/music/<kind>/ ones, and
+        the music release's into Music/<kind>/), and songs you put in the laptop's Music folder are uploaded,
+        so the cutter (here or on GitHub) always has music."""
+        from_repo = self.repo_music()
+        try:
+            rel = self.music_release()
+        except Exception as e:                  # the repo's songs are enough to cut with
+            log.warning("Music release unavailable: %s", e)
+            return f"Music in step: {from_repo} new from the repo"
         remote = {a["name"]: a for a in self.gh.assets(rel["id"])}
         local = self.local_songs()
         got = sent = 0
@@ -2036,7 +2073,7 @@ class Agent:
             self._save_memory()
         if got or sent:
             log.info("Music: %s downloaded, %s uploaded", got, sent)
-        return f"Music in step: {got} new on the laptop, {sent} sent to GitHub"
+        return f"Music in step: {got + from_repo} new on the laptop, {sent} sent to GitHub"
 
     def music_counts(self):
         counts = {}
