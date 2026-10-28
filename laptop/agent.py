@@ -298,6 +298,34 @@ def day_history(history, totals, today=None):
     return rows[-60:]
 
 
+def mode_stats(videos):
+    """Views per kind of video (recap, best stretch, highlights...): which modes make the hits."""
+    out = {}
+    for v in videos or []:
+        if not v.get("mode"):
+            continue
+        m = out.setdefault(v["mode"], {"videos": 0, "views": 0, "best_views": 0, "watch": []})
+        views = int(v.get("views") or 0)
+        m["videos"] += 1
+        m["views"] += views
+        m["best_views"] = max(m["best_views"], views)
+        if v.get("avg_watch") is not None:
+            m["watch"].append(float(v["avg_watch"]))
+    for m in out.values():
+        w = m.pop("watch")
+        m["views_per_video"] = round(m["views"] / m["videos"])
+        m["avg_watch"] = round(sum(w) / len(w), 1) if w else None
+    return dict(sorted(out.items(), key=lambda kv: -kv[1]["best_views"]))
+
+
+def owner_notes_text(data):
+    notes = [n.get("text") for n in (data.get("notes") or []) if n.get("text")]
+    if not notes:
+        return ""
+    return ("THE OWNER'S STANDING NOTES (they know their channel; these override your own reading, never "
+            f"advise against them): {json.dumps(notes[-20:], ensure_ascii=False)}\n")
+
+
 def insights_prompt(data, cur):
     """What Claude sees: the numbers, per movie and per video, and the settings it may change."""
     vids = [{k: v.get(k) for k in ("desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
@@ -323,7 +351,9 @@ waiting if they're still good picks. With few or no numbers yet, lean on the sea
 
 The channel's numbers (newest videos first; avg_watch in seconds, full_watch = % who watched to the end):
 TOTALS: {json.dumps(data["totals"])}
-DAY BY DAY (totals each day this ran, oldest first): {json.dumps((data.get("history") or [])[-14:])}
+PER MODE (kind of video; best_views = its biggest single video): {json.dumps(mode_stats(data["videos"]), ensure_ascii=False)}
+Never tell the owner to stop or drop a mode that made one of the channel's top videos: a viral hit outweighs a
+weak average. {owner_notes_text(data)}DAY BY DAY (totals each day this ran, oldest first): {json.dumps((data.get("history") or [])[-14:])}
 YOUR EARLIER SETTING CHANGES: {json.dumps((data.get("tuning") or [])[-6:], ensure_ascii=False)}
 Judge each earlier change against the days after it: views per video, avg_watch and full_watch up or down? Keep
 what helped, undo or adjust what made things worse, and say which in settings_why.
@@ -1414,6 +1444,12 @@ class Agent:
                 return "Insights are already being updated"
             threading.Thread(target=self._insights_quietly, kwargs={"force": True}, daemon=True).start()
             return "Reading your TikTok numbers and the trends: Insights update in a few minutes"
+        if kind == "forget_note":
+            return self.forget_note(str(c.get("at") or ""))
+        if kind == "insights_chat":                      # the owner talks to the Insights AI
+            threading.Thread(target=self.insights_chat, args=(str(c["id"]), str(c.get("text") or "")),
+                             daemon=True).start()
+            return None                                   # finished by insights_chat
         if kind == "pick":                               # Insights' Download next: Got it / Skip / Undo
             return self.answer_pick(str(c.get("title") or ""), str(c.get("status") or ""))
         if kind == "sync_music":
@@ -2116,6 +2152,7 @@ class Agent:
         data = build_insights(state, videos, old)
         data["history"] = day_history(old.get("history"), data["totals"])   # (for Claude: is it getting better?)
         data["tuning"] = (old.get("tuning") or [])[-30:]
+        data["chat"], data["notes"] = (old.get("chat") or [])[-40:], (old.get("notes") or [])[-20:]
         library = [m.get("name") or "" for m in state.get("movies", [])]
         for folder in (self.watch, self.downloads, self.output / "Done"):
             try:
@@ -2174,6 +2211,62 @@ class Agent:
                           "status", "insights")
         log.info("Insights updated: %s videos%s", len(videos), f", tuned {', '.join(changes)}" if changes else "")
         return None
+
+    def insights_chat(self, cid, text):
+        """Answers the owner's message on the Insights tab. Anything they want kept in mind ("Best stretch made my
+        viral videos, keep it") becomes a standing note every later Insights run must follow."""
+        text = text.strip()[:1000]
+        if not text:
+            return self.command_over(cid, False, "Empty message")
+        self.cmd_status[cid] = {"status": "working", "note": "Claude is reading your message"}
+        self.heartbeat(force=True)
+        old, _ = self.gh.read_file("insights.json", "status")
+        try:
+            data = json.loads(old) if old else {}
+        except ValueError:
+            data = {}
+        prompt = f"""The owner of the channel wrote to you on the Insights screen of their app:
+"{text}"
+
+What you told them last time: {json.dumps(data.get("ai") or {}, ensure_ascii=False)}
+TOTALS: {json.dumps(data.get("totals") or {})}
+PER MODE: {json.dumps(mode_stats(data.get("videos")), ensure_ascii=False)}
+PER MOVIE: {json.dumps(data.get("movies") or {}, ensure_ascii=False)[:6000]}
+{owner_notes_text(data)}THE CONVERSATION SO FAR: {json.dumps((data.get("chat") or [])[-10:], ensure_ascii=False)}
+
+Answer like a colleague: short, plain English, backed by their numbers where you can, and admit it when your
+earlier advice was wrong. If they tell you how things should be, or correct you, turn that into one standing note
+(a short rule in the third person, e.g. "Keep Best stretch on: it made the channel's two viral videos") that
+every later Insights run will follow; otherwise note is null.
+Answer with JSON: {{"reply": "<1-4 sentences>", "note": "<standing rule or null>"}}"""
+        try:
+            ai = self.ask_ai(INSIGHTS_SYSTEM, prompt)
+            reply, note = str(ai.get("reply") or "").strip()[:1200], (str(ai.get("note") or "").strip() or None)
+        except Exception as e:
+            log.warning("Insights chat: %s", e)
+            return self.command_over(cid, False, f"Claude couldn't answer: {str(e)[:150]}")
+        if note and note.lower() in ("null", "none"):
+            note = None
+
+        def edit(cur):
+            cur = json.loads(cur or "{}")
+            cur["chat"] = ((cur.get("chat") or []) + [{"at": now_iso(), "you": text, "ai": reply, "note": note}])[-40:]
+            if note:
+                cur["notes"] = ((cur.get("notes") or []) + [{"at": now_iso(), "text": note[:300]}])[-20:]
+            return json.dumps(cur, indent=1, ensure_ascii=False) + "\n"
+        try:
+            self.gh.save_file("insights.json", edit, "status", "insights: chat")
+        except Exception as e:
+            return self.command_over(cid, False, f"Couldn't save the answer: {str(e)[:150]}")
+        self.command_over(cid, True, reply[:300])
+
+    def forget_note(self, at):
+        def edit(cur):
+            cur = json.loads(cur or "{}")
+            cur["notes"] = [n for n in cur.get("notes") or [] if n.get("at") != at]
+            return json.dumps(cur, indent=1, ensure_ascii=False) + "\n"
+        self.gh.save_file("insights.json", edit, "status", "insights: forget note")
+        return "Forgot that note"
 
     def answer_pick(self, title, status_):
         """The owner's answer to a Download next title: "have" (got it), "skipped" (not this one), "new" (undo)."""

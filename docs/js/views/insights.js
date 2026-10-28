@@ -77,6 +77,30 @@ export function createInsightsView(ctx) {
     </div>`;
   }
 
+  // Talk to the Insights AI: its answers, and the standing notes every later run must follow.
+  function chatCard(ins, st) {
+    const lp = st.data.laptop || {};
+    const status = lp.commands || {};
+    const done = new Set(lp.commands_done || []);
+    const cmds = ((st.data.commands || {}).json || {}).commands || [];
+    const chat = (ins.chat || []).slice(-6);
+    const pending = cmds.filter((c) => c.type === 'insights_chat' && Date.now() - Date.parse(c.at || 0) < 6 * 3600000
+      && !(done.has(c.id) && (status[c.id] || {}).status !== 'failed') && !chat.some((m) => m.you === c.text));
+    const bubble = (who, text, extra = '') => `<div class="chat-msg chat-msg--${who}"><p>${esc(text)}</p>${extra}</div>`;
+    const notes = ins.notes || [];
+    return `<div class="group chat-card">
+      <div class="ai-head">${icon('memory')}<span>Talk to Claude</span></div>
+      ${chat.map((m) => bubble('you', m.you) + bubble('ai', m.ai, m.note ? `<span class="chat-note">${icon('check')}Remembered: ${esc(m.note)}</span>` : '')).join('')}
+      ${pending.map((c) => { const s = status[c.id] || {}; return bubble('you', c.text) + (s.status === 'failed'
+        ? `<p class="note note--warn">${esc(s.note || "Claude couldn't answer")}</p>`
+        : `<div class="chat-msg chat-msg--ai chat-msg--wait"><span class="spinner"></span><p>${esc(s.note || 'Waiting for the laptop (it checks every 30 seconds)…')}</p></div>`); }).join('')}
+      ${!chat.length && !pending.length ? '<p class="group-foot" style="margin:0 0 8px">Tell Claude what it got wrong or how things should be, e.g. "Best stretch made my 2 viral videos, keep it". It answers here and remembers it on every run.</p>' : ''}
+      <form class="chat-form" data-chat><textarea class="input" rows="2" maxlength="1000" name="text" placeholder="Tell Claude something…" ${pending.length ? 'disabled' : ''}></textarea>
+        <button class="btn btn--primary" type="submit" ${pending.length ? 'disabled' : ''}>Send</button></form>
+      ${notes.length ? `<div class="ai-list ai-list--info"><h4>Claude remembers</h4><ul>${notes.slice().reverse().map((n) => `<li>${esc(n.text)} <button class="btn btn--quiet btn--small" data-forget="${esc(n.at)}">Forget</button></li>`).join('')}</ul></div>` : ''}
+    </div>`;
+  }
+
   function genresCard(movies, base) {
     const g = {};
     for (const m of movies) {
@@ -209,11 +233,35 @@ export function createInsightsView(ctx) {
     const n = (ins.totals || {}).videos || 0;
     content.innerHTML = banner(st) + prog
       + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span>${n ? ` from ${n} TikTok videos` : ' (no TikTok numbers yet: log in under Settings › TikTok)'}.</p>`
-      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
+      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + chatCard(ins, st) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
       + castCard(movies, base) + refresh;
   }
 
+  content.addEventListener('submit', async (e) => {
+    const f = e.target.closest('[data-chat]');
+    if (!f) return;
+    e.preventDefault();
+    const text = f.elements.text.value.trim();
+    if (!text) return;
+    haptic();
+    f.elements.text.disabled = true;
+    try {
+      await ctx.store.sendCommand({ type: 'insights_chat', text });
+    } catch (err) {
+      f.elements.text.disabled = false;
+      toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 });
+    }
+  });
+
   content.addEventListener('click', async (e) => {
+    const fg = e.target.closest('[data-forget]');
+    if (fg) {
+      haptic();
+      const ins = lastSt && lastSt.data && lastSt.data.insights;
+      if (ins) { ins.notes = (ins.notes || []).filter((n) => n.at !== fg.dataset.forget); render(lastSt); }
+      try { await ctx.store.sendCommand({ type: 'forget_note', at: fg.dataset.forget }); toast('Claude will forget that.', { kind: 'ok', ms: 3000 }); } catch (err) { toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 }); }
+      return;
+    }
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
     const s = e.target.closest('[data-sort]');
     if (s) { haptic(); sort = s.dataset.sort; lsSet(LS_SORT, sort); render(lastSt); return; }
