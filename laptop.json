@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T06:11:04+07:00",
+ "updated": "2026-10-29T06:11:37+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -327,12 +327,7 @@
  "music": {},
  "tiktok_login": "2026-10-28T18:04:25+07:00",
  "next_post_at": 1793229472.3372378,
- "insights_run": {
-  "started": "2026-10-29T06:07:54+07:00",
-  "step": "Claude is reading the numbers",
-  "done": null,
-  "total": null
- },
+ "insights_run": null,
  "insights_at": 1793228874.482454,
  "version": 2
 }
