@@ -9,12 +9,13 @@ import { createQueueView } from './views/queue.js';
 import { createSettingsView } from './views/settings.js';
 import { createMakeView } from './views/make.js';
 import { createInsightsView } from './views/insights.js';
+import { createRecommendView } from './views/recommend.js';
 
-// Tabs in the tab bar (Dashboard, Queue, Make one now, Insights, Settings), each with its own colour, plus pages
+// Tabs in the tab bar (Dashboard, Queue, Make one now, Recommended, Insights, Settings), each with its own colour, plus pages
 // opened from them (all movies, alerts from the Dashboard; Memory from Settings) that light up their parent tab.
-const TABS = ['now', 'queue', 'make', 'insights', 'settings', 'memory', 'movies', 'alerts'];
+const TABS = ['now', 'queue', 'make', 'recommend', 'insights', 'settings', 'memory', 'movies', 'alerts'];
 const PARENT = { movies: 'now', alerts: 'now', memory: 'settings' };
-const TITLES = { now: 'Dashboard', queue: 'Queue', make: 'Make one now', insights: 'Insights', settings: 'Settings', memory: 'Memory', movies: 'Movies', alerts: 'Alerts' };
+const TITLES = { now: 'Dashboard', queue: 'Queue', make: 'Make one now', recommend: 'Recommended', insights: 'Insights', settings: 'Settings', memory: 'Memory', movies: 'Movies', alerts: 'Alerts' };
 const LS_SEEN = 'ms.alerts.seen';
 
 const store = createStore();
@@ -55,6 +56,7 @@ const views = {
   settings: createSettingsView(ctx),
   make: createMakeView(ctx),
   insights: createInsightsView(ctx),
+  recommend: createRecommendView(ctx),
   memory: createSettingsView(ctx, { memory: true }),
 };
 
@@ -134,6 +136,11 @@ function updateBadge(st) {
 store.subscribe((st) => {
   for (const name of TABS) views[name].render(st);
   if (current === 'alerts' && st.data) markSeen(); else updateBadge(st);
+  const rec = document.querySelector('.tab-badge--rec');                // movies waiting to be downloaded
+  const n = views.recommend.count(st);
+  rec.hidden = !n;
+  rec.textContent = n > 9 ? '9+' : String(n);
+  rec.setAttribute('aria-label', `${n} to download`);
   document.documentElement.classList.toggle('is-demo', store.isDemo());
 });
 
