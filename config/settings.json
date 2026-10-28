@@ -38,17 +38,15 @@
   "delete_originals": "permanent",
   "cleanup_parts_after_days": 3,
   "posting": {
-    "enabled": false,
+    "enabled": true,
     "method": "browser",
     "privacy": "self_only",
     "modes": [
       "recap",
-      "character",
-      "hype",
       "stretch",
       "highlights"
     ],
-    "per_day": 10,
+    "per_day": 20,
     "times": [
       "00:00",
       "07:00",
@@ -63,7 +61,7 @@
     "gap_max": 30,
     "active_from": "09:00",
     "active_to": "23:30",
-    "username": ""
+    "username": "@starctacher"
   },
   "cut_style": "zoom",
   "filter": "mystery",
