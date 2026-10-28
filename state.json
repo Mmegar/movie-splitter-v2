@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:45:18+13:00",
+ "updated": "2026-10-28T13:45:21+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,12 +16,12 @@
   {
    "id": "elysium-2013",
    "name": "Elysium (2013)",
-   "status": "processing",
+   "status": "done",
    "source": "laptop",
    "started": "2026-10-28T09:46:49+13:00",
-   "finished": null,
+   "finished": "2026-10-28T13:45:21+13:00",
    "duration": 6575.6,
-   "subtitles": null,
+   "subtitles": "from your .srt file",
    "error": null,
    "modes": {
     "recap": {
@@ -4825,6 +4825,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T13:45:21+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Elysium (2013): Highlight 5 of 5 ready",
+   "message": "Highlight 5: 1:30:58 to 1:35:45 (287s)  interest score 66/100\nIn Ready to post/Elysium (2013)/Highlights."
+  },
+  {
    "at": "2026-10-28T13:36:04+13:00",
    "type": "part_ready",
    "title": "[Highlights] Elysium (2013): Highlight 4 of 5 ready",
@@ -6017,12 +6023,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 14 of 20 ready",
    "message": "Part 14: Locked Up for Trying (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T08:18:27+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 13 of 20 ready",
-   "message": "Part 13: Canon, Captains, and Calls (6 narrated beats, about 75s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
