@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:22:36+13:00",
+ "updated": "2026-10-28T13:22:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Elysium (2013)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 5
  },
  "queue": [],
@@ -4780,6 +4780,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T13:22:38+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Elysium (2013): Highlight 2 of 5 ready",
+   "message": "Highlight 2: 48:26 to 52:36 (250s)  interest score 67/100\nIn Ready to post/Elysium (2013)/Highlights."
+  },
+  {
    "at": "2026-10-28T13:14:19+13:00",
    "type": "part_ready",
    "title": "[Highlights] Elysium (2013): Highlight 1 of 5 ready",
@@ -5972,12 +5978,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 11 of 20 ready",
    "message": "Part 11: The Collapse and the Captain (6 narrated beats, about 74s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T08:10:58+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 10 of 20 ready",
-   "message": "Part 10: Hobie Brown Enters the Chaos (5 narrated beats, about 65s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
