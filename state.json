@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T09:32:32+13:00",
+ "updated": "2026-10-29T09:32:34+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4826,6 +4826,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T09:32:34+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 1",
+   "message": "[Movie recap] TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done s\nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T09:17:03+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 1",
@@ -6018,12 +6024,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 20 of 20 ready",
    "message": "Part 20: The Team Assembles (6 narrated beats, about 59s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T08:32:55+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 19 of 20 ready",
-   "message": "Part 19: Uncle Aaron Says No (6 narrated beats, about 73s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
