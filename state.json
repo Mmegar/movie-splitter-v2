@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T12:07:47+13:00",
+ "updated": "2026-10-29T12:07:49+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4830,6 +4830,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T12:07:49+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 5",
+   "message": "[Movie recap] TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      \nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T11:52:17+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 4",
@@ -6022,12 +6028,6 @@
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 10 of 11 ready",
    "message": "Part 10: Home Isn't Home Anymore (5 narrated beats, about 63s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
-  },
-  {
-   "at": "2026-10-22T08:59:50+13:00",
-   "type": "part_ready",
-   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 9 of 11 ready",
-   "message": "Part 9: The Original Anomaly (6 narrated beats, about 64s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
   }
  ]
 }
