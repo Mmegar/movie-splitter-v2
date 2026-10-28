@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T18:46:15+07:00",
+ "updated": "2026-10-28T18:46:18+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -311,5 +311,7 @@
  "music": {},
  "tiktok_login": "2026-10-28T18:04:25+07:00",
  "next_post_at": null,
+ "insights_run": null,
+ "insights_at": 1793185590.7073617,
  "version": 2
 }
