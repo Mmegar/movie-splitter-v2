@@ -150,6 +150,9 @@ class AgentTestBase(TempDirTest):
         self.web = FakeWeb()
         self.web_patch = mock.patch.object(archive, "http_request", self.web)
         self.web_patch.start()
+        no_claude = mock.patch.object(agent.Agent, "ask_ai", side_effect=RuntimeError("no Claude in tests"))
+        no_claude.start()                     # (the To edit ordering would otherwise call the real one)
+        self.addCleanup(no_claude.stop)
         os.environ.pop("STATUS", None)
 
     def tearDown(self):

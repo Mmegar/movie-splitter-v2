@@ -383,6 +383,48 @@ def has_movie(title, library):
     return False
 
 
+QUEUE_SYSTEM = ("You run a TikTok channel that posts movie recaps in parts. You decide which movie waiting on the "
+                "laptop gets cut and posted first, from the channel's numbers and what people are watching right "
+                "now. You answer with JSON only.")
+
+
+def queue_prompt(files, brief, trends_now=None):
+    """What Claude sees when it orders To edit: the waiting files, the channel's numbers, the season and trends."""
+    tr = trends_now or brief.get("trends") or {}
+    movies = {k: {f: v.get(f) for f in ("views", "videos", "avg_watch", "full_watch", "genres")}
+              for k, v in list((brief.get("movies") or {}).items())[:40]}
+    return f"""Today is {tr.get("date") or time.strftime("%Y-%m-%d")}.
+SEASON: {json.dumps(tr.get("season") or [], ensure_ascii=False)}
+MOST READ-ABOUT FILMS AND SHOWS ON WIKIPEDIA (last 3 days): {json.dumps(tr.get("trending") or [], ensure_ascii=False)}
+THE CHANNEL'S NUMBERS PER MOVIE ALREADY POSTED (avg_watch in seconds, full_watch %): {json.dumps(movies, ensure_ascii=False)}
+LAST ADVICE FROM INSIGHTS: {json.dumps(brief.get("summary") or "", ensure_ascii=False)}
+
+These movie files are waiting to be cut (one at a time, each takes a while, then its parts get posted):
+{json.dumps(files, ensure_ascii=False)}
+
+Put ALL of them in the order they should be cut, best first. Weigh (1) what's trending or in season right now
+(a movie riding a trend is worth more today than next week), (2) the genres and kinds of movie that get the most
+views and watch time on THIS channel, (3) how well-known it is and how well its story cuts into cliffhanger parts.
+The channel is best at mystery and twisty stories.
+
+Answer with this JSON, using the file names exactly as given:
+{{"order": [{{"file": "<file name>", "why": "<one short line, e.g. 'Halloween is in 3 days' or 'thrillers get your best watch time'>"}}, ...]}}"""
+
+
+def clean_queue_order(answer, files):
+    """Claude's order, kept to the files really waiting (matched exactly, else by title)."""
+    by_key = {names.clean_name(f).lower(): f for f in files}
+    out, seen = [], set()
+    for x in (answer or {}).get("order") or []:
+        x = x if isinstance(x, dict) else {"file": x}
+        f = str(x.get("file") or "").strip()
+        f = f if f in files else by_key.get(names.clean_name(f).lower())
+        if f and f not in seen:
+            seen.add(f)
+            out.append({"name": f, "why": str(x.get("why") or "")[:140]})
+    return out
+
+
 PICKS_WAITING = 8   # at most this many "download next" titles waiting at once
 
 
@@ -805,9 +847,61 @@ class Agent:
         return {s["path"] for s in self.memory["sends"].values() if s["status"] in ("sent", "done", "cutting")}
 
     def queue_sorted(self, paths):
-        """Files in the order chosen in the app (anything not ordered goes last, by name)."""
+        """Files in the order chosen in the app; the rest in Claude's order (rank_queue), then by name."""
         order = {n: i for i, n in enumerate(self.memory.get("queue_order") or [])}
-        return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), p.name.lower()))
+        ai = {x["name"]: i for i, x in enumerate(self.memory.get("ai_order") or [])} if self.ai_queue_on() else {}
+        return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), ai.get(p.name, 10 ** 6), p.name.lower()))
+
+    def ai_queue_on(self):
+        return bool(self.remote_settings.get("ai_queue", True))
+
+    def rank_due(self, now=None):
+        """True when To edit changed since Claude last ordered it (or 12 h went by, as trends move)."""
+        if not self.ai_queue_on() or self.paused_reason():
+            return False
+        now = time.time() if now is None else now
+        busy = self.waiting_paths()
+        files = sorted(p.name for p in self.watcher.candidates() if str(p) not in busy)
+        if len(files) < 2:
+            return False
+        if now - float(self.memory.get("ai_order_try") or 0) < 1800 and files == self.memory.get("ai_order_tried"):
+            return False                               # (a failed try waits 30 min before the next one)
+        return files != self.memory.get("ai_order_for") or now - float(self.memory.get("ai_order_at") or 0) >= 12 * 3600
+
+    def rank_queue(self):
+        """Claude orders the movies in To edit (best first) from the season, trends and the channel's numbers.
+        Movies you put in order in the app still go first."""
+        busy = self.waiting_paths()
+        files = sorted(p.name for p in self.watcher.candidates() if str(p) not in busy)
+        if len(files) < 2:
+            return None
+        with self.lock:
+            self.memory.update(ai_order_try=time.time(), ai_order_tried=files)
+            self._save_memory()
+        brief = self.memory.get("insights_brief") or {}
+        trends_now = None
+        try:
+            import trends
+            trends_now = trends.context()
+        except Exception as e:
+            log.warning("Queue: couldn't read the trends: %s", e)
+        order = clean_queue_order(self.ask_ai(QUEUE_SYSTEM, queue_prompt(files, brief, trends_now)), files)
+        if not order:
+            raise RuntimeError("Claude didn't give an order")
+        with self.lock:
+            self.memory.update(ai_order=order, ai_order_for=files, ai_order_at=time.time())
+            self._save_memory()
+        log.info("Claude's cutting order: %s", ", ".join(x["name"] for x in order))
+        return order
+
+    def _rank_quietly(self):
+        self.last["rank_busy"] = time.time()
+        try:
+            self.rank_queue()
+        except Exception as e:
+            log.warning("Claude couldn't order To edit: %s", e)
+        finally:
+            self.last["rank_busy"] = 0
 
     # ---- 1b. or cut it right here (setting cut_on: laptop): no upload at all
     def laptop_cutting(self):
@@ -969,6 +1063,8 @@ class Agent:
             self._save_memory()
 
     def check_folder(self):
+        if time.time() - float(self.last.get("rank_busy") or 0) < 300:
+            return                                       # Claude is choosing which one goes first
         busy = self.waiting_paths()
         for p in self.queue_sorted(self.watcher.ready()):
             if str(p) in busy or (p.name in self.memory["stopped"] and self.laptop_cutting()):
@@ -1465,7 +1561,7 @@ class Agent:
             with self.lock:
                 self.memory["queue_order"] = order
                 self._save_memory()
-            return "New order saved"
+            return "New order saved" if order else "Claude chooses the order again"
         if not name:
             raise ValueError("no file name given")
         if kind in ("to_queue", "to_library"):
@@ -2125,6 +2221,10 @@ class Agent:
                 for k in ("genres", "cast", "year"):
                     if m.get(k):
                         data["movies"][name][k] = m[k]
+        with self.lock:                                # what the queue ordering (rank_queue) works from
+            self.memory["insights_brief"] = {"movies": data["movies"], "trends": data.get("trends") or {},
+                                             "summary": (data.get("ai") or {}).get("summary") or ""}
+            self._save_memory()
         data["tuning"] = (old.get("tuning") or [])[-30:]
         if changes:
             def apply(text):
@@ -2215,6 +2315,8 @@ class Agent:
         busy = self.waiting_paths()
         sending = {t["file"] for t in self.transfers.values() if t["direction"] == "send"}
         files = [p for p in self.watcher.candidates() if str(p) not in busy]
+        manual = set(self.memory.get("queue_order") or [])
+        why = {x["name"]: x.get("why") or "" for x in self.memory.get("ai_order") or []} if self.ai_queue_on() else {}
         out = []
         for p in self.queue_sorted(files):
             info = file_info(p)
@@ -2222,6 +2324,8 @@ class Agent:
                 info["sending"] = p.name in sending
                 info["style"] = self.style_for(p.name)
                 info["character"] = (self.memory.get("characters") or {}).get(p.name, "")
+                info["pinned"] = p.name in manual
+                info["ai_why"] = why.get(p.name, "")
                 out.append(info)
         return out
 
@@ -2280,6 +2384,9 @@ class Agent:
                 self.sync_music()
             except Exception as e:
                 log.warning("Music sync failed: %s", e)
+        if not self.last.get("rank_busy") and self.rank_due():
+            self.last["rank_busy"] = time.time()         # (set here too, so the cut waits for the order)
+            threading.Thread(target=self._rank_quietly, daemon=True).start()
         insights_due = time.time() - float(self.memory.get("insights_at") or 0) >= float(self.cfg["insights_hours"]) * 3600
         if insights_due and not self.cutting and not self.browser_busy.locked() and not self.last.get("insights_busy"):
             threading.Thread(target=self._insights_quietly, daemon=True).start()

@@ -71,13 +71,17 @@
       "name": "Carnival.of.Souls.1962.mp4",
       "size_mb": 655,
       "modified": "2026-10-13T13:58:00+13:00",
-      "sending": true
+      "sending": true,
+      "ai_why": "Halloween is in 3 days",
+      "pinned": false
     },
     {
       "name": "The.Phantom.of.the.Opera.1925.mkv",
       "size_mb": 1210,
       "modified": "2026-10-13T13:20:00+13:00",
-      "sending": false
+      "sending": false,
+      "ai_why": "horror classics get your best watch time",
+      "pinned": true
     }
   ],
   "library": [

@@ -485,3 +485,45 @@ class StyleTest(base.AgentTestBase):
         self.assertEqual(a.queue_files()[0]["style"], "zoom")
         a.remote_settings["cut_style"] = "classic"
         self.assertEqual(a.queue_files()[0]["style"], "classic")
+
+
+class AiQueueTest(base.AgentTestBase):
+    def test_claude_orders_the_rest_after_your_own_order(self):
+        for n in ("A.mkv", "B.mkv", "C.mkv"):
+            (self.watch / n).write_bytes(b"x")
+        a = self.make_agent()
+        answer = {"order": [{"file": "C", "why": "Halloween"}, {"file": "B.mkv", "why": "thrillers do well"},
+                            {"file": "Nope.mkv"}, {"file": "A.mkv"}]}
+        with mock.patch.object(a, "ask_ai", return_value=answer) as ask:
+            self.assertTrue(a.rank_due())
+            a.rank_queue()
+        self.assertIn("C.mkv", ask.call_args[0][1])
+        self.assertEqual([x["name"] for x in a.memory["ai_order"]], ["C.mkv", "B.mkv", "A.mkv"])
+        self.assertFalse(a.rank_due())                     # nothing changed: no new call
+        self.assertEqual([p.name for p in a.queue_sorted(a.watcher.candidates())], ["C.mkv", "B.mkv", "A.mkv"])
+        a.memory["queue_order"] = ["A.mkv"]                # moved by hand: goes first
+        self.assertEqual([p.name for p in a.queue_sorted(a.watcher.candidates())], ["A.mkv", "C.mkv", "B.mkv"])
+        q = {f["name"]: f for f in a.queue_files()}
+        self.assertTrue(q["A.mkv"]["pinned"])
+        self.assertEqual(q["C.mkv"]["ai_why"], "Halloween")
+        self.assertEqual(a.run_command("queue_order", {"order": []}), "Claude chooses the order again")
+        self.assertEqual(a.memory["queue_order"], [])
+        (self.watch / "D.mkv").write_bytes(b"x")           # a new movie: Claude orders again
+        self.assertTrue(a.rank_due())
+
+    def test_switched_off_or_one_movie_means_no_call(self):
+        (self.watch / "A.mkv").write_bytes(b"x")
+        a = self.make_agent()
+        self.assertFalse(a.rank_due())
+        (self.watch / "B.mkv").write_bytes(b"x")
+        a.remote_settings["ai_queue"] = False
+        self.assertFalse(a.rank_due())
+
+    def test_a_failed_try_waits(self):
+        for n in ("A.mkv", "B.mkv"):
+            (self.watch / n).write_bytes(b"x")
+        a = self.make_agent()
+        with mock.patch.object(a, "ask_ai", side_effect=RuntimeError("no Claude")):
+            a._rank_quietly()
+        self.assertFalse(a.rank_due())
+        self.assertTrue(a.rank_due(now=__import__("time").time() + 3600))
