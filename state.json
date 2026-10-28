@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:36:02+13:00",
+ "updated": "2026-10-28T13:36:05+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Elysium (2013)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 5
  },
  "queue": [],
@@ -4810,6 +4810,12 @@
  },
  "events": [
   {
+   "at": "2026-10-28T13:36:04+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Elysium (2013): Highlight 4 of 5 ready",
+   "message": "Highlight 4: 1:25:48 to 1:29:20 (211s)  interest score 59/100\nIn Ready to post/Elysium (2013)/Highlights."
+  },
+  {
    "at": "2026-10-28T13:29:08+13:00",
    "type": "part_ready",
    "title": "[Highlights] Elysium (2013): Highlight 3 of 5 ready",
@@ -6002,12 +6008,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 13 of 20 ready",
    "message": "Part 13: Canon, Captains, and Calls (6 narrated beats, about 75s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T08:16:15+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Spider-Man Across The Spider-Verse (2023): Part 12 of 20 ready",
-   "message": "Part 12: Peter, Mayday, and Miguel (5 narrated beats, about 62s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Movie recap."
   }
  ]
 }
