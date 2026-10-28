@@ -1,5 +1,6 @@
 import http.server
 import json
+import unittest
 import os
 import subprocess
 import sys
@@ -16,6 +17,27 @@ import ghapi
 import posting
 import status
 import transport
+
+
+_OLD_POSTING = {}
+
+
+def setUpModule():      # these tests cover the Composio poster at set times (the browser poster has its own)
+    _s = agent.settings
+    _OLD_POSTING.update(_s.DEFAULTS["posting"])
+    _s.DEFAULTS["posting"].update(method="draft", when="times", per_day=3)
+    import os as _os                     # (importing process.py copies config/settings.json into POSTING_* env vars)
+    for k in [k for k in _os.environ if k.startswith("POSTING_")]:
+        _OLD_POSTING.setdefault("_env", {})[k] = _os.environ.pop(k)
+
+
+def tearDownModule():
+    _s = agent.settings
+    import os as _os
+    _os.environ.update(_OLD_POSTING.pop("_env", {}))
+    _s.DEFAULTS["posting"].clear()
+    _s.DEFAULTS["posting"].update(_OLD_POSTING)
+
 
 PD = archive.DEFAULT_PD_COLLECTIONS
 NOSFERATU = {"identifier": "nosferatu_1922", "title": "Nosferatu: A Symphony of Horror", "year": "1922",
@@ -589,3 +611,26 @@ class AsReadyTest(PostingTest):
         with mock.patch.object(posting, "post_video", lambda *x, **k: (True, "v~1", None)):
             a.check_commands()
         self.assertEqual(a.cmd_status["x1"]["status"], "done")
+
+
+class InsightsTest(unittest.TestCase):
+    def test_matches_videos_to_parts_and_adds_up_movies(self):
+        state = {"movies": [{"name": "Gone Girl", "modes": {"recap": {"parts": [
+            {"n": 1, "caption": "She vanished on their anniversary... #gonegirl #movie", "post": {}},
+            {"n": 2, "caption": "The diary was a lie 😳 #gonegirl", "post": {"url": "https://www.tiktok.com/@me/video/22"}}]}}}]}
+        videos = [{"id": "11", "desc": "She vanished on their anniversary... #gonegirl #movie #fyp", "views": 1000,
+                   "avg_watch": 20.0, "full_watch": 10.0, "created": 2},
+                  {"id": "22", "desc": "something else", "views": 3000, "avg_watch": 30.0, "created": 3},
+                  {"id": "33", "desc": "unrelated", "views": 5, "created": 1}]
+        data = agent.build_insights(state, videos)
+        self.assertEqual([v.get("part") for v in data["videos"]], [1, 2, None])
+        m = data["movies"]["Gone Girl"]
+        self.assertEqual((m["views"], m["videos"], m["avg_watch"], m["best_part"]), (4000, 2, 25.0, [2, 3000]))
+        self.assertEqual(data["totals"]["views"], 4005)
+
+    def test_tuning_stays_in_safe_limits(self):
+        cur = {"narrator_funny": 0.5, "recap_part_seconds": 180, "narrator_tempo": "1.2", "thumbnail_badge": "PART {n}"}
+        out = agent.clean_tuning({"narrator_funny": 1.0, "recap_part_seconds": 60, "narrator_tempo": "1.3x",
+                                  "thumbnail_badge": "no number", "story_model": "x", "script_direction": "Roast more."}, cur)
+        self.assertEqual(out, {"narrator_funny": 0.65, "recap_part_seconds": 150, "narrator_tempo": "1.3",
+                               "script_direction": "Roast more."})

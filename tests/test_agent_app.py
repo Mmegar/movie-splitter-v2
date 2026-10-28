@@ -11,6 +11,27 @@ import status
 import transport
 
 
+_OLD_POSTING = {}
+
+
+def setUpModule():      # these tests cover the Composio poster at set times (the browser poster has its own)
+    _s = agent.settings
+    _OLD_POSTING.update(_s.DEFAULTS["posting"])
+    _s.DEFAULTS["posting"].update(method="draft", when="times", per_day=3)
+    import os as _os                     # (importing process.py copies config/settings.json into POSTING_* env vars)
+    for k in [k for k in _os.environ if k.startswith("POSTING_")]:
+        _OLD_POSTING.setdefault("_env", {})[k] = _os.environ.pop(k)
+
+
+def tearDownModule():
+    _s = agent.settings
+    import os as _os
+    _os.environ.update(_OLD_POSTING.pop("_env", {}))
+    _s.DEFAULTS["posting"].clear()
+    _s.DEFAULTS["posting"].update(_OLD_POSTING)
+
+
+
 def commands(fake, *cmds):
     fake.put_file("config/commands.json", json.dumps({"commands": list(cmds)}), "main")
 

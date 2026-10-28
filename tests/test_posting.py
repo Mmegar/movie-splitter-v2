@@ -2,7 +2,8 @@ import json
 import os
 import sys
 import types
-from datetime import datetime
+import unittest
+from datetime import datetime, timedelta
 from unittest import mock
 from zoneinfo import ZoneInfo
 
@@ -159,3 +160,33 @@ class ComposioCallTest(TempDirTest):
         self.assertIn("composio_user_id", posting.post_video(self.video, "c", "SELF_ONLY", {"api_key": "k"})[2])
         with mock.patch.dict(sys.modules, {"composio": None}):
             self.assertIn("pip install composio", posting.post_video(self.video, "c", "SELF_ONLY", self.creds)[2])
+
+
+class GapScheduleTest(unittest.TestCase):
+    """when = "gap": one part every 15-30 minutes (random), inside active hours, up to per_day."""
+    P = {"enabled": True, "when": "gap", "gap_min": 15, "gap_max": 30, "active_from": "09:00",
+         "active_to": "23:30", "per_day": 10, "modes": ["recap"]}
+
+    def state(self):
+        return {"movies": [{"id": "a", "name": "A", "started": "2026-10-10T10:00:00+13:00", "modes": {"recap": {"parts": [
+            {"n": 2, "drive_path": "p2", "post": {}}, {"n": 1, "drive_path": "p1", "post": {}}]}}}]}
+
+    def test_series_order_and_gap(self):
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo("Pacific/Auckland")
+        now = datetime(2026, 10, 13, 12, 0, tzinfo=tz)
+        pick, _ = posting.decide(self.state(), self.P, now)
+        self.assertEqual(pick[2]["n"], 1)                                  # Part 1 first
+        pick, why = posting.decide(self.state(), self.P, now, next_due=now + timedelta(minutes=20))
+        self.assertIsNone(pick)
+        self.assertIn("gap", why)
+        pick, why = posting.decide(self.state(), self.P, datetime(2026, 10, 13, 3, 0, tzinfo=tz))
+        self.assertIsNone(pick)                                            # asleep: outside active hours
+        for _ in range(50):
+            self.assertTrue(15 <= posting.next_gap_minutes(self.P) <= 30)
+
+    def test_next_at_moves_into_active_hours(self):
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo("Pacific/Auckland")
+        now = datetime(2026, 10, 13, 23, 50, tzinfo=tz)
+        self.assertEqual(posting.next_at(now, self.P, 1), "2026-10-14T09:00:00+13:00")

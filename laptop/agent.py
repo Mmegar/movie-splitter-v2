@@ -13,7 +13,13 @@ What it does, all by itself, while your laptop is on:
      <output folder>/Ready to post/<movie>/<mode>/, with "_parts list.txt" and "captions.txt".
      Then the copies on GitHub are deleted and the original movie goes to <output folder>/Done
      (setting "original_after": "move", "keep" or "delete").
-  4. POST (optional): at your posting times it posts the next part to TikTok through Composio.
+  4. POST (optional): posts the next part to TikTok in its own logged-in Chrome window (TikTok Studio),
+     in series order, one every 15-30 minutes (random gap) during your posting hours, with the part's
+     thumbnail as the cover and its caption. Log in once with:  python agent.py --tiktok-login
+  4b. INSIGHTS: every few hours it reads your TikTok views and watch time, asks Claude what's working
+     and (if Auto-tune is on) adjusts the narration, captions and thumbnails by itself (insights.json).
+  4c. MUSIC: keeps your songs in step between <output folder>/Music/<hype|story|...> and GitHub (a
+     private draft release "music-library"), so every video has background music.
   5. Tells the app what it's doing (laptop.json), every 5 minutes and whenever something changes.
 
 Settings: config.json next to this file (copy config.example.json). Log: agent.log next to it.
@@ -88,6 +94,8 @@ DEFAULTS = {
     "composio_connected_account_id": "",
     "composio_tiktok_version": "latest",
     "tiktok_username": "",
+    "tiktok_headless": False,          # True = the TikTok window stays hidden (TikTok blocks hidden browsers more often)
+    "insights_hours": 6,               # how often TikTok's numbers are read for Insights
     "posting_dry_run": False,
     "anthropic_api_key": "",           # for cutting on this laptop: Claude (Haiku) writes the stories
 }
@@ -206,7 +214,137 @@ CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "p
               "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
               "process.py", "tracking.py",   # (process + tracking: for cutting on the laptop)
               "laptop/startup_apps.ps1",
-              "assets/music/tracks.json"]    # the free songs the laptop downloads when you have none of your own     # Windows: opens the project's apps at login (install_startup_apps)
+              "assets/music/tracks.json"]
+MUSIC_RELEASE = "music-library"   # the draft release that holds your songs on GitHub (only you can see it)
+AUDIO = {".mp3", ".m4a", ".wav", ".aac", ".ogg", ".flac"}    # the free songs the laptop downloads when you have none of your own     # Windows: opens the project's apps at login (install_startup_apps)
+# ---------------------------------------------------------------- Insights (TikTok numbers -> what to change)
+INSIGHTS_SYSTEM = ("You are the growth analyst for a TikTok channel that posts movie recaps in parts (narrated "
+                   "recaps, character stories, hype edits and clips). You read the channel's real numbers and "
+                   "give short, concrete advice in plain English. You answer with JSON only.")
+TUNABLE = {"script_direction": str, "caption_direction": str, "thumbnail_badge": str, "narrator_funny": float,
+           "narrator_intensity": float, "narrator_tempo": str, "recap_part_seconds": int}
+TUNE_LIMITS = {"narrator_funny": (0.0, 1.0), "narrator_intensity": (0.5, 1.2), "recap_part_seconds": (60, 300)}
+TEMPOS = ("1", "1.1", "1.2", "1.3", "1.5")
+
+
+def _norm(text):
+    return re.sub(r"[^a-z0-9]+", " ", re.sub(r"#\S+", " ", str(text or "").lower())).strip()
+
+
+def build_insights(state, videos, old=None):
+    """Matches each TikTok video to its movie/part (by the posted link, else by its caption) and adds up
+    the numbers per movie."""
+    parts = []
+    for m in state.get("movies", []):
+        for mode, md in (m.get("modes") or {}).items():
+            for pt in md.get("parts", []):
+                url = str((pt.get("post") or {}).get("url") or "")
+                parts.append((m.get("name") or "?", mode, pt.get("n"), url.rsplit("/", 1)[-1] if "/video/" in url else "",
+                              _norm(pt.get("caption"))[:48]))
+    known = {v["id"]: v for v in (old or {}).get("videos", []) if v.get("movie")}
+    out, movies = [], {}
+    for v in videos:
+        v = dict(v, desc=str(v.get("desc") or "")[:300])
+        hit = next((p for p in parts if p[3] and p[3] == v["id"]), None)
+        if not hit:
+            d = _norm(v["desc"])
+            hit = next((p for p in parts if p[4] and len(p[4]) >= 12 and (p[4] in d or d[:48] in p[4])), None)
+        if hit:
+            v.update(movie=hit[0], mode=hit[1], part=hit[2])
+        elif v["id"] in known:
+            v.update({k: known[v["id"]].get(k) for k in ("movie", "mode", "part")})
+        out.append(v)
+        if not v.get("movie"):
+            continue
+        mv = movies.setdefault(v["movie"], {"videos": 0, "views": 0, "likes": 0, "comments": 0, "shares": 0,
+                                            "saves": 0, "watch": [], "full": [], "modes": {}, "best_part": None})
+        mv["videos"] += 1
+        for k in ("views", "likes", "comments", "shares", "saves"):
+            mv[k] += int(v.get(k) or 0)
+        if v.get("avg_watch") is not None:
+            mv["watch"].append(v["avg_watch"])
+        if v.get("full_watch") is not None:
+            mv["full"].append(v["full_watch"])
+        mv["modes"][v["mode"]] = mv["modes"].get(v["mode"], 0) + int(v.get("views") or 0)
+        if not mv["best_part"] or v.get("views", 0) > mv["best_part"][1]:
+            mv["best_part"] = [v.get("part"), v.get("views", 0)]
+    for mv in movies.values():
+        w, f = mv.pop("watch"), mv.pop("full")
+        mv["avg_watch"] = round(sum(w) / len(w), 1) if w else None
+        mv["full_watch"] = round(sum(f) / len(f), 1) if f else None
+    tot = {k: sum(int(v.get(k) or 0) for v in out) for k in ("views", "likes", "comments", "shares", "saves")}
+    ws = [v["avg_watch"] for v in out if v.get("avg_watch") is not None]
+    fs = [v["full_watch"] for v in out if v.get("full_watch") is not None]
+    tot.update(videos=len(out), avg_watch=round(sum(ws) / len(ws), 1) if ws else None,
+               full_watch=round(sum(fs) / len(fs), 1) if fs else None)
+    return {"updated": now_iso(), "totals": tot, "videos": out[:200], "movies": movies}
+
+
+def insights_prompt(data, cur):
+    """What Claude sees: the numbers, per movie and per video, and the settings it may change."""
+    vids = [{k: v.get(k) for k in ("desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
+                                    "avg_watch", "full_watch", "movie", "mode", "part")} for v in data["videos"][:60]]
+    now = {k: cur.get(k) for k in TUNABLE}
+    return f"""The channel's numbers (newest videos first; avg_watch in seconds, full_watch = % who watched to the end):
+TOTALS: {json.dumps(data["totals"])}
+PER MOVIE: {json.dumps(data["movies"], ensure_ascii=False)}
+VIDEOS: {json.dumps(vids, ensure_ascii=False)}
+
+Settings the owner lets you tune (current values): {json.dumps(now, ensure_ascii=False)}
+- script_direction / caption_direction: free-text notes the script and caption writer follow (max 600 chars).
+  Keep what's already there that still makes sense; refine it, don't throw it away.
+- thumbnail_badge: the badge on each part's thumbnail, must contain {{n}} (the part number), max 40 chars.
+- narrator_funny 0..1, narrator_intensity 0.5..1.2, narrator_tempo one of {list(TEMPOS)}, recap_part_seconds 60..300.
+
+Answer with this JSON:
+{{"summary": "<2-3 sentences: how the channel is doing and the one thing that matters most>",
+  "working": ["<short point backed by a number>", ...up to 4],
+  "not_working": ["<short point backed by a number>", ...up to 4],
+  "actions": ["<a concrete next step for the owner>", ...up to 4],
+  "next_movies": [{{"title": "<a movie or show to download next>", "why": "<genre/cast that performs here>"}}, ...up to 5],
+  "movies": {{"<movie name exactly as in PER MOVIE>": {{"genres": ["<1-3 genres, e.g. Mystery, Thriller>"],
+             "cast": ["<top 3 billed actors>"], "year": <release year or null>}}}},
+  "settings": {{<ONLY the settings you want to change, with their new values; {{}} if nothing>}},
+  "settings_why": "<one sentence: which numbers made you change them>"}}
+Rules: change settings only when at least 5 matched videos back it up, in small steps (funny/intensity by at
+most 0.15, part length by at most 30 s). Watch time and full-watch % matter more than likes. Fill "movies" for
+every movie in PER MOVIE."""
+
+
+def clean_tuning(proposed, cur):
+    """Only the allowed settings, within their limits, and only real changes."""
+    out = {}
+    for k, v in (proposed or {}).items():
+        if k not in TUNABLE or v is None:
+            continue
+        try:
+            if TUNABLE[k] is str:
+                v = str(v).strip()
+                if k == "narrator_tempo":
+                    v = v.rstrip("x")
+                    if v not in TEMPOS:
+                        continue
+                elif k == "thumbnail_badge":
+                    if "{n}" not in v or len(v) > 40:
+                        continue
+                elif not v or len(v) > 600:
+                    continue
+            else:
+                lo, hi = TUNE_LIMITS[k]
+                v = min(hi, max(lo, TUNABLE[k](v)))
+                if k in ("narrator_funny", "narrator_intensity"):
+                    was = float(cur.get(k) if cur.get(k) is not None else v)
+                    v = round(min(was + 0.15, max(was - 0.15, v)), 2)
+                if k == "recap_part_seconds":
+                    was = int(cur.get(k) or v)
+                    v = int(min(was + 30, max(was - 30, v)))
+        except (TypeError, ValueError):
+            continue
+        if str(cur.get(k)) != str(v):
+            out[k] = v
+    return out
+
+
 PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
 SHARE_KEEP = 30         # full-quality parts kept on GitHub for the phone to save
 
@@ -422,6 +560,9 @@ class Agent:
         self.cmd_lock = threading.Lock()
         self.remote_settings = settings.load(text="{}")
         self.status_ready = False
+        self.tiktok_dir = self.dir / "tiktok-browser"   # the poster's Chrome profile (keeps the TikTok login)
+        self.music_dir = self.output / "Music"
+        self.browser_busy = threading.Lock()            # one TikTok window at a time
 
     # ---- memory (what's been done, kept between restarts)
     def _load_memory(self):
@@ -431,7 +572,7 @@ class Agent:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
                      ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {}),
-                     ("styles", {}), ("characters", {}), ("stopped", [])):
+                     ("styles", {}), ("characters", {}), ("stopped", []), ("insights_at", 0)):
             m.setdefault(k, v)
         return m
 
@@ -611,6 +752,10 @@ class Agent:
                                          "started": now_iso(), "style": self.style_for(path.name), "local": True}
             self._save_memory()
         ensure_cutter_packages()
+        try:
+            self.sync_music()                      # your newest songs, so this movie's parts have music
+        except Exception as e:
+            log.warning("Music sync failed: %s", e)
         settings_file = self.dir / "settings-for-cutting.json"
         settings_file.write_text(json.dumps(self.remote_settings), encoding="utf-8")
         env = dict(os.environ, SETTINGS_FILE=str(settings_file), STATUS_BACKEND="api",
@@ -1168,6 +1313,14 @@ class Agent:
         name = plain_name(c.get("file"))
         if kind == "post_all":
             return self.post_all(c)
+        if kind == "tiktok_login":                       # opens TikTok's login page on the laptop's screen
+            threading.Thread(target=self.tiktok_login, args=(str(c["id"]),), daemon=True).start()
+            return None                                   # finished by tiktok_login
+        if kind == "insights_now":
+            threading.Thread(target=self.update_insights, kwargs={"force": True}, daemon=True).start()
+            return "Reading your TikTok numbers: Insights update in a few minutes"
+        if kind == "sync_music":
+            return self.sync_music()
         if kind == "share_all":
             return self.share_all(c)
         if kind == "cut_now":                            # the app's Start button when cutting is on the laptop
@@ -1227,8 +1380,8 @@ class Agent:
                 return "Marked as posted"
             if kind == "share_part":
                 return "Ready to save on your phone: " + self.share_part(movie, mode, part, f)
-            if not self.cfg.get("composio_api_key"):
-                raise RuntimeError("TikTok isn't set up on the laptop yet (composio_api_key in config.json)")
+            if not self.tiktok_ready():
+                raise RuntimeError("TikTok isn't logged in on the laptop yet (Settings > TikTok > Log in on the laptop)")
             ok, error = self.send_part(movie, mode, part, manual=True)
             if not ok:
                 raise RuntimeError(error or "TikTok didn't accept it")
@@ -1431,10 +1584,12 @@ class Agent:
         now = datetime.now(tz)
         if str(cfg.get("when") or "") == "as_ready" and not force and self.posted_recently():
             return None                                   # one part every 5 minutes at most
-        pick, reason = posting.decide(state, cfg, now, force, available)
+        due = self.memory.get("next_post_at")
+        due = datetime.fromtimestamp(due, tz) if due else None
+        pick, reason = posting.decide(state, cfg, now, force, available, next_due=due)
         if not dry_run:
             count = posting.posted_today(state, now)
-            status.set_posting(cfg.get("enabled"), posting.next_at(now, cfg, count), count)
+            status.set_posting(cfg.get("enabled"), posting.next_at(now, cfg, count, due), count)
         if not pick:
             log.info("Posting: %s", reason)
             return None
@@ -1443,10 +1598,15 @@ class Agent:
         log.info("Posting %s [%s] Part %s%s", movie["name"], label, part["n"], " - dry run, nothing posted" if dry_run else "")
         if dry_run:
             return pick
-        self.send_part(movie, mode, part, cfg)
+        ok, _ = self.send_part(movie, mode, part, cfg)
+        gap = posting.next_gap_minutes(cfg) if ok else 10      # a failed try waits 10 minutes
+        with self.lock:
+            self.memory["next_post_at"] = time.time() + gap * 60
+            self._save_memory()
+        due = datetime.fromtimestamp(self.memory["next_post_at"], tz)
         state = status.load_state() or {}
         count = posting.posted_today(state, datetime.now(tz))
-        status.set_posting(cfg.get("enabled"), posting.next_at(datetime.now(tz), cfg, count), count)
+        status.set_posting(cfg.get("enabled"), posting.next_at(datetime.now(tz), cfg, count, due), count)
         status.flush()
         return pick
 
@@ -1466,12 +1626,22 @@ class Agent:
         creds = {"api_key": self.cfg["composio_api_key"], "user_id": self.cfg["composio_user_id"],
                  "connected_account_id": self.cfg["composio_connected_account_id"],
                  "version": self.cfg["composio_tiktok_version"], "username": self.cfg["tiktok_username"]}
-        direct = str(cfg.get("method") or "draft").lower() == "direct"
+        method = str(cfg.get("method") or "browser").lower()
+        direct = method in ("direct", "browser")
+        f = self.output / part["drive_path"]
         try:
-            ok, ref, error = posting.post_video(self.output / part["drive_path"], caption, privacy, creds,
-                                                publish=direct)
+            if method == "browser":
+                cover = next((c for c in (f.with_name(f.stem + " - thumbnail.jpg"),
+                                          f.with_name(f.stem + " - thumbnail.png")) if c.exists()), None)
+                with self.browser_busy:
+                    ok, ref, error = posting.browser_post(f, caption, self.tiktok_dir, cover=cover,
+                                                          headless=bool(self.cfg["tiktok_headless"]), log=log.info)
+            else:
+                ok, ref, error = posting.post_video(f, caption, privacy, creds, publish=direct)
         except Exception as e:
             ok, ref, error = False, None, str(e)
+        if method == "browser":
+            privacy = "PUBLIC_TO_EVERYONE"
         url = ref if ref and str(ref).startswith("http") else None
         status.set_post(movie["id"], mode, part["n"], ("posted" if direct else "inbox") if ok else "failed", url=url,
                         error=None if ok else error)
@@ -1500,8 +1670,8 @@ class Agent:
     def post_all(self, c):
         """'Send all parts to TikTok': queues every part of the movie (one mode) that hasn't been sent, in
         order. run_post_jobs() then sends them one by one until all of them are in TikTok."""
-        if not self.cfg.get("composio_api_key"):
-            raise RuntimeError("TikTok isn't set up on the laptop yet (composio_api_key in config.json)")
+        if not self.tiktok_ready():
+            raise RuntimeError("TikTok isn't logged in on the laptop yet (Settings > TikTok > Log in on the laptop)")
         self.state_ready()
         status.refresh()
         state = status.load_state() or {}
@@ -1721,6 +1891,166 @@ class Agent:
         return path
 
     # ---- 5. laptop.json
+    # ---- TikTok browser login
+    def tiktok_ready(self):
+        method = str((self.remote_settings.get("posting") or {}).get("method") or "browser").lower()
+        if method == "browser":
+            return self.tiktok_dir.exists()            # made by the first login (python agent.py --tiktok-login)
+        return bool(self.cfg.get("composio_api_key"))
+
+    def tiktok_login(self, cid=None):
+        self.cmd_status[cid or "login"] = {"status": "working", "note": "TikTok login is open on the laptop's screen"}
+        self.heartbeat(force=True)
+        with self.browser_busy:
+            ok, error = posting.browser_login(self.tiktok_dir, log=log.info)
+        with self.lock:
+            self.memory["tiktok_login"] = now_iso() if ok else None
+            self._save_memory()
+        if cid:
+            self.command_over(cid, ok, "Logged in to TikTok on the laptop" if ok else error)
+        self.notify("✅ TikTok is logged in on the laptop" if ok else "⚠️ TikTok login didn't finish",
+                    "Parts will post by themselves." if ok else (error or ""), kind="info")
+        return ok
+
+    # ---- background music: <output>/Music <-> GitHub (draft release "music-library")
+    def music_release(self, create=True):
+        for r in self.gh.releases():
+            if r.get("draft") and (transport.body_of(r).get("kind") == "music" or r.get("name") == "Music library"):
+                return r
+        if not create:
+            return None
+        return self.gh.create_release(MUSIC_RELEASE, "Music library",
+                                      json.dumps({"kind": "music", "note": "Background songs for every video. "
+                                                  "Asset names are <kind>__<file>."}), draft=True)
+
+    def local_songs(self):
+        out = {}
+        if self.music_dir.is_dir():
+            for f in self.music_dir.rglob("*"):
+                if f.suffix.lower() in AUDIO and f.is_file():
+                    rel = f.relative_to(self.music_dir).parts
+                    kind = rel[0] if len(rel) > 1 else "any"
+                    out[f"{safe_name(kind)}__{f.name}"] = f
+        return out
+
+    def sync_music(self):
+        """Songs on GitHub that aren't on the laptop are downloaded into Music/<kind>/, and songs you put in
+        the laptop's Music folder are uploaded, so the cutter (here or on GitHub) always has music."""
+        rel = self.music_release()
+        remote = {a["name"]: a for a in self.gh.assets(rel["id"])}
+        local = self.local_songs()
+        got = sent = 0
+        for name, a in remote.items():
+            if name in local or "__" not in name or Path(name).suffix.lower() not in AUDIO:
+                continue
+            kind, file = name.split("__", 1)
+            dest = self.music_dir / kind / file
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            tmp = dest.with_suffix(dest.suffix + ".part")
+            with open(tmp, "wb") as fh:
+                self.gh.download_asset(a["id"], fh.write)
+            os.replace(tmp, dest)
+            got += 1
+        for name, f in local.items():
+            if name in remote:
+                continue
+            with open(f, "rb") as fh:
+                self.gh.upload_asset(rel, name, f.stat().st_size, fh)
+            sent += 1
+        with self.lock:
+            self.memory["music"] = {k: n for k, n in self.music_counts().items()}
+            self._save_memory()
+        if got or sent:
+            log.info("Music: %s downloaded, %s uploaded", got, sent)
+        return f"Music in step: {got} new on the laptop, {sent} sent to GitHub"
+
+    def music_counts(self):
+        counts = {}
+        for name in self.local_songs():
+            k = name.split("__", 1)[0]
+            counts[k] = counts.get(k, 0) + 1
+        return counts
+
+    # ---- Insights: TikTok numbers -> Claude -> settings
+    def ask_ai(self, system, prompt):
+        import story                                   # (Claude through the Claude app, else the API key)
+        model = str(self.remote_settings.get("story_model") or "claude-haiku-5-5")
+        story.MODEL = model if model.startswith("claude") else "claude-haiku-5-5"
+        story.set_source(None)
+        if story.claude_app():
+            return story.ask_claude_app(system, prompt)
+        if self.cfg.get("anthropic_api_key"):
+            os.environ.setdefault("ANTHROPIC_API_KEY", self.cfg["anthropic_api_key"])
+            return story.ask_claude(system, prompt)
+        raise RuntimeError("No Claude on the laptop (Claude app or anthropic_api_key)")
+
+    def update_insights(self, force=False):
+        """Reads your TikTok numbers, matches each video to its movie and part, asks Claude what works, and
+        (Auto-tune on) changes a few settings within safe limits. Saved as insights.json for the app."""
+        hours = float(self.cfg["insights_hours"])
+        if not force and time.time() - float(self.memory.get("insights_at") or 0) < hours * 3600:
+            return None
+        method = str((self.remote_settings.get("posting") or {}).get("method") or "browser").lower()
+        if method != "browser" or not self.tiktok_dir.exists():
+            return None                                # Insights read TikTok through the poster's logged-in window
+        with self.lock:
+            self.memory["insights_at"] = time.time()
+            self._save_memory()
+        cfg = self.remote_settings.get("posting") or {}
+        user = cfg.get("username") or self.cfg.get("tiktok_username")
+        with self.browser_busy:
+            videos, error = posting.browser_stats(self.tiktok_dir, user, headless=bool(self.cfg["tiktok_headless"]),
+                                                  log=log.info)
+        if videos is None:
+            log.warning("Insights: %s", error)
+            return error
+        self.state_ready()
+        status.refresh()
+        state = status.load_state() or {}
+        old, _ = self.gh.read_file("insights.json", "status")
+        try:
+            old = json.loads(old) if old else {}
+        except ValueError:
+            old = {}
+        data = build_insights(state, videos, old)
+        tune = self.remote_settings.get("insights_autotune", True)
+        try:
+            ai = self.ask_ai(INSIGHTS_SYSTEM, insights_prompt(data, self.remote_settings))
+            data["ai"] = {k: ai.get(k) for k in ("summary", "working", "not_working", "next_movies", "actions")}
+            data["ai"]["at"] = now_iso()
+            for name, info in (ai.get("movies") or {}).items():
+                m = data["movies"].get(name)
+                if m and isinstance(info, dict):
+                    m["genres"] = [str(g) for g in (info.get("genres") or [])][:3]
+                    m["cast"] = [str(c) for c in (info.get("cast") or [])][:4]
+                    m["year"] = info.get("year")
+            changes = clean_tuning(ai.get("settings") or {}, self.remote_settings) if tune else {}
+        except Exception as e:
+            log.warning("Insights: Claude couldn't look at the numbers: %s", e)
+            changes = {}
+            data["ai"] = (old.get("ai") or {}) | {"error": str(e)[:200]}
+        for name, m in (old.get("movies") or {}).items():          # keep genres Claude found last time
+            if name in data["movies"] and not data["movies"][name].get("genres"):
+                for k in ("genres", "cast", "year"):
+                    if m.get(k):
+                        data["movies"][name][k] = m[k]
+        data["tuning"] = (old.get("tuning") or [])[-30:]
+        if changes:
+            def apply(text):
+                cur = json.loads(text or "{}")
+                cur.update(changes)
+                return json.dumps(cur, indent=2, ensure_ascii=False) + "\n"
+            try:
+                self.gh.save_file("config/settings.json", apply, "main", "Insights: auto-tune " + ", ".join(changes))
+                data["tuning"].append({"at": now_iso(), "changes": changes, "why": (ai.get("settings_why") or "")[:400]})
+                self.refresh_settings(force=True)
+            except Exception as e:
+                log.warning("Insights: couldn't save the tuned settings: %s", e)
+        self.gh.save_file("insights.json", lambda _o: json.dumps(data, indent=1, ensure_ascii=False) + "\n",
+                          "status", "insights")
+        log.info("Insights updated: %s videos%s", len(videos), f", tuned {', '.join(changes)}" if changes else "")
+        return None
+
     def snapshot(self):
         with self.lock:
             wl = []
@@ -1753,6 +2083,8 @@ class Agent:
                                         for cid, j in (self.memory.get("post_jobs") or {}).items()},
                                      **self.cmd_status}, "commands_done": sorted(self.memory["commands_done"])[-150:],
                     "originals": sorted(self.memory["originals"]), "shared": list(self.memory.get("shared", [])),
+                    "music": self.memory.get("music") or {}, "tiktok_login": self.memory.get("tiktok_login"),
+                    "next_post_at": self.memory.get("next_post_at"),
                     "version": 2}
 
     def folder_files(self, folder, limit=150):
@@ -1832,6 +2164,15 @@ class Agent:
                 log.error("Posting check failed: %s", e)
         if not self.memory.get("mp4fix_done") and not self.transfers:
             self.repair_old_parts()
+        if now - self.last.get("music", 0) >= 3600:
+            self.last["music"] = now
+            try:
+                self.sync_music()
+            except Exception as e:
+                log.warning("Music sync failed: %s", e)
+        insights_due = time.time() - float(self.memory.get("insights_at") or 0) >= float(self.cfg["insights_hours"]) * 3600
+        if insights_due and not self.cutting and not self.browser_busy.locked() and not self.last.get("insights_busy"):
+            threading.Thread(target=self._insights_quietly, daemon=True).start()
         if now - self.last["cleanup"] >= 3600:
             self.last["cleanup"] = now
             try:
@@ -1854,6 +2195,15 @@ class Agent:
             except Exception as e:
                 log.warning("Couldn't check for a newer helper: %s", e)
         self.heartbeat()
+
+    def _insights_quietly(self):
+        self.last["insights_busy"] = True
+        try:
+            self.update_insights()
+        except Exception as e:
+            log.warning("Insights failed: %s", e)
+        finally:
+            self.last["insights_busy"] = False
 
     def stop(self):
         self.online = False
@@ -2016,6 +2366,7 @@ def main(argv=None):
     ap.add_argument("--once", action="store_true", help="one round of everything, then stop")
     ap.add_argument("--post-now", action="store_true", help="post the next part now (ignores the schedule)")
     ap.add_argument("--dry-run", action="store_true", help="with --post-now: only show what would be posted")
+    ap.add_argument("--tiktok-login", action="store_true", help="log in to TikTok once in the poster's Chrome window")
     ap.add_argument("--test-post", metavar="VIDEO", help="post this one video to TikTok privately (checks the Composio setup)")
     args = ap.parse_args(argv)
     cfg_path = Path(args.config)
@@ -2024,6 +2375,10 @@ def main(argv=None):
     if args.setup:
         setup(cfg_path)
         return 0
+    if args.tiktok_login:
+        ok, error = posting.browser_login(cfg_path.parent / "tiktok-browser")
+        print("Logged in! Parts will now post by themselves." if ok else f"Didn't work: {error}")
+        return 0 if ok else 1
     if args.test_post:
         cfg = dict(DEFAULTS, **load_config(cfg_path))
         creds = {"api_key": cfg["composio_api_key"], "user_id": cfg["composio_user_id"],
