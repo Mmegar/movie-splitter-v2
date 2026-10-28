@@ -160,6 +160,34 @@ export function createInsightsView(ctx) {
     }).join('')}</div><p class="group-foot">Actors whose movies get the most views per part on your channel.</p>`;
   }
 
+  // Experiments: one A/B test at a time; the winner becomes the setting. Holds: movies Claude stopped posting.
+  const STATUS = { won: 'Winner kept', no_difference: 'No clear winner, kept as it was', timeout: 'Not enough views in time, kept as it was', stopped: 'Stopped' };
+  const armVal = (v) => (v === '' ? '(none)' : typeof v === 'string' && v.length > 50 ? `${v.slice(0, 50)}…` : String(v));
+  function experimentsCard(ins) {
+    const ex = ins.experiments || {};
+    const cur = ex.current;
+    const hist = ex.history || [];
+    const holds = ins.holds || [];
+    if (!cur && !hist.length && !holds.length) return '';
+    const arms = (e) => `<div class="group">${e.arms.map((a) => `<div class="row">
+        <span class="row-ic tone-ok">${esc(a.name)}</span>
+        <span class="row-main"><span class="row-title">${esc(armVal(a.value))}${a.control ? ' <span class="muted">(current)</span>' : ''}${e.winner === a.name ? ` <span class="perf-badge tier-bg-hot">Winner</span>` : ''}</span>
+          <span class="perf-stats"><span>${a.mature ?? 0}/${e.need} videos ready</span><span>${fmt(a.median_views)} median views</span><span>${sec(a.avg_watch)} watch</span><span>${pct(a.full_watch)} to end</span></span></span>
+      </div>`).join('')}</div>`;
+    const now = cur ? `<div class="group ai-card"><div class="ai-head">${icon('insights')}<span>Testing: ${esc(cur.label)}</span><span class="muted" data-rel="${Date.parse(cur.started)}">${esc(relTime(Date.parse(cur.started)))}</span></div>
+        ${cur.why ? `<p class="ai-summary">${esc(cur.why)}</p>` : ''}
+        <span class="bar" aria-label="Progress"><span style="width:${cur.progress || 0}%"></span></span>
+        <p class="group-foot">${cur.progress || 0}% of the way to a verdict. ${cur.level === 'movie' ? 'Each new movie is cut with the next version.' : cur.level === 'day' ? 'Each day posts with the next version.' : cur.level === 'post' ? 'Each post uses the next version.' : 'Compares what is already being posted.'}</p>
+      </div>${arms(cur)}<button class="btn btn--quiet btn--small" data-stop-exp>Stop this experiment</button>` : '';
+    const done = hist.length ? `<details class="picks-done"><summary>Finished experiments (${hist.length})</summary>${hist.map((h) => `<p class="group-foot"><strong>${esc(h.label)}</strong>: ${esc(STATUS[h.status] || h.status)}${h.winner ? ` (${esc(armVal((h.arms.find((a) => a.name === h.winner) || {}).value))})` : ''}</p>${arms(h)}`).join('')}</details>` : '';
+    const held = holds.length ? `<h3 class="group-title">Held back</h3><div class="group">${holds.map((h) => `<div class="row">
+        <span class="row-main"><span class="row-title">${esc(h.movie)} <span class="muted">(${esc(h.mode)})</span></span>${h.why ? `<span class="row-sub">${esc(h.why)}</span>` : ''}</span>
+        <button class="btn btn--quiet btn--small" data-release="${esc(h.movie)}" data-mode="${esc(h.mode)}">Post again</button>
+      </div>`).join('')}</div><p class="group-foot">Claude stopped posting these for 7 days because their parts flopped. Tap Post again to undo.</p>` : '';
+    const prot = (ins.protected || []).length ? `<p class="group-foot">Never switched off: ${esc(ins.protected.join(', '))} (made your biggest videos).</p>` : '';
+    return `<h3 class="group-title">Experiments</h3>${now}${done}${prot}${held}`;
+  }
+
   // Download next: Claude picks these itself from the channel's numbers, the season and what's trending.
   function nextCard(ins) {
     const picks = ins.picks || ((ins.ai && ins.ai.next_movies) || []).map((x) => ({ ...x, status: 'new' }));
@@ -233,7 +261,7 @@ export function createInsightsView(ctx) {
     const n = (ins.totals || {}).videos || 0;
     content.innerHTML = banner(st) + prog
       + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span>${n ? ` from ${n} TikTok videos` : ' (no TikTok numbers yet: log in under Settings › TikTok)'}.</p>`
-      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + chatCard(ins, st) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
+      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + chatCard(ins, st) + experimentsCard(ins) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
       + castCard(movies, base) + refresh;
   }
 
@@ -280,6 +308,16 @@ export function createInsightsView(ctx) {
         if (p) { p.status = was; render(lastSt); }
         toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 });
       }
+      return;
+    }
+    const rel = e.target.closest('[data-release]');
+    if (rel || e.target.closest('[data-stop-exp]')) {
+      haptic();
+      const cmd = rel ? { type: 'release_hold', movie: rel.dataset.release, mode: rel.dataset.mode } : { type: 'stop_experiment' };
+      try {
+        await ctx.store.sendCommand(cmd);
+        toast(rel ? `${rel.dataset.release} will post again.` : 'Stopping the experiment. Nothing changes.', { kind: 'ok', ms: 3500 });
+      } catch (err) { toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 }); }
       return;
     }
     const now = e.target.closest('[data-insights-now]');
