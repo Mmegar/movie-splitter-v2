@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T09:16:16+13:00",
+ "updated": "2026-10-29T09:17:01+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -37,11 +37,11 @@
        "caption": "A boy who dreams of a perfect city in the sky 🚀 Years later, a small mistake at a checkpoint changes everything.\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "elysium-2013/recap-001.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-29T09:16:16+13:00",
+        "status": "failed",
+        "at": "2026-10-29T09:17:01+13:00",
         "url": null,
-        "error": null,
-        "attempts": 1
+        "error": "TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is visible, enabled and stable\n      - scrolling into view if needed\n      ",
+        "attempts": 2
        },
        "cover": "elysium-2013/recap-01-cover.bin"
       },
