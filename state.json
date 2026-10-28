@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T10:03:32+13:00",
+ "updated": "2026-10-29T10:03:34+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4827,6 +4827,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T10:03:34+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 2",
+   "message": "[Movie recap] TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done s\nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T09:48:06+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 2",
@@ -6019,12 +6025,6 @@
    "type": "part_ready",
    "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 2 of 11 ready",
    "message": "Part 2: A Grudge Made of Portals (6 narrated beats, about 82s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
-  },
-  {
-   "at": "2026-10-22T08:38:25+13:00",
-   "type": "part_ready",
-   "title": "[Character story] Spider-Man Across The Spider-Verse (2023): Part 1 of 11 ready",
-   "message": "Part 1: Brooklyn's Only Spider-Man (6 narrated beats, about 76s of voice)\nIn Ready to post/Spider-Man Across The Spider-Verse (2023)/Character story."
   }
  ]
 }
