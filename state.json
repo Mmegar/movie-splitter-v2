@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:29:08+13:00",
+ "updated": "2026-10-28T13:36:02+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -265,6 +265,21 @@
        "drive_path": "Ready to post/Elysium (2013)/Highlights/Elysium (2013) - Highlight 03.mp4",
        "caption": "Can't believe I almost skipped this\nHighlight 3 🎬 · Follow so you don't miss Highlight 4 🔔\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie",
        "preview": "elysium-2013/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 5148.3,
+       "end": 5359.8,
+       "seconds": 211.5,
+       "drive_path": "Ready to post/Elysium (2013)/Highlights/Elysium (2013) - Highlight 04.mp4",
+       "caption": "Okay but why is this so good\nHighlight 4 🎬 · Should I post Highlight 5? 👇\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie",
+       "preview": "elysium-2013/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
