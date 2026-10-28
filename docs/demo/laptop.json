@@ -1,132 +1,136 @@
 {
- "updated": "2026-10-13T14:04:00+13:00",
- "online": true,
- "host": "Kimmeng-Laptop",
- "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
- "uploading": {
-  "file": "Carnival.of.Souls.1962.mp4",
-  "percent": 42
- },
- "uploaded": [
-  {
-   "file": "The.Kid.1921.mkv",
-   "at": "2026-10-13T13:56:00+13:00",
-   "size_mb": 410
+  "updated": "2026-10-13T14:04:00+13:00",
+  "online": true,
+  "host": "Kimmeng-Laptop",
+  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
+  "uploading": {
+    "file": "Carnival.of.Souls.1962.mp4",
+    "percent": 42
   },
-  {
-   "file": "Nosferatu.1922.mp4",
-   "at": "2026-10-13T13:40:00+13:00",
-   "size_mb": 812
-  },
-  {
-   "file": "TheManFromUncle.mkv",
-   "at": "2026-10-13T13:45:00+13:00",
-   "size_mb": 1381
+  "uploaded": [
+    {
+      "file": "The.Kid.1921.mkv",
+      "at": "2026-10-13T13:56:00+13:00",
+      "size_mb": 410
+    },
+    {
+      "file": "Nosferatu.1922.mp4",
+      "at": "2026-10-13T13:40:00+13:00",
+      "size_mb": 812
+    },
+    {
+      "file": "TheManFromUncle.mkv",
+      "at": "2026-10-13T13:45:00+13:00",
+      "size_mb": 1381
+    }
+  ],
+  "wishlist": [
+    {
+      "title": "Nosferatu (1922)",
+      "status": "uploaded",
+      "source_url": "https://archive.org/details/nosferatu",
+      "note": null
+    },
+    {
+      "title": "Carnival of Souls (1962)",
+      "status": "downloading",
+      "source_url": "https://archive.org/details/CarnivalOfSouls",
+      "note": "Uploading to Drive"
+    },
+    {
+      "title": "The Phantom of the Opera (1925)",
+      "status": "found",
+      "source_url": "https://archive.org/details/ThePhantomOfTheOpera1925",
+      "note": "Starts after the current download"
+    },
+    {
+      "title": "Metropolis (1927)",
+      "status": "searching",
+      "source_url": null,
+      "note": null
+    },
+    {
+      "title": "Plan 9 from Outer Space (1957)",
+      "status": "failed",
+      "source_url": "https://archive.org/details/Plan_9_from_Outer_Space_1959",
+      "note": "Download kept stopping - will try again tomorrow"
+    },
+    {
+      "title": "Dune: Part Two (2024)",
+      "status": "not_available",
+      "source_url": null,
+      "note": "Not public domain - add the file to your laptop folder instead"
+    }
+  ],
+  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
+  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
+  "paused": null,
+  "battery": false,
+  "queue": [
+    {
+      "name": "Carnival.of.Souls.1962.mp4",
+      "size_mb": 655,
+      "modified": "2026-10-13T13:58:00+13:00",
+      "sending": true,
+      "ai_why": "Halloween is in 3 days",
+      "pinned": false
+    },
+    {
+      "name": "The.Phantom.of.the.Opera.1925.mkv",
+      "size_mb": 1210,
+      "modified": "2026-10-13T13:20:00+13:00",
+      "sending": false,
+      "ai_why": "horror classics get your best watch time",
+      "pinned": true
+    }
+  ],
+  "library": [
+    {
+      "name": "Sherlock.Jr.1924.mp4",
+      "size_mb": 402,
+      "modified": "2026-10-12T21:10:00+13:00"
+    },
+    {
+      "name": "Plan.9.from.Outer.Space.1957.mkv",
+      "size_mb": 980,
+      "modified": "2026-10-11T19:42:00+13:00"
+    },
+    {
+      "name": "The.Little.Shop.of.Horrors.1960.mp4",
+      "size_mb": 744,
+      "modified": "2026-10-10T08:05:00+13:00"
+    }
+  ],
+  "bin": [
+    {
+      "name": "TheManFromUncle.mkv",
+      "size_mb": 1381,
+      "modified": "2026-10-13T12:30:00+13:00",
+      "folder": "done"
+    },
+    {
+      "name": "His.Girl.Friday.1940.mp4",
+      "size_mb": 890,
+      "modified": "2026-10-12T15:00:00+13:00",
+      "folder": "done"
+    },
+    {
+      "name": "Broken.Download.mkv",
+      "size_mb": 120,
+      "modified": "2026-10-11T10:00:00+13:00",
+      "folder": "failed"
+    }
+  ],
+  "commands": {},
+  "commands_done": [],
+  "originals": [
+    "the-man-from-uncle-2015",
+    "his-girl-friday-1940"
+  ],
+  "insights_run": {
+    "started": "2026-10-13T14:04:00+13:00",
+    "step": "Reading watch time",
+    "done": 4,
+    "total": 9
   }
- ],
- "wishlist": [
-  {
-   "title": "Nosferatu (1922)",
-   "status": "uploaded",
-   "source_url": "https://archive.org/details/nosferatu",
-   "note": null
-  },
-  {
-   "title": "Carnival of Souls (1962)",
-   "status": "downloading",
-   "source_url": "https://archive.org/details/CarnivalOfSouls",
-   "note": "Uploading to Drive"
-  },
-  {
-   "title": "The Phantom of the Opera (1925)",
-   "status": "found",
-   "source_url": "https://archive.org/details/ThePhantomOfTheOpera1925",
-   "note": "Starts after the current download"
-  },
-  {
-   "title": "Metropolis (1927)",
-   "status": "searching",
-   "source_url": null,
-   "note": null
-  },
-  {
-   "title": "Plan 9 from Outer Space (1957)",
-   "status": "failed",
-   "source_url": "https://archive.org/details/Plan_9_from_Outer_Space_1959",
-   "note": "Download kept stopping - will try again tomorrow"
-  },
-  {
-   "title": "Dune: Part Two (2024)",
-   "status": "not_available",
-   "source_url": null,
-   "note": "Not public domain - add the file to your laptop folder instead"
-  }
- ],
- "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
- "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
- "paused": null,
- "battery": false,
- "queue": [
-  {
-   "name": "Carnival.of.Souls.1962.mp4",
-   "size_mb": 655,
-   "modified": "2026-10-13T13:58:00+13:00",
-   "sending": true
-  },
-  {
-   "name": "The.Phantom.of.the.Opera.1925.mkv",
-   "size_mb": 1210,
-   "modified": "2026-10-13T13:20:00+13:00",
-   "sending": false
-  }
- ],
- "library": [
-  {
-   "name": "Sherlock.Jr.1924.mp4",
-   "size_mb": 402,
-   "modified": "2026-10-12T21:10:00+13:00"
-  },
-  {
-   "name": "Plan.9.from.Outer.Space.1957.mkv",
-   "size_mb": 980,
-   "modified": "2026-10-11T19:42:00+13:00"
-  },
-  {
-   "name": "The.Little.Shop.of.Horrors.1960.mp4",
-   "size_mb": 744,
-   "modified": "2026-10-10T08:05:00+13:00"
-  }
- ],
- "bin": [
-  {
-   "name": "TheManFromUncle.mkv",
-   "size_mb": 1381,
-   "modified": "2026-10-13T12:30:00+13:00",
-   "folder": "done"
-  },
-  {
-   "name": "His.Girl.Friday.1940.mp4",
-   "size_mb": 890,
-   "modified": "2026-10-12T15:00:00+13:00",
-   "folder": "done"
-  },
-  {
-   "name": "Broken.Download.mkv",
-   "size_mb": 120,
-   "modified": "2026-10-11T10:00:00+13:00",
-   "folder": "failed"
-  }
- ],
- "commands": {},
- "commands_done": [],
- "originals": [
-  "the-man-from-uncle-2015",
-  "his-girl-friday-1940"
- ],
- "insights_run": {
-  "started": "2026-10-13T14:04:00+13:00",
-  "step": "Reading watch time",
-  "done": 4,
-  "total": 9
- }
 }

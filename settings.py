@@ -82,6 +82,7 @@ DEFAULTS = {
     "delete_originals": "permanent",     # "permanent" = gone for good, "bin" = Google Drive's bin (30 days)
     "cleanup_parts_after_days": 0,       # delete finished parts older than this; 0 = never
     "insights_autotune": True,           # Insights may change script/caption direction, thumbnail badge, Funny dial... by itself
+    "ai_queue": True,                    # Claude orders To edit (trends, season, channel numbers); your own order still goes first
     "posting": {
         "enabled": False,
         "privacy": "self_only",

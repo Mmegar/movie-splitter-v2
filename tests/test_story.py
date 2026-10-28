@@ -167,6 +167,22 @@ class StoryTest(unittest.TestCase):
         finally:
             story.MUSIC_DIR = old
 
+    def test_same_song_in_repo_and_music_folder_counts_once(self):
+        import tempfile
+        from pathlib import Path
+        repo, laptop = Path(tempfile.mkdtemp()), Path(tempfile.mkdtemp())
+        for root in (repo, laptop):
+            (root / "hype").mkdir()
+            (root / "hype" / "RAVE.mp3").write_bytes(b"x")
+        (laptop / "hype" / "AURA.mp3").write_bytes(b"x")
+        old, old_roots = story.MUSIC_DIR, list(story.MUSIC_ROOTS)
+        try:
+            story.MUSIC_DIR, story.MUSIC_ROOTS[:] = repo, [laptop]
+            names = sorted(f.name for f, _, k in story.available_music() if k == "hype")
+            self.assertEqual(names, ["AURA.mp3", "RAVE.mp3"])
+        finally:
+            story.MUSIC_DIR, story.MUSIC_ROOTS[:] = old, old_roots
+
     def test_clean_story_checks_times(self):
         story.load_settings({"RECAP_STYLE": "chatty"})
         data = {"character": "", "parts": [

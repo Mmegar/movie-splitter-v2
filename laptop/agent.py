@@ -222,6 +222,7 @@ CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "p
               "laptop/startup_apps.ps1",
               "assets/music/tracks.json"]
 MUSIC_RELEASE = "music-library"   # the draft release that holds your songs on GitHub (only you can see it)
+REPO_MUSIC_KINDS = ["hype", "story"]   # your songs committed to the repo, in assets/music/<kind>/
 AUDIO = {".mp3", ".m4a", ".wav", ".aac", ".ogg", ".flac"}    # the free songs the laptop downloads when you have none of your own     # Windows: opens the project's apps at login (install_startup_apps)
 # ---------------------------------------------------------------- Insights (TikTok numbers -> what to change)
 INSIGHTS_SYSTEM = ("You are the growth analyst for a TikTok channel that posts movie recaps in parts (narrated "
@@ -440,6 +441,48 @@ def has_movie(title, library):
         if n == k or (len(k) >= 6 and n.startswith(k + " ")):
             return True
     return False
+
+
+QUEUE_SYSTEM = ("You run a TikTok channel that posts movie recaps in parts. You decide which movie waiting on the "
+                "laptop gets cut and posted first, from the channel's numbers and what people are watching right "
+                "now. You answer with JSON only.")
+
+
+def queue_prompt(files, brief, trends_now=None):
+    """What Claude sees when it orders To edit: the waiting files, the channel's numbers, the season and trends."""
+    tr = trends_now or brief.get("trends") or {}
+    movies = {k: {f: v.get(f) for f in ("views", "videos", "avg_watch", "full_watch", "genres")}
+              for k, v in list((brief.get("movies") or {}).items())[:40]}
+    return f"""Today is {tr.get("date") or time.strftime("%Y-%m-%d")}.
+SEASON: {json.dumps(tr.get("season") or [], ensure_ascii=False)}
+MOST READ-ABOUT FILMS AND SHOWS ON WIKIPEDIA (last 3 days): {json.dumps(tr.get("trending") or [], ensure_ascii=False)}
+THE CHANNEL'S NUMBERS PER MOVIE ALREADY POSTED (avg_watch in seconds, full_watch %): {json.dumps(movies, ensure_ascii=False)}
+LAST ADVICE FROM INSIGHTS: {json.dumps(brief.get("summary") or "", ensure_ascii=False)}
+
+These movie files are waiting to be cut (one at a time, each takes a while, then its parts get posted):
+{json.dumps(files, ensure_ascii=False)}
+
+Put ALL of them in the order they should be cut, best first. Weigh (1) what's trending or in season right now
+(a movie riding a trend is worth more today than next week), (2) the genres and kinds of movie that get the most
+views and watch time on THIS channel, (3) how well-known it is and how well its story cuts into cliffhanger parts.
+The channel is best at mystery and twisty stories.
+
+Answer with this JSON, using the file names exactly as given:
+{{"order": [{{"file": "<file name>", "why": "<one short line, e.g. 'Halloween is in 3 days' or 'thrillers get your best watch time'>"}}, ...]}}"""
+
+
+def clean_queue_order(answer, files):
+    """Claude's order, kept to the files really waiting (matched exactly, else by title)."""
+    by_key = {names.clean_name(f).lower(): f for f in files}
+    out, seen = [], set()
+    for x in (answer or {}).get("order") or []:
+        x = x if isinstance(x, dict) else {"file": x}
+        f = str(x.get("file") or "").strip()
+        f = f if f in files else by_key.get(names.clean_name(f).lower())
+        if f and f not in seen:
+            seen.add(f)
+            out.append({"name": f, "why": str(x.get("why") or "")[:140]})
+    return out
 
 
 PICKS_WAITING = 8   # at most this many "download next" titles waiting at once
@@ -866,9 +909,61 @@ class Agent:
         return {s["path"] for s in self.memory["sends"].values() if s["status"] in ("sent", "done", "cutting")}
 
     def queue_sorted(self, paths):
-        """Files in the order chosen in the app (anything not ordered goes last, by name)."""
+        """Files in the order chosen in the app; the rest in Claude's order (rank_queue), then by name."""
         order = {n: i for i, n in enumerate(self.memory.get("queue_order") or [])}
-        return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), p.name.lower()))
+        ai = {x["name"]: i for i, x in enumerate(self.memory.get("ai_order") or [])} if self.ai_queue_on() else {}
+        return sorted(paths, key=lambda p: (order.get(p.name, 10 ** 6), ai.get(p.name, 10 ** 6), p.name.lower()))
+
+    def ai_queue_on(self):
+        return bool(self.remote_settings.get("ai_queue", True))
+
+    def rank_due(self, now=None):
+        """True when To edit changed since Claude last ordered it (or 12 h went by, as trends move)."""
+        if not self.ai_queue_on() or self.paused_reason():
+            return False
+        now = time.time() if now is None else now
+        busy = self.waiting_paths()
+        files = sorted(p.name for p in self.watcher.candidates() if str(p) not in busy)
+        if len(files) < 2:
+            return False
+        if now - float(self.memory.get("ai_order_try") or 0) < 1800 and files == self.memory.get("ai_order_tried"):
+            return False                               # (a failed try waits 30 min before the next one)
+        return files != self.memory.get("ai_order_for") or now - float(self.memory.get("ai_order_at") or 0) >= 12 * 3600
+
+    def rank_queue(self):
+        """Claude orders the movies in To edit (best first) from the season, trends and the channel's numbers.
+        Movies you put in order in the app still go first."""
+        busy = self.waiting_paths()
+        files = sorted(p.name for p in self.watcher.candidates() if str(p) not in busy)
+        if len(files) < 2:
+            return None
+        with self.lock:
+            self.memory.update(ai_order_try=time.time(), ai_order_tried=files)
+            self._save_memory()
+        brief = self.memory.get("insights_brief") or {}
+        trends_now = None
+        try:
+            import trends
+            trends_now = trends.context()
+        except Exception as e:
+            log.warning("Queue: couldn't read the trends: %s", e)
+        order = clean_queue_order(self.ask_ai(QUEUE_SYSTEM, queue_prompt(files, brief, trends_now)), files)
+        if not order:
+            raise RuntimeError("Claude didn't give an order")
+        with self.lock:
+            self.memory.update(ai_order=order, ai_order_for=files, ai_order_at=time.time())
+            self._save_memory()
+        log.info("Claude's cutting order: %s", ", ".join(x["name"] for x in order))
+        return order
+
+    def _rank_quietly(self):
+        self.last["rank_busy"] = time.time()
+        try:
+            self.rank_queue()
+        except Exception as e:
+            log.warning("Claude couldn't order To edit: %s", e)
+        finally:
+            self.last["rank_busy"] = 0
 
     # ---- 1b. or cut it right here (setting cut_on: laptop): no upload at all
     def laptop_cutting(self):
@@ -1045,6 +1140,8 @@ class Agent:
             self._save_memory()
 
     def check_folder(self):
+        if time.time() - float(self.last.get("rank_busy") or 0) < 300:
+            return                                       # Claude is choosing which one goes first
         busy = self.waiting_paths()
         for p in self.queue_sorted(self.watcher.ready()):
             if str(p) in busy or (p.name in self.memory["stopped"] and self.laptop_cutting()):
@@ -1547,7 +1644,7 @@ class Agent:
             with self.lock:
                 self.memory["queue_order"] = order
                 self._save_memory()
-            return "New order saved"
+            return "New order saved" if order else "Claude chooses the order again"
         if not name:
             raise ValueError("no file name given")
         if kind in ("to_queue", "to_library"):
@@ -2106,10 +2203,46 @@ class Agent:
                     out[f"{safe_name(kind)}__{f.name}"] = f
         return out
 
+    def repo_music(self):
+        """Your songs kept in the repo (assets/music/<kind>/) that aren't on the laptop yet are downloaded
+        there, so story.py finds them without copying anything by hand. Returns how many were new."""
+        root, got = HERE.parent / "assets" / "music", 0
+        for kind in REPO_MUSIC_KINDS:
+            status, _, data = self.gh.request("GET", f"/contents/assets/music/{kind}")
+            if status == 404:
+                continue
+            if status != 200:
+                raise ghapi.GitHubError(status, data[:300].decode("utf-8", "replace"))
+            for f in json.loads(data):
+                if f.get("type") != "file" or Path(f["name"]).suffix.lower() not in AUDIO:
+                    continue
+                dest = root / kind / f["name"]
+                if dest.exists() and dest.stat().st_size == f.get("size"):
+                    continue
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                tmp = dest.with_suffix(dest.suffix + ".part")
+                with open(tmp, "wb") as fh:
+                    status, _, data = self.gh.request("GET", f"/contents/{urllib.parse.quote(f['path'])}",
+                                                      accept="application/vnd.github.raw", sink=fh.write)
+                if status != 200:
+                    tmp.unlink(missing_ok=True)
+                    raise ghapi.GitHubError(status, data[:300].decode("utf-8", "replace"))
+                os.replace(tmp, dest)
+                got += 1
+        if got:
+            log.info("Music: %s songs from the repo", got)
+        return got
+
     def sync_music(self):
-        """Songs on GitHub that aren't on the laptop are downloaded into Music/<kind>/, and songs you put in
-        the laptop's Music folder are uploaded, so the cutter (here or on GitHub) always has music."""
-        rel = self.music_release()
+        """Songs on GitHub that aren't on the laptop are downloaded (the repo's assets/music/<kind>/ ones, and
+        the music release's into Music/<kind>/), and songs you put in the laptop's Music folder are uploaded,
+        so the cutter (here or on GitHub) always has music."""
+        from_repo = self.repo_music()
+        try:
+            rel = self.music_release()
+        except Exception as e:                  # the repo's songs are enough to cut with
+            log.warning("Music release unavailable: %s", e)
+            return f"Music in step: {from_repo} new from the repo"
         remote = {a["name"]: a for a in self.gh.assets(rel["id"])}
         local = self.local_songs()
         got = sent = 0
@@ -2135,7 +2268,7 @@ class Agent:
             self._save_memory()
         if got or sent:
             log.info("Music: %s downloaded, %s uploaded", got, sent)
-        return f"Music in step: {got} new on the laptop, {sent} sent to GitHub"
+        return f"Music in step: {got + from_repo} new on the laptop, {sent} sent to GitHub"
 
     def music_counts(self):
         counts = {}
@@ -2244,6 +2377,10 @@ class Agent:
                 changes, notes = self.act_on_insights(ai, data, act, changes)
             except Exception as e:
                 log.warning("Insights: couldn't act on the advice: %s", e)
+        with self.lock:                                # what the queue ordering (rank_queue) works from
+            self.memory["insights_brief"] = {"movies": data["movies"], "trends": data.get("trends") or {},
+                                             "summary": (data.get("ai") or {}).get("summary") or ""}
+            self._save_memory()
         if changes:
             def apply(text):
                 cur = json.loads(text or "{}")
@@ -2429,6 +2566,8 @@ class Agent:
         busy = self.waiting_paths()
         sending = {t["file"] for t in self.transfers.values() if t["direction"] == "send"}
         files = [p for p in self.watcher.candidates() if str(p) not in busy]
+        manual = set(self.memory.get("queue_order") or [])
+        why = {x["name"]: x.get("why") or "" for x in self.memory.get("ai_order") or []} if self.ai_queue_on() else {}
         out = []
         for p in self.queue_sorted(files):
             info = file_info(p)
@@ -2436,6 +2575,8 @@ class Agent:
                 info["sending"] = p.name in sending
                 info["style"] = self.style_for(p.name)
                 info["character"] = (self.memory.get("characters") or {}).get(p.name, "")
+                info["pinned"] = p.name in manual
+                info["ai_why"] = why.get(p.name, "")
                 out.append(info)
         return out
 
@@ -2494,6 +2635,9 @@ class Agent:
                 self.sync_music()
             except Exception as e:
                 log.warning("Music sync failed: %s", e)
+        if not self.last.get("rank_busy") and self.rank_due():
+            self.last["rank_busy"] = time.time()         # (set here too, so the cut waits for the order)
+            threading.Thread(target=self._rank_quietly, daemon=True).start()
         insights_due = time.time() - float(self.memory.get("insights_at") or 0) >= float(self.cfg["insights_hours"]) * 3600
         if insights_due and not self.cutting and not self.browser_busy.locked() and not self.last.get("insights_busy"):
             threading.Thread(target=self._insights_quietly, daemon=True).start()
