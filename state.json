@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-28T13:06:08+13:00",
+ "updated": "2026-10-28T13:14:17+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -226,7 +226,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 2598.0,
+       "end": 2811.3,
+       "seconds": 213.4,
+       "drive_path": "Ready to post/Elysium (2013)/Highlights/Elysium (2013) - Highlight 01.mp4",
+       "caption": "Watch till the end 🤯\nHighlight 1 🎬 · Should I post Highlight 2? 👇\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie",
+       "preview": "elysium-2013/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
