@@ -1,13 +1,11 @@
 {
- "updated": "2026-10-28T07:45:29+07:00",
+ "updated": "2026-10-28T07:45:44+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": {
-  "file": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv"
- },
+ "cutting": null,
  "transfers": [],
  "uploaded": [
   {
