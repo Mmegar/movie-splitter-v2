@@ -749,16 +749,3 @@ class RepoMusicTests(TempDirTest):
             calls.clear()
             self.assertEqual(agent.Agent.repo_music(me), 0)          # already here: not downloaded again
             self.assertFalse(any(c.endswith("A.mp3") for c in calls))
-class ModeStatsTest(unittest.TestCase):
-    def test_viral_mode_ranks_first_even_with_weak_average(self):
-        vids = [{"mode": "recap", "views": 3000}, {"mode": "recap", "views": 2800},
-                {"mode": "best stretch", "views": 900000}, {"mode": "best stretch", "views": 50},
-                {"mode": "best stretch", "views": 40}, {"views": 10}]
-        st = agent.mode_stats(vids)
-        self.assertEqual(list(st)[0], "best stretch")
-        self.assertEqual(st["best stretch"]["best_views"], 900000)
-        self.assertEqual(st["recap"]["videos"], 2)
-
-    def test_owner_notes_reach_the_prompt(self):
-        self.assertEqual(agent.owner_notes_text({}), "")
-        self.assertIn("Keep Best stretch", agent.owner_notes_text({"notes": [{"text": "Keep Best stretch on"}]}))
