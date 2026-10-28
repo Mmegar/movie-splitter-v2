@@ -166,7 +166,8 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
         finish(c, !!f, 'Moved to your Movies folder');
       } else if (c.type === 'queue_order') {
         lp.queue.sort((a, b) => c.order.indexOf(a.name) - c.order.indexOf(b.name));
-        finish(c, true, 'New order saved');
+        for (const f of lp.queue) f.pinned = c.order.includes(f.name);
+        finish(c, true, c.order.length ? 'New order saved' : 'Claude chooses the order again');
       } else if (c.type === 'to_bin') {
         const f = take(lp.bin, c.file);
         finish(c, !!f, 'Put in the Recycle Bin');

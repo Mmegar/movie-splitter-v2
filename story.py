@@ -1584,7 +1584,7 @@ def available_music():
     (their kind from tracks.json), songs loose in a music folder (kind "any", no credit line), and songs in
     a sub-folder named after a category (see FOLDER_KINDS), up to two folders deep."""
     listed = {t["file"]: t for t in music_list() if t.get("file")}
-    out = []
+    out, seen = [], set()      # the same song in the repo and in the laptop's Music folder counts once
     for root in music_roots():
         for f in sorted(root.rglob("*")):
             rel = f.relative_to(root).parts
@@ -1595,6 +1595,9 @@ def available_music():
                 out.append((f, t.get("credit", ""), t.get("kind", "any")))
             else:
                 kind = next((k for k in map(folder_kind, reversed(rel[:-1])) if k != "any"), "any")
+                if (kind, f.name.lower()) in seen:
+                    continue
+                seen.add((kind, f.name.lower()))
                 out.append((f, "", kind))
     return out
 

@@ -96,6 +96,7 @@ export function createQueueView(ctx) {
     if (al) { libraryActions(al.dataset.addLib); return; }
     const bm = e.target.closest('[data-bin-more]');
     if (bm) { binActions(bm.dataset.binMore, bm.dataset.folder); return; }
+    if (e.target.closest('[data-ai-order]')) { haptic(); localOrder = null; send({ type: 'queue_order', order: [] }, 'Claude will choose the order'); return; }
     if (e.target.closest('[data-bin-toggle]')) { haptic(); binOpen = !binOpen; render(lastSt); }
   });
 
@@ -225,14 +226,23 @@ export function createQueueView(ctx) {
     return head + `<div class="group">${q.map((f, i) => fileRow(f, {
       busy: busy.get(f.name) === 'to_library' ? 'Taking it out…' : f.sending ? '' : '',
       lead: `<span class="row-ic ${i === 0 ? 'tone-accent' : 'tone-muted'}"><span class="num" style="font-weight:700;font-size:15px">${i + 1}</span></span>`,
-      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to cut' : '', f.character ? `Following ${f.character}` : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
+      sub: [f.sending ? 'Sending to GitHub now' : i === 0 ? 'Next to cut' : '', aiNote(f), f.character ? `Following ${f.character}` : '', sizeText(f.size_mb)].filter(Boolean).join(' · '),
       extra: styleChip(st, f),
       action: `<span class="reorder">
         <button class="icon-btn" data-up="${esc(f.name)}" ${i === 0 ? 'disabled' : ''} aria-label="Move ${esc(cleanTitle(f.name))} up">${icon('chevL', 'rot90')}</button>
         <button class="icon-btn" data-qmore="${esc(f.name)}" data-i="${i}" data-n="${q.length}" aria-label="Options for ${esc(cleanTitle(f.name))}">${icon('more')}</button>
       </span>`,
     })).join('')}</div>
-    <p class="group-foot">The laptop sends one movie at a time, from the top. Tap the arrow to move a movie up.</p>`;
+    <p class="group-foot">The laptop cuts one movie at a time, from the top. ${aiOn(st) ? 'Claude puts them in order from what\'s trending, the season and your channel\'s numbers. Movies you move yourself go first.' : 'Tap the arrow to move a movie up.'}</p>
+    ${aiOn(st) && q.some((f) => f.pinned) && !pendingOrder(st) ? '<button class="btn btn--block" data-ai-order style="margin-top:8px">Let Claude choose the whole order</button>' : ''}`;
+  }
+
+  const aiOn = (st) => ((st.data.settings && st.data.settings.json) || {}).ai_queue !== false;
+  const pendingOrder = (st) => pendingCommands(st.data.commands, st.data.laptop, 'queue_order').length > 0;
+  /** Why the movie sits where it is: your own order, or Claude's reason. */
+  function aiNote(f) {
+    if (f.pinned) return 'Your order';
+    return f.ai_why ? `Claude: ${f.ai_why}` : '';
   }
 
   /** The cutting style of a movie in To edit: a small button that opens the choice. */

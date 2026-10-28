@@ -150,6 +150,9 @@ class AgentTestBase(TempDirTest):
         self.web = FakeWeb()
         self.web_patch = mock.patch.object(archive, "http_request", self.web)
         self.web_patch.start()
+        no_claude = mock.patch.object(agent.Agent, "ask_ai", side_effect=RuntimeError("no Claude in tests"))
+        no_claude.start()                     # (the To edit ordering would otherwise call the real one)
+        self.addCleanup(no_claude.stop)
         os.environ.pop("STATUS", None)
 
     def tearDown(self):
@@ -683,3 +686,30 @@ class ModeStatsTest(unittest.TestCase):
     def test_owner_notes_reach_the_prompt(self):
         self.assertEqual(agent.owner_notes_text({}), "")
         self.assertIn("Keep Best stretch", agent.owner_notes_text({"notes": [{"text": "Keep Best stretch on"}]}))
+
+
+class RepoMusicTests(TempDirTest):
+    """Songs committed to assets/music/<kind>/ come down to the laptop by themselves."""
+
+    def test_downloads_new_songs_once(self):
+        listing = {"hype": [{"type": "file", "name": "A.mp3", "path": "assets/music/hype/A.mp3", "size": 3},
+                            {"type": "file", "name": "notes.txt", "path": "assets/music/hype/notes.txt", "size": 1}]}
+        calls = []
+
+        def request(method, path, accept=None, sink=None, **kw):
+            calls.append(path)
+            if path.startswith("/contents/assets/music/hype/"):
+                sink(b"abc")
+                return 200, {}, b""
+            kind = path.rsplit("/", 1)[1]
+            return (200, {}, json.dumps(listing[kind]).encode()) if kind in listing else (404, {}, b"")
+
+        me = mock.Mock(gh=mock.Mock(request=request))
+        (self.tmp / "laptop").mkdir()
+        with mock.patch.object(agent, "HERE", self.tmp / "laptop"):
+            self.assertEqual(agent.Agent.repo_music(me), 1)
+            self.assertEqual((self.tmp / "assets/music/hype/A.mp3").read_bytes(), b"abc")
+            self.assertFalse((self.tmp / "assets/music/hype/notes.txt").exists())
+            calls.clear()
+            self.assertEqual(agent.Agent.repo_music(me), 0)          # already here: not downloaded again
+            self.assertFalse(any(c.endswith("A.mp3") for c in calls))
