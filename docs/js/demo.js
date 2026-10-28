@@ -196,6 +196,17 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
           if (c.type === 'post_part') note('posted', `📲 In your TikTok drafts: ${movie.name}: Part ${part.n}`, 'Open TikTok, tap the notification, paste the caption and post.', ['iphone']);
         }
         finish(c, !!part, part ? 'Done' : 'Part not found');
+      } else if (c.type === 'insights_chat') {
+        if (!cur) { lp.commands[c.id] = { status: 'working', note: 'Claude is reading your message' }; continue; }
+        const ins = d.insights || {};
+        const noteText = `The owner says: ${c.text.slice(0, 120)}`;
+        ins.chat = [...(ins.chat || []), { at: iso(Date.now()), you: c.text, ai: "Fair point, I only looked at the average views per part and missed that your two biggest videos came from Best stretch. I'll keep it on and won't suggest dropping it again.", note: noteText }];
+        ins.notes = [...(ins.notes || []), { at: iso(Date.now()), text: noteText }];
+        finish(c, true, 'Answered');
+      } else if (c.type === 'forget_note') {
+        const ins = d.insights || {};
+        ins.notes = (ins.notes || []).filter((n) => n.at !== c.at);
+        finish(c, true, 'Forgot that note');
       } else if (c.type === 'clip') {
         if (!cur) { lp.commands[c.id] = { status: 'working', note: 'Sending the movie to GitHub' }; continue; }
         if (cur.note === 'Sending the movie to GitHub') { cur.note = 'Being cut on GitHub'; continue; }
