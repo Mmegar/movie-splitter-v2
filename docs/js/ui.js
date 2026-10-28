@@ -6,6 +6,7 @@ const P = {
   now: '<rect x="3" y="5" width="18" height="14" rx="3.5"/><path d="M10 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"/>',
   movies: '<rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 3v18M16 3v18M4 8h4M4 12h4M4 16h4M16 8h4M16 12h4M16 16h4"/>',
   alerts: '<path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2H4.5z"/><path d="M10 21h4"/>',
+  insights: '<path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/>',
   queue: '<path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18.5" cy="17" r="1.6" fill="currentColor" stroke="none"/>',
   settings: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/>',
   memory: '<path d="M12 5.5C10.5 4 8 4 6.5 5.2 4.6 6.7 4.5 9.6 6 11c-1.6 1.2-1.6 4 .2 5.2 1 2.4 4 3 5.8 1.3 1.8 1.7 4.8 1.1 5.8-1.3 1.8-1.2 1.8-4 .2-5.2 1.5-1.4 1.4-4.3-.5-5.8C16 4 13.5 4 12 5.5z"/><path d="M12 5.5v13"/>',

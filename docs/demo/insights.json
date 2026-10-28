@@ -1,0 +1,21 @@
+{
+ "updated": "2026-10-28T06:00:00+13:00",
+ "totals": {"views": 412300, "likes": 30120, "comments": 1890, "shares": 4210, "saves": 5320, "videos": 31, "avg_watch": 24.6, "full_watch": 11.8},
+ "videos": [],
+ "movies": {
+  "Gone Girl": {"videos": 6, "views": 162000, "likes": 12100, "comments": 700, "shares": 1900, "saves": 2400, "modes": {"recap": 162000}, "best_part": [1, 61000], "avg_watch": 31.2, "full_watch": 15.4, "genres": ["Mystery", "Thriller"], "cast": ["Ben Affleck", "Rosamund Pike", "Neil Patrick Harris"], "year": 2014},
+  "Knives Out": {"videos": 5, "views": 98000, "likes": 7300, "comments": 410, "shares": 900, "saves": 1200, "modes": {"recap": 98000}, "best_part": [2, 30000], "avg_watch": 27.0, "full_watch": 13.1, "genres": ["Mystery", "Comedy", "Crime"], "cast": ["Daniel Craig", "Ana de Armas", "Chris Evans"], "year": 2019},
+  "John Wick 2": {"videos": 7, "views": 71000, "likes": 5200, "comments": 380, "shares": 700, "saves": 800, "modes": {"recap": 52000, "hype": 19000}, "best_part": [1, 22000], "avg_watch": 21.5, "full_watch": 9.8, "genres": ["Action", "Thriller"], "cast": ["Keanu Reeves", "Riccardo Scamarcio", "Ian McShane"], "year": 2017},
+  "Shutter Island": {"videos": 6, "views": 56000, "likes": 3900, "comments": 260, "shares": 480, "saves": 700, "modes": {"recap": 56000}, "best_part": [1, 19000], "avg_watch": 22.4, "full_watch": 10.2, "genres": ["Mystery", "Psychological", "Thriller"], "cast": ["Leonardo DiCaprio", "Mark Ruffalo", "Ben Kingsley"], "year": 2010},
+  "Runner": {"videos": 7, "views": 25300, "likes": 1620, "comments": 140, "shares": 230, "saves": 220, "modes": {"recap": 25300}, "best_part": [1, 9000], "avg_watch": 15.1, "full_watch": 6.0, "genres": ["Drama", "Sport"], "cast": [], "year": null}
+ },
+ "ai": {
+  "at": "2026-10-28T06:00:00+13:00",
+  "summary": "Mysteries carry the channel: Gone Girl and Knives Out get twice the views per part of anything else, and people stay longest on parts that open with a question. Part 1s pull most views, so the cliffhanger at the end of Part 1 matters most.",
+  "working": ["Mystery recaps: 27k views per part vs 13k channel average", "Parts opening on a question keep viewers 31s on average", "Part 1 thumbnails with a close-up face get 2x the views"],
+  "not_working": ["Sports drama (Runner): 3.6k views per part, 6% watch to the end", "Hype edits get views but few follows"],
+  "actions": ["Download more twisty mysteries and psychological thrillers", "Keep parts near 3 minutes: longer ones lose people after 40s", "End every Part 1 on an unanswered question"],
+  "next_movies": [{"title": "Prisoners (2013)", "why": "Mystery thriller, same audience as Gone Girl"}, {"title": "The Prestige (2006)", "why": "Twist-driven, Christian Bale + Hugh Jackman"}, {"title": "Glass Onion (2022)", "why": "Knives Out did well here"}]
+ },
+ "tuning": [{"at": "2026-10-28T06:00:00+13:00", "changes": {"script_direction": "Open each part with a question the viewer needs answered…", "recap_part_seconds": 180}, "why": "Parts over 3:15 lost 40% more viewers after the first minute."}]
+}

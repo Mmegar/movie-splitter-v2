@@ -34,19 +34,25 @@
   "cleanup_parts_after_days": 0,
   "posting": {
     "enabled": true,
-    "when": "times",
-    "method": "draft",
+    "when": "gap",
+    "method": "browser",
     "privacy": "self_only",
     "modes": [
       "stretch"
     ],
-    "per_day": 3,
+    "per_day": 10,
     "times": [
       "12:00",
       "18:00",
       "21:00"
     ],
     "timezone": "Pacific/Auckland",
-    "hashtags": "#movie #movieclips #fyp"
-  }
+    "hashtags": "#movie #movieclips #fyp",
+    "gap_min": 15,
+    "gap_max": 30,
+    "active_from": "09:00",
+    "active_to": "23:30",
+    "username": ""
+  },
+  "insights_autotune": true
 }

@@ -24,11 +24,12 @@ function createLiveSource(conn) {
   let polls = 0;
 
   async function loadConfigs() {
-    const [settings, wish, cmds] = await Promise.all([gh.getJson('config/settings.json'), gh.getFile('config/wishlist.txt'),
-      gh.getJson('config/commands.json').catch(() => null)]);
+    const [settings, wish, cmds, insights] = await Promise.all([gh.getJson('config/settings.json'), gh.getFile('config/wishlist.txt'),
+      gh.getJson('config/commands.json').catch(() => null), gh.getJson('insights.json', STATUS_BRANCH).catch(() => null)]);
     configs = {
       settings: settings ? { json: settings.json, sha: settings.sha } : { json: null, sha: null },
       wishlist: wish ? { text: wish.text, sha: wish.sha } : { text: '', sha: null },
+      insights: insights ? insights.json : null,
       commands: cmds ? { json: cmds.json && Array.isArray(cmds.json.commands) ? cmds.json : { commands: [] }, sha: cmds.sha } : { json: { commands: [] }, sha: null },
     };
   }
@@ -59,6 +60,7 @@ function createLiveSource(conn) {
         settings: configs.settings,
         wishlist: configs.wishlist,
         commands: configs.commands,
+        insights: configs.insights,
         fetchedAt: Date.now(),
         notes,
       };

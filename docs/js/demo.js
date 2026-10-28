@@ -40,6 +40,7 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
       settings: { json: savedSettings ? JSON.parse(savedSettings) : JSON.parse(se), sha: fakeSha() },
       wishlist: { text: lsGet(LS_WISH) ?? wl, sha: fakeSha() },
       commands: { json: { commands: [] }, sha: fakeSha() },
+      insights: await getText('insights.json').then((t) => JSON.parse(t)).catch(() => null),
     };
     lastStep = Date.now();
   }
@@ -216,7 +217,7 @@ export function createDemoSource({ base = 'demo/', fetchImpl = (...a) => fetch(.
   function snapshot() {
     return JSON.parse(JSON.stringify({
       state: d.state, laptop: d.laptop, ntfy: d.ntfy, runs: d.runs,
-      settings: d.settings, wishlist: d.wishlist, commands: d.commands, fetchedAt: Date.now(), notes: [],
+      settings: d.settings, wishlist: d.wishlist, commands: d.commands, insights: d.insights, fetchedAt: Date.now(), notes: [],
     }));
   }
 

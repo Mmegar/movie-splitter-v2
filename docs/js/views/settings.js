@@ -1,6 +1,7 @@
 import { esc, icon, toast, haptic, openSheet, confirmSheet } from '../ui.js';
 import { MODE_LABELS, MODE_HINTS, ALL_MODES, OLD_MODES, diffSettings, validateSettings, formatSetting, describeFlipEvery } from '../logic.js';
 import { makePage, freshness, banner, skeleton, empty } from './common.js';
+import { laptopGroup, togglePause } from './queue.js';
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
 function getPath(o, p) { return p.split('.').reduce((a, k) => (a == null ? a : a[k]), o); }
@@ -170,6 +171,7 @@ function buildForm(d) {
   const tz = timeZones();
   if (p.timezone && !tz.includes(p.timezone)) tz.unshift(p.timezone);
   return [
+    group('Memory', [`<a class="row" href="#/memory"><span class="row-ic tone-memory">${icon('memory')}</span><span class="row-main"><span class="row-title">Character, narrator and caption notes</span><span class="row-sub">${esc(d.character ? `Following ${d.character}` : 'Following the main character')}${d.script_direction ? ' · has script notes' : ''}</span></span>${icon('chevR', 'row-chev')}</a>`]),
     modesGroup(d),
 
     group('Story & voice', [
@@ -181,7 +183,7 @@ function buildForm(d) {
       narrated ? sliderRow({ narrator_intensity: 0.9, ...d }, 'narrator_intensity', 'Expressiveness', { min: 0.5, max: 1.2, step: 0.05, ends: ['Calm', 'Wild'], sub: 'Every voice: each line is read in its mood (tense, shocked, whispered, hyped…), and this sets how far it goes.' }) : '',
       narrated ? segRow(d, 'narrator_tempo', 'Narrator speed', [['1.2', '1.2x'], ['1', '1x'], ['1.1', '1.1x'], ['1.3', '1.3x'], ['1.5', '1.5x']]) : '',
       (d.modes || []).includes('hype') ? stepRow(d, 'hype_count', 'Hype edits per movie', { def: 1, min: 1, max: 5, step: 1 }) : '',
-      swRow(d, 'music', 'Background music', 'Songs you add to assets/music on GitHub: quiet under the narrator, full volume in hype montages'),
+      swRow(d, 'music', 'Background music', 'On every video: under the narrator, full volume in hype montages. Songs come from the laptop\'s Music folder (hype / story sub-folders), kept in step with GitHub'),
     ], 'Claude writes the narration from the subtitles and the plot, so mystery twists stay hidden until the last part.'),
 
     group('Film look', [
@@ -213,36 +215,43 @@ function buildForm(d) {
     ]),
 
 
-    group('Posting to TikTok', [
-      swRow(d, 'posting.enabled', 'Send parts to TikTok automatically', 'The next part goes to TikTok at each time below'),
+    group('TikTok', [
+      swRow(d, 'posting.enabled', 'Post parts to TikTok automatically', 'The laptop posts them itself, in series order: Part 1, Part 2… of the oldest movie first'),
+      `<div class="row row--ctl"><span class="row-main"><span class="row-title">TikTok login on the laptop</span><span class="row-sub">Opens TikTok's login page on the laptop's screen. Log in once; the laptop remembers it.</span></span><button type="button" class="btn btn--small btn--quiet" data-tiktok-login>Log in</button></div>`,
+      `<label class="row row--stack"><span class="row-title">Your TikTok username</span>
+        <input class="input" data-k="posting.username" data-t="str" value="${esc(p.username || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="@yourname">
+        <span class="row-sub">Used to read your views and watch time for Insights.</span></label>`,
       ...(p.enabled ? [
-        segRow(d, 'posting.method', 'How to post', [['draft', 'To my TikTok drafts'], ['direct', 'Post straight away']],
-          (p.method || 'draft') === 'draft'
-            ? 'At each time, the part lands in your TikTok inbox as a draft. Tap the TikTok notification, paste the caption and post (public is fine).'
-            : '<span class="note--warn">Straight away only works with a private TikTok account until TikTok approves the app.</span>'),
-        segRow(d, 'posting.when', 'When to post', [['times', 'At set times'], ['as_ready', 'As soon as ready']],
-          p.when === 'as_ready' ? 'Each new part goes to TikTok when it reaches the laptop: one every 5 minutes, up to 15 a day (TikTok\'s limit). The times below are ignored.' : 'The next part goes at each time below.'),
-        ...((p.method || 'draft') === 'direct' ? [segRow(d, 'posting.privacy', 'Who can see posts', [['self_only', 'Only me'], ['public', 'Public']],
-          p.privacy === 'public'
-            ? '<span class="note--warn">TikTok only allows public posts from apps that passed its audit. Until then, posts fail or are kept private.</span>'
-            : 'TikTok only lets unaudited apps post privately. Posts land on your profile as private, so you can make each one public in TikTok.')] : []),
+        segRow({ ...d, posting: { ...p, method: p.method || 'browser' } }, 'posting.method', 'How to post', [['browser', 'Browser'], ['draft', 'Drafts (old)'], ['direct', 'API (old)']],
+          (p.method || 'browser') === 'browser'
+            ? 'The laptop opens TikTok Studio in its own Chrome window, uploads the part, sets the thumbnail as the cover, pastes the caption and posts it publicly.'
+            : '<span class="note--warn">The old Composio API: drafts need you to tap Post, and direct posts stay private. Pick Browser instead.</span>'),
+        segRow({ ...d, posting: { ...p, when: p.when || 'gap' } }, 'posting.when', 'When to post', [['gap', 'Random gap'], ['times', 'Set times'], ['as_ready', 'ASAP']],
+          (p.when || 'gap') === 'gap' ? 'One part, then a random wait inside the gap below before the next one, only during your posting hours. A random gap looks human and keeps the account safe from shadowbans.'
+            : p.when === 'as_ready' ? 'Each new part goes when it reaches the laptop, one every 5 minutes. Fast, but riskier for shadowbans.' : 'The next part goes at each time below.'),
+        (p.when || 'gap') === 'gap' ? stepRow(d, 'posting.gap_min', 'Shortest gap (minutes)', { def: 15, min: 5, max: 120, step: 5 }) : '',
+        (p.when || 'gap') === 'gap' ? stepRow(d, 'posting.gap_max', 'Longest gap (minutes)', { def: 30, min: 10, max: 240, step: 5 }) : '',
+        (p.when || 'gap') === 'gap' ? `<div class="row row--stack"><div class="row-head"><span class="row-title">Posting hours</span></div>
+          <div class="input-row"><label class="field"><span>From</span><input class="input" type="time" data-k="posting.active_from" data-t="str" value="${esc(p.active_from || '09:00')}"></label>
+          <label class="field"><span>Until</span><input class="input" type="time" data-k="posting.active_to" data-t="str" value="${esc(p.active_to || '23:30')}"></label></div>
+          <p class="note">Nothing posts at night. Times are in the time zone below.</p></div>` : '',
         `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
           <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
             const onm = (p.modes || []).includes(m);
             return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
           }).join('')}</div></div>`,
-        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Posts per day', { min: 1, max: 12, step: 1 }),
-        p.when === 'as_ready' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
+        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Most posts per day', { min: 1, max: 20, step: 1 }),
+        p.when !== 'times' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
           <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
             <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
-          ${(p.times || []).length !== Number(p.per_day) ? `<p class="note note--warn">${(p.times || []).length} time${(p.times || []).length === 1 ? '' : 's'} for ${p.per_day} post${Number(p.per_day) === 1 ? '' : 's'} a day. Usually these match.</p>` : ''}
         </div>`,
         `<label class="row row--stack"><span class="row-title">Time zone</span>
           <select class="input" data-k="posting.timezone" data-t="str">${tz.map((z) => `<option ${z === p.timezone ? 'selected' : ''}>${esc(z)}</option>`).join('')}</select></label>`,
-        `<label class="row row--stack"><span class="row-title">Hashtags</span>
+        `<label class="row row--stack"><span class="row-title">Extra hashtags</span>
           <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
       ] : []),
-    ], p.enabled ? '' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
+      swRow({ insights_autotune: true, ...d }, 'insights_autotune', 'Let Insights tune things by itself', 'Every few hours Claude reads your views and watch time, then adjusts script and caption notes, the thumbnail badge, Funny dial and part length in small steps'),
+    ], p.enabled ? 'Captions never include a music credit line.' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
 
     !old ? '' : group('Part lengths', [
       stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
@@ -284,7 +293,7 @@ function buildForm(d) {
     ]),
 
     group('Line', [
-      swRow(d, 'line', 'Thin line across the picture'),
+      swRow(d, 'line', 'Thin line across clip videos', 'Only on clips (Best stretch, Highlights, Whole movie, custom clips), never on narrated recaps'),
       d.line ? sliderRow(d, 'line_opacity', 'Darkness', { min: 0.1, max: 1, step: 0.05, ends: ['Faint', 'Solid black'] }) : '',
       d.line ? stepRow(d, 'line_thickness', 'Thickness', { min: 1, max: 12, step: 1 }) : '',
     ]),
@@ -295,7 +304,6 @@ function buildForm(d) {
       d.cockroach ? stepRow(d, 'cockroach_size', 'Size', { min: 30, max: 160, step: 10, sub: 'The screen is 1080 px wide' }) : '',
     ]),
 
-    group('Wish list', [swRow(d, 'wishlist_archive', 'Find wish-list films on archive.org', 'Public-domain films only. Turn off to stop the laptop searching and downloading')]),
     group('Laptop & internet', [
       swRow(d, 'pause_on_battery', 'Pause when on battery', 'The laptop waits until it\'s plugged in before sending or downloading'),
       stepRow(d, 'upload_limit_mbps', 'Upload speed limit', { values: UPLOAD_STEPS, sub: 'Keeps some internet free for you while a movie is sent' }),
@@ -380,9 +388,25 @@ export function createSettingsView(ctx, { memory = false } = {}) {
     if (!draft) return;
     const focusKey = document.activeElement && content.contains(document.activeElement) ? document.activeElement.dataset.k : null;
     const html = memory ? memoryForm(draft, lastSt) : buildForm(draft);
-    content.querySelector('[data-form]').innerHTML = (memory ? '' : jumpNav(html)) + html;
+    content.querySelector('[data-form]').innerHTML = (memory ? '' : jumpNav(`${html}<h3 class="group-title" id="sec-laptop">Laptop</h3>`)) + html;
     if (focusKey) { const el = content.querySelector(`[data-k="${focusKey}"]`); if (el) el.focus({ preventScroll: true }); }
     updateBar();
+  }
+
+  function musicNote(st) {
+    const m = (st.data.laptop || {}).music;
+    if (!m) return '';
+    const n = Object.values(m).reduce((a, b) => a + b, 0);
+    const kinds = Object.entries(m).map(([k, v]) => `${v} ${k}`).join(', ');
+    return `<div class="group"><div class="row"><span class="row-ic ${n ? 'tone-ok' : 'tone-warn'}">${icon('play')}</span><span class="row-main"><span class="row-title">${n ? `${n} songs on the laptop` : 'No songs on the laptop'}</span><span class="row-sub">${n ? esc(kinds) : 'Put songs in the Music folder next to Ready to post (hype and story sub-folders)'}</span></span></div></div>`;
+  }
+
+  function topHtml(st) {
+    return banner(st) + (memory ? memoryIntro() : connCard(st));
+  }
+
+  function bottomHtml(st) {
+    return memory ? '' : laptopGroup(st) + musicNote(st);
   }
 
   function memoryIntro() {
@@ -404,10 +428,12 @@ export function createSettingsView(ctx, { memory = false } = {}) {
     const dirty = changes().length > 0;
     if (fresh) { base = clone(s.json); baseSha = s.sha; if (!dirty) draft = clone(s.json); }
     if (!content.querySelector('[data-form]') || (fresh && !dirty)) {
-      content.innerHTML = `<div data-top>${banner(st) + (memory ? memoryIntro() : connCard(st))}</div><div class="content" data-form></div>`;
+      content.innerHTML = `<div data-top>${topHtml(st)}</div><div class="content" data-form></div><div data-bottom>${bottomHtml(st)}</div>`;
       renderForm();
     } else {
-      content.querySelector('[data-top]').innerHTML = banner(st) + (memory ? memoryIntro() : connCard(st));
+      content.querySelector('[data-top]').innerHTML = topHtml(st);
+      const bottom = content.querySelector('[data-bottom]');
+      if (bottom) bottom.innerHTML = bottomHtml(st);
       updateBar();
     }
   }
@@ -418,8 +444,16 @@ export function createSettingsView(ctx, { memory = false } = {}) {
   }
 
   // ---------- events ----------
-  content.addEventListener('click', (e) => {
+  content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
+    if (e.target.closest('[data-tiktok-login]')) {
+      haptic();
+      try {
+        await ctx.store.sendCommand({ type: 'tiktok_login' });
+        toast('TikTok login is opening on the laptop. Log in there once.', { kind: 'ok', ms: 4500 });
+      } catch (err) { toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 }); }
+      return;
+    }
     const jt = e.target.closest('[data-jump-to]');
     if (jt) {
       const el = content.querySelector(`#${jt.dataset.jumpTo}`);
@@ -520,6 +554,7 @@ export function createSettingsView(ctx, { memory = false } = {}) {
 
   content.addEventListener('change', (e) => {
     const el = e.target;
+    if (el.matches('[data-pause]')) { togglePause(ctx, el); return; }
     if (el.dataset.modeToggle) {
       haptic();
       const m = el.dataset.modeToggle;
