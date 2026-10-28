@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T18:01:52+07:00",
+ "updated": "2026-10-28T18:04:01+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -122,7 +122,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {},
+ "commands": {
+  "mvs0b8et99dr": {
+   "status": "working",
+   "note": "TikTok login is open on the laptop's screen"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
