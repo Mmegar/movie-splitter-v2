@@ -250,6 +250,7 @@ function buildForm(d) {
         `<label class="row row--stack"><span class="row-title">Extra hashtags</span>
           <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
       ] : []),
+      swRow({ ai_queue: true, ...d }, 'ai_queue', 'Let Claude choose what to cut next', 'Claude orders the movies in To edit by what\'s trending, the season and your channel\'s numbers. Movies you move yourself in Queue still go first'),
       swRow({ insights_autotune: true, ...d }, 'insights_autotune', 'Let Insights tune things by itself', 'Every few hours Claude reads your views and watch time, then adjusts script and caption notes, the thumbnail badge, Funny dial and part length in small steps'),
     ], p.enabled ? 'Captions never include a music credit line.' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
 
