@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T07:45:10+07:00",
+ "updated": "2026-10-28T07:45:29+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -124,6 +124,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [
+  {
+   "name": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
+   "size_mb": 2633,
+   "modified": "2026-10-23T09:02:49+07:00",
+   "folder": "done"
+  },
   {
    "name": "Predestination.2014.1080p.BluRay.x264.YIFY.mp4",
    "size_mb": 1550,
@@ -334,6 +340,7 @@
  "originals": [
   "10-cloverfield-lane-2016",
   "blink-twice-2024",
+  "elysium-2013",
   "fall-2022",
   "gonjiam-haunted-asylum-2017",
   "heretic-2024",
