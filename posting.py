@@ -509,11 +509,26 @@ def _num(v):
         return 0
 
 
-def browser_stats(profile_dir, username, deep=15, headless=True, log=print):
+SETTLED_DAYS = 14     # after two weeks a video's watch time hardly changes: its last reading is kept
+
+
+def needs_analytics(v, known, now=None):
+    """True when this video's analytics page is worth opening: it's new to us, or it's under two weeks old and
+    has gained 10%+ views since we last read its watch time. Older, settled videos keep their last numbers."""
+    k = (known or {}).get(v["id"]) or {}
+    if k.get("avg_watch") is None:
+        return True
+    young = (now or time.time()) - v.get("created", 0) < SETTLED_DAYS * 86400
+    return young and v.get("views", 0) >= 1.1 * max(1, int(k.get("views") or 0))
+
+
+def browser_stats(profile_dir, username, deep=15, headless=True, log=print, known=None, progress=None):
     """Your TikTok videos with their numbers, read from your profile and TikTok Studio:
     [{"id", "desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
-      "avg_watch", "full_watch"}]. avg_watch (seconds) and full_watch (% who watched to the end)
-    come from each video's analytics page, for the newest `deep` videos only."""
+      "avg_watch", "full_watch"}]. Views, likes etc. for every video come from one look at your profile.
+    avg_watch (seconds) and full_watch (% who watched to the end) need each video's own analytics page, so
+    only videos that changed are opened (see needs_analytics, at most `deep`); the rest keep the numbers in
+    `known` ({id: video from last time})."""
     if not ensure_playwright(log):
         return None, "Couldn't install Playwright"
     user = str(username or "").lstrip("@")
@@ -543,8 +558,16 @@ def browser_stats(profile_dir, username, deep=15, headless=True, log=print):
             for _ in range(12):                                 # scroll to load older videos
                 time.sleep(2.5)
                 page.mouse.wheel(0, 4000)
-            newest = sorted(items.values(), key=lambda x: -x["created"])[:deep]
-            for v in newest:
+            for v in items.values():                           # settled videos: last reading
+                k = (known or {}).get(v["id"]) or {}
+                for key in ("avg_watch", "full_watch", "followers"):
+                    if k.get(key) is not None:
+                        v[key] = k[key]
+            todo = [v for v in sorted(items.values(), key=lambda x: -x["created"]) if needs_analytics(v, known)][:deep]
+            log(f"Insights: {len(items)} videos, opening analytics for {len(todo)} that changed")
+            for i, v in enumerate(todo):
+                if progress:
+                    progress(i, len(todo))
                 try:
                     page.goto(f"https://www.tiktok.com/tiktokstudio/analytics/{v['id']}", wait_until="domcontentloaded",
                               timeout=60000)

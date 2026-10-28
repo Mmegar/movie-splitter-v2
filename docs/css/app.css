@@ -826,3 +826,10 @@ html[data-tab="settings"] { --tab-c: var(--c-settings); }
 .pick-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
 .picks-done { margin: 4px 0 12px; }
 .picks-done summary { cursor: pointer; font-size: 14px; color: var(--text-2); padding: 6px 4px; }
+.insights-run { border-color: color-mix(in srgb, var(--c-insights) 45%, var(--line)); margin-bottom: 12px; }
+.insights-run .row-title { color: var(--c-insights); font-weight: 600; }
+.insights-run .bar { margin-top: 8px; width: 100%; }
+.insights-run .bar > span { background: var(--c-insights); transition: width 0.4s var(--ease); }
+.bar--busy > span { animation: bar-busy 1.4s ease-in-out infinite; }
+@keyframes bar-busy { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+@media (prefers-reduced-motion: reduce) { .bar--busy > span { animation: none; } }

@@ -164,20 +164,50 @@ export function createInsightsView(ctx) {
       ${answered.length ? `<details class="picks-done"><summary>Already answered (${answered.length})</summary><div class="group">${answered.map(row).join('')}</div></details>` : ''}`;
   }
 
+  // What the laptop is doing for Insights right now (laptop.json insights_run), or a tap still on its way to it.
+  function runState(st) {
+    const lp = st.data.laptop || {};
+    const run = lp.insights_run;
+    const cmds = ((st.data.commands || {}).json || {}).commands || [];
+    const done = new Set(lp.commands_done || []);
+    const waiting = cmds.some((c) => c.type === 'insights_now' && !done.has(c.id) && Date.now() - Date.parse(c.at || 0) < 15 * 60000);
+    return { run, waiting, last: lp.insights_at ? lp.insights_at * 1000 : null };
+  }
+
+  function progressCard(st) {
+    const { run, waiting } = runState(st);
+    if (!run && !waiting) return '';
+    const pct = run && run.total ? Math.round((run.done / run.total) * 100) : null;
+    const step = run ? `${run.step}${run.total ? ` (${run.done + 1} of ${run.total})` : ''}…` : 'Waiting for the laptop to pick it up (it checks every 30 seconds)…';
+    return `<div class="group insights-run" role="status">
+      <div class="row"><span class="spinner"></span><span class="row-main"><span class="row-title">Updating Insights</span>
+        <span class="row-sub">${esc(step)}${run && run.started ? ` · started <span data-rel="${Date.parse(run.started)}">${esc(relTime(Date.parse(run.started)))}</span>` : ''}</span>
+        <span class="bar ${pct == null ? 'bar--busy' : ''}" role="progressbar" ${pct == null ? '' : `aria-valuenow="${pct}"`} aria-valuemin="0" aria-valuemax="100"><span style="width:${pct == null ? 35 : Math.max(4, pct)}%"></span></span>
+      </span></div></div>`;
+  }
+
+  function refreshButton(st) {
+    const { run, waiting, last } = runState(st);
+    const busy = !!(run || waiting);
+    return `<button class="btn btn--quiet btn--block" data-insights-now ${busy ? 'disabled' : ''}>${icon('refresh')}${busy ? 'Updating…' : 'Read my numbers and trends now'}</button>
+      <p class="group-foot">Runs by itself every 6 hours${last ? `; last run <span data-rel="${last}">${esc(relTime(last))}</span>` : ''}. Settings change by themselves at most once a day, so each change has time to show whether it helped.</p>`;
+  }
+
   function render(st) {
     lastSt = st;
     page.setSub(freshness(st));
     if (!st.data) { content.innerHTML = banner(st) + skeleton(3); return; }
     const ins = st.data.insights;
-    const refresh = `<button class="btn btn--quiet btn--block" data-insights-now>${icon('refresh')}Read my numbers and trends now</button>`;
+    const refresh = refreshButton(st);
+    const prog = progressCard(st);
     if (!ins) {
-      content.innerHTML = banner(st) + empty({ icon: 'insights', title: 'No numbers yet',
+      content.innerHTML = banner(st) + prog + empty({ icon: 'insights', title: 'No numbers yet',
         text: 'Every few hours the laptop reads your TikTok views (once logged in under Settings › TikTok) and what people are watching right now, and Claude explains what works and picks the next movies to download.', action: refresh });
       return;
     }
     const { movies, base } = movieRows(ins);
     const n = (ins.totals || {}).videos || 0;
-    content.innerHTML = banner(st)
+    content.innerHTML = banner(st) + prog
       + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span>${n ? ` from ${n} TikTok videos` : ' (no TikTok numbers yet: log in under Settings › TikTok)'}.</p>`
       + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
       + castCard(movies, base) + refresh;
@@ -204,8 +234,11 @@ export function createInsightsView(ctx) {
       }
       return;
     }
-    if (e.target.closest('[data-insights-now]')) {
+    const now = e.target.closest('[data-insights-now]');
+    if (now) {
+      if (now.disabled) return;
       haptic();
+      now.disabled = true;
       try {
         await ctx.store.sendCommand({ type: 'insights_now' });
         toast('The laptop is reading your TikTok numbers. Give it a few minutes.', { kind: 'ok', ms: 4500 });

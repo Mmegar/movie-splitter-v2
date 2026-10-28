@@ -659,3 +659,12 @@ class InsightsTest(unittest.TestCase):
                                   "thumbnail_badge": "no number", "story_model": "x", "script_direction": "Roast more."}, cur)
         self.assertEqual(out, {"narrator_funny": 0.65, "recap_part_seconds": 150, "narrator_tempo": "1.3",
                                "script_direction": "Roast more."})
+
+
+class DayHistoryTest(unittest.TestCase):
+    def test_one_row_per_day_kept_60_days(self):
+        h = agent.day_history([{"day": "2026-10-27", "views": 5}], {"views": 9, "videos": 2}, today="2026-10-28")
+        h = agent.day_history(h, {"views": 12, "videos": 3}, today="2026-10-28")       # same day: replaced
+        self.assertEqual([(r["day"], r["views"]) for r in h], [("2026-10-27", 5), ("2026-10-28", 12)])
+        many = [{"day": f"d{i}"} for i in range(80)]
+        self.assertEqual(len(agent.day_history(many, {}, today="x")), 60)

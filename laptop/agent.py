@@ -95,7 +95,7 @@ DEFAULTS = {
     "composio_tiktok_version": "latest",
     "tiktok_username": "",
     "tiktok_headless": False,          # True = the TikTok window stays hidden (TikTok blocks hidden browsers more often)
-    "insights_hours": 6,               # how often TikTok's numbers are read for Insights
+    "insights_hours": 6,               # Insights read the numbers every 6 hours (auto-tune changes settings once a day at most)
     "posting_dry_run": False,
     "anthropic_api_key": "",           # for cutting on this laptop: Claude (Haiku) writes the stories
 }
@@ -282,6 +282,22 @@ def build_insights(state, videos, old=None):
     return {"updated": now_iso(), "totals": tot, "videos": out[:200], "movies": movies}
 
 
+def _iso_time(text):
+    try:
+        return datetime.fromisoformat(str(text)).timestamp()
+    except (TypeError, ValueError):
+        return 0
+
+
+def day_history(history, totals, today=None):
+    """One line of totals per day (the last 60 days), so each daily run can see what changed since yesterday."""
+    day = today or datetime.now().strftime("%Y-%m-%d")
+    rows = [h for h in (history or []) if h.get("day") != day]
+    rows.append({"day": day, **{k: totals.get(k) for k in ("views", "videos", "likes", "shares", "avg_watch",
+                                                           "full_watch")}})
+    return rows[-60:]
+
+
 def insights_prompt(data, cur):
     """What Claude sees: the numbers, per movie and per video, and the settings it may change."""
     vids = [{k: v.get(k) for k in ("desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
@@ -307,6 +323,10 @@ waiting if they're still good picks. With few or no numbers yet, lean on the sea
 
 The channel's numbers (newest videos first; avg_watch in seconds, full_watch = % who watched to the end):
 TOTALS: {json.dumps(data["totals"])}
+DAY BY DAY (totals each day this ran, oldest first): {json.dumps((data.get("history") or [])[-14:])}
+YOUR EARLIER SETTING CHANGES: {json.dumps((data.get("tuning") or [])[-6:], ensure_ascii=False)}
+Judge each earlier change against the days after it: views per video, avg_watch and full_watch up or down? Keep
+what helped, undo or adjust what made things worse, and say which in settings_why.
 PER MOVIE: {json.dumps(data["movies"], ensure_ascii=False)}
 VIDEOS: {json.dumps(vids, ensure_ascii=False)}
 
@@ -635,6 +655,7 @@ class Agent:
         self.tiktok_dir = self.dir / "tiktok-browser"   # the poster's Chrome profile (keeps the TikTok login)
         self.music_dir = self.output / "Music"
         self.browser_busy = threading.Lock()            # one TikTok window at a time
+        self.insights_run = None                        # {"started", "step", "done", "total"} while Insights runs
 
     # ---- memory (what's been done, kept between restarts)
     def _load_memory(self):
@@ -1389,7 +1410,9 @@ class Agent:
             threading.Thread(target=self.tiktok_login, args=(str(c["id"]),), daemon=True).start()
             return None                                   # finished by tiktok_login
         if kind == "insights_now":
-            threading.Thread(target=self.update_insights, kwargs={"force": True}, daemon=True).start()
+            if self.last.get("insights_busy"):
+                return "Insights are already being updated"
+            threading.Thread(target=self._insights_quietly, kwargs={"force": True}, daemon=True).start()
             return "Reading your TikTok numbers and the trends: Insights update in a few minutes"
         if kind == "pick":                               # Insights' Download next: Got it / Skip / Undo
             return self.answer_pick(str(c.get("title") or ""), str(c.get("status") or ""))
@@ -2067,6 +2090,7 @@ class Agent:
         with self.lock:
             self.memory["insights_at"] = time.time()
             self._save_memory()
+        self.insights_step("Starting")
         old, _ = self.gh.read_file("insights.json", "status")
         try:
             old = json.loads(old) if old else {}
@@ -2077,9 +2101,12 @@ class Agent:
         if method == "browser" and self.tiktok_dir.exists():     # numbers come through the poster's logged-in window
             cfg = self.remote_settings.get("posting") or {}
             user = cfg.get("username") or self.cfg.get("tiktok_username")
+            known = {v["id"]: v for v in old.get("videos") or [] if v.get("id")}
+            self.insights_step("Opening your TikTok profile")
             with self.browser_busy:
-                videos, error = posting.browser_stats(self.tiktok_dir, user,
-                                                      headless=bool(self.cfg["tiktok_headless"]), log=log.info)
+                videos, error = posting.browser_stats(
+                    self.tiktok_dir, user, known=known, headless=bool(self.cfg["tiktok_headless"]), log=log.info,
+                    progress=lambda d, t: self.insights_step("Reading watch time", d, t))
         if videos is None:                             # no new numbers: still pick movies from the trends
             log.warning("Insights: %s", error)
             videos = old.get("videos") or []
@@ -2087,6 +2114,8 @@ class Agent:
         status.refresh()
         state = status.load_state() or {}
         data = build_insights(state, videos, old)
+        data["history"] = day_history(old.get("history"), data["totals"])   # (for Claude: is it getting better?)
+        data["tuning"] = (old.get("tuning") or [])[-30:]
         library = [m.get("name") or "" for m in state.get("movies", [])]
         for folder in (self.watch, self.downloads, self.output / "Done"):
             try:
@@ -2096,6 +2125,7 @@ class Agent:
                 pass
         data["library"] = sorted(set(n for n in library if n))
         data["picks"] = merge_picks(old.get("picks"), [], data["library"])
+        self.insights_step("Checking what's trending")
         try:
             import trends                              # (synced with the code; loaded here so an old copy still starts)
             data["trends"] = trends.context()
@@ -2103,7 +2133,10 @@ class Agent:
             log.warning("Insights: couldn't read the trends: %s", e)
             data["trends"] = old.get("trends") or {}
         matched = sum(1 for v in data["videos"] if v.get("movie"))
-        tune = self.remote_settings.get("insights_autotune", True) and matched >= 5
+        last_tune = max([_iso_time(t.get("at")) for t in data["tuning"]] or [0])
+        tune = (self.remote_settings.get("insights_autotune", True) and matched >= 5
+                and time.time() - last_tune >= 20 * 3600)   # one change a day: time to see if it helped
+        self.insights_step("Claude is reading the numbers")
         try:
             ai = self.ask_ai(INSIGHTS_SYSTEM, insights_prompt(data, self.remote_settings))
             data["picks"] = merge_picks(data["picks"], ai.get("next_movies"), data["library"])
@@ -2125,7 +2158,6 @@ class Agent:
                 for k in ("genres", "cast", "year"):
                     if m.get(k):
                         data["movies"][name][k] = m[k]
-        data["tuning"] = (old.get("tuning") or [])[-30:]
         if changes:
             def apply(text):
                 cur = json.loads(text or "{}")
@@ -2137,6 +2169,7 @@ class Agent:
                 self.refresh_settings(force=True)
             except Exception as e:
                 log.warning("Insights: couldn't save the tuned settings: %s", e)
+        self.insights_step("Saving")
         self.gh.save_file("insights.json", lambda _o: json.dumps(data, indent=1, ensure_ascii=False) + "\n",
                           "status", "insights")
         log.info("Insights updated: %s videos%s", len(videos), f", tuned {', '.join(changes)}" if changes else "")
@@ -2194,7 +2227,8 @@ class Agent:
                                      **self.cmd_status}, "commands_done": sorted(self.memory["commands_done"])[-150:],
                     "originals": sorted(self.memory["originals"]), "shared": list(self.memory.get("shared", [])),
                     "music": self.memory.get("music") or {}, "tiktok_login": self.memory.get("tiktok_login"),
-                    "next_post_at": self.memory.get("next_post_at"),
+                    "next_post_at": self.memory.get("next_post_at"), "insights_run": self.insights_run,
+                    "insights_at": self.memory.get("insights_at"),
                     "version": 2}
 
     def folder_files(self, folder, limit=150):
@@ -2306,14 +2340,25 @@ class Agent:
                 log.warning("Couldn't check for a newer helper: %s", e)
         self.heartbeat()
 
-    def _insights_quietly(self):
+    def _insights_quietly(self, force=False):
+        if self.last.get("insights_busy"):
+            return
         self.last["insights_busy"] = True
         try:
-            self.update_insights()
+            self.update_insights(force=force)
         except Exception as e:
             log.warning("Insights failed: %s", e)
         finally:
             self.last["insights_busy"] = False
+            self.insights_run = None
+            self.heartbeat(force=True)
+
+    def insights_step(self, step, done=None, total=None):
+        """What Insights is doing right now, shown live in the app (laptop.json "insights_run")."""
+        run = self.insights_run or {"started": now_iso()}
+        self.insights_run = dict(run, step=step, done=done, total=total)
+        self.progress_changed = True
+        self.heartbeat()
 
     def stop(self):
         self.online = False
