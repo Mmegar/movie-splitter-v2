@@ -1,0 +1,7 @@
+{
+ "movies": [
+  "elysium-2013",
+  "blink-twice-2024"
+ ],
+ "format": "MSP1 AES-256-GCM, key = sha256('movie-splitter-preview:' + ntfy topic)"
+}
