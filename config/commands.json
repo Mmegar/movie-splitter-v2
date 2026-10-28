@@ -1,14 +1,6 @@
 {
  "commands": [
   {
-   "id": "mvqjq5kqispe",
-   "at": "2026-10-27T10:31:56.090Z",
-   "type": "share_part",
-   "movie_id": "fall-2022",
-   "mode": "recap",
-   "n": 2
-  },
-  {
    "id": "mvql6f0j751z",
    "at": "2026-10-27T11:12:34.437Z",
    "type": "share_part",
@@ -113,6 +105,11 @@
    "id": "mvryutb65bpu",
    "at": "2026-10-28T10:23:13.890Z",
    "type": "insights_now"
+  },
+  {
+   "id": "mvs0b8et99dr",
+   "at": "2026-10-28T11:03:59.573Z",
+   "type": "tiktok_login"
   }
  ]
 }
