@@ -213,6 +213,7 @@ def file_info(p):
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
               "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
               "process.py", "tracking.py",   # (process + tracking: for cutting on the laptop)
+              "trends.py",                   # (what people watch right now, for Insights' Download next)
               "laptop/startup_apps.ps1",
               "assets/music/tracks.json"]
 MUSIC_RELEASE = "music-library"   # the draft release that holds your songs on GitHub (only you can see it)
@@ -220,7 +221,8 @@ AUDIO = {".mp3", ".m4a", ".wav", ".aac", ".ogg", ".flac"}    # the free songs th
 # ---------------------------------------------------------------- Insights (TikTok numbers -> what to change)
 INSIGHTS_SYSTEM = ("You are the growth analyst for a TikTok channel that posts movie recaps in parts (narrated "
                    "recaps, character stories, hype edits and clips). You read the channel's real numbers and "
-                   "give short, concrete advice in plain English. You answer with JSON only.")
+                   "give short, concrete advice in plain English, and pick which movies to download next from the "
+                   "channel's numbers and what people are watching right now. You answer with JSON only.")
 TUNABLE = {"script_direction": str, "caption_direction": str, "thumbnail_badge": str, "narrator_funny": float,
            "narrator_intensity": float, "narrator_tempo": str, "recap_part_seconds": int}
 TUNE_LIMITS = {"narrator_funny": (0.0, 1.0), "narrator_intensity": (0.5, 1.2), "recap_part_seconds": (60, 300)}
@@ -285,7 +287,25 @@ def insights_prompt(data, cur):
     vids = [{k: v.get(k) for k in ("desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
                                     "avg_watch", "full_watch", "movie", "mode", "part")} for v in data["videos"][:60]]
     now = {k: cur.get(k) for k in TUNABLE}
-    return f"""The channel's numbers (newest videos first; avg_watch in seconds, full_watch = % who watched to the end):
+    tr = data.get("trends") or {}
+    picks = data.get("picks") or []
+    done = [p["title"] for p in picks if p.get("status") in ("have", "skipped")]
+    have = data.get("library") or []
+    return f"""Today is {tr.get("date")}. What people are watching right now:
+SEASON: {json.dumps(tr.get("season") or [], ensure_ascii=False)}
+MOST READ-ABOUT FILMS AND SHOWS ON WIKIPEDIA (last 3 days): {json.dumps(tr.get("trending") or [], ensure_ascii=False)}
+ALREADY ON THE LAPTOP OR MADE: {json.dumps(have[:80], ensure_ascii=False)}
+ALREADY PICKED BEFORE (downloaded or turned down by the owner, don't pick again): {json.dumps(done[-40:], ensure_ascii=False)}
+STILL WAITING TO BE DOWNLOADED: {json.dumps([p["title"] for p in picks if p.get("status") == "new"], ensure_ascii=False)}
+
+next_movies: choose the 5 titles the owner should download next, by yourself. Weigh (1) the genres, cast and kinds
+of movie that get the most views per part and watch time on THIS channel, (2) the season (e.g. horror and
+supernatural mysteries around Halloween), (3) what's trending right now. Mix them: at least one rides a current
+trend or the season, the rest lean on what this channel's numbers prove. The channel is best at mystery and
+twisty stories. Prefer well-known titles with a clear story that cuts into cliffhanger parts. Keep the ones still
+waiting if they're still good picks. With few or no numbers yet, lean on the season and trends.
+
+The channel's numbers (newest videos first; avg_watch in seconds, full_watch = % who watched to the end):
 TOTALS: {json.dumps(data["totals"])}
 PER MOVIE: {json.dumps(data["movies"], ensure_ascii=False)}
 VIDEOS: {json.dumps(vids, ensure_ascii=False)}
@@ -301,7 +321,9 @@ Answer with this JSON:
   "working": ["<short point backed by a number>", ...up to 4],
   "not_working": ["<short point backed by a number>", ...up to 4],
   "actions": ["<a concrete next step for the owner>", ...up to 4],
-  "next_movies": [{{"title": "<a movie or show to download next>", "why": "<genre/cast that performs here>"}}, ...up to 5],
+  "next_movies": [{{"title": "<exact title of a movie or show to download next>", "year": <release year>,
+                   "genres": ["<1-3 genres>"], "why": "<one line: which of your numbers and/or which trend>",
+                   "trend": "<the season or trending item behind it, or null>"}}, ...exactly 5],
   "movies": {{"<movie name exactly as in PER MOVIE>": {{"genres": ["<1-3 genres, e.g. Mystery, Thriller>"],
              "cast": ["<top 3 billed actors>"], "year": <release year or null>}}}},
   "settings": {{<ONLY the settings you want to change, with their new values; {{}} if nothing>}},
@@ -343,6 +365,56 @@ def clean_tuning(proposed, cur):
         if str(cur.get(k)) != str(v):
             out[k] = v
     return out
+
+
+def _title_key(title):
+    return _norm(re.sub(r"\(?\b(19|20)\d{2}\b\)?", " ", str(title or "")))
+
+
+def has_movie(title, library):
+    """Is this pick already on the laptop or made? ('Gone Girl' matches 'Gone Girl (2014)' and 'Gone.Girl.2014.1080p')"""
+    k = _title_key(title)
+    if not k:
+        return False
+    for name in library:
+        n = _title_key(name)
+        if n == k or (len(k) >= 6 and n.startswith(k + " ")):
+            return True
+    return False
+
+
+PICKS_WAITING = 8   # at most this many "download next" titles waiting at once
+
+
+def merge_picks(old, proposed, library, now=None):
+    """Claude's new picks on top, the owner's earlier answers kept: a skipped title stays skipped, a title that
+    turns up on the laptop becomes "have"."""
+    now = now or now_iso()
+    picks, seen = [], set()
+    for p in old or []:
+        p = dict(p)
+        if p.get("status") == "new" and has_movie(p.get("title"), library):
+            p.update(status="have", at=now)
+        picks.append(p)
+        seen.add(_title_key(p.get("title")))
+    fresh = []
+    for x in proposed or []:
+        if not isinstance(x, dict) or not str(x.get("title") or "").strip():
+            continue
+        k = _title_key(x["title"])
+        if k in seen:
+            for p in picks:                      # still a good pick: refresh why
+                if _title_key(p.get("title")) == k and p.get("status") == "new" and x.get("why"):
+                    p["why"] = str(x["why"])[:200]
+            continue
+        seen.add(k)
+        g = [str(v) for v in (x.get("genres") or [])][:3]
+        fresh.append({"title": str(x["title"]).strip()[:120], "year": x.get("year"), "genres": g,
+                      "why": str(x.get("why") or "")[:200], "trend": (str(x["trend"])[:120] if x.get("trend") else None),
+                      "status": "have" if has_movie(x["title"], library) else "new", "added": now})
+    waiting = [p for p in fresh + picks if p.get("status") == "new"][:PICKS_WAITING]
+    rest = [p for p in picks if p.get("status") != "new"][-40:]
+    return waiting + rest
 
 
 PACK_SUFFIX = ".editpack.zip"   # an edit plan from GitHub that FilmCraft turns into the video here (story.py)
@@ -1318,7 +1390,9 @@ class Agent:
             return None                                   # finished by tiktok_login
         if kind == "insights_now":
             threading.Thread(target=self.update_insights, kwargs={"force": True}, daemon=True).start()
-            return "Reading your TikTok numbers: Insights update in a few minutes"
+            return "Reading your TikTok numbers and the trends: Insights update in a few minutes"
+        if kind == "pick":                               # Insights' Download next: Got it / Skip / Undo
+            return self.answer_pick(str(c.get("title") or ""), str(c.get("status") or ""))
         if kind == "sync_music":
             return self.sync_music()
         if kind == "share_all":
@@ -1990,33 +2064,50 @@ class Agent:
         hours = float(self.cfg["insights_hours"])
         if not force and time.time() - float(self.memory.get("insights_at") or 0) < hours * 3600:
             return None
-        method = str((self.remote_settings.get("posting") or {}).get("method") or "browser").lower()
-        if method != "browser" or not self.tiktok_dir.exists():
-            return None                                # Insights read TikTok through the poster's logged-in window
         with self.lock:
             self.memory["insights_at"] = time.time()
             self._save_memory()
-        cfg = self.remote_settings.get("posting") or {}
-        user = cfg.get("username") or self.cfg.get("tiktok_username")
-        with self.browser_busy:
-            videos, error = posting.browser_stats(self.tiktok_dir, user, headless=bool(self.cfg["tiktok_headless"]),
-                                                  log=log.info)
-        if videos is None:
-            log.warning("Insights: %s", error)
-            return error
-        self.state_ready()
-        status.refresh()
-        state = status.load_state() or {}
         old, _ = self.gh.read_file("insights.json", "status")
         try:
             old = json.loads(old) if old else {}
         except ValueError:
             old = {}
+        method = str((self.remote_settings.get("posting") or {}).get("method") or "browser").lower()
+        videos, error = None, "not logged in to TikTok on the laptop"
+        if method == "browser" and self.tiktok_dir.exists():     # numbers come through the poster's logged-in window
+            cfg = self.remote_settings.get("posting") or {}
+            user = cfg.get("username") or self.cfg.get("tiktok_username")
+            with self.browser_busy:
+                videos, error = posting.browser_stats(self.tiktok_dir, user,
+                                                      headless=bool(self.cfg["tiktok_headless"]), log=log.info)
+        if videos is None:                             # no new numbers: still pick movies from the trends
+            log.warning("Insights: %s", error)
+            videos = old.get("videos") or []
+        self.state_ready()
+        status.refresh()
+        state = status.load_state() or {}
         data = build_insights(state, videos, old)
-        tune = self.remote_settings.get("insights_autotune", True)
+        library = [m.get("name") or "" for m in state.get("movies", [])]
+        for folder in (self.watch, self.downloads, self.output / "Done"):
+            try:
+                library += [names.clean_name(f.name) for f in folder.iterdir()
+                            if f.suffix.lower() in VIDEO_EXT]
+            except OSError:
+                pass
+        data["library"] = sorted(set(n for n in library if n))
+        data["picks"] = merge_picks(old.get("picks"), [], data["library"])
+        try:
+            import trends                              # (synced with the code; loaded here so an old copy still starts)
+            data["trends"] = trends.context()
+        except Exception as e:
+            log.warning("Insights: couldn't read the trends: %s", e)
+            data["trends"] = old.get("trends") or {}
+        matched = sum(1 for v in data["videos"] if v.get("movie"))
+        tune = self.remote_settings.get("insights_autotune", True) and matched >= 5
         try:
             ai = self.ask_ai(INSIGHTS_SYSTEM, insights_prompt(data, self.remote_settings))
-            data["ai"] = {k: ai.get(k) for k in ("summary", "working", "not_working", "next_movies", "actions")}
+            data["picks"] = merge_picks(data["picks"], ai.get("next_movies"), data["library"])
+            data["ai"] = {k: ai.get(k) for k in ("summary", "working", "not_working", "actions")}
             data["ai"]["at"] = now_iso()
             for name, info in (ai.get("movies") or {}).items():
                 m = data["movies"].get(name)
@@ -2050,6 +2141,25 @@ class Agent:
                           "status", "insights")
         log.info("Insights updated: %s videos%s", len(videos), f", tuned {', '.join(changes)}" if changes else "")
         return None
+
+    def answer_pick(self, title, status_):
+        """The owner's answer to a Download next title: "have" (got it), "skipped" (not this one), "new" (undo)."""
+        if status_ not in ("have", "skipped", "new"):
+            return None
+        hit = []
+
+        def edit(text):
+            data = json.loads(text or "{}")
+            for p in data.get("picks") or []:
+                if _title_key(p.get("title")) == _title_key(title):
+                    p.update(status=status_, at=now_iso())
+                    hit.append(p["title"])
+            return json.dumps(data, indent=1, ensure_ascii=False) + "\n"
+        self.gh.save_file("insights.json", edit, "status", "insights: pick " + status_)
+        if not hit:
+            return None
+        return {"have": f"Marked {hit[0]} as downloaded", "skipped": f"Skipped {hit[0]}: Claude picks another one next time",
+                "new": f"{hit[0]} is back on Download next"}[status_]
 
     def snapshot(self):
         with self.lock:

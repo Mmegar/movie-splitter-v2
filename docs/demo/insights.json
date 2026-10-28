@@ -1,21 +1,284 @@
 {
  "updated": "2026-10-28T06:00:00+13:00",
- "totals": {"views": 412300, "likes": 30120, "comments": 1890, "shares": 4210, "saves": 5320, "videos": 31, "avg_watch": 24.6, "full_watch": 11.8},
+ "totals": {
+  "views": 412300,
+  "likes": 30120,
+  "comments": 1890,
+  "shares": 4210,
+  "saves": 5320,
+  "videos": 31,
+  "avg_watch": 24.6,
+  "full_watch": 11.8
+ },
  "videos": [],
  "movies": {
-  "Gone Girl": {"videos": 6, "views": 162000, "likes": 12100, "comments": 700, "shares": 1900, "saves": 2400, "modes": {"recap": 162000}, "best_part": [1, 61000], "avg_watch": 31.2, "full_watch": 15.4, "genres": ["Mystery", "Thriller"], "cast": ["Ben Affleck", "Rosamund Pike", "Neil Patrick Harris"], "year": 2014},
-  "Knives Out": {"videos": 5, "views": 98000, "likes": 7300, "comments": 410, "shares": 900, "saves": 1200, "modes": {"recap": 98000}, "best_part": [2, 30000], "avg_watch": 27.0, "full_watch": 13.1, "genres": ["Mystery", "Comedy", "Crime"], "cast": ["Daniel Craig", "Ana de Armas", "Chris Evans"], "year": 2019},
-  "John Wick 2": {"videos": 7, "views": 71000, "likes": 5200, "comments": 380, "shares": 700, "saves": 800, "modes": {"recap": 52000, "hype": 19000}, "best_part": [1, 22000], "avg_watch": 21.5, "full_watch": 9.8, "genres": ["Action", "Thriller"], "cast": ["Keanu Reeves", "Riccardo Scamarcio", "Ian McShane"], "year": 2017},
-  "Shutter Island": {"videos": 6, "views": 56000, "likes": 3900, "comments": 260, "shares": 480, "saves": 700, "modes": {"recap": 56000}, "best_part": [1, 19000], "avg_watch": 22.4, "full_watch": 10.2, "genres": ["Mystery", "Psychological", "Thriller"], "cast": ["Leonardo DiCaprio", "Mark Ruffalo", "Ben Kingsley"], "year": 2010},
-  "Runner": {"videos": 7, "views": 25300, "likes": 1620, "comments": 140, "shares": 230, "saves": 220, "modes": {"recap": 25300}, "best_part": [1, 9000], "avg_watch": 15.1, "full_watch": 6.0, "genres": ["Drama", "Sport"], "cast": [], "year": null}
+  "Gone Girl": {
+   "videos": 6,
+   "views": 162000,
+   "likes": 12100,
+   "comments": 700,
+   "shares": 1900,
+   "saves": 2400,
+   "modes": {
+    "recap": 162000
+   },
+   "best_part": [
+    1,
+    61000
+   ],
+   "avg_watch": 31.2,
+   "full_watch": 15.4,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "cast": [
+    "Ben Affleck",
+    "Rosamund Pike",
+    "Neil Patrick Harris"
+   ],
+   "year": 2014
+  },
+  "Knives Out": {
+   "videos": 5,
+   "views": 98000,
+   "likes": 7300,
+   "comments": 410,
+   "shares": 900,
+   "saves": 1200,
+   "modes": {
+    "recap": 98000
+   },
+   "best_part": [
+    2,
+    30000
+   ],
+   "avg_watch": 27.0,
+   "full_watch": 13.1,
+   "genres": [
+    "Mystery",
+    "Comedy",
+    "Crime"
+   ],
+   "cast": [
+    "Daniel Craig",
+    "Ana de Armas",
+    "Chris Evans"
+   ],
+   "year": 2019
+  },
+  "John Wick 2": {
+   "videos": 7,
+   "views": 71000,
+   "likes": 5200,
+   "comments": 380,
+   "shares": 700,
+   "saves": 800,
+   "modes": {
+    "recap": 52000,
+    "hype": 19000
+   },
+   "best_part": [
+    1,
+    22000
+   ],
+   "avg_watch": 21.5,
+   "full_watch": 9.8,
+   "genres": [
+    "Action",
+    "Thriller"
+   ],
+   "cast": [
+    "Keanu Reeves",
+    "Riccardo Scamarcio",
+    "Ian McShane"
+   ],
+   "year": 2017
+  },
+  "Shutter Island": {
+   "videos": 6,
+   "views": 56000,
+   "likes": 3900,
+   "comments": 260,
+   "shares": 480,
+   "saves": 700,
+   "modes": {
+    "recap": 56000
+   },
+   "best_part": [
+    1,
+    19000
+   ],
+   "avg_watch": 22.4,
+   "full_watch": 10.2,
+   "genres": [
+    "Mystery",
+    "Psychological",
+    "Thriller"
+   ],
+   "cast": [
+    "Leonardo DiCaprio",
+    "Mark Ruffalo",
+    "Ben Kingsley"
+   ],
+   "year": 2010
+  },
+  "Runner": {
+   "videos": 7,
+   "views": 25300,
+   "likes": 1620,
+   "comments": 140,
+   "shares": 230,
+   "saves": 220,
+   "modes": {
+    "recap": 25300
+   },
+   "best_part": [
+    1,
+    9000
+   ],
+   "avg_watch": 15.1,
+   "full_watch": 6.0,
+   "genres": [
+    "Drama",
+    "Sport"
+   ],
+   "cast": [],
+   "year": null
+  }
  },
  "ai": {
   "at": "2026-10-28T06:00:00+13:00",
   "summary": "Mysteries carry the channel: Gone Girl and Knives Out get twice the views per part of anything else, and people stay longest on parts that open with a question. Part 1s pull most views, so the cliffhanger at the end of Part 1 matters most.",
-  "working": ["Mystery recaps: 27k views per part vs 13k channel average", "Parts opening on a question keep viewers 31s on average", "Part 1 thumbnails with a close-up face get 2x the views"],
-  "not_working": ["Sports drama (Runner): 3.6k views per part, 6% watch to the end", "Hype edits get views but few follows"],
-  "actions": ["Download more twisty mysteries and psychological thrillers", "Keep parts near 3 minutes: longer ones lose people after 40s", "End every Part 1 on an unanswered question"],
-  "next_movies": [{"title": "Prisoners (2013)", "why": "Mystery thriller, same audience as Gone Girl"}, {"title": "The Prestige (2006)", "why": "Twist-driven, Christian Bale + Hugh Jackman"}, {"title": "Glass Onion (2022)", "why": "Knives Out did well here"}]
+  "working": [
+   "Mystery recaps: 27k views per part vs 13k channel average",
+   "Parts opening on a question keep viewers 31s on average",
+   "Part 1 thumbnails with a close-up face get 2x the views"
+  ],
+  "not_working": [
+   "Sports drama (Runner): 3.6k views per part, 6% watch to the end",
+   "Hype edits get views but few follows"
+  ],
+  "actions": [
+   "Download more twisty mysteries and psychological thrillers",
+   "Keep parts near 3 minutes: longer ones lose people after 40s",
+   "End every Part 1 on an unanswered question"
+  ]
  },
- "tuning": [{"at": "2026-10-28T06:00:00+13:00", "changes": {"script_direction": "Open each part with a question the viewer needs answered…", "recap_part_seconds": 180}, "why": "Parts over 3:15 lost 40% more viewers after the first minute."}]
+ "tuning": [
+  {
+   "at": "2026-10-28T06:00:00+13:00",
+   "changes": {
+    "script_direction": "Open each part with a question the viewer needs answered…",
+    "recap_part_seconds": 180
+   },
+   "why": "Parts over 3:15 lost 40% more viewers after the first minute."
+  }
+ ],
+ "trends": {
+  "date": "2026-10-28",
+  "season": [
+   {
+    "moment": "Spooky season / Halloween",
+    "genres": [
+     "Horror",
+     "Supernatural",
+     "Slasher",
+     "Mystery"
+    ]
+   }
+  ],
+  "trending": [
+   {
+    "title": "Weapons (2025 film)",
+    "about": "2025 film by Zach Cregger",
+    "views": 412000
+   },
+   {
+    "title": "Stranger Things",
+    "about": "American science fiction horror television series",
+    "views": 388000
+   },
+   {
+    "title": "The Black Phone 2",
+    "about": "2025 film by Scott Derrickson",
+    "views": 301000
+   }
+  ]
+ },
+ "picks": [
+  {
+   "title": "The Others",
+   "year": 2001,
+   "genres": [
+    "Horror",
+    "Mystery"
+   ],
+   "why": "Twist endings get your best watch time (Gone Girl 31s) and it's Halloween week.",
+   "trend": "Spooky season / Halloween",
+   "status": "new",
+   "added": "2026-10-28T09:00:00Z"
+  },
+  {
+   "title": "Prisoners",
+   "year": 2013,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "Mystery thrillers average the most views per part on your channel.",
+   "trend": null,
+   "status": "new",
+   "added": "2026-10-28T09:00:00Z"
+  },
+  {
+   "title": "Weapons",
+   "year": 2025,
+   "genres": [
+    "Horror",
+    "Mystery"
+   ],
+   "why": "A missing-kids mystery, your strongest kind of story.",
+   "trend": "Top film on Wikipedia this week",
+   "status": "new",
+   "added": "2026-10-28T09:00:00Z"
+  },
+  {
+   "title": "Shutter Island",
+   "year": 2010,
+   "genres": [
+    "Mystery",
+    "Psychological"
+   ],
+   "why": "Leonardo DiCaprio movies hold viewers to the end.",
+   "trend": null,
+   "status": "new",
+   "added": "2026-10-28T09:00:00Z"
+  },
+  {
+   "title": "Get Out",
+   "year": 2017,
+   "genres": [
+    "Horror",
+    "Thriller"
+   ],
+   "why": "Horror rides the Halloween trend; slow-burn reveals cut into great cliffhangers.",
+   "trend": "Spooky season / Halloween",
+   "status": "new",
+   "added": "2026-10-28T09:00:00Z"
+  },
+  {
+   "title": "Zodiac",
+   "year": 2007,
+   "genres": [
+    "Crime",
+    "Mystery"
+   ],
+   "why": "",
+   "trend": null,
+   "status": "skipped",
+   "added": "2026-10-27T09:00:00Z",
+   "at": "2026-10-27T12:00:00Z"
+  }
+ ]
 }

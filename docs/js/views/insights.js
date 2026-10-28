@@ -136,10 +136,32 @@ export function createInsightsView(ctx) {
     }).join('')}</div><p class="group-foot">Actors whose movies get the most views per part on your channel.</p>`;
   }
 
-  function nextCard(ai) {
-    const n = (ai && ai.next_movies) || [];
-    if (!n.length) return '';
-    return `<h3 class="group-title">Download next</h3><div class="group">${n.map((x) => `<div class="row"><span class="row-ic tone-ok">${icon('download')}</span><span class="row-main"><span class="row-title">${esc(x.title || '')}</span><span class="row-sub">${esc(x.why || '')}</span></span></div>`).join('')}</div>`;
+  // Download next: Claude picks these itself from the channel's numbers, the season and what's trending.
+  function nextCard(ins) {
+    const picks = ins.picks || ((ins.ai && ins.ai.next_movies) || []).map((x) => ({ ...x, status: 'new' }));
+    const waiting = picks.filter((p) => p.status === 'new');
+    const answered = picks.filter((p) => p.status !== 'new').slice().reverse().slice(0, 8);
+    const tr = ins.trends || {};
+    const now = (tr.season || []).map((x) => `<span class="trend-chip trend-chip--season">${esc(x.moment)}: ${esc((x.genres || []).join(', '))}</span>`)
+      .concat((tr.trending || []).slice(0, 6).map((x) => `<span class="trend-chip" title="${esc(x.about || '')}">${icon('insights')}${esc(x.title)}</span>`));
+    if (!waiting.length && !now.length) return '';
+    const row = (p) => `<div class="row pick${p.status !== 'new' ? ' pick--done' : ''}">
+        <span class="row-ic tone-ok">${icon(p.status === 'have' ? 'check' : 'download')}</span>
+        <span class="row-main">
+          <span class="row-title">${esc(p.title || '')}${p.year ? ` <span class="muted">(${esc(p.year)})</span>` : ''}</span>
+          ${(p.genres || []).length ? `<span class="genre-chips">${p.genres.map((g) => `<span class="gchip" style="--g:${genreColor(g)}">${esc(g)}</span>`).join('')}</span>` : ''}
+          ${p.why ? `<span class="row-sub">${esc(p.why)}</span>` : ''}
+          ${p.trend ? `<span class="pick-trend">${icon('insights')}${esc(p.trend)}</span>` : ''}
+          ${p.status === 'new'
+    ? `<span class="pick-actions"><button class="btn btn--quiet btn--small" data-pick="have" data-title="${esc(p.title)}">${icon('check')}Got it</button><button class="btn btn--quiet btn--small" data-pick="skipped" data-title="${esc(p.title)}">Skip</button></span>`
+    : `<span class="pick-actions"><span class="muted">${p.status === 'have' ? 'Downloaded' : 'Skipped'}</span><button class="btn btn--quiet btn--small" data-pick="new" data-title="${esc(p.title)}">Undo</button></span>`}
+        </span>
+      </div>`;
+    return `<h3 class="group-title">Download next</h3>
+      ${now.length ? `<div class="trend-chips" aria-label="What people watch right now">${now.join('')}</div>` : ''}
+      ${waiting.length ? `<div class="group">${waiting.map(row).join('')}</div>` : '<p class="group-foot">Claude picks the next movies on its next look.</p>'}
+      <p class="group-foot">Picked by Claude from what does best on your channel, the season and what people are watching right now. Skip one and it picks another; a movie you put in To edit ticks itself off.</p>
+      ${answered.length ? `<details class="picks-done"><summary>Already answered (${answered.length})</summary><div class="group">${answered.map(row).join('')}</div></details>` : ''}`;
   }
 
   function render(st) {
@@ -147,23 +169,41 @@ export function createInsightsView(ctx) {
     page.setSub(freshness(st));
     if (!st.data) { content.innerHTML = banner(st) + skeleton(3); return; }
     const ins = st.data.insights;
-    const refresh = `<button class="btn btn--quiet btn--block" data-insights-now>${icon('refresh')}Read my TikTok numbers now</button>`;
+    const refresh = `<button class="btn btn--quiet btn--block" data-insights-now>${icon('refresh')}Read my numbers and trends now</button>`;
     if (!ins) {
       content.innerHTML = banner(st) + empty({ icon: 'insights', title: 'No numbers yet',
-        text: 'Once the laptop is logged in to TikTok (Settings › TikTok › Log in) and your username is set, it reads your views and watch time every few hours and Claude explains what works.', action: refresh });
+        text: 'Every few hours the laptop reads your TikTok views (once logged in under Settings › TikTok) and what people are watching right now, and Claude explains what works and picks the next movies to download.', action: refresh });
       return;
     }
     const { movies, base } = movieRows(ins);
+    const n = (ins.totals || {}).videos || 0;
     content.innerHTML = banner(st)
-      + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span> from ${ins.totals.videos || 0} TikTok videos.</p>`
-      + kpis(ins.totals || {}) + aiCard(ins.ai, ins) + genresCard(movies, base) + moviesCard(movies, base)
-      + castCard(movies, base) + nextCard(ins.ai) + refresh;
+      + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span>${n ? ` from ${n} TikTok videos` : ' (no TikTok numbers yet: log in under Settings › TikTok)'}.</p>`
+      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
+      + castCard(movies, base) + refresh;
   }
 
   content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
     const s = e.target.closest('[data-sort]');
     if (s) { haptic(); sort = s.dataset.sort; lsSet(LS_SORT, sort); render(lastSt); return; }
+    const pk = e.target.closest('[data-pick]');
+    if (pk) {
+      haptic();
+      const { pick, title } = pk.dataset;
+      const ins = lastSt && lastSt.data && lastSt.data.insights;
+      const p = ins && (ins.picks || []).find((x) => x.title === title);
+      const was = p && p.status;
+      if (p) { p.status = pick; render(lastSt); }
+      try {
+        await ctx.store.sendCommand({ type: 'pick', title, status: pick });
+        toast(pick === 'have' ? `Ticked off ${title}.` : pick === 'skipped' ? `Skipped ${title}. Claude picks another next time.` : `${title} is back on the list.`, { kind: 'ok', ms: 3500 });
+      } catch (err) {
+        if (p) { p.status = was; render(lastSt); }
+        toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 });
+      }
+      return;
+    }
     if (e.target.closest('[data-insights-now]')) {
       haptic();
       try {

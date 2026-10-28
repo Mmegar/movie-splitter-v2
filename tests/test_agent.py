@@ -628,6 +628,31 @@ class InsightsTest(unittest.TestCase):
         self.assertEqual((m["views"], m["videos"], m["avg_watch"], m["best_part"]), (4000, 2, 25.0, [2, 3000]))
         self.assertEqual(data["totals"]["views"], 4005)
 
+    def test_picks_keep_answers_and_tick_off_downloaded(self):
+        old = [{"title": "Zodiac", "status": "skipped"}, {"title": "Prisoners", "status": "new"},
+               {"title": "Gone Girl", "status": "new"}]
+        out = agent.merge_picks(old, [{"title": "Zodiac (2007)", "why": "x"}, {"title": "The Others", "year": 2001,
+                                       "genres": ["Horror"], "why": "Halloween", "trend": "Spooky season"},
+                                      {"title": "Prisoners", "why": "still good"}, "junk", {"title": ""}],
+                                ["Gone Girl (2014)", "Se7en (1995)"], now="t")
+        by = {p["title"]: p for p in out}
+        self.assertEqual(by["Zodiac"]["status"], "skipped")          # turned down stays turned down
+        self.assertEqual(by["Gone Girl"]["status"], "have")          # it's on the laptop now
+        self.assertEqual(by["Prisoners"]["why"], "still good")
+        self.assertEqual(out[0]["title"], "The Others")              # newest pick first
+        self.assertEqual([p["status"] for p in out[:2]], ["new", "new"])
+        self.assertTrue(agent.has_movie("Se7en", ["Se7en (1995)"]))
+        self.assertFalse(agent.has_movie("It", ["It Follows (2014)"]))
+
+    def test_insights_prompt_has_trends_and_past_picks(self):
+        data = {"totals": {}, "movies": {}, "videos": [], "library": ["Gone Girl (2014)"],
+                "trends": {"date": "2026-10-28", "season": [{"moment": "Halloween", "genres": ["Horror"]}], "trending": []},
+                "picks": [{"title": "Zodiac", "status": "skipped"}]}
+        p = agent.insights_prompt(data, {})
+        self.assertIn("Halloween", p)
+        self.assertIn("Zodiac", p)
+        self.assertIn("Gone Girl (2014)", p)
+
     def test_tuning_stays_in_safe_limits(self):
         cur = {"narrator_funny": 0.5, "recap_part_seconds": 180, "narrator_tempo": "1.2", "thumbnail_badge": "PART {n}"}
         out = agent.clean_tuning({"narrator_funny": 1.0, "recap_part_seconds": 60, "narrator_tempo": "1.3x",
