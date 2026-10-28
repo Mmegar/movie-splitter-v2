@@ -16,7 +16,7 @@
   "flip_every": "25-30",
   "auto_subtitles": true,
   "whisper_model": "small",
-  "line": false,
+  "line": true,
   "line_opacity": 0.45,
   "line_thickness": 12,
   "cockroach": true,
@@ -33,12 +33,13 @@
   "previews": true,
   "preview_keep_movies": 2,
   "wishlist_archive": false,
+  "insights_autotune": true,
   "video_quality": 18,
   "delete_originals": "permanent",
   "cleanup_parts_after_days": 3,
   "posting": {
     "enabled": false,
-    "method": "draft",
+    "method": "browser",
     "privacy": "self_only",
     "modes": [
       "recap",
@@ -47,7 +48,7 @@
       "stretch",
       "highlights"
     ],
-    "per_day": 6,
+    "per_day": 10,
     "times": [
       "00:00",
       "07:00",
@@ -57,7 +58,12 @@
     ],
     "timezone": "Pacific/Auckland",
     "hashtags": "#movie #movieclips #fyp",
-    "when": "times"
+    "when": "gap",
+    "gap_min": 15,
+    "gap_max": 30,
+    "active_from": "09:00",
+    "active_to": "23:30",
+    "username": ""
   },
   "cut_style": "zoom",
   "filter": "mystery",

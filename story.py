@@ -99,7 +99,8 @@ PACK_SUFFIX = ".editpack.zip"
 
 
 MUSIC_DIR = Path(__file__).resolve().parent / "assets" / "music"
-MUSIC_UNDER_LUFS = -32   # narrated parts: songs are evened out to this before mixing (the voice sits around -16)
+MUSIC_UNDER_LUFS = -25   # narrated parts: songs are evened out to this before mixing (the voice sits around -16).
+                         # (-32 plus heavy ducking under a non-stop narrator made the music inaudible)
 AUDIO_EXT = {".mp3", ".m4a", ".aac", ".wav", ".ogg", ".flac", ".opus"}
 DUCK = 0.18          # movie sound under the narrator
 WORDS_PER_SECOND = 2.6
@@ -1553,7 +1554,9 @@ FOLDER_KINDS = [("hype", ("hype", "phonk", "edit")), ("character", ("character",
 # what each kind falls back to when it has no songs of its own ("calm" = the free tracks in tracks.json)
 MUSIC_FALLBACK = {"recap": ["recap", "calm", "any"], "calm": ["recap", "calm", "any"],
                   "character": ["character", "recap", "calm", "any"],
-                  "hype": ["hype", "any"], "highlight": ["highlight"]}
+                  "hype": ["hype", "any"], "highlight": ["highlight", "recap", "calm", "any"]}
+# every video gets a song: when its own kinds have none, any song at all is better than silence
+LAST_RESORT = ["recap", "calm", "character", "any", "hype", "highlight"]
 MUSIC_ROOTS = []   # more places to look for song folders (process.py adds the laptop's output folder/Music)
 
 
@@ -1603,20 +1606,20 @@ def pick_music(kind, seed=None):
     if not MUSIC:
         return None
     songs = available_music()
-    for k in MUSIC_FALLBACK.get(kind, [kind, "any"]):
+    order = MUSIC_FALLBACK.get(kind, [kind, "any"])
+    for k in order + [k for k in LAST_RESORT if k not in order]:
         fits = [s for s in songs if s[2] == k]
         if fits:
             f, credit, _ = random.Random(seed).choice(fits)
             _CREDIT["last"] = credit or None
             print(f"  music ({kind}): {f.parent.name}/{f.name}", flush=True)
             return f
-    if kind != "highlight":
-        where = ", ".join(str(r) for r in music_roots()) or str(MUSIC_DIR)
-        print(f"  (no {kind} music found: put songs in a '{kind}' folder in {where})", flush=True)
+    where = ", ".join(str(r) for r in music_roots()) or str(MUSIC_DIR)
+    print(f"  (NO MUSIC: no songs at all. Put songs in a '{kind}' folder in {where})", flush=True)
     return None
 
 
-def music_under(video, music, workdir, lufs=-30):
+def music_under(video, music, workdir, lufs=-27):
     """Adds a song quietly under a finished clip's own sound (ducked while people talk); the picture is kept."""
     video = Path(video).resolve()
     tmp = video.with_name(video.stem + ".music" + video.suffix)
@@ -1641,8 +1644,34 @@ def last_credit():
     return _CREDIT["last"]
 
 
+def library_music():
+    """On GitHub: your own songs from the private "Music library" draft release (the laptop keeps it in step
+    with its Music folder) into assets/music/<kind>/, so GitHub-cut parts have your music too."""
+    if not (os.environ.get("GITHUB_TOKEN") and os.environ.get("GITHUB_REPOSITORY")):
+        return
+    try:
+        import ghapi
+        gh = ghapi.GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"],
+                          os.environ.get("GITHUB_API_URL") or ghapi.API)
+        rel = next((r for r in gh.releases() if r.get("draft") and r.get("name") == "Music library"), None)
+        for a in gh.assets(rel["id"]) if rel else []:
+            if "__" not in a["name"]:
+                continue
+            kind, file = a["name"].split("__", 1)
+            dest = MUSIC_DIR / kind / file
+            if dest.exists():
+                continue
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            with open(dest, "wb") as fh:
+                gh.download_asset(a["id"], fh.write)
+            print(f"Music library: {kind}/{file}", flush=True)
+    except Exception as e:
+        print(f"(couldn't get your music library: {e})", flush=True)
+
+
 def download_music():
     """Downloads the songs in tracks.json that aren't here yet (the workflow runs this before cutting)."""
+    library_music()
     for t in music_list():
         f = MUSIC_DIR / t["file"]
         if f.exists() or not t.get("url"):
@@ -1685,7 +1714,7 @@ def specks_image(workdir):
     return f.resolve()
 
 
-def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None, loud=False):
+def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None, loud=False, line=False):
     """Joins the pieces, then adds the part-level touches in one last encode: the top label, the line,
     the cockroach, and quiet background music. loud: evened out to TikTok loudness (-14 LUFS), like the
     recap channels' always-full sound."""
@@ -1712,7 +1741,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
         v += (f",drawtext=fontfile={P.FONT}:textfile=toptext.txt:expansion=none:"
               f"fontsize=96:fontcolor=white:borderw=7:bordercolor=black:x=(w-text_w)/2:y={150 if zoomed() else 230}")
     with classic():
-        v += "[txt0]" + P.line_filter(src, length)
+        v += "[txt0]" + (P.line_filter(src, length) if line else ";[txt0]null[txt]")   # the line: clip videos only
     v += roach[1] if roach else ";[txt]null[v]"
     a = "[0:a]anull[a]"
     if music:
@@ -1725,7 +1754,7 @@ def finish_part(segs, out, workdir, src, top_text, music=None, music_volume=None
             # then pushed down further whenever the narrator speaks, so it never covers the words
             a = (f"[{mi}:a]loudnorm=I={MUSIC_UNDER_LUFS:.0f}:TP=-8:LRA=11,aresample=48000,volume={vol / 0.12:.3f},{fades}[mu0];"
                  "[0:a]asplit=2[vo][key];"
-                 "[mu0][key]sidechaincompress=threshold=0.015:ratio=8:attack=20:release=450:makeup=1[mu];"
+                 "[mu0][key]sidechaincompress=threshold=0.03:ratio=3:attack=30:release=600:makeup=1[mu];"
                  "[vo][mu]amix=inputs=2:duration=first:normalize=0[a]")
         else:
             a = (f"[{mi}:a]volume={vol:.3f},{fades}[mu];"

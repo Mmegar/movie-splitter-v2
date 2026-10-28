@@ -28,6 +28,9 @@
   "tiktok_username": "",
   "posting_dry_run": false,
 
+  "_tiktok": "TikTok posting now uses its own Chrome window on this laptop (no Composio needed). Log in once: py agent.py --tiktok-login. tiktok_headless true hides the window (TikTok blocks hidden browsers more often).",
+  "tiktok_headless": false,
+
   "_timing": "Seconds between folder checks, seconds a file must stop growing, seconds between checks for finished parts, minutes between wish-list checks.",
   "poll_seconds": 15,
   "stable_seconds": 60,

@@ -31,7 +31,7 @@ class SettingsTest(TempDirTest):
         s = settings.load(self.write({"cockroach_size": 90, "posting": {"enabled": True}}), env={})
         self.assertEqual(s["cockroach_size"], 90)
         self.assertTrue(s["posting"]["enabled"])
-        self.assertEqual(s["posting"]["per_day"], 3)          # filled in from defaults
+        self.assertEqual(s["posting"]["per_day"], 10)         # filled in from defaults
 
     def test_env_overrides_with_types(self):
         env = {"MODES": "all, highlights", "COCKROACH_SIZE": "80", "AUTO_SUBTITLES": "off",
@@ -56,7 +56,7 @@ class SettingsTest(TempDirTest):
         settings.apply_to_env(settings.load(self.write({"line": False}), env=env), env=env)
         self.assertEqual(env["MODES"], "all")
         self.assertEqual(env["LINE"], "off")
-        self.assertEqual(env["POSTING_PER_DAY"], "3")
+        self.assertEqual(env["POSTING_PER_DAY"], "10")
         self.assertEqual(env["FLIP_EVERY"], "25-30")
 
     def test_text_instead_of_file(self):

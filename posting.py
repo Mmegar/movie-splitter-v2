@@ -1,16 +1,25 @@
 """
-TikTok posting rules and the Composio call. Used by the laptop helper (laptop/agent.py), which
+TikTok posting rules, the browser poster (the default) and the older Composio call. Used by the laptop helper (laptop/agent.py), which
 posts the parts it has downloaded, on the schedule set in the app (settings.json "posting"):
 
   * only when posting is switched on, during the hour of one of the posting times
     (in posting.timezone), at most one post per time and at most `per_day` posts a day;
   * oldest movie first, Part 1 before Part 2, only modes listed in posting.modes;
   * a part that failed is tried again at the next posting time, up to 3 tries.
+  * when = "gap" (the default): one part every 15-30 minutes (a random gap each time, so it never
+    looks like a bot), only between active_from and active_to, at most per_day a day.
+
+Browser posting (method "browser", the default): the laptop opens TikTok Studio in its own Chrome
+window that stays logged in to your account (log in once: python agent.py --tiktok-login), uploads
+the part, sets its thumbnail as the cover, types the caption and taps Post. Needs no TikTok app
+approval, so posts are public. The same window reads your views and watch time for Insights.
 
 TikTok rule: until the TikTok app behind the Composio connection passes TikTok's audit, every
 post is private ("Only me", SELF_ONLY), and the TikTok account itself must be set to private.
 """
 import json
+import random
+import re
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -98,10 +107,48 @@ def next_part(state, modes, available=None):
     return None
 
 
-def next_at(now, posting, count_today):
+def _hm(text, default):
+    try:
+        h, m = str(text).strip().split(":")
+        return int(h) % 24 * 60 + int(m) % 60
+    except (ValueError, AttributeError):
+        return default
+
+
+def in_active_hours(now, posting):
+    """True between active_from and active_to (e.g. 09:00-23:30; a window past midnight works too)."""
+    a, b = _hm(posting.get("active_from"), 9 * 60), _hm(posting.get("active_to"), 23 * 60 + 30)
+    t = now.hour * 60 + now.minute
+    return a <= t < b if a <= b else (t >= a or t < b)
+
+
+def next_gap_minutes(posting, rng=random):
+    """A random gap before the next post, between gap_min and gap_max minutes (15-30 by default)."""
+    lo = max(5, int(posting.get("gap_min") or 15))
+    hi = max(lo, int(posting.get("gap_max") or 30))
+    return rng.uniform(lo, hi)
+
+
+def gap_due(now, posting, next_due):
+    """When the next gap-mode post may go (a datetime): the saved due time, moved into active hours."""
+    t = max(now, next_due) if next_due else now
+    if in_active_hours(t, posting):
+        return t
+    a = _hm(posting.get("active_from"), 9 * 60)       # asleep: the next time the posting hours start
+    start = datetime(t.year, t.month, t.day, a // 60, a % 60, tzinfo=t.tzinfo)
+    return start if start > t else start + timedelta(days=1)
+
+
+def next_at(now, posting, count_today, next_due=None):
     """When the next post is due (ISO text), or None if posting is off."""
     if not posting.get("enabled") or str(posting.get("when") or "") == "as_ready":
         return None                        # as soon as ready: there's no fixed next time
+    if str(posting.get("when") or "times") == "gap":
+        t = gap_due(now, posting, next_due)
+        if count_today >= int(posting.get("per_day", 10)):
+            tomorrow = datetime(now.year, now.month, now.day, tzinfo=now.tzinfo) + timedelta(days=1)
+            t = gap_due(tomorrow, posting, None)
+        return t.isoformat(timespec="seconds")
     times = parse_times(posting.get("times"))
     for days in range(0, 8):
         day = (now + timedelta(days=days)).date()
@@ -231,13 +278,21 @@ def post_video(path, caption, privacy, creds=None, publish=True):
         return False, None, f"{type(e).__name__}: {e}"[:500]
 
 
-def decide(state, posting, now, force=False, available=None):
-    """(movie, mode, part) to post right now, or (None, reason)."""
+def decide(state, posting, now, force=False, available=None, next_due=None):
+    """(movie, mode, part) to post right now, or (None, reason). next_due: gap mode's next allowed time."""
     count = posted_today(state, now)
     if not posting.get("enabled") and not force:
         return None, "Posting is switched off in the settings."
-    as_ready = str(posting.get("when") or "times").lower() == "as_ready"
-    if as_ready and not force:
+    when = str(posting.get("when") or "times").lower()
+    as_ready = when == "as_ready"
+    if when == "gap" and not force:
+        if not in_active_hours(now, posting):
+            return None, f"Outside posting hours ({now:%H:%M})."
+        if count >= int(posting.get("per_day", 10)):
+            return None, f"Already posted {count} today (limit {posting.get('per_day')})."
+        if next_due and now < next_due:
+            return None, f"Next post after {next_due:%H:%M} (random 15-30 min gap)."
+    elif as_ready and not force:
         if count >= AS_READY_DAILY_MAX:
             return None, f"Already sent {count} today (TikTok's daily limit is about {AS_READY_DAILY_MAX})."
     elif not force:
@@ -249,3 +304,264 @@ def decide(state, posting, now, force=False, available=None):
             return None, "Already posted in this hour's slot."
     pick = next_part(state, posting.get("modes") or ["recap", "character", "hype", "stretch", "highlights"], available)
     return (pick, None) if pick else (None, "Nothing to post yet.")
+
+
+# ---------------------------------------------------------------- browser posting (TikTok Studio)
+STUDIO_UPLOAD = "https://www.tiktok.com/tiktokstudio/upload?from=webapp"
+STUDIO_CONTENT = "https://www.tiktok.com/tiktokstudio/content"
+LOGIN_URL = "https://www.tiktok.com/login"
+
+
+def ensure_playwright(log=print):
+    """The browser robot (Playwright): installed the first time it's needed. True when ready."""
+    import subprocess
+    import sys
+    try:
+        import playwright  # noqa: F401
+        return True
+    except ImportError:
+        pass
+    log("Installing Playwright (the browser robot that posts to TikTok), once...")
+    subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "playwright"], timeout=1800,
+                   capture_output=True)
+    import importlib
+    importlib.invalidate_caches()
+    try:
+        import playwright  # noqa: F401,F811
+        return True
+    except ImportError:
+        return False
+
+
+def _install_chromium():
+    import subprocess
+    import sys
+    subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"], timeout=1800, capture_output=True)
+
+
+def _pause(lo=0.6, hi=1.8):
+    time.sleep(random.uniform(lo, hi))            # human-ish pauses between clicks
+
+
+class Browser:
+    """A Chrome window with its own profile folder, so the TikTok login is remembered between runs."""
+
+    def __init__(self, profile_dir, headless=False):
+        self.profile_dir = Path(profile_dir)
+        self.headless = headless
+        self.pw = self.ctx = None
+
+    def __enter__(self):
+        from playwright.sync_api import sync_playwright
+        self.profile_dir.mkdir(parents=True, exist_ok=True)
+        self.pw = sync_playwright().start()
+        kw = dict(user_data_dir=str(self.profile_dir), headless=self.headless, viewport={"width": 1366, "height": 860},
+                  args=["--disable-blink-features=AutomationControlled"], ignore_default_args=["--enable-automation"])
+        try:
+            self.ctx = self.pw.chromium.launch_persistent_context(channel="chrome", **kw)   # your real Chrome
+        except Exception:
+            try:
+                self.ctx = self.pw.chromium.launch_persistent_context(**kw)
+            except Exception:
+                _install_chromium()
+                self.ctx = self.pw.chromium.launch_persistent_context(**kw)
+        return self
+
+    def page(self):
+        return self.ctx.pages[0] if self.ctx.pages else self.ctx.new_page()
+
+    def logged_in(self):
+        return any(c.get("name") == "sessionid" and c.get("value") for c in self.ctx.cookies("https://www.tiktok.com"))
+
+    def __exit__(self, *exc):
+        for fn in (lambda: self.ctx.close(), lambda: self.pw.stop()):
+            try:
+                fn()
+            except Exception:
+                pass
+
+
+def browser_login(profile_dir, wait_minutes=15, log=print):
+    """Opens TikTok's login page in the poster's own Chrome window and waits until you've logged in."""
+    if not ensure_playwright(log):
+        return False, "Couldn't install Playwright (py -m pip install playwright)"
+    with Browser(profile_dir, headless=False) as b:
+        page = b.page()
+        if b.logged_in():
+            return True, None
+        page.goto(LOGIN_URL, wait_until="domcontentloaded")
+        log(f"Log in to TikTok in the window that just opened (waiting up to {wait_minutes} minutes)...")
+        end = time.time() + wait_minutes * 60
+        while time.time() < end:
+            if b.logged_in():
+                time.sleep(3)                          # let TikTok finish saving the login
+                return True, None
+            time.sleep(2)
+    return False, "Not logged in yet: run it again and finish logging in"
+
+
+def _click_text(page, texts, timeout=4000):
+    for t in texts:
+        loc = page.get_by_text(t, exact=True)
+        try:
+            loc.first.click(timeout=timeout)
+            return True
+        except Exception:
+            continue
+    return False
+
+
+def _set_cover(page, cover, log=print):
+    """Edit cover -> Upload cover -> the part's thumbnail -> Confirm. Best effort: posting goes on without it."""
+    try:
+        if not _click_text(page, ["Edit cover", "Select cover"], timeout=8000):
+            return False
+        _pause()
+        _click_text(page, ["Upload cover", "Upload image"], timeout=6000)
+        _pause()
+        inp = page.locator('input[type="file"][accept*="image"]')
+        inp.first.set_input_files(str(cover), timeout=10000)
+        _pause(2, 4)
+        page.get_by_role("button", name=re.compile(r"^(Confirm|Save|Done)$")).last.click(timeout=15000)
+        _pause(1, 2)
+        return True
+    except Exception as e:
+        log(f"  (couldn't set the cover, posting with TikTok's own: {e})")
+        try:
+            page.keyboard.press("Escape")
+        except Exception:
+            pass
+        return False
+
+
+def _type_caption(page, caption):
+    box = page.locator('div[contenteditable="true"]').first
+    box.click(timeout=30000)
+    page.keyboard.press("Control+A")
+    page.keyboard.press("Backspace")
+    _pause(0.3, 0.8)
+    lines = caption.split("\n")
+    for i, line in enumerate(lines):
+        for word in line.split(" "):
+            page.keyboard.type(word, delay=random.randint(25, 70))
+            if word.startswith(("#", "@")):
+                time.sleep(1.2)                         # hashtag suggestions pop up...
+            page.keyboard.type(" ")                     # ...a space closes them without picking one
+        if i < len(lines) - 1:
+            page.keyboard.press("Shift+Enter")
+
+
+def browser_post(path, caption, profile_dir, cover=None, headless=False, log=print):
+    """Posts one video through TikTok Studio in the logged-in Chrome window. Returns (ok, url, error)."""
+    if not ensure_playwright(log):
+        return False, None, "Couldn't install Playwright (py -m pip install playwright)"
+    path = Path(path).resolve()
+    if not path.exists():
+        return False, None, f"The video isn't on the laptop any more: {path.name}"
+    try:
+        with Browser(profile_dir, headless=headless) as b:
+            page = b.page()
+            page.goto(STUDIO_UPLOAD, wait_until="domcontentloaded", timeout=90000)
+            _pause(2, 4)
+            if not b.logged_in() or "login" in page.url:
+                return False, None, "TikTok isn't logged in on the laptop (run: py agent.py --tiktok-login)"
+            page.locator('input[type="file"][accept*="video"]').first.set_input_files(str(path), timeout=60000)
+            post_btn = page.locator('button[data-e2e="post_video_button"]')
+            post_btn.wait_for(state="visible", timeout=10 * 60000)
+            _pause(2, 4)
+            _type_caption(page, caption)
+            _pause()
+            if cover and Path(cover).exists():
+                _set_cover(page, Path(cover).resolve(), log)
+            end = time.time() + 15 * 60                    # wait for the upload to finish (Post turns on)
+            while time.time() < end:
+                if post_btn.get_attribute("aria-disabled") != "true" and post_btn.is_enabled() \
+                        and not page.get_by_text(re.compile(r"Uploading|\d+%")).count():
+                    break
+                time.sleep(3)
+            _pause(2, 5)
+            post_btn.click(timeout=30000)
+            _pause(2, 3)
+            _click_text(page, ["Post now", "Post anyway"], timeout=3000)   # TikTok's "content check" pop-up
+            end = time.time() + 5 * 60
+            while time.time() < end and "/content" not in page.url:
+                if page.get_by_text(re.compile(r"(Your video (has been|is being) (uploaded|posted))|Manage your posts")).count():
+                    break
+                time.sleep(2)
+            if "/content" not in page.url:
+                page.goto(STUDIO_CONTENT, wait_until="domcontentloaded", timeout=60000)
+            _pause(3, 5)
+            url = None
+            try:
+                href = page.locator('a[href*="/video/"]').first.get_attribute("href", timeout=15000)
+                url = href if href and href.startswith("http") else f"https://www.tiktok.com{href}" if href else None
+            except Exception:
+                pass
+            return True, url, None
+    except Exception as e:
+        return False, None, f"{type(e).__name__}: {e}"[:500]
+
+
+def _num(v):
+    try:
+        return int(v)
+    except (TypeError, ValueError):
+        return 0
+
+
+def browser_stats(profile_dir, username, deep=15, headless=True, log=print):
+    """Your TikTok videos with their numbers, read from your profile and TikTok Studio:
+    [{"id", "desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
+      "avg_watch", "full_watch"}]. avg_watch (seconds) and full_watch (% who watched to the end)
+    come from each video's analytics page, for the newest `deep` videos only."""
+    if not ensure_playwright(log):
+        return None, "Couldn't install Playwright"
+    user = str(username or "").lstrip("@")
+    if not user:
+        return None, "Your TikTok username isn't set (Settings > TikTok > Username)"
+    items = {}
+    try:
+        with Browser(profile_dir, headless=headless) as b:
+            page = b.page()
+
+            def grab(resp):
+                if "/api/post/item_list" not in resp.url:
+                    return
+                try:
+                    for it in (resp.json() or {}).get("itemList") or []:
+                        st = it.get("stats") or {}
+                        items[str(it.get("id"))] = {
+                            "id": str(it.get("id")), "desc": it.get("desc") or "", "created": _num(it.get("createTime")),
+                            "views": _num(st.get("playCount")), "likes": _num(st.get("diggCount")),
+                            "comments": _num(st.get("commentCount")), "shares": _num(st.get("shareCount")),
+                            "saves": _num(st.get("collectCount")), "seconds": _num((it.get("video") or {}).get("duration")),
+                            "url": f"https://www.tiktok.com/@{user}/video/{it.get('id')}"}
+                except Exception:
+                    pass
+            page.on("response", grab)
+            page.goto(f"https://www.tiktok.com/@{user}", wait_until="domcontentloaded", timeout=90000)
+            for _ in range(12):                                 # scroll to load older videos
+                time.sleep(2.5)
+                page.mouse.wheel(0, 4000)
+            newest = sorted(items.values(), key=lambda x: -x["created"])[:deep]
+            for v in newest:
+                try:
+                    page.goto(f"https://www.tiktok.com/tiktokstudio/analytics/{v['id']}", wait_until="domcontentloaded",
+                              timeout=60000)
+                    time.sleep(6)
+                    text = page.inner_text("body", timeout=15000)
+                    m = re.search(r"Average watch time\s*\n?\s*([\d.,]+)\s*s", text)
+                    if m:
+                        v["avg_watch"] = float(m.group(1).replace(",", ""))
+                    m = re.search(r"Watched full video\s*\n?\s*([\d.,]+)\s*%", text)
+                    if m:
+                        v["full_watch"] = float(m.group(1).replace(",", ""))
+                    m = re.search(r"New followers\s*\n?\s*([\d,]+)", text)
+                    if m:
+                        v["followers"] = int(m.group(1).replace(",", ""))
+                    _pause(1, 3)
+                except Exception as e:
+                    log(f"  (no watch-time numbers for video {v['id']}: {e})")
+    except Exception as e:
+        return None, f"{type(e).__name__}: {e}"[:500]
+    return sorted(items.values(), key=lambda x: -x["created"]), None

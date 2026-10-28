@@ -54,7 +54,7 @@ DEFAULTS = {
     "flip_every": "25-30",
     "auto_subtitles": True,
     "whisper_model": "small",
-    "line": True,
+    "line": True,                        # the thin line: clip videos only (never on narrated recaps)
     "line_opacity": 0.45,
     "line_thickness": 1,
     "cockroach": True,
@@ -78,13 +78,21 @@ DEFAULTS = {
     "video_quality": 18,                 # x264 CRF: 18 = best/biggest ... 28 = smallest
     "delete_originals": "permanent",     # "permanent" = gone for good, "bin" = Google Drive's bin (30 days)
     "cleanup_parts_after_days": 0,       # delete finished parts older than this; 0 = never
+    "insights_autotune": True,           # Insights may change script/caption direction, thumbnail badge, Funny dial... by itself
     "posting": {
         "enabled": False,
         "privacy": "self_only",
-        "when": "times",                 # times = at the post times below; as_ready = each part as soon as it's on the laptop
-        "method": "draft",               # draft = sent to your TikTok inbox, you tap Post; direct = posted straight away (needs a private account until TikTok approves the app)
+        "when": "gap",                   # gap = one part every gap_min-gap_max minutes (random) in active hours;
+                                         # times = at the post times below; as_ready = each part as soon as it's on the laptop
+        "method": "browser",             # browser = the laptop's logged-in Chrome posts it publicly (TikTok Studio);
+                                         # draft / direct = the older Composio API (drafts, or private posts only)
+        "gap_min": 15,                   # minutes between posts: a random gap in this range each time
+        "gap_max": 30,
+        "active_from": "09:00",          # gap mode only posts between these times (posting.timezone)
+        "active_to": "23:30",
+        "username": "",                  # your TikTok @name (for Insights)
         "modes": ["recap", "character", "hype", "stretch", "highlights"],   # older parts still get posted
-        "per_day": 3,
+        "per_day": 10,
         "times": ["12:00", "18:00", "21:00"],
         "timezone": "Pacific/Auckland",
         "hashtags": "#movie #movieclips #fyp",

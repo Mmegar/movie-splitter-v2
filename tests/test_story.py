@@ -163,7 +163,7 @@ class StoryTest(unittest.TestCase):
             self.assertEqual(story.pick_music("character", 1).name, "pa.mp3")    # no character folder: recap's
             self.assertEqual(story.pick_music("highlight", 1).name, "clip.mp3")
             (d / "Highlight" / "clip.mp3").unlink()
-            self.assertIsNone(story.pick_music("highlight", 1))                 # clips only get their own folder
+            self.assertIsNotNone(story.pick_music("highlight", 1))              # every video gets a song (any one)
         finally:
             story.MUSIC_DIR = old
 
