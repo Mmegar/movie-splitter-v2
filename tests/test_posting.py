@@ -190,3 +190,13 @@ class GapScheduleTest(unittest.TestCase):
         tz = ZoneInfo("Pacific/Auckland")
         now = datetime(2026, 10, 13, 23, 50, tzinfo=tz)
         self.assertEqual(posting.next_at(now, self.P, 1), "2026-10-14T09:00:00+13:00")
+
+
+class AnalyticsSkipTest(unittest.TestCase):
+    def test_only_new_or_changed_young_videos_are_reopened(self):
+        now = 1_800_000_000
+        old = {"a": {"avg_watch": 20, "views": 1000}, "b": {"avg_watch": 20, "views": 1000}, "c": {"avg_watch": 9, "views": 10}}
+        self.assertTrue(posting.needs_analytics({"id": "new", "created": now, "views": 5}, old, now))       # never read
+        self.assertTrue(posting.needs_analytics({"id": "a", "created": now - 86400, "views": 1200}, old, now))   # +20%
+        self.assertFalse(posting.needs_analytics({"id": "b", "created": now - 86400, "views": 1050}, old, now))  # +5%
+        self.assertFalse(posting.needs_analytics({"id": "c", "created": now - 30 * 86400, "views": 999}, old, now))  # settled

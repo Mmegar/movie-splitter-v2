@@ -126,5 +126,11 @@
   "originals": [
     "the-man-from-uncle-2015",
     "his-girl-friday-1940"
-  ]
+  ],
+  "insights_run": {
+    "started": "2026-10-13T14:04:00+13:00",
+    "step": "Reading watch time",
+    "done": 4,
+    "total": 9
+  }
 }

@@ -664,6 +664,30 @@ class InsightsTest(unittest.TestCase):
                                "script_direction": "Roast more."})
 
 
+class DayHistoryTest(unittest.TestCase):
+    def test_one_row_per_day_kept_60_days(self):
+        h = agent.day_history([{"day": "2026-10-27", "views": 5}], {"views": 9, "videos": 2}, today="2026-10-28")
+        h = agent.day_history(h, {"views": 12, "videos": 3}, today="2026-10-28")       # same day: replaced
+        self.assertEqual([(r["day"], r["views"]) for r in h], [("2026-10-27", 5), ("2026-10-28", 12)])
+        many = [{"day": f"d{i}"} for i in range(80)]
+        self.assertEqual(len(agent.day_history(many, {}, today="x")), 60)
+
+
+class ModeStatsTest(unittest.TestCase):
+    def test_viral_mode_ranks_first_even_with_weak_average(self):
+        vids = [{"mode": "recap", "views": 3000}, {"mode": "recap", "views": 2800},
+                {"mode": "best stretch", "views": 900000}, {"mode": "best stretch", "views": 50},
+                {"mode": "best stretch", "views": 40}, {"views": 10}]
+        st = agent.mode_stats(vids)
+        self.assertEqual(list(st)[0], "best stretch")
+        self.assertEqual(st["best stretch"]["best_views"], 900000)
+        self.assertEqual(st["recap"]["videos"], 2)
+
+    def test_owner_notes_reach_the_prompt(self):
+        self.assertEqual(agent.owner_notes_text({}), "")
+        self.assertIn("Keep Best stretch", agent.owner_notes_text({"notes": [{"text": "Keep Best stretch on"}]}))
+
+
 class RepoMusicTests(TempDirTest):
     """Songs committed to assets/music/<kind>/ come down to the laptop by themselves."""
 

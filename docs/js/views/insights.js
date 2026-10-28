@@ -77,6 +77,30 @@ export function createInsightsView(ctx) {
     </div>`;
   }
 
+  // Talk to the Insights AI: its answers, and the standing notes every later run must follow.
+  function chatCard(ins, st) {
+    const lp = st.data.laptop || {};
+    const status = lp.commands || {};
+    const done = new Set(lp.commands_done || []);
+    const cmds = ((st.data.commands || {}).json || {}).commands || [];
+    const chat = (ins.chat || []).slice(-6);
+    const pending = cmds.filter((c) => c.type === 'insights_chat' && Date.now() - Date.parse(c.at || 0) < 6 * 3600000
+      && !(done.has(c.id) && (status[c.id] || {}).status !== 'failed') && !chat.some((m) => m.you === c.text));
+    const bubble = (who, text, extra = '') => `<div class="chat-msg chat-msg--${who}"><p>${esc(text)}</p>${extra}</div>`;
+    const notes = ins.notes || [];
+    return `<div class="group chat-card">
+      <div class="ai-head">${icon('memory')}<span>Talk to Claude</span></div>
+      ${chat.map((m) => bubble('you', m.you) + bubble('ai', m.ai, m.note ? `<span class="chat-note">${icon('check')}Remembered: ${esc(m.note)}</span>` : '')).join('')}
+      ${pending.map((c) => { const s = status[c.id] || {}; return bubble('you', c.text) + (s.status === 'failed'
+        ? `<p class="note note--warn">${esc(s.note || "Claude couldn't answer")}</p>`
+        : `<div class="chat-msg chat-msg--ai chat-msg--wait"><span class="spinner"></span><p>${esc(s.note || 'Waiting for the laptop (it checks every 30 seconds)…')}</p></div>`); }).join('')}
+      ${!chat.length && !pending.length ? '<p class="group-foot" style="margin:0 0 8px">Tell Claude what it got wrong or how things should be, e.g. "Best stretch made my 2 viral videos, keep it". It answers here and remembers it on every run.</p>' : ''}
+      <form class="chat-form" data-chat><textarea class="input" rows="2" maxlength="1000" name="text" placeholder="Tell Claude something…" ${pending.length ? 'disabled' : ''}></textarea>
+        <button class="btn btn--primary" type="submit" ${pending.length ? 'disabled' : ''}>Send</button></form>
+      ${notes.length ? `<div class="ai-list ai-list--info"><h4>Claude remembers</h4><ul>${notes.slice().reverse().map((n) => `<li>${esc(n.text)} <button class="btn btn--quiet btn--small" data-forget="${esc(n.at)}">Forget</button></li>`).join('')}</ul></div>` : ''}
+    </div>`;
+  }
+
   function genresCard(movies, base) {
     const g = {};
     for (const m of movies) {
@@ -164,26 +188,80 @@ export function createInsightsView(ctx) {
       ${answered.length ? `<details class="picks-done"><summary>Already answered (${answered.length})</summary><div class="group">${answered.map(row).join('')}</div></details>` : ''}`;
   }
 
+  // What the laptop is doing for Insights right now (laptop.json insights_run), or a tap still on its way to it.
+  function runState(st) {
+    const lp = st.data.laptop || {};
+    const run = lp.insights_run;
+    const cmds = ((st.data.commands || {}).json || {}).commands || [];
+    const done = new Set(lp.commands_done || []);
+    const waiting = cmds.some((c) => c.type === 'insights_now' && !done.has(c.id) && Date.now() - Date.parse(c.at || 0) < 15 * 60000);
+    return { run, waiting, last: lp.insights_at ? lp.insights_at * 1000 : null };
+  }
+
+  function progressCard(st) {
+    const { run, waiting } = runState(st);
+    if (!run && !waiting) return '';
+    const pct = run && run.total ? Math.round((run.done / run.total) * 100) : null;
+    const step = run ? `${run.step}${run.total ? ` (${run.done + 1} of ${run.total})` : ''}…` : 'Waiting for the laptop to pick it up (it checks every 30 seconds)…';
+    return `<div class="group insights-run" role="status">
+      <div class="row"><span class="spinner"></span><span class="row-main"><span class="row-title">Updating Insights</span>
+        <span class="row-sub">${esc(step)}${run && run.started ? ` · started <span data-rel="${Date.parse(run.started)}">${esc(relTime(Date.parse(run.started)))}</span>` : ''}</span>
+        <span class="bar ${pct == null ? 'bar--busy' : ''}" role="progressbar" ${pct == null ? '' : `aria-valuenow="${pct}"`} aria-valuemin="0" aria-valuemax="100"><span style="width:${pct == null ? 35 : Math.max(4, pct)}%"></span></span>
+      </span></div></div>`;
+  }
+
+  function refreshButton(st) {
+    const { run, waiting, last } = runState(st);
+    const busy = !!(run || waiting);
+    return `<button class="btn btn--quiet btn--block" data-insights-now ${busy ? 'disabled' : ''}>${icon('refresh')}${busy ? 'Updating…' : 'Read my numbers and trends now'}</button>
+      <p class="group-foot">Runs by itself every 6 hours${last ? `; last run <span data-rel="${last}">${esc(relTime(last))}</span>` : ''}. Settings change by themselves at most once a day, so each change has time to show whether it helped.</p>`;
+  }
+
   function render(st) {
     lastSt = st;
     page.setSub(freshness(st));
     if (!st.data) { content.innerHTML = banner(st) + skeleton(3); return; }
     const ins = st.data.insights;
-    const refresh = `<button class="btn btn--quiet btn--block" data-insights-now>${icon('refresh')}Read my numbers and trends now</button>`;
+    const refresh = refreshButton(st);
+    const prog = progressCard(st);
     if (!ins) {
-      content.innerHTML = banner(st) + empty({ icon: 'insights', title: 'No numbers yet',
+      content.innerHTML = banner(st) + prog + empty({ icon: 'insights', title: 'No numbers yet',
         text: 'Every few hours the laptop reads your TikTok views (once logged in under Settings › TikTok) and what people are watching right now, and Claude explains what works and picks the next movies to download.', action: refresh });
       return;
     }
     const { movies, base } = movieRows(ins);
     const n = (ins.totals || {}).videos || 0;
-    content.innerHTML = banner(st)
+    content.innerHTML = banner(st) + prog
       + `<p class="group-foot" style="margin:0 0 8px">Updated <span data-rel="${Date.parse(ins.updated)}">${esc(relTime(Date.parse(ins.updated)))}</span>${n ? ` from ${n} TikTok videos` : ' (no TikTok numbers yet: log in under Settings › TikTok)'}.</p>`
-      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
+      + (n ? kpis(ins.totals || {}) : '') + aiCard(ins.ai, ins) + chatCard(ins, st) + nextCard(ins) + genresCard(movies, base) + moviesCard(movies, base)
       + castCard(movies, base) + refresh;
   }
 
+  content.addEventListener('submit', async (e) => {
+    const f = e.target.closest('[data-chat]');
+    if (!f) return;
+    e.preventDefault();
+    const text = f.elements.text.value.trim();
+    if (!text) return;
+    haptic();
+    f.elements.text.disabled = true;
+    try {
+      await ctx.store.sendCommand({ type: 'insights_chat', text });
+    } catch (err) {
+      f.elements.text.disabled = false;
+      toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 });
+    }
+  });
+
   content.addEventListener('click', async (e) => {
+    const fg = e.target.closest('[data-forget]');
+    if (fg) {
+      haptic();
+      const ins = lastSt && lastSt.data && lastSt.data.insights;
+      if (ins) { ins.notes = (ins.notes || []).filter((n) => n.at !== fg.dataset.forget); render(lastSt); }
+      try { await ctx.store.sendCommand({ type: 'forget_note', at: fg.dataset.forget }); toast('Claude will forget that.', { kind: 'ok', ms: 3000 }); } catch (err) { toast(err.message || "Couldn't reach the laptop.", { kind: 'err', ms: 4500 }); }
+      return;
+    }
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }
     const s = e.target.closest('[data-sort]');
     if (s) { haptic(); sort = s.dataset.sort; lsSet(LS_SORT, sort); render(lastSt); return; }
@@ -204,8 +282,11 @@ export function createInsightsView(ctx) {
       }
       return;
     }
-    if (e.target.closest('[data-insights-now]')) {
+    const now = e.target.closest('[data-insights-now]');
+    if (now) {
+      if (now.disabled) return;
       haptic();
+      now.disabled = true;
       try {
         await ctx.store.sendCommand({ type: 'insights_now' });
         toast('The laptop is reading your TikTok numbers. Give it a few minutes.', { kind: 'ok', ms: 4500 });
