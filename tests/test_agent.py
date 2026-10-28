@@ -5,7 +5,9 @@ import os
 import subprocess
 import sys
 import threading
+import time
 import urllib.parse
+from pathlib import Path
 from unittest import mock
 
 from tests.fake_github import FakeGitHub
@@ -668,3 +670,39 @@ class DayHistoryTest(unittest.TestCase):
         self.assertEqual([(r["day"], r["views"]) for r in h], [("2026-10-27", 5), ("2026-10-28", 12)])
         many = [{"day": f"d{i}"} for i in range(80)]
         self.assertEqual(len(agent.day_history(many, {}, today="x")), 60)
+
+
+class InsightsActTest(AgentTestBase):
+    """Insights acting on its advice: modes (protected ones kept), holds, experiments, cut settings."""
+
+    def test_acts_but_keeps_viral_mode_and_holds_a_flop(self):
+        a = self.make_agent()
+        a.remote_settings["modes"] = ["recap", "stretch"]
+        now = time.time() - 3 * 86400
+        videos = [{"id": f"r{i}", "movie": "Flop", "mode": "recap", "part": i, "views": 50, "created": now}
+                  for i in range(3)] + [{"id": "s1", "movie": "Hit", "mode": "stretch", "part": 1,
+                                         "views": 300000, "created": now}]
+        data = {"videos": videos, "movies": {"Flop": {"videos": 3, "modes": {"recap": 150}},
+                                             "Hit": {"videos": 1, "modes": {"stretch": 300000}}}}
+        act = a.act_context(data)
+        self.assertIn("stretch", act["protected"])
+        self.assertIn("PROTECTED", agent.insights_prompt({"totals": {}, "movies": {}, "videos": []}, {}, act))
+        ai = {"modes": ["recap"], "hold": [{"movie": "Flop", "mode": "recap", "why": "50 views"},
+                                           {"movie": "Hit", "mode": "stretch", "why": "no"}],
+              "next_experiment": {"factor": "narrator_tempo", "arms": ["1.3"], "why": "faster?"}}
+        with mock.patch.object(a, "notify"):
+            changes, notes = a.act_on_insights(ai, data, act, {"narrator_funny": 0.5})
+        self.assertNotIn("modes", changes)                         # stretch can't be dropped
+        self.assertEqual(changes, {"narrator_funny": 0.5})
+        self.assertEqual([(h["movie"], h["mode"]) for h in a.memory["holds"]], [("Flop", "recap")])
+        self.assertEqual(a.memory["experiment"]["current"]["factor"], "narrator_tempo")
+        # while the tempo test runs, auto-tune can't touch the tempo
+        with mock.patch.object(a, "notify"):
+            changes, _ = a.act_on_insights({}, data, act, {"narrator_tempo": "1.5"})
+        self.assertEqual(changes, {})
+        # each new movie is cut with the next arm
+        tempos = [a.cut_settings(Path(f"M{i}.mkv"))["narrator_tempo"] for i in range(3)]
+        self.assertEqual(tempos, ["1.2", "1.3", "1.2"])
+        self.assertEqual(a.run_command("release_hold", {"movie": "Flop", "mode": "recap"}), "Flop posts again")
+        self.assertEqual(a.memory["holds"], [])
+        self.assertIn("Stopped", a.run_command("stop_experiment", {}))

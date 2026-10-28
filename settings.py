@@ -68,6 +68,9 @@ DEFAULTS = {
     "caption_direction": "",             # free text for how captions should sound, e.g. "short, Gen Z, end with a question"
     "thumbnail_badge": "PART {n}",       # the red badge on each part's thumbnail; {n} = the part number
     "caption_style": "goofy",            # goofy = jokes + a quote from the clip; plain = the older, calmer captions
+    "insights_act": True,                # Insights may also act: add kinds of video, hold back flopping movies, pick the film look
+    "experiments": True,                 # Insights runs A/B posting tests one at a time and keeps each winner
+    "insights_keep_modes": ["stretch"],  # never switched off by Insights (your viral videos came from Best stretch)
     "paused": False,                     # True = laptop stops sending/receiving and GitHub doesn't start cutting
     "pause_on_battery": False,           # laptop waits while it's running on battery
     "upload_limit_mbps": 0,              # cap the laptop's upload speed (megabits/s); 0 = no limit

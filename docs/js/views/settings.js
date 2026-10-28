@@ -251,6 +251,8 @@ function buildForm(d) {
           <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
       ] : []),
       swRow({ insights_autotune: true, ...d }, 'insights_autotune', 'Let Insights tune things by itself', 'Every few hours Claude reads your views and watch time, then adjusts script and caption notes, the thumbnail badge, Funny dial and part length in small steps'),
+      swRow({ insights_act: true, ...d }, 'insights_act', 'Let Insights act on its advice', 'Claude may add kinds of video, hold back a movie whose parts flop (7 days, you can release it), and change the film look. Best stretch and whatever made your biggest videos are never switched off'),
+      swRow({ experiments: true, ...d }, 'experiments', 'Run posting experiments', 'One A/B test at a time (narrator speed, thumbnail badge, hashtags, posting hours...). Each version needs 6 videos a day old; the clear winner (25% more views, same watch time) becomes the setting, then the next test starts'),
     ], p.enabled ? 'Captions never include a music credit line.' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
 
     !old ? '' : group('Part lengths', [

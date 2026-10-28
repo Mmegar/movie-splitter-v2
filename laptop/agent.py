@@ -64,6 +64,10 @@ except Exception:           # write why it couldn't start into agent.log (no win
     with open(HERE / "agent.log", "a", encoding="utf-8") as _f:
         _f.write(f"{datetime.now()} ERROR The helper couldn't start:\n{traceback.format_exc()}\n")
     raise
+try:
+    import experiments      # noqa: E402  (A/B posting tests; an old copy without it still starts)
+except ImportError:
+    experiments = None
 
 VIDEO_EXT = archive.VIDEO_EXT
 PARTIAL_EXT = {".part", ".partial", ".crdownload", ".download", ".tmp", ".!ut", ".opdownload"}
@@ -214,6 +218,7 @@ CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "p
               "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
               "process.py", "tracking.py",   # (process + tracking: for cutting on the laptop)
               "trends.py",                   # (what people watch right now, for Insights' Download next)
+              "experiments.py",              # (Insights' posting experiments and what it may change by itself)
               "laptop/startup_apps.ps1",
               "assets/music/tracks.json"]
 MUSIC_RELEASE = "music-library"   # the draft release that holds your songs on GitHub (only you can see it)
@@ -224,7 +229,8 @@ INSIGHTS_SYSTEM = ("You are the growth analyst for a TikTok channel that posts m
                    "give short, concrete advice in plain English, and pick which movies to download next from the "
                    "channel's numbers and what people are watching right now. You answer with JSON only.")
 TUNABLE = {"script_direction": str, "caption_direction": str, "thumbnail_badge": str, "narrator_funny": float,
-           "narrator_intensity": float, "narrator_tempo": str, "recap_part_seconds": int}
+           "narrator_intensity": float, "narrator_tempo": str, "recap_part_seconds": int,
+           "filter": str, "recap_style": str}          # (the last two only with "Let Insights act")
 TUNE_LIMITS = {"narrator_funny": (0.0, 1.0), "narrator_intensity": (0.5, 1.2), "recap_part_seconds": (60, 300)}
 TEMPOS = ("1", "1.1", "1.2", "1.3", "1.5")
 
@@ -298,7 +304,28 @@ def day_history(history, totals, today=None):
     return rows[-60:]
 
 
-def insights_prompt(data, cur):
+def act_prompt(act):
+    """The extra part of the Insights question when Claude may act by itself: modes, holds, experiments."""
+    if not act:
+        return ""
+    return f"""
+YOU MAY ALSO ACT BY YOURSELF (the owner switched on "Let Insights act"):
+- KINDS OF VIDEO MADE (modes) now: {json.dumps(act["modes"])}. Possible: recap (Movie recap), character
+  (Character story), hype (Hype edit), stretch (Best stretch), highlights. You may ADD a mode the numbers support.
+  PROTECTED, never drop or advise dropping these, they made the channel's biggest videos: {json.dumps(sorted(act["protected"]))}.
+  Views per mode so far: {json.dumps(act["mode_stats"])}. Only suggest dropping a mode with 8+ videos far below the rest.
+- HOLD BACK: stop posting the rest of one movie's parts (one mode) for 7 days when its posted parts clearly flop
+  (2+ videos, far under the channel's views and watch time). Never a protected mode. Holding now: {json.dumps(act["holds"])}.
+- EXPERIMENTS: one A/B test runs at a time and its winner becomes the setting automatically. Running:
+  {json.dumps(act["experiment"], ensure_ascii=False)}. Finished: {json.dumps(act["history"], ensure_ascii=False)}.
+  When nothing is running, propose the next one: the single thing your numbers say is most worth testing.
+  Testable (arm A is always the current value, give 1-2 OTHER values): {json.dumps(act["factors"])}.
+  posting.hours is "HH:MM-HH:MM" (4+ hours); mode_first compares the kinds of video already made (arms: []).
+  Don't repeat a finished test unless the numbers have changed a lot. Don't tune a setting under test.
+Base every action on the numbers above. If the numbers don't clearly back an action, don't take it."""
+
+
+def insights_prompt(data, cur, act=None):
     """What Claude sees: the numbers, per movie and per video, and the settings it may change."""
     vids = [{k: v.get(k) for k in ("desc", "created", "views", "likes", "comments", "shares", "saves", "seconds",
                                     "avg_watch", "full_watch", "movie", "mode", "part")} for v in data["videos"][:60]]
@@ -307,6 +334,14 @@ def insights_prompt(data, cur):
     picks = data.get("picks") or []
     done = [p["title"] for p in picks if p.get("status") in ("have", "skipped")]
     have = data.get("library") or []
+    act_tune = ("\n- filter (film look): vivid/mystery/warm/teal_orange/noir/none; recap_style: fast/chatty."
+                if act else "")
+    act_keys = (""",
+  "modes": [<the full list of modes to make, or null to keep them>],
+  "hold": [{"movie": "<name as in PER MOVIE>", "mode": "<mode>", "why": "<the numbers>"}],
+  "release": ["<movie name of a hold to lift>"],
+  "next_experiment": {"factor": "<one of the testable keys>", "arms": [<1-2 other values>], "why": "<one line>"} or null"""
+                if act else "")
     return f"""Today is {tr.get("date")}. What people are watching right now:
 SEASON: {json.dumps(tr.get("season") or [], ensure_ascii=False)}
 MOST READ-ABOUT FILMS AND SHOWS ON WIKIPEDIA (last 3 days): {json.dumps(tr.get("trending") or [], ensure_ascii=False)}
@@ -334,7 +369,8 @@ Settings the owner lets you tune (current values): {json.dumps(now, ensure_ascii
 - script_direction / caption_direction: free-text notes the script and caption writer follow (max 600 chars).
   Keep what's already there that still makes sense; refine it, don't throw it away.
 - thumbnail_badge: the badge on each part's thumbnail, must contain {{n}} (the part number), max 40 chars.
-- narrator_funny 0..1, narrator_intensity 0.5..1.2, narrator_tempo one of {list(TEMPOS)}, recap_part_seconds 60..300.
+- narrator_funny 0..1, narrator_intensity 0.5..1.2, narrator_tempo one of {list(TEMPOS)}, recap_part_seconds 60..300.{act_tune}
+{act_prompt(act)}
 
 Answer with this JSON:
 {{"summary": "<2-3 sentences: how the channel is doing and the one thing that matters most>",
@@ -347,10 +383,10 @@ Answer with this JSON:
   "movies": {{"<movie name exactly as in PER MOVIE>": {{"genres": ["<1-3 genres, e.g. Mystery, Thriller>"],
              "cast": ["<top 3 billed actors>"], "year": <release year or null>}}}},
   "settings": {{<ONLY the settings you want to change, with their new values; {{}} if nothing>}},
-  "settings_why": "<one sentence: which numbers made you change them>"}}
+  "settings_why": "<one sentence: which numbers made you change them>"{act_keys}}}
 Rules: change settings only when at least 5 matched videos back it up, in small steps (funny/intensity by at
 most 0.15, part length by at most 30 s). Watch time and full-watch % matter more than likes. Fill "movies" for
-every movie in PER MOVIE."""
+every movie in PER MOVIE. Never advise dropping a kind of video (mode) that made the channel's biggest videos."""
 
 
 def clean_tuning(proposed, cur):
@@ -368,6 +404,9 @@ def clean_tuning(proposed, cur):
                         continue
                 elif k == "thumbnail_badge":
                     if "{n}" not in v or len(v) > 40:
+                        continue
+                elif k in ("filter", "recap_style"):
+                    if not experiments or experiments.clean_value(k, v) is None:
                         continue
                 elif not v or len(v) > 600:
                     continue
@@ -665,7 +704,8 @@ class Agent:
             m = {}
         for k, v in (("uploaded", []), ("wishlist", {}), ("order", []), ("sends", {}), ("received", []),
                      ("finished", []), ("originals", {}), ("queue_order", []), ("commands_done", {}),
-                     ("styles", {}), ("characters", {}), ("stopped", []), ("insights_at", 0)):
+                     ("styles", {}), ("characters", {}), ("stopped", []), ("insights_at", 0),
+                     ("experiment", {}), ("holds", [])):
             m.setdefault(k, v)
         return m
 
@@ -850,7 +890,7 @@ class Agent:
         except Exception as e:
             log.warning("Music sync failed: %s", e)
         settings_file = self.dir / "settings-for-cutting.json"
-        settings_file.write_text(json.dumps(self.remote_settings), encoding="utf-8")
+        settings_file.write_text(json.dumps(self.cut_settings(path)), encoding="utf-8")
         env = dict(os.environ, SETTINGS_FILE=str(settings_file), STATUS_BACKEND="api",
                    GITHUB_REPOSITORY=f"{self.cfg['github_owner']}/{self.cfg['github_repo']}",
                    GITHUB_TOKEN=self.cfg["github_token"], NTFY_TOPIC=self.cfg.get("ntfy_topic") or "-",
@@ -891,6 +931,21 @@ class Agent:
             self._save_memory()
         self.finish_original(rid, failed=code != 0, error=None if code == 0 else "see laptop/cutting.log",
                              movie=names.clean_name(path.name))
+
+    def cut_settings(self, path):
+        """Settings for cutting this movie: while an experiment tests a narration/thumbnail/... setting, each
+        new movie gets the next arm, so the arms take turns."""
+        out = json.loads(json.dumps(self.remote_settings))
+        if not experiments:
+            return out
+        with self.lock:
+            cur = (self.memory.get("experiment") or {}).get("current")
+            extra = experiments.movie_overrides(cur, names.clean_name(path.name))
+            if extra:
+                self._save_memory()
+        if extra:
+            log.info("Experiment %s: cutting %s with %s", cur["label"], path.name, extra)
+        return experiments.apply_changes(out, extra)
 
     def recover_stuck_cuts(self):
         """A laptop cut the helper lost track of (it restarted mid-cut, e.g. to update itself): once the cutter
@@ -1414,6 +1469,10 @@ class Agent:
                 return "Insights are already being updated"
             threading.Thread(target=self._insights_quietly, kwargs={"force": True}, daemon=True).start()
             return "Reading your TikTok numbers and the trends: Insights update in a few minutes"
+        if kind == "release_hold" and experiments:       # Insights: post a held-back movie again
+            return self.release_hold(str(c.get("movie") or ""), c.get("mode"))
+        if kind == "stop_experiment" and experiments:
+            return self.stop_experiment()
         if kind == "pick":                               # Insights' Download next: Got it / Skip / Undo
             return self.answer_pick(str(c.get("title") or ""), str(c.get("status") or ""))
         if kind == "sync_music":
@@ -1672,8 +1731,20 @@ class Agent:
         status.refresh()
         state = status.load_state() or {}
         received = set(self.memory["received"])
+        exp = (self.memory.get("experiment") or {}).get("current") if experiments else None
+        today = datetime.now(tz).strftime("%Y-%m-%d")
+        if exp and exp.get("level") == "day":             # posting-hours test: today's hours
+            with self.lock:
+                hours = experiments.day_overrides(exp, today)
+                self._save_memory()
+            cfg = experiments.apply_changes({"posting": dict(cfg)}, hours)["posting"]
+        holds = self.memory.get("holds") or []
+        held = {p.get("drive_path") for m, mode, p in posting.all_parts(state)
+                if holds and experiments and experiments.is_held(holds, m.get("name"), mode)}
 
         def available(p):
+            if p.get("drive_path") in held:                # Insights is holding back this flopping movie: skip
+                return False
             if (self.output / p["drive_path"]).exists():
                 return True
             return False if p["drive_path"] in received else None
@@ -1695,6 +1766,11 @@ class Agent:
         log.info("Posting %s [%s] Part %s%s", movie["name"], label, part["n"], " - dry run, nothing posted" if dry_run else "")
         if dry_run:
             return pick
+        if exp and exp.get("level") in ("post", "day"):   # this post's arm (e.g. which hashtags)
+            with self.lock:
+                extra = experiments.post_overrides(exp, experiments.post_key(movie["name"], mode, part["n"]), today)
+                self._save_memory()
+            cfg = experiments.apply_changes({"posting": dict(cfg)}, extra)["posting"]
         ok, _ = self.send_part(movie, mode, part, cfg)
         gap = posting.next_gap_minutes(cfg) if ok else 10      # a failed try waits 10 minutes
         with self.lock:
@@ -2137,8 +2213,10 @@ class Agent:
         tune = (self.remote_settings.get("insights_autotune", True) and matched >= 5
                 and time.time() - last_tune >= 20 * 3600)   # one change a day: time to see if it helped
         self.insights_step("Claude is reading the numbers")
+        act = self.act_context(data) if experiments and self.remote_settings.get("insights_act", True) else None
+        ai = {}
         try:
-            ai = self.ask_ai(INSIGHTS_SYSTEM, insights_prompt(data, self.remote_settings))
+            ai = self.ask_ai(INSIGHTS_SYSTEM, insights_prompt(data, self.remote_settings, act))
             data["picks"] = merge_picks(data["picks"], ai.get("next_movies"), data["library"])
             data["ai"] = {k: ai.get(k) for k in ("summary", "working", "not_working", "actions")}
             data["ai"]["at"] = now_iso()
@@ -2151,29 +2229,131 @@ class Agent:
             changes = clean_tuning(ai.get("settings") or {}, self.remote_settings) if tune else {}
         except Exception as e:
             log.warning("Insights: Claude couldn't look at the numbers: %s", e)
-            changes = {}
+            ai, changes = {}, {}
             data["ai"] = (old.get("ai") or {}) | {"error": str(e)[:200]}
         for name, m in (old.get("movies") or {}).items():          # keep genres Claude found last time
             if name in data["movies"] and not data["movies"][name].get("genres"):
                 for k in ("genres", "cast", "year"):
                     if m.get(k):
                         data["movies"][name][k] = m[k]
+        notes = []
+        if act is None:
+            changes = {k: v for k, v in changes.items() if k not in ("filter", "recap_style")}
+        elif experiments:
+            try:
+                changes, notes = self.act_on_insights(ai, data, act, changes)
+            except Exception as e:
+                log.warning("Insights: couldn't act on the advice: %s", e)
         if changes:
             def apply(text):
                 cur = json.loads(text or "{}")
-                cur.update(changes)
+                if experiments:
+                    experiments.apply_changes(cur, changes)
+                else:
+                    cur.update(changes)
                 return json.dumps(cur, indent=2, ensure_ascii=False) + "\n"
             try:
                 self.gh.save_file("config/settings.json", apply, "main", "Insights: auto-tune " + ", ".join(changes))
-                data["tuning"].append({"at": now_iso(), "changes": changes, "why": (ai.get("settings_why") or "")[:400]})
+                why = " ".join(x for x in [ai.get("settings_why") or ""] + notes if x)
+                data["tuning"].append({"at": now_iso(), "changes": changes, "why": why[:400]})
                 self.refresh_settings(force=True)
             except Exception as e:
                 log.warning("Insights: couldn't save the tuned settings: %s", e)
+        for k in ("experiments", "holds", "protected", "actions_log"):
+            if k not in data and old.get(k) is not None:
+                data[k] = old[k]
         self.insights_step("Saving")
         self.gh.save_file("insights.json", lambda _o: json.dumps(data, indent=1, ensure_ascii=False) + "\n",
                           "status", "insights")
         log.info("Insights updated: %s videos%s", len(videos), f", tuned {', '.join(changes)}" if changes else "")
         return None
+
+    def act_context(self, data):
+        """What Claude needs to act by itself: modes made, protected modes, holds and experiments."""
+        ex = experiments
+        keep = self.remote_settings.get("insights_keep_modes", list(ex.KEEP_MODES))
+        protected = ex.protected_modes(data["videos"], keep)
+        st = self.memory.get("experiment") or {}
+        return {"modes": self.remote_settings.get("modes"), "protected": protected,
+                "mode_stats": ex.mode_stats(data["videos"]),
+                "holds": [{k: h.get(k) for k in ("movie", "mode", "why")} for h in self.memory.get("holds") or []],
+                "experiment": ex.brief(st.get("current")),
+                "history": [ex.brief(h) for h in (st.get("history") or [])[-6:]],
+                "factors": {k: v[1] for k, v in ex.FACTORS.items()}}
+
+    def act_on_insights(self, ai, data, act, changes):
+        """Claude's advice turned into action: the kinds of video made (protected ones always kept), parts held
+        back from posting, and the experiment loop (score, keep the winner, start the next). Returns the
+        settings changes to save and one-line notes for the app."""
+        ex = experiments
+        rs = self.remote_settings
+        with self.lock:
+            state = self.memory.get("experiment") or {}
+        busy = ex.testing_keys(state)
+        changes = {k: v for k, v in changes.items() if k not in busy}     # a setting under test stays put
+        notes = []
+        if ai.get("modes"):
+            modes = ex.guard_modes(ai["modes"], rs.get("modes"), data["videos"], act["protected"])
+            if modes:
+                changes["modes"] = modes
+                notes.append("Making: " + ", ".join(LABELS.get(m, m) for m in modes) + ".")
+        after = ex.apply_changes(json.loads(json.dumps(rs)), changes)
+        state, won, note = ex.step(state, after, data["videos"], ai.get("next_experiment"),
+                                   enabled=bool(rs.get("experiments", True)))
+        changes.update(won)
+        if note:
+            notes.append(note + ".")
+            self.notify("🧪 Experiment finished" if "stopped" not in note else "🧪 Experiment stopped", note,
+                        event=False, tags=["test_tube"])
+        release = {str(x) for x in (ai.get("release") or [])}
+        with self.lock:
+            held = [h for h in self.memory.get("holds") or [] if h.get("movie") not in release]
+            holds = ex.clean_holds(ai.get("hold"), held, data["movies"], act["protected"])
+            for h in holds:
+                if h not in held:
+                    notes.append(f"Holding back {h['movie']} ({LABELS.get(h['mode'], h['mode'])}) for "
+                                 f"{ex.HOLD_DAYS} days: {h['why']}")
+            self.memory["holds"] = holds
+            self.memory["experiment"] = state
+            self._save_memory()
+        data["experiments"] = ex.public(state)
+        data["holds"] = holds
+        data["protected"] = sorted(act["protected"])
+        if notes:
+            data["actions_log"] = (data.get("actions_log") or [])[-30:] + [{"at": now_iso(), "notes": notes}]
+        return changes, notes
+
+    def release_hold(self, movie, mode=None):
+        """The app's Release on a held-back movie: its parts post again."""
+        with self.lock:
+            before = len(self.memory.get("holds") or [])
+            self.memory["holds"] = [h for h in self.memory.get("holds") or []
+                                    if not (h.get("movie") == movie and (not mode or h.get("mode") == mode))]
+            hit = len(self.memory["holds"]) < before
+            self._save_memory()
+        self._mirror_act()
+        return f"{movie} posts again" if hit else None
+
+    def stop_experiment(self):
+        """The app's Stop on the running experiment: nothing changes, the next one starts on the next look."""
+        with self.lock:
+            state, label = experiments.stop(self.memory.get("experiment"))
+            self.memory["experiment"] = state
+            self._save_memory()
+        self._mirror_act()
+        return f"Stopped the {label} experiment" if label else "No experiment was running"
+
+    def _mirror_act(self):
+        """Shows holds and experiments in insights.json straight away (not only at the next look)."""
+        def edit(text):
+            data = json.loads(text or "{}")
+            data["holds"] = self.memory.get("holds") or []
+            data["experiments"] = experiments.public(self.memory.get("experiment"))
+            return json.dumps(data, indent=1, ensure_ascii=False) + "\n"
+        try:
+            self.gh.save_file("insights.json", edit, "status", "insights: holds/experiments")
+        except Exception as e:
+            log.warning("Insights: couldn't update the app: %s", e)
 
     def answer_pick(self, title, status_):
         """The owner's answer to a Download next title: "have" (got it), "skipped" (not this one), "new" (undo)."""
