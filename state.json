@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:19:15+13:00",
+ "updated": "2026-10-29T14:19:17+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4832,6 +4832,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T14:19:17+13:00",
+   "type": "posted",
+   "title": "📤 Posted to TikTok: Elysium (2013): Part 1",
+   "message": "[Movie recap] Posted publicly. https://www.tiktok.com/@starctacher/video/7696015184623570196\n\n📝 Caption:\nA boy who dreams of a perfect city in the sky 🚀 Years later, a small mistake at a checkpoint changes everything.\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movieclips #fyp"
+  },
+  {
    "at": "2026-10-29T14:09:15+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 7",
@@ -6024,12 +6030,6 @@
    "type": "part_ready",
    "title": "[Movie recap] John Wick Chapter 2 (2017): Part 3 of 8 ready",
    "message": "Part 3: Grenade Launcher Says Hello (15 narrated beats, about 69s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T17:35:44+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 2 of 8 ready",
-   "message": "Part 2: Retirement Lasts Two Minutes (14 narrated beats, about 73s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
   }
  ]
 }
