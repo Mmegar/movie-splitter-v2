@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:26:55+13:00",
+ "updated": "2026-10-29T14:26:57+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4832,6 +4832,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T14:26:57+13:00",
+   "type": "posted",
+   "title": "📤 Posted to TikTok: Elysium (2013): Part 3",
+   "message": "[Movie recap] Posted publicly. https://www.tiktok.com/@starctacher/video/7696015184623570196\n\n📝 Caption:\nA friend has a plan that sounds like a disaster waiting to happen 😬 Then one shift at the factory goes horribly wrong.\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Crypto\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movieclips #fyp"
+  },
+  {
    "at": "2026-10-29T14:23:44+13:00",
    "type": "posted",
    "title": "📤 Posted to TikTok: Elysium (2013): Part 2",
@@ -6024,12 +6030,6 @@
    "type": "started",
    "title": "Started: The Fantastic 4 First Steps (2025)",
    "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/The Fantastic 4 First Steps (2025)'."
-  },
-  {
-   "at": "2026-10-22T17:46:38+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 4 of 8 ready",
-   "message": "Part 4: Twelve Seats, One Hit (18 narrated beats, about 85s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
   }
  ]
 }
