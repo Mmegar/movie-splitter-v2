@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:51:50+13:00",
+ "updated": "2026-10-29T14:52:36+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4828,8 +4828,8 @@
  ],
  "posting": {
   "enabled": true,
-  "next_at": "2026-10-29T14:49:29+13:00",
-  "posted_today": 6
+  "next_at": "2026-10-29T14:52:36+13:00",
+  "posted_today": 7
  },
  "events": [
   {
