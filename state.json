@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T13:25:32+13:00",
+ "updated": "2026-10-29T13:25:34+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4831,6 +4831,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T13:25:34+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 6",
+   "message": "[Movie recap] TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done s\nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T13:10:01+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 6",
@@ -6023,12 +6029,6 @@
    "type": "planned",
    "title": "[Movie recap] John Wick Chapter 2 (2017): 8 parts planned",
    "message": "John Wick Chapter 2 (2017)\nMode: Movie recap\n\nPart 1: Stolen Car, Very Bad Week (13 narrated beats, about 64s of voice)\nPart 2: Retirement Lasts Two Minutes (14 narrated beats, about 73s of voice)\nPart 3: Grenade Launcher Says Hello (15 narrated beats, about 69s of voice)\nPart 4: Twelve Seats, One Hit (18 narrated beats, about 85s of voice)\nPart 5: The Dressing Room Confession (11 narrated beats, about 53s of voice)\nPart 6: Catacombs, Double Cross, Courtesy (17 narrated beats, about 75s of voice)\nPart 7: Seven Million Dollar Bounty (15 narrated beats, about 64s of voice)\nPart 8: Excommunicado in One Hour (23 narrated beats, about 102s of voice)\n"
-  },
-  {
-   "at": "2026-10-22T17:14:00+13:00",
-   "type": "started",
-   "title": "Started: John Wick Chapter 2 (2017)",
-   "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/John Wick Chapter 2 (2017)'."
   }
  ]
 }
