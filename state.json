@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:47:47+13:00",
+ "updated": "2026-10-29T14:51:25+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -122,11 +122,11 @@
        "caption": "A hunt across Los Angeles and a family hiding a wounded man 😳 Then a daring flight to the one place he can't reach.\nPart 6 🎬 · Should I post Part 7? 👇\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Spy Glass\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "elysium-2013/recap-006.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-29T14:47:47+13:00",
-        "url": null,
+        "status": "posted",
+        "at": "2026-10-29T14:51:25+13:00",
+        "url": "https://www.tiktok.com/@starctacher/video/7696015184623570196",
         "error": null,
-        "attempts": 3
+        "attempts": 4
        },
        "cover": "elysium-2013/recap-06-cover.bin"
       },
