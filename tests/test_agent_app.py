@@ -228,6 +228,9 @@ class SelfUpdateTest(base.AgentTestBase):
 class PartActionTest(base.AgentTestBase):
     def setUp(self):
         super().setUp()
+        on = mock.patch.object(agent, "TIKTOK_POSTING", True)   # covers the poster itself; it's switched off for real
+        on.start()
+        self.addCleanup(on.stop)
         st = status.empty_state()
         part = {"n": 3, "drive_path": "Ready to post/M/Best stretch/M - Part 03.mp4", "caption": "lol",
                 "post": {"status": "none", "at": None, "url": None, "error": None}}
@@ -352,6 +355,9 @@ class ResumeTest(base.AgentTestBase):
 class PostAllTest(base.AgentTestBase):
     def setUp(self):
         super().setUp()
+        on = mock.patch.object(agent, "TIKTOK_POSTING", True)   # covers the poster itself; it's switched off for real
+        on.start()
+        self.addCleanup(on.stop)
         st = status.empty_state()
         parts = []
         for n in (1, 2, 3, 4):
@@ -448,6 +454,42 @@ class CancelPostTest(PostAllTest):
             self.a.check_commands()
         self.assertEqual(self.sent, ["M - Part 04.mp4"])
         self.assertEqual(self.fake.json_file("laptop.json")["commands"]["all2"]["status"], "done")
+
+
+class PostingOffTest(base.AgentTestBase):
+    """The owner posts by hand: nothing reaches TikTok, whatever settings.json or an old command says."""
+    def setUp(self):
+        super().setUp()
+        st = status.empty_state()
+        part = {"n": 1, "drive_path": "Ready to post/M/Best stretch/M - Part 01.mp4", "caption": "c1",
+                "post": {"status": "none", "at": None, "url": None, "error": None}}
+        (self.out / part["drive_path"]).parent.mkdir(parents=True)
+        (self.out / part["drive_path"]).write_bytes(b"p1")
+        st["movies"] = [{"id": "m", "name": "M", "status": "done", "started": "2026-10-10T10:00:00+13:00",
+                         "modes": {"stretch": {"label": "Best stretch", "planned": 1, "parts": [part]}}}]
+        self.fake.put_file("state.json", json.dumps(st), "status")
+        off = mock.patch.object(agent, "TIKTOK_POSTING", False)
+        off.start()
+        self.addCleanup(off.stop)
+        self.fake.put_file("config/settings.json", json.dumps({"posting": {"enabled": True, "when": "as_ready"}}))
+
+    def test_nothing_is_sent(self):
+        a = self.make_agent(composio_api_key="k", composio_user_id="u")
+        a.memory["post_jobs"] = {"old": {"movie_id": "m", "mode": "stretch", "left": [1], "total": 1, "next_try": 0, "fails": 0}}
+        a.memory["next_post_at"] = 1
+        commands(self.fake, {"id": "p1", "type": "post_part", "movie_id": "m", "mode": "stretch", "n": 1},
+                 {"id": "all1", "type": "post_all", "movie_id": "m", "mode": "stretch"})
+        boom = mock.Mock(side_effect=AssertionError("must not post"))
+        with mock.patch.object(agent.posting, "post_video", boom), mock.patch.object(agent.posting, "browser_post", boom):
+            a.refresh_settings(force=True)
+            self.assertFalse(a.remote_settings["posting"]["enabled"])
+            self.assertIsNone(a.post_if_due(force=True, dry_run=False))
+            a.check_commands()
+        self.assertEqual(a.cmd_status["p1"]["status"], "failed")
+        self.assertEqual(a.cmd_status["all1"]["status"], "failed")
+        self.assertEqual(a.cmd_status["old"]["status"], "failed")
+        self.assertFalse(a.memory.get("post_jobs"))
+        self.assertNotIn("next_post_at", a.memory)
 
 
 class StyleTest(base.AgentTestBase):

@@ -494,6 +494,9 @@ class SubtitleTest(TempDirTest):
 class PostingTest(AgentTestBase):
     def setUp(self):
         super().setUp()
+        on = mock.patch.object(agent, "TIKTOK_POSTING", True)   # covers the poster itself; it's switched off for real
+        on.start()
+        self.addCleanup(on.stop)
         st = status.empty_state()
         parts = [{"n": n, "drive_path": f"Ready to post/M/Best stretch/M - Part {n:02}.mp4", "caption": f"c{n}",
                   "post": {"status": "none", "at": None, "url": None, "error": None}} for n in (1, 2)]
