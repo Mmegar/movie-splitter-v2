@@ -379,7 +379,6 @@ export async function openPartActions(ctx, movie, mode, part) {
     className: 'sheet--action',
     body: `<div class="action-card">
         <div class="action-msg"><strong>${esc(movie.name)} · ${esc(label)}</strong></div>
-        <button class="action-btn" data-v="post">Send to TikTok now</button>
         <button class="action-btn" data-v="save">Save to phone</button>
         ${posted ? '' : '<button class="action-btn" data-v="mark">Mark as posted</button>'}
         <button class="action-btn" data-v="path">Copy file path</button>
@@ -390,20 +389,10 @@ export async function openPartActions(ctx, movie, mode, part) {
   if (!v) return;
   if (v === 'save') { openSavePart(ctx, movie, mode, part); return; }
   if (v === 'path') { const ok = await copyText(part.drive_path || ''); toast(ok ? 'File path copied' : "Couldn't copy", { kind: ok ? 'ok' : 'err' }); return; }
-  const posting = ((ctx.store.state.data.settings || {}).json || {}).posting || {};
-  const direct = posting.method === 'direct';
-  if (v === 'post') {
-    const ok = await confirmSheet({
-      title: `Send ${label} to TikTok now?`,
-      message: direct ? 'It goes straight onto your profile (as set in Settings).' : 'It lands in your TikTok inbox: tap the TikTok notification, paste the caption and post. The caption is sent to your phone too.',
-      confirm: 'Send now',
-    });
-    if (!ok) return;
-  }
   try {
-    await ctx.store.sendCommand({ type: v === 'post' ? 'post_part' : 'mark_posted', movie_id: movie.id, mode, n: part.n });
+    await ctx.store.sendCommand({ type: 'mark_posted', movie_id: movie.id, mode, n: part.n });
     haptic();
-    toast(v === 'post' ? 'Sent to the laptop. It goes to TikTok within a minute.' : 'Marked as posted');
+    toast('Marked as posted');
   } catch (e) { toast(e.message || "Couldn't send that.", { kind: 'err', ms: 4500 }); }
 }
 

@@ -1,6 +1,6 @@
 """
 Movie Splitter laptop helper (Windows and Mac). Needs only Python 3.9+ (nothing to pip install;
-the `composio` package is only needed if you switch on automatic TikTok posting).
+nothing else is needed).
 
 What it does, all by itself, while your laptop is on:
   1. SEND: watches your "To upload" folder. When a movie has stopped growing for 60 seconds
@@ -13,9 +13,8 @@ What it does, all by itself, while your laptop is on:
      <output folder>/Ready to post/<movie>/<mode>/, with "_parts list.txt" and "captions.txt".
      Then the copies on GitHub are deleted and the original movie goes to <output folder>/Done
      (setting "original_after": "move", "keep" or "delete").
-  4. POST (optional): posts the next part to TikTok in its own logged-in Chrome window (TikTok Studio),
-     in series order, one every 15-30 minutes (random gap) during your posting hours, with the part's
-     thumbnail as the cover and its caption. Log in once with:  python agent.py --tiktok-login
+  4. POST: switched off (TIKTOK_POSTING). You post every part yourself: save it to your phone from the app,
+     with its caption and thumbnail. The TikTok login (python agent.py --tiktok-login) is only for Insights.
   4b. INSIGHTS: every few hours it reads your TikTok views and watch time, asks Claude what's working
      and (if Auto-tune is on) adjusts the narration, captions and thumbnails by itself (insights.json).
   4c. MUSIC: keeps your songs in step between <output folder>/Music/<hype|story|...> and GitHub (a
@@ -210,6 +209,11 @@ def file_info(p):
 
 
 # files the helper keeps up to date from GitHub by itself (path in the repo -> path here)
+# The owner posts every part to TikTok by hand (2026-10-29, after a shadowban). Nothing is ever sent to
+# TikTok from here, whatever settings.json, an old app command or a saved "send all" says.
+TIKTOK_POSTING = False
+POSTING_OFF = "Posting to TikTok from the laptop is off: save the part to your phone and post it yourself"
+
 CODE_FILES = ["laptop/agent.py", "laptop/archive.py", "ghapi.py", "names.py", "posting.py", "previews.py",
               "settings.py", "status.py", "transport.py", "mp4fix.py", "story.py", "filmcraft.py", "fc_editor.py",
               "process.py", "tracking.py",   # (process + tracking: for cutting on the laptop)
@@ -1679,6 +1683,8 @@ class Agent:
                 return "Marked as posted"
             if kind == "share_part":
                 return "Ready to save on your phone: " + self.share_part(movie, mode, part, f)
+            if not TIKTOK_POSTING:
+                raise RuntimeError(POSTING_OFF)
             if not self.tiktok_ready():
                 raise RuntimeError("TikTok isn't logged in on the laptop yet (Settings > TikTok > Log in on the laptop)")
             ok, error = self.send_part(movie, mode, part, manual=True)
@@ -1858,6 +1864,8 @@ class Agent:
             text, _ = self.gh.read_file("config/settings.json")
             was_paused = bool(self.remote_settings.get("paused"))
             self.remote_settings = settings.load(text=text or "{}", env={})
+            if not TIKTOK_POSTING:
+                self.remote_settings["posting"]["enabled"] = False
             self.last["settings"] = time.time()
             if was_paused and not self.remote_settings.get("paused"):
                 log.info("Pause switched off: carrying on")
@@ -1866,6 +1874,9 @@ class Agent:
             log.warning("Couldn't read settings from GitHub: %s", e)
 
     def post_if_due(self, force=False, dry_run=None):
+        if not TIKTOK_POSTING:
+            self.posting_off()
+            return None
         dry_run = self.cfg["posting_dry_run"] if dry_run is None else dry_run
         self.refresh_settings(force=True)
         cfg = self.remote_settings["posting"]
@@ -1909,6 +1920,21 @@ class Agent:
         status.flush()
         return pick
 
+    def posting_off(self):
+        """Clears anything left from auto-posting (scheduled next post, queued 'send all' jobs) once, and tells the
+        app posting is off."""
+        if self.memory.get("posting_off_done"):
+            return
+        for cid in list(self.memory.get("post_jobs") or {}):
+            self.memory["post_jobs"].pop(cid, None)
+            self.command_over(cid, False, "Cancelled: you post to TikTok yourself now")
+        with self.lock:
+            self.memory.pop("next_post_at", None)
+            self.memory["posting_off_done"] = True
+            self._save_memory()
+        status.set_posting(False, None, 0)
+        status.flush()
+
     def posted_recently(self, minutes=5):
         """'As soon as ready' sends at most one part every 5 minutes, so TikTok isn't flooded."""
         return time.time() - self.memory.get("last_post", 0) < minutes * 60
@@ -1916,6 +1942,8 @@ class Agent:
     def send_part(self, movie, mode, part, cfg=None, manual=False):
         """Sends one part to TikTok (drafts by default, or straight onto the profile with method=direct).
         Records the result in state.json and tells the phone. Returns (ok, error)."""
+        if not TIKTOK_POSTING:
+            return False, POSTING_OFF
         cfg = cfg or self.remote_settings["posting"]
         self.state_ready()
         privacy = posting.PRIVACY.get(str(cfg.get("privacy", "self_only")).lower(), "SELF_ONLY")
@@ -1969,6 +1997,8 @@ class Agent:
     def post_all(self, c):
         """'Send all parts to TikTok': queues every part of the movie (one mode) that hasn't been sent, in
         order. run_post_jobs() then sends them one by one until all of them are in TikTok."""
+        if not TIKTOK_POSTING:
+            raise RuntimeError(POSTING_OFF)
         if not self.tiktok_ready():
             raise RuntimeError("TikTok isn't logged in on the laptop yet (Settings > TikTok > Log in on the laptop)")
         self.state_ready()
@@ -2020,6 +2050,9 @@ class Agent:
         """Sends queued 'send all' parts strictly in order. When TikTok won't take more drafts for now, it
         waits and tries the same part again every 10 minutes (room frees up as drafts get posted), so in the
         end every part is in TikTok. Parts cut after the tap go too. Survives restarts (agent_memory.json)."""
+        if not TIKTOK_POSTING:
+            self.posting_off()
+            return
         jobs = self.memory.get("post_jobs") or {}
         for cid, job in list(jobs.items()):
             for _round in range(50):
@@ -2842,8 +2875,10 @@ def main(argv=None):
         return 0
     if args.tiktok_login:
         ok, error = posting.browser_login(cfg_path.parent / "tiktok-browser")
-        print("Logged in! Parts will now post by themselves." if ok else f"Didn't work: {error}")
+        print("Logged in! Insights can now read your TikTok numbers." if ok else f"Didn't work: {error}")
         return 0 if ok else 1
+    if (args.test_post or args.post_now) and not TIKTOK_POSTING:
+        sys.exit(POSTING_OFF)
     if args.test_post:
         cfg = dict(DEFAULTS, **load_config(cfg_path))
         creds = {"api_key": cfg["composio_api_key"], "user_id": cfg["composio_user_id"],

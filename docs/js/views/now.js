@@ -86,7 +86,6 @@ function glanceRows(st) {
   const s = st.data.state || {};
   const laptop = st.data.laptop;
   const settings = (st.data.settings && st.data.settings.json) || {};
-  const posting = s.posting || {};
   const lst = laptopStatus(laptop);
   const rows = [];
 
@@ -108,35 +107,12 @@ function glanceRows(st) {
       : laptop && laptop.uploading && lst.online ? `<span class="row-val">${laptop.uploading.percent}%</span>` : `<span class="row-val">${lst.online ? 'Online' : 'Offline'}</span>`}
   </a>`);
 
-  // Posting
-  const asReady = !!(settings.posting && settings.posting.enabled && settings.posting.when === 'as_ready');
-  rows.push(`<label class="row row--ctl ${asReady ? 'is-on-row' : ''}" for="asready-now">
-    <span class="row-ic ${asReady ? 'tone-accent' : 'tone-muted'}">${icon('send')}</span>
-    <span class="row-main"><span class="row-title">Post each part as soon as it's ready</span>
-      <span class="row-sub">${asReady ? 'On: every new part goes to TikTok when it reaches the laptop (one every 5 min, up to 15 a day).' : 'Off: parts go at your post times.'}</span></span>
-    <input type="checkbox" class="switch" role="switch" id="asready-now" data-asready ${asReady ? 'checked' : ''}>
-  </label>`);
-  const enabled = posting.enabled ?? (settings.posting && settings.posting.enabled);
-  const perDay = settings.posting ? settings.posting.per_day : null;
-  if (enabled) {
-    const nextAt = posting.next_at ? Date.parse(posting.next_at) : null;
-    rows.push(`<a class="row" href="#/settings">
-      <span class="row-ic tone-info">${icon('send')}</span>
-      <span class="row-main"><span class="row-title">Next post</span><span class="row-sub">${asReady ? 'As soon as the next part is ready' : nextAt ? `${relTime(nextAt)}${settings.posting && settings.posting.method === 'direct' && settings.posting.privacy === 'self_only' ? ', posted privately' : ''}` : 'Nothing scheduled'}</span></span>
-      <span class="row-val">${!asReady && nextAt ? clock(nextAt) : '—'}</span>
-    </a>`);
-  } else {
-    rows.push(`<a class="row" href="#/settings">
-      <span class="row-ic tone-muted">${icon('send')}</span>
-      <span class="row-main"><span class="row-title">Auto-posting is off</span><span class="row-sub">Copy captions and post parts yourself, or turn it on in Settings.</span></span>
-      ${icon('chevR', 'row-chev')}
-    </a>`);
-  }
-  rows.push(`<div class="row">
-    <span class="row-ic tone-ok">${icon('check')}</span>
-    <span class="row-main"><span class="row-title">Sent to TikTok today</span>${enabled && perDay ? `<span class="row-sub">${perDay} a day at your post times, plus any you send yourself</span>` : ''}</span>
-    <span class="row-val">${posting.posted_today ?? 0}</span>
-  </div>`);
+  // Posting: always by hand (the laptop never posts)
+  rows.push(`<a class="row" href="#/movies">
+    <span class="row-ic tone-muted">${icon('send')}</span>
+    <span class="row-main"><span class="row-title">You post to TikTok yourself</span><span class="row-sub">Save parts to your phone and copy their captions from Movies.</span></span>
+    ${icon('chevR', 'row-chev')}
+  </a>`);
   const q = (s.queue || []).length;
   rows.push(`<a class="row" href="#/queue">
     <span class="row-ic tone-accent">${icon('inbox')}</span>
@@ -193,15 +169,6 @@ export function createNowView(ctx) {
 
   content.addEventListener('change', async (e) => {
     if (e.target.matches('[data-pause]')) { togglePause(ctx, e.target); return; }
-    if (e.target.matches('[data-asready]')) {
-      const el = e.target, on = el.checked;
-      haptic(); el.disabled = true;
-      try {
-        await ctx.store.setAsReady(on);
-        toast(on ? 'On: each new part goes to TikTok as soon as it\'s ready' : 'Back to your post times', { kind: on ? 'ok' : 'info' });
-      } catch (err) { el.checked = !on; toast(err.message || "Couldn't save that.", { kind: 'err', ms: 4500 }); }
-      finally { el.disabled = false; }
-    }
   });
   content.addEventListener('click', async (e) => {
     if (e.target.closest('[data-retry]')) { ctx.store.refresh(); return; }

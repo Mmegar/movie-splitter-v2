@@ -90,7 +90,6 @@ export function createMoviesView(ctx) {
       ${lastSt ? partPendingHtml(lastSt, movie, mode, p) : ''}
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
-        ${post.status === 'failed' && !(lastSt && partPendingHtml(lastSt, movie, mode, p)) ? `<button class="btn btn--small btn--accent" data-retrypost="${p.n}">${icon('refresh')}Try again</button>` : ''}
         <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>
         <button class="btn btn--small btn--quiet" data-clip="${p.n}">${icon('scissors')}Clip</button>
         ${p.cover ? `<button class="btn btn--small btn--quiet" data-cover="${p.n}">${icon('download')}Thumbnail</button>` : ''}
@@ -135,7 +134,7 @@ export function createMoviesView(ctx) {
       <div class="section-head"><h3>${md.planned && nParts < md.planned ? `${nParts} of ${md.planned} parts` : `${nParts} part${nParts === 1 ? '' : 's'}`}</h3>
         ${(() => { if (!nParts) return '';
           const left = md.parts.filter((p) => !(p.post && ['posted', 'inbox'].includes(p.post.status))).length;
-          return left ? `<button class="btn btn--small btn--accent" data-sendall>${icon('send')}Send all ${left} to TikTok</button>` : '<span class="muted">All sent</span>'; })()}</div>
+          return left ? '' : '<span class="muted">All posted</span>'; })()}</div>
       ${(md.parts || []).length ? `<button class="btn btn--quiet btn--block" data-saveall>${icon('inbox')}Save all ${(md.parts || []).length} to phone</button>` : ''}
       ${(md.parts || []).length ? `<ol class="parts">${md.parts.map((p) => partRow(p, m, detail.mode)).join('')}${live ? `<li class="part part--pending"><span class="spinner"></span>Making part ${run.part} of ${run.parts_total}…</li>` : ''}</ol>`
         : empty({ icon: 'scissors', title: live ? 'Making the first part' : m.status === 'failed' ? 'No parts were made' : 'No parts yet', text: live ? 'Parts appear here as soon as each one is made; they arrive on your laptop shortly after.' : m.status === 'processing' ? (runMode ? `This mode starts after ${esc(m.modes[runMode].label || MODE_LABELS[runMode])}.` : 'This mode starts after the current one.') : '' })}

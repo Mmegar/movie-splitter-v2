@@ -216,43 +216,16 @@ function buildForm(d) {
 
 
     group('TikTok', [
-      swRow(d, 'posting.enabled', 'Post parts to TikTok automatically', 'The laptop posts them itself, in series order: Part 1, Part 2… of the oldest movie first'),
-      `<div class="row row--ctl"><span class="row-main"><span class="row-title">TikTok login on the laptop</span><span class="row-sub">Opens TikTok's login page on the laptop's screen. Log in once; the laptop remembers it.</span></span><button type="button" class="btn btn--small btn--quiet" data-tiktok-login>Log in</button></div>`,
+      `<div class="row"><span class="row-main"><span class="row-title">You post to TikTok yourself</span><span class="row-sub">The laptop never posts anything. Save each part to your phone, copy its caption and post it in the TikTok app.</span></span></div>`,
+      `<div class="row row--ctl"><span class="row-main"><span class="row-title">TikTok login on the laptop</span><span class="row-sub">Only so Insights can read your views. Opens TikTok's login page on the laptop's screen; it never posts.</span></span><button type="button" class="btn btn--small btn--quiet" data-tiktok-login>Log in</button></div>`,
       `<label class="row row--stack"><span class="row-title">Your TikTok username</span>
         <input class="input" data-k="posting.username" data-t="str" value="${esc(p.username || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="@yourname">
         <span class="row-sub">Used to read your views and watch time for Insights.</span></label>`,
-      ...(p.enabled ? [
-        segRow({ ...d, posting: { ...p, method: p.method || 'browser' } }, 'posting.method', 'How to post', [['browser', 'Browser'], ['draft', 'Drafts (old)'], ['direct', 'API (old)']],
-          (p.method || 'browser') === 'browser'
-            ? 'The laptop opens TikTok Studio in its own Chrome window, uploads the part, sets the thumbnail as the cover, pastes the caption and posts it publicly.'
-            : '<span class="note--warn">The old Composio API: drafts need you to tap Post, and direct posts stay private. Pick Browser instead.</span>'),
-        segRow({ ...d, posting: { ...p, when: p.when || 'gap' } }, 'posting.when', 'When to post', [['gap', 'Random gap'], ['times', 'Set times'], ['as_ready', 'ASAP']],
-          (p.when || 'gap') === 'gap' ? 'One part, then a random wait inside the gap below before the next one, only during your posting hours. A random gap looks human and keeps the account safe from shadowbans.'
-            : p.when === 'as_ready' ? 'Each new part goes when it reaches the laptop, one every 5 minutes. Fast, but riskier for shadowbans.' : 'The next part goes at each time below.'),
-        (p.when || 'gap') === 'gap' ? stepRow(d, 'posting.gap_min', 'Shortest gap (minutes)', { def: 15, min: 5, max: 120, step: 5 }) : '',
-        (p.when || 'gap') === 'gap' ? stepRow(d, 'posting.gap_max', 'Longest gap (minutes)', { def: 30, min: 10, max: 240, step: 5 }) : '',
-        (p.when || 'gap') === 'gap' ? `<div class="row row--stack"><div class="row-head"><span class="row-title">Posting hours</span></div>
-          <div class="input-row"><label class="field"><span>From</span><input class="input" type="time" data-k="posting.active_from" data-t="str" value="${esc(p.active_from || '09:00')}"></label>
-          <label class="field"><span>Until</span><input class="input" type="time" data-k="posting.active_to" data-t="str" value="${esc(p.active_to || '23:30')}"></label></div>
-          <p class="note">Nothing posts at night. Times are in the time zone below.</p></div>` : '',
-        `<div class="row row--stack"><div class="row-head"><span class="row-title">Modes to post</span></div>
-          <div class="chips-pick" role="group" aria-label="Modes to post">${[...ALL_MODES.filter((m) => (d.modes || []).includes(m) || (p.modes || []).includes(m)), 'clips'].map((m) => {
-            const onm = (p.modes || []).includes(m);
-            return `<button type="button" data-pmode="${m}" aria-pressed="${onm}">${onm ? icon('check') : ''}${esc(MODE_LABELS[m])}</button>`;
-          }).join('')}</div></div>`,
-        p.when === 'as_ready' ? '' : stepRow(d, 'posting.per_day', 'Most posts per day', { min: 1, max: 20, step: 1 }),
-        p.when !== 'times' ? '' : `<div class="row row--stack"><div class="row-head"><span class="row-title">Post times</span><span class="row-val">${(p.times || []).length} a day</span></div>
-          <div class="times">${(p.times || []).map((t, i) => `<span class="time-chip"><input type="time" value="${esc(t)}" data-time="${i}" aria-label="Post time ${i + 1}"><button type="button" data-time-del="${i}" aria-label="Remove ${esc(t)}">${icon('x')}</button></span>`).join('')}
-            <button type="button" class="time-add" data-time-add>${icon('plus')}Add time</button></div>
-        </div>`,
-        `<label class="row row--stack"><span class="row-title">Time zone</span>
+      `<label class="row row--stack"><span class="row-title">Time zone</span>
           <select class="input" data-k="posting.timezone" data-t="str">${tz.map((z) => `<option ${z === p.timezone ? 'selected' : ''}>${esc(z)}</option>`).join('')}</select></label>`,
-        `<label class="row row--stack"><span class="row-title">Extra hashtags</span>
-          <input class="input" data-k="posting.hashtags" data-t="str" value="${esc(p.hashtags || '')}" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="#movie #fyp"></label>`,
-      ] : []),
       swRow({ ai_queue: true, ...d }, 'ai_queue', 'Let Claude choose what to cut next', 'Claude orders the movies in To edit by what\'s trending, the season and your channel\'s numbers. Movies you move yourself in Queue still go first'),
       swRow({ insights_autotune: true, ...d }, 'insights_autotune', 'Let Insights tune things by itself', 'Every few hours Claude reads your views and watch time, then adjusts script and caption notes, the thumbnail badge, Funny dial and part length in small steps'),
-    ], p.enabled ? 'Captions never include a music credit line.' : 'When off, parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
+    ], 'Parts wait in Ready to post. Copy each caption from Movies and post them yourself.'),
 
     !old ? '' : group('Part lengths', [
       stepRow(d, 'stretch_minutes', 'Best stretch length', { min: 2, max: 40, step: 1, sub: 'How much of the movie Best stretch covers' }),
