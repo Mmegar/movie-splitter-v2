@@ -38,7 +38,7 @@
   "delete_originals": "permanent",
   "cleanup_parts_after_days": 3,
   "posting": {
-    "enabled": true,
+    "enabled": false,
     "method": "browser",
     "privacy": "self_only",
     "modes": [
