@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:09:13+13:00",
+ "updated": "2026-10-29T14:09:15+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4832,6 +4832,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T14:09:15+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 7",
+   "message": "[Movie recap] TargetClosedError: Locator.get_attribute: Target page, context or browser has been closed\nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T13:56:34+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 7",
@@ -6024,12 +6030,6 @@
    "type": "part_ready",
    "title": "[Movie recap] John Wick Chapter 2 (2017): Part 2 of 8 ready",
    "message": "Part 2: Retirement Lasts Two Minutes (14 narrated beats, about 73s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T17:29:54+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] John Wick Chapter 2 (2017): Part 1 of 8 ready",
-   "message": "Part 1: Stolen Car, Very Bad Week (13 narrated beats, about 64s of voice)\nIn Ready to post/John Wick Chapter 2 (2017)/Movie recap."
   }
  ]
 }
