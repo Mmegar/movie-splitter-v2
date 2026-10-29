@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:52:38+13:00",
+ "updated": "2026-10-29T15:01:13+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -139,11 +139,11 @@
        "caption": "This deserves way more attention\nPart 7 🎬 · That's the last part. Follow for more 🍿\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Darkling\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "elysium-2013/recap-007.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-29T14:52:38+13:00",
-        "url": null,
+        "status": "posted",
+        "at": "2026-10-29T15:01:13+13:00",
+        "url": "https://www.tiktok.com/@starctacher/video/7696015184623570196",
         "error": null,
-        "attempts": 3
+        "attempts": 4
        },
        "cover": "elysium-2013/recap-07-cover.bin"
       }
