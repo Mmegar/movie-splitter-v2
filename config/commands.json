@@ -1,43 +1,6 @@
 {
  "commands": [
   {
-   "id": "mvqznqzpcwfx",
-   "at": "2026-10-27T17:57:57.736Z",
-   "type": "to_queue",
-   "file": "Blink.Twice.2024.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv",
-   "from": "library",
-   "first": true
-  },
-  {
-   "id": "mvqznu3t5v6a",
-   "at": "2026-10-27T17:58:01.769Z",
-   "type": "to_queue",
-   "file": "Elysium.2013.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv",
-   "from": "library",
-   "first": false
-  },
-  {
-   "id": "mvqzxu2ukvr6",
-   "at": "2026-10-27T18:05:48.294Z",
-   "type": "cut_now"
-  },
-  {
-   "id": "mvr1ef1hhod7",
-   "at": "2026-10-27T18:46:41.573Z",
-   "type": "share_part",
-   "movie_id": "blink-twice-2024",
-   "mode": "recap",
-   "n": 2
-  },
-  {
-   "id": "mvr9t1it51i9",
-   "at": "2026-10-27T22:42:00.822Z",
-   "type": "share_part",
-   "movie_id": "blink-twice-2024",
-   "mode": "recap",
-   "n": 6
-  },
-  {
    "id": "mvryutb65bpu",
    "at": "2026-10-28T10:23:13.890Z",
    "type": "insights_now"
@@ -63,6 +26,13 @@
    "type": "pick",
    "title": "The Sixth Sense",
    "status": "skipped"
+  },
+  {
+   "id": "mvsuigtt55h4",
+   "at": "2026-10-29T01:09:25.553Z",
+   "type": "post_all",
+   "movie_id": "elysium-2013",
+   "mode": "recap"
   }
  ]
 }
