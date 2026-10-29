@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:31:41+13:00",
+ "updated": "2026-10-29T14:31:46+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -105,11 +105,11 @@
        "caption": "A surgery, a suit, and a shuttle full of nerves 🚀 The heist begins, and the plan starts to fall apart.\nPart 5 🎬 · Part 6 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Spy Glass\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "elysium-2013/recap-005.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-29T14:31:41+13:00",
+        "status": "failed",
+        "at": "2026-10-29T14:31:46+13:00",
         "url": null,
-        "error": null,
-        "attempts": 3
+        "error": "Error: Page.goto: net::ERR_ABORTED at https://www.tiktok.com/tiktokstudio/upload?from=webapp",
+        "attempts": 4
        },
        "cover": "elysium-2013/recap-05-cover.bin"
       },
