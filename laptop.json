@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T08:09:23+07:00",
+ "updated": "2026-10-29T08:09:41+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -132,7 +132,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {},
+ "commands": {
+  "mvsuigtt55h4": {
+   "status": "working",
+   "note": "Sending part 1 (1 of 7)…"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
