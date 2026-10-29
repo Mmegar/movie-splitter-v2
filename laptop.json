@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T08:38:12+07:00",
+ "updated": "2026-10-29T08:41:59+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -135,7 +135,7 @@
  "commands": {
   "mvsuigtt55h4": {
    "status": "working",
-   "note": "Sent 4 of 7. Part 5 failed (Error: Page.goto: net::ERR_ABORTED at https://www.tiktok.com/tiktokstudio/upload?from=webapp); trying again in 10 min"
+   "note": "Sending part 5 (5 of 7)…"
   }
  },
  "commands_done": [
