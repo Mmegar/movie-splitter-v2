@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:51:27+13:00",
+ "updated": "2026-10-29T14:51:50+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -139,10 +139,10 @@
        "caption": "This deserves way more attention\nPart 7 🎬 · That's the last part. Follow for more 🍿\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Darkling\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0",
        "preview": "elysium-2013/recap-007.bin",
        "post": {
-        "status": "failed",
-        "at": "2026-10-29T14:09:13+13:00",
+        "status": "scheduled",
+        "at": "2026-10-29T14:51:50+13:00",
         "url": null,
-        "error": "TargetClosedError: Locator.get_attribute: Target page, context or browser has been closed",
+        "error": null,
         "attempts": 3
        },
        "cover": "elysium-2013/recap-07-cover.bin"
