@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:32:25+13:00",
+ "updated": "2026-10-29T14:34:21+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -162,11 +162,11 @@
        "caption": "I need answers 😩\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie",
        "preview": "elysium-2013/stretch-001.bin",
        "post": {
-        "status": "scheduled",
-        "at": "2026-10-29T14:32:25+13:00",
-        "url": null,
+        "status": "posted",
+        "at": "2026-10-29T14:34:21+13:00",
+        "url": "https://www.tiktok.com/@starctacher/video/7696015184623570196",
         "error": null,
-        "attempts": 0
+        "attempts": 1
        }
       },
       {
