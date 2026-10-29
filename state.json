@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:34:21+13:00",
+ "updated": "2026-10-29T14:34:23+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4833,6 +4833,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T14:34:23+13:00",
+   "type": "posted",
+   "title": "📤 Posted to TikTok: Elysium (2013): Part 1",
+   "message": "[Best stretch] Posted publicly. https://www.tiktok.com/@starctacher/video/7696015184623570196\n\n📝 Caption:\nI need answers 😩\nPart 1 🎬 · Part 2 is up next 👀\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n#movieclips #fyp"
+  },
+  {
    "at": "2026-10-29T14:31:48+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 5",
@@ -6025,12 +6031,6 @@
    "type": "info",
    "title": "[Character story] Skipped for The Fantastic 4 First Steps (2025)",
    "message": "The story plan didn't have enough to make at least 2 parts."
-  },
-  {
-   "at": "2026-10-22T22:54:12+13:00",
-   "type": "planned",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): 8 parts planned",
-   "message": "The Fantastic 4 First Steps (2025)\nMode: Movie recap\n\nPart 1: Four Heroes, One Hungry Giant (12 narrated beats, about 64s of voice)\nPart 2: The Surfer Brings Bad News (14 narrated beats, about 69s of voice)\nPart 3: Blowing Up Our Own Ride (14 narrated beats, about 68s of voice)\nPart 4: The World Wants The Baby (13 narrated beats, about 61s of voice)\nPart 5: Moving Planet Earth (14 narrated beats, about 66s of voice)\nPart 6: The Herald Who Turned (14 narrated beats, about 65s of voice)\nPart 7: The Trap That Almost Worked (11 narrated beats, about 50s of voice)\nPart 8: Our Tiny Miracle Worker (11 narrated beats, about 50s of voice)\n"
   }
  ]
 }
