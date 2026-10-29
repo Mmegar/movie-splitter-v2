@@ -200,3 +200,29 @@ class AnalyticsSkipTest(unittest.TestCase):
         self.assertTrue(posting.needs_analytics({"id": "a", "created": now - 86400, "views": 1200}, old, now))   # +20%
         self.assertFalse(posting.needs_analytics({"id": "b", "created": now - 86400, "views": 1050}, old, now))  # +5%
         self.assertFalse(posting.needs_analytics({"id": "c", "created": now - 30 * 86400, "views": 999}, old, now))  # settled
+
+
+class CaptionBoxTest(unittest.TestCase):
+    """The caption box covered by a TikTok pop-up: normal clicks time out, so it falls back to focusing it."""
+
+    def test_covered_box_falls_back_to_focus(self):
+        box = mock.MagicMock()
+        box.click.side_effect = Exception("Locator.click: Timeout 8000ms exceeded.\nCall log: ...")
+        box.evaluate.return_value = True
+        page = mock.MagicMock()
+        page.locator.return_value.first = box
+        with mock.patch.object(posting, "_dismiss_popups") as dismiss, mock.patch.object(posting, "_pause"):
+            self.assertIs(posting._focus_caption(page, log=lambda *_: None), box)
+        self.assertEqual(dismiss.call_count, 3)
+        self.assertTrue(any(c.kwargs.get("force") for c in box.click.call_args_list))
+        self.assertIn("el.focus()", box.evaluate.call_args_list[0].args[0])
+
+    def test_still_covered_raises(self):
+        box = mock.MagicMock()
+        box.click.side_effect = Exception("Timeout")
+        box.evaluate.return_value = False
+        page = mock.MagicMock()
+        page.locator.return_value.first = box
+        with mock.patch.object(posting, "_dismiss_popups"), mock.patch.object(posting, "_pause"):
+            with self.assertRaises(RuntimeError):
+                posting._focus_caption(page, log=lambda *_: None)
