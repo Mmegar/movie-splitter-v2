@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T14:51:25+13:00",
+ "updated": "2026-10-29T14:51:27+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4833,6 +4833,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T14:51:27+13:00",
+   "type": "posted",
+   "title": "📤 Posted to TikTok: Elysium (2013): Part 6",
+   "message": "[Movie recap] Posted publicly. https://www.tiktok.com/@starctacher/video/7696015184623570196\n\n📝 Caption:\nA hunt across Los Angeles and a family hiding a wounded man 😳 Then a daring flight to the one place he can't reach.\nPart 6 🎬 · Should I post Part 7? 👇\n#Elysium #MattDamon #MaxwellPerryCotton #JodieFoster #movie\n🎵 \"Spy Glass\" Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0\n#movieclips #fyp"
+  },
+  {
    "at": "2026-10-29T14:47:24+13:00",
    "type": "posted",
    "title": "📤 Posted to TikTok: Elysium (2013): Part 5",
@@ -6025,12 +6031,6 @@
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 2 of 8 ready",
    "message": "Part 2: The Surfer Brings Bad News (14 narrated beats, about 69s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T22:58:32+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 1 of 8 ready",
-   "message": "Part 1: Four Heroes, One Hungry Giant (12 narrated beats, about 64s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
   }
  ]
 }
