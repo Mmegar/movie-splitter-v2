@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-29T13:09:59+13:00",
+ "updated": "2026-10-29T13:10:01+13:00",
  "run": {
   "active": false,
   "run_id": 40755105046,
@@ -4831,6 +4831,12 @@
  },
  "events": [
   {
+   "at": "2026-10-29T13:10:01+13:00",
+   "type": "post_failed",
+   "title": "⚠️ TikTok post failed: Elysium (2013): Part 6",
+   "message": "[Movie recap] TimeoutError: Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div[contenteditable=\\\"true\\\"]\").first\n    - locator resolved to <div role=\"combobox\" spellcheck=\"false\" aria-expanded=\"false\" contenteditable=\"true\" aria-autocomplete=\"list\" class=\"notranslate public-DraftEditor-content\">…</div>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n    - done s\nIt will be tried again at the next posting time (up to 3 tries)."
+  },
+  {
    "at": "2026-10-29T12:54:41+13:00",
    "type": "post_failed",
    "title": "⚠️ TikTok post failed: Elysium (2013): Part 6",
@@ -6023,12 +6029,6 @@
    "type": "started",
    "title": "Started: John Wick Chapter 2 (2017)",
    "message": "Cutting on the laptop: Movie recap, Character story. Parts go into 'Ready to post/John Wick Chapter 2 (2017)'."
-  },
-  {
-   "at": "2026-10-22T12:03:18+13:00",
-   "type": "posted",
-   "title": "📲 In your TikTok drafts: Runner (2026): Part 3",
-   "message": "[Movie recap] Open TikTok, tap the notification, paste the caption and post.\n\n📝 Caption:\nI've watched this 10 times already 🔁\nPart 3 🎬 · Part 4 coming soon ⏳\n#fyp #foryou #viral #movie #movieclips"
   }
  ]
 }
