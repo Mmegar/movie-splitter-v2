@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T12:10:32+07:00",
+ "updated": "2026-10-29T12:11:07+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -325,9 +325,9 @@
  "next_post_at": null,
  "insights_run": {
   "started": "2026-10-29T12:08:07+07:00",
-  "step": "Reading watch time",
-  "done": 12,
-  "total": 15
+  "step": "Checking what's trending",
+  "done": null,
+  "total": null
  },
  "insights_at": 1793250487.4612195,
  "version": 2
