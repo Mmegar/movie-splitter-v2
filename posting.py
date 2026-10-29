@@ -434,9 +434,81 @@ def _set_cover(page, cover, log=print):
         return False
 
 
-def _type_caption(page, caption):
-    box = page.locator('div[contenteditable="true"]').first
-    box.click(timeout=30000)
+# Pop-ups TikTok Studio puts over the editor (feature tours, "turn on content checks?", "keep editing?").
+# Only buttons that close them without changing anything; never "Turn on" or "Discard".
+DISMISS = ["Got it", "Not now", "Cancel", "Skip", "Close", "Maybe later", "OK", "Dismiss", "Continue editing"]
+CAPTION_BOX = 'div[contenteditable="true"]'
+
+
+def _dismiss_popups(page, rounds=3):
+    """Closes whatever modal or tour is covering the upload page. True if it closed something."""
+    closed = False
+    for _ in range(rounds):
+        hit = False
+        for scope in ('[role="dialog"]', '[class*="modal" i]', '[class*="joyride" i]', '[class*="tour" i]',
+                      '[class*="popover" i]', '[class*="tooltip" i]'):
+            for t in DISMISS:
+                btn = page.locator(scope).get_by_role("button", name=t, exact=True)
+                try:
+                    if btn.count() and btn.first.is_visible():
+                        btn.first.click(timeout=2000)
+                        hit = closed = True
+                        _pause(0.4, 0.9)
+                except Exception:
+                    continue
+        if not hit:
+            try:
+                page.keyboard.press("Escape")
+            except Exception:
+                pass
+            break
+    return closed
+
+
+def _upload_done(page, post_btn):
+    return post_btn.get_attribute("aria-disabled") != "true" and post_btn.is_enabled() \
+        and not page.get_by_text(re.compile(r"Uploading|\d+%")).count()
+
+
+def _wait_upload(page, post_btn, minutes=15):
+    """Waits for the video to finish uploading (Post turns on), closing pop-ups as they show up."""
+    end = time.time() + minutes * 60
+    while time.time() < end:
+        if _upload_done(page, post_btn):
+            return True
+        _dismiss_popups(page, rounds=1)
+        time.sleep(3)
+    return False
+
+
+def _focus_caption(page, log=print):
+    """Puts the cursor in the caption box. A pop-up or the upload overlay can sit on top of it (the click
+    then times out though the box is "visible, enabled and stable"), so: close pop-ups and try a normal
+    click a few times, then a forced click, then focus it straight through the page."""
+    box = page.locator(CAPTION_BOX).first
+    box.wait_for(state="visible", timeout=60000)
+    for i in range(3):
+        _dismiss_popups(page)
+        try:
+            box.scroll_into_view_if_needed(timeout=5000)
+            box.click(timeout=8000)
+            return box
+        except Exception as e:
+            log(f"  (caption box is covered, try {i + 1}: {str(e).splitlines()[0][:120]})")
+            _pause(1.5, 3)
+    try:
+        box.click(timeout=5000, force=True)
+    except Exception:
+        pass
+    box.evaluate("el => { el.focus(); const r = document.createRange(); r.selectNodeContents(el); r.collapse(false);"
+                 " const s = getSelection(); s.removeAllRanges(); s.addRange(r); }")
+    if not box.evaluate("el => el === document.activeElement || el.contains(document.activeElement)"):
+        raise RuntimeError("Couldn't get into TikTok's caption box (something is covering it)")
+    return box
+
+
+def _type_caption(page, caption, log=print):
+    _focus_caption(page, log)
     page.keyboard.press("Control+A")
     page.keyboard.press("Backspace")
     _pause(0.3, 0.8)
@@ -451,6 +523,16 @@ def _type_caption(page, caption):
             page.keyboard.press("Shift+Enter")
 
 
+def _snapshot(page, profile_dir):
+    """Keeps a screenshot of the page when a post fails, next to the Chrome profile, for working out why."""
+    try:
+        shot = Path(profile_dir).parent / "tiktok-last-error.png"
+        page.screenshot(path=str(shot), full_page=True, timeout=10000)
+        return shot
+    except Exception:
+        return None
+
+
 def browser_post(path, caption, profile_dir, cover=None, headless=False, log=print):
     """Posts one video through TikTok Studio in the logged-in Chrome window. Returns (ok, url, error)."""
     if not ensure_playwright(log):
@@ -461,45 +543,58 @@ def browser_post(path, caption, profile_dir, cover=None, headless=False, log=pri
     try:
         with Browser(profile_dir, headless=headless) as b:
             page = b.page()
-            page.goto(STUDIO_UPLOAD, wait_until="domcontentloaded", timeout=90000)
-            _pause(2, 4)
-            if not b.logged_in() or "login" in page.url:
-                return False, None, "TikTok isn't logged in on the laptop (run: py agent.py --tiktok-login)"
-            page.locator('input[type="file"][accept*="video"]').first.set_input_files(str(path), timeout=60000)
-            post_btn = page.locator('button[data-e2e="post_video_button"]')
-            post_btn.wait_for(state="visible", timeout=10 * 60000)
-            _pause(2, 4)
-            _type_caption(page, caption)
-            _pause()
-            if cover and Path(cover).exists():
-                _set_cover(page, Path(cover).resolve(), log)
-            end = time.time() + 15 * 60                    # wait for the upload to finish (Post turns on)
-            while time.time() < end:
-                if post_btn.get_attribute("aria-disabled") != "true" and post_btn.is_enabled() \
-                        and not page.get_by_text(re.compile(r"Uploading|\d+%")).count():
-                    break
-                time.sleep(3)
-            _pause(2, 5)
-            post_btn.click(timeout=30000)
-            _pause(2, 3)
-            _click_text(page, ["Post now", "Post anyway"], timeout=3000)   # TikTok's "content check" pop-up
-            end = time.time() + 5 * 60
-            while time.time() < end and "/content" not in page.url:
-                if page.get_by_text(re.compile(r"(Your video (has been|is being) (uploaded|posted))|Manage your posts")).count():
-                    break
-                time.sleep(2)
-            if "/content" not in page.url:
-                page.goto(STUDIO_CONTENT, wait_until="domcontentloaded", timeout=60000)
-            _pause(3, 5)
-            url = None
             try:
-                href = page.locator('a[href*="/video/"]').first.get_attribute("href", timeout=15000)
-                url = href if href and href.startswith("http") else f"https://www.tiktok.com{href}" if href else None
+                return _studio_post(b, page, path, caption, cover, log)
             except Exception:
-                pass
-            return True, url, None
+                shot = _snapshot(page, profile_dir)          # while the window is still open
+                if shot:
+                    log(f"  (screenshot of the TikTok page: {shot})")
+                raise
     except Exception as e:
-        return False, None, f"{type(e).__name__}: {e}"[:500]
+        msg = str(e).split("Call log:")[0].strip()          # Playwright's call log fills the app card
+        return False, None, f"{type(e).__name__}: {msg}"[:300]
+
+
+def _studio_post(b, page, path, caption, cover, log):
+    page.goto(STUDIO_UPLOAD, wait_until="domcontentloaded", timeout=90000)
+    _pause(2, 4)
+    if not b.logged_in() or "login" in page.url:
+        return False, None, "TikTok isn't logged in on the laptop (run: py agent.py --tiktok-login)"
+    page.locator('input[type="file"][accept*="video"]').first.set_input_files(str(path), timeout=60000)
+    post_btn = page.locator('button[data-e2e="post_video_button"]')
+    post_btn.wait_for(state="visible", timeout=10 * 60000)
+    _pause(2, 4)
+    _wait_upload(page, post_btn)                    # the editor is covered while it uploads
+    _dismiss_popups(page)
+    _type_caption(page, caption, log)
+    _pause()
+    if cover and Path(cover).exists():
+        _set_cover(page, Path(cover).resolve(), log)
+    _dismiss_popups(page)
+    _wait_upload(page, post_btn)
+    _pause(2, 5)
+    try:
+        post_btn.click(timeout=15000)
+    except Exception:
+        _dismiss_popups(page)
+        post_btn.click(timeout=15000, force=True)
+    _pause(2, 3)
+    _click_text(page, ["Post now", "Post anyway"], timeout=3000)   # TikTok's "content check" pop-up
+    end = time.time() + 5 * 60
+    while time.time() < end and "/content" not in page.url:
+        if page.get_by_text(re.compile(r"(Your video (has been|is being) (uploaded|posted))|Manage your posts")).count():
+            break
+        time.sleep(2)
+    if "/content" not in page.url:
+        page.goto(STUDIO_CONTENT, wait_until="domcontentloaded", timeout=60000)
+    _pause(3, 5)
+    url = None
+    try:
+        href = page.locator('a[href*="/video/"]').first.get_attribute("href", timeout=15000)
+        url = href if href and href.startswith("http") else f"https://www.tiktok.com{href}" if href else None
+    except Exception:
+        pass
+    return True, url, None
 
 
 def _num(v):

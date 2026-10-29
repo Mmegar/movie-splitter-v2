@@ -90,6 +90,7 @@ export function createMoviesView(ctx) {
       ${lastSt ? partPendingHtml(lastSt, movie, mode, p) : ''}
       ${p.caption ? `<p class="caption" data-expand>${esc(p.caption)}</p>` : ''}
       <div class="part-actions">
+        ${post.status === 'failed' && !(lastSt && partPendingHtml(lastSt, movie, mode, p)) ? `<button class="btn btn--small btn--accent" data-retrypost="${p.n}">${icon('refresh')}Try again</button>` : ''}
         <button class="btn btn--small btn--accent" data-preview="${p.n}" ${p.preview || demoMode ? '' : 'data-nopreview'}>${icon('play')}Preview</button>
         <button class="btn btn--small btn--quiet" data-clip="${p.n}">${icon('scissors')}Clip</button>
         ${p.cover ? `<button class="btn btn--small btn--quiet" data-cover="${p.n}">${icon('download')}Thumbnail</button>` : ''}
@@ -189,6 +190,18 @@ export function createMoviesView(ctx) {
         const m = movieNow();
         const part = m && (m.modes[detail.mode].parts || []).find((x) => String(x.n) === cl.dataset.clip);
         if (part) openClipEditor(ctx, m, { start: part.start, end: Math.min(part.end, part.start + 600) });
+        return;
+      }
+      const rp = e.target.closest('[data-retrypost]');
+      if (rp) {
+        haptic();
+        const m = movieNow();
+        if (!m) return;
+        rp.disabled = true;
+        try {
+          await ctx.store.sendCommand({ type: 'post_part', movie_id: m.id, mode: detail.mode, n: Number(rp.dataset.retrypost) });
+          toast('Sent to the laptop. It tries TikTok again within a minute.');
+        } catch (err) { rp.disabled = false; toast(err.message || "Couldn't send that.", { kind: 'err', ms: 4500 }); }
         return;
       }
       const pm = e.target.closest('[data-partmore]');
