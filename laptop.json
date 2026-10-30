@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T06:36:31+07:00",
+ "updated": "2026-10-31T06:38:48+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -323,7 +323,12 @@
  "music": {},
  "tiktok_login": "2026-10-28T18:04:25+07:00",
  "next_post_at": null,
- "insights_run": null,
- "insights_at": 1793381926.6018872,
+ "insights_run": {
+  "started": "2026-10-31T06:38:48+07:00",
+  "step": "Starting",
+  "done": null,
+  "total": null
+ },
+ "insights_at": 1793403528.6845737,
  "version": 2
 }
