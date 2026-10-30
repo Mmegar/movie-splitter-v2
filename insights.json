@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T18:39:12+07:00",
+ "updated": "2026-10-31T00:39:23+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -24,6 +24,15 @@
   },
   {
    "day": "2026-10-30",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
+  },
+  {
+   "day": "2026-10-31",
    "views": 0,
    "videos": 0,
    "likes": 0,
@@ -153,7 +162,7 @@
   }
  ],
  "trends": {
-  "date": "2026-10-30",
+  "date": "2026-10-31",
   "season": [
    {
     "moment": "Spooky season / Halloween",
@@ -169,27 +178,17 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 404206
-   },
-   {
-    "title": "You Can See Everything",
-    "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 326164
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 311234
+    "views": 256405
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 269643
+    "views": 213311
    },
    {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 227673
+    "title": "You Can See Everything",
+    "about": "2026 film by Nathan Fielder and Lance Oppenheim",
+    "views": 209285
    },
    {
     "title": "Dancing with the Stars (American TV series) season 35",
@@ -197,49 +196,59 @@
     "views": 204442
    },
    {
-    "title": "Wicker (film)",
-    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 189487
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 182485
    },
    {
-    "title": "Dorothy (film)",
-    "about": "2026 Indian film by Karthik Subbaraj",
-    "views": 126763
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 142410
+   },
+   {
+    "title": "Wicker (film)",
+    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
+    "views": 122169
    },
    {
     "title": "Verity (film)",
     "about": "2026 film by Michael Showalter",
-    "views": 121260
+    "views": 92763
+   },
+   {
+    "title": "Dorothy (film)",
+    "about": "2026 Indian film by Karthik Subbaraj",
+    "views": 79154
    },
    {
     "title": "Street Fighter (2026 film)",
     "about": "2026 film by Kitao Sakurai",
-    "views": 114000
+    "views": 68751
    },
    {
-    "title": "The Terminal List",
-    "about": "American action thriller television series",
-    "views": 95148
+    "title": "Bigg Boss (Hindi TV series) season 20",
+    "about": "Season of television series",
+    "views": 68363
    },
    {
     "title": "Obsession (2025 film)",
     "about": "2025 film by Curry Barker",
-    "views": 93822
+    "views": 66934
    },
    {
-    "title": "XXX (film series)",
-    "about": "American spy action film series by Rich Wilkes",
-    "views": 93339
-   },
-   {
-    "title": "Nobody Wants This",
-    "about": "2024 American romantic comedy-drama TV series",
-    "views": 93054
+    "title": "The Terminal List",
+    "about": "American action thriller television series",
+    "views": 59314
    },
    {
     "title": "Slow Horses",
     "about": "British spy thriller TV series (2022–present)",
-    "views": 93000
+    "views": 57793
+   },
+   {
+    "title": "Carrie (TV series)",
+    "about": "2026 television series by Mike Flanagan",
+    "views": 57559
    }
   ]
  },
