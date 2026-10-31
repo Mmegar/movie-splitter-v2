@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T18:39:49+07:00",
+ "updated": "2026-11-01T00:39:45+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -33,6 +33,15 @@
   },
   {
    "day": "2026-10-31",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
+  },
+  {
+   "day": "2026-11-01",
    "views": 0,
    "videos": 0,
    "likes": 0,
@@ -162,7 +171,7 @@
   }
  ],
  "trends": {
-  "date": "2026-10-31",
+  "date": "2026-11-01",
   "season": [
    {
     "moment": "Spooky season / Halloween",
@@ -178,42 +187,32 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 370179
+    "views": 236111
    },
    {
     "title": "You Can See Everything",
     "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 299369
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 266223
+    "views": 189570
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 257087
+    "views": 154233
    },
    {
-    "title": "Dancing with the Stars (American TV series) season 35",
-    "about": "Season of television series",
-    "views": 204442
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 129372
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 203305
+    "views": 125987
    },
    {
     "title": "Wicker (film)",
     "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 186908
-   },
-   {
-    "title": "Verity (film)",
-    "about": "2026 film by Michael Showalter",
-    "views": 138031
+    "views": 125905
    },
    {
     "title": "Baththa",
@@ -221,34 +220,44 @@
     "views": 117341
    },
    {
-    "title": "Obsession (2025 film)",
-    "about": "2025 film by Curry Barker",
-    "views": 114498
+    "title": "Verity (film)",
+    "about": "2026 film by Michael Showalter",
+    "views": 96290
    },
    {
-    "title": "Dorothy (film)",
-    "about": "2026 Indian film by Karthik Subbaraj",
-    "views": 112516
+    "title": "Obsession (2025 film)",
+    "about": "2025 film by Curry Barker",
+    "views": 84504
    },
    {
     "title": "Bigg Boss (Hindi TV series) season 20",
     "about": "Season of television series",
-    "views": 108911
+    "views": 80806
+   },
+   {
+    "title": "Dorothy (film)",
+    "about": "2026 Indian film by Karthik Subbaraj",
+    "views": 68202
+   },
+   {
+    "title": "The Rocky Horror Picture Show",
+    "about": "1975 musical comedy horror film by Jim Sharman",
+    "views": 61099
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 60674
    },
    {
     "title": "Street Fighter (2026 film)",
     "about": "2026 film by Kitao Sakurai",
-    "views": 96830
+    "views": 60114
    },
    {
-    "title": "The Terminal List",
-    "about": "American action thriller television series",
-    "views": 87536
-   },
-   {
-    "title": "Carrie (TV series)",
-    "about": "2026 television series by Mike Flanagan",
-    "views": 85011
+    "title": "The Sheep Detectives",
+    "about": "2026 film by Kyle Balda",
+    "views": 57574
    }
   ]
  },
