@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T06:39:26+07:00",
+ "updated": "2026-10-31T12:39:31+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -178,17 +178,22 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 256405
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 213311
+    "views": 370179
    },
    {
     "title": "You Can See Everything",
     "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 209285
+    "views": 299369
+   },
+   {
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 266223
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 257087
    },
    {
     "title": "Dancing with the Stars (American TV series) season 35",
@@ -196,59 +201,54 @@
     "views": 204442
    },
    {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 182485
-   },
-   {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 142410
+    "views": 203305
    },
    {
     "title": "Wicker (film)",
     "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 122169
+    "views": 186908
    },
    {
     "title": "Verity (film)",
     "about": "2026 film by Michael Showalter",
-    "views": 92763
+    "views": 138031
    },
    {
-    "title": "Dorothy (film)",
-    "about": "2026 Indian film by Karthik Subbaraj",
-    "views": 79154
-   },
-   {
-    "title": "Street Fighter (2026 film)",
-    "about": "2026 film by Kitao Sakurai",
-    "views": 68751
-   },
-   {
-    "title": "Bigg Boss (Hindi TV series) season 20",
-    "about": "Season of television series",
-    "views": 68363
+    "title": "Baththa",
+    "about": "2026 film directed by Balaji Tharaneetharan",
+    "views": 117341
    },
    {
     "title": "Obsession (2025 film)",
     "about": "2025 film by Curry Barker",
-    "views": 66934
+    "views": 114498
+   },
+   {
+    "title": "Dorothy (film)",
+    "about": "2026 Indian film by Karthik Subbaraj",
+    "views": 112516
+   },
+   {
+    "title": "Bigg Boss (Hindi TV series) season 20",
+    "about": "Season of television series",
+    "views": 108911
+   },
+   {
+    "title": "Street Fighter (2026 film)",
+    "about": "2026 film by Kitao Sakurai",
+    "views": 96830
    },
    {
     "title": "The Terminal List",
     "about": "American action thriller television series",
-    "views": 59314
-   },
-   {
-    "title": "Slow Horses",
-    "about": "British spy thriller TV series (2022–present)",
-    "views": 57793
+    "views": 87536
    },
    {
     "title": "Carrie (TV series)",
     "about": "2026 television series by Mike Flanagan",
-    "views": 57559
+    "views": 85011
    }
   ]
  },
