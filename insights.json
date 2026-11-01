@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02T00:40:17+07:00",
+ "updated": "2026-11-02T06:40:31+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -230,7 +230,7 @@
    },
    {
     "title": "Obsession (2025 film)",
-    "about": "2025 film by Curry Barker",
+    "about": "Film by Curry Barker",
     "views": 117461
    },
    {
@@ -291,6 +291,6 @@
    "Let the 165 s part length run for several days before changing it, since there is no post-change data yet, and pause stretch mode while it averages 97 views per video"
   ],
   "at": "2026-10-29T12:11:47+07:00",
-  "error": "Claude app: You've hit your weekly limit · resets Nov 3, 3am (Asia/Bangkok)\n"
+  "error": "Claude app: You've hit your weekly limit · resets 3am (Asia/Bangkok)\n"
  }
 }
