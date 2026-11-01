@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:10:55+13:00",
+ "updated": "2026-11-01T15:18:09+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "midsommar-2019/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 6382.0,
+       "end": 7923.0,
+       "seconds": 100.6,
+       "drive_path": "Ready to post/Midsommar (2019)/Movie recap/Midsommar (2019) - Part 03.mp4",
+       "caption": "A missing friend, a deadly night and a crown that changes everything. 👑 The village is watching.\nPart 3 🎬 · Part 4 is up next 👀\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "midsommar-2019/recap-03-cover.bin"
       }
      ]
     },
