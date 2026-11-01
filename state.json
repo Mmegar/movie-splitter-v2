@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:31:17+13:00",
+ "updated": "2026-11-01T16:31:20+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 6
  },
  "queue": [],
@@ -5078,6 +5078,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T16:31:20+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Midsommar (2019): Highlight 5 of 6 ready",
+   "message": "Highlight 5: 2:26:38 to 2:30:57 (259s)  interest score 60/100\nIn Ready to post/Midsommar (2019)/Highlights."
+  },
+  {
    "at": "2026-11-01T16:24:00+13:00",
    "type": "part_ready",
    "title": "[Highlights] Midsommar (2019): Highlight 4 of 6 ready",
@@ -6270,12 +6276,6 @@
    "type": "planned",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): 8 parts planned",
    "message": "Once Upon A Time In The Middle East (2026)\nMode: Movie recap\n\nPart 1: Chef Xu Walks Into Chaos (12 narrated beats, about 64s of voice)\nPart 2: Stay, Chef. Please. (9 narrated beats, about 45s of voice)\nPart 3: Business Booms in a Warzone (9 narrated beats, about 45s of voice)\nPart 4: Zaid's Fall From Grace (7 narrated beats, about 37s of voice)\nPart 5: Alifah Prison Gets Weird (8 narrated beats, about 44s of voice)\nPart 6: Christmas Feast Gone Wrong (7 narrated beats, about 37s of voice)\nPart 7: Cooking for Child Soldiers (7 narrated beats, about 41s of voice)\nPart 8: The Mosque Escape Plan (12 narrated beats, about 70s of voice)\n"
-  },
-  {
-   "at": "2026-10-23T14:31:01+13:00",
-   "type": "started",
-   "title": "Started: Once Upon A Time In The Middle East (2026)",
-   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Once Upon A Time In The Middle East (2026)'."
   }
  ]
 }
