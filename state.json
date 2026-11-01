@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:02:58+13:00",
+ "updated": "2026-11-01T16:03:01+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 6
  },
  "queue": [],
@@ -5018,6 +5018,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T16:03:00+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Midsommar (2019): Highlight 1 of 6 ready",
+   "message": "Highlight 1: 25:07 to 28:50 (222s)  interest score 64/100\nIn Ready to post/Midsommar (2019)/Highlights."
+  },
+  {
    "at": "2026-11-01T15:55:54+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Midsommar (2019): Part 5 of 5 ready",
@@ -6210,12 +6216,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 7 of 8 ready",
    "message": "Part 7: Snappy Sends the Photo (9 narrated beats, about 58s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T06:53:28+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Toy Story 5 (2026): Part 6 of 8 ready",
-   "message": "Part 6: Toys Locked in the Garage (12 narrated beats, about 76s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
   }
  ]
 }
