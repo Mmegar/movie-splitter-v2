@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T14:58:24+13:00",
+ "updated": "2026-11-01T14:58:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 4
  },
  "queue": [],
@@ -4878,6 +4878,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T14:58:27+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Midsommar (2019): Part 1 of 4 ready",
+   "message": "Part 1: Grief, a Breakup and a Trip (32 narrated beats, about 245s of voice)\nIn Ready to post/Midsommar (2019)/Movie recap."
+  },
+  {
    "at": "2026-11-01T14:44:06+13:00",
    "type": "planned",
    "title": "[Highlights] Midsommar (2019): 6 parts planned",
@@ -6070,12 +6076,6 @@
    "type": "finished",
    "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
    "message": "Movie recap: 8 parts.\nIn Ready to post/The Fantastic 4 First Steps (2025)."
-  },
-  {
-   "at": "2026-10-22T23:18:50+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 8 of 8 ready",
-   "message": "Part 8: Our Tiny Miracle Worker (11 narrated beats, about 50s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
   }
  ]
 }
