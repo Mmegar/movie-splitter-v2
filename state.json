@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:18:09+13:00",
+ "updated": "2026-11-01T15:18:12+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 4
  },
  "queue": [],
@@ -4910,6 +4910,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T15:18:12+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Midsommar (2019): Part 3 of 4 ready",
+   "message": "Part 3: Josh Vanishes, Dani Crowned (17 narrated beats, about 138s of voice)\nIn Ready to post/Midsommar (2019)/Movie recap."
+  },
+  {
    "at": "2026-11-01T15:10:55+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Midsommar (2019): Part 2 of 4 ready",
@@ -6102,12 +6108,6 @@
    "type": "planned",
    "title": "[Movie recap] Toy Story 5 (2026): 8 parts planned",
    "message": "Toy Story 5 (2026)\nMode: Movie recap\n\nPart 1: A Frog Takes Over Bonnie's Room (11 narrated beats, about 65s of voice)\nPart 2: Woody Answers the Walkie (11 narrated beats, about 72s of voice)\nPart 3: Stowaways in a Suitcase (12 narrated beats, about 75s of voice)\nPart 4: Wrong House, Jimmy (13 narrated beats, about 82s of voice)\nPart 5: Smarty Pants Wakes Up (13 narrated beats, about 74s of voice)\nPart 6: Toys Locked in the Garage (12 narrated beats, about 76s of voice)\nPart 7: Snappy Sends the Photo (9 narrated beats, about 58s of voice)\nPart 8: Blaze Plays for Real (29 narrated beats, about 190s of voice)\n"
-  },
-  {
-   "at": "2026-10-23T06:24:40+13:00",
-   "type": "started",
-   "title": "Started: Toy Story 5 (2026)",
-   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Toy Story 5 (2026)'."
   }
  ]
 }
