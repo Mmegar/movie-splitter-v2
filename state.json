@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:44:46+13:00",
+ "updated": "2026-11-01T15:44:49+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "stretch",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 5
  },
  "queue": [],
@@ -4972,6 +4972,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T15:44:48+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Midsommar (2019): Part 3 of 5 ready",
+   "message": "Part 3: 1:12:18 to 1:16:05 (226s)\nIn Ready to post/Midsommar (2019)/Best stretch."
+  },
+  {
    "at": "2026-11-01T15:38:04+13:00",
    "type": "part_ready",
    "title": "[Best stretch] Midsommar (2019): Part 2 of 5 ready",
@@ -6164,12 +6170,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 4 of 8 ready",
    "message": "Part 4: Wrong House, Jimmy (13 narrated beats, about 82s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T06:42:27+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Toy Story 5 (2026): Part 3 of 8 ready",
-   "message": "Part 3: Stowaways in a Suitcase (12 narrated beats, about 75s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
   }
  ]
 }
