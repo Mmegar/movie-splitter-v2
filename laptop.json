@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T08:16:16+07:00",
+ "updated": "2026-11-01T08:19:45+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,13 +102,19 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
- "library": [
+ "queue": [
   {
    "name": "Midsommar.2019.Directors.Cut.1080p.HDRip.1800MB.DD2.0.x264-GalaxyRG.mkv",
    "size_mb": 1938,
-   "modified": "2026-10-29T01:13:30+07:00"
-  },
+   "modified": "2026-10-29T01:13:30+07:00",
+   "sending": false,
+   "style": "zoom",
+   "character": "",
+   "pinned": true,
+   "ai_why": ""
+  }
+ ],
+ "library": [
   {
    "name": "Hereditary.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
    "size_mb": 2198,
@@ -132,7 +138,12 @@
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
  "bin": [],
- "commands": {},
+ "commands": {
+  "mvx5718upab5": {
+   "status": "done",
+   "note": "Moved to To edit"
+  }
+ },
  "commands_done": [
   "mv6igiwhxb7g",
   "mv6kcq56w73o",
@@ -279,7 +290,8 @@
   "mvs0bahqmv5j",
   "mvs0e95fxnfm",
   "mvse04c7h4xw",
-  "mvsuigtt55h4"
+  "mvsuigtt55h4",
+  "mvx5718upab5"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
