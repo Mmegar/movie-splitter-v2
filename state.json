@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:23:58+13:00",
+ "updated": "2026-11-01T16:24:01+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "highlights",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 6
  },
  "queue": [],
@@ -5063,6 +5063,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T16:24:00+13:00",
+   "type": "part_ready",
+   "title": "[Highlights] Midsommar (2019): Highlight 4 of 6 ready",
+   "message": "Highlight 4: 2:17:26 to 2:21:48 (261s)  interest score 57/100\nIn Ready to post/Midsommar (2019)/Highlights."
+  },
+  {
    "at": "2026-11-01T16:16:23+13:00",
    "type": "part_ready",
    "title": "[Highlights] Midsommar (2019): Highlight 3 of 6 ready",
@@ -6255,12 +6261,6 @@
    "type": "started",
    "title": "Started: Once Upon A Time In The Middle East (2026)",
    "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Once Upon A Time In The Middle East (2026)'."
-  },
-  {
-   "at": "2026-10-23T07:05:55+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Toy Story 5 (2026)",
-   "message": "Movie recap: 8 parts.\nIn Ready to post/Toy Story 5 (2026)."
   }
  ]
 }
