@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-11-01T14:44:02+13:00",
+ "updated": "2026-11-01T14:44:06+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-11-01T14:22:24+13:00",
   "movie": "Midsommar (2019)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 4
  },
  "queue": [],
  "movies": [
@@ -31,12 +31,12 @@
     },
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 6,
      "parts": []
     }
    }
@@ -4861,6 +4861,24 @@
  },
  "events": [
   {
+   "at": "2026-11-01T14:44:06+13:00",
+   "type": "planned",
+   "title": "[Highlights] Midsommar (2019): 6 parts planned",
+   "message": "Midsommar (2019)\nMode: Highlights\n\nHighlight 1: 25:07 to 28:50 (222s)  interest score 64/100\nHighlight 2: 1:08:49 to 1:12:24 (215s)  interest score 60/100\nHighlight 3: 2:07:21 to 2:11:00 (219s)  interest score 63/100\nHighlight 4: 2:17:26 to 2:21:48 (261s)  interest score 57/100\nHighlight 5: 2:26:38 to 2:30:57 (259s)  interest score 60/100\nHighlight 6: 2:39:47 to 2:43:20 (212s)  interest score 57/100\n"
+  },
+  {
+   "at": "2026-11-01T14:44:05+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Midsommar (2019): 5 parts planned",
+   "message": "Midsommar (2019)\nMode: Best stretch\n\nPart 1: 1:05:18 to 1:08:40 (202s)\nPart 2: 1:08:40 to 1:12:18 (219s)\nPart 3: 1:12:18 to 1:16:05 (226s)\nPart 4: 1:16:05 to 1:19:44 (219s)\nPart 5: 1:19:44 to 1:22:46 (182s)\n"
+  },
+  {
+   "at": "2026-11-01T14:44:04+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Midsommar (2019): 4 parts planned",
+   "message": "Midsommar (2019)\nMode: Movie recap\n\nPart 1: Grief, a Breakup and a Trip (32 narrated beats, about 245s of voice)\nPart 2: The Cliff Ceremony Horror (32 narrated beats, about 242s of voice)\nPart 3: Josh Vanishes, Dani Crowned (17 narrated beats, about 138s of voice)\nPart 4: The Ninth Sacrifice Choice (19 narrated beats, about 145s of voice)\n"
+  },
+  {
    "at": "2026-11-01T14:22:27+13:00",
    "type": "started",
    "title": "Started: Midsommar (2019)",
@@ -6041,24 +6059,6 @@
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 8 of 8 ready",
    "message": "Part 8: Our Tiny Miracle Worker (11 narrated beats, about 50s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T23:16:29+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 7 of 8 ready",
-   "message": "Part 7: The Trap That Almost Worked (11 narrated beats, about 50s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T23:13:38+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 6 of 8 ready",
-   "message": "Part 6: The Herald Who Turned (14 narrated beats, about 65s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T23:10:42+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 5 of 8 ready",
-   "message": "Part 5: Moving Planet Earth (14 narrated beats, about 66s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
   }
  ]
 }
