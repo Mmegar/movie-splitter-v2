@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:55:55+13:00",
+ "updated": "2026-11-01T16:02:58+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -178,7 +178,23 @@
     "highlights": {
      "label": "Highlights",
      "planned": 6,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 1507.0,
+       "end": 1729.5,
+       "seconds": 222.5,
+       "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 01.mp4",
+       "caption": "The tension in this one 😬\nHighlight 1 🎬 · Comment 'more' for Highlight 2 👇\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     }
    }
   },
