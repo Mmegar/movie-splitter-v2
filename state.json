@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:09:44+13:00",
+ "updated": "2026-11-01T16:16:21+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -202,6 +202,21 @@
        "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 02.mp4",
        "caption": "Lowkey the best part 🤫\nHighlight 2 🎬 · Should I post Highlight 3? 👇\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
        "preview": "midsommar-2019/highlights-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 7641.0,
+       "end": 7859.9,
+       "seconds": 218.9,
+       "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 03.mp4",
+       "caption": "Hardest scene ever? 🔥\nHighlight 3 🎬 · Follow so you don't miss Highlight 4 🔔\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/highlights-003.bin",
        "post": {
         "status": "none",
         "at": null,
