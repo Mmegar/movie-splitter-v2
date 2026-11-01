@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T14:58:28+13:00",
+ "updated": "2026-11-01T15:10:52+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -43,6 +43,22 @@
         "error": null
        },
        "cover": "midsommar-2019/recap-01-cover.bin"
+      },
+      {
+       "n": 2,
+       "start": 3316.0,
+       "end": 6294.0,
+       "seconds": 173.7,
+       "drive_path": "Ready to post/Midsommar (2019)/Movie recap/Midsommar (2019) - Part 02.mp4",
+       "caption": "The village has a ceremony that nobody should ever have to watch. 😱 Brace yourself.\nPart 2 🎬 · Part 3 is up next 👀\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/recap-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "midsommar-2019/recap-02-cover.bin"
       }
      ]
     },
