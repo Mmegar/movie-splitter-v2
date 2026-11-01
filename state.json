@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:38:05+13:00",
+ "updated": "2026-11-01T15:44:46+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -121,6 +121,21 @@
        "drive_path": "Ready to post/Midsommar (2019)/Best stretch/Midsommar (2019) - Part 02.mp4",
        "caption": "This scene lives in my head rent free\nPart 2 🎬 · Part 3 is up next 👀\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
        "preview": "midsommar-2019/stretch-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 3,
+       "start": 4338.5,
+       "end": 4565.0,
+       "seconds": 226.5,
+       "drive_path": "Ready to post/Midsommar (2019)/Best stretch/Midsommar (2019) - Part 03.mp4",
+       "caption": "Stop scrolling, you need to see this ✋\nPart 3 🎬 · Part 4 coming soon ⏳\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/stretch-003.bin",
        "post": {
         "status": "none",
         "at": null,
