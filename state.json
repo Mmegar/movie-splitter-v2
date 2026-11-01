@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:31:41+13:00",
+ "updated": "2026-11-01T15:31:43+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "stretch",
   "stage": "rendering",
-  "part": 1,
+  "part": 2,
   "parts_total": 5
  },
  "queue": [],
@@ -4942,6 +4942,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T15:31:43+13:00",
+   "type": "part_ready",
+   "title": "[Best stretch] Midsommar (2019): Part 1 of 5 ready",
+   "message": "Part 1: 1:05:18 to 1:08:40 (202s)\nIn Ready to post/Midsommar (2019)/Best stretch."
+  },
+  {
    "at": "2026-11-01T15:26:00+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Midsommar (2019): Part 4 of 4 ready",
@@ -6134,12 +6140,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Toy Story 5 (2026): Part 2 of 8 ready",
    "message": "Part 2: Woody Answers the Walkie (11 narrated beats, about 72s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T06:35:37+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Toy Story 5 (2026): Part 1 of 8 ready",
-   "message": "Part 1: A Frog Takes Over Bonnie's Room (11 narrated beats, about 65s of voice)\nIn Ready to post/Toy Story 5 (2026)/Movie recap."
   }
  ]
 }
