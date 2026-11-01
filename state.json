@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:26:00+13:00",
+ "updated": "2026-11-01T15:31:41+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -97,7 +97,23 @@
     "stretch": {
      "label": "Best stretch",
      "planned": 5,
-     "parts": []
+     "parts": [
+      {
+       "n": 1,
+       "start": 3918.0,
+       "end": 4119.5,
+       "seconds": 201.6,
+       "drive_path": "Ready to post/Midsommar (2019)/Best stretch/Midsommar (2019) - Part 01.mp4",
+       "caption": "Late night watch 🍿🌙\nPart 1 🎬 · Comment 'more' for Part 2 👇\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/stretch-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      }
+     ]
     },
     "highlights": {
      "label": "Highlights",
