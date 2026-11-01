@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:16:24+13:00",
+ "updated": "2026-11-01T16:23:58+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -217,6 +217,21 @@
        "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 03.mp4",
        "caption": "Hardest scene ever? 🔥\nHighlight 3 🎬 · Follow so you don't miss Highlight 4 🔔\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
        "preview": "midsommar-2019/highlights-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 4,
+       "start": 8246.4,
+       "end": 8507.6,
+       "seconds": 261.2,
+       "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 04.mp4",
+       "caption": "The ending of this part 😳\nHighlight 4 🎬 · Follow so you don't miss Highlight 5 🔔\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/highlights-004.bin",
        "post": {
         "status": "none",
         "at": null,
