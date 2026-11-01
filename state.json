@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T14:22:24+13:00",
+ "updated": "2026-11-01T14:22:27+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -13,6 +13,34 @@
  },
  "queue": [],
  "movies": [
+  {
+   "id": "midsommar-2019",
+   "name": "Midsommar (2019)",
+   "status": "processing",
+   "source": "laptop",
+   "started": "2026-11-01T14:22:27+13:00",
+   "finished": null,
+   "duration": null,
+   "subtitles": null,
+   "error": null,
+   "modes": {
+    "recap": {
+     "label": "Movie recap",
+     "planned": 0,
+     "parts": []
+    },
+    "stretch": {
+     "label": "Best stretch",
+     "planned": 0,
+     "parts": []
+    },
+    "highlights": {
+     "label": "Highlights",
+     "planned": 0,
+     "parts": []
+    }
+   }
+  },
   {
    "id": "elysium-2013",
    "name": "Elysium (2013)",
@@ -4833,6 +4861,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T14:22:27+13:00",
+   "type": "started",
+   "title": "Started: Midsommar (2019)",
+   "message": "Cutting on the laptop: Movie recap, Best stretch, Highlights. Parts go into 'Ready to post/Midsommar (2019)'."
+  },
+  {
    "at": "2026-10-29T15:04:40+13:00",
    "type": "posted",
    "title": "📤 Posted to TikTok: Elysium (2013): Part 7",
@@ -6025,12 +6059,6 @@
    "type": "part_ready",
    "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 5 of 8 ready",
    "message": "Part 5: Moving Planet Earth (14 narrated beats, about 66s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
-  },
-  {
-   "at": "2026-10-22T23:07:37+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] The Fantastic 4 First Steps (2025): Part 4 of 8 ready",
-   "message": "Part 4: The World Wants The Baby (13 narrated beats, about 61s of voice)\nIn Ready to post/The Fantastic 4 First Steps (2025)/Movie recap."
   }
  ]
 }
