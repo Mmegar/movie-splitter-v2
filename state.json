@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:37:43+13:00",
+ "updated": "2026-11-01T16:37:45+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -5093,6 +5093,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T16:37:45+13:00",
+   "type": "finished",
+   "title": "✅ Finished: Midsommar (2019)",
+   "message": "Movie recap: 4 parts, Best stretch: 5 parts, Highlights: 6 parts.\nIn Ready to post/Midsommar (2019)."
+  },
+  {
    "at": "2026-11-01T16:37:42+13:00",
    "type": "part_ready",
    "title": "[Highlights] Midsommar (2019): Highlight 6 of 6 ready",
@@ -6285,12 +6291,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 2 of 8 ready",
    "message": "Part 2: Stay, Chef. Please. (9 narrated beats, about 45s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T14:44:25+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 1 of 8 ready",
-   "message": "Part 1: Chef Xu Walks Into Chaos (12 narrated beats, about 64s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
   }
  ]
 }
