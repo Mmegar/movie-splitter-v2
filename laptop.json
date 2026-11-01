@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T10:37:15+07:00",
+ "updated": "2026-11-01T10:37:51+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -128,7 +128,14 @@
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
- "bin": [],
+ "bin": [
+  {
+   "name": "Midsommar.2019.Directors.Cut.1080p.HDRip.1800MB.DD2.0.x264-GalaxyRG.mkv",
+   "size_mb": 1938,
+   "modified": "2026-10-29T01:13:30+07:00",
+   "folder": "done"
+  }
+ ],
  "commands": {
   "mvx5718upab5": {
    "status": "done",
@@ -298,6 +305,7 @@
   "heretic-2024",
   "john-wick-chapter-2-2017",
   "kung-fu-hustle-2004",
+  "midsommar-2019",
   "moon-knight-s01e02-summon-the-suit",
   "obsession-2026",
   "once-upon-a-time-in-the-middle-east-2026",
