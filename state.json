@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:31:20+13:00",
+ "updated": "2026-11-01T16:37:40+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -247,6 +247,21 @@
        "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 05.mp4",
        "caption": "Who else remembers this? 🙋\nHighlight 5 🎬 · Highlight 6 coming soon ⏳\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
        "preview": "midsommar-2019/highlights-005.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 6,
+       "start": 9587.0,
+       "end": 9799.5,
+       "seconds": 212.5,
+       "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 06.mp4",
+       "caption": "Pause at the right moment 😂\nHighlight 6 🎬 · And that's a wrap 🎬 Follow for the next one\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/highlights-006.bin",
        "post": {
         "status": "none",
         "at": null,
