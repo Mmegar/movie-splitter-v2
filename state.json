@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T15:10:52+13:00",
+ "updated": "2026-11-01T15:10:55+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Midsommar (2019)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 4
  },
  "queue": [],
@@ -4894,6 +4894,12 @@
  },
  "events": [
   {
+   "at": "2026-11-01T15:10:55+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Midsommar (2019): Part 2 of 4 ready",
+   "message": "Part 2: The Cliff Ceremony Horror (32 narrated beats, about 242s of voice)\nIn Ready to post/Midsommar (2019)/Movie recap."
+  },
+  {
    "at": "2026-11-01T14:58:27+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Midsommar (2019): Part 1 of 4 ready",
@@ -6086,12 +6092,6 @@
    "type": "started",
    "title": "Started: Toy Story 5 (2026)",
    "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Toy Story 5 (2026)'."
-  },
-  {
-   "at": "2026-10-22T23:18:53+13:00",
-   "type": "finished",
-   "title": "✅ Finished: The Fantastic 4 First Steps (2025)",
-   "message": "Movie recap: 8 parts.\nIn Ready to post/The Fantastic 4 First Steps (2025)."
   }
  ]
 }
