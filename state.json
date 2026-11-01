@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-01T16:03:01+13:00",
+ "updated": "2026-11-01T16:09:42+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -187,6 +187,21 @@
        "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 01.mp4",
        "caption": "The tension in this one 😬\nHighlight 1 🎬 · Comment 'more' for Highlight 2 👇\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
        "preview": "midsommar-2019/highlights-001.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       }
+      },
+      {
+       "n": 2,
+       "start": 4129.0,
+       "end": 4343.9,
+       "seconds": 214.9,
+       "drive_path": "Ready to post/Midsommar (2019)/Highlights/Midsommar (2019) - Highlight 02.mp4",
+       "caption": "Lowkey the best part 🤫\nHighlight 2 🎬 · Should I post Highlight 3? 👇\n#Midsommar #FlorencePugh #JackReynor #WilliamJacksonHarper #movie",
+       "preview": "midsommar-2019/highlights-002.bin",
        "post": {
         "status": "none",
         "at": null,
