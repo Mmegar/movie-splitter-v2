@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-11-01T14:22:27+13:00",
+ "updated": "2026-11-01T14:23:07+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-11-01T14:22:24+13:00",
-  "movie": null,
+  "movie": "Midsommar (2019)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
