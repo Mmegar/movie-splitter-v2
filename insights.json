@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02T18:40:47+07:00",
+ "updated": "2026-11-03T00:40:56+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -51,6 +51,15 @@
   },
   {
    "day": "2026-11-02",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
+  },
+  {
+   "day": "2026-11-03",
    "views": 0,
    "videos": 0,
    "likes": 0,
@@ -180,14 +189,13 @@
   }
  ],
  "trends": {
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "season": [
    {
-    "moment": "Spooky season / Halloween",
+    "moment": "True-crime season, long dark evenings",
     "genres": [
-     "Horror",
-     "Supernatural",
-     "Slasher",
+     "Crime",
+     "Thriller",
      "Mystery"
     ]
    }
@@ -196,77 +204,77 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 343361
+    "views": 229587
    },
    {
     "title": "You Can See Everything",
     "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 276503
+    "views": 186419
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 236910
+    "views": 162308
    },
    {
     "title": "Obsession (2025 film)",
     "about": "Film by Curry Barker",
-    "views": 209247
+    "views": 161683
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 197168
+    "views": 136273
    },
    {
     "title": "Baththa",
     "about": "2026 film directed by Balaji Tharaneetharan",
-    "views": 193308
-   },
-   {
-    "title": "Wicker (film)",
-    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 181749
+    "views": 131061
    },
    {
     "title": "Nocturne (TV series)",
     "about": "2026 American crime drama series",
-    "views": 177435
+    "views": 124035
+   },
+   {
+    "title": "Wicker (film)",
+    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
+    "views": 117010
    },
    {
     "title": "Verity (film)",
     "about": "2026 film by Michael Showalter",
-    "views": 149162
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 140341
-   },
-   {
-    "title": "The Rocky Horror Picture Show",
-    "about": "1975 musical comedy horror film by Jim Sharman",
-    "views": 130953
+    "views": 103894
    },
    {
     "title": "Backrooms (film)",
     "about": "2026 film by Kane Parsons",
-    "views": 126234
+    "views": 98993
    },
    {
-    "title": "Bigg Boss (Hindi TV series) season 20",
-    "about": "Season of television series",
-    "views": 108093
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 87429
+   },
+   {
+    "title": "Halloween (1978 film)",
+    "about": "Film by John Carpenter",
+    "views": 78140
+   },
+   {
+    "title": "The Rocky Horror Picture Show",
+    "about": "1975 musical comedy horror film by Jim Sharman",
+    "views": 69854
+   },
+   {
+    "title": "Dead-End Job",
+    "about": "2026 South Korean television series",
+    "views": 69413
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 102945
-   },
-   {
-    "title": "Dorothy (film)",
-    "about": "2026 Indian film by Karthik Subbaraj",
-    "views": 98815
+    "views": 67627
    }
   ]
  },
