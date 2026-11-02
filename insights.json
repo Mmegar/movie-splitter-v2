@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T00:40:56+07:00",
+ "updated": "2026-11-03T06:40:58+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -110,6 +110,66 @@
   "Upgrade (2018)"
  ],
  "picks": [
+  {
+   "title": "Verity (film)",
+   "year": 2026,
+   "genres": [
+    "Thriller",
+    "Mystery"
+   ],
+   "why": "Twisty thriller that fits the channel's mystery strength and is currently among the most-read films on Wikipedia (103,894 views)",
+   "trend": "Trending on Wikipedia right now",
+   "status": "new",
+   "added": "2026-11-03T06:41:27+07:00"
+  },
+  {
+   "title": "Gone Girl",
+   "year": 2014,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "Well-known twist-driven mystery that splits cleanly into cliffhanger parts, matching the channel's best-performing style",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-03T06:41:27+07:00"
+  },
+  {
+   "title": "Knives Out",
+   "year": 2019,
+   "genres": [
+    "Mystery",
+    "Crime"
+   ],
+   "why": "Whodunit with a clear reveal structure that suits multi-part recaps and the channel's mystery focus",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-03T06:41:27+07:00"
+  },
+  {
+   "title": "MobLand",
+   "year": 2025,
+   "genres": [
+    "Crime",
+    "Drama"
+   ],
+   "why": "British crime drama that is currently being read about heavily (67,627 views) and fits the crime season",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-03T06:41:27+07:00"
+  },
+  {
+   "title": "Halloween",
+   "year": 1978,
+   "genres": [
+    "Horror",
+    "Thriller"
+   ],
+   "why": "Classic slasher with a tense, suspenseful build that cuts well into cliffhanger parts and is still widely read about (78,140 views)",
+   "trend": "Dark-evenings season, Halloween just passed; Halloween (1978 film) on Wikipedia",
+   "status": "new",
+   "added": "2026-11-03T06:41:27+07:00"
+  },
   {
    "title": "Wicker (film)",
    "year": 2026,
@@ -279,26 +339,23 @@
   ]
  },
  "ai": {
-  "summary": "The channel has 97,283 views, but 85,900 of them (88%) come from two videos: Elysium part 1 (31,100) and an untagged part 12 (54,800). Across 50 videos the average watch is only 6.2 s and 1.5% of viewers reach the end, so the opening hook and the cliffhanger endings are the first things to fix.",
+  "summary": "The channel posted 50 videos on 2026-10-29 for 97,707 views, but retention is very weak: average watch was 6.7 seconds and only 2.2% of viewers reached the end. No views, videos or per-video data are recorded for 2026-10-30 through 2026-11-03, so the trend since the last setting change can't be judged. Retention is the thing that matters most.",
   "working": [
-   "Recap mode has 34 of 50 videos, 39,940 views and 1,175 views per video, the best of the three modes",
-   "Elysium part 1 recap: 31,100 views, 692 likes and 79 saves, the channel's top video",
-   "10 Cloverfield Lane parts 1-8 at 58-85 s drew 4,713 views (about 589 per part), while Blink Twice recaps at 158-190 s averaged about 260 per part",
-   "Predestination highlights have the best retention: 19.5 s average watch and 7.3% full watch"
+   "50 videos drew 97,707 views on 2026-10-29, about 1,950 views per video",
+   "2,124 likes on 97,707 views, about 2.2% like rate",
+   "9 shares that day"
   ],
   "not_working": [
-   "Average watch is 6.2 s and full watch is 1.5% across all 50 videos",
-   "Stretch mode: 5 videos, 483 views in total (97 per video), 3.5 s average watch",
-   "Speak No Evil recaps: 8 parts, 1,454 views, 0.0% full watch",
-   "Only 19 comments and 24 shares on 97,283 views, so viewers are not reacting much"
+   "Average watch time was 6.7 seconds",
+   "Only 2.2% of viewers watched to the end",
+   "No videos or views recorded for the 5 days from 2026-10-30 to 2026-11-03"
   ],
   "actions": [
-   "Keep making recap parts as the core format, since recap holds 34 of 50 videos and produced the top hit",
-   "Open every part with the most tense or twisty beat in the first 3 seconds, because average watch is only 6.2 s",
-   "End each recap part on a cliffhanger and keep the next part's tease in the caption, aiming for the short-part pattern that worked on 10 Cloverfield Lane",
-   "Let the 165 s part length run for several days before changing it, since there is no post-change data yet, and pause stretch mode while it averages 97 views per video"
+   "Check whether posting stopped after 2026-10-29 or whether analytics stopped syncing, and fix whichever it is",
+   "Open each part with the hook in the first 2 seconds and cut slow intros, since 6.7s average watch means most viewers leave almost at once",
+   "Keep part length at 165s until 5 or more videos have data after the change, then compare avg_watch and full_watch",
+   "Download the next five movies, starting with the trending picks, and cut each into cliffhanger parts"
   ],
-  "at": "2026-10-29T12:11:47+07:00",
-  "error": "Claude app: You've hit your weekly limit · resets 3am (Asia/Bangkok)\n"
+  "at": "2026-11-03T06:41:27+07:00"
  }
 }
