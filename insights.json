@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T06:40:58+07:00",
+ "updated": "2026-11-03T12:41:08+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -264,77 +264,77 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 229587
+    "views": 341062
    },
    {
     "title": "You Can See Everything",
     "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 186419
+    "views": 286310
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 162308
+    "views": 235794
    },
    {
     "title": "Obsession (2025 film)",
     "about": "Film by Curry Barker",
-    "views": 161683
+    "views": 216445
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 136273
+    "views": 206041
    },
    {
     "title": "Baththa",
     "about": "2026 film directed by Balaji Tharaneetharan",
-    "views": 131061
+    "views": 173740
    },
    {
     "title": "Nocturne (TV series)",
     "about": "2026 American crime drama series",
-    "views": 124035
+    "views": 167909
    },
    {
     "title": "Wicker (film)",
     "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 117010
+    "views": 162985
    },
    {
     "title": "Verity (film)",
     "about": "2026 film by Michael Showalter",
-    "views": 103894
-   },
-   {
-    "title": "Backrooms (film)",
-    "about": "2026 film by Kane Parsons",
-    "views": 98993
+    "views": 149407
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 87429
+    "views": 132390
    },
    {
-    "title": "Halloween (1978 film)",
-    "about": "Film by John Carpenter",
-    "views": 78140
-   },
-   {
-    "title": "The Rocky Horror Picture Show",
-    "about": "1975 musical comedy horror film by Jim Sharman",
-    "views": 69854
-   },
-   {
-    "title": "Dead-End Job",
-    "about": "2026 South Korean television series",
-    "views": 69413
+    "title": "Backrooms (film)",
+    "about": "2026 film by Kane Parsons",
+    "views": 128762
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 67627
+    "views": 99896
+   },
+   {
+    "title": "Bigg Boss (Hindi TV series) season 20",
+    "about": "Season of television series",
+    "views": 93696
+   },
+   {
+    "title": "Dead-End Job",
+    "about": "2026 South Korean television series",
+    "views": 93425
+   },
+   {
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 92560
    }
   ]
  },
@@ -356,6 +356,7 @@
    "Keep part length at 165s until 5 or more videos have data after the change, then compare avg_watch and full_watch",
    "Download the next five movies, starting with the trending picks, and cut each into cliffhanger parts"
   ],
-  "at": "2026-11-03T06:41:27+07:00"
+  "at": "2026-11-03T06:41:27+07:00",
+  "error": "Claude app: You've hit your session limit · resets 1pm (Asia/Bangkok)\n"
  }
 }
