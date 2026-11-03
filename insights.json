@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T18:41:12+07:00",
+ "updated": "2026-11-04T00:41:16+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -66,6 +66,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-04",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -111,13 +120,25 @@
  ],
  "picks": [
   {
+   "title": "From (TV series)",
+   "year": 2022,
+   "genres": [
+    "Horror",
+    "Mystery"
+   ],
+   "why": "Supernatural mystery at 62,432 Wikipedia views, a fit for the dark-evening horror pull",
+   "trend": "Horror and supernatural mysteries in the season",
+   "status": "new",
+   "added": "2026-11-04T00:41:49+07:00"
+  },
+  {
    "title": "Nocturne (TV series)",
    "year": 2026,
    "genres": [
     "Crime",
     "Drama"
    ],
-   "why": "A new crime drama at 167,909 Wikipedia views in 3 days, a strong current pull for a mystery-style recap",
+   "why": "Still waiting, and the most-read crime series on Wikipedia right now at 103,315 views",
    "trend": "Nocturne (TV series) is among the most-read shows on Wikipedia in the last 3 days",
    "status": "new",
    "added": "2026-11-03T18:41:45+07:00"
@@ -129,7 +150,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Trending right now at 149,407 Wikipedia views in 3 days, and a twisty thriller fits the channel's strongest lane",
+   "why": "Still waiting, a twisty thriller at 101,564 Wikipedia views that suits the channel's mystery stories",
    "trend": "Trending on Wikipedia right now",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -141,7 +162,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "A twist-driven mystery that suits the channel's best lane and splits cleanly into cliffhanger parts; no per-movie numbers yet",
+   "why": "Still waiting; a twist-driven mystery that cuts into cliffhanger parts, the channel's strongest style",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -153,7 +174,7 @@
     "Mystery",
     "Crime"
    ],
-   "why": "A whodunit with a clear story and frequent reveals, a strong fit for the channel's mystery focus; no per-movie numbers yet",
+   "why": "Still waiting; a whodunit with a clear story, built for part-by-part reveals",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -261,7 +282,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-03",
+  "date": "2026-11-04",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -276,97 +297,98 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 341062
+    "views": 227470
    },
    {
     "title": "You Can See Everything",
-    "about": "2026 film by Nathan Fielder and Lance Oppenheim",
-    "views": 286310
+    "about": "2026 film",
+    "views": 194783
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 235794
+    "views": 156595
    },
    {
     "title": "Obsession (2025 film)",
     "about": "Film by Curry Barker",
-    "views": 216445
+    "views": 146548
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 206041
+    "views": 140742
    },
    {
     "title": "Baththa",
     "about": "2026 film directed by Balaji Tharaneetharan",
-    "views": 173740
+    "views": 105728
    },
    {
     "title": "Nocturne (TV series)",
     "about": "2026 American crime drama series",
-    "views": 167909
+    "views": 103315
    },
    {
     "title": "Wicker (film)",
     "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 162985
+    "views": 102958
    },
    {
     "title": "Verity (film)",
     "about": "2026 film by Michael Showalter",
-    "views": 149407
+    "views": 101564
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 132390
+    "views": 88415
    },
    {
     "title": "Backrooms (film)",
     "about": "2026 film by Kane Parsons",
-    "views": 128762
+    "views": 82611
    },
    {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 99896
-   },
-   {
-    "title": "Bigg Boss (Hindi TV series) season 20",
-    "about": "Season of television series",
-    "views": 93696
-   },
-   {
-    "title": "Dead-End Job",
-    "about": "2026 South Korean television series",
-    "views": 93425
+    "title": "King (2026 film)",
+    "about": "Upcoming Indian film by Siddharth Anand",
+    "views": 82422
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 92560
+    "views": 71259
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 65436
+   },
+   {
+    "title": "From (TV series)",
+    "about": "2022 American horror television series",
+    "views": 62432
    }
   ]
  },
  "ai": {
-  "summary": "The channel posted 50 videos on 2026-10-29 for 97,707 views, with 2,124 likes and 24 shares, but viewers stayed only 6.7 seconds on average and just 2.2% watched to the end. No videos were tracked from 2026-10-30 to 2026-11-03, so the most important thing now is keeping the numbers flowing and fixing the first seconds of each part.",
+  "summary": "The channel had 97,707 views across 50 videos on 2026-10-29, but every day since shows zeros, so the tracker may have stopped rather than the audience leaving. The number that matters most is retention: viewers leave after about 6.7 seconds on average, and only 2.2% watch to the end.",
   "working": [
-   "97,707 views on 2026-10-29 across 50 videos",
-   "2,124 likes (about 2.2% of views) and 24 shares on that day"
+   "97,707 views across 50 videos on 2026-10-29 shows the channel can reach a large audience",
+   "2,124 likes on 97,707 views (about 2.2%) shows some viewers liked the parts",
+   "24 shares on 2026-10-29 shows some viewers passed the parts on"
   ],
   "not_working": [
-   "Average watch of 6.7 seconds and only 2.2% full watch",
-   "Zero videos and zero views recorded on each day from 2026-10-30 to 2026-11-03",
-   "No per-mode or per-movie numbers, so no format or film can be ranked yet"
+   "Average watch time is 6.7 seconds, so most viewers leave almost immediately",
+   "Only 2.2% of viewers watched to the end",
+   "Zero views, videos and likes logged from 2026-10-30 to 2026-11-04 (six days)"
   ],
   "actions": [
-   "Check whether the zero rows from 2026-10-30 to 2026-11-03 mean no uploads or a failed analytics pull before changing anything else",
-   "Rework the first 3 seconds of each part so the hook lands before viewers leave, since the 6.7-second average watch shows most leave almost at once",
-   "Keep recap_part_seconds at 165 and judge it only after at least 5 tracked videos exist",
-   "Download the five next_movies, starting with Verity (film) and Gone Girl, and end each part on a cliffhanger"
+   "Check the analytics pull and upload tracker first; six days of zeros after a 97,707-view day likely means the sync stopped",
+   "Rewrite the first 3 seconds of each part to open on the tensest moment or the cliffhanger, then compare avg watch against the current 6.7s",
+   "Keep recap_part_seconds at 165 until 5 or more videos posted after the change have numbers; no tuning yet",
+   "Download Nocturne and Verity first, the two crime and thriller titles trending hardest right now"
   ],
-  "at": "2026-11-03T18:41:45+07:00"
+  "at": "2026-11-04T00:41:49+07:00"
  }
 }
