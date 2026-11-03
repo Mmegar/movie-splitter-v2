@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T12:41:08+07:00",
+ "updated": "2026-11-03T18:41:12+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -111,13 +111,25 @@
  ],
  "picks": [
   {
+   "title": "Nocturne (TV series)",
+   "year": 2026,
+   "genres": [
+    "Crime",
+    "Drama"
+   ],
+   "why": "A new crime drama at 167,909 Wikipedia views in 3 days, a strong current pull for a mystery-style recap",
+   "trend": "Nocturne (TV series) is among the most-read shows on Wikipedia in the last 3 days",
+   "status": "new",
+   "added": "2026-11-03T18:41:45+07:00"
+  },
+  {
    "title": "Verity (film)",
    "year": 2026,
    "genres": [
     "Thriller",
     "Mystery"
    ],
-   "why": "Twisty thriller that fits the channel's mystery strength and is currently among the most-read films on Wikipedia (103,894 views)",
+   "why": "Trending right now at 149,407 Wikipedia views in 3 days, and a twisty thriller fits the channel's strongest lane",
    "trend": "Trending on Wikipedia right now",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -129,7 +141,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Well-known twist-driven mystery that splits cleanly into cliffhanger parts, matching the channel's best-performing style",
+   "why": "A twist-driven mystery that suits the channel's best lane and splits cleanly into cliffhanger parts; no per-movie numbers yet",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -141,7 +153,7 @@
     "Mystery",
     "Crime"
    ],
-   "why": "Whodunit with a clear reveal structure that suits multi-part recaps and the channel's mystery focus",
+   "why": "A whodunit with a clear story and frequent reveals, a strong fit for the channel's mystery focus; no per-movie numbers yet",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -153,7 +165,7 @@
     "Crime",
     "Drama"
    ],
-   "why": "British crime drama that is currently being read about heavily (67,627 views) and fits the crime season",
+   "why": "A crime drama trending at 99,896 Wikipedia views in 3 days, and it can be recapped in cliffhanger parts",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-03T06:41:27+07:00"
@@ -339,24 +351,22 @@
   ]
  },
  "ai": {
-  "summary": "The channel posted 50 videos on 2026-10-29 for 97,707 views, but retention is very weak: average watch was 6.7 seconds and only 2.2% of viewers reached the end. No views, videos or per-video data are recorded for 2026-10-30 through 2026-11-03, so the trend since the last setting change can't be judged. Retention is the thing that matters most.",
+  "summary": "The channel posted 50 videos on 2026-10-29 for 97,707 views, with 2,124 likes and 24 shares, but viewers stayed only 6.7 seconds on average and just 2.2% watched to the end. No videos were tracked from 2026-10-30 to 2026-11-03, so the most important thing now is keeping the numbers flowing and fixing the first seconds of each part.",
   "working": [
-   "50 videos drew 97,707 views on 2026-10-29, about 1,950 views per video",
-   "2,124 likes on 97,707 views, about 2.2% like rate",
-   "9 shares that day"
+   "97,707 views on 2026-10-29 across 50 videos",
+   "2,124 likes (about 2.2% of views) and 24 shares on that day"
   ],
   "not_working": [
-   "Average watch time was 6.7 seconds",
-   "Only 2.2% of viewers watched to the end",
-   "No videos or views recorded for the 5 days from 2026-10-30 to 2026-11-03"
+   "Average watch of 6.7 seconds and only 2.2% full watch",
+   "Zero videos and zero views recorded on each day from 2026-10-30 to 2026-11-03",
+   "No per-mode or per-movie numbers, so no format or film can be ranked yet"
   ],
   "actions": [
-   "Check whether posting stopped after 2026-10-29 or whether analytics stopped syncing, and fix whichever it is",
-   "Open each part with the hook in the first 2 seconds and cut slow intros, since 6.7s average watch means most viewers leave almost at once",
-   "Keep part length at 165s until 5 or more videos have data after the change, then compare avg_watch and full_watch",
-   "Download the next five movies, starting with the trending picks, and cut each into cliffhanger parts"
+   "Check whether the zero rows from 2026-10-30 to 2026-11-03 mean no uploads or a failed analytics pull before changing anything else",
+   "Rework the first 3 seconds of each part so the hook lands before viewers leave, since the 6.7-second average watch shows most leave almost at once",
+   "Keep recap_part_seconds at 165 and judge it only after at least 5 tracked videos exist",
+   "Download the five next_movies, starting with Verity (film) and Gone Girl, and end each part on a cliffhanger"
   ],
-  "at": "2026-11-03T06:41:27+07:00",
-  "error": "Claude app: You've hit your session limit · resets 1pm (Asia/Bangkok)\n"
+  "at": "2026-11-03T18:41:45+07:00"
  }
 }
