@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-05T18:43:27+07:00",
+ "updated": "2026-11-06T00:42:39+07:00",
  "totals": {
-  "views": 104284,
+  "views": 104524,
   "likes": 2195,
   "comments": 21,
   "shares": 24,
@@ -249,7 +249,7 @@
    "id": "7701562686290677010",
    "desc": "The vibes are unmatched ✨ Highlight 1 🎬 · Follow so you don't miss Highlight 2 🔔 #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793159819,
-   "views": 347,
+   "views": 348,
    "likes": 8,
    "comments": 0,
    "shares": 0,
@@ -285,7 +285,7 @@
    "id": "7701482449565437205",
    "desc": "They drink what might be snake venom to get their memories back 🥃 The plan starts, and it gets messy fast. Part 5 🎬 · Follow so you don't miss Part 6 🔔 #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793141125,
-   "views": 415,
+   "views": 418,
    "likes": 5,
    "comments": 0,
    "shares": 0,
@@ -303,7 +303,7 @@
    "id": "7701429584889187604",
    "desc": "The party gets wild, and then someone gets bitten 🐍 Nobody wants to leave, but one woman is begging them to. Part 4 🎬 · Part 5 coming soon ⏳ #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793128818,
-   "views": 558,
+   "views": 564,
    "likes": 10,
    "comments": 0,
    "shares": 0,
@@ -549,7 +549,7 @@
    "id": "7699805601295060230",
    "desc": "The bunker turns deadly, the acid goes everywhere, and the girl in the suit makes a run for it 🔥 Hold on tight. Part 8 🎬 · That's the last part. Follow for more 🍿 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
    "created": 1792750705,
-   "views": 4643,
+   "views": 4668,
    "likes": 14,
    "comments": 1,
    "shares": 0,
@@ -693,7 +693,7 @@
    "id": "7699734948793650452",
    "desc": "Paddy is calm, Ciara is begging, and the Daltons have one shot left 🔥 Is this the end of the family? Part 8 🎬 · That's the last part. Follow for more 🍿 #SpeakNoEvil #JamesMcAvoy #MackenzieDavis #ScootMcNairy #movie",
    "created": 1792734251,
-   "views": 189,
+   "views": 190,
    "likes": 2,
    "comments": 0,
    "shares": 0,
@@ -837,7 +837,7 @@
    "id": "7699700913782508820",
    "desc": "The final showdown, a plank full of nails and a butterfly 🦋 Heretic ends on a moment that will stay with you. Part 8 🎬 · And that's a wrap 🎬 Follow for the next one #Heretic #HughGrant #SophieThatcher #ChloeEast #movie",
    "created": 1792726329,
-   "views": 941,
+   "views": 944,
    "likes": 4,
    "comments": 0,
    "shares": 0,
@@ -855,7 +855,7 @@
    "id": "7699700342224653588",
    "desc": "The final showdown, a plank full of nails and a butterfly 🦋 Heretic ends on a moment that will stay with you. Part 8 🎬 · And that's a wrap 🎬 Follow for the next one #Heretic #HughGrant #SophieThatcher #ChloeEast #movie",
    "created": 1792726194,
-   "views": 380,
+   "views": 381,
    "likes": 2,
    "comments": 0,
    "shares": 0,
@@ -873,7 +873,7 @@
    "id": "7696015184623570196",
    "desc": "Tag someone who needs to see this 👇 Part 4 🎬 · Part 5 is up next 👀 #fyp #foryou #viral #movie #movieclips",
    "created": 1791868175,
-   "views": 32900,
+   "views": 33000,
    "likes": 720,
    "comments": 9,
    "shares": 8,
@@ -891,7 +891,7 @@
    "id": "7695891942626053396",
    "desc": "I like banana Part 12 🎬 · That's the last part. Follow for more 🍿 #foryou #trending #movie #cinema #fypシ",
    "created": 1791839482,
-   "views": 55900,
+   "views": 56000,
    "likes": 1301,
    "comments": 11,
    "shares": 13,
@@ -906,25 +906,24 @@
  "movies": {
   "Elysium (2013)": {
    "videos": 8,
-   "views": 32902,
+   "views": 33002,
    "likes": 721,
    "comments": 9,
    "shares": 8,
    "saves": 80,
    "modes": {
-    "recap": 32902,
+    "recap": 33002,
     "stretch": 0
    },
    "best_part": [
     1,
-    32900
+    33000
    ],
    "avg_watch": 2.3,
    "full_watch": 1.1,
    "genres": [
     "Sci-Fi",
-    "Action",
-    "Thriller"
+    "Action"
    ],
    "cast": [
     "Matt Damon",
@@ -935,19 +934,19 @@
   },
   "Blink Twice (2024)": {
    "videos": 13,
-   "views": 2670,
+   "views": 2680,
    "likes": 45,
    "comments": 0,
    "shares": 3,
    "saves": 1,
    "modes": {
     "stretch": 41,
-    "highlights": 887,
-    "recap": 1742
+    "highlights": 888,
+    "recap": 1751
    },
    "best_part": [
     4,
-    558
+    564
    ],
    "avg_watch": 13.8,
    "full_watch": 3.3,
@@ -981,7 +980,7 @@
    "full_watch": 1.4,
    "genres": [
     "Thriller",
-    "Survival"
+    "Adventure"
    ],
    "cast": [
     "Grace Caroline Currey",
@@ -1019,17 +1018,17 @@
   },
   "10 Cloverfield Lane (2016)": {
    "videos": 8,
-   "views": 6944,
+   "views": 6969,
    "likes": 36,
    "comments": 1,
    "shares": 0,
    "saves": 4,
    "modes": {
-    "recap": 6944
+    "recap": 6969
    },
    "best_part": [
     8,
-    4643
+    4668
    ],
    "avg_watch": 7.2,
    "full_watch": 3.8,
@@ -1047,13 +1046,13 @@
   },
   "Speak No Evil (2024)": {
    "videos": 8,
-   "views": 1488,
+   "views": 1489,
    "likes": 18,
    "comments": 0,
    "shares": 0,
    "saves": 5,
    "modes": {
-    "recap": 1488
+    "recap": 1489
    },
    "best_part": [
     3,
@@ -1074,17 +1073,17 @@
   },
   "Heretic (2024)": {
    "videos": 2,
-   "views": 1321,
+   "views": 1325,
    "likes": 6,
    "comments": 0,
    "shares": 0,
    "saves": 0,
    "modes": {
-    "recap": 1321
+    "recap": 1325
    },
    "best_part": [
     8,
-    941
+    944
    ],
    "avg_watch": 9.1,
    "full_watch": 2.6,
@@ -1172,6 +1171,15 @@
    "shares": 24,
    "avg_watch": 8.3,
    "full_watch": 3.1
+  },
+  {
+   "day": "2026-11-06",
+   "views": 104524,
+   "videos": 50,
+   "likes": 2195,
+   "shares": 24,
+   "avg_watch": 8.3,
+   "full_watch": 3.1
   }
  ],
  "tuning": [
@@ -1237,7 +1245,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "A twisty psychological mystery with a clear reveal structure, similar in feel to Predestination, which had the channel's best retention.",
+   "why": "Twist-ending mystery that fits the channel's strongest stories (Predestination had 7.2% full watch); still waiting from the last list",
    "trend": null,
    "status": "new",
    "added": "2026-11-05T18:44:18+07:00"
@@ -1249,7 +1257,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Still waiting to be downloaded; a 2026 psychological thriller with a twisty story that fits the channel's strongest genre.",
+   "why": "64,547 Wikipedia reads in 3 days; still waiting and fits the crime-thriller season",
    "trend": "Verity (2026 film): 110,060 Wikipedia views in the last 3 days",
    "status": "new",
    "added": "2026-11-05T12:45:55+07:00"
@@ -1262,7 +1270,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Still waiting to be downloaded; a dark kidnapping mystery with a clear story that splits into cliffhanger parts.",
+   "why": "Missing-child mystery with cliffhanger-ready parts; still waiting and matches the crime-thriller mood",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-05T06:45:20+07:00"
@@ -1274,7 +1282,7 @@
     "Horror",
     "Action"
    ],
-   "why": "Still waiting to be downloaded; a new horror film with a clear plot, and it's among the most-read titles on Wikipedia right now.",
+   "why": "113,667 Wikipedia reads in 3 days; horror-thriller in the same vein as Heretic, which drew 944 views on one part",
    "trend": "Wikipedia: 96,855 reads in 3 days",
    "status": "new",
    "added": "2026-11-05T00:45:43+07:00"
@@ -1384,18 +1392,6 @@
    "at": "2026-11-04T06:43:49+07:00"
   },
   {
-   "title": "Wicker (film)",
-   "year": 2026,
-   "genres": [
-    "Horror"
-   ],
-   "why": "Trending at 204,669 Wikipedia views and fits the Halloween horror window; a horror mystery suits the channel's strongest story type",
-   "trend": "Trending on Wikipedia (67,318 views in 3 days) during spooky season",
-   "status": "expired",
-   "added": "2026-10-29T00:10:07+07:00",
-   "at": "2026-10-30T00:38:59+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -1410,7 +1406,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -1423,102 +1419,102 @@
   ],
   "trending": [
    {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 292070
-   },
-   {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 257661
+    "views": 212700
    },
    {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 176341
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 175993
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 149148
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 180595
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 146450
+    "views": 122792
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 113667
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 106573
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 102507
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 135719
-   },
-   {
-    "title": "Wicker (film)",
-    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 118053
-   },
-   {
-    "title": "Verity (film)",
-    "about": "2026 film by Michael Showalter",
-    "views": 110060
+    "views": 94522
    },
    {
     "title": "Primetime (film)",
     "about": "2026 film by Lance Oppenheim",
-    "views": 105715
+    "views": 81673
+   },
+   {
+    "title": "Wicker (film)",
+    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
+    "views": 72078
+   },
+   {
+    "title": "The Remarried Empress",
+    "about": "2026 South Korean television series",
+    "views": 65684
+   },
+   {
+    "title": "Verity (film)",
+    "about": "2026 film by Michael Showalter",
+    "views": 64547
+   },
+   {
+    "title": "I, Robot (film)",
+    "about": "2004 film by Alex Proyas",
+    "views": 54406
    },
    {
     "title": "Obsession (2025 film)",
     "about": "Film by Curry Barker",
-    "views": 92229
-   },
-   {
-    "title": "King (2026 film)",
-    "about": "Upcoming Indian film by Siddharth Anand",
-    "views": 90169
+    "views": 37467
    },
    {
     "title": "Nocturne (TV series)",
     "about": "2026 American crime drama series",
-    "views": 75993
-   },
-   {
-    "title": "The Gilded Age (TV series)",
-    "about": "American historical drama television series",
-    "views": 75425
+    "views": 32119
    },
    {
     "title": "Baththa",
     "about": "2026 film directed by Balaji Tharaneetharan",
-    "views": 74717
+    "views": 32038
    }
   ]
  },
  "ai": {
-  "summary": "The channel has 50 videos and 104,284 views, but it's mostly carried by two outliers: the Elysium part 1 recap (32,900 views) and an untagged \"I like banana\" part 12 (55,900 views, 35.8% full watch). Average watch is only 8.3 s and full watch is 3.1%, so the hooks and part endings matter most. Recaps are the only mode with a proven top video, so they stay.",
+  "summary": "The channel has 104,524 views, but two videos make up 85% of them: Elysium part 1 (33,000) and an untagged 'I like banana' part 12 (56,000). Most other parts draw under 500 views. The thing that matters most is that recap is the only format that has produced hits, so keep recaps as the main format, keep the parts short, and tag every upload with its movie.",
   "working": [
-   "Elysium part 1 recap: 32,900 views, 18.4 s average watch, 8.8% full watch",
-   "Recaps: 34 of 50 videos and about 44% of all views (45,394 of 104,284), 1,335 views per video",
-   "10 Cloverfield Lane part 8 (85 s): 4,643 views and 22.6 s average watch",
-   "Predestination highlights: 14.3 s average watch and 7.2% full watch, the best retention of any movie"
+   "Elysium part 1 drew 33,000 views with 18.4 s average watch; the untagged part 12 drew 56,000 views with 35.8% full watch",
+   "Recap is the only format with a hit: 34 videos, 45,533 views, 6.5 s average watch",
+   "10 Cloverfield Lane parts 2–6 (58–66 s) each drew 382–488 views",
+   "Highlights hold viewers longest at 14.9 s average watch, though they average only 199 views per video"
   ],
   "not_working": [
-   "Elysium parts 2-7 (165-288 s), posted after the Oct 29 change to 165 s, drew 2 views in total",
-   "Highlights average 199 views per video and stretch averages 116, against 1,335 for recaps",
-   "Speak No Evil parts 4 and 7 drew 8 and 10 views, with 2.6 s average watch across the movie",
-   "Channel-wide full watch is only 3.1%, so most viewers leave in the first seconds"
+   "Elysium parts 2–7 (165–288 s) drew 2 views in total, with 2.3 s average watch and 1.1% full watch",
+   "Speak No Evil recap: 2.6 s average watch, 0.5% full watch, 1,489 views over 8 parts",
+   "Stretch mode averages 116 views per video across 5 videos, with 5.5 s average watch",
+   "Channel-wide: 3.1% full watch, and only 21 comments and 24 shares across 50 videos"
   ],
   "actions": [
-   "Keep recap_part_seconds at 105 and judge the next 5 or more recap parts before changing it again; the Nov 4 change to 135 never got posts to test it.",
-   "Find what the 55,900-view \"I like banana\" part 12 is, since it has the best full-watch rate on the channel, and make more videos built the same way.",
-   "Open every part with the strongest moment and end each one on a cliffhanger with \"Part N is up next\", as the 4,643-view Cloverfield part 8 and the 32,900-view Elysium part 1 did.",
-   "Download Verity first while its trend lasts, then Prisoners, Resident Evil (2026) and the two twisty picks."
+   "Tag the 56,000-view 'I like banana' part 12 with its movie name so it counts in the per-movie numbers and can be judged",
+   "Download Shutter Island and Prisoners next; both fit the true-crime season and are twist-driven, the story type that produced Predestination's 7.2% full watch",
+   "Hold recap_part_seconds at 105 until 5 new recap parts are posted; if they average under 1,000 views, step down to 90 s",
+   "Post fewer stretch-mode parts, since they average 116 views each, and keep highlights as the retention tool for recap endings"
   ],
-  "at": "2026-11-05T18:44:18+07:00"
+  "at": "2026-11-06T00:43:53+07:00"
  }
 }
