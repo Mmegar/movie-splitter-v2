@@ -1,7 +1,7 @@
 {
- "updated": "2026-11-06T00:42:39+07:00",
+ "updated": "2026-11-06T01:12:45+07:00",
  "totals": {
-  "views": 104524,
+  "views": 104531,
   "likes": 2195,
   "comments": 21,
   "shares": 24,
@@ -549,7 +549,7 @@
    "id": "7699805601295060230",
    "desc": "The bunker turns deadly, the acid goes everywhere, and the girl in the suit makes a run for it 🔥 Hold on tight. Part 8 🎬 · That's the last part. Follow for more 🍿 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
    "created": 1792750705,
-   "views": 4668,
+   "views": 4675,
    "likes": 14,
    "comments": 1,
    "shares": 0,
@@ -980,7 +980,7 @@
    "full_watch": 1.4,
    "genres": [
     "Thriller",
-    "Adventure"
+    "Survival"
    ],
    "cast": [
     "Grace Caroline Currey",
@@ -1018,17 +1018,17 @@
   },
   "10 Cloverfield Lane (2016)": {
    "videos": 8,
-   "views": 6969,
+   "views": 6976,
    "likes": 36,
    "comments": 1,
    "shares": 0,
    "saves": 4,
    "modes": {
-    "recap": 6969
+    "recap": 6976
    },
    "best_part": [
     8,
-    4668
+    4675
    ],
    "avg_watch": 7.2,
    "full_watch": 3.8,
@@ -1174,7 +1174,7 @@
   },
   {
    "day": "2026-11-06",
-   "views": 104524,
+   "views": 104531,
    "videos": 50,
    "likes": 2195,
    "shares": 24,
@@ -1239,13 +1239,26 @@
  ],
  "picks": [
   {
+   "title": "Zodiac",
+   "year": 2007,
+   "genres": [
+    "Crime",
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "A real-crime mystery with a long runtime that splits into cliffhanger parts, matching the season.",
+   "trend": "True-crime season, long dark evenings.",
+   "status": "new",
+   "added": "2026-11-06T01:13:51+07:00"
+  },
+  {
    "title": "Shutter Island",
    "year": 2010,
    "genres": [
     "Mystery",
     "Thriller"
    ],
-   "why": "Twist-ending mystery that fits the channel's strongest stories (Predestination had 7.2% full watch); still waiting from the last list",
+   "why": "Still-waiting pick; the twist-driven mystery style that suits this channel's best recap hooks.",
    "trend": null,
    "status": "new",
    "added": "2026-11-05T18:44:18+07:00"
@@ -1257,7 +1270,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "64,547 Wikipedia reads in 3 days; still waiting and fits the crime-thriller season",
+   "why": "Still-waiting pick; a twisty thriller that cuts well into cliffhanger parts.",
    "trend": "Verity (2026 film): 110,060 Wikipedia views in the last 3 days",
    "status": "new",
    "added": "2026-11-05T12:45:55+07:00"
@@ -1270,7 +1283,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Missing-child mystery with cliffhanger-ready parts; still waiting and matches the crime-thriller mood",
+   "why": "Still-waiting pick; a slow-burn crime mystery that fits the dark-evenings true-crime season.",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-05T06:45:20+07:00"
@@ -1284,8 +1297,9 @@
    ],
    "why": "113,667 Wikipedia reads in 3 days; horror-thriller in the same vein as Heretic, which drew 944 views on one part",
    "trend": "Wikipedia: 96,855 reads in 3 days",
-   "status": "new",
-   "added": "2026-11-05T00:45:43+07:00"
+   "status": "expired",
+   "added": "2026-11-05T00:45:43+07:00",
+   "at": "2026-11-06T01:12:45+07:00"
   },
   {
    "title": "Backrooms (film)",
@@ -1496,25 +1510,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel has 104,524 views, but two videos make up 85% of them: Elysium part 1 (33,000) and an untagged 'I like banana' part 12 (56,000). Most other parts draw under 500 views. The thing that matters most is that recap is the only format that has produced hits, so keep recaps as the main format, keep the parts short, and tag every upload with its movie.",
+  "summary": "The channel has 104,531 views but holds attention poorly: 8.3s average watch and 3.1% full watch, so most viewers leave in the first seconds. Recap parts with a tag-a-friend hook carry almost all of the views, and the 165-second Elysium batch was the clearest failure, which the owner has already moved back to 105 seconds.",
   "working": [
-   "Elysium part 1 drew 33,000 views with 18.4 s average watch; the untagged part 12 drew 56,000 views with 35.8% full watch",
-   "Recap is the only format with a hit: 34 videos, 45,533 views, 6.5 s average watch",
-   "10 Cloverfield Lane parts 2–6 (58–66 s) each drew 382–488 views",
-   "Highlights hold viewers longest at 14.9 s average watch, though they average only 199 views per video"
+   "Recaps drive the channel: 34 recap videos made 45,540 of 104,531 views (1,339 per video, vs 199 for highlights and 116 for stretch).",
+   "Elysium part 1 with a 'Tag someone who needs to see this' hook drew 33,000 views, 18.4s average watch, 8.8% full watch and 80 saves, the channel's best.",
+   "The 'I like banana' Part 12 video drew 56,000 views at 35.8% full watch, the best retention on the channel.",
+   "Highlights hold attention longer: 14.9s average watch vs 6.5s for recaps; Predestination highlights reached 14.3s and 7.2% full watch."
   ],
   "not_working": [
-   "Elysium parts 2–7 (165–288 s) drew 2 views in total, with 2.3 s average watch and 1.1% full watch",
-   "Speak No Evil recap: 2.6 s average watch, 0.5% full watch, 1,489 views over 8 parts",
-   "Stretch mode averages 116 views per video across 5 videos, with 5.5 s average watch",
-   "Channel-wide: 3.1% full watch, and only 21 comments and 24 shares across 50 videos"
+   "Elysium parts 2-7 (165-288 s), posted after the Oct 29 change to 165 s, drew 2 views combined.",
+   "Speak No Evil averages 2.6s watch and 0.5% full watch across 8 parts (1,489 views total).",
+   "Overall average watch is 8.3s and full watch 3.1%, so the first seconds of each part are losing viewers.",
+   "Stretch is the weakest mode at 116 views per video and 5.5s average watch."
   ],
   "actions": [
-   "Tag the 56,000-view 'I like banana' part 12 with its movie name so it counts in the per-movie numbers and can be judged",
-   "Download Shutter Island and Prisoners next; both fit the true-crime season and are twist-driven, the story type that produced Predestination's 7.2% full watch",
-   "Hold recap_part_seconds at 105 until 5 new recap parts are posted; if they average under 1,000 views, step down to 90 s",
-   "Post fewer stretch-mode parts, since they average 116 views each, and keep highlights as the retention tool for recap endings"
+   "Keep recap parts at 105 seconds and judge the next 5 posts on avg_watch and full_watch before changing length again.",
+   "Open each recap part with a bold hook and end it on a question or cliffhanger, copying the 'Tag someone' line that worked on Elysium part 1.",
+   "Fill in the movie and mode fields for the 'I like banana' Part 12 video (56,000 views, 35.8% full watch) so the channel can learn from it.",
+   "Download Verity and Shutter Island first, then test a highlights series on a twist film to compare retention against recaps."
   ],
-  "at": "2026-11-06T00:43:53+07:00"
+  "at": "2026-11-06T01:13:51+07:00"
  }
 }
