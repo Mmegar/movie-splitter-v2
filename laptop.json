@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T10:40:43+07:00",
+ "updated": "2026-11-06T10:45:40+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,7 +102,18 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [],
+ "queue": [
+  {
+   "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
+   "size_mb": 2948,
+   "modified": "2026-10-19T22:58:35+07:00",
+   "sending": false,
+   "style": "zoom",
+   "character": "",
+   "pinned": true,
+   "ai_why": ""
+  }
+ ],
  "library": [
   {
    "name": "Hereditary.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
@@ -118,11 +129,6 @@
    "name": "Companion.2025.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 1922,
    "modified": "2026-10-23T08:47:45+07:00"
-  },
-  {
-   "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2948,
-   "modified": "2026-10-19T22:58:35+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -150,10 +156,13 @@
   "mw4f749zjey1": {
    "status": "failed",
    "note": "The part isn't on the laptop (not downloaded yet, or it was cleaned up)"
+  },
+  "mw4flx1wbjng": {
+   "status": "done",
+   "note": "Moved to To edit"
   }
  },
  "commands_done": [
-  "mv6igiwhxb7g",
   "mv6kcq56w73o",
   "mv7d1to8kmvj",
   "mv7d21lvbmlq",
@@ -302,7 +311,8 @@
   "mvx5718upab5",
   "mvx59ofn8o3i",
   "mw4f3efe0bpt",
-  "mw4f749zjey1"
+  "mw4f749zjey1",
+  "mw4flx1wbjng"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
