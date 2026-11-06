@@ -30,6 +30,14 @@
    "type": "to_bin",
    "file": "Midsommar.2019.Directors.Cut.1080p.HDRip.1800MB.DD2.0.x264-GalaxyRG.mkv",
    "from": "done"
+  },
+  {
+   "id": "mw4hge8v6v7l",
+   "at": "2026-11-06T04:37:08.000Z",
+   "type": "mark_posted",
+   "movie_id": "dune-2021",
+   "mode": "recap",
+   "n": 2
   }
  ]
 }
