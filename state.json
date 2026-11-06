@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:41:28+13:00",
+ "updated": "2026-11-06T17:41:31+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Dune (2021)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 5,
+  "part": 6,
   "parts_total": 6
  },
  "queue": [],
@@ -5203,6 +5203,12 @@
  },
  "events": [
   {
+   "at": "2026-11-06T17:41:30+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Dune (2021): Part 5 of 6 ready",
+   "message": "Part 5: Jessica's Voice in the Desert (10 narrated beats, about 163s of voice)\nIn Ready to post/Dune (2021)/Movie recap."
+  },
+  {
    "at": "2026-11-06T17:31:36+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Dune (2021): Part 4 of 6 ready",
@@ -6395,12 +6401,6 @@
    "type": "planned",
    "title": "[Movie recap] Heretic (2024): 8 parts planned",
    "message": "Heretic (2024)\nMode: Movie recap\n\nPart 1: Two Missionaries, One Locked Door (16 narrated beats, about 82s of voice)\nPart 2: Blueberry Disease and Butterflies (13 narrated beats, about 67s of voice)\nPart 3: Pick a Door, Any Door (11 narrated beats, about 58s of voice)\nPart 4: Iterations, Jar Jar, and Fear (15 narrated beats, about 65s of voice)\nPart 5: Basement Pie, Dead Prophet (13 narrated beats, about 58s of voice)\nPart 6: She's Coming Back, Right? (13 narrated beats, about 60s of voice)\nPart 7: The Chute and the Cages (12 narrated beats, about 55s of voice)\nPart 8: The One True Religion (12 narrated beats, about 59s of voice)\n"
-  },
-  {
-   "at": "2026-10-23T15:39:17+13:00",
-   "type": "started",
-   "title": "Started: Heretic (2024)",
-   "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Heretic (2024)'."
   }
  ]
 }
