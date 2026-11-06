@@ -1,13 +1,13 @@
 {
  "version": 1,
- "updated": "2026-11-06T16:50:57+13:00",
+ "updated": "2026-11-06T16:51:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-11-06T16:50:54+13:00",
-  "movie": null,
+  "movie": "Dune (2021)",
   "mode": null,
-  "stage": "idle",
+  "stage": "analysing",
   "part": null,
   "parts_total": null
  },
