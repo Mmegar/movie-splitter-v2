@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:08:43+13:00",
+ "updated": "2026-11-06T17:15:01+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -43,6 +43,22 @@
         "error": null
        },
        "cover": "dune-2021/recap-01-cover.bin"
+      },
+      {
+       "n": 2,
+       "start": 1652.0,
+       "end": 2780.0,
+       "seconds": 64.3,
+       "drive_path": "Ready to post/Dune (2021)/Movie recap/Dune (2021) - Part 02.mp4",
+       "caption": "A failed assassination and a secret meeting with a cruel baron 😬 Something bad is coming.\nPart 2 🎬 · Part 3 is up next 👀\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
+       "preview": "dune-2021/recap-002.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "dune-2021/recap-02-cover.bin"
       }
      ]
     },
