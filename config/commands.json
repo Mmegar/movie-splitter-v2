@@ -1,17 +1,12 @@
 {
  "commands": [
   {
-   "id": "mvx5718upab5",
-   "at": "2026-11-01T01:19:32.624Z",
-   "type": "to_queue",
-   "file": "Midsommar.2019.Directors.Cut.1080p.HDRip.1800MB.DD2.0.x264-GalaxyRG.mkv",
-   "from": "library",
-   "first": true
-  },
-  {
-   "id": "mvx59ofn8o3i",
-   "at": "2026-11-01T01:21:35.987Z",
-   "type": "cut_now"
+   "id": "mw4f3efe0bpt",
+   "at": "2026-11-06T03:31:02.475Z",
+   "type": "mark_posted",
+   "movie_id": "midsommar-2019",
+   "mode": "recap",
+   "n": 2
   }
  ]
 }
