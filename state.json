@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:48:03+13:00",
+ "updated": "2026-11-06T17:48:07+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -71,10 +71,11 @@
        "caption": "A duke bets everything on a desert alliance, then gets hit with a vision 🌪️\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
        "preview": "dune-2021/recap-003.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "posted",
+        "at": "2026-11-06T17:48:07+13:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 1
        },
        "cover": "dune-2021/recap-03-cover.bin"
       },
