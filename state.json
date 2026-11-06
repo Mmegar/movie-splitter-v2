@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:21:22+13:00",
+ "updated": "2026-11-06T17:21:25+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Dune (2021)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 3,
+  "part": 4,
   "parts_total": 6
  },
  "queue": [],
@@ -5170,6 +5170,12 @@
  },
  "events": [
   {
+   "at": "2026-11-06T17:21:25+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Dune (2021): Part 3 of 6 ready",
+   "message": "Part 3: The Duke's Risky Alliance (5 narrated beats, about 88s of voice)\nIn Ready to post/Dune (2021)/Movie recap."
+  },
+  {
    "at": "2026-11-06T17:15:03+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Dune (2021): Part 2 of 6 ready",
@@ -6362,12 +6368,6 @@
    "type": "finished",
    "title": "✅ Finished: Once Upon A Time In The Middle East (2026)",
    "message": "Movie recap: 8 parts.\nIn Ready to post/Once Upon A Time In The Middle East (2026)."
-  },
-  {
-   "at": "2026-10-23T15:08:51+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 8 of 8 ready",
-   "message": "Part 8: The Mosque Escape Plan (12 narrated beats, about 70s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
   }
  ]
 }
