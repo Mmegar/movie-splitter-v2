@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T18:47:01+07:00",
+ "updated": "2026-11-06T18:47:40+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -378,9 +378,9 @@
  "next_post_at": null,
  "insights_run": {
   "started": "2026-11-06T18:44:26+07:00",
-  "step": "Reading watch time",
-  "done": 13,
-  "total": 15
+  "step": "Claude is reading the numbers",
+  "done": null,
+  "total": null
  },
  "insights_at": 1793965466.557816,
  "version": 2
