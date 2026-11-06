@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:41:31+13:00",
+ "updated": "2026-11-06T17:47:47+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -108,6 +108,22 @@
         "error": null
        },
        "cover": "dune-2021/recap-05-cover.bin"
+      },
+      {
+       "n": 6,
+       "start": 8132.0,
+       "end": 8451.0,
+       "seconds": 70.9,
+       "drive_path": "Ready to post/Dune (2021)/Movie recap/Dune (2021) - Part 06.mp4",
+       "caption": "A ritual duel to the death decides everything, and the stakes keep climbing 🔥\nPart 6 🎬 · And that's a wrap 🎬 Follow for the next one\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
+       "preview": "dune-2021/recap-006.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "dune-2021/recap-06-cover.bin"
       }
      ]
     },
