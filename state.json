@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:37:23+13:00",
+ "updated": "2026-11-06T17:41:28+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -92,6 +92,22 @@
         "error": null
        },
        "cover": "dune-2021/recap-04-cover.bin"
+      },
+      {
+       "n": 5,
+       "start": 5413.0,
+       "end": 7752.0,
+       "seconds": 115.6,
+       "drive_path": "Ready to post/Dune (2021)/Movie recap/Dune (2021) - Part 05.mp4",
+       "caption": "Two prisoners are dumped in the sand, but one of them has a secret weapon 🏜️\nPart 5 🎬 · Part 6 is up next 👀\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
+       "preview": "dune-2021/recap-005.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "dune-2021/recap-05-cover.bin"
       }
      ]
     },
