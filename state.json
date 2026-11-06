@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:31:33+13:00",
+ "updated": "2026-11-06T17:31:36+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Dune (2021)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 4,
+  "part": 5,
   "parts_total": 6
  },
  "queue": [],
@@ -5186,6 +5186,12 @@
  },
  "events": [
   {
+   "at": "2026-11-06T17:31:36+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Dune (2021): Part 4 of 6 ready",
+   "message": "Part 4: Yueh's Betrayal Opens the Gates (10 narrated beats, about 159s of voice)\nIn Ready to post/Dune (2021)/Movie recap."
+  },
+  {
    "at": "2026-11-06T17:21:25+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Dune (2021): Part 3 of 6 ready",
@@ -6378,12 +6384,6 @@
    "type": "started",
    "title": "Started: Heretic (2024)",
    "message": "Cutting on the laptop: Movie recap. Parts go into 'Ready to post/Heretic (2024)'."
-  },
-  {
-   "at": "2026-10-23T15:08:54+13:00",
-   "type": "finished",
-   "title": "✅ Finished: Once Upon A Time In The Middle East (2026)",
-   "message": "Movie recap: 8 parts.\nIn Ready to post/Once Upon A Time In The Middle East (2026)."
   }
  ]
 }
