@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T00:45:08+07:00",
+ "updated": "2026-11-07T01:15:14+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -175,7 +175,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "A well-known detective hunt with a twist ending that fits the channel's twisty mystery strength",
+   "why": "A crime thriller with a clear case and a twist ending that splits well into cliffhanger parts; still waiting to be downloaded",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-07T00:45:36+07:00"
@@ -202,8 +202,9 @@
    ],
    "why": "Still waiting, a true-crime mystery with a clear case that splits well into cliffhanger parts, which fits this channel's best genre",
    "trend": "True-crime season, long dark evenings.",
-   "status": "new",
-   "added": "2026-11-06T01:13:51+07:00"
+   "status": "expired",
+   "added": "2026-11-06T01:13:51+07:00",
+   "at": "2026-11-07T01:15:14+07:00"
   },
   {
    "title": "Shutter Island",
@@ -390,39 +391,59 @@
   ],
   "trending": [
    {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 83507
-   },
-   {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 79462
+    "views": 237119
+   },
+   {
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 167974
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 77851
+    "views": 152294
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 67947
+    "views": 117873
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 48973
+    "views": 99371
    },
    {
     "title": "Resident Evil (2026 film)",
     "about": "Film by Zach Cregger",
-    "views": 44880
+    "views": 97173
    },
    {
     "title": "The Remarried Empress",
     "about": "2026 South Korean television series",
-    "views": 44848
+    "views": 91829
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 88204
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 82392
+   },
+   {
+    "title": "Wicker (film)",
+    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
+    "views": 68688
+   },
+   {
+    "title": "Verity (film)",
+    "about": "2026 film by Michael Showalter",
+    "views": 51458
    },
    {
     "title": "Black Doves",
@@ -430,60 +451,42 @@
     "views": 43266
    },
    {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 42480
-   },
-   {
     "title": "Survivor 51",
     "about": "Season of television series",
     "views": 39462
    },
    {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 38916
-   },
-   {
-    "title": "Wicker (film)",
-    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 35523
+    "title": "I, Robot (film)",
+    "about": "2004 film by Alex Proyas",
+    "views": 37443
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
     "views": 32317
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 32142
-   },
-   {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 28377
    }
   ]
  },
  "ai": {
-  "summary": "The channel is holding steady at about 100k views a day on 50 videos, and watch time improved: average watch rose from 6.7 s on Oct 29 to 9.3 s on Nov 6, and full-watch went from 2.2% to 3.3%. Posting stopped for six days (Oct 30 to Nov 4) and nothing has been posted yet today, so consistent posting matters most right now, along with mystery picks for the true-crime season.",
+  "summary": "The channel is holding about 100k views a day (104,284 on Nov 5, 103,237 on Nov 6), and watch time is improving: average watch rose from 6.7 s on Oct 29 to 9.3 s on Nov 6. The biggest problem is that only 3.3% of viewers reach the end, and there were no posts from Oct 30 to Nov 4, so there are no per-video numbers to judge the settings against.",
   "working": [
-   "Average watch time rose from 6.7 s (Oct 29) to 8.3 s (Nov 5) and 9.3 s (Nov 6)",
-   "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Daily views held at about 97k to 104k, roughly 2,000 views per video on 50 videos"
+   "Average watch time rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
+   "Full-watch rate rose from 2.2% to 3.3% over the same days",
+   "Daily views held near 100k (97,707 → 104,284 → 103,237) on 50 videos a day",
+   "Likes rose from 2,124 to 2,184 on the same days"
   ],
   "not_working": [
-   "No posts on Oct 30 through Nov 4 (six days at zero), which breaks the daily run",
-   "Full-watch is still only about 3%, so most viewers leave before the end of a part",
-   "No per-mode or per-video breakdown yet, so no proof of which movie or format wins"
+   "Only 3.3% of viewers reach the end on Nov 6, so most drop off before the last part",
+   "Shares are flat at 24 a day on every posting day, so parts are not being passed on",
+   "No posts from Oct 30 to Nov 4 (6 days with 0 views), which leaves a gap in the channel's history",
+   "VIDEOS and PER MODE are empty, so no part-length change can be tied to its results"
   ],
   "actions": [
-   "Post every day again, starting today, so the daily totals keep climbing",
-   "Download Zodiac and Se7en first to ride the true-crime season, then Gone Girl and Shutter Island for twisty mysteries",
-   "Keep recap_part_seconds at 135 for now; the 105 s and 135 s changes have too few matched videos to judge, so change nothing yet",
-   "Keep every part ending on a cliffhanger, and work on the first seconds of each part to push full-watch above 3%"
+   "Keep recap_part_seconds at 135 and change nothing until at least 5 matched videos exist for the current setting",
+   "Post on a steady schedule with no multi-day gaps, so the numbers can be read day to day",
+   "Make the last 3 seconds of each part a clear cliffhanger, and test that against the 3.3% full-watch rate",
+   "Log per-video views, avg_watch and full_watch so the earlier part-length steps (165, 135, 105, 135) can be judged"
   ],
-  "at": "2026-11-07T00:45:36+07:00"
+  "at": "2026-11-07T01:15:49+07:00"
  }
 }
