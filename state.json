@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:15:01+13:00",
+ "updated": "2026-11-06T17:15:03+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -8,7 +8,7 @@
   "movie": "Dune (2021)",
   "mode": "recap",
   "stage": "rendering",
-  "part": 2,
+  "part": 3,
   "parts_total": 6
  },
  "queue": [],
@@ -5154,6 +5154,12 @@
  },
  "events": [
   {
+   "at": "2026-11-06T17:15:03+13:00",
+   "type": "part_ready",
+   "title": "[Movie recap] Dune (2021): Part 2 of 6 ready",
+   "message": "Part 2: Warnings, Visions and a Secret Meeting (5 narrated beats, about 83s of voice)\nIn Ready to post/Dune (2021)/Movie recap."
+  },
+  {
    "at": "2026-11-06T17:08:42+13:00",
    "type": "part_ready",
    "title": "[Movie recap] Dune (2021): Part 1 of 6 ready",
@@ -6346,12 +6352,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 8 of 8 ready",
    "message": "Part 8: The Mosque Escape Plan (12 narrated beats, about 70s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T15:05:41+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 7 of 8 ready",
-   "message": "Part 7: Cooking for Child Soldiers (7 narrated beats, about 41s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
   }
  ]
 }
