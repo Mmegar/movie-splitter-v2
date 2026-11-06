@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T11:51:18+07:00",
+ "updated": "2026-11-06T11:51:42+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -102,18 +102,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2948,
-   "modified": "2026-10-19T22:58:35+07:00",
-   "sending": false,
-   "style": "zoom",
-   "character": "",
-   "pinned": true,
-   "ai_why": ""
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Hereditary.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
@@ -129,6 +118,11 @@
    "name": "Companion.2025.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
    "size_mb": 1922,
    "modified": "2026-10-23T08:47:45+07:00"
+  },
+  {
+   "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
+   "size_mb": 2948,
+   "modified": "2026-10-19T22:58:35+07:00"
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
@@ -181,10 +175,13 @@
   "mw4hxwmvlmxs": {
    "status": "done",
    "note": "Stopping Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
+  },
+  "mw4hyzi4dit5": {
+   "status": "done",
+   "note": "Moved to your Movies folder"
   }
  },
  "commands_done": [
-  "mv7g9xua6dba",
   "mv7gdml59qky",
   "mv7gywszor5l",
   "mv7jelh24r0h",
@@ -333,7 +330,8 @@
   "mw4htyoj9joz",
   "mw4htzzqsnnu",
   "mw4hwql09uj5",
-  "mw4hxwmvlmxs"
+  "mw4hxwmvlmxs",
+  "mw4hyzi4dit5"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
