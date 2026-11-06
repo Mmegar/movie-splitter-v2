@@ -1,11 +1,13 @@
 {
- "updated": "2026-11-06T10:45:45+07:00",
+ "updated": "2026-11-06T10:50:44+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
  "ready_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/Ready to Post/Ready to post",
  "uploading": null,
- "cutting": null,
+ "cutting": {
+  "file": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
+ },
  "transfers": [],
  "uploaded": [
   {
@@ -102,18 +104,7 @@
  "wishlist": [],
  "paused": null,
  "battery": false,
- "queue": [
-  {
-   "name": "Dune.2021.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4",
-   "size_mb": 2948,
-   "modified": "2026-10-19T22:58:35+07:00",
-   "sending": false,
-   "style": "zoom",
-   "character": "",
-   "pinned": true,
-   "ai_why": ""
-  }
- ],
+ "queue": [],
  "library": [
   {
    "name": "Hereditary.2018.1080p.WEBRip.x264-[YTS.AM].mp4",
