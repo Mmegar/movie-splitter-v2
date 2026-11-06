@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T01:15:14+07:00",
+ "updated": "2026-11-07T06:47:36+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -168,6 +168,30 @@
  ],
  "picks": [
   {
+   "title": "Black Doves",
+   "year": 2024,
+   "genres": [
+    "Thriller",
+    "Spy"
+   ],
+   "why": "Serialised twists that cut cleanly into cliffhanger parts; picked to ride current interest",
+   "trend": "Black Doves is in Wikipedia's most-read list (43,266 views in 3 days)",
+   "status": "new",
+   "added": "2026-11-07T06:48:12+07:00"
+  },
+  {
+   "title": "Get Out",
+   "year": 2017,
+   "genres": [
+    "Horror",
+    "Thriller"
+   ],
+   "why": "Twisty horror mystery with a clear reveal; no channel numbers yet, so picked on genre fit",
+   "trend": null,
+   "status": "new",
+   "added": "2026-11-07T06:48:12+07:00"
+  },
+  {
    "title": "Se7en",
    "year": 1995,
    "genres": [
@@ -175,7 +199,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "A crime thriller with a clear case and a twist ending that splits well into cliffhanger parts; still waiting to be downloaded",
+   "why": "Still waiting from before and a strong fit for the channel's mystery and twist style; no channel numbers yet, so picked on genre fit",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-07T00:45:36+07:00"
@@ -189,8 +213,9 @@
    ],
    "why": "Still waiting from the last round and a clear, twisty horror story that fits the channel's Hereditary and Speak No Evil results",
    "trend": "Halloween season: supernatural mysteries",
-   "status": "new",
-   "added": "2026-11-06T06:46:52+07:00"
+   "status": "expired",
+   "added": "2026-11-06T06:46:52+07:00",
+   "at": "2026-11-07T06:47:36+07:00"
   },
   {
    "title": "Zodiac",
@@ -468,25 +493,23 @@
   ]
  },
  "ai": {
-  "summary": "The channel is holding about 100k views a day (104,284 on Nov 5, 103,237 on Nov 6), and watch time is improving: average watch rose from 6.7 s on Oct 29 to 9.3 s on Nov 6. The biggest problem is that only 3.3% of viewers reach the end, and there were no posts from Oct 30 to Nov 4, so there are no per-video numbers to judge the settings against.",
+  "summary": "The channel holds about 100k views a day across its 50 videos, but viewers leave fast: average watch is 8.3 to 9.3 seconds and only about 3% reach the end. The tracker did not run on Oct 30 to Nov 4 or Nov 7, and the per-video and per-movie tables are empty, so the only thing that matters now is getting per-video data back so modes and settings can be judged.",
   "working": [
-   "Average watch time rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
-   "Full-watch rate rose from 2.2% to 3.3% over the same days",
-   "Daily views held near 100k (97,707 → 104,284 → 103,237) on 50 videos a day",
-   "Likes rose from 2,124 to 2,184 on the same days"
+   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6) after the recap length went back to 135 s",
+   "Full-watch rose from 3.1% to 3.3% on the same days",
+   "About 2.2k likes and 24 shares a day on the 50-video library"
   ],
   "not_working": [
-   "Only 3.3% of viewers reach the end on Nov 6, so most drop off before the last part",
-   "Shares are flat at 24 a day on every posting day, so parts are not being passed on",
-   "No posts from Oct 30 to Nov 4 (6 days with 0 views), which leaves a gap in the channel's history",
-   "VIDEOS and PER MODE are empty, so no part-length change can be tied to its results"
+   "Full-watch is only about 3%, so most viewers leave in the first seconds",
+   "Daily views slipped from 104,284 (Nov 5) to 103,237 (Nov 6)",
+   "No per-video or per-movie rows exist yet, so mode and movie results cannot be judged"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135 and change nothing until at least 5 matched videos exist for the current setting",
-   "Post on a steady schedule with no multi-day gaps, so the numbers can be read day to day",
-   "Make the last 3 seconds of each part a clear cliffhanger, and test that against the 3.3% full-watch rate",
-   "Log per-video views, avg_watch and full_watch so the earlier part-length steps (165, 135, 105, 135) can be judged"
+   "Re-run the tracker so the VIDEOS, PER MODE and PER MOVIE tables fill in before any setting change",
+   "Keep recap_part_seconds at 135 and wait for at least 5 matched videos before moving it again",
+   "Open each part with the strongest twist or question in the first 3 seconds to lift the 9 s average watch",
+   "Download the five picks below, starting with Se7en, which is still waiting"
   ],
-  "at": "2026-11-07T01:15:49+07:00"
+  "at": "2026-11-07T06:48:12+07:00"
  }
 }
