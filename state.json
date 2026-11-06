@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:15:03+13:00",
+ "updated": "2026-11-06T17:21:22+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -59,6 +59,22 @@
         "error": null
        },
        "cover": "dune-2021/recap-02-cover.bin"
+      },
+      {
+       "n": 3,
+       "start": 3083.0,
+       "end": 3748.0,
+       "seconds": 64.9,
+       "drive_path": "Ready to post/Dune (2021)/Movie recap/Dune (2021) - Part 03.mp4",
+       "caption": "A duke bets everything on a desert alliance, then gets hit with a vision 🌪️\nPart 3 🎬 · Follow so you don't miss Part 4 🔔\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
+       "preview": "dune-2021/recap-003.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "dune-2021/recap-03-cover.bin"
       }
      ]
     },
