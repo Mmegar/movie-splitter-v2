@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:50:01+13:00",
+ "updated": "2026-11-06T17:51:10+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -16,7 +16,7 @@
   {
    "id": "dune-2021",
    "name": "Dune (2021)",
-   "status": "processing",
+   "status": "queued",
    "source": "laptop",
    "started": "2026-11-06T16:50:57+13:00",
    "finished": null,
@@ -141,7 +141,8 @@
      "planned": 5,
      "parts": []
     }
-   }
+   },
+   "note": "Stopped from the app. Tap Start to cut it again."
   },
   {
    "id": "midsommar-2019",
