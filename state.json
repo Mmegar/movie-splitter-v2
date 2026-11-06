@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:21:25+13:00",
+ "updated": "2026-11-06T17:31:33+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -75,6 +75,22 @@
         "error": null
        },
        "cover": "dune-2021/recap-03-cover.bin"
+      },
+      {
+       "n": 4,
+       "start": 3782.0,
+       "end": 5367.0,
+       "seconds": 117.2,
+       "drive_path": "Ready to post/Dune (2021)/Movie recap/Dune (2021) - Part 04.mp4",
+       "caption": "The trusted aide turns on his own house, and the gates fall open 😱\nPart 4 🎬 · Should I post Part 5? 👇\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
+       "preview": "dune-2021/recap-004.bin",
+       "post": {
+        "status": "none",
+        "at": null,
+        "url": null,
+        "error": null
+       },
+       "cover": "dune-2021/recap-04-cover.bin"
       }
      ]
     },
