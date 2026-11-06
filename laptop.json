@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T10:50:47+07:00",
+ "updated": "2026-11-06T10:51:53+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -123,14 +123,7 @@
   }
  ],
  "library_folder": "C:/Users/kimme/OneDrive/Desktop/Movies",
- "bin": [
-  {
-   "name": "Midsommar.2019.Directors.Cut.1080p.HDRip.1800MB.DD2.0.x264-GalaxyRG.mkv",
-   "size_mb": 1938,
-   "modified": "2026-10-29T01:13:30+07:00",
-   "folder": "done"
-  }
- ],
+ "bin": [],
  "commands": {
   "mvx5718upab5": {
    "status": "done",
@@ -151,10 +144,13 @@
   "mw4flx1wbjng": {
    "status": "done",
    "note": "Moved to To edit"
+  },
+  "mw4fu2j2nlrz": {
+   "status": "done",
+   "note": "Put in the Recycle Bin"
   }
  },
  "commands_done": [
-  "mv6kcq56w73o",
   "mv7d1to8kmvj",
   "mv7d21lvbmlq",
   "mv7d23jv572w",
@@ -303,7 +299,8 @@
   "mvx59ofn8o3i",
   "mw4f3efe0bpt",
   "mw4f749zjey1",
-  "mw4flx1wbjng"
+  "mw4flx1wbjng",
+  "mw4fu2j2nlrz"
  ],
  "originals": [
   "10-cloverfield-lane-2016",
