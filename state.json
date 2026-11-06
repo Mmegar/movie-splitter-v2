@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-06T17:31:36+13:00",
+ "updated": "2026-11-06T17:37:23+13:00",
  "run": {
   "active": true,
   "run_id": null,
@@ -53,10 +53,11 @@
        "caption": "A failed assassination and a secret meeting with a cruel baron 😬 Something bad is coming.\nPart 2 🎬 · Part 3 is up next 👀\n#Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
        "preview": "dune-2021/recap-002.bin",
        "post": {
-        "status": "none",
-        "at": null,
+        "status": "posted",
+        "at": "2026-11-06T17:37:22+13:00",
         "url": null,
-        "error": null
+        "error": null,
+        "attempts": 1
        },
        "cover": "dune-2021/recap-02-cover.bin"
       },
