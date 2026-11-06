@@ -1,15 +1,15 @@
 {
  "version": 1,
- "updated": "2026-11-06T16:59:35+13:00",
+ "updated": "2026-11-06T16:59:39+13:00",
  "run": {
   "active": true,
   "run_id": null,
   "started": "2026-11-06T16:50:54+13:00",
   "movie": "Dune (2021)",
-  "mode": null,
-  "stage": "planning",
-  "part": null,
-  "parts_total": null
+  "mode": "recap",
+  "stage": "rendering",
+  "part": 1,
+  "parts_total": 6
  },
  "queue": [],
  "movies": [
@@ -31,12 +31,12 @@
     },
     "stretch": {
      "label": "Best stretch",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     },
     "highlights": {
      "label": "Highlights",
-     "planned": 0,
+     "planned": 5,
      "parts": []
     }
    }
@@ -5121,6 +5121,24 @@
  },
  "events": [
   {
+   "at": "2026-11-06T16:59:39+13:00",
+   "type": "planned",
+   "title": "[Highlights] Dune (2021): 5 parts planned",
+   "message": "Dune (2021)\nMode: Highlights\n\nHighlight 1: 33:47 to 37:18 (210s)  interest score 61/100\nHighlight 2: 55:23 to 58:54 (211s)  interest score 59/100\nHighlight 3: 1:00:33 to 1:04:02 (208s)  interest score 66/100\nHighlight 4: 1:14:49 to 1:18:19 (210s)  interest score 60/100\nHighlight 5: 1:49:34 to 1:53:24 (230s)  interest score 68/100\n"
+  },
+  {
+   "at": "2026-11-06T16:59:38+13:00",
+   "type": "planned",
+   "title": "[Best stretch] Dune (2021): 5 parts planned",
+   "message": "Dune (2021)\nMode: Best stretch\n\nPart 1: 53:52 to 57:16 (204s)\nPart 2: 57:16 to 1:00:40 (204s)\nPart 3: 1:00:40 to 1:04:10 (210s)\nPart 4: 1:04:10 to 1:07:38 (207s)\nPart 5: 1:07:38 to 1:11:25 (228s)\n"
+  },
+  {
+   "at": "2026-11-06T16:59:37+13:00",
+   "type": "planned",
+   "title": "[Movie recap] Dune (2021): 6 parts planned",
+   "message": "Dune (2021)\nMode: Movie recap\n\nPart 1: Duke Leto's Deadly Desert Job (5 narrated beats, about 105s of voice)\nPart 2: Warnings, Visions and a Secret Meeting (5 narrated beats, about 83s of voice)\nPart 3: The Duke's Risky Alliance (5 narrated beats, about 88s of voice)\nPart 4: Yueh's Betrayal Opens the Gates (10 narrated beats, about 159s of voice)\nPart 5: Jessica's Voice in the Desert (10 narrated beats, about 163s of voice)\nPart 6: Duel for the Desert Tribe (7 narrated beats, about 93s of voice)\n"
+  },
+  {
    "at": "2026-11-06T16:50:57+13:00",
    "type": "started",
    "title": "Started: Dune (2021)",
@@ -6301,24 +6319,6 @@
    "type": "part_ready",
    "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 6 of 8 ready",
    "message": "Part 6: Christmas Feast Gone Wrong (7 narrated beats, about 37s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T14:59:00+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 5 of 8 ready",
-   "message": "Part 5: Alifah Prison Gets Weird (8 narrated beats, about 44s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T14:54:47+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 4 of 8 ready",
-   "message": "Part 4: Zaid's Fall From Grace (7 narrated beats, about 37s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
-  },
-  {
-   "at": "2026-10-23T14:51:29+13:00",
-   "type": "part_ready",
-   "title": "[Movie recap] Once Upon A Time In The Middle East (2026): Part 3 of 8 ready",
-   "message": "Part 3: Business Booms in a Warzone (9 narrated beats, about 45s of voice)\nIn Ready to post/Once Upon A Time In The Middle East (2026)/Movie recap."
   }
  ]
 }
