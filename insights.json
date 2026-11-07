@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T18:47:55+07:00",
+ "updated": "2026-11-08T00:46:26+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -102,6 +102,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-08",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -174,7 +183,7 @@
     "Thriller",
     "Spy"
    ],
-   "why": "Still-waiting pick; spy-crime series with a clear plot that splits well into cliffhanger parts",
+   "why": "Still waiting from the owner's list, and it is at 96,091 views on Wikipedia in the last 3 days, a strong thriller pull",
    "trend": "Black Doves is in Wikipedia's most-read list (43,266 views in 3 days)",
    "status": "new",
    "added": "2026-11-07T06:48:12+07:00"
@@ -186,7 +195,7 @@
     "Horror",
     "Thriller"
    ],
-   "why": "Still-waiting pick; a tight mystery with a twist and natural cliffhanger breaks",
+   "why": "Still waiting from the owner's list; a tense thriller with a clear reveal that suits the dark-evening season",
    "trend": null,
    "status": "new",
    "added": "2026-11-07T06:48:12+07:00"
@@ -201,8 +210,9 @@
    ],
    "why": "Still-waiting pick; a twisty serial-killer mystery that suits this channel's strength",
    "trend": "True-crime season, long dark evenings",
-   "status": "new",
-   "added": "2026-11-07T00:45:36+07:00"
+   "status": "expired",
+   "added": "2026-11-07T00:45:36+07:00",
+   "at": "2026-11-08T00:46:26+07:00"
   },
   {
    "title": "Smile",
@@ -403,7 +413,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -493,23 +503,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel held about 104k views a day on Nov 5 and 103k on Nov 6, and average watch time rose from 6.7s on Oct 29 to 9.3s on Nov 6. Full-watch is still only 3.3%, so most viewers leave well before the end of a part. This run has no per-video or per-mode data, so nothing can be ranked yet.",
+  "summary": "The channel drew about 98k to 104k views a day on the three logged days, with average watch time rising from 6.7s (Oct 29) to 9.3s (Nov 6) and full-watch rising from 2.2% to 3.3%. Almost nobody reaches the end of a part, so the most important fix is the first seconds of each video, plus logging per-video numbers so the channel can tell which movies and part lengths work.",
   "working": [
-   "Daily views held near 104k (Nov 5: 104,284; Nov 6: 103,237) vs 97,707 on Oct 29",
-   "Average watch rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
-   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)"
+   "Average watch time rose from 6.7s (Oct 29) to 9.3s (Nov 6), and full-watch rose from 2.2% to 3.3%",
+   "Daily views held at 97,707 (Oct 29), 104,284 (Nov 5) and 103,237 (Nov 6) across 50 videos each day",
+   "Likes stayed around 2,100 to 2,200 a day on each logged day",
+   "Your earlier notes say the sub-90s 10 Cloverfield Lane recap parts drew most of the recap views, which points to twisty thrillers"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so most viewers drop before the end of a part",
-   "Average watch of 9.3s is under 10% of a 135s part, so the opening seconds are losing viewers",
-   "No per-video or per-mode rows came back, so no video or movie can be ranked yet"
+   "Full-watch is only 2.2% to 3.3%, so most viewers leave before the end of a part",
+   "Shares stayed flat at 24 a day on all three logged days",
+   "No posts or totals were logged for Oct 30 to Nov 4 or Nov 7 to Nov 8, so those days can't be compared",
+   "VIDEOS and PER MOVIE are empty, so no movie or mode can be checked against the numbers"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135; the Nov 6 change has no posts since to judge it by",
-   "Put the hook and the cliffhanger setup in the first 3 seconds of each part to lift the 9.3s average watch",
-   "Sync per-video stats so VIDEOS and PER MOVIE fill in; the five-video minimum for setting changes can't be met yet",
-   "Download Black Doves and Se7en first: one rides the crime and thriller trend, the other the season"
+   "Open each part with a question or a sharp reveal in the first 3 seconds, since full-watch is only about 3%",
+   "Keep recap_part_seconds at 135 for now; there are no per-video numbers to judge a change against",
+   "Log per-video views, avg_watch and full_watch so the next run can match settings changes to the videos they affected",
+   "Download Black Doves or MobLand first to ride the true-crime and thriller trend, then Gone Girl or Shutter Island for the twisty-mystery pattern that has worked on this channel"
   ],
-  "at": "2026-11-07T18:48:30+07:00"
+  "at": "2026-11-08T00:47:08+07:00"
  }
 }
