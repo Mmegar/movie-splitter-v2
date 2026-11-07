@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T06:47:36+07:00",
+ "updated": "2026-11-07T12:47:40+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -174,7 +174,7 @@
     "Thriller",
     "Spy"
    ],
-   "why": "Serialised twists that cut cleanly into cliffhanger parts; picked to ride current interest",
+   "why": "Still waiting; 96,091 Wikipedia views in 3 days and a British spy series that splits into episodic parts",
    "trend": "Black Doves is in Wikipedia's most-read list (43,266 views in 3 days)",
    "status": "new",
    "added": "2026-11-07T06:48:12+07:00"
@@ -186,7 +186,7 @@
     "Horror",
     "Thriller"
    ],
-   "why": "Twisty horror mystery with a clear reveal; no channel numbers yet, so picked on genre fit",
+   "why": "Still waiting; a horror-thriller with a clear reveal structure that suits a dark-season slot",
    "trend": null,
    "status": "new",
    "added": "2026-11-07T06:48:12+07:00"
@@ -199,7 +199,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Still waiting from before and a strong fit for the channel's mystery and twist style; no channel numbers yet, so picked on genre fit",
+   "why": "Still waiting and still good: a twisty crime mystery that cuts into cliffhanger parts, the kind of story this channel does best",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-07T00:45:36+07:00"
@@ -418,98 +418,100 @@
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 237119
-   },
-   {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 167974
+    "views": 290340
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 152294
+    "views": 274854
+   },
+   {
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 238714
+   },
+   {
+    "title": "Scene (2026 film)",
+    "about": "2026 Indian film by Jithu Madhavan",
+    "views": 185848
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 117873
+    "views": 174098
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 99371
+    "views": 144648
    },
    {
     "title": "Resident Evil (2026 film)",
     "about": "Film by Zach Cregger",
-    "views": 97173
-   },
-   {
-    "title": "The Remarried Empress",
-    "about": "2026 South Korean television series",
-    "views": 91829
+    "views": 140356
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 88204
+    "views": 131563
+   },
+   {
+    "title": "The Remarried Empress",
+    "about": "2026 South Korean television series",
+    "views": 128699
    },
    {
     "title": "Primetime (film)",
     "about": "2026 film by Lance Oppenheim",
-    "views": 82392
+    "views": 122426
    },
    {
     "title": "Wicker (film)",
     "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 68688
-   },
-   {
-    "title": "Verity (film)",
-    "about": "2026 film by Michael Showalter",
-    "views": 51458
+    "views": 104590
    },
    {
     "title": "Black Doves",
     "about": "British spy action television series (2024–present)",
-    "views": 43266
-   },
-   {
-    "title": "Survivor 51",
-    "about": "Season of television series",
-    "views": 39462
+    "views": 96091
    },
    {
     "title": "I, Robot (film)",
     "about": "2004 film by Alex Proyas",
-    "views": 37443
+    "views": 82143
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 32317
+    "views": 81571
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 79484
    }
   ]
  },
  "ai": {
-  "summary": "The channel holds about 100k views a day across its 50 videos, but viewers leave fast: average watch is 8.3 to 9.3 seconds and only about 3% reach the end. The tracker did not run on Oct 30 to Nov 4 or Nov 7, and the per-video and per-movie tables are empty, so the only thing that matters now is getting per-video data back so modes and settings can be judged.",
+  "summary": "The channel is holding about 103k to 104k views a day across 50 videos, and average watch time rose from 6.7 s on Oct 29 to 9.3 s on Nov 6. Full-watch is still only 3.3%, so most viewers leave before a part ends, and that is the number to move. The per-video data needed to judge the recent length changes is missing from this snapshot.",
   "working": [
-   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6) after the recap length went back to 135 s",
-   "Full-watch rose from 3.1% to 3.3% on the same days",
-   "About 2.2k likes and 24 shares a day on the 50-video library"
+   "Average watch time rose from 6.7 s (Oct 29) to 9.3 s (Nov 6), about 39% higher",
+   "Full-watch rose from 2.2% to 3.3% over the same days",
+   "Views held at 103k to 104k a day on Nov 5 and Nov 6 across 50 videos",
+   "Shares steady at 24 a day"
   ],
   "not_working": [
-   "Full-watch is only about 3%, so most viewers leave in the first seconds",
-   "Daily views slipped from 104,284 (Nov 5) to 103,237 (Nov 6)",
-   "No per-video or per-movie rows exist yet, so mode and movie results cannot be judged"
+   "Full-watch is still 3.3%, so about 97% of viewers stop before the end",
+   "Views rose only about 6% (97.7k to 103k) while watch time climbed about 39%",
+   "Likes are about 2.1% of views (2,184 likes on 103k views)",
+   "The part-length changes (165, then 135, then 105, then back to 135 s) have no per-video rows here, so their effect is unproven"
   ],
   "actions": [
-   "Re-run the tracker so the VIDEOS, PER MODE and PER MOVIE tables fill in before any setting change",
-   "Keep recap_part_seconds at 135 and wait for at least 5 matched videos before moving it again",
-   "Open each part with the strongest twist or question in the first 3 seconds to lift the 9 s average watch",
-   "Download the five picks below, starting with Se7en, which is still waiting"
+   "Hold recap_part_seconds at 135 and change it again only when per-video rows show at least 5 videos backing the change",
+   "End every part on an unresolved cliffhanger, since full-watch at 3.3% is the number to lift",
+   "Download the picks in order, starting with Se7en and Black Doves, which are still waiting and fit the crime season",
+   "Make sure the analytics pull returns per-video rows, because the next settings decision depends on them"
   ],
-  "at": "2026-11-07T06:48:12+07:00"
+  "at": "2026-11-07T12:48:16+07:00"
  }
 }
