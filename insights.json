@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T06:46:23+07:00",
+ "updated": "2026-11-08T07:16:23+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -185,8 +185,9 @@
    ],
    "why": "Still waiting, and 96k Wikipedia views in 3 days makes it a current trend pick with a twisty spy plot",
    "trend": "Black Doves is in Wikipedia's most-read list (43,266 views in 3 days)",
-   "status": "new",
-   "added": "2026-11-07T06:48:12+07:00"
+   "status": "expired",
+   "added": "2026-11-07T06:48:12+07:00",
+   "at": "2026-11-08T07:16:23+07:00"
   },
   {
    "title": "Get Out",
@@ -197,8 +198,9 @@
    ],
    "why": "Still waiting; a mystery that unfolds into a reveal, which suits the channel's twisty cliffhanger parts",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-07T06:48:12+07:00"
+   "status": "expired",
+   "added": "2026-11-07T06:48:12+07:00",
+   "at": "2026-11-08T07:16:23+07:00"
   },
   {
    "title": "Se7en",
@@ -503,25 +505,23 @@
   ]
  },
  "ai": {
-  "summary": "Daily views held near 100k on the three logged days (97.7k, 104.3k, 103.2k), and average watch rose from 6.7s to 9.3s with full-watch up from 2.2% to 3.3%. The biggest problem is that viewers leave within about 9 seconds of parts that run about 135 seconds, so the opening hook matters most.",
+  "summary": "Daily totals held steady at about 97k to 104k views across the three days with data, and average watch time rose from 6.7 s (Oct 29) to 9.3 s (Nov 6), with full-watch up from 2.2% to 3.3%. The feed has no per-video or per-mode rows, so the channel's best format can't be identified yet.",
   "working": [
-   "Daily views steady at 97.7k to 104.3k across the 3 logged days (Oct 29, Nov 5, Nov 6)",
-   "Average watch rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
-   "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Shares flat at 24 per day, likes at about 2.1k to 2.2k per day"
+   "Average watch rose from 6.7 s (Oct 29) to 8.3 s (Nov 5) and 9.3 s (Nov 6)",
+   "Full-watch rose from 2.2% to 3.1% and then 3.3%",
+   "Daily views stayed near 100k (97,707, 104,284, 103,237)"
   ],
   "not_working": [
-   "Average watch of 9.3s on roughly 135s parts means most viewers drop in the first seconds",
-   "Full-watch is still only 3.3%",
-   "No videos logged on 8 of the 10 days in this window",
-   "No per-video data (VIDEOS and PER MOVIE are empty), so modes and part lengths can't be judged"
+   "Full-watch is still only about 3%, so most viewers leave before the end of a part",
+   "The per-video, per-mode and totals feeds are empty or zero, so no video can be tied to a result",
+   "Five of the seven days in the log show zero views, so the record has gaps"
   ],
   "actions": [
-   "Open each part on its most twisted moment or a cliffhanger line within the first 3 seconds, since a 9.3s average watch means the hook is losing most viewers",
-   "Post on a steady schedule; the logs show no videos on 8 of 10 days",
-   "Keep recap_part_seconds at 135 and make no setting changes until at least 5 videos posted after the Nov 6 change have data",
-   "Download Black Doves and Get Out first: Black Doves is trending and both are still waiting"
+   "Restore the per-video and per-mode feed so settings can be judged on at least 5 matched videos",
+   "Keep recap_part_seconds at 135 and don't change it until the feed shows per-part numbers",
+   "Post the next mystery picks with a cliffhanger at the end of each part and track full-watch % on them",
+   "Check that the totals feed is writing; it reads 0 while the day-by-day rows show about 100k views"
   ],
-  "at": "2026-11-08T06:47:07+07:00"
+  "at": "2026-11-08T07:16:53+07:00"
  }
 }
