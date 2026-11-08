@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T13:16:23+07:00",
+ "updated": "2026-11-08T19:16:34+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -183,7 +183,7 @@
     "Horror",
     "Mystery"
    ],
-   "why": "Midsommar's ~135 s parts averaged 33 views vs 14.5 for Dune, and Barbarian is a twisty horror mystery with a clear story that cuts into cliffhanger parts",
+   "why": "Still waiting from before; a twisty horror mystery that fits the channel's best format and cuts well into cliffhanger parts",
    "trend": "Resident Evil (2026 film) by Zach Cregger is trending at 88,063 Wikipedia views; Barbarian is also by Cregger",
    "status": "new",
    "added": "2026-11-08T13:16:55+07:00"
@@ -517,25 +517,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel posted 50 videos on each of the two days with data (Nov 5 and Nov 6), with about 100k views a day, steady shares (24/day) and rising watch time: average watch went from 6.7 s on Oct 29 to 9.3 s on Nov 6, and full-watch went from 2.2% to 3.3%. The most important thing is that no per-video or per-movie data is matched yet, so the owner needs to tag each video with its movie so the channel can see which stories drive views.",
+  "summary": "The channel's day totals held near 100k views a day on Nov 5 and Nov 6, and watch time improved, with average watch up from 6.7 s (Oct 29) to 9.3 s (Nov 6) and full-watch up from 2.2% to 3.3%. The most important problem is that no per-video or per-mode data came through, so none of the setting changes can be checked against the videos they affected.",
   "working": [
-   "Average watch rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
-   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
-   "About 100k views per day on 50 videos (97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6)",
-   "Likes held at about 2,100–2,200 per day"
+   "Views held near 100k a day: 97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6",
+   "Average watch rose from 6.7 s to 9.3 s between Oct 29 and Nov 6",
+   "Full-watch rose from 2.2% to 3.3% over the same days",
+   "Likes held at about 2,100–2,200 a day, with 24 shares a day"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so most viewers leave before the end of each part",
-   "Shares are flat at 24 per day, with no growth",
-   "No videos recorded on Oct 30–Nov 4 or Nov 7–8, so the channel has gaps in its posting",
-   "No per-movie or per-video data is matched, so the owner cannot tell which films drive views"
+   "Full-watch is still only 3.3%, so most viewers leave before the end of a part",
+   "Shares are flat at 24 a day and not growing",
+   "Five days (Oct 30–Nov 4) and two more (Nov 7–8) show zero posts or zero data, so the feed has gaps",
+   "VIDEOS and PER MODE are empty, so no setting change can be matched to videos"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135; the watch-time gains came after the 105 s and 135 s changes, and there is no matched data to justify another change",
-   "Tag every upload with its movie title so the next analysis can match views and watch time to each film",
-   "End each part on a cliffhanger, since full-watch (3.3%) is the number to move",
-   "Post on the gap days (Oct 30–Nov 4, Nov 7–8) or confirm the data feed is recording them"
+   "Fix the data feed so VIDEOS and PER MODE fill in; without per-video numbers the settings can't be tuned",
+   "Hold recap_part_seconds at 135 and re-check after the next 5 matched recap videos are posted",
+   "Download Barbarian first, then Gone Girl or Prisoners, to ride the true-crime season while the evenings are dark",
+   "End each part on a sharper cliffhanger to lift full-watch above 3.3%"
   ],
-  "at": "2026-11-08T13:16:55+07:00"
+  "at": "2026-11-08T19:17:10+07:00"
  }
 }
