@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T19:16:34+07:00",
+ "updated": "2026-11-09T01:16:37+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -111,6 +111,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-09",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -183,7 +192,7 @@
     "Horror",
     "Mystery"
    ],
-   "why": "Still waiting from before; a twisty horror mystery that fits the channel's best format and cuts well into cliffhanger parts",
+   "why": "Still waiting from the last run and a twisty, cliffhanger-friendly horror pick for the dark-evening season; no per-movie numbers yet to test it against",
    "trend": "Resident Evil (2026 film) by Zach Cregger is trending at 88,063 Wikipedia views; Barbarian is also by Cregger",
    "status": "new",
    "added": "2026-11-08T13:16:55+07:00"
@@ -427,7 +436,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-08",
+  "date": "2026-11-09",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -440,102 +449,100 @@
   ],
   "trending": [
    {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 200411
-   },
-   {
     "title": "Scene (2026 film)",
     "about": "2026 Indian film by Jithu Madhavan",
-    "views": 185848
+    "views": 159862
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 122560
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 154247
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 132683
+    "views": 70740
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 124172
+    "views": 56225
+   },
+   {
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 53221
    },
    {
     "title": "Black Doves",
     "about": "British spy action television series (2024–present)",
-    "views": 96091
-   },
-   {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 94250
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 88063
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 85839
-   },
-   {
-    "title": "The Remarried Empress",
-    "about": "2026 South Korean television series",
-    "views": 81718
+    "views": 52825
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 81571
+    "views": 49254
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 79484
+    "views": 47342
    },
    {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 78950
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 45277
+   },
+   {
+    "title": "I, Robot (film)",
+    "about": "2004 film by Alex Proyas",
+    "views": 44700
    },
    {
     "title": "Godzilla Minus One",
     "about": "2023 film by Takashi Yamazaki",
-    "views": 72060
+    "views": 43683
    },
    {
-    "title": "Wicker (film)",
-    "about": "2026 film by Alex Huston Fischer and Eleanor Wilson",
-    "views": 71425
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 43359
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 43183
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 40034
+   },
+   {
+    "title": "The Remarried Empress",
+    "about": "2026 South Korean television series",
+    "views": 36870
    }
   ]
  },
  "ai": {
-  "summary": "The channel's day totals held near 100k views a day on Nov 5 and Nov 6, and watch time improved, with average watch up from 6.7 s (Oct 29) to 9.3 s (Nov 6) and full-watch up from 2.2% to 3.3%. The most important problem is that no per-video or per-mode data came through, so none of the setting changes can be checked against the videos they affected.",
+  "summary": "The channel held about 100k views a day across 50 videos from Oct 29 to Nov 6, and average watch time rose from 6.7 s to 9.3 s. Full-watch is still only about 3%, so the main job is getting per-video numbers so the next picks and settings can be checked against real movies.",
   "working": [
-   "Views held near 100k a day: 97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6",
-   "Average watch rose from 6.7 s to 9.3 s between Oct 29 and Nov 6",
+   "Average watch time rose from 6.7 s (Oct 29) to 8.3 s (Nov 5) to 9.3 s (Nov 6)",
    "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Likes held at about 2,100–2,200 a day, with 24 shares a day"
+   "Views held near 100k a day (97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6) across 50 videos"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so most viewers leave before the end of a part",
-   "Shares are flat at 24 a day and not growing",
-   "Five days (Oct 30–Nov 4) and two more (Nov 7–8) show zero posts or zero data, so the feed has gaps",
-   "VIDEOS and PER MODE are empty, so no setting change can be matched to videos"
+   "Full-watch is still only about 3.3%, so most viewers leave before the end of a part",
+   "This run returned no per-video, per-mode or per-movie rows, so no movie or mode can be credited with the numbers",
+   "Views slipped from 104,284 to 103,237 between Nov 5 and Nov 6"
   ],
   "actions": [
-   "Fix the data feed so VIDEOS and PER MODE fill in; without per-video numbers the settings can't be tuned",
-   "Hold recap_part_seconds at 135 and re-check after the next 5 matched recap videos are posted",
-   "Download Barbarian first, then Gone Girl or Prisoners, to ride the true-crime season while the evenings are dark",
-   "End each part on a sharper cliffhanger to lift full-watch above 3.3%"
+   "Fix the data pull so it returns per-video rows, since VIDEOS and PER MOVIE are empty and TOTALS shows zeros",
+   "Download Barbarian first, since it is still waiting and is a twisty horror pick for dark evenings",
+   "Use the next five picks to build a true-crime and mystery run, and check per-movie watch time after each one posts",
+   "Keep recap_part_seconds at 135 until matched per-video data can judge the 165 s and 105 s steps"
   ],
-  "at": "2026-11-08T19:17:10+07:00"
+  "at": "2026-11-09T01:17:08+07:00"
  }
 }
