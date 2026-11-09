@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T19:16:46+07:00",
+ "updated": "2026-11-10T01:17:01+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -120,6 +120,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-10",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -186,6 +195,18 @@
  ],
  "picks": [
   {
+   "title": "I, Robot",
+   "year": 2004,
+   "genres": [
+    "Sci-Fi",
+    "Mystery"
+   ],
+   "why": "Detective mystery with clear stakes and built-in reveals that suits the channel's twisty style",
+   "trend": "I, Robot (film) (139,323 views in 3 days)",
+   "status": "new",
+   "added": "2026-11-10T01:17:35+07:00"
+  },
+  {
    "title": "Godzilla Minus One",
    "year": 2023,
    "genres": [
@@ -193,7 +214,7 @@
     "Drama",
     "Sci-Fi"
    ],
-   "why": "Still waiting from before and a clear, well-known story that cuts into cliffhanger parts",
+   "why": "Still waiting from before, and the sequel-led Godzilla trend is pulling 282,866 Wikipedia reads right now",
    "trend": "Godzilla Minus Zero (122,560 Wikipedia views in 3 days)",
    "status": "new",
    "added": "2026-11-09T07:17:08+07:00"
@@ -450,7 +471,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-09",
+  "date": "2026-11-10",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -465,100 +486,100 @@
    {
     "title": "Scene (2026 film)",
     "about": "2026 Indian film by Jithu Madhavan",
-    "views": 335543
+    "views": 344561
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 260304
+    "views": 282866
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 145600
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action television series (2024–present)",
-    "views": 112633
+    "views": 156044
    },
    {
     "title": "I, Robot (film)",
     "about": "2004 film by Alex Proyas",
-    "views": 105748
+    "views": 139323
    },
    {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 102877
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 100078
+    "title": "Black Doves",
+    "about": "British spy action television series (2024–present)",
+    "views": 129160
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 96754
-   },
-   {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 93854
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 92475
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 91345
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 91303
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 89633
-   },
-   {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 87793
+    "views": 108045
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 85462
+    "views": 104822
+   },
+   {
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 104142
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 103709
+   },
+   {
+    "title": "The Odyssey (2026 film)",
+    "about": "2026 film by Christopher Nolan",
+    "views": 102774
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 98976
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 98191
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 93880
+   },
+   {
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 91497
+   },
+   {
+    "title": "Mookuthi Amman 2",
+    "about": "2026 Indian film by Sundar C",
+    "views": 80582
    }
   ]
  },
  "ai": {
-  "summary": "The channel holds about 100k views on each run day across 50 videos (roughly 2,000 views per video). Average watch time rose from 6.7s on Oct 29 to 9.3s on Nov 6, and full-watch went from 2.2% to 3.3%. The most important gap is that there is no per-video or per-mode data, so the recap length changes cannot be judged.",
+  "summary": "The channel holds about 100k views on each day it was tracked (97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6), and watch time improved from 6.7 s to 9.3 s between those days. Full-watch is still only 3.3%, so most viewers leave before a part ends, and the most important gap is that no per-video or per-mode data was recorded. Without that, the recap-length changes can't be judged.",
   "working": [
-   "Average watch rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
-   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
-   "About 104k views on Nov 5 and 103k on Nov 6 across 50 videos, roughly 2,000 views per video",
-   "Average watch is rising while the video count stays at 50, so viewers are watching longer on the existing parts"
+   "Views held near 100k on each tracked day (97,707 Oct 29; 104,284 Nov 5; 103,237 Nov 6)",
+   "Average watch rose from 6.7 s to 9.3 s between Oct 29 and Nov 6",
+   "Full-watch rose from 2.2% to 3.3% over the same days",
+   "Likes held at about 2,100 to 2,200 per tracked day"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so most viewers leave before a part ends",
-   "At 9.3s average watch, viewers see only about 7% of a 135s part",
-   "No new videos in the data since Oct 29 (50 on every run day), so there are no fresh posts to measure",
-   "VIDEOS and PER MODE are empty, so no setting change can be tied to a result"
+   "Full-watch is still only 3.3%, so about 97% of viewers leave before a part ends",
+   "Average watch of 9.3 s is under 7% of a 135 s part",
+   "Shares flat at 24 per day on every tracked day, about 0.02% of views",
+   "10 of 12 days have zero videos or views recorded, so the channel's output and results are mostly unlogged"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135 until at least 5 videos at that length have per-video data",
-   "Get the per-video and per-mode feed running so the next length change can be judged",
-   "Download Godzilla Minus One first, since it is still waiting and rides the Godzilla Minus Zero trend",
-   "Keep the cliffhanger endings in script_direction; the full-watch gain suggests they help"
+   "Turn on per-video and per-mode tracking so VIDEOS and PER MODE fill in; the length changes (165, 135, 105, 135 s) can't be judged until they do",
+   "Open every part with the twist or a question in the first 3 seconds to push average watch above 9.3 s",
+   "Keep the 135 s part length, the current setting, until at least 5 posted videos show a clear result",
+   "Post on a steady schedule and log each day's totals, since 10 of 12 days show nothing"
   ],
-  "at": "2026-11-09T19:17:20+07:00"
+  "at": "2026-11-10T01:17:35+07:00"
  }
 }
