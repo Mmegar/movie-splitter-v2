@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T13:16:45+07:00",
+ "updated": "2026-11-09T19:16:46+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -193,7 +193,7 @@
     "Drama",
     "Sci-Fi"
    ],
-   "why": "Still waiting from before and a clear, self-contained story that splits well into cliffhanger parts",
+   "why": "Still waiting from before and a clear, well-known story that cuts into cliffhanger parts",
    "trend": "Godzilla Minus Zero (122,560 Wikipedia views in 3 days)",
    "status": "new",
    "added": "2026-11-09T07:17:08+07:00"
@@ -465,100 +465,100 @@
    {
     "title": "Scene (2026 film)",
     "about": "2026 Indian film by Jithu Madhavan",
-    "views": 159862
+    "views": 335543
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 122560
+    "views": 260304
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 70740
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 56225
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 53221
+    "views": 145600
    },
    {
     "title": "Black Doves",
     "about": "British spy action television series (2024–present)",
-    "views": 52825
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 49254
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 47342
-   },
-   {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 45277
+    "views": 112633
    },
    {
     "title": "I, Robot (film)",
     "about": "2004 film by Alex Proyas",
-    "views": 44700
+    "views": 105748
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 102877
+   },
+   {
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 100078
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 96754
    },
    {
     "title": "Godzilla Minus One",
     "about": "2023 film by Takashi Yamazaki",
-    "views": 43683
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 43359
+    "views": 93854
    },
    {
     "title": "Resident Evil (2026 film)",
     "about": "Film by Zach Cregger",
-    "views": 43183
+    "views": 92475
+   },
+   {
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 91345
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 91303
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 89633
    },
    {
     "title": "Primetime (film)",
     "about": "2026 film by Lance Oppenheim",
-    "views": 40034
+    "views": 87793
    },
    {
-    "title": "The Remarried Empress",
-    "about": "2026 South Korean television series",
-    "views": 36870
+    "title": "Heart of the Beast",
+    "about": "2026 film by David Ayer",
+    "views": 85462
    }
   ]
  },
  "ai": {
-  "summary": "The channel is steady at about 100k views a day and improving: average watch rose from 6.7 s (Oct 29) to 9.3 s (Nov 6), and full-watch rose from 2.2% to 3.3%. The most important thing is that per-video, per-mode and per-movie data came back empty, so the numbers can't yet show which movies or formats win.",
+  "summary": "The channel holds about 100k views on each run day across 50 videos (roughly 2,000 views per video). Average watch time rose from 6.7s on Oct 29 to 9.3s on Nov 6, and full-watch went from 2.2% to 3.3%. The most important gap is that there is no per-video or per-mode data, so the recap length changes cannot be judged.",
   "working": [
-   "Average watch rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
-   "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Views held at 103k-104k on Nov 5-6, up from 97.7k on Oct 29",
-   "Likes stayed at 2,184-2,195 a day across 50 videos"
+   "Average watch rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
+   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
+   "About 104k views on Nov 5 and 103k on Nov 6 across 50 videos, roughly 2,000 views per video",
+   "Average watch is rising while the video count stays at 50, so viewers are watching longer on the existing parts"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so most viewers leave before the end",
-   "Oct 29, the 165 s part-length run, had the weakest average watch at 6.7 s",
-   "TOTALS, VIDEOS, PER MODE and PER MOVIE are all empty while the daily rows show 50 videos",
-   "Shares are flat at 24 a day"
+   "Full-watch is still only 3.3%, so most viewers leave before a part ends",
+   "At 9.3s average watch, viewers see only about 7% of a 135s part",
+   "No new videos in the data since Oct 29 (50 on every run day), so there are no fresh posts to measure",
+   "VIDEOS and PER MODE are empty, so no setting change can be tied to a result"
   ],
   "actions": [
-   "Fix the stats pull first: TOTALS, PER MODE, PER MOVIE and VIDEOS came back empty even though the daily rows show 50 videos",
-   "Keep recap parts at 135 s and check the next few days' average watch against 9.3 s before changing anything",
-   "Make the five picks below as cliffhanger-ending recap parts, and tag each video's mode and movie so the next run can rank them",
-   "Push full-watch past 3.3% by keeping each part's ending a cliffhanger"
+   "Keep recap_part_seconds at 135 until at least 5 videos at that length have per-video data",
+   "Get the per-video and per-mode feed running so the next length change can be judged",
+   "Download Godzilla Minus One first, since it is still waiting and rides the Godzilla Minus Zero trend",
+   "Keep the cliffhanger endings in script_direction; the full-watch gain suggests they help"
   ],
-  "at": "2026-11-09T13:17:26+07:00"
+  "at": "2026-11-09T19:17:20+07:00"
  }
 }
