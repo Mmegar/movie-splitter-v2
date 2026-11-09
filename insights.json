@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T01:16:37+07:00",
+ "updated": "2026-11-09T07:16:41+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -186,13 +186,26 @@
  ],
  "picks": [
   {
+   "title": "Godzilla Minus One",
+   "year": 2023,
+   "genres": [
+    "Action",
+    "Drama",
+    "Sci-Fi"
+   ],
+   "why": "Clear story with cliffhanger beats, and the franchise is trending on Wikipedia with Godzilla Minus Zero",
+   "trend": "Godzilla Minus Zero (122,560 Wikipedia views in 3 days)",
+   "status": "new",
+   "added": "2026-11-09T07:17:08+07:00"
+  },
+  {
    "title": "Barbarian",
    "year": 2022,
    "genres": [
     "Horror",
     "Mystery"
    ],
-   "why": "Still waiting from the last run and a twisty, cliffhanger-friendly horror pick for the dark-evening season; no per-movie numbers yet to test it against",
+   "why": "Still waiting from the owner's list; a twisty mystery that splits into cliffhanger parts",
    "trend": "Resident Evil (2026 film) by Zach Cregger is trending at 88,063 Wikipedia views; Barbarian is also by Cregger",
    "status": "new",
    "added": "2026-11-08T13:16:55+07:00"
@@ -526,23 +539,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel held about 100k views a day across 50 videos from Oct 29 to Nov 6, and average watch time rose from 6.7 s to 9.3 s. Full-watch is still only about 3%, so the main job is getting per-video numbers so the next picks and settings can be checked against real movies.",
+  "summary": "The channel is steady at about 100k views a day on 50 videos, and average watch time rose from 6.7s to 9.3s between Oct 29 and Nov 6. Full-watch is still only about 3%, so most viewers leave before the end of a part. The one thing that matters most is keeping parts ending on cliffhangers and watching whether full-watch moves past 3%.",
   "working": [
-   "Average watch time rose from 6.7 s (Oct 29) to 8.3 s (Nov 5) to 9.3 s (Nov 6)",
-   "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Views held near 100k a day (97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6) across 50 videos"
+   "Avg watch time rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
+   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
+   "About 103k-104k views a day on Nov 5-6 with 2,184-2,195 likes",
+   "Shares held steady at 24 a day"
   ],
   "not_working": [
-   "Full-watch is still only about 3.3%, so most viewers leave before the end of a part",
-   "This run returned no per-video, per-mode or per-movie rows, so no movie or mode can be credited with the numbers",
-   "Views slipped from 104,284 to 103,237 between Nov 5 and Nov 6"
+   "Full-watch is still only 3.3%, so most viewers drop before the end",
+   "PER MOVIE, PER MODE and VIDEOS are all empty, so no movie or format can be judged",
+   "Views were flat from Nov 5 to Nov 6 (104,284 to 103,237) with no clear gain from the 135s change",
+   "Only 3 of the last 11 days have numbers; the other days show zero"
   ],
   "actions": [
-   "Fix the data pull so it returns per-video rows, since VIDEOS and PER MOVIE are empty and TOTALS shows zeros",
-   "Download Barbarian first, since it is still waiting and is a twisty horror pick for dark evenings",
-   "Use the next five picks to build a true-crime and mystery run, and check per-movie watch time after each one posts",
-   "Keep recap_part_seconds at 135 until matched per-video data can judge the 165 s and 105 s steps"
+   "Keep recap_part_seconds at 135 and judge the Nov 6 change only after at least 5 videos post at that length",
+   "Fix the stats feed so per-video and per-movie numbers fill in; TOTALS reads 0 while the daily rows show about 100k views",
+   "Make the next recaps mystery or twisty stories that end on a cliffhanger, and track avg_watch and full_watch for each part",
+   "Check full-watch again after the next batch of parts and look for a clear rise above 3.3%"
   ],
-  "at": "2026-11-09T01:17:08+07:00"
+  "at": "2026-11-09T07:17:08+07:00"
  }
 }
