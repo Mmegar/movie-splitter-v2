@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T01:17:01+07:00",
+ "updated": "2026-11-10T07:17:12+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -201,7 +201,7 @@
     "Sci-Fi",
     "Mystery"
    ],
-   "why": "Detective mystery with clear stakes and built-in reveals that suits the channel's twisty style",
+   "why": "Still waiting from before and a clear whodunit with a twist; it is trending at 139,323 views on Wikipedia.",
    "trend": "I, Robot (film) (139,323 views in 3 days)",
    "status": "new",
    "added": "2026-11-10T01:17:35+07:00"
@@ -216,8 +216,9 @@
    ],
    "why": "Still waiting from before, and the sequel-led Godzilla trend is pulling 282,866 Wikipedia reads right now",
    "trend": "Godzilla Minus Zero (122,560 Wikipedia views in 3 days)",
-   "status": "new",
-   "added": "2026-11-09T07:17:08+07:00"
+   "status": "expired",
+   "added": "2026-11-09T07:17:08+07:00",
+   "at": "2026-11-10T07:17:12+07:00"
   },
   {
    "title": "Barbarian",
@@ -485,7 +486,7 @@
   "trending": [
    {
     "title": "Scene (2026 film)",
-    "about": "2026 Indian film by Jithu Madhavan",
+    "about": "Indian film by Jithu Madhavan",
     "views": 344561
    },
    {
@@ -561,25 +562,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel holds about 100k views on each day it was tracked (97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6), and watch time improved from 6.7 s to 9.3 s between those days. Full-watch is still only 3.3%, so most viewers leave before a part ends, and the most important gap is that no per-video or per-mode data was recorded. Without that, the recap-length changes can't be judged.",
+  "summary": "The channel is holding about 100k views a day on 50 videos (roughly 2,000 per video), and retention is improving: average watch rose from 6.7 s to 9.3 s and full-watch from 2.2% to 3.3%. The biggest problem is posting: only 3 of the 13 days in the log have any videos, and the per-video and per-mode tables are empty, so no setting change can be checked.",
   "working": [
-   "Views held near 100k on each tracked day (97,707 Oct 29; 104,284 Nov 5; 103,237 Nov 6)",
-   "Average watch rose from 6.7 s to 9.3 s between Oct 29 and Nov 6",
-   "Full-watch rose from 2.2% to 3.3% over the same days",
-   "Likes held at about 2,100 to 2,200 per tracked day"
+   "Average watch rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
+   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
+   "Views held at about 100k a day on 50 videos, roughly 2,000 per video",
+   "Likes steady at about 2,200 a day"
   ],
   "not_working": [
-   "Full-watch is still only 3.3%, so about 97% of viewers leave before a part ends",
-   "Average watch of 9.3 s is under 7% of a 135 s part",
-   "Shares flat at 24 per day on every tracked day, about 0.02% of views",
-   "10 of 12 days have zero videos or views recorded, so the channel's output and results are mostly unlogged"
+   "Only 3.3% of viewers reach the end of a part",
+   "Zero videos logged on 10 of 13 days (Oct 30 to Nov 4, Nov 7 to 10)",
+   "Shares flat at 24 a day on every posting day",
+   "TOTALS reads all zeros and PER MODE, PER MOVIE and VIDEOS are empty, so no video can be matched to a setting"
   ],
   "actions": [
-   "Turn on per-video and per-mode tracking so VIDEOS and PER MODE fill in; the length changes (165, 135, 105, 135 s) can't be judged until they do",
-   "Open every part with the twist or a question in the first 3 seconds to push average watch above 9.3 s",
-   "Keep the 135 s part length, the current setting, until at least 5 posted videos show a clear result",
-   "Post on a steady schedule and log each day's totals, since 10 of 12 days show nothing"
+   "Post every day: the log shows videos on only 3 of 13 days, which leaves no trend to read",
+   "Fix the data feed so TOTALS and the per-video rows fill in before judging any setting change",
+   "Open each part with the hook from the last cliffhanger in the first 3 seconds to lift the 9-second average watch and the 3.3% full-watch",
+   "Download I, Robot first, then Black Doves, Gone Girl, Shutter Island and Zodiac, and check each one's watch time after 5 parts"
   ],
-  "at": "2026-11-10T01:17:35+07:00"
+  "at": "2026-11-10T07:17:48+07:00"
  }
 }
