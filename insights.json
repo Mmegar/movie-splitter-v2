@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T07:17:12+07:00",
+ "updated": "2026-11-10T13:17:20+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -201,7 +201,7 @@
     "Sci-Fi",
     "Mystery"
    ],
-   "why": "Still waiting from before and a clear whodunit with a twist; it is trending at 139,323 views on Wikipedia.",
+   "why": "Still waiting from before and a murder-mystery at its core, which suits the channel's twisty style; no per-movie numbers yet",
    "trend": "I, Robot (film) (139,323 views in 3 days)",
    "status": "new",
    "added": "2026-11-10T01:17:35+07:00"
@@ -487,100 +487,100 @@
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 344561
+    "views": 520557
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 282866
+    "views": 430442
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 156044
-   },
-   {
-    "title": "I, Robot (film)",
-    "about": "2004 film by Alex Proyas",
-    "views": 139323
+    "views": 241688
    },
    {
     "title": "Black Doves",
     "about": "British spy action television series (2024–present)",
-    "views": 129160
+    "views": 192790
    },
    {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 108045
-   },
-   {
-    "title": "Heart of the Beast",
-    "about": "2026 film by David Ayer",
-    "views": 104822
-   },
-   {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 104142
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 103709
-   },
-   {
-    "title": "The Odyssey (2026 film)",
-    "about": "2026 film by Christopher Nolan",
-    "views": 102774
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 98976
+    "title": "I, Robot (film)",
+    "about": "2004 film by Alex Proyas",
+    "views": 175988
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 98191
+    "views": 161194
    },
    {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 93880
+    "title": "The Odyssey (2026 film)",
+    "about": "2026 film by Christopher Nolan",
+    "views": 157158
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 156073
+   },
+   {
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 155316
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 143521
+   },
+   {
+    "title": "Heart of the Beast",
+    "about": "2026 film by David Ayer",
+    "views": 142040
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 91497
+    "views": 139355
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 137826
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 129324
    },
    {
     "title": "Mookuthi Amman 2",
     "about": "2026 Indian film by Sundar C",
-    "views": 80582
+    "views": 126895
    }
   ]
  },
  "ai": {
-  "summary": "The channel is holding about 100k views a day on 50 videos (roughly 2,000 per video), and retention is improving: average watch rose from 6.7 s to 9.3 s and full-watch from 2.2% to 3.3%. The biggest problem is posting: only 3 of the 13 days in the log have any videos, and the per-video and per-mode tables are empty, so no setting change can be checked.",
+  "summary": "The channel's day-level numbers are steady and improving: about 103k–104k views on each of the two days with data (Nov 5–6), with average watch up from 6.7s to 9.3s and full-watch up from 2.2% to 3.3% since Oct 29. The data is inconsistent, though: the totals show 0 videos and the per-video list is empty, so no single video can be judged yet. Fixing that feed is the one thing that matters most.",
   "working": [
-   "Average watch rose from 6.7 s (Oct 29) to 9.3 s (Nov 6)",
-   "Full-watch rose from 2.2% (Oct 29) to 3.3% (Nov 6)",
-   "Views held at about 100k a day on 50 videos, roughly 2,000 per video",
-   "Likes steady at about 2,200 a day"
+   "Average watch rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
+   "Full-watch rose from 2.2% to 3.3% over the same days",
+   "Day totals held at 103k–104k views on Nov 5 and Nov 6 (50 videos each)",
+   "Shares held at 24 a day, so the content is still being passed on"
   ],
   "not_working": [
-   "Only 3.3% of viewers reach the end of a part",
-   "Zero videos logged on 10 of 13 days (Oct 30 to Nov 4, Nov 7 to 10)",
-   "Shares flat at 24 a day on every posting day",
-   "TOTALS reads all zeros and PER MODE, PER MOVIE and VIDEOS are empty, so no video can be matched to a setting"
+   "Full-watch is still only 3.3%, so most viewers leave before the end of a part",
+   "Totals show 0 views and 0 videos while the day rows show 50 videos, so per-video results can't be checked",
+   "Likes are flat at about 2,100–2,200 a day across the three days with data",
+   "No per-movie or per-mode numbers exist yet, so the next picks can't be backed by this channel's results"
   ],
   "actions": [
-   "Post every day: the log shows videos on only 3 of 13 days, which leaves no trend to read",
-   "Fix the data feed so TOTALS and the per-video rows fill in before judging any setting change",
-   "Open each part with the hook from the last cliffhanger in the first 3 seconds to lift the 9-second average watch and the 3.3% full-watch",
-   "Download I, Robot first, then Black Doves, Gone Girl, Shutter Island and Zodiac, and check each one's watch time after 5 parts"
+   "Fix the stats export so TOTALS and VIDEOS match the day rows, then re-run this analysis before changing settings",
+   "Keep recap_part_seconds at 135; only move it once 5 or more videos at that length have matched numbers",
+   "Start with I, Robot and Gone Girl, and cut each part on a cliffhanger, since full-watch is the weakest number",
+   "Log avg_watch and full_watch for each of the five picks as they go up, so the next run can rank them"
   ],
-  "at": "2026-11-10T07:17:48+07:00"
+  "at": "2026-11-10T13:18:00+07:00"
  }
 }
