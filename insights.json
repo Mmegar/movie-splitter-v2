@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T13:17:20+07:00",
+ "updated": "2026-11-10T19:17:26+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -501,7 +501,7 @@
    },
    {
     "title": "Black Doves",
-    "about": "British spy action television series (2024–present)",
+    "about": "British spy action TV series (2024–present)",
     "views": 192790
    },
    {
@@ -516,7 +516,7 @@
    },
    {
     "title": "The Odyssey (2026 film)",
-    "about": "2026 film by Christopher Nolan",
+    "about": "Film by Christopher Nolan",
     "views": 157158
    },
    {
@@ -556,7 +556,7 @@
    },
    {
     "title": "Mookuthi Amman 2",
-    "about": "2026 Indian film by Sundar C",
+    "about": "2026 film by Sundar C",
     "views": 126895
    }
   ]
@@ -581,6 +581,7 @@
    "Start with I, Robot and Gone Girl, and cut each part on a cliffhanger, since full-watch is the weakest number",
    "Log avg_watch and full_watch for each of the five picks as they go up, so the next run can rank them"
   ],
-  "at": "2026-11-10T13:18:00+07:00"
+  "at": "2026-11-10T13:18:00+07:00",
+  "error": "Claude app: You've hit your session limit · resets 10:20pm (Asia/Bangkok)\n"
  }
 }
