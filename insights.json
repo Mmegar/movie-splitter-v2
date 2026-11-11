@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:17:32+07:00",
+ "updated": "2026-11-11T07:17:37+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -403,71 +403,6 @@
    "at": "2026-11-04T18:42:00+07:00"
   },
   {
-   "title": "Verity (film)",
-   "year": 2026,
-   "genres": [
-    "Thriller",
-    "Mystery"
-   ],
-   "why": "Still waiting, a twisty thriller at 101,564 Wikipedia views that suits the channel's mystery stories",
-   "trend": "Trending on Wikipedia right now",
-   "status": "expired",
-   "added": "2026-11-03T06:41:27+07:00",
-   "at": "2026-11-04T06:43:49+07:00"
-  },
-  {
-   "title": "Gone Girl",
-   "year": 2014,
-   "genres": [
-    "Mystery",
-    "Thriller"
-   ],
-   "why": "Still waiting; a twist-driven mystery that cuts into cliffhanger parts, the channel's strongest style",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-03T06:41:27+07:00",
-   "at": "2026-11-04T06:43:49+07:00"
-  },
-  {
-   "title": "Knives Out",
-   "year": 2019,
-   "genres": [
-    "Mystery",
-    "Crime"
-   ],
-   "why": "Still waiting; a whodunit with a clear story, built for part-by-part reveals",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-03T06:41:27+07:00",
-   "at": "2026-11-04T06:43:49+07:00"
-  },
-  {
-   "title": "MobLand",
-   "year": 2025,
-   "genres": [
-    "Crime",
-    "Drama"
-   ],
-   "why": "A crime drama trending at 99,896 Wikipedia views in 3 days, and it can be recapped in cliffhanger parts",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-03T06:41:27+07:00",
-   "at": "2026-11-04T06:43:49+07:00"
-  },
-  {
-   "title": "Halloween",
-   "year": 1978,
-   "genres": [
-    "Horror",
-    "Thriller"
-   ],
-   "why": "Classic slasher with a tense, suspenseful build that cuts well into cliffhanger parts and is still widely read about (78,140 views)",
-   "trend": "Dark-evenings season, Halloween just passed; Halloween (1978 film) on Wikipedia",
-   "status": "expired",
-   "added": "2026-11-03T06:41:27+07:00",
-   "at": "2026-11-04T06:43:49+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -590,6 +525,7 @@
    "Keep recap_part_seconds at 135 and make no further length changes until at least 5 videos per length can be compared",
    "End each part on a cliffhanger, since full-watch is still only 3.3%"
   ],
-  "at": "2026-11-11T01:18:02+07:00"
+  "at": "2026-11-11T01:18:02+07:00",
+  "error": "Claude app: You've hit your session limit · resets 8:20am (Asia/Bangkok)\n"
  }
 }
