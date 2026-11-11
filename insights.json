@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T07:17:37+07:00",
+ "updated": "2026-11-11T13:17:48+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -432,77 +432,77 @@
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 344876
+    "views": 488056
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 292698
+    "views": 400064
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 166828
+    "views": 246101
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 132982
+    "views": 193293
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 174033
+   },
+   {
+    "title": "VisionQuest",
+    "about": "Marvel Studios television miniseries",
+    "views": 163873
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 116008
+    "views": 161397
+   },
+   {
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 142671
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 142282
+   },
+   {
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 124385
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 124169
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 120406
+   },
+   {
+    "title": "Mookuthi Amman 2",
+    "about": "2026 film by Sundar C",
+    "views": 120321
+   },
+   {
+    "title": "Heart of the Beast",
+    "about": "2026 film by David Ayer",
+    "views": 119394
    },
    {
     "title": "I, Robot (film)",
     "about": "2004 film by Alex Proyas",
     "views": 114940
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 113250
-   },
-   {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 105145
-   },
-   {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 104596
-   },
-   {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 92498
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 89898
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 88534
-   },
-   {
-    "title": "Mookuthi Amman 2",
-    "about": "2026 film by Sundar C",
-    "views": 88206
-   },
-   {
-    "title": "Heart of the Beast",
-    "about": "2026 film by David Ayer",
-    "views": 85977
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 85346
    }
   ]
  },
@@ -526,6 +526,6 @@
    "End each part on a cliffhanger, since full-watch is still only 3.3%"
   ],
   "at": "2026-11-11T01:18:02+07:00",
-  "error": "Claude app: You've hit your session limit · resets 8:20am (Asia/Bangkok)\n"
+  "error": "Claude app: You've hit your session limit · resets 1:20pm (Asia/Bangkok)\n"
  }
 }
