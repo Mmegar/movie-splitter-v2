@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T13:17:48+07:00",
+ "updated": "2026-11-11T19:18:01+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -204,6 +204,30 @@
  ],
  "picks": [
   {
+   "title": "Gone Girl",
+   "year": 2014,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "A famous twist-driven mystery that fits the channel's strength in twisty stories",
+   "trend": null,
+   "status": "new",
+   "added": "2026-11-11T19:18:31+07:00"
+  },
+  {
+   "title": "Knives Out",
+   "year": 2019,
+   "genres": [
+    "Mystery",
+    "Comedy"
+   ],
+   "why": "A whodunit with a clear story and a reveal at each act, which suits cliffhanger parts",
+   "trend": null,
+   "status": "new",
+   "added": "2026-11-11T19:18:31+07:00"
+  },
+  {
    "title": "I, Robot",
    "year": 2004,
    "genres": [
@@ -390,19 +414,6 @@
    "at": "2026-11-05T00:44:23+07:00"
   },
   {
-   "title": "Nocturne (TV series)",
-   "year": 2026,
-   "genres": [
-    "Crime",
-    "Drama"
-   ],
-   "why": "Still waiting; a crime drama that fits the channel's mystery pull and the true-crime season",
-   "trend": "Nocturne (TV series) is among the most-read shows on Wikipedia in the last 3 days",
-   "status": "expired",
-   "added": "2026-11-03T18:41:45+07:00",
-   "at": "2026-11-04T18:42:00+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -507,25 +518,23 @@
   ]
  },
  "ai": {
-  "summary": "The channel is holding about 100k views a day across 50 videos. Average watch rose from 6.7s to 9.3s and full-watch from 2.2% to 3.3% between Oct 29 and Nov 6, while views and shares stayed flat. Only 3 of 13 days have any data and no per-video rows came back, so the most useful step is getting daily per-video numbers recorded.",
+  "summary": "The channel has real numbers on only 3 of the 14 days, and those show growth: daily views held near 100k, average watch rose from 6.7s to 9.3s, and full-watch rose from 2.2% to 3.3%. Full-watch is still low, so the main lever is getting viewers to the end of each part. Per-video and per-mode data is empty, so the mystery-led picks below rest on the channel's stated strength rather than its own per-movie numbers.",
   "working": [
-   "Average watch time rose from 6.7s (Oct 29) to 8.3s (Nov 5) to 9.3s (Nov 6)",
-   "Full-watch rose from 2.2% to 3.1% to 3.3% over the same days",
-   "Likes held steady at about 2,120 to 2,200 a day across the 50 videos"
+   "Daily views held near 100k: 97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6",
+   "Average watch time rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
+   "Full-watch rate rose from 2.2% (Oct 29) to 3.3% (Nov 6)"
   ],
   "not_working": [
-   "Views are flat at about 100k a day (97,707, 104,284, 103,237), so there is no growth",
-   "Shares stayed at 24 every day with data",
-   "8 of 13 days show zero videos and views, so most of the window has no numbers",
-   "Full-watch is still only 3.3%, so most viewers leave before the end of a part"
+   "No videos recorded on 11 of 14 days (Oct 30 to Nov 4 and Nov 7 to Nov 11), so the channel is not posting consistently",
+   "Full-watch is still only 3.3%, so most viewers leave before a part ends",
+   "Per-video and per-mode data is empty, so no movie or format can yet be shown to win"
   ],
   "actions": [
-   "Make sure the daily stats pull runs every day and records per-video rows, since 8 of 13 days are empty and no videos were matched",
-   "Download I, Robot first (it is still waiting and is trending on Wikipedia at 114,940 views), then the other four picks",
-   "Keep recap_part_seconds at 135 and make no further length changes until at least 5 videos per length can be compared",
-   "End each part on a cliffhanger, since full-watch is still only 3.3%"
+   "Post a part every day, or at least on a fixed schedule, so the daily numbers stay comparable",
+   "End every part on a cliffhanger unless the sub-story is fully resolved, to push full-watch above 3.3%",
+   "Download the 5 picks below and keep part length at 135 s until at least 5 videos per setting are measured",
+   "Keep the day-by-day totals running so the next review can judge each setting change per video"
   ],
-  "at": "2026-11-11T01:18:02+07:00",
-  "error": "Claude app: You've hit your session limit · resets 1:20pm (Asia/Bangkok)\n"
+  "at": "2026-11-11T19:18:31+07:00"
  }
 }
