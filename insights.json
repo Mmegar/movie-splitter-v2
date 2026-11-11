@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T19:18:01+07:00",
+ "updated": "2026-11-12T01:17:58+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -138,6 +138,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-12",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -204,13 +213,25 @@
  ],
  "picks": [
   {
+   "title": "MobLand",
+   "year": 2025,
+   "genres": [
+    "Crime",
+    "Drama"
+   ],
+   "why": "Crime drama in the Wikipedia most-read list at 66,332 views in 3 days; a current trend, and its episodes break into parts easily",
+   "trend": "MobLand (2025 British crime drama television series) is among the most-read Wikipedia pages right now at 66,332 views in",
+   "status": "new",
+   "added": "2026-11-12T01:18:28+07:00"
+  },
+  {
    "title": "Gone Girl",
    "year": 2014,
    "genres": [
     "Mystery",
     "Thriller"
    ],
-   "why": "A famous twist-driven mystery that fits the channel's strength in twisty stories",
+   "why": "Waiting pick and a twist-driven mystery, the style this channel is strongest at; no per-movie numbers yet to confirm it",
    "trend": null,
    "status": "new",
    "added": "2026-11-11T19:18:31+07:00"
@@ -222,7 +243,7 @@
     "Mystery",
     "Comedy"
    ],
-   "why": "A whodunit with a clear story and a reveal at each act, which suits cliffhanger parts",
+   "why": "Waiting pick with a whodunit structure that cuts cleanly into cliffhanger parts; its witty tone suits the funny side commentary in the script",
    "trend": null,
    "status": "new",
    "added": "2026-11-11T19:18:31+07:00"
@@ -401,19 +422,6 @@
    "at": "2026-11-05T06:45:20+07:00"
   },
   {
-   "title": "From (TV series)",
-   "year": 2022,
-   "genres": [
-    "Horror",
-    "Mystery"
-   ],
-   "why": "Still waiting and still a strong pick: a mystery-horror with cliffhanger episodes, matching the channel's twisty stories",
-   "trend": "Horror and supernatural mysteries in the season",
-   "status": "expired",
-   "added": "2026-11-04T00:41:49+07:00",
-   "at": "2026-11-05T00:44:23+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -428,7 +436,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -443,98 +451,98 @@
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 488056
+    "views": 319176
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 400064
+    "views": 254942
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 246101
+    "views": 164917
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 193293
+    "views": 123941
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 174033
+    "views": 123786
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 163873
+    "views": 119233
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 161397
+    "views": 99773
    },
    {
     "title": "Godzilla Minus One",
     "about": "2023 film by Takashi Yamazaki",
-    "views": 142671
+    "views": 88700
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 142282
+    "views": 85714
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 124385
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 124169
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 120406
+    "views": 81863
    },
    {
     "title": "Mookuthi Amman 2",
     "about": "2026 film by Sundar C",
-    "views": 120321
+    "views": 78428
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 74083
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 70722
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 119394
+    "views": 70635
    },
    {
-    "title": "I, Robot (film)",
-    "about": "2004 film by Alex Proyas",
-    "views": 114940
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 66332
    }
   ]
  },
  "ai": {
-  "summary": "The channel has real numbers on only 3 of the 14 days, and those show growth: daily views held near 100k, average watch rose from 6.7s to 9.3s, and full-watch rose from 2.2% to 3.3%. Full-watch is still low, so the main lever is getting viewers to the end of each part. Per-video and per-mode data is empty, so the mystery-led picks below rest on the channel's stated strength rather than its own per-movie numbers.",
+  "summary": "The channel had real traffic on Nov 5 and 6 (about 104k and 103k views a day) with avg watch rising from 8.3s to 9.3s. Full-watch stayed near 3%, so most viewers leave early. The fix that matters most is a stronger hook and a cliffhanger that makes people stay to the end of each part.",
   "working": [
-   "Daily views held near 100k: 97,707 on Oct 29, 104,284 on Nov 5, 103,237 on Nov 6",
-   "Average watch time rose from 6.7s (Oct 29) to 9.3s (Nov 6)",
-   "Full-watch rate rose from 2.2% (Oct 29) to 3.3% (Nov 6)"
+   "Views held steady at 104,284 on Nov 5 and 103,237 on Nov 6",
+   "Average watch time rose from 8.3s to 9.3s between Nov 5 and Nov 6",
+   "About 2,200 likes a day on both days (2,195 and 2,184)"
   ],
   "not_working": [
-   "No videos recorded on 11 of 14 days (Oct 30 to Nov 4 and Nov 7 to Nov 11), so the channel is not posting consistently",
-   "Full-watch is still only 3.3%, so most viewers leave before a part ends",
-   "Per-video and per-mode data is empty, so no movie or format can yet be shown to win"
+   "Full-watch is only 3.1% to 3.3%, so almost everyone leaves before the end of a part",
+   "Only 24 shares a day, about 0.02% of views",
+   "Per-video and per-movie numbers are empty, so the channel can't yet show which movies or modes win"
   ],
   "actions": [
-   "Post a part every day, or at least on a fixed schedule, so the daily numbers stay comparable",
-   "End every part on a cliffhanger unless the sub-story is fully resolved, to push full-watch above 3.3%",
-   "Download the 5 picks below and keep part length at 135 s until at least 5 videos per setting are measured",
-   "Keep the day-by-day totals running so the next review can judge each setting change per video"
+   "Keep recap_part_seconds at 135 and don't change it until per-video data is back; the earlier 165, 105 and 135 changes can't be judged yet",
+   "Check the data feed: totals are 0 while the day-by-day shows about 104k views on each of two days, and the video list is empty",
+   "Open each part with a hook in the first 3 seconds and end on a cliffhanger, aiming for full-watch above 5%",
+   "Download Gone Girl first; it is the best fit for this channel's twist-driven mystery style and the true-crime season"
   ],
-  "at": "2026-11-11T19:18:31+07:00"
+  "at": "2026-11-12T01:18:28+07:00"
  }
 }
