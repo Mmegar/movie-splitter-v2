@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T07:18:08+07:00",
+ "updated": "2026-11-12T13:18:08+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -438,77 +438,77 @@
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 319176
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 254942
-   },
-   {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 164917
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 123941
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 123786
+    "views": 442419
    },
    {
     "title": "VisionQuest",
     "about": "Marvel Studios television miniseries",
-    "views": 119233
+    "views": 359971
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 345651
+   },
+   {
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 238659
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 179828
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 173787
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 99773
-   },
-   {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 88700
+    "views": 142165
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 85714
+    "views": 125062
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 81863
+    "views": 124720
    },
    {
-    "title": "Mookuthi Amman 2",
-    "about": "2026 film by Sundar C",
-    "views": 78428
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 122540
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 74083
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 70722
+    "views": 112098
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 70635
+    "views": 101458
    },
    {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 66332
+    "title": "Mookuthi Amman 2",
+    "about": "2026 film by Sundar C",
+    "views": 101141
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Upcoming film by Ti West",
+    "views": 99264
+   },
+   {
+    "title": "Resident Evil (2026 film)",
+    "about": "Film by Zach Cregger",
+    "views": 96613
    }
   ]
  },
@@ -532,6 +532,7 @@
    "Open every part with a hook in the first 3 seconds and end each part on a cliffhanger, then compare average watch time against the 8–9 s baseline",
    "Download the next five picks, starting with MobLand and Black Doves, which are high on Wikipedia right now"
   ],
-  "at": "2026-11-12T07:18:39+07:00"
+  "at": "2026-11-12T07:18:39+07:00",
+  "error": "Claude app: You've hit your session limit · resets 3:50pm (Asia/Bangkok)\n"
  }
 }
