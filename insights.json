@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T01:17:58+07:00",
+ "updated": "2026-11-12T07:18:08+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -219,7 +219,7 @@
     "Crime",
     "Drama"
    ],
-   "why": "Crime drama in the Wikipedia most-read list at 66,332 views in 3 days; a current trend, and its episodes break into parts easily",
+   "why": "Still-waiting pick; a crime series with a layered, twisty plot that suits cliffhanger parts",
    "trend": "MobLand (2025 British crime drama television series) is among the most-read Wikipedia pages right now at 66,332 views in",
    "status": "new",
    "added": "2026-11-12T01:18:28+07:00"
@@ -231,7 +231,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Waiting pick and a twist-driven mystery, the style this channel is strongest at; no per-movie numbers yet to confirm it",
+   "why": "Still-waiting pick; a twist-driven mystery that fits the channel's strength in twisty stories",
    "trend": null,
    "status": "new",
    "added": "2026-11-11T19:18:31+07:00"
@@ -243,7 +243,7 @@
     "Mystery",
     "Comedy"
    ],
-   "why": "Waiting pick with a whodunit structure that cuts cleanly into cliffhanger parts; its witty tone suits the funny side commentary in the script",
+   "why": "Still-waiting pick; a whodunit with clear clues that cuts well into parts",
    "trend": null,
    "status": "new",
    "added": "2026-11-11T19:18:31+07:00"
@@ -409,19 +409,6 @@
    "at": "2026-11-06T01:12:45+07:00"
   },
   {
-   "title": "Backrooms (film)",
-   "year": 2026,
-   "genres": [
-    "Horror",
-    "Mystery"
-   ],
-   "why": "Still-waiting pick and a mystery-horror with a clear hook, in line with Heretic (928 views on part 8) and 10 Cloverfield Lane (4,554 on part 8).",
-   "trend": "Dark-evening horror; 82,611 Wikipedia views in the last 3 days",
-   "status": "expired",
-   "added": "2026-11-04T06:44:46+07:00",
-   "at": "2026-11-05T06:45:20+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -526,23 +513,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel had real traffic on Nov 5 and 6 (about 104k and 103k views a day) with avg watch rising from 8.3s to 9.3s. Full-watch stayed near 3%, so most viewers leave early. The fix that matters most is a stronger hook and a cliffhanger that makes people stay to the end of each part.",
+  "summary": "Two days of data (Nov 5–6) show about 207k views across 50 videos, steady at roughly 2,070 views per video, with average watch time rising from 8.3 s to 9.3 s. Viewers still drop off early (full-watch 3.1–3.3%), and the totals and per-video tables don't reconcile, so no video or change can be tied to a result yet. The one thing that matters most is getting per-video data flowing so the recap-length and hook decisions can be judged.",
   "working": [
-   "Views held steady at 104,284 on Nov 5 and 103,237 on Nov 6",
-   "Average watch time rose from 8.3s to 9.3s between Nov 5 and Nov 6",
-   "About 2,200 likes a day on both days (2,195 and 2,184)"
+   "Views held steady: 104,284 on Nov 5 and 103,237 on Nov 6 across 50 videos (about 2,070 per video)",
+   "Average watch time rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
+   "Full-watch rose from 3.1% to 3.3%",
+   "Shares held at 24 both days, so the content is being passed along at a steady rate"
   ],
   "not_working": [
-   "Full-watch is only 3.1% to 3.3%, so almost everyone leaves before the end of a part",
-   "Only 24 shares a day, about 0.02% of views",
-   "Per-video and per-movie numbers are empty, so the channel can't yet show which movies or modes win"
+   "Full-watch is only 3.1–3.3%, so almost nobody reaches the end of a part",
+   "Average watch is 8–9 s, far below the 135 s recap length, so viewers leave within the first few seconds",
+   "TOTALS shows 0 views and VIDEOS is empty while the day-by-day rows show 207k views, so the data doesn't reconcile",
+   "PER MODE and PER MOVIE are empty, so I can't tell which kind of video or which movie drives the views"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135 and don't change it until per-video data is back; the earlier 165, 105 and 135 changes can't be judged yet",
-   "Check the data feed: totals are 0 while the day-by-day shows about 104k views on each of two days, and the video list is empty",
-   "Open each part with a hook in the first 3 seconds and end on a cliffhanger, aiming for full-watch above 5%",
-   "Download Gone Girl first; it is the best fit for this channel's twist-driven mystery style and the true-crime season"
+   "Fix the data export so TOTALS, VIDEOS and PER MOVIE fill in; the day-by-day numbers are not enough to judge any change",
+   "Keep recap_part_seconds at 135 for now and make no other setting changes until at least 5 videos have per-video numbers",
+   "Open every part with a hook in the first 3 seconds and end each part on a cliffhanger, then compare average watch time against the 8–9 s baseline",
+   "Download the next five picks, starting with MobLand and Black Doves, which are high on Wikipedia right now"
   ],
-  "at": "2026-11-12T01:18:28+07:00"
+  "at": "2026-11-12T07:18:39+07:00"
  }
 }
