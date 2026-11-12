@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T19:18:19+07:00",
+ "updated": "2026-11-12T19:48:26+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -233,8 +233,9 @@
    ],
    "why": "Still-waiting pick; a twist-driven mystery that fits the channel's strength in twisty stories",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-11T19:18:31+07:00"
+   "status": "expired",
+   "added": "2026-11-11T19:18:31+07:00",
+   "at": "2026-11-12T19:48:26+07:00"
   },
   {
    "title": "Knives Out",
@@ -245,8 +246,9 @@
    ],
    "why": "Still-waiting pick; a whodunit with clear clues that cuts well into parts",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-11T19:18:31+07:00"
+   "status": "expired",
+   "added": "2026-11-11T19:18:31+07:00",
+   "at": "2026-11-12T19:48:26+07:00"
   },
   {
    "title": "I, Robot",
