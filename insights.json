@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T19:48:26+07:00",
+ "updated": "2026-11-13T01:19:12+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -147,6 +147,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-13",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -213,6 +222,19 @@
  ],
  "picks": [
   {
+   "title": "Scream",
+   "year": 1996,
+   "genres": [
+    "Horror",
+    "Slasher",
+    "Mystery"
+   ],
+   "why": "Whodunit slasher with a masked killer and twists; no per-movie numbers yet, picked for the channel's mystery and twist strength",
+   "trend": "Friday the 13th (today)",
+   "status": "new",
+   "added": "2026-11-13T01:19:51+07:00"
+  },
+  {
    "title": "MobLand",
    "year": 2025,
    "genres": [
@@ -221,8 +243,9 @@
    ],
    "why": "Still-waiting pick; a crime series with a layered, twisty plot that suits cliffhanger parts",
    "trend": "MobLand (2025 British crime drama television series) is among the most-read Wikipedia pages right now at 66,332 views in",
-   "status": "new",
-   "added": "2026-11-12T01:18:28+07:00"
+   "status": "expired",
+   "added": "2026-11-12T01:18:28+07:00",
+   "at": "2026-11-13T01:19:12+07:00"
   },
   {
    "title": "Gone Girl",
@@ -398,19 +421,6 @@
    "at": "2026-11-06T06:45:59+07:00"
   },
   {
-   "title": "Resident Evil (2026)",
-   "year": 2026,
-   "genres": [
-    "Horror",
-    "Action"
-   ],
-   "why": "113,667 Wikipedia reads in 3 days; horror-thriller in the same vein as Heretic, which drew 944 views on one part",
-   "trend": "Wikipedia: 96,855 reads in 3 days",
-   "status": "expired",
-   "added": "2026-11-05T00:45:43+07:00",
-   "at": "2026-11-06T01:12:45+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -425,7 +435,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -434,107 +444,112 @@
      "Thriller",
      "Mystery"
     ]
+   },
+   {
+    "moment": "Friday the 13th",
+    "genres": [
+     "Horror",
+     "Slasher"
+    ]
    }
   ],
   "trending": [
    {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 442419
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 312113
    },
    {
-    "title": "VisionQuest",
-    "about": "Marvel Studios television miniseries",
-    "views": 359971
+    "title": "Scene (2026 film)",
+    "about": "Indian film by Jithu Madhavan",
+    "views": 266423
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 345651
+    "views": 198075
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 238659
+    "views": 153015
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 179828
+    "views": 116198
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 173787
+    "views": 110784
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 142165
-   },
-   {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 125062
+    "views": 87781
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 124720
+    "views": 81896
    },
    {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 122540
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 77034
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 76465
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 112098
+    "views": 72286
+   },
+   {
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 71366
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 101458
+    "views": 64240
    },
    {
-    "title": "Mookuthi Amman 2",
-    "about": "2026 film by Sundar C",
-    "views": 101141
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Upcoming film by Ti West",
-    "views": 99264
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 59559
    },
    {
     "title": "Resident Evil (2026 film)",
     "about": "Film by Zach Cregger",
-    "views": 96613
+    "views": 57763
    }
   ]
  },
  "ai": {
-  "summary": "Two days of data (Nov 5–6) show about 207k views across 50 videos, steady at roughly 2,070 views per video, with average watch time rising from 8.3 s to 9.3 s. Viewers still drop off early (full-watch 3.1–3.3%), and the totals and per-video tables don't reconcile, so no video or change can be tied to a result yet. The one thing that matters most is getting per-video data flowing so the recap-length and hook decisions can be judged.",
+  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6 (50 videos a day, roughly 2,000 views per video), but viewers leave early: average watch was 8-9 s and only about 3% watched to the end. Nothing is logged for Nov 7-13, and no per-video or per-movie rows were supplied, so the biggest fix is holding attention in the first seconds of each part.",
   "working": [
-   "Views held steady: 104,284 on Nov 5 and 103,237 on Nov 6 across 50 videos (about 2,070 per video)",
-   "Average watch time rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
-   "Full-watch rose from 3.1% to 3.3%",
-   "Shares held at 24 both days, so the content is being passed along at a steady rate"
+   "Nov 5 and Nov 6 each drew about 104k views (104,284 and 103,237) across 50 videos",
+   "Likes held steady at 2,195 and 2,184, about 2% of views",
+   "Average watch rose from 8.3 s to 9.3 s on Nov 6"
   ],
   "not_working": [
-   "Full-watch is only 3.1–3.3%, so almost nobody reaches the end of a part",
-   "Average watch is 8–9 s, far below the 135 s recap length, so viewers leave within the first few seconds",
-   "TOTALS shows 0 views and VIDEOS is empty while the day-by-day rows show 207k views, so the data doesn't reconcile",
-   "PER MODE and PER MOVIE are empty, so I can't tell which kind of video or which movie drives the views"
+   "Full-watch was only 3.1% and 3.3%, so most viewers leave before a part ends",
+   "Average watch of 8-9 s is about 6-7% of a 135 s part",
+   "Only 24 shares a day, about 0.02% of views",
+   "Views, likes and videos are zero for every day from Nov 7 to Nov 13"
   ],
   "actions": [
-   "Fix the data export so TOTALS, VIDEOS and PER MOVIE fill in; the day-by-day numbers are not enough to judge any change",
-   "Keep recap_part_seconds at 135 for now and make no other setting changes until at least 5 videos have per-video numbers",
-   "Open every part with a hook in the first 3 seconds and end each part on a cliffhanger, then compare average watch time against the 8–9 s baseline",
-   "Download the next five picks, starting with MobLand and Black Doves, which are high on Wikipedia right now"
+   "Open every part on its strongest line or a question in the first 3 seconds, since average watch is only 8-9 s",
+   "Keep recap_part_seconds at 135 until at least 5 matched videos appear in VIDEOS, then judge the change",
+   "Post the next batch now, since nothing has gone out since Nov 6",
+   "Fix the export: day rows show 50 videos a day while TOTALS shows 0, and VIDEOS and PER MOVIE are empty"
   ],
-  "at": "2026-11-12T07:18:39+07:00",
-  "error": "Claude app: You've hit your session limit · resets 8:50pm (Asia/Bangkok)\n"
+  "at": "2026-11-13T01:19:51+07:00"
  }
 }
