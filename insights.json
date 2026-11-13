@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T13:19:29+07:00",
+ "updated": "2026-11-13T19:19:35+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -228,7 +228,7 @@
     "Horror",
     "Slasher"
    ],
-   "why": "Classic slasher with a clear body-count structure that splits well into cliffhanger parts",
+   "why": "Still waiting from your list, and a strong slasher with a clear mystery of who is killing the counselors that cuts well into cliffhanger parts",
    "trend": "Friday the 13th",
    "status": "new",
    "added": "2026-11-13T13:20:03+07:00"
@@ -241,7 +241,7 @@
     "Slasher",
     "Mystery"
    ],
-   "why": "Still-waiting pick; a whodunit slasher with reveals that suit the channel's mystery style",
+   "why": "Still waiting from your list; a whodunit with twists and a masked killer, which suits the channel's mystery and twisty-story strength",
    "trend": "Friday the 13th (today)",
    "status": "new",
    "added": "2026-11-13T01:19:51+07:00"
@@ -393,19 +393,6 @@
    "at": "2026-11-07T01:15:14+07:00"
   },
   {
-   "title": "Shutter Island",
-   "year": 2010,
-   "genres": [
-    "Mystery",
-    "Thriller"
-   ],
-   "why": "Still-waiting pick; a twisty mystery that matches the channel's strongest genre and Blink Twice's retention",
-   "trend": null,
-   "status": "expired",
-   "added": "2026-11-05T18:44:18+07:00",
-   "at": "2026-11-06T18:47:21+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -476,7 +463,7 @@
    },
    {
     "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
+    "about": "2026 film by Ti West",
     "views": 129640
    },
    {
@@ -517,24 +504,24 @@
   ]
  },
  "ai": {
-  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6, with shares steady at 24 a day and average watch rising from 8.3 s to 9.3 s. Retention is still the weak point: full-watch is about 3%, and the totals and per-video data are missing, so the length settings can't be judged. Fix the stats feed and work on the first seconds of each part.",
+  "summary": "The channel has about 104k views a day across 50 videos, but retention is weak: average watch is 8.3 to 9.3 seconds and only about 3% of viewers reach the end. Per-video and per-mode data is empty, so no setting change has enough matched videos to justify it, and the day totals look like a repeated snapshot that needs checking. The most important thing is to fix the first seconds of each part so viewers stay past the opening.",
   "working": [
-   "About 104k views on Nov 5 and about 103k on Nov 6, with about 2,190 likes each day",
-   "Average watch rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
-   "Full-watch rose from 3.1% to 3.3% over the same two days",
-   "24 shares on each of the two days"
+   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)",
+   "Full-watch rate rose from 3.1% to 3.3% over the same two days",
+   "Shares held steady at 24 per day"
   ],
   "not_working": [
-   "Average watch is only 8–9 s, so most viewers leave long before a 135 s part ends",
-   "Full-watch is about 3%, so fewer than 1 in 30 viewers finish a part",
-   "TOTALS shows 0 views while the day rows show about 104k, and VIDEOS and PER MOVIE are empty, so per-video and per-mode results can't be checked"
+   "Average watch is only 8–9 s, so most viewers leave in the first few seconds",
+   "Full-watch rate is about 3%, far below what a cliffhanger-driven series should get",
+   "Views were flat (104,284 to 103,237) and likes fell from 2,195 to 2,184",
+   "Per-video and per-mode data is empty, so no part can be judged on its own"
   ],
   "actions": [
-   "Reconcile the stats feed: TOTALS reads 0 while the day rows show about 104k views, so the next review has trustworthy numbers",
-   "Keep part length at 135 s until matched videos come back; no settings change is justified yet",
-   "Download Scream first for the Friday the 13th slasher trend, then Zodiac and Gone Girl for the mystery and twisty stories that suit the channel",
-   "Tighten the opening seconds of each part, since 8–9 s average watch means viewers are leaving early"
+   "Rewrite the first 3 seconds of every part to open on the most tense or twisty moment, not on setup",
+   "Keep the settings as they are until per-video numbers arrive; the 135 s length from Nov 6 is the current baseline",
+   "Check the data feed: both days show exactly 50 videos and nearly identical totals, which suggests a repeated snapshot rather than daily counts",
+   "Make sure each part ends on a cliffhanger, as the script direction already asks, and track full-watch % per part"
   ],
-  "at": "2026-11-13T13:20:03+07:00"
+  "at": "2026-11-13T19:20:08+07:00"
  }
 }
