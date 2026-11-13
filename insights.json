@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T07:19:28+07:00",
+ "updated": "2026-11-13T13:19:29+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -222,6 +222,18 @@
  ],
  "picks": [
   {
+   "title": "Friday the 13th",
+   "year": 1980,
+   "genres": [
+    "Horror",
+    "Slasher"
+   ],
+   "why": "Classic slasher with a clear body-count structure that splits well into cliffhanger parts",
+   "trend": "Friday the 13th",
+   "status": "new",
+   "added": "2026-11-13T13:20:03+07:00"
+  },
+  {
    "title": "Scream",
    "year": 1996,
    "genres": [
@@ -229,7 +241,7 @@
     "Slasher",
     "Mystery"
    ],
-   "why": "Whodunit slasher with a masked killer and twists; no per-movie numbers yet, picked for the channel's mystery and twist strength",
+   "why": "Still-waiting pick; a whodunit slasher with reveals that suit the channel's mystery style",
    "trend": "Friday the 13th (today)",
    "status": "new",
    "added": "2026-11-13T01:19:51+07:00"
@@ -394,19 +406,6 @@
    "at": "2026-11-06T18:47:21+07:00"
   },
   {
-   "title": "Verity",
-   "year": 2026,
-   "genres": [
-    "Thriller",
-    "Mystery"
-   ],
-   "why": "Still-waiting pick and currently heavily read on Wikipedia (64,547 views in 3 days)",
-   "trend": "Verity (2026 film): 110,060 Wikipedia views in the last 3 days",
-   "status": "expired",
-   "added": "2026-11-05T12:45:55+07:00",
-   "at": "2026-11-06T12:47:48+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -443,100 +442,99 @@
    {
     "title": "VisionQuest",
     "about": "2026 Marvel Studios television miniseries",
-    "views": 312113
+    "views": 414239
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 266423
+    "views": 364733
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 198075
+    "views": 273122
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 153015
+    "views": 260146
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 116198
+    "views": 165255
    },
    {
     "title": "Clayface (film)",
     "about": "2026 DC Studios film",
-    "views": 110784
+    "views": 145112
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 87781
+    "views": 129965
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 129640
+   },
+   {
+    "title": "The Body (TV series)",
+    "about": "American television series",
+    "views": 128271
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 81896
+    "views": 119195
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 77034
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "2026 film by Ti West",
-    "views": 76465
+    "views": 111107
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 72286
+    "views": 107275
    },
    {
     "title": "Godzilla Minus One",
     "about": "2023 film by Takashi Yamazaki",
-    "views": 71366
+    "views": 99171
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 64240
+    "views": 94653
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 59559
-   },
-   {
-    "title": "Resident Evil (2026 film)",
-    "about": "Film by Zach Cregger",
-    "views": 57763
+    "views": 92717
    }
   ]
  },
  "ai": {
-  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6 (50 videos a day, roughly 2,000 views per video), but viewers leave early: average watch was 8-9 s and only about 3% watched to the end. Nothing is logged for Nov 7-13, and no per-video or per-movie rows were supplied, so the biggest fix is holding attention in the first seconds of each part.",
+  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6, with shares steady at 24 a day and average watch rising from 8.3 s to 9.3 s. Retention is still the weak point: full-watch is about 3%, and the totals and per-video data are missing, so the length settings can't be judged. Fix the stats feed and work on the first seconds of each part.",
   "working": [
-   "Nov 5 and Nov 6 each drew about 104k views (104,284 and 103,237) across 50 videos",
-   "Likes held steady at 2,195 and 2,184, about 2% of views",
-   "Average watch rose from 8.3 s to 9.3 s on Nov 6"
+   "About 104k views on Nov 5 and about 103k on Nov 6, with about 2,190 likes each day",
+   "Average watch rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
+   "Full-watch rose from 3.1% to 3.3% over the same two days",
+   "24 shares on each of the two days"
   ],
   "not_working": [
-   "Full-watch was only 3.1% and 3.3%, so most viewers leave before a part ends",
-   "Average watch of 8-9 s is about 6-7% of a 135 s part",
-   "Only 24 shares a day, about 0.02% of views",
-   "Views, likes and videos are zero for every day from Nov 7 to Nov 13"
+   "Average watch is only 8–9 s, so most viewers leave long before a 135 s part ends",
+   "Full-watch is about 3%, so fewer than 1 in 30 viewers finish a part",
+   "TOTALS shows 0 views while the day rows show about 104k, and VIDEOS and PER MOVIE are empty, so per-video and per-mode results can't be checked"
   ],
   "actions": [
-   "Open every part on its strongest line or a question in the first 3 seconds, since average watch is only 8-9 s",
-   "Keep recap_part_seconds at 135 until at least 5 matched videos appear in VIDEOS, then judge the change",
-   "Post the next batch now, since nothing has gone out since Nov 6",
-   "Fix the export: day rows show 50 videos a day while TOTALS shows 0, and VIDEOS and PER MOVIE are empty"
+   "Reconcile the stats feed: TOTALS reads 0 while the day rows show about 104k views, so the next review has trustworthy numbers",
+   "Keep part length at 135 s until matched videos come back; no settings change is justified yet",
+   "Download Scream first for the Friday the 13th slasher trend, then Zodiac and Gone Girl for the mystery and twisty stories that suit the channel",
+   "Tighten the opening seconds of each part, since 8–9 s average watch means viewers are leaving early"
   ],
-  "at": "2026-11-13T01:19:51+07:00",
-  "error": "Claude app: You've hit your session limit · resets 7:20am (Asia/Bangkok)\n"
+  "at": "2026-11-13T13:20:03+07:00"
  }
 }
