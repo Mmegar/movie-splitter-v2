@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T19:19:35+07:00",
+ "updated": "2026-11-14T01:19:48+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -156,6 +156,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-14",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -222,13 +231,26 @@
  ],
  "picks": [
   {
+   "title": "Zodiac",
+   "year": 2007,
+   "genres": [
+    "Crime",
+    "Thriller",
+    "Mystery"
+   ],
+   "why": "A real-life case told as a long investigation, well suited to multi-part cliffhangers; no channel numbers yet to prove it",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-14T01:20:15+07:00"
+  },
+  {
    "title": "Friday the 13th",
    "year": 1980,
    "genres": [
     "Horror",
     "Slasher"
    ],
-   "why": "Still waiting from your list, and a strong slasher with a clear mystery of who is killing the counselors that cuts well into cliffhanger parts",
+   "why": "Still waiting from the owner's list; a classic seasonal pick with clear escalating set-pieces for cliffhangers",
    "trend": "Friday the 13th",
    "status": "new",
    "added": "2026-11-13T13:20:03+07:00"
@@ -243,8 +265,9 @@
    ],
    "why": "Still waiting from your list; a whodunit with twists and a masked killer, which suits the channel's mystery and twisty-story strength",
    "trend": "Friday the 13th (today)",
-   "status": "new",
-   "added": "2026-11-13T01:19:51+07:00"
+   "status": "expired",
+   "added": "2026-11-13T01:19:51+07:00",
+   "at": "2026-11-14T01:20:15+07:00"
   },
   {
    "title": "MobLand",
@@ -379,20 +402,6 @@
    "at": "2026-11-07T06:47:36+07:00"
   },
   {
-   "title": "Zodiac",
-   "year": 2007,
-   "genres": [
-    "Crime",
-    "Mystery",
-    "Thriller"
-   ],
-   "why": "Still waiting, a true-crime mystery with a clear case that splits well into cliffhanger parts, which fits this channel's best genre",
-   "trend": "True-crime season, long dark evenings.",
-   "status": "expired",
-   "added": "2026-11-06T01:13:51+07:00",
-   "at": "2026-11-07T01:15:14+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -407,7 +416,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-13",
+  "date": "2026-11-14",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -416,55 +425,28 @@
      "Thriller",
      "Mystery"
     ]
-   },
-   {
-    "moment": "Friday the 13th",
-    "genres": [
-     "Horror",
-     "Slasher"
-    ]
    }
   ],
   "trending": [
    {
     "title": "VisionQuest",
     "about": "2026 Marvel Studios television miniseries",
-    "views": 414239
+    "views": 342864
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 364733
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 273122
+    "views": 221553
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 260146
+    "views": 180873
    },
    {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 165255
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 145112
-   },
-   {
-    "title": "The Odyssey (2026 film)",
-    "about": "Film by Christopher Nolan",
-    "views": 129965
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "2026 film by Ti West",
-    "views": 129640
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 165756
    },
    {
     "title": "The Body (TV series)",
@@ -472,56 +454,75 @@
     "views": 128271
    },
    {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 104944
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "2026 film by Ti West",
+    "views": 91277
+   },
+   {
+    "title": "The Odyssey (2026 film)",
+    "about": "Film by Christopher Nolan",
+    "views": 84576
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 84329
+   },
+   {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 119195
+    "views": 80156
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 film by Travis Knight",
-    "views": 111107
+    "views": 73421
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 107275
+    "views": 73004
    },
    {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 99171
-   },
-   {
-    "title": "Heart of the Beast",
-    "about": "2026 film by David Ayer",
-    "views": 94653
+    "title": "Other Mommy",
+    "about": "2026 film by Rob Savage",
+    "views": 66696
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 92717
+    "views": 62465
+   },
+   {
+    "title": "Godzilla Minus One",
+    "about": "2023 film by Takashi Yamazaki",
+    "views": 61645
    }
   ]
  },
  "ai": {
-  "summary": "The channel has about 104k views a day across 50 videos, but retention is weak: average watch is 8.3 to 9.3 seconds and only about 3% of viewers reach the end. Per-video and per-mode data is empty, so no setting change has enough matched videos to justify it, and the day totals look like a repeated snapshot that needs checking. The most important thing is to fix the first seconds of each part so viewers stay past the opening.",
+  "summary": "The channel had about 104k views on Nov 5 and 103k on Nov 6, with 50 videos each day, and watch time edged up on Nov 6. Nothing has posted since Nov 6, and the per-video, per-mode and per-movie data is empty, so the most useful next step is to get posting again and restore that data.",
   "working": [
-   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)",
-   "Full-watch rate rose from 3.1% to 3.3% over the same two days",
-   "Shares held steady at 24 per day"
+   "Views held steady at 104,284 (Nov 5) and 103,237 (Nov 6) across 50 videos a day",
+   "Avg watch rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
+   "Full-watch rate rose from 3.1% to 3.3% over the same two days"
   ],
   "not_working": [
-   "Average watch is only 8–9 s, so most viewers leave in the first few seconds",
-   "Full-watch rate is about 3%, far below what a cliffhanger-driven series should get",
-   "Views were flat (104,284 to 103,237) and likes fell from 2,195 to 2,184",
-   "Per-video and per-mode data is empty, so no part can be judged on its own"
+   "No videos or views recorded Nov 7 to Nov 14, an 8-day gap",
+   "Avg watch of 9.3 s is low for 135 s recap parts",
+   "Totals, per-mode, per-movie and per-video data are all empty, so no mode or movie can be judged"
   ],
   "actions": [
-   "Rewrite the first 3 seconds of every part to open on the most tense or twisty moment, not on setup",
-   "Keep the settings as they are until per-video numbers arrive; the 135 s length from Nov 6 is the current baseline",
-   "Check the data feed: both days show exactly 50 videos and nearly identical totals, which suggests a repeated snapshot rather than daily counts",
-   "Make sure each part ends on a cliffhanger, as the script direction already asks, and track full-watch % per part"
+   "Post new parts now; the channel has had no uploads since Nov 6",
+   "Fix the data feed so totals, per-mode and per-video numbers populate, then re-run this analysis",
+   "Start with the Zodiac or Gone Girl picks, since true-crime and mystery fit the season and this channel's strength",
+   "Keep recap_part_seconds at 135 and the narrator settings as they are until at least 5 matched videos exist"
   ],
-  "at": "2026-11-13T19:20:08+07:00"
+  "at": "2026-11-14T01:20:15+07:00"
  }
 }
