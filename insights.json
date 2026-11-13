@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T01:19:12+07:00",
+ "updated": "2026-11-13T07:19:28+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -407,20 +407,6 @@
    "at": "2026-11-06T12:47:48+07:00"
   },
   {
-   "title": "Prisoners",
-   "year": 2013,
-   "genres": [
-    "Crime",
-    "Mystery",
-    "Thriller"
-   ],
-   "why": "Still-waiting pick; a slow-burn crime mystery that fits the dark-evenings true-crime season.",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-05T06:45:20+07:00",
-   "at": "2026-11-06T06:45:59+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -501,7 +487,7 @@
    },
    {
     "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
+    "about": "2026 film by Ti West",
     "views": 76465
    },
    {
@@ -550,6 +536,7 @@
    "Post the next batch now, since nothing has gone out since Nov 6",
    "Fix the export: day rows show 50 videos a day while TOTALS shows 0, and VIDEOS and PER MOVIE are empty"
   ],
-  "at": "2026-11-13T01:19:51+07:00"
+  "at": "2026-11-13T01:19:51+07:00",
+  "error": "Claude app: You've hit your session limit · resets 7:20am (Asia/Bangkok)\n"
  }
 }
