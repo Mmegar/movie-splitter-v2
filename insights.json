@@ -1,14 +1,14 @@
 {
- "updated": "2026-11-14T07:22:26+07:00",
+ "updated": "2026-11-14T13:22:39+07:00",
  "totals": {
-  "views": 106828,
-  "likes": 2219,
-  "comments": 21,
+  "views": 96350,
+  "likes": 2121,
+  "comments": 20,
   "shares": 24,
-  "saves": 269,
-  "videos": 50,
-  "avg_watch": 4.9,
-  "full_watch": 1.1
+  "saves": 259,
+  "videos": 34,
+  "avg_watch": 9.3,
+  "full_watch": 2.6
  },
  "videos": [
   {
@@ -33,7 +33,7 @@
    "id": "7704917841044196628",
    "desc": "Two prisoners are dumped in the sand, but one of them has a secret weapon 🏜️ Part 5 🎬 · Part 6 is up next 👀 #Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
    "created": 1793940988,
-   "views": 328,
+   "views": 329,
    "likes": 3,
    "comments": 0,
    "shares": 0,
@@ -51,7 +51,7 @@
    "id": "7704917713508027668",
    "desc": "The trusted aide turns on his own house, and the gates fall open 😱 Part 4 🎬 · Should I post Part 5? 👇 #Dune #TimotheChalamet #RebeccaFerguson #OscarIsaac #movie",
    "created": 1793940958,
-   "views": 387,
+   "views": 388,
    "likes": 8,
    "comments": 0,
    "shares": 0,
@@ -292,6 +292,9 @@
    "saves": 0,
    "seconds": 165,
    "url": "https://www.tiktok.com/@starctacher/video/7701895083997662482",
+   "avg_watch": 0.0,
+   "full_watch": 0.0,
+   "followers": 0,
    "movie": "Elysium (2013)",
    "mode": "recap",
    "part": 3
@@ -307,6 +310,9 @@
    "saves": 0,
    "seconds": 189,
    "url": "https://www.tiktok.com/@starctacher/video/7701894250211855634",
+   "avg_watch": 0.0,
+   "full_watch": 0.0,
+   "followers": 0,
    "movie": "Elysium (2013)",
    "mode": "recap",
    "part": 2
@@ -322,6 +328,9 @@
    "saves": 0,
    "seconds": 204,
    "url": "https://www.tiktok.com/@starctacher/video/7701568703707499784",
+   "avg_watch": 2.66,
+   "full_watch": 0.0,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "stretch",
    "part": 5
@@ -337,6 +346,9 @@
    "saves": 0,
    "seconds": 231,
    "url": "https://www.tiktok.com/@starctacher/video/7701568290807631111",
+   "avg_watch": 11.94,
+   "full_watch": 0.0,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "stretch",
    "part": 4
@@ -352,6 +364,9 @@
    "saves": 0,
    "seconds": 224,
    "url": "https://www.tiktok.com/@starctacher/video/7701567691546512658",
+   "avg_watch": 22.83,
+   "full_watch": 8.3,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "highlights",
    "part": 5
@@ -367,6 +382,9 @@
    "saves": 0,
    "seconds": 295,
    "url": "https://www.tiktok.com/@starctacher/video/7701567031132376328",
+   "avg_watch": 43.35,
+   "full_watch": 13.0,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "highlights",
    "part": 4
@@ -382,6 +400,9 @@
    "saves": 1,
    "seconds": 240,
    "url": "https://www.tiktok.com/@starctacher/video/7701565624010591495",
+   "avg_watch": 8.58,
+   "full_watch": 1.0,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "highlights",
    "part": 3
@@ -397,6 +418,9 @@
    "saves": 0,
    "seconds": 235,
    "url": "https://www.tiktok.com/@starctacher/video/7701563082467790087",
+   "avg_watch": 12.97,
+   "full_watch": 1.9,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "highlights",
    "part": 2
@@ -412,6 +436,9 @@
    "saves": 0,
    "seconds": 229,
    "url": "https://www.tiktok.com/@starctacher/video/7701562686290677010",
+   "avg_watch": 16.07,
+   "full_watch": 0.8,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "highlights",
    "part": 1
@@ -427,6 +454,9 @@
    "saves": 0,
    "seconds": 127,
    "url": "https://www.tiktok.com/@starctacher/video/7701560554845998356",
+   "avg_watch": 42.84,
+   "full_watch": 28.0,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 5
@@ -435,13 +465,16 @@
    "id": "7701482449565437205",
    "desc": "They drink what might be snake venom to get their memories back 🥃 The plan starts, and it gets messy fast. Part 5 🎬 · Follow so you don't miss Part 6 🔔 #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793141125,
-   "views": 504,
+   "views": 506,
    "likes": 6,
    "comments": 0,
    "shares": 0,
    "saves": 0,
    "seconds": 123,
    "url": "https://www.tiktok.com/@starctacher/video/7701482449565437205",
+   "avg_watch": 11.41,
+   "full_watch": 3.5,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 5
@@ -450,13 +483,16 @@
    "id": "7701429584889187604",
    "desc": "The party gets wild, and then someone gets bitten 🐍 Nobody wants to leave, but one woman is begging them to. Part 4 🎬 · Part 5 coming soon ⏳ #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793128818,
-   "views": 777,
+   "views": 782,
    "likes": 12,
    "comments": 0,
    "shares": 0,
    "saves": 0,
    "seconds": 190,
    "url": "https://www.tiktok.com/@starctacher/video/7701429584889187604",
+   "avg_watch": 13.38,
+   "full_watch": 2.3,
+   "followers": 1,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 4
@@ -472,6 +508,9 @@
    "saves": 0,
    "seconds": 175,
    "url": "https://www.tiktok.com/@starctacher/video/7701424569441144085",
+   "avg_watch": 6.27,
+   "full_watch": 1.3,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 3
@@ -487,6 +526,9 @@
    "saves": 0,
    "seconds": 117,
    "url": "https://www.tiktok.com/@starctacher/video/7701421580294950164",
+   "avg_watch": 8.06,
+   "full_watch": 2.3,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 2
@@ -495,13 +537,16 @@
    "id": "7701420887173565717",
    "desc": "She's late, broke, and told to stay invisible 🐰 One fancy party is about to change everything. Part 1 🎬 · Comment 'more' for Part 2 👇 #BlinkTwice #ChanningTatum #NaomiAckie #AliaShawkat #movie",
    "created": 1793126791,
-   "views": 297,
+   "views": 298,
    "likes": 4,
    "comments": 0,
    "shares": 0,
    "saves": 0,
    "seconds": 158,
    "url": "https://www.tiktok.com/@starctacher/video/7701420887173565717",
+   "avg_watch": 5.76,
+   "full_watch": 0.9,
+   "followers": 0,
    "movie": "Blink Twice (2024)",
    "mode": "recap",
    "part": 1
@@ -537,240 +582,6 @@
    "part": 1
   },
   {
-   "id": "7701303476520783124",
-   "desc": "A tiny tattoo on an ankle tells a big secret 👀 Part 4 🎬 · And that's a wrap 🎬 Follow for the next one #Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
-   "created": 1793099452,
-   "views": 410,
-   "likes": 12,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 118,
-   "url": "https://www.tiktok.com/@starctacher/video/7701303476520783124",
-   "movie": "Fall (2022)",
-   "mode": "recap",
-   "part": 4
-  },
-  {
-   "id": "7701303272077823252",
-   "desc": "Stuck hundreds of feet up with no way down 🚨 Their phones can't reach anyone. Part 3 🎬 · Follow so you don't miss Part 4 🔔 #Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
-   "created": 1793099403,
-   "views": 299,
-   "likes": 7,
-   "comments": 0,
-   "shares": 0,
-   "saves": 2,
-   "seconds": 86,
-   "url": "https://www.tiktok.com/@starctacher/video/7701303272077823252",
-   "movie": "Fall (2022)",
-   "mode": "recap",
-   "part": 3
-  },
-  {
-   "id": "7701303027398954261",
-   "desc": "A rusty tower, a tiny platform, and one dare too far 😰 Part 2 🎬 · Should I post Part 3? 👇 #Fall #GraceCarolineCurrey #VirginiaGardner #JeffreyDeanMorgan #movie",
-   "created": 1793099350,
-   "views": 321,
-   "likes": 11,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 63,
-   "url": "https://www.tiktok.com/@starctacher/video/7701303027398954261",
-   "movie": "Fall (2022)",
-   "mode": "recap",
-   "part": 2
-  },
-  {
-   "id": "7701263916122246420",
-   "desc": "The tension in this one 😬 Highlight 5 🎬 · And that's a wrap 🎬 Follow for the next one #Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
-   "created": 1793090240,
-   "views": 304,
-   "likes": 4,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 243,
-   "url": "https://www.tiktok.com/@starctacher/video/7701263916122246420",
-   "movie": "Predestination (2014)",
-   "mode": "highlights",
-   "part": 5
-  },
-  {
-   "id": "7701260599115746581",
-   "desc": "Who else remembers this? 🙋 Highlight 4 🎬 · Highlight 5 is up next 👀 #Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
-   "created": 1793089469,
-   "views": 6,
-   "likes": 1,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 223,
-   "url": "https://www.tiktok.com/@starctacher/video/7701260599115746581",
-   "movie": "Predestination (2014)",
-   "mode": "highlights",
-   "part": 4
-  },
-  {
-   "id": "7701259813505748244",
-   "desc": "The way I gasped 😮 Highlight 3 🎬 · Follow so you don't miss Highlight 4 🔔 #Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
-   "created": 1793089286,
-   "views": 397,
-   "likes": 9,
-   "comments": 0,
-   "shares": 0,
-   "saves": 2,
-   "seconds": 204,
-   "url": "https://www.tiktok.com/@starctacher/video/7701259813505748244",
-   "movie": "Predestination (2014)",
-   "mode": "highlights",
-   "part": 3
-  },
-  {
-   "id": "7701156075101342982",
-   "desc": "The ending of this part 😳 Highlight 2 🎬 · Highlight 3 coming soon ⏳ #Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
-   "created": 1793065134,
-   "views": 425,
-   "likes": 7,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 216,
-   "url": "https://www.tiktok.com/@starctacher/video/7701156075101342982"
-  },
-  {
-   "id": "7701155032938368257",
-   "desc": "I need answers 😩 Highlight 1 🎬 · Follow so you don't miss Highlight 2 🔔 #Predestination #EthanHawke #SarahSnook #NoahTaylor #movie",
-   "created": 1793064889,
-   "views": 433,
-   "likes": 9,
-   "comments": 0,
-   "shares": 0,
-   "saves": 1,
-   "seconds": 208,
-   "url": "https://www.tiktok.com/@starctacher/video/7701155032938368257"
-  },
-  {
-   "id": "7699805601295060230",
-   "desc": "The bunker turns deadly, the acid goes everywhere, and the girl in the suit makes a run for it 🔥 Hold on tight. Part 8 🎬 · That's the last part. Follow for more 🍿 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750705,
-   "views": 5561,
-   "likes": 16,
-   "comments": 1,
-   "shares": 0,
-   "saves": 3,
-   "seconds": 85,
-   "url": "https://www.tiktok.com/@starctacher/video/7699805601295060230",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 8
-  },
-  {
-   "id": "7699805488413805830",
-   "desc": "A padlock, a message scratched into the glass, and an earring that does not add up 💍 Michelle has a bad feeling. Part 7 🎬 · Comment 'more' for Part 8 👇 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750673,
-   "views": 58,
-   "likes": 1,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 69,
-   "url": "https://www.tiktok.com/@starctacher/video/7699805488413805830",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 7
-  },
-  {
-   "id": "7699805331320261908",
-   "desc": "Family secrets, a clogged air vent, and a very tiny hole to crawl through 🕳️ Nothing about this bunker is comfortable. Part 6 🎬 · Part 7 coming soon ⏳ #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750638,
-   "views": 430,
-   "likes": 5,
-   "comments": 0,
-   "shares": 0,
-   "saves": 1,
-   "seconds": 66,
-   "url": "https://www.tiktok.com/@starctacher/video/7699805331320261908",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 6
-  },
-  {
-   "id": "7699805194829286676",
-   "desc": "A stolen keychain, an airlock, and a woman outside begging to get in 😱 Michelle makes a choice that could end everything. Part 5 🎬 · Part 6 coming soon ⏳ #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750608,
-   "views": 418,
-   "likes": 4,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 63,
-   "url": "https://www.tiktok.com/@starctacher/video/7699805194829286676",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 5
-  },
-  {
-   "id": "7699805056375278854",
-   "desc": "Two people, one bunker, and a story that does not match the story 👀 Who is lying, and who is just scared? Part 4 🎬 · Comment 'more' for Part 5 👇 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750575,
-   "views": 493,
-   "likes": 1,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 66,
-   "url": "https://www.tiktok.com/@starctacher/video/7699805056375278854",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 4
-  },
-  {
-   "id": "7699804965480484116",
-   "desc": "A kitchen tour, a bathroom with rules, and a window full of dead pigs 🐷 Welcome to the bunker, I guess. Part 3 🎬 · Comment 'more' for Part 4 👇 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750553,
-   "views": 435,
-   "likes": 3,
-   "comments": 0,
-   "shares": 0,
-   "saves": 1,
-   "seconds": 58,
-   "url": "https://www.tiktok.com/@starctacher/video/7699804965480484116",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 3
-  },
-  {
-   "id": "7699804826166742292",
-   "desc": "Our doomsday dad has a lot to say about the outside world 🌍 Some of it sounds a little too convenient. Part 2 🎬 · Part 3 is up next 👀 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792750523,
-   "views": 383,
-   "likes": 6,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 59,
-   "url": "https://www.tiktok.com/@starctacher/video/7699804826166742292",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 2
-  },
-  {
-   "id": "7699796589451234580",
-   "desc": "A fight, a dark road, and a crash nobody saw coming 😬 Our girl wakes up somewhere she never planned to be. Part 1 🎬 · Follow so you don't miss Part 2 🔔 #10CloverfieldLane #JohnGoodman #MaryElizabethWinstead #JohnGallagherJr #movie",
-   "created": 1792748605,
-   "views": 115,
-   "likes": 2,
-   "comments": 0,
-   "shares": 0,
-   "saves": 0,
-   "seconds": 70,
-   "url": "https://www.tiktok.com/@starctacher/video/7699796589451234580",
-   "movie": "10 Cloverfield Lane (2016)",
-   "mode": "recap",
-   "part": 1
-  },
-  {
    "id": "7696015184623570196",
    "desc": "Tag someone who needs to see this 👇 Part 4 🎬 · Part 5 is up next 👀 #fyp #foryou #viral #movie #movieclips",
    "created": 1791868175,
@@ -801,26 +612,26 @@
  "movies": {
   "Dune (2021)": {
    "videos": 6,
-   "views": 1779,
+   "views": 1781,
    "likes": 23,
    "comments": 0,
    "shares": 0,
    "saves": 1,
    "modes": {
-    "recap": 1779
+    "recap": 1781
    },
    "best_part": [
     4,
-    387
+    388
    ],
    "avg_watch": 5.7,
    "full_watch": 0.7,
    "genres": [
-    "Science Fiction",
+    "Sci-Fi",
     "Adventure"
    ],
    "cast": [
-    "Timothée Chalamet",
+    "Timothee Chalamet",
     "Rebecca Ferguson",
     "Oscar Isaac"
    ],
@@ -871,7 +682,7 @@
    "avg_watch": 0.0,
    "full_watch": 0.0,
    "genres": [
-    "Science Fiction",
+    "Sci-Fi",
     "Action"
    ],
    "cast": [
@@ -883,7 +694,7 @@
   },
   "Blink Twice (2024)": {
    "videos": 13,
-   "views": 3058,
+   "views": 3066,
    "likes": 48,
    "comments": 0,
    "shares": 3,
@@ -891,14 +702,14 @@
    "modes": {
     "stretch": 46,
     "highlights": 915,
-    "recap": 2097
+    "recap": 2105
    },
    "best_part": [
     4,
-    777
+    782
    ],
-   "avg_watch": null,
-   "full_watch": null,
+   "avg_watch": 15.9,
+   "full_watch": 4.9,
    "genres": [
     "Thriller",
     "Mystery"
@@ -911,19 +722,18 @@
    "year": 2024
   },
   "Fall (2022)": {
-   "videos": 5,
-   "views": 1574,
-   "likes": 38,
+   "videos": 2,
+   "views": 544,
+   "likes": 8,
    "comments": 0,
    "shares": 0,
-   "saves": 3,
+   "saves": 1,
    "modes": {
-    "stretch": 544,
-    "recap": 1030
+    "stretch": 544
    },
    "best_part": [
-    4,
-    410
+    2,
+    388
    ],
    "avg_watch": null,
    "full_watch": null,
@@ -937,60 +747,6 @@
     "Jeffrey Dean Morgan"
    ],
    "year": 2022
-  },
-  "Predestination (2014)": {
-   "videos": 3,
-   "views": 707,
-   "likes": 14,
-   "comments": 0,
-   "shares": 0,
-   "saves": 2,
-   "modes": {
-    "highlights": 707
-   },
-   "best_part": [
-    3,
-    397
-   ],
-   "avg_watch": null,
-   "full_watch": null,
-   "genres": [
-    "Science Fiction",
-    "Thriller"
-   ],
-   "cast": [
-    "Ethan Hawke",
-    "Sarah Snook",
-    "Noah Taylor"
-   ],
-   "year": 2014
-  },
-  "10 Cloverfield Lane (2016)": {
-   "videos": 8,
-   "views": 7893,
-   "likes": 38,
-   "comments": 1,
-   "shares": 0,
-   "saves": 5,
-   "modes": {
-    "recap": 7893
-   },
-   "best_part": [
-    8,
-    5561
-   ],
-   "avg_watch": null,
-   "full_watch": null,
-   "genres": [
-    "Thriller",
-    "Science Fiction"
-   ],
-   "cast": [
-    "John Goodman",
-    "Mary Elizabeth Winstead",
-    "John Gallagher Jr."
-   ],
-   "year": 2016
   }
  },
  "history": [
@@ -1140,12 +896,12 @@
   },
   {
    "day": "2026-11-14",
-   "views": 106828,
-   "videos": 50,
-   "likes": 2219,
+   "views": 96350,
+   "videos": 34,
+   "likes": 2121,
    "shares": 24,
-   "avg_watch": 4.9,
-   "full_watch": 1.1
+   "avg_watch": 9.3,
+   "full_watch": 2.6
   }
  ],
  "tuning": [
@@ -1212,13 +968,25 @@
  ],
  "picks": [
   {
+   "title": "The Others",
+   "year": 2001,
+   "genres": [
+    "Horror",
+    "Mystery"
+   ],
+   "why": "Supernatural twist mystery; Midsommar (1,057 views) and Blink Twice (3,066 views) show horror-mystery draws here",
+   "trend": null,
+   "status": "new",
+   "added": "2026-11-14T13:24:11+07:00"
+  },
+  {
    "title": "Shutter Island",
    "year": 2010,
    "genres": [
     "Mystery",
     "Thriller"
    ],
-   "why": "Twist-ending mystery that matches the twisty stories the channel is best at",
+   "why": "Still-waiting twisty mystery; the channel's best numbers (Elysium part 1 at 33,700 views, Blink Twice at 43 s average watch) come from twist-driven stories",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T07:23:20+07:00"
@@ -1231,7 +999,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Still-waiting pick; a true-crime mystery that suits the channel's strongest genre and cuts cleanly into cliffhanger parts",
+   "why": "Still-waiting real-crime mystery with a long investigation that splits into clean cliffhanger parts",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-14T01:20:15+07:00"
@@ -1245,8 +1013,9 @@
    ],
    "why": "Still-waiting pick; a clear story with a kill-by-kill cliffhanger structure, backed by Midsommar's 9.8 s average watch",
    "trend": "Friday the 13th",
-   "status": "new",
-   "added": "2026-11-13T13:20:03+07:00"
+   "status": "expired",
+   "added": "2026-11-13T13:20:03+07:00",
+   "at": "2026-11-14T13:22:39+07:00"
   },
   {
    "title": "Scream",
@@ -1411,100 +1180,100 @@
    {
     "title": "VisionQuest",
     "about": "2026 Marvel Studios television miniseries",
-    "views": 342864
+    "views": 405189
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 221553
+    "views": 303985
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 180873
+    "views": 275387
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 165756
+    "views": 228032
    },
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 128271
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 104944
+    "views": 207614
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "2026 film by Ti West",
-    "views": 91277
+    "views": 169898
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 149054
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 84576
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 84329
+    "views": 128236
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 80156
+    "views": 118946
    },
    {
-    "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 73421
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 73004
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 114848
    },
    {
     "title": "Other Mommy",
     "about": "2026 film by Rob Savage",
-    "views": 66696
+    "views": 113648
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 62465
+    "views": 110123
    },
    {
-    "title": "Godzilla Minus One",
-    "about": "2023 film by Takashi Yamazaki",
-    "views": 61645
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 107911
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 film by Travis Knight",
+    "views": 105018
+   },
+   {
+    "title": "Heart of the Beast",
+    "about": "2026 film by David Ayer",
+    "views": 90571
    }
   ]
  },
  "ai": {
-  "summary": "The channel has real reach but weak holding power: 106,828 views, yet 33,700 come from one Elysium part and 56,200 from an untagged 'I like banana' video, and viewers leave early (4.9 s average watch, 1.1% full watch). Recap parts are the only format with real volume, so the fix that matters most is opening each part with a hook and ending it on a cliffhanger.",
+  "summary": "The channel has 34 posts and 96,350 views, but 56,200 of those come from one untagged #foryou post, and the only movie hit is Elysium part 1 (33,700 views). Viewers leave fast (average watch 9.3 s, 2.6% full watch) and parts after part 1 are barely seen, so the main job is getting viewers from part 1 into part 2.",
   "working": [
-   "Recap is 34 of 50 videos and 47,558 views, 1,399 per video vs 203 for highlights and 118 for stretch",
-   "Elysium part 1 hit 33,700 views, 729 likes and 81 saves, the channel's biggest recap",
-   "Midsommar has the best retention of any movie here: 9.8 s average watch and 2.9% full watch",
-   "Blink Twice recaps drew 2,097 views across 13 videos, and its part 4 alone drew 777"
+   "Elysium part 1: 33,700 views, 729 likes and 81 saves, the best recap on the channel",
+   "Untagged #foryou post: 56,200 views, 58% of all channel views, so generic hook posts can carry the channel",
+   "Recap parts at 105 s (Dune and Midsommar, 10 posts) averaged about 284 views each, against 2 views total for six Elysium parts at 165 s",
+   "Blink Twice highlight 4: 43 s average watch, the highest on the channel (small sample, 12 views)"
   ],
   "not_working": [
-   "Retention is the core problem: 4.9 s average watch and 1.1% full watch across all 50 videos",
-   "Stretch mode averages 118 views per video with 0.0 average watch on Elysium",
-   "Viewers drop off after the first part: Elysium parts 2–7 drew 2 views total after the 33,700-view part 1",
-   "The 105 s step drew 14.5 views per Dune part vs 33 for Midsommar's roughly 135 s parts, and the 165 s step drew almost nothing"
+   "Elysium parts 2 to 7: 2 views combined after part 1's 33,700",
+   "Overall full watch is 2.6% and average watch 9.3 s; Dune's six parts averaged 0.7% full watch and 5.7 s",
+   "Stretch mode: 5 posts, 590 views, 118 per post, average watch 4.9 s",
+   "Day totals drop from 50 videos (Nov 5-6) to 34 now, so 16 posts are missing or uncounted"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135; no posts have run at that length since the Nov 6 change, so judge the next 5 recap parts before moving it again",
-   "Rewrite the first 3 seconds of every part as a loud line or the cliffhanger from the previous part, since average watch is only 4.9 s",
-   "Find the movie behind the untagged 56,200-view 'I like banana Part 12' video and tag it so its numbers count in the per-movie stats",
-   "Pause stretch mode for the next batch (118 views per video, 0.0 average watch) and test one highlights part per movie instead"
+   "Post the next part within a few hours of the last one, and end each part on a hook that points to the next part number; the Elysium sequel parts sat for about two weeks after part 1 and drew almost nothing",
+   "Check the account for the 16 missing posts and find out what the untagged 'I like banana' post is; if it is yours, make one more hook-led post in its style",
+   "Keep recap_part_seconds at 135 for the next 5 recap posts and judge it then; the Nov 6 move back to 135 was based on a misread of Dune (its six parts averaged about 297 views, not 14.5)",
+   "Test Blink Twice's cut style (short 'wait for it' highlights, which held viewers 43 s on average) on the next 3 highlight posts and compare them with recap parts"
   ],
-  "at": "2026-11-14T07:23:20+07:00"
+  "at": "2026-11-14T13:24:11+07:00"
  }
 }
