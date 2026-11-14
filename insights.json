@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T19:20:20+07:00",
+ "updated": "2026-11-15T01:20:20+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -165,6 +165,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-15",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -237,7 +246,7 @@
     "Horror",
     "Thriller"
    ],
-   "why": "A new 2026 horror film with heavy current interest, suited to suspense-driven cliffhanger parts",
+   "why": "Still waiting from the owner's list; a 2026 horror film with about 77,800 views on Wikipedia in the last 3 days",
    "trend": "Other Mommy: 113,648 Wikipedia views in the last 3 days",
    "status": "new",
    "added": "2026-11-14T19:20:47+07:00"
@@ -249,7 +258,7 @@
     "Horror",
     "Mystery"
    ],
-   "why": "Still waiting; a supernatural mystery with a built-in twist, a good fit for the channel's twisty stories and the season",
+   "why": "Still waiting from the owner's list; a supernatural mystery with a twist that cuts well into cliffhanger parts",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T13:24:11+07:00"
@@ -261,7 +270,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Still waiting; a twisty mystery where each reveal can end a part, which suits the channel's twist-driven numbers",
+   "why": "Twisty mystery with a reveal at the end, the channel's strongest style; still waiting from the owner's list",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T07:23:20+07:00"
@@ -276,8 +285,9 @@
    ],
    "why": "Still waiting from earlier picks; a true-crime mystery with a long investigation that splits cleanly into cliffhanger parts, matching the channel's mystery strength",
    "trend": "True-crime season, long dark evenings",
-   "status": "new",
-   "added": "2026-11-14T01:20:15+07:00"
+   "status": "expired",
+   "added": "2026-11-14T01:20:15+07:00",
+   "at": "2026-11-15T01:20:20+07:00"
   },
   {
    "title": "Friday the 13th",
@@ -412,20 +422,6 @@
    "at": "2026-11-08T07:16:23+07:00"
   },
   {
-   "title": "Se7en",
-   "year": 1995,
-   "genres": [
-    "Crime",
-    "Thriller",
-    "Mystery"
-   ],
-   "why": "Still-waiting pick; a twisty serial-killer mystery that suits this channel's strength",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-07T00:45:36+07:00",
-   "at": "2026-11-08T00:46:26+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -440,7 +436,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-14",
+  "date": "2026-11-15",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -453,100 +449,100 @@
   ],
   "trending": [
    {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 405189
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 201645
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 303985
+    "views": 180742
    },
    {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 275387
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 228032
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 164451
    },
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 207614
+    "views": 161465
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 137323
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "2026 film by Ti West",
-    "views": 169898
+    "views": 131796
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 149054
+    "views": 93167
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 128236
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 118946
-   },
-   {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 114848
-   },
-   {
-    "title": "Other Mommy",
-    "about": "2026 film by Rob Savage",
-    "views": 113648
+    "views": 85844
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 110123
+    "views": 80816
+   },
+   {
+    "title": "Other Mommy",
+    "about": "2026 film by Rob Savage",
+    "views": 77817
+   },
+   {
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 76089
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 107911
+    "views": 69896
    },
    {
     "title": "Wildwood (film)",
-    "about": "2026 film by Travis Knight",
-    "views": 105018
+    "about": "2026 animated film by Travis Knight",
+    "views": 65670
+   },
+   {
+    "title": "Clayface (film)",
+    "about": "2026 DC Studios film",
+    "views": 64847
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 90571
+    "views": 59748
    }
   ]
  },
  "ai": {
-  "summary": "The channel has only two days of usable totals (Nov 5 and Nov 6): about 104k and 103k views a day across 50 videos each, with average watch up from 8.3 s to 9.3 s. The main problem is that viewers leave early, with full-watch stuck near 3%. The TOTALS block reads zero, and no per-video or per-movie rows came through, so the earlier setting changes cannot be judged.",
+  "summary": "The channel drew about 207,500 views across Nov 5–6 (50 videos each day), with avg watch rising from 8.3 s to 9.3 s, but full-watch is only about 3%. Nothing has been recorded since Nov 6, and the TOTALS block reads zero, so the numbers don't agree. The most important thing is to fix the data gap and get per-video numbers before changing anything.",
   "working": [
-   "Views held steady at 104,284 (Nov 5) and 103,237 (Nov 6) across 50 videos each",
-   "Average watch rose from 8.3 s to 9.3 s between Nov 5 and Nov 6",
-   "Shares held at 24 a day on both days"
+   "Nov 5: 104,284 views across 50 videos (about 2,085 per video)",
+   "Nov 6: 103,237 views, 2,184 likes and 24 shares",
+   "Avg watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)"
   ],
   "not_working": [
-   "Full-watch is only 3.1% and 3.3%, so almost nobody reaches the end of a part",
-   "Likes are about 2,190 a day against about 104k views, roughly a 2% like rate",
-   "Per-video, per-mode and per-movie data is empty, so no change can be tied to a result"
+   "Full-watch only 3.1–3.3%, so very few viewers reach the end of a part",
+   "No videos or views recorded Nov 7–15 (9 days)",
+   "TOTALS and PER MODE show 0 while DAY BY DAY shows about 207k views, so the report is inconsistent"
   ],
   "actions": [
-   "Keep recap_part_seconds at 135 until per-video rows arrive; there is no evidence yet to move it",
-   "Open each part with the hook in the first 2 to 3 seconds and end every part on a cliffhanger to lift full-watch",
-   "Check why TOTALS shows zero while the day-by-day rows show about 104k views, since the two disagree",
-   "Download the five picks below, starting with Zodiac and Shutter Island, which are already waiting and fit the mystery style"
+   "Re-run the analytics export so TOTALS, PER MODE and PER MOVIE match DAY BY DAY",
+   "Confirm whether posting stopped after Nov 6 or the tracker stopped recording",
+   "Once per-video data is back, check whether the 135 s recap length (set Nov 6) beats the 105 s length",
+   "Post the five picks below, starting with Shutter Island, since it fits the mystery style that works best here"
   ],
-  "at": "2026-11-14T19:20:47+07:00"
+  "at": "2026-11-15T01:20:46+07:00"
  }
 }
