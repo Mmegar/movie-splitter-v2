@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T19:21:37+07:00",
+ "updated": "2026-11-16T01:21:39+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -168,6 +168,15 @@
   },
   {
    "day": "2026-11-15",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
+  },
+  {
+   "day": "2026-11-16",
    "views": 0,
    "videos": 0,
    "likes": 0,
@@ -425,7 +434,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -440,67 +449,32 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 295770
-   },
-   {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 259278
+    "views": 188639
    },
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 252130
+    "views": 170008
    },
    {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 221933
+    "title": "Scene (2026 film)",
+    "about": "Indian film by Jithu Madhavan",
+    "views": 160968
    },
    {
     "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 209797
+    "about": "2026 film by Ti West",
+    "views": 156622
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 202478
+    "views": 127431
    },
    {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 140402
-   },
-   {
-    "title": "The Odyssey (2026 film)",
-    "about": "Film by Christopher Nolan",
-    "views": 137669
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 127541
-   },
-   {
-    "title": "Other Mommy",
-    "about": "2026 film by Rob Savage",
-    "views": 120514
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 117566
-   },
-   {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 112232
-   },
-   {
-    "title": "Wildwood (film)",
-    "about": "2026 animated film",
-    "views": 103180
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 119807
    },
    {
     "title": "The End of Oak Street",
@@ -508,9 +482,44 @@
     "views": 99440
    },
    {
-    "title": "Heart of the Beast",
-    "about": "2026 film by David Ayer",
-    "views": 95207
+    "title": "The Odyssey (2026 film)",
+    "about": "Film by Christopher Nolan",
+    "views": 95485
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 94383
+   },
+   {
+    "title": "Daayra",
+    "about": "2026 Indian film by Meghna Gulzar",
+    "views": 93904
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 91345
+   },
+   {
+    "title": "Other Mommy",
+    "about": "2026 film by Rob Savage",
+    "views": 89649
+   },
+   {
+    "title": "Ranabaali",
+    "about": "2026 Indian film by Rahul Sankrityan",
+    "views": 88147
+   },
+   {
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 80267
+   },
+   {
+    "title": "Wild Horse Nine",
+    "about": "2026 film by Martin McDonagh",
+    "views": 77243
    }
   ]
  },
