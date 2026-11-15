@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T01:20:20+07:00",
+ "updated": "2026-11-15T07:20:31+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -246,7 +246,7 @@
     "Horror",
     "Thriller"
    ],
-   "why": "Still waiting from the owner's list; a 2026 horror film with about 77,800 views on Wikipedia in the last 3 days",
+   "why": "Still-waiting pick and a fresh horror film with 77,817 Wikipedia views in 3 days.",
    "trend": "Other Mommy: 113,648 Wikipedia views in the last 3 days",
    "status": "new",
    "added": "2026-11-14T19:20:47+07:00"
@@ -258,7 +258,7 @@
     "Horror",
     "Mystery"
    ],
-   "why": "Still waiting from the owner's list; a supernatural mystery with a twist that cuts well into cliffhanger parts",
+   "why": "Still-waiting pick; a late-reveal supernatural mystery that suits the channel's twisty style.",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T13:24:11+07:00"
@@ -270,7 +270,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Twisty mystery with a reveal at the end, the channel's strongest style; still waiting from the owner's list",
+   "why": "Still-waiting pick; a twisty mystery whose reveal can end a part on a cliffhanger, the channel's strongest style.",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T07:23:20+07:00"
@@ -396,32 +396,6 @@
    "at": "2026-11-09T13:17:26+07:00"
   },
   {
-   "title": "Black Doves",
-   "year": 2024,
-   "genres": [
-    "Thriller",
-    "Spy"
-   ],
-   "why": "Still waiting, and 96k Wikipedia views in 3 days makes it a current trend pick with a twisty spy plot",
-   "trend": "Black Doves is in Wikipedia's most-read list (43,266 views in 3 days)",
-   "status": "expired",
-   "added": "2026-11-07T06:48:12+07:00",
-   "at": "2026-11-08T07:16:23+07:00"
-  },
-  {
-   "title": "Get Out",
-   "year": 2017,
-   "genres": [
-    "Horror",
-    "Thriller"
-   ],
-   "why": "Still waiting; a mystery that unfolds into a reveal, which suits the channel's twisty cliffhanger parts",
-   "trend": null,
-   "status": "expired",
-   "added": "2026-11-07T06:48:12+07:00",
-   "at": "2026-11-08T07:16:23+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -526,23 +500,23 @@
   ]
  },
  "ai": {
-  "summary": "The channel drew about 207,500 views across Nov 5–6 (50 videos each day), with avg watch rising from 8.3 s to 9.3 s, but full-watch is only about 3%. Nothing has been recorded since Nov 6, and the TOTALS block reads zero, so the numbers don't agree. The most important thing is to fix the data gap and get per-video numbers before changing anything.",
+  "summary": "The channel shows two days of totals (5 and 6 Nov) with about 104k views a day across 50 videos, 2.1% likes and 24 shares a day. Viewers leave early: average watch is 8 to 9 seconds and only about 3% finish, so the opening seconds of each part matter most. The TOTALS, per-mode, per-movie and per-video tables are empty, so no setting change can be checked yet.",
   "working": [
-   "Nov 5: 104,284 views across 50 videos (about 2,085 per video)",
-   "Nov 6: 103,237 views, 2,184 likes and 24 shares",
-   "Avg watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)"
+   "About 104k views a day on 50 videos (5 and 6 Nov)",
+   "2,195 and 2,184 likes a day, about 2.1% of views",
+   "24 shares a day, so some viewers pass parts on"
   ],
   "not_working": [
-   "Full-watch only 3.1–3.3%, so very few viewers reach the end of a part",
-   "No videos or views recorded Nov 7–15 (9 days)",
-   "TOTALS and PER MODE show 0 while DAY BY DAY shows about 207k views, so the report is inconsistent"
+   "Full watch only 3.1% and 3.3%, so almost everyone leaves early",
+   "Average watch 8.3 s and 9.3 s, far short of the 135 s part length",
+   "TOTALS shows 0 while the daily rows show 104k views, so the numbers don't reconcile"
   ],
   "actions": [
-   "Re-run the analytics export so TOTALS, PER MODE and PER MOVIE match DAY BY DAY",
-   "Confirm whether posting stopped after Nov 6 or the tracker stopped recording",
-   "Once per-video data is back, check whether the 135 s recap length (set Nov 6) beats the 105 s length",
-   "Post the five picks below, starting with Shutter Island, since it fits the mystery style that works best here"
+   "Fix the stats export: TOTALS, PER MODE, PER MOVIE and VIDEOS are empty while DAY BY DAY has views, so the next run can't tell which videos or modes work.",
+   "Rework the first 3 seconds of each part with a hard question or the cliffhanger from the last part, since full watch is about 3%.",
+   "Download Other Mommy first (77,817 Wikipedia views, trending now), then Shutter Island and The Others.",
+   "Keep the settings as they are until at least 5 videos are matched, then judge the 135 s part length by full-watch."
   ],
-  "at": "2026-11-15T01:20:46+07:00"
+  "at": "2026-11-15T07:21:04+07:00"
  }
 }
