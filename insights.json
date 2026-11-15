@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T07:20:31+07:00",
+ "updated": "2026-11-15T07:50:42+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -240,13 +240,25 @@
  ],
  "picks": [
   {
+   "title": "Prisoners",
+   "year": 2013,
+   "genres": [
+    "Crime",
+    "Thriller"
+   ],
+   "why": "A slow-burn crime story with clear clues that works well in parts, matching the channel's mystery focus",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-15T07:51:15+07:00"
+  },
+  {
    "title": "Other Mommy",
    "year": 2026,
    "genres": [
     "Horror",
     "Thriller"
    ],
-   "why": "Still-waiting pick and a fresh horror film with 77,817 Wikipedia views in 3 days.",
+   "why": "Still waiting from the last pick list and a current Wikipedia hit, which suits a fast-moving cliffhanger recap",
    "trend": "Other Mommy: 113,648 Wikipedia views in the last 3 days",
    "status": "new",
    "added": "2026-11-14T19:20:47+07:00"
@@ -258,7 +270,7 @@
     "Horror",
     "Mystery"
    ],
-   "why": "Still-waiting pick; a late-reveal supernatural mystery that suits the channel's twisty style.",
+   "why": "Still waiting; a twisty mystery whose reveal can close a part on a cliffhanger, which is the channel's strongest style",
    "trend": null,
    "status": "new",
    "added": "2026-11-14T13:24:11+07:00"
@@ -272,8 +284,9 @@
    ],
    "why": "Still-waiting pick; a twisty mystery whose reveal can end a part on a cliffhanger, the channel's strongest style.",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-14T07:23:20+07:00"
+   "status": "expired",
+   "added": "2026-11-14T07:23:20+07:00",
+   "at": "2026-11-15T07:50:42+07:00"
   },
   {
    "title": "Zodiac",
@@ -500,23 +513,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel shows two days of totals (5 and 6 Nov) with about 104k views a day across 50 videos, 2.1% likes and 24 shares a day. Viewers leave early: average watch is 8 to 9 seconds and only about 3% finish, so the opening seconds of each part matter most. The TOTALS, per-mode, per-movie and per-video tables are empty, so no setting change can be checked yet.",
+  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6 with 2.1% of views liking a video, but viewers leave early: average watch is 8 to 9 seconds and only about 3% reach the end. The log shows no posts or views after Nov 6, and there is no per-video data to judge the part-length changes. The most important thing is to hook viewers in the first seconds of each part and confirm that posting and tracking are running again.",
   "working": [
-   "About 104k views a day on 50 videos (5 and 6 Nov)",
-   "2,195 and 2,184 likes a day, about 2.1% of views",
-   "24 shares a day, so some viewers pass parts on"
+   "104,284 views on Nov 5 and 103,237 on Nov 6, 50 videos logged each day",
+   "2,195 likes on Nov 5 (about 2.1% of views) and 24 shares per day",
+   "Average watch rose from 8.3 s on Nov 5 to 9.3 s on Nov 6",
+   "Full-watch rose from 3.1% to 3.3% over the same two days"
   ],
   "not_working": [
-   "Full watch only 3.1% and 3.3%, so almost everyone leaves early",
-   "Average watch 8.3 s and 9.3 s, far short of the 135 s part length",
-   "TOTALS shows 0 while the daily rows show 104k views, so the numbers don't reconcile"
+   "Full-watch is only 3.1 to 3.3%, so almost nobody reaches the end of a part",
+   "Average watch of 8 to 9 s is far below the 135 s part length",
+   "Zero videos and zero views for Nov 2 to 4 and Nov 7 to 15, so posting or tracking has stopped",
+   "No matched videos (VIDEOS and PER MOVIE are empty), so no mode or movie can be ranked"
   ],
   "actions": [
-   "Fix the stats export: TOTALS, PER MODE, PER MOVIE and VIDEOS are empty while DAY BY DAY has views, so the next run can't tell which videos or modes work.",
-   "Rework the first 3 seconds of each part with a hard question or the cliffhanger from the last part, since full watch is about 3%.",
-   "Download Other Mommy first (77,817 Wikipedia views, trending now), then Shutter Island and The Others.",
-   "Keep the settings as they are until at least 5 videos are matched, then judge the 135 s part length by full-watch."
+   "Check whether posting resumed after Nov 6; the log shows zero videos from Nov 7 to 15, so fix the tracker first if it is down",
+   "Open every part with the twist or cliffhanger in the first 10 seconds to push average watch past 9 s",
+   "Download Other Mommy and The Others next: both are still waiting and fit the dark-evening horror-mystery season",
+   "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
   ],
-  "at": "2026-11-15T07:21:04+07:00"
+  "at": "2026-11-15T07:51:15+07:00"
  }
 }
