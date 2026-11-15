@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T13:24:51+07:00",
+ "updated": "2026-11-15T19:21:37+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -260,8 +260,9 @@
    ],
    "why": "Still waiting from the last pick list and a current Wikipedia hit, which suits a fast-moving cliffhanger recap",
    "trend": "Other Mommy: 113,648 Wikipedia views in the last 3 days",
-   "status": "new",
-   "added": "2026-11-14T19:20:47+07:00"
+   "status": "expired",
+   "added": "2026-11-14T19:20:47+07:00",
+   "at": "2026-11-15T19:21:37+07:00"
   },
   {
    "title": "The Others",
@@ -498,7 +499,7 @@
    },
    {
     "title": "Wildwood (film)",
-    "about": "2026 animated film by Travis Knight",
+    "about": "2026 animated film",
     "views": 103180
    },
    {
