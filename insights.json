@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T07:50:42+07:00",
+ "updated": "2026-11-15T13:24:51+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -272,8 +272,9 @@
    ],
    "why": "Still waiting; a twisty mystery whose reveal can close a part on a cliffhanger, which is the channel's strongest style",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-14T13:24:11+07:00"
+   "status": "expired",
+   "added": "2026-11-14T13:24:11+07:00",
+   "at": "2026-11-15T13:24:51+07:00"
   },
   {
    "title": "Shutter Island",
@@ -438,77 +439,77 @@
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 201645
+    "views": 295770
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 180742
-   },
-   {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 164451
+    "views": 259278
    },
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 161465
+    "views": 252130
+   },
+   {
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 221933
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 209797
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 137323
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "2026 film by Ti West",
-    "views": 131796
+    "views": 202478
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 93167
+    "views": 140402
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 85844
+    "views": 137669
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 80816
+    "views": 127541
    },
    {
     "title": "Other Mommy",
     "about": "2026 film by Rob Savage",
-    "views": 77817
+    "views": 120514
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 76089
+    "views": 117566
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 69896
+    "views": 112232
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 animated film by Travis Knight",
-    "views": 65670
+    "views": 103180
    },
    {
-    "title": "Clayface (film)",
-    "about": "2026 DC Studios film",
-    "views": 64847
+    "title": "The End of Oak Street",
+    "about": "2026 film by David Robert Mitchell",
+    "views": 99440
    },
    {
     "title": "Heart of the Beast",
     "about": "2026 film by David Ayer",
-    "views": 59748
+    "views": 95207
    }
   ]
  },
@@ -532,6 +533,7 @@
    "Download Other Mommy and The Others next: both are still waiting and fit the dark-evening horror-mystery season",
    "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
   ],
-  "at": "2026-11-15T07:51:15+07:00"
+  "at": "2026-11-15T07:51:15+07:00",
+  "error": "Claude app: You've hit your weekly limit · resets Nov 17, 3am (Asia/Bangkok)\n"
  }
 }
