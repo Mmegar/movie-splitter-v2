@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T01:21:39+07:00",
+ "updated": "2026-11-16T07:21:53+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -544,6 +544,6 @@
    "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
   ],
   "at": "2026-11-15T07:51:15+07:00",
-  "error": "Claude app: You've hit your weekly limit · resets Nov 17, 3am (Asia/Bangkok)\n"
+  "error": "Claude app: You've hit your weekly limit · resets 3am (Asia/Bangkok)\n"
  }
 }
