@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T13:52:19+07:00",
+ "updated": "2026-11-17T19:52:27+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -258,6 +258,18 @@
  ],
  "picks": [
   {
+   "title": "The End of Oak Street",
+   "year": 2026,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "Trending on Wikipedia with 193,735 views in 3 days, and a mystery thriller that suits the channel's strongest style",
+   "trend": "True-crime season, long dark evenings; most-read on Wikipedia (last 3 days)",
+   "status": "new",
+   "added": "2026-11-17T19:52:58+07:00"
+  },
+  {
    "title": "Prisoners",
    "year": 2013,
    "genres": [
@@ -507,26 +519,25 @@
   ]
  },
  "ai": {
-  "summary": "The channel drew about 104k views on each of Nov 5 and Nov 6 with 2.1% of views liking a video, but viewers leave early: average watch is 8 to 9 seconds and only about 3% reach the end. The log shows no posts or views after Nov 6, and there is no per-video data to judge the part-length changes. The most important thing is to hook viewers in the first seconds of each part and confirm that posting and tracking are running again.",
+  "summary": "The channel had strong early traction: about 104k views on Nov 5 and 103k on Nov 6, with average watch time rising from 8.3 s to 9.3 s. But the totals and every day since Nov 7 show zero videos and zero views, so posting or stats collection may have stopped. The first thing to check is whether the pipeline is still publishing and reporting.",
   "working": [
-   "104,284 views on Nov 5 and 103,237 on Nov 6, 50 videos logged each day",
-   "2,195 likes on Nov 5 (about 2.1% of views) and 24 shares per day",
-   "Average watch rose from 8.3 s on Nov 5 to 9.3 s on Nov 6",
-   "Full-watch rose from 3.1% to 3.3% over the same two days"
+   "Nov 5 had about 104,284 views across 50 videos, roughly 2,100 views per video",
+   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6) after the move to 105 s parts",
+   "Full-watch rate edged up from 3.1% to 3.3% over the same two days",
+   "Views held near 103k on Nov 6, so the shorter parts did not cost reach"
   ],
   "not_working": [
-   "Full-watch is only 3.1 to 3.3%, so almost nobody reaches the end of a part",
-   "Average watch of 8 to 9 s is far below the 135 s part length",
-   "Zero videos and zero views for Nov 2 to 4 and Nov 7 to 15, so posting or tracking has stopped",
-   "No matched videos (VIDEOS and PER MOVIE are empty), so no mode or movie can be ranked"
+   "No videos or views recorded from Nov 7 to Nov 17",
+   "Full-watch rate is only about 3%, so most viewers leave before the end of a part",
+   "Totals show 0 videos and no per-mode or per-video breakdown, so the channel's best format cannot be identified yet",
+   "The 135 s setting has no posted days after it, so its effect is unknown"
   ],
   "actions": [
-   "Check whether posting resumed after Nov 6; the log shows zero videos from Nov 7 to 15, so fix the tracker first if it is down",
-   "Open every part with the twist or cliffhanger in the first 10 seconds to push average watch past 9 s",
-   "Download Other Mommy and The Others next: both are still waiting and fit the dark-evening horror-mystery season",
-   "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
+   "Check the upload and stats pipeline now, since nothing has been recorded since Nov 6",
+   "Keep recap parts at 135 s and judge that length on at least 5 posted videos before changing it again",
+   "Download The End of Oak Street and Zodiac first, then cut each into cliffhanger parts and track full-watch rate on each",
+   "Add a per-mode and per-video stats export so the next review can name which kind of video works"
   ],
-  "at": "2026-11-15T07:51:15+07:00",
-  "error": "Claude app: You've hit your session limit · resets 2:20pm (Asia/Bangkok)\n"
+  "at": "2026-11-17T19:52:58+07:00"
  }
 }
