@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T07:52:12+07:00",
+ "updated": "2026-11-17T13:52:19+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -432,77 +432,77 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 211203
-   },
-   {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 176694
+    "views": 347348
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "2026 film by Ti West",
-    "views": 176175
+    "views": 263614
+   },
+   {
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 236223
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 154024
-   },
-   {
-    "title": "The End of Oak Street",
-    "about": "2026 film by David Robert Mitchell",
-    "views": 149577
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 134508
+    "views": 218906
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 132027
+    "views": 193916
    },
    {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 109823
+    "title": "The End of Oak Street",
+    "about": "2026 film by David Robert Mitchell",
+    "views": 193735
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 192077
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 104843
+    "views": 171713
+   },
+   {
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 152718
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 99659
-   },
-   {
-    "title": "Bigg Boss (Tamil TV series) season 10",
-    "about": "Season of television series",
-    "views": 91086
+    "views": 141794
    },
    {
     "title": "Heartland (2026 film)",
     "about": "Thriller film by Shana Feste",
-    "views": 89608
+    "views": 132495
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 89402
+    "views": 129236
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 86612
+    "views": 123296
    },
    {
-    "title": "Ranabaali",
-    "about": "2026 Indian film by Rahul Sankrityan",
-    "views": 84106
+    "title": "Bigg Boss (Tamil TV series) season 10",
+    "about": "Season of television series",
+    "views": 117558
+   },
+   {
+    "title": "Wildwood (film)",
+    "about": "2026 animated film",
+    "views": 111823
    }
   ]
  },
@@ -527,6 +527,6 @@
    "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
   ],
   "at": "2026-11-15T07:51:15+07:00",
-  "error": "Claude app: You've hit your session limit · resets 9:20am (Asia/Bangkok)\n"
+  "error": "Claude app: You've hit your session limit · resets 2:20pm (Asia/Bangkok)\n"
  }
 }
