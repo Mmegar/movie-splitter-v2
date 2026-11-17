@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T01:52:10+07:00",
+ "updated": "2026-11-17T07:52:12+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -403,20 +403,6 @@
    "at": "2026-11-11T01:18:02+07:00"
   },
   {
-   "title": "Godzilla Minus One",
-   "year": 2023,
-   "genres": [
-    "Action",
-    "Drama",
-    "Sci-Fi"
-   ],
-   "why": "Still waiting from before, and the sequel-led Godzilla trend is pulling 282,866 Wikipedia reads right now",
-   "trend": "Godzilla Minus Zero (122,560 Wikipedia views in 3 days)",
-   "status": "expired",
-   "added": "2026-11-09T07:17:08+07:00",
-   "at": "2026-11-10T07:17:12+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -541,6 +527,6 @@
    "Keep recap parts at 135 s until at least 5 videos with per-video numbers are logged"
   ],
   "at": "2026-11-15T07:51:15+07:00",
-  "error": "Claude app: You've hit your weekly limit · resets 3am (Asia/Bangkok)\n"
+  "error": "Claude app: You've hit your session limit · resets 9:20am (Asia/Bangkok)\n"
  }
 }
