@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T19:52:27+07:00",
+ "updated": "2026-11-18T01:52:35+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -192,6 +192,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-18",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -264,7 +273,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Trending on Wikipedia with 193,735 views in 3 days, and a mystery thriller that suits the channel's strongest style",
+   "why": "Still waiting to be downloaded and one of the most-read films on Wikipedia right now, with 121,865 views",
    "trend": "True-crime season, long dark evenings; most-read on Wikipedia (last 3 days)",
    "status": "new",
    "added": "2026-11-17T19:52:58+07:00"
@@ -402,19 +411,6 @@
    "at": "2026-11-12T19:48:26+07:00"
   },
   {
-   "title": "I, Robot",
-   "year": 2004,
-   "genres": [
-    "Sci-Fi",
-    "Mystery"
-   ],
-   "why": "Still waiting from before and a murder-mystery at its core, which suits the channel's twisty style; no per-movie numbers yet",
-   "trend": "I, Robot (film) (139,323 views in 3 days)",
-   "status": "expired",
-   "added": "2026-11-10T01:17:35+07:00",
-   "at": "2026-11-11T01:18:02+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -429,7 +425,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-17",
+  "date": "2026-11-18",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -444,100 +440,98 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 347348
+    "views": 256683
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "2026 film by Ti West",
-    "views": 263614
+    "views": 185613
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 236223
+    "views": 142098
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 218906
+    "views": 140370
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 193916
-   },
-   {
-    "title": "The End of Oak Street",
-    "about": "2026 film by David Robert Mitchell",
-    "views": 193735
+    "views": 131029
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 192077
+    "views": 126922
+   },
+   {
+    "title": "The End of Oak Street",
+    "about": "2026 film by David Robert Mitchell",
+    "views": 121865
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 171713
-   },
-   {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 152718
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 141794
+    "views": 119888
    },
    {
     "title": "Heartland (2026 film)",
     "about": "Thriller film by Shana Feste",
-    "views": 132495
+    "views": 100903
+   },
+   {
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 95236
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 94559
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 129236
+    "views": 82511
    },
    {
     "title": "Wild Horse Nine",
     "about": "2026 film by Martin McDonagh",
-    "views": 123296
+    "views": 80960
    },
    {
-    "title": "Bigg Boss (Tamil TV series) season 10",
-    "about": "Season of television series",
-    "views": 117558
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 77969
    },
    {
     "title": "Wildwood (film)",
     "about": "2026 animated film",
-    "views": 111823
+    "views": 74313
    }
   ]
  },
  "ai": {
-  "summary": "The channel had strong early traction: about 104k views on Nov 5 and 103k on Nov 6, with average watch time rising from 8.3 s to 9.3 s. But the totals and every day since Nov 7 show zero videos and zero views, so posting or stats collection may have stopped. The first thing to check is whether the pipeline is still publishing and reporting.",
+  "summary": "The channel's numbers stop after 2026-11-06, so there is no reliable read on how it is doing now. The last full day (Nov 5-6) had about 104k views across 50 videos, roughly 2,070 views per video, with average watch time rising from 8.3 s to 9.3 s. The totals block shows zero views and zero videos, which conflicts with the day-by-day rows, so the tracker needs checking before any settings change.",
   "working": [
-   "Nov 5 had about 104,284 views across 50 videos, roughly 2,100 views per video",
-   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6) after the move to 105 s parts",
-   "Full-watch rate edged up from 3.1% to 3.3% over the same two days",
-   "Views held near 103k on Nov 6, so the shorter parts did not cost reach"
+   "Avg watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)",
+   "Full-watch rate edged up from 3.1% to 3.3% on Nov 6",
+   "About 2,070 views per video on Nov 6 (103,237 views across 50 videos)"
   ],
   "not_working": [
-   "No videos or views recorded from Nov 7 to Nov 17",
-   "Full-watch rate is only about 3%, so most viewers leave before the end of a part",
-   "Totals show 0 videos and no per-mode or per-video breakdown, so the channel's best format cannot be identified yet",
-   "The 135 s setting has no posted days after it, so its effect is unknown"
+   "No views or videos recorded since 2026-11-07, so the last 11 days have no data",
+   "Full-watch rate is still only about 3%, so most viewers leave before the end of a part",
+   "Totals show 0 views and 0 videos while the Nov 5-6 day rows show 50 videos each, so the figures disagree"
   ],
   "actions": [
-   "Check the upload and stats pipeline now, since nothing has been recorded since Nov 6",
-   "Keep recap parts at 135 s and judge that length on at least 5 posted videos before changing it again",
-   "Download The End of Oak Street and Zodiac first, then cut each into cliffhanger parts and track full-watch rate on each",
-   "Add a per-mode and per-video stats export so the next review can name which kind of video works"
+   "Check that the analytics pull is still running and that posts since Nov 7 are being counted; the totals block and day rows disagree",
+   "Keep recap_part_seconds at 135 and post a few parts so there is data to judge it by",
+   "Use the next batch to test a Zodiac or Shutter Island recap, since the true-crime season and this channel's twisty favourites fit together",
+   "Download The End of Oak Street next, as it is still waiting and is trending on Wikipedia"
   ],
-  "at": "2026-11-17T19:52:58+07:00"
+  "at": "2026-11-18T01:53:04+07:00"
  }
 }
