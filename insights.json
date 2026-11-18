@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T01:52:35+07:00",
+ "updated": "2026-11-18T07:52:41+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -273,7 +273,7 @@
     "Mystery",
     "Thriller"
    ],
-   "why": "Still waiting to be downloaded and one of the most-read films on Wikipedia right now, with 121,865 views",
+   "why": "Still waiting from the last pick list and a current trend: 121,865 Wikipedia views in 3 days, with a mystery hook that suits cliffhanger parts",
    "trend": "True-crime season, long dark evenings; most-read on Wikipedia (last 3 days)",
    "status": "new",
    "added": "2026-11-17T19:52:58+07:00"
@@ -515,23 +515,24 @@
   ]
  },
  "ai": {
-  "summary": "The channel's numbers stop after 2026-11-06, so there is no reliable read on how it is doing now. The last full day (Nov 5-6) had about 104k views across 50 videos, roughly 2,070 views per video, with average watch time rising from 8.3 s to 9.3 s. The totals block shows zero views and zero videos, which conflicts with the day-by-day rows, so the tracker needs checking before any settings change.",
+  "summary": "The channel has no per-video data to judge, and the tracker has shown nothing since Nov 6. The only real signal is Nov 5 to Nov 6, when average watch time rose from 8.3 s to 9.3 s and full-watch rose slightly from 3.1% to 3.3%. The most important step is restoring the analytics feed so the next settings decision rests on real videos.",
   "working": [
-   "Avg watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6)",
-   "Full-watch rate edged up from 3.1% to 3.3% on Nov 6",
-   "About 2,070 views per video on Nov 6 (103,237 views across 50 videos)"
+   "Average watch rose from 8.3 s (Nov 5) to 9.3 s (Nov 6), +1.0 s",
+   "Full-watch rose from 3.1% to 3.3% on Nov 6",
+   "Shares held steady at 24 on both tracked days"
   ],
   "not_working": [
-   "No views or videos recorded since 2026-11-07, so the last 11 days have no data",
-   "Full-watch rate is still only about 3%, so most viewers leave before the end of a part",
-   "Totals show 0 views and 0 videos while the Nov 5-6 day rows show 50 videos each, so the figures disagree"
+   "Views fell from 104,284 to 103,237 on Nov 6 (-1,047)",
+   "Likes slipped from 2,195 to 2,184",
+   "Full-watch is only 3.1–3.3%, so most viewers leave before the end of a part",
+   "No tracked videos for 12 days (Nov 7–18); the totals row reads 0 views and 0 videos"
   ],
   "actions": [
-   "Check that the analytics pull is still running and that posts since Nov 7 are being counted; the totals block and day rows disagree",
-   "Keep recap_part_seconds at 135 and post a few parts so there is data to judge it by",
-   "Use the next batch to test a Zodiac or Shutter Island recap, since the true-crime season and this channel's twisty favourites fit together",
-   "Download The End of Oak Street next, as it is still waiting and is trending on Wikipedia"
+   "Check the analytics feed first: the Nov 5–6 rows show 50 videos each, but the totals row reads 0 and nothing has been logged since Nov 6",
+   "Leave the settings as they are until at least 5 videos are tracked; no setting change is supported yet",
+   "Download The End of Oak Street first; it is the top trending pick and is still waiting",
+   "After the next 5 downloads post, judge each by avg_watch and full_watch per video before the next pick"
   ],
-  "at": "2026-11-18T01:53:04+07:00"
+  "at": "2026-11-18T07:53:18+07:00"
  }
 }
