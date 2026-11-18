@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T19:53:02+07:00",
+ "updated": "2026-11-19T01:53:10+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -201,6 +201,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-19",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -266,6 +275,45 @@
   "Upgrade (2018)"
  ],
  "picks": [
+  {
+   "title": "The Batman",
+   "year": 2022,
+   "genres": [
+    "Crime",
+    "Mystery",
+    "Superhero"
+   ],
+   "why": "A dark detective mystery with a clear villain plot that cuts into cliffhanger parts; it sits in the top Wikipedia reads at 93,881 views",
+   "trend": "The Batman (film) among most-read Wikipedia films, last 3 days",
+   "status": "new",
+   "added": "2026-11-19T01:53:39+07:00"
+  },
+  {
+   "title": "No Time to Die",
+   "year": 2021,
+   "genres": [
+    "Action",
+    "Thriller",
+    "Spy"
+   ],
+   "why": "A high-stakes spy story with a clear arc and built-in twists; it is among the most-read titles at 110,388 views",
+   "trend": "No Time to Die among most-read Wikipedia films, last 3 days",
+   "status": "new",
+   "added": "2026-11-19T01:53:39+07:00"
+  },
+  {
+   "title": "Se7en",
+   "year": 1995,
+   "genres": [
+    "Crime",
+    "Thriller",
+    "Mystery"
+   ],
+   "why": "A serial-killer case told one clue at a time, which splits well into cliffhanger parts for mystery fans",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-19T01:53:39+07:00"
+  },
   {
    "title": "The End of Oak Street",
    "year": 2026,
@@ -426,7 +474,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-18",
+  "date": "2026-11-19",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -441,67 +489,27 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 383964
+    "views": 263426
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "2026 film by Ti West",
-    "views": 240446
-   },
-   {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 192260
+    "views": 142272
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 191531
+    "views": 138513
    },
    {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 188193
+    "title": "Scene (2026 film)",
+    "about": "Indian film by Jithu Madhavan",
+    "views": 116772
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 184992
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 167907
-   },
-   {
-    "title": "The End of Oak Street",
-    "about": "2026 film by David Robert Mitchell",
-    "views": 151419
-   },
-   {
-    "title": "Heartland (2026 film)",
-    "about": "Thriller film by Shana Feste",
-    "views": 135407
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 130381
-   },
-   {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 128810
-   },
-   {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 127804
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 117210
+    "views": 115852
    },
    {
     "title": "No Time to Die",
@@ -509,30 +517,68 @@
     "views": 110388
    },
    {
-    "title": "Wild Horse Nine",
-    "about": "2026 film by Martin McDonagh",
-    "views": 108607
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 105624
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 100272
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 98554
+   },
+   {
+    "title": "The Batman (film)",
+    "about": "2022 superhero film by Matt Reeves",
+    "views": 93881
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 77957
+   },
+   {
+    "title": "Heartland (2026 film)",
+    "about": "Thriller film by Shana Feste",
+    "views": 77391
+   },
+   {
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 76469
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 74533
+   },
+   {
+    "title": "The End of Oak Street",
+    "about": "2026 film by David Robert Mitchell",
+    "views": 73712
    }
   ]
  },
  "ai": {
-  "summary": "The channel had about 104k views on 50 videos on Nov 5 and 103k on Nov 6, with avg watch around 8-9 s and only about 3% of viewers reaching the end. The day rows read zero from Nov 7 onward, and TOTALS shows 0 views, so the tracking may have stopped and the numbers should be checked first. The most important thing is to fix the data feed so later settings changes can be judged.",
+  "summary": "The channel's only data is one day, 2026-11-06: 50 videos, 103,237 views, 9.3 s average watch and 3.3% full watch. Nothing has been recorded since, so there is no per-video, per-mode or per-movie breakdown to judge from. The most important thing is getting the numbers flowing again so the next picks and setting changes rest on real results.",
   "working": [
-   "Nov 5 to Nov 6: avg_watch rose from 8.3 s to 9.3 s and full_watch from 3.1% to 3.3%",
-   "Nov 5 to Nov 6: about 104k and 103k views across 50 videos per day, roughly 2,000 views per video",
-   "Nov 5 to Nov 6: 2,184 to 2,195 likes and 24 shares per day"
+   "50 videos drew 103,237 views on 2026-11-06 (about 2,065 per video)",
+   "The same day had 2,184 likes and 24 shares"
   ],
   "not_working": [
-   "Only about 3% of viewers reach the end of a part (3.1% and 3.3%), so cliffhanger endings are not pulling people through",
-   "avg_watch of 8-9 s is far below the 135 s part length, so most viewers leave in the first seconds",
-   "Every day from Nov 7 to Nov 18 reads 0 views and 0 videos, and TOTALS shows 0 views, which conflicts with Nov 5-6"
+   "Average watch was 9.3 s and only 3.3% watched to the end on 2026-11-06",
+   "No views, videos or likes were recorded on any day from 2026-11-07 to 2026-11-19"
   ],
   "actions": [
-   "Check the analytics pull before trusting any number: Nov 5-6 show about 104k views but TOTALS shows 0, and nothing is recorded after Nov 6",
-   "Rework the first 3-5 seconds of each part so it opens on the scene's tension, since viewers leave in about 8-9 s",
-   "Post the five picks as a crime and mystery run, and label each video with its movie title so future numbers can be matched to films",
-   "Leave recap_part_seconds at 135 until at least 5 matched videos come back, because the Nov 6 change has no data after it"
+   "Check that the analytics pull and posting are still running, since the last day with data is 2026-11-06",
+   "Download The Batman (2022) and No Time to Die (2021) first while their Wikipedia reads are high",
+   "Download Se7en, Gone Girl and Knives Out next for the true-crime season, then judge them by avg watch and full watch once they have data",
+   "Leave the recap length at 135 s until at least 5 matched videos have numbers"
   ],
-  "at": "2026-11-18T19:53:33+07:00"
+  "at": "2026-11-19T01:53:39+07:00"
  }
 }
