@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T07:53:20+07:00",
+ "updated": "2026-11-19T13:53:15+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -283,7 +283,7 @@
     "Mystery",
     "Superhero"
    ],
-   "why": "Still waiting, still a strong pick; a detective mystery that fits the channel's twisty style",
+   "why": "Still waiting, noir detective mystery with 116,425 Wikipedia reads in the last 3 days",
    "trend": "The Batman (film) among most-read Wikipedia films, last 3 days",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -309,7 +309,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Twisty crime story with a clear arc for cliffhanger parts; no per-movie numbers yet, so picked on the channel's mystery pitch and the season",
+   "why": "Still waiting, dark crime mystery with a cliffhanger-friendly serial-killer case that fits the channel's twisty style",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -489,98 +489,98 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 263426
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "2026 film by Ti West",
-    "views": 142272
+    "views": 387989
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 138513
+    "views": 211231
    },
    {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 116772
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 183384
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 115852
+    "views": 163727
+   },
+   {
+    "title": "Scene (2026 film)",
+    "about": "Indian film by Jithu Madhavan",
+    "views": 159846
    },
    {
     "title": "No Time to Die",
     "about": "2021 James Bond film by Cary Joji Fukunaga",
-    "views": 110388
+    "views": 146156
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 105624
-   },
-   {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 100272
+    "views": 144451
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 98554
+    "views": 135296
+   },
+   {
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 129879
    },
    {
     "title": "The Batman (film)",
     "about": "2022 superhero film by Matt Reeves",
-    "views": 93881
+    "views": 116425
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 77957
+    "views": 109722
    },
    {
     "title": "Heartland (2026 film)",
     "about": "Thriller film by Shana Feste",
-    "views": 77391
-   },
-   {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 76469
+    "views": 108282
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 74533
+    "views": 106638
    },
    {
-    "title": "The End of Oak Street",
-    "about": "2026 film by David Robert Mitchell",
-    "views": 73712
+    "title": "VisionQuest",
+    "about": "2026 Marvel Studios television miniseries",
+    "views": 104722
+   },
+   {
+    "title": "XXX (film series)",
+    "about": "American spy action film series by Rich Wilkes",
+    "views": 103191
    }
   ]
  },
  "ai": {
-  "summary": "The channel had 103,237 views across 50 videos on 2026-11-06, with 2,184 likes and 24 shares, but the averages are weak: 9.3 s average watch and 3.3% full watch. Every day since then reads zero, and the totals, per-mode, per-movie and per-video sections are empty, so there is no matched video data to judge the part-length changes or any movie. The most important thing is to confirm the analytics pull is running and populating those sections.",
+  "summary": "Only one day of numbers came back (2026-11-06: 50 videos, 103,237 views), and the TOTALS block reads 0 for everything, so the data is inconsistent. The one clear signal is retention: 9.3 s average watch and 3.3% full watch mean most viewers leave early. Fix the data feed first, then judge the hooks and part lengths.",
   "working": [
-   "2026-11-06: 103,237 views across 50 videos",
-   "2,184 likes and 24 shares on the same day",
-   "Every day from 2026-11-07 to 2026-11-19 shows 0 views, so there is no data after the last change to judge it by"
+   "2026-11-06 drew 103,237 views across 50 videos, so the channel gets reach",
+   "Likes were 2,184 on that day, about 2.1% of views",
+   "Shares were 24 on that day, a small sign that people pass the parts on"
   ],
   "not_working": [
-   "Average watch 9.3 s on the 2026-11-06 day, far short of the 135 s part length",
-   "Full watch 3.3%, so most viewers leave before the end of a part",
-   "TOTALS shows 0 views while DAY BY DAY shows 103,237 on 2026-11-06, so the data does not agree with itself"
+   "Average watch was 9.3 s and full watch was 3.3%, so most viewers leave in the first seconds",
+   "TOTALS shows 0 views and 0 videos while the day row shows 50 videos and 103,237 views, so the totals are not being summed correctly",
+   "No per-video, per-mode or per-movie numbers came back, so the channel's best movies and modes cannot be identified yet"
   ],
   "actions": [
-   "Check that the analytics pull is running and returning per-video rows, so VIDEOS, PER MODE and PER MOVIE fill in",
-   "Rewrite the first 3 seconds of each part as a hook, since 9.3 s average watch on 135 s parts means most viewers leave early",
-   "Once at least 5 videos match, judge the 2026-11-06 change to 135 s against avg_watch and full_watch before changing length again",
-   "Download the picks below in order, starting with Se7en for the true-crime season"
+   "Fix the totals and per-video pull so views, avg_watch and full_watch come back per video and per mode",
+   "Tighten the first 3 seconds of every part, since a 9.3 s average watch means the open is losing viewers",
+   "Download the five next_movies, starting with Se7en and The Batman, which are already waiting",
+   "Keep recap_part_seconds at 135 until a week of per-video numbers can judge it"
   ],
-  "at": "2026-11-19T07:53:50+07:00"
+  "at": "2026-11-19T13:53:48+07:00"
  }
 }
