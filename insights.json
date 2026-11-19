@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T01:53:10+07:00",
+ "updated": "2026-11-19T07:53:20+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -283,7 +283,7 @@
     "Mystery",
     "Superhero"
    ],
-   "why": "A dark detective mystery with a clear villain plot that cuts into cliffhanger parts; it sits in the top Wikipedia reads at 93,881 views",
+   "why": "Still waiting, still a strong pick; a detective mystery that fits the channel's twisty style",
    "trend": "The Batman (film) among most-read Wikipedia films, last 3 days",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -296,7 +296,7 @@
     "Thriller",
     "Spy"
    ],
-   "why": "A high-stakes spy story with a clear arc and built-in twists; it is among the most-read titles at 110,388 views",
+   "why": "Still waiting; a well-known title with a clear plot that splits well into parts",
    "trend": "No Time to Die among most-read Wikipedia films, last 3 days",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -309,7 +309,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "A serial-killer case told one clue at a time, which splits well into cliffhanger parts for mystery fans",
+   "why": "Twisty crime story with a clear arc for cliffhanger parts; no per-movie numbers yet, so picked on the channel's mystery pitch and the season",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -564,21 +564,23 @@
   ]
  },
  "ai": {
-  "summary": "The channel's only data is one day, 2026-11-06: 50 videos, 103,237 views, 9.3 s average watch and 3.3% full watch. Nothing has been recorded since, so there is no per-video, per-mode or per-movie breakdown to judge from. The most important thing is getting the numbers flowing again so the next picks and setting changes rest on real results.",
+  "summary": "The channel had 103,237 views across 50 videos on 2026-11-06, with 2,184 likes and 24 shares, but the averages are weak: 9.3 s average watch and 3.3% full watch. Every day since then reads zero, and the totals, per-mode, per-movie and per-video sections are empty, so there is no matched video data to judge the part-length changes or any movie. The most important thing is to confirm the analytics pull is running and populating those sections.",
   "working": [
-   "50 videos drew 103,237 views on 2026-11-06 (about 2,065 per video)",
-   "The same day had 2,184 likes and 24 shares"
+   "2026-11-06: 103,237 views across 50 videos",
+   "2,184 likes and 24 shares on the same day",
+   "Every day from 2026-11-07 to 2026-11-19 shows 0 views, so there is no data after the last change to judge it by"
   ],
   "not_working": [
-   "Average watch was 9.3 s and only 3.3% watched to the end on 2026-11-06",
-   "No views, videos or likes were recorded on any day from 2026-11-07 to 2026-11-19"
+   "Average watch 9.3 s on the 2026-11-06 day, far short of the 135 s part length",
+   "Full watch 3.3%, so most viewers leave before the end of a part",
+   "TOTALS shows 0 views while DAY BY DAY shows 103,237 on 2026-11-06, so the data does not agree with itself"
   ],
   "actions": [
-   "Check that the analytics pull and posting are still running, since the last day with data is 2026-11-06",
-   "Download The Batman (2022) and No Time to Die (2021) first while their Wikipedia reads are high",
-   "Download Se7en, Gone Girl and Knives Out next for the true-crime season, then judge them by avg watch and full watch once they have data",
-   "Leave the recap length at 135 s until at least 5 matched videos have numbers"
+   "Check that the analytics pull is running and returning per-video rows, so VIDEOS, PER MODE and PER MOVIE fill in",
+   "Rewrite the first 3 seconds of each part as a hook, since 9.3 s average watch on 135 s parts means most viewers leave early",
+   "Once at least 5 videos match, judge the 2026-11-06 change to 135 s against avg_watch and full_watch before changing length again",
+   "Download the picks below in order, starting with Se7en for the true-crime season"
   ],
-  "at": "2026-11-19T01:53:39+07:00"
+  "at": "2026-11-19T07:53:50+07:00"
  }
 }
