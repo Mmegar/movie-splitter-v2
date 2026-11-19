@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T13:53:15+07:00",
+ "updated": "2026-11-19T19:53:24+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -276,6 +276,19 @@
  ],
  "picks": [
   {
+   "title": "Gone Girl",
+   "year": 2014,
+   "genres": [
+    "Mystery",
+    "Thriller",
+    "Crime"
+   ],
+   "why": "A twist-driven missing-person mystery that fits the channel's twisty-story strength and cuts into cliffhanger parts",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-19T19:53:50+07:00"
+  },
+  {
    "title": "The Batman",
    "year": 2022,
    "genres": [
@@ -283,7 +296,7 @@
     "Mystery",
     "Superhero"
    ],
-   "why": "Still waiting, noir detective mystery with 116,425 Wikipedia reads in the last 3 days",
+   "why": "Still-waiting pick; a detective mystery that is trending right now on Wikipedia with 116,425 views in 3 days",
    "trend": "The Batman (film) among most-read Wikipedia films, last 3 days",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -309,7 +322,7 @@
     "Thriller",
     "Mystery"
    ],
-   "why": "Still waiting, dark crime mystery with a cliffhanger-friendly serial-killer case that fits the channel's twisty style",
+   "why": "Still-waiting pick; a twisty serial-killer mystery that suits the channel's strengths and cuts well into cliffhanger parts",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T01:53:39+07:00"
@@ -434,32 +447,6 @@
    "at": "2026-11-13T01:19:12+07:00"
   },
   {
-   "title": "Gone Girl",
-   "year": 2014,
-   "genres": [
-    "Mystery",
-    "Thriller"
-   ],
-   "why": "Still-waiting pick; a twist-driven mystery that fits the channel's strength in twisty stories",
-   "trend": null,
-   "status": "expired",
-   "added": "2026-11-11T19:18:31+07:00",
-   "at": "2026-11-12T19:48:26+07:00"
-  },
-  {
-   "title": "Knives Out",
-   "year": 2019,
-   "genres": [
-    "Mystery",
-    "Comedy"
-   ],
-   "why": "Still-waiting pick; a whodunit with clear clues that cuts well into parts",
-   "trend": null,
-   "status": "expired",
-   "added": "2026-11-11T19:18:31+07:00",
-   "at": "2026-11-12T19:48:26+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -564,23 +551,21 @@
   ]
  },
  "ai": {
-  "summary": "Only one day of numbers came back (2026-11-06: 50 videos, 103,237 views), and the TOTALS block reads 0 for everything, so the data is inconsistent. The one clear signal is retention: 9.3 s average watch and 3.3% full watch mean most viewers leave early. Fix the data feed first, then judge the hooks and part lengths.",
+  "summary": "The channel posted 50 videos and 103,237 views on Nov 6, about 2,064 views per video, with 2,184 likes. Every day after Nov 6 shows zero videos and zero views, and the totals read zero, so there is no usable data for the last 13 days. The most important thing is to confirm the stats pull and posting are running again before judging any setting.",
   "working": [
-   "2026-11-06 drew 103,237 views across 50 videos, so the channel gets reach",
-   "Likes were 2,184 on that day, about 2.1% of views",
-   "Shares were 24 on that day, a small sign that people pass the parts on"
+   "Nov 6: 103,237 views across 50 videos (about 2,064 per video)",
+   "Nov 6: 2,184 likes and 24 shares, so the videos get some engagement"
   ],
   "not_working": [
-   "Average watch was 9.3 s and full watch was 3.3%, so most viewers leave in the first seconds",
-   "TOTALS shows 0 views and 0 videos while the day row shows 50 videos and 103,237 views, so the totals are not being summed correctly",
-   "No per-video, per-mode or per-movie numbers came back, so the channel's best movies and modes cannot be identified yet"
+   "Nov 6: average watch time is 9.3 s and only 3.3% of viewers reach the end",
+   "No videos or views recorded from Nov 7 to Nov 19, so the channel's output or the stats collection has stopped"
   ],
   "actions": [
-   "Fix the totals and per-video pull so views, avg_watch and full_watch come back per video and per mode",
-   "Tighten the first 3 seconds of every part, since a 9.3 s average watch means the open is losing viewers",
-   "Download the five next_movies, starting with Se7en and The Batman, which are already waiting",
-   "Keep recap_part_seconds at 135 until a week of per-video numbers can judge it"
+   "Check that the posting and stats pull are running, since the totals show zero for Nov 7 to Nov 19.",
+   "Once new data arrives, judge the recap-length changes (165 s, 135 s, 105 s, back to 135 s) against views, avg_watch and full_watch.",
+   "Lead with the first 3 seconds of each part to lift the 9.3 s average watch and the 3.3% full-watch rate.",
+   "Post the 5 next movies as cliffhanger-ending mystery parts, and track avg_watch and full_watch for each."
   ],
-  "at": "2026-11-19T13:53:48+07:00"
+  "at": "2026-11-19T19:53:50+07:00"
  }
 }
