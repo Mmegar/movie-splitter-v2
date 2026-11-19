@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T19:53:24+07:00",
+ "updated": "2026-11-20T01:53:30+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -210,6 +210,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-20",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -276,6 +285,30 @@
  ],
  "picks": [
   {
+   "title": "Knives Out",
+   "year": 2019,
+   "genres": [
+    "Mystery",
+    "Comedy"
+   ],
+   "why": "Whodunit with a clear reveal at the end, a strong fit for mystery recap parts; not yet on the laptop.",
+   "trend": "True-crime season, long dark evenings",
+   "status": "new",
+   "added": "2026-11-20T01:53:56+07:00"
+  },
+  {
+   "title": "Die Hard",
+   "year": 1988,
+   "genres": [
+    "Action",
+    "Thriller"
+   ],
+   "why": "Christmas-set thriller with natural cliffhangers between parts; not yet on the laptop.",
+   "trend": "Christmas holidays",
+   "status": "new",
+   "added": "2026-11-20T01:53:56+07:00"
+  },
+  {
    "title": "Gone Girl",
    "year": 2014,
    "genres": [
@@ -283,7 +316,7 @@
     "Thriller",
     "Crime"
    ],
-   "why": "A twist-driven missing-person mystery that fits the channel's twisty-story strength and cuts into cliffhanger parts",
+   "why": "Twist-driven mystery that suits the channel's strength and cuts into cliffhanger parts; still waiting to be downloaded.",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T19:53:50+07:00"
@@ -298,8 +331,9 @@
    ],
    "why": "Still-waiting pick; a detective mystery that is trending right now on Wikipedia with 116,425 views in 3 days",
    "trend": "The Batman (film) among most-read Wikipedia films, last 3 days",
-   "status": "new",
-   "added": "2026-11-19T01:53:39+07:00"
+   "status": "expired",
+   "added": "2026-11-19T01:53:39+07:00",
+   "at": "2026-11-20T01:53:56+07:00"
   },
   {
    "title": "No Time to Die",
@@ -311,8 +345,9 @@
    ],
    "why": "Still waiting; a well-known title with a clear plot that splits well into parts",
    "trend": "No Time to Die among most-read Wikipedia films, last 3 days",
-   "status": "new",
-   "added": "2026-11-19T01:53:39+07:00"
+   "status": "expired",
+   "added": "2026-11-19T01:53:39+07:00",
+   "at": "2026-11-20T01:53:56+07:00"
   },
   {
    "title": "Se7en",
@@ -324,8 +359,9 @@
    ],
    "why": "Still-waiting pick; a twisty serial-killer mystery that suits the channel's strengths and cuts well into cliffhanger parts",
    "trend": "True-crime season, long dark evenings",
-   "status": "new",
-   "added": "2026-11-19T01:53:39+07:00"
+   "status": "expired",
+   "added": "2026-11-19T01:53:39+07:00",
+   "at": "2026-11-20T01:53:56+07:00"
   },
   {
    "title": "The End of Oak Street",
@@ -434,19 +470,6 @@
    "at": "2026-11-14T01:20:15+07:00"
   },
   {
-   "title": "MobLand",
-   "year": 2025,
-   "genres": [
-    "Crime",
-    "Drama"
-   ],
-   "why": "Still-waiting pick; a crime series with a layered, twisty plot that suits cliffhanger parts",
-   "trend": "MobLand (2025 British crime drama television series) is among the most-read Wikipedia pages right now at 66,332 views in",
-   "status": "expired",
-   "added": "2026-11-12T01:18:28+07:00",
-   "at": "2026-11-13T01:19:12+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -461,7 +484,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -470,102 +493,109 @@
      "Thriller",
      "Mystery"
     ]
+   },
+   {
+    "moment": "Christmas holidays",
+    "genres": [
+     "Holiday",
+     "Family",
+     "Fantasy",
+     "Comedy"
+    ]
    }
   ],
   "trending": [
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 387989
+    "views": 251844
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 211231
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 183384
+    "views": 144361
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 163727
+    "views": 101838
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 95945
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 159846
+    "views": 94964
    },
    {
     "title": "No Time to Die",
     "about": "2021 James Bond film by Cary Joji Fukunaga",
-    "views": 146156
+    "views": 94720
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 144451
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 135296
+    "views": 84922
    },
    {
     "title": "Primetime (film)",
     "about": "2026 film by Lance Oppenheim",
-    "views": 129879
+    "views": 79442
    },
    {
-    "title": "The Batman (film)",
-    "about": "2022 superhero film by Matt Reeves",
-    "views": 116425
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 109722
-   },
-   {
-    "title": "Heartland (2026 film)",
-    "about": "Thriller film by Shana Feste",
-    "views": 108282
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 106638
-   },
-   {
-    "title": "VisionQuest",
-    "about": "2026 Marvel Studios television miniseries",
-    "views": 104722
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 77727
    },
    {
     "title": "XXX (film series)",
     "about": "American spy action film series by Rich Wilkes",
-    "views": 103191
+    "views": 69812
+   },
+   {
+    "title": "The Batman (film)",
+    "about": "2022 superhero film by Matt Reeves",
+    "views": 67844
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 67587
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 66804
+   },
+   {
+    "title": "Casino Royale (2006 film)",
+    "about": "2006 James Bond film by Martin Campbell",
+    "views": 66629
+   },
+   {
+    "title": "Heartland (2026 film)",
+    "about": "Thriller film by Shana Feste",
+    "views": 65395
    }
   ]
  },
  "ai": {
-  "summary": "The channel posted 50 videos and 103,237 views on Nov 6, about 2,064 views per video, with 2,184 likes. Every day after Nov 6 shows zero videos and zero views, and the totals read zero, so there is no usable data for the last 13 days. The most important thing is to confirm the stats pull and posting are running again before judging any setting.",
+  "summary": "The channel has no tracked videos or views yet: all totals are 0 across the 14 days from 2026-11-07 to 2026-11-20. There is nothing to judge, so the one thing that matters most is getting the first parts posted so the numbers start to exist.",
   "working": [
-   "Nov 6: 103,237 views across 50 videos (about 2,064 per video)",
-   "Nov 6: 2,184 likes and 24 shares, so the videos get some engagement"
+   "0 views and 0 videos logged across 14 tracked days, so no format is proven yet"
   ],
   "not_working": [
-   "Nov 6: average watch time is 9.3 s and only 3.3% of viewers reach the end",
-   "No videos or views recorded from Nov 7 to Nov 19, so the channel's output or the stats collection has stopped"
+   "0 videos posted in the tracked window, so no per-mode or per-movie data exists"
   ],
   "actions": [
-   "Check that the posting and stats pull are running, since the totals show zero for Nov 7 to Nov 19.",
-   "Once new data arrives, judge the recap-length changes (165 s, 135 s, 105 s, back to 135 s) against views, avg_watch and full_watch.",
-   "Lead with the first 3 seconds of each part to lift the 9.3 s average watch and the 3.3% full-watch rate.",
-   "Post the 5 next movies as cliffhanger-ending mystery parts, and track avg_watch and full_watch for each."
+   "Post the first parts of Gone Girl or Se7en this week, since true-crime is the current season and the channel's strength is twisty stories.",
+   "Keep recap_part_seconds at 135 until at least 5 matched videos exist; the earlier 105 and 165 changes cannot be judged without posts.",
+   "Log views, avg_watch and full_watch for every part from day one so the next run has numbers to act on.",
+   "Put the season hook in each part's first line, such as true-crime for the mystery picks and Christmas for Die Hard."
   ],
-  "at": "2026-11-19T19:53:50+07:00"
+  "at": "2026-11-20T01:53:56+07:00"
  }
 }
