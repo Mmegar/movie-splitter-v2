@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T01:53:30+07:00",
+ "updated": "2026-11-20T07:53:42+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -291,7 +291,7 @@
     "Mystery",
     "Comedy"
    ],
-   "why": "Whodunit with a clear reveal at the end, a strong fit for mystery recap parts; not yet on the laptop.",
+   "why": "Still waiting from the owner's list; a whodunit with a clear cast of suspects and twist reveals, matching the channel's mystery strength",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -303,7 +303,7 @@
     "Action",
     "Thriller"
    ],
-   "why": "Christmas-set thriller with natural cliffhangers between parts; not yet on the laptop.",
+   "why": "Still waiting from the owner's list; a Christmas-set action thriller with strong recognition and natural cliffhangers",
    "trend": "Christmas holidays",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -316,7 +316,7 @@
     "Thriller",
     "Crime"
    ],
-   "why": "Twist-driven mystery that suits the channel's strength and cuts into cliffhanger parts; still waiting to be downloaded.",
+   "why": "Still waiting from the owner's list; a twisty, cliffhanger-friendly story that splits cleanly into parts",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T19:53:50+07:00"
@@ -583,19 +583,21 @@
   ]
  },
  "ai": {
-  "summary": "The channel has no tracked videos or views yet: all totals are 0 across the 14 days from 2026-11-07 to 2026-11-20. There is nothing to judge, so the one thing that matters most is getting the first parts posted so the numbers start to exist.",
+  "summary": "The channel has no measured results yet: 0 views, 0 videos, and no per-mode or per-movie data across the 13 days logged (2026-11-07 to 2026-11-20). The one thing that matters most is getting enough published parts out that the numbers can start to show what works.",
   "working": [
-   "0 views and 0 videos logged across 14 tracked days, so no format is proven yet"
+   "0 views and 0 videos logged across 13 days, so there is no channel performance to build on yet",
+   "The channel's stated strength is mystery and twisty stories, which fits the true-crime season (Crime, Thriller, Mystery) right now"
   ],
   "not_working": [
-   "0 videos posted in the tracked window, so no per-mode or per-movie data exists"
+   "No videos have been posted in the 13-day log, so the earlier part-length changes (165s, 135s, 105s, 135s) cannot be judged",
+   "Nothing in the log shows which mode or movie is drawing watch time, so the channel has no proven format yet"
   ],
   "actions": [
-   "Post the first parts of Gone Girl or Se7en this week, since true-crime is the current season and the channel's strength is twisty stories.",
-   "Keep recap_part_seconds at 135 until at least 5 matched videos exist; the earlier 105 and 165 changes cannot be judged without posts.",
-   "Log views, avg_watch and full_watch for every part from day one so the next run has numbers to act on.",
-   "Put the season hook in each part's first line, such as true-crime for the mystery picks and Christmas for Die Hard."
+   "Download and post a first batch of parts from the next_movies list, starting with the still-waiting Knives Out and Gone Girl, which suit the mystery strength",
+   "Keep recap_part_seconds at 135 until at least 5 videos are posted, then compare avg_watch and full_watch against it",
+   "Use Die Hard for a Christmas-timed post while the holiday season is active",
+   "Log every posted video so the next analysis has real per-video numbers to judge"
   ],
-  "at": "2026-11-20T01:53:56+07:00"
+  "at": "2026-11-20T07:54:06+07:00"
  }
 }
