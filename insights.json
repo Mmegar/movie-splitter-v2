@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T07:53:42+07:00",
+ "updated": "2026-11-20T13:53:47+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -291,7 +291,7 @@
     "Mystery",
     "Comedy"
    ],
-   "why": "Still waiting from the owner's list; a whodunit with a clear cast of suspects and twist reveals, matching the channel's mystery strength",
+   "why": "Twisty whodunit that fits this channel's best kind of story; no channel numbers yet, so this rests on genre fit",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -303,7 +303,7 @@
     "Action",
     "Thriller"
    ],
-   "why": "Still waiting from the owner's list; a Christmas-set action thriller with strong recognition and natural cliffhangers",
+   "why": "Christmas-set thriller with a clear escalating plot; still waiting from earlier picks",
    "trend": "Christmas holidays",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -316,7 +316,7 @@
     "Thriller",
     "Crime"
    ],
-   "why": "Still waiting from the owner's list; a twisty, cliffhanger-friendly story that splits cleanly into parts",
+   "why": "Reveal-driven plot that splits well into cliffhanger parts; still waiting from earlier picks",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-19T19:53:50+07:00"
@@ -508,96 +508,95 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 251844
+    "views": 363365
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 144361
+    "views": 204990
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 101838
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 95945
+    "views": 147750
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 94964
+    "views": 133749
    },
    {
-    "title": "No Time to Die",
-    "about": "2021 James Bond film by Cary Joji Fukunaga",
-    "views": 94720
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 127620
    },
    {
     "title": "Jailer 2",
     "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 84922
+    "views": 119100
    },
    {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 79442
+    "title": "No Time to Die",
+    "about": "2021 James Bond film by Cary Joji Fukunaga",
+    "views": 118847
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 77727
-   },
-   {
-    "title": "XXX (film series)",
-    "about": "American spy action film series by Rich Wilkes",
-    "views": 69812
-   },
-   {
-    "title": "The Batman (film)",
-    "about": "2022 superhero film by Matt Reeves",
-    "views": 67844
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 67587
+    "views": 108374
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 66804
+    "views": 107832
    },
    {
-    "title": "Casino Royale (2006 film)",
-    "about": "2006 James Bond film by Martin Campbell",
-    "views": 66629
+    "title": "Primetime (film)",
+    "about": "2026 film by Lance Oppenheim",
+    "views": 100298
+   },
+   {
+    "title": "XXX (film series)",
+    "about": "American spy action film series by Rich Wilkes",
+    "views": 99201
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 95739
+   },
+   {
+    "title": "Obsession (2025 film)",
+    "about": "Film by Curry Barker",
+    "views": 92497
    },
    {
     "title": "Heartland (2026 film)",
     "about": "Thriller film by Shana Feste",
-    "views": 65395
+    "views": 91480
+   },
+   {
+    "title": "The Further Mis-Adventures of Cliff Booth",
+    "about": "Upcoming film by David Fincher",
+    "views": 89983
    }
   ]
  },
  "ai": {
-  "summary": "The channel has no measured results yet: 0 views, 0 videos, and no per-mode or per-movie data across the 13 days logged (2026-11-07 to 2026-11-20). The one thing that matters most is getting enough published parts out that the numbers can start to show what works.",
+  "summary": "The channel has no videos or views yet. The daily tracker has run for 14 days (2026-11-07 to 2026-11-20) with every total at 0, so there is nothing to judge the format or length on. The one thing that matters now is getting the first recap parts posted so the numbers start to exist.",
   "working": [
-   "0 views and 0 videos logged across 13 days, so there is no channel performance to build on yet",
-   "The channel's stated strength is mystery and twisty stories, which fits the true-crime season (Crime, Thriller, Mystery) right now"
+   "Daily tracking has run for 14 days (2026-11-07 to 2026-11-20), so the baseline is in place for when posts start"
   ],
   "not_working": [
-   "No videos have been posted in the 13-day log, so the earlier part-length changes (165s, 135s, 105s, 135s) cannot be judged",
-   "Nothing in the log shows which mode or movie is drawing watch time, so the channel has no proven format yet"
+   "0 videos posted in 14 days, so there are 0 views, 0 likes and no avg_watch or full_watch data to judge",
+   "The last recap-length change (135 s, 2026-11-06) has had no posts since, so its effect is still unknown"
   ],
   "actions": [
-   "Download and post a first batch of parts from the next_movies list, starting with the still-waiting Knives Out and Gone Girl, which suit the mystery strength",
-   "Keep recap_part_seconds at 135 until at least 5 videos are posted, then compare avg_watch and full_watch against it",
-   "Use Die Hard for a Christmas-timed post while the holiday season is active",
-   "Log every posted video so the next analysis has real per-video numbers to judge"
+   "Post the first recap parts this week, with each mystery or thriller cut into cliffhanger parts, so the numbers start to exist",
+   "Download the five next_movies picks, starting with Knives Out and Gone Girl for the true-crime season",
+   "Leave recap_part_seconds at 135 until at least 5 videos are posted and can be compared",
+   "Check the daily totals again after the first 5 videos are live and judge the 135 s length on watch time and full-watch %"
   ],
-  "at": "2026-11-20T07:54:06+07:00"
+  "at": "2026-11-20T13:54:15+07:00"
  }
 }
