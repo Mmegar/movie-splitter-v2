@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T19:53:47+07:00",
+ "updated": "2026-11-21T01:53:59+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -219,6 +219,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-21",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -285,6 +294,31 @@
  ],
  "picks": [
   {
+   "title": "Home Alone",
+   "year": 1990,
+   "genres": [
+    "Holiday",
+    "Comedy",
+    "Family"
+   ],
+   "why": "Simple, well-known story with easy comedy beats that suit short parts for the Christmas audience",
+   "trend": "Christmas holidays",
+   "status": "new",
+   "added": "2026-11-21T01:54:25+07:00"
+  },
+  {
+   "title": "The Prestige",
+   "year": 2006,
+   "genres": [
+    "Mystery",
+    "Thriller"
+   ],
+   "why": "Layered rivalry-and-secrets plot with repeated twists, a strong fit for cliffhanger endings",
+   "trend": null,
+   "status": "new",
+   "added": "2026-11-21T01:54:25+07:00"
+  },
+  {
    "title": "Knives Out",
    "year": 2019,
    "genres": [
@@ -293,8 +327,9 @@
    ],
    "why": "Twisty whodunit with a clear cast of suspects that cuts well into cliffhanger parts; still waiting from the queue",
    "trend": "True-crime season, long dark evenings",
-   "status": "new",
-   "added": "2026-11-20T01:53:56+07:00"
+   "status": "expired",
+   "added": "2026-11-20T01:53:56+07:00",
+   "at": "2026-11-21T01:53:59+07:00"
   },
   {
    "title": "Die Hard",
@@ -305,8 +340,9 @@
    ],
    "why": "Classic Christmas-set action with a tight, escalating plot that splits cleanly into parts; still waiting from the queue",
    "trend": "Christmas holidays",
-   "status": "new",
-   "added": "2026-11-20T01:53:56+07:00"
+   "status": "expired",
+   "added": "2026-11-20T01:53:56+07:00",
+   "at": "2026-11-21T01:53:59+07:00"
   },
   {
    "title": "Gone Girl",
@@ -457,20 +493,6 @@
    "at": "2026-11-14T13:22:39+07:00"
   },
   {
-   "title": "Scream",
-   "year": 1996,
-   "genres": [
-    "Horror",
-    "Slasher",
-    "Mystery"
-   ],
-   "why": "Still waiting from your list; a whodunit with twists and a masked killer, which suits the channel's mystery and twisty-story strength",
-   "trend": "Friday the 13th (today)",
-   "status": "expired",
-   "added": "2026-11-13T01:19:51+07:00",
-   "at": "2026-11-14T01:20:15+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -485,7 +507,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-20",
+  "date": "2026-11-21",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -509,96 +531,97 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 363365
+    "views": 236084
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 204990
+    "views": 133347
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 147750
+    "views": 93787
+   },
+   {
+    "title": "Madden (film)",
+    "about": "2026 sports film by David O. Russell",
+    "views": 85728
    },
    {
     "title": "Scene (2026 film)",
     "about": "Indian film by Jithu Madhavan",
-    "views": 133749
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 127620
-   },
-   {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 119100
-   },
-   {
-    "title": "No Time to Die",
-    "about": "2021 James Bond film by Cary Joji Fukunaga",
-    "views": 118847
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 108374
+    "views": 81859
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 107832
+    "views": 73133
    },
    {
-    "title": "Primetime (film)",
-    "about": "2026 film by Lance Oppenheim",
-    "views": 100298
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 73005
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 72787
    },
    {
     "title": "XXX (film series)",
     "about": "American spy action film series by Rich Wilkes",
-    "views": 99201
-   },
-   {
-    "title": "Black Doves",
-    "about": "British spy action TV series (2024–present)",
-    "views": 95739
+    "views": 69513
    },
    {
     "title": "Obsession (2025 film)",
     "about": "Film by Curry Barker",
-    "views": 92497
+    "views": 68322
    },
    {
-    "title": "Heartland (2026 film)",
-    "about": "Thriller film by Shana Feste",
-    "views": 91480
+    "title": "Guarding Stars",
+    "about": "2026 film by Elizabeth Allen Rosenbaum",
+    "views": 67722
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 67389
+   },
+   {
+    "title": "Black Doves",
+    "about": "British spy action TV series (2024–present)",
+    "views": 59917
+   },
+   {
+    "title": "No Time to Die",
+    "about": "2021 James Bond film by Cary Joji Fukunaga",
+    "views": 59895
    },
    {
     "title": "The Further Mis-Adventures of Cliff Booth",
     "about": "Upcoming film by David Fincher",
-    "views": 89983
+    "views": 58207
    }
   ]
  },
  "ai": {
-  "summary": "The channel has no numbers yet: 0 views, 0 likes and 0 videos on every day from 2026-11-07 to 2026-11-20, so nothing can be judged from its own data. The most useful move now is to start posting, so next picks lean on the true-crime season and the Christmas holidays.",
+  "summary": "The channel has no recorded numbers yet: 0 views, 0 videos, and no day-by-day data since 2026-11-08. Picks and advice therefore rest on the season (true-crime and dark evenings, then Christmas) and on the channel's stated strength in twisty mysteries. The first videos will show what works.",
   "working": [
-   "Settings are at a steady baseline (recap_part_seconds 135, set Nov 6), so there is no recent change to second-guess",
-   "Zero videos in 14 days, so no mode or format has been tested yet"
+   "0 views and 0 videos across all 14 tracked days, so there is no proven format yet",
+   "Channel is set to a 135 s recap part length, the setting that was last changed on 2026-11-06 and has no posts to judge it by",
+   "No mode or movie has data yet, so no top video or hit to protect"
   ],
   "not_working": [
-   "0 total views and 0 videos across all 14 tracked days, so there is no signal to act on",
-   "Three picks are still waiting to be downloaded (Knives Out, Die Hard, Gone Girl), so the queue is not moving"
+   "No data to judge: the channel has posted nothing in the tracked window, so nothing is confirmed as underperforming",
+   "No avg_watch or full_watch figures exist yet, so retention cannot be measured"
   ],
   "actions": [
-   "Download Knives Out and Gone Girl first and post 4–5 cliffhanger parts of each, since mystery and twisty stories are this channel's strength",
-   "Post at least 5 videos this week before changing any setting, so the 5-video minimum for tuning is met",
-   "Start the Zodiac and Shutter Island queue for the true-crime evenings while the season lasts",
-   "Track views, avg_watch and full_watch per video daily so the next tuning decision has real numbers"
+   "Download Gone Girl and Zodiac first. They match the true-crime season and the channel's twisty-story strength, and both split into clear cliffhanger parts.",
+   "Post the first 3 to 5 parts of one movie and let the numbers come in for a week before changing any setting.",
+   "Keep the 135 s part length for now, since no post has tested the 2026-11-06 change yet.",
+   "Once 5 or more videos have views, check avg_watch and full_watch per part before picking the next batch."
   ],
-  "at": "2026-11-20T19:54:12+07:00"
+  "at": "2026-11-21T01:54:25+07:00"
  }
 }
