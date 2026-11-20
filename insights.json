@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T13:53:47+07:00",
+ "updated": "2026-11-20T19:53:47+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -291,7 +291,7 @@
     "Mystery",
     "Comedy"
    ],
-   "why": "Twisty whodunit that fits this channel's best kind of story; no channel numbers yet, so this rests on genre fit",
+   "why": "Twisty whodunit with a clear cast of suspects that cuts well into cliffhanger parts; still waiting from the queue",
    "trend": "True-crime season, long dark evenings",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -303,7 +303,7 @@
     "Action",
     "Thriller"
    ],
-   "why": "Christmas-set thriller with a clear escalating plot; still waiting from earlier picks",
+   "why": "Classic Christmas-set action with a tight, escalating plot that splits cleanly into parts; still waiting from the queue",
    "trend": "Christmas holidays",
    "status": "new",
    "added": "2026-11-20T01:53:56+07:00"
@@ -318,8 +318,9 @@
    ],
    "why": "Reveal-driven plot that splits well into cliffhanger parts; still waiting from earlier picks",
    "trend": "True-crime season, long dark evenings",
-   "status": "new",
-   "added": "2026-11-19T19:53:50+07:00"
+   "status": "expired",
+   "added": "2026-11-19T19:53:50+07:00",
+   "at": "2026-11-20T19:54:12+07:00"
   },
   {
    "title": "The Batman",
@@ -583,20 +584,21 @@
   ]
  },
  "ai": {
-  "summary": "The channel has no videos or views yet. The daily tracker has run for 14 days (2026-11-07 to 2026-11-20) with every total at 0, so there is nothing to judge the format or length on. The one thing that matters now is getting the first recap parts posted so the numbers start to exist.",
+  "summary": "The channel has no numbers yet: 0 views, 0 likes and 0 videos on every day from 2026-11-07 to 2026-11-20, so nothing can be judged from its own data. The most useful move now is to start posting, so next picks lean on the true-crime season and the Christmas holidays.",
   "working": [
-   "Daily tracking has run for 14 days (2026-11-07 to 2026-11-20), so the baseline is in place for when posts start"
+   "Settings are at a steady baseline (recap_part_seconds 135, set Nov 6), so there is no recent change to second-guess",
+   "Zero videos in 14 days, so no mode or format has been tested yet"
   ],
   "not_working": [
-   "0 videos posted in 14 days, so there are 0 views, 0 likes and no avg_watch or full_watch data to judge",
-   "The last recap-length change (135 s, 2026-11-06) has had no posts since, so its effect is still unknown"
+   "0 total views and 0 videos across all 14 tracked days, so there is no signal to act on",
+   "Three picks are still waiting to be downloaded (Knives Out, Die Hard, Gone Girl), so the queue is not moving"
   ],
   "actions": [
-   "Post the first recap parts this week, with each mystery or thriller cut into cliffhanger parts, so the numbers start to exist",
-   "Download the five next_movies picks, starting with Knives Out and Gone Girl for the true-crime season",
-   "Leave recap_part_seconds at 135 until at least 5 videos are posted and can be compared",
-   "Check the daily totals again after the first 5 videos are live and judge the 135 s length on watch time and full-watch %"
+   "Download Knives Out and Gone Girl first and post 4–5 cliffhanger parts of each, since mystery and twisty stories are this channel's strength",
+   "Post at least 5 videos this week before changing any setting, so the 5-video minimum for tuning is met",
+   "Start the Zodiac and Shutter Island queue for the true-crime evenings while the season lasts",
+   "Track views, avg_watch and full_watch per video daily so the next tuning decision has real numbers"
   ],
-  "at": "2026-11-20T13:54:15+07:00"
+  "at": "2026-11-20T19:54:12+07:00"
  }
 }
