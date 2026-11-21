@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T19:54:14+07:00",
+ "updated": "2026-11-22T01:54:25+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -228,6 +228,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-22",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -303,8 +312,9 @@
    ],
    "why": "Simple, well-known story with easy comedy beats that suit short parts for the Christmas audience",
    "trend": "Christmas holidays",
-   "status": "new",
-   "added": "2026-11-21T01:54:25+07:00"
+   "status": "expired",
+   "added": "2026-11-21T01:54:25+07:00",
+   "at": "2026-11-22T01:54:25+07:00"
   },
   {
    "title": "The Prestige",
@@ -315,8 +325,9 @@
    ],
    "why": "Layered rivalry-and-secrets plot with repeated twists, a strong fit for cliffhanger endings",
    "trend": null,
-   "status": "new",
-   "added": "2026-11-21T01:54:25+07:00"
+   "status": "expired",
+   "added": "2026-11-21T01:54:25+07:00",
+   "at": "2026-11-22T01:54:25+07:00"
   },
   {
    "title": "Knives Out",
@@ -466,20 +477,6 @@
    "at": "2026-11-15T07:50:42+07:00"
   },
   {
-   "title": "Zodiac",
-   "year": 2007,
-   "genres": [
-    "Crime",
-    "Thriller",
-    "Mystery"
-   ],
-   "why": "Still waiting from earlier picks; a true-crime mystery with a long investigation that splits cleanly into cliffhanger parts, matching the channel's mystery strength",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-14T01:20:15+07:00",
-   "at": "2026-11-15T01:20:20+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -494,7 +491,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-21",
+  "date": "2026-11-22",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -518,77 +515,77 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 342131
+    "views": 217568
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 190975
+    "views": 118257
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 153822
+    "views": 105947
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 134163
-   },
-   {
-    "title": "XXX (film series)",
-    "about": "American spy action film series by Rich Wilkes",
-    "views": 128213
+    "views": 102058
    },
    {
     "title": "Madden (film)",
     "about": "2026 sports film by David O. Russell",
-    "views": 124770
+    "views": 89844
    },
    {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 118239
+    "title": "XXX (film series)",
+    "about": "American spy action film series by Rich Wilkes",
+    "views": 88089
    },
    {
     "title": "Guarding Stars",
     "about": "2026 film by Elizabeth Allen Rosenbaum",
-    "views": 109656
-   },
-   {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 106864
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 103776
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 99971
-   },
-   {
-    "title": "Obsession (2025 film)",
-    "about": "Film by Curry Barker",
-    "views": 97697
+    "views": 83879
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 95075
+    "views": 76645
+   },
+   {
+    "title": "Scene (2026 film)",
+    "about": "Indian film by Jithu Madhavan",
+    "views": 75165
+   },
+   {
+    "title": "Jailer 2",
+    "about": "2026 Indian film by Nelson Dilipkumar",
+    "views": 68037
    },
    {
     "title": "The Further Mis-Adventures of Cliff Booth",
     "about": "Upcoming film by David Fincher",
-    "views": 94733
+    "views": 64619
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 63229
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 62664
+   },
+   {
+    "title": "Obsession (2025 film)",
+    "about": "Film by Curry Barker",
+    "views": 61376
    },
    {
     "title": "Black Doves",
     "about": "British spy action TV series (2024–present)",
-    "views": 86633
+    "views": 54868
    }
   ]
  },
