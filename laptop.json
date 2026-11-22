@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T13:56:06+07:00",
+ "updated": "2026-11-22T13:56:39+07:00",
  "online": true,
  "host": "MSI",
  "watch_folder": "C:/Users/kimme/OneDrive/Desktop/Movies/To Edit",
@@ -379,7 +379,7 @@
  "insights_run": {
   "started": "2026-11-22T13:53:56+07:00",
   "step": "Reading watch time",
-  "done": 9,
+  "done": 13,
   "total": 15
  },
  "insights_at": 1795330436.1574872,
