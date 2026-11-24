@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T19:55:41+07:00",
+ "updated": "2026-11-25T01:55:55+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -255,6 +255,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-25",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -457,7 +466,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -481,77 +490,77 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 315570
+    "views": 205751
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 242825
-   },
-   {
-    "title": "You Can See Everything",
-    "about": "2026 documentary film",
-    "views": 219016
+    "views": 150487
    },
    {
     "title": "XXX (film series)",
     "about": "American spy action film series by Rich Wilkes",
-    "views": 210622
+    "views": 148730
+   },
+   {
+    "title": "You Can See Everything",
+    "about": "2026 documentary film",
+    "views": 147162
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 199859
+    "views": 126026
    },
    {
     "title": "Steps (film)",
     "about": "2026 Netflix animated film",
-    "views": 177485
+    "views": 109509
+   },
+   {
+    "title": "The Witch Farm",
+    "about": "British television series",
+    "views": 92893
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 144009
-   },
-   {
-    "title": "Guarding Stars",
-    "about": "2026 film by Elizabeth Allen Rosenbaum",
-    "views": 136940
+    "views": 88646
    },
    {
     "title": "Aakasamlo Oka Tara",
     "about": "2026 Indian film by Pavan Sadineni",
-    "views": 133629
+    "views": 87810
+   },
+   {
+    "title": "Guarding Stars",
+    "about": "2026 film by Elizabeth Allen Rosenbaum",
+    "views": 86743
    },
    {
     "title": "Godzilla Minus Zero",
     "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 118489
+    "views": 80233
    },
    {
     "title": "The Hunger Games (film)",
     "about": "2012 film by Gary Ross",
-    "views": 115085
+    "views": 77428
    },
    {
     "title": "I Play Rocky",
     "about": "2026 film by Peter Farrelly",
-    "views": 105881
+    "views": 67681
    },
    {
     "title": "Madden (film)",
     "about": "2026 sports film by David O. Russell",
-    "views": 103383
+    "views": 67449
    },
    {
-    "title": "Jailer 2",
-    "about": "2026 Indian film by Nelson Dilipkumar",
-    "views": 103198
-   },
-   {
-    "title": "Scene (2026 film)",
-    "about": "Indian film by Jithu Madhavan",
-    "views": 102935
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 66064
    }
   ]
  },
