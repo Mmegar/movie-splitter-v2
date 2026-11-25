@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T19:56:21+07:00",
+ "updated": "2026-11-26T01:56:21+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -264,6 +264,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-26",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -453,7 +462,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -477,77 +486,77 @@
    {
     "title": "The Body (TV series)",
     "about": "American television series",
-    "views": 289694
+    "views": 177348
    },
    {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
-    "views": 229652
+    "views": 147583
    },
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 222697
+    "views": 143024
    },
    {
     "title": "XXX (film series)",
     "about": "American spy action film series by Rich Wilkes",
-    "views": 210526
+    "views": 140012
    },
    {
     "title": "The Odyssey (2026 film)",
     "about": "Film by Christopher Nolan",
-    "views": 165963
+    "views": 90855
    },
    {
     "title": "Steps (film)",
     "about": "2026 Netflix animated film",
-    "views": 150624
-   },
-   {
-    "title": "MobLand",
-    "about": "2025 British crime drama television series",
-    "views": 122698
-   },
-   {
-    "title": "Aakasamlo Oka Tara",
-    "about": "2026 Indian film by Pavan Sadineni",
-    "views": 122282
-   },
-   {
-    "title": "The Witch Farm",
-    "about": "British television series",
-    "views": 117247
-   },
-   {
-    "title": "Guarding Stars",
-    "about": "2026 film by Elizabeth Allen Rosenbaum",
-    "views": 110718
-   },
-   {
-    "title": "Godzilla Minus Zero",
-    "about": "2026 Japanese film by Takashi Yamazaki",
-    "views": 108519
+    "views": 88483
    },
    {
     "title": "Focker-in-Law",
     "about": "2026 American comedy film",
-    "views": 107843
+    "views": 82232
+   },
+   {
+    "title": "Aakasamlo Oka Tara",
+    "about": "2026 Indian film by Pavan Sadineni",
+    "views": 76552
+   },
+   {
+    "title": "MobLand",
+    "about": "2025 British crime drama television series",
+    "views": 75595
+   },
+   {
+    "title": "The Witch Farm",
+    "about": "British television series",
+    "views": 66664
+   },
+   {
+    "title": "Godzilla Minus Zero",
+    "about": "2026 Japanese film by Takashi Yamazaki",
+    "views": 62414
    },
    {
     "title": "The Hunger Games (film)",
     "about": "2012 film by Gary Ross",
-    "views": 104187
+    "views": 61862
+   },
+   {
+    "title": "From (TV series)",
+    "about": "2022 American horror television series",
+    "views": 58527
+   },
+   {
+    "title": "Guarding Stars",
+    "about": "2026 film by Elizabeth Allen Rosenbaum",
+    "views": 57553
    },
    {
     "title": "Ebenezer (2026 film)",
     "about": "Film by Ti West",
-    "views": 91969
-   },
-   {
-    "title": "I Play Rocky",
-    "about": "2026 film by Peter Farrelly",
-    "views": 91128
+    "views": 56312
    }
   ]
  },
