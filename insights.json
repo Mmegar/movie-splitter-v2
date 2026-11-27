@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T19:57:23+07:00",
+ "updated": "2026-11-28T01:57:26+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -282,6 +282,15 @@
    "shares": 0,
    "avg_watch": null,
    "full_watch": null
+  },
+  {
+   "day": "2026-11-28",
+   "views": 0,
+   "videos": 0,
+   "likes": 0,
+   "shares": 0,
+   "avg_watch": null,
+   "full_watch": null
   }
  ],
  "tuning": [
@@ -375,32 +384,6 @@
    "at": "2026-11-22T01:54:25+07:00"
   },
   {
-   "title": "Knives Out",
-   "year": 2019,
-   "genres": [
-    "Mystery",
-    "Comedy"
-   ],
-   "why": "Twisty whodunit with a clear cast of suspects that cuts well into cliffhanger parts; still waiting from the queue",
-   "trend": "True-crime season, long dark evenings",
-   "status": "expired",
-   "added": "2026-11-20T01:53:56+07:00",
-   "at": "2026-11-21T01:53:59+07:00"
-  },
-  {
-   "title": "Die Hard",
-   "year": 1988,
-   "genres": [
-    "Action",
-    "Thriller"
-   ],
-   "why": "Classic Christmas-set action with a tight, escalating plot that splits cleanly into parts; still waiting from the queue",
-   "trend": "Christmas holidays",
-   "status": "expired",
-   "added": "2026-11-20T01:53:56+07:00",
-   "at": "2026-11-21T01:53:59+07:00"
-  },
-  {
    "title": "The Sixth Sense",
    "year": 1999,
    "genres": [
@@ -415,7 +398,7 @@
   }
  ],
  "trends": {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "season": [
    {
     "moment": "True-crime season, long dark evenings",
@@ -439,57 +422,32 @@
    {
     "title": "You Can See Everything",
     "about": "2026 documentary film",
-    "views": 278763
-   },
-   {
-    "title": "The Body (TV series)",
-    "about": "American television series",
-    "views": 216230
-   },
-   {
-    "title": "XXX (2002 film)",
-    "about": "American action film directed by Rob Cohen",
-    "views": 194783
+    "views": 203228
    },
    {
     "title": "Blade Runner 2099",
     "about": "2026 American television miniseries",
-    "views": 192932
+    "views": 168521
+   },
+   {
+    "title": "The Body (TV series)",
+    "about": "American television series",
+    "views": 132287
    },
    {
     "title": "Focker-in-Law",
     "about": "2026 American comedy film",
-    "views": 166125
+    "views": 119972
    },
    {
-    "title": "XXX (film series)",
-    "about": "American spy action film series by Rich Wilkes",
-    "views": 163762
+    "title": "XXX (2002 film)",
+    "about": "American action film directed by Rob Cohen",
+    "views": 115618
    },
    {
     "title": "Hexed (2026 film)",
     "about": "2026 film by Fawn Veerasunthorn and Jason Hand",
-    "views": 140604
-   },
-   {
-    "title": "The Further Mis-Adventures of Cliff Booth",
-    "about": "2026 film by David Fincher",
-    "views": 126212
-   },
-   {
-    "title": "The Odyssey (2026 film)",
-    "about": "Film by Christopher Nolan",
-    "views": 117667
-   },
-   {
-    "title": "Steps (film)",
-    "about": "2026 Netflix animated film",
-    "views": 114947
-   },
-   {
-    "title": "From (TV series)",
-    "about": "2022 American horror television series",
-    "views": 110012
+    "views": 106494
    },
    {
     "title": "The Mosquito Bowl",
@@ -497,19 +455,44 @@
     "views": 103318
    },
    {
+    "title": "XXX (film series)",
+    "about": "American spy action film series by Rich Wilkes",
+    "views": 101966
+   },
+   {
+    "title": "The Further Mis-Adventures of Cliff Booth",
+    "about": "2026 film by David Fincher",
+    "views": 101085
+   },
+   {
+    "title": "Dancing with the Stars (American TV series)",
+    "about": "American reality dance competition television series",
+    "views": 77917
+   },
+   {
+    "title": "The Odyssey (2026 film)",
+    "about": "Film by Christopher Nolan",
+    "views": 77730
+   },
+   {
+    "title": "Steps (film)",
+    "about": "2026 Netflix animated film",
+    "views": 73832
+   },
+   {
+    "title": "From (TV series)",
+    "about": "2022 American horror television series",
+    "views": 72814
+   },
+   {
     "title": "Aakasamlo Oka Tara",
     "about": "2026 Indian film by Pavan Sadineni",
-    "views": 94365
+    "views": 59893
    },
    {
     "title": "MobLand",
     "about": "2025 British crime drama television series",
-    "views": 92887
-   },
-   {
-    "title": "Ebenezer (2026 film)",
-    "about": "Film by Ti West",
-    "views": 79226
+    "views": 58835
    }
   ]
  },
