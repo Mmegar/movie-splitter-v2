@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-28T01:57:26+07:00",
+ "updated": "2026-11-28T07:57:27+07:00",
  "totals": {
   "views": 0,
   "likes": 0,
@@ -435,11 +435,6 @@
     "views": 132287
    },
    {
-    "title": "Focker-in-Law",
-    "about": "2026 American comedy film",
-    "views": 119972
-   },
-   {
     "title": "XXX (2002 film)",
     "about": "American action film directed by Rob Cohen",
     "views": 115618
@@ -493,6 +488,11 @@
     "title": "MobLand",
     "about": "2025 British crime drama television series",
     "views": 58835
+   },
+   {
+    "title": "Ebenezer (2026 film)",
+    "about": "Film by Ti West",
+    "views": 53321
    }
   ]
  },
